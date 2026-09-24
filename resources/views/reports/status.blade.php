@@ -28,7 +28,7 @@
                     <div class="mt-8">
                         @foreach ($statuses as $index => $status)
                             @php
-                                $history = $report->statusHistories->firstWhere('to_status', $status);
+                                $history = $report->statusHistories->where('to_status', $status)->last();
                                 $isDone = $index <= $currentIndex;
                                 $isCurrent = $index === $currentIndex;
                             @endphp

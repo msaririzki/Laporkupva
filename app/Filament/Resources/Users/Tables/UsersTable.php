@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Users\Tables;
 
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -16,6 +17,7 @@ class UsersTable
                 TextColumn::make('name')->label('Nama')->searchable()->sortable()->weight('bold'),
                 TextColumn::make('email')->label('Alamat email')->searchable()->copyable(),
                 TextColumn::make('role')->label('Peran')->badge(),
+                IconColumn::make('is_active')->label('Akses aktif')->boolean(),
                 TextColumn::make('created_at')->label('Dibuat')->dateTime('d M Y, H:i')->sortable(),
             ])
             ->recordActions([

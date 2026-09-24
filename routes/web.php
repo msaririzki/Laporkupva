@@ -10,6 +10,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::view('/panduan', 'pages.guide')->name('guide');
+Route::view('/privasi', 'pages.privacy')->name('privacy');
+
 Route::controller(PublicReportController::class)->group(function (): void {
     Route::get('/lapor', 'create')->name('reports.create');
     Route::post('/lapor', 'store')->middleware('throttle:report-submissions')->name('reports.store');
@@ -26,6 +29,6 @@ Route::post('/status/{report:public_code}/pesan', PublicReportMessageController:
     ->middleware('throttle:report-messages')
     ->name('reports.messages.store');
 
-Route::get('/admin/laporan/lampiran/{reportEvidence}/unduh', ReportEvidenceController::class)
+Route::get('/admin/lampiran-laporan/{reportEvidence}/unduh', ReportEvidenceController::class)
     ->middleware('auth')
     ->name('admin.report-evidence.download');

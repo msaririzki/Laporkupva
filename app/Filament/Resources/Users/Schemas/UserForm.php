@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Users\Schemas;
 use App\Enums\UserRole;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -37,6 +38,11 @@ class UserForm
                             ->minLength(8)
                             ->helperText(fn (string $operation): string => $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah kata sandi.' : 'Gunakan minimal 8 karakter.')
                             ->columnSpanFull(),
+                        Toggle::make('is_active')
+                            ->label('Akun aktif')
+                            ->helperText('Nonaktifkan untuk mencabut akses Admin tanpa menghapus riwayat aktivitasnya.')
+                            ->default(true)
+                            ->required(),
                         Hidden::make('role')->default(UserRole::Admin->value),
                     ]),
             ]);

@@ -21,7 +21,7 @@ class PublicReportController extends Controller
     public function store(StorePublicReportRequest $request): RedirectResponse
     {
         $pin = (string) random_int(100000, 999999);
-        $validated = $request->safe()->except('evidence');
+        $validated = $request->safe()->except(['evidence', 'good_faith']);
 
         $report = DB::transaction(function () use ($request, $validated, $pin): Report {
             $report = Report::query()->create([
@@ -55,6 +55,7 @@ class PublicReportController extends Controller
         return to_route('reports.success')->with('submitted_report', [
             'code' => $report->public_code,
             'pin' => $pin,
+            'submitted_at' => $report->created_at->toIso8601String(),
         ]);
     }
 

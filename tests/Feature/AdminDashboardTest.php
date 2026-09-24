@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Enums\ReportStatus;
 use App\Enums\UserRole;
 use App\Filament\Resources\Kupvas\KupvaResource;
 use App\Filament\Resources\Reports\Pages\ViewReport;
 use App\Filament\Resources\Reports\ReportResource;
+use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\AnonymousMessage;
 use App\Models\Kupva;
@@ -40,7 +42,10 @@ class AdminDashboardTest extends TestCase
             ->get('/admin')
             ->assertOk()
             ->assertSee('Ringkasan pengawasan')
-            ->assertSee('Peta sebaran lokasi terlapor');
+            ->assertSee('Peta sebaran lokasi terlapor')
+            ->assertSee('Distribusi status laporan')
+            ->assertSee('Wilayah laporan terbanyak')
+            ->assertSee('Laporan terbaru');
 
         $this->actingAs($admin)
             ->get(ReportResource::getUrl('index'))
@@ -90,6 +95,51 @@ class AdminDashboardTest extends TestCase
         ]);
     }
 
+    public function test_only_super_admin_can_correct_a_report_status_with_a_reason(): void
+    {
+        $superAdmin = User::factory()->superAdmin()->create();
+        $report = Report::factory()->create([
+            'status' => ReportStatus::FieldAction,
+            'received_at' => now()->subDays(3),
+            'coordinated_at' => now()->subDays(2),
+            'field_action_at' => now()->subDay(),
+        ]);
+
+        $this->actingAs($superAdmin);
+
+        Livewire::test(ViewReport::class, ['record' => $report->getRouteKey()])
+            ->callAction('correctStatus', [
+                'status' => ReportStatus::Received->value,
+                'reason' => 'Tahap kunjungan dipilih sebelum koordinasi terkonfirmasi.',
+                'public_note' => 'Status disesuaikan setelah pemeriksaan administrasi.',
+            ])
+            ->assertNotified();
+
+        $report->refresh();
+
+        $this->assertSame(ReportStatus::Received, $report->status);
+        $this->assertNull($report->coordinated_at);
+        $this->assertNull($report->field_action_at);
+        $this->assertDatabaseHas('report_status_histories', [
+            'report_id' => $report->getKey(),
+            'user_id' => $superAdmin->getKey(),
+            'from_status' => ReportStatus::FieldAction->value,
+            'to_status' => ReportStatus::Received->value,
+            'internal_note' => 'Koreksi status: Tahap kunjungan dipilih sebelum koordinasi terkonfirmasi.',
+        ]);
+    }
+
+    public function test_regular_admin_cannot_see_the_status_correction_action(): void
+    {
+        $admin = User::factory()->create();
+        $report = Report::factory()->received()->create();
+
+        $this->actingAs($admin);
+
+        Livewire::test(ViewReport::class, ['record' => $report->getRouteKey()])
+            ->assertActionHidden('correctStatus');
+    }
+
     public function test_super_admin_can_open_admin_account_management(): void
     {
         $superAdmin = User::factory()->superAdmin()->create();
@@ -98,5 +148,33 @@ class AdminDashboardTest extends TestCase
             ->get(UserResource::getUrl('index'))
             ->assertOk()
             ->assertSee('Manajemen admin');
+    }
+
+    public function test_super_admin_can_deactivate_an_admin_without_deleting_the_account(): void
+    {
+        $superAdmin = User::factory()->superAdmin()->create();
+        $admin = User::factory()->create(['is_active' => true]);
+
+        $this->actingAs($superAdmin);
+
+        Livewire::test(EditUser::class, ['record' => $admin->getRouteKey()])
+            ->fillForm(['is_active' => false])
+            ->call('save')
+            ->assertHasNoFormErrors()
+            ->assertNotified();
+
+        $this->assertDatabaseHas(User::class, [
+            'id' => $admin->getKey(),
+            'is_active' => false,
+        ]);
+    }
+
+    public function test_inactive_admin_cannot_access_the_admin_panel(): void
+    {
+        $admin = User::factory()->create(['is_active' => false]);
+
+        $this->actingAs($admin)
+            ->get('/admin')
+            ->assertForbidden();
     }
 }

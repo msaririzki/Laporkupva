@@ -118,6 +118,32 @@ class ReportInfolist
                                     ->columnSpanFull(),
                             ]),
                     ]),
+                Section::make('Histori penanganan')
+                    ->description('Seluruh perubahan tahap disimpan permanen, termasuk koreksi yang dilakukan Super Admin.')
+                    ->schema([
+                        RepeatableEntry::make('statusHistories')
+                            ->hiddenLabel()
+                            ->columns(4)
+                            ->schema([
+                                TextEntry::make('to_status')
+                                    ->label('Tahap')
+                                    ->badge(),
+                                TextEntry::make('created_at')
+                                    ->label('Waktu')
+                                    ->dateTime('d M Y, H:i'),
+                                TextEntry::make('user.name')
+                                    ->label('Petugas')
+                                    ->placeholder('Sistem'),
+                                TextEntry::make('public_note')
+                                    ->label('Pembaruan publik')
+                                    ->placeholder('-')
+                                    ->columnSpanFull(),
+                                TextEntry::make('internal_note')
+                                    ->label('Catatan koreksi internal')
+                                    ->placeholder('-')
+                                    ->columnSpanFull(),
+                            ]),
+                    ]),
                 Section::make('Catatan penanganan')
                     ->columns(2)
                     ->schema([

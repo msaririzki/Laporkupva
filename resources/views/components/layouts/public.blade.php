@@ -24,6 +24,7 @@
             <nav class="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
                 <a class="nav-link" href="{{ route('home') }}#cara-kerja">Cara kerja</a>
                 <a class="nav-link" href="{{ route('home') }}#keamanan">Keamanan</a>
+                <a class="nav-link" href="{{ route('guide') }}">Panduan</a>
                 <a class="nav-link" href="{{ route('reports.track') }}">Cek status</a>
             </nav>
 
@@ -42,7 +43,7 @@
                 </div>
                 <p class="mt-4 max-w-md text-sm leading-6 text-slate-500">Kanal partisipasi masyarakat untuk membantu pengawasan kegiatan usaha penukaran valuta asing di wilayah Nusa Tenggara Barat.</p>
             </div>
-            <div><p class="footer-heading">Layanan</p><div class="mt-3 grid gap-2 text-sm text-slate-600"><a class="footer-link" href="{{ route('reports.create') }}">Buat laporan</a><a class="footer-link" href="{{ route('reports.track') }}">Cek status laporan</a></div></div>
+            <div><p class="footer-heading">Layanan</p><div class="mt-3 grid gap-2 text-sm text-slate-600"><a class="footer-link" href="{{ route('reports.create') }}">Buat laporan</a><a class="footer-link" href="{{ route('reports.track') }}">Cek status laporan</a><a class="footer-link" href="{{ route('guide') }}">Panduan & FAQ</a><a class="footer-link" href="{{ route('privacy') }}">Informasi privasi</a></div></div>
             <div><p class="footer-heading">Perhatian</p><p class="mt-3 text-sm leading-6 text-slate-500">Untuk keadaan darurat atau tindak pidana yang sedang berlangsung, segera hubungi aparat berwenang.</p></div>
         </div>
         <div class="border-t border-slate-100 py-5 text-center text-xs text-slate-400">© {{ date('Y') }} TAMBORA · laporkupva.id</div>

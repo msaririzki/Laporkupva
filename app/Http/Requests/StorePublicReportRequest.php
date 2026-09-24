@@ -56,6 +56,7 @@ class StorePublicReportRequest extends FormRequest
             'location_accuracy' => ['nullable', 'numeric', 'min:0', 'max:100000'],
             'evidence' => ['nullable', 'array', 'max:5'],
             'evidence.*' => ['file', 'mimes:jpg,jpeg,png,webp,pdf', 'max:10240'],
+            'good_faith' => ['accepted'],
         ];
     }
 
@@ -76,6 +77,7 @@ class StorePublicReportRequest extends FormRequest
             'longitude' => 'titik lokasi',
             'evidence' => 'bukti pendukung',
             'evidence.*' => 'berkas bukti',
+            'good_faith' => 'pernyataan itikad baik',
         ];
     }
 

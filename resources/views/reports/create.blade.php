@@ -117,7 +117,8 @@
                     </div>
 
                     <div class="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5"><h3 class="font-extrabold text-navy-950">Sebelum mengirim</h3><ul class="mt-3 grid gap-2 text-sm leading-6 text-slate-600"><li class="flex gap-2"><span class="text-teal-600">✓</span>Pastikan lokasi yang dipilih adalah lokasi pihak atau kegiatan yang dilaporkan.</li><li class="flex gap-2"><span class="text-teal-600">✓</span>Jangan mencantumkan identitas pribadi Anda di kronologi atau lampiran.</li><li class="flex gap-2"><span class="text-teal-600">✓</span>Setelah dikirim, simpan kode laporan dan PIN yang hanya ditampilkan satu kali.</li></ul></div>
-                    <label class="mt-6 flex cursor-pointer items-start gap-3"><input class="mt-0.5 size-4 rounded border-slate-300 text-blue-700 focus:ring-blue-600" type="checkbox" id="confirmation" required><span class="text-sm leading-6 text-slate-600">Saya menyatakan bahwa informasi ini disampaikan dengan itikad baik berdasarkan hal yang saya ketahui. <span class="text-red-600">*</span></span></label>
+                    <label class="mt-6 flex cursor-pointer items-start gap-3"><input class="mt-0.5 size-4 rounded border-slate-300 text-blue-700 focus:ring-blue-600" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required><span class="text-sm leading-6 text-slate-600">Saya menyatakan bahwa informasi ini disampaikan dengan itikad baik berdasarkan hal yang saya ketahui. <span class="text-red-600">*</span></span></label>
+                    @error('good_faith')<p class="form-error mt-2">{{ $message }}</p>@enderror
                 </section>
 
                 <div class="flex items-center justify-between gap-4 border-t border-slate-200 px-6 py-5 sm:px-9">

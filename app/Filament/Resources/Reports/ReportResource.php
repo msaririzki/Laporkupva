@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Reports;
 
+use App\Enums\ReportStatus;
 use App\Filament\Resources\Reports\Pages\EditReport;
 use App\Filament\Resources\Reports\Pages\ListReports;
 use App\Filament\Resources\Reports\Pages\ViewReport;
@@ -11,6 +12,7 @@ use App\Filament\Resources\Reports\Tables\ReportsTable;
 use App\Models\Report;
 use BackedEnum;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
@@ -29,6 +31,8 @@ class ReportResource extends Resource
     protected static ?string $pluralModelLabel = 'Laporan masyarakat';
 
     protected static ?string $navigationLabel = 'Laporan';
+
+    protected static ?string $slug = 'laporan';
 
     protected static ?int $navigationSort = 1;
 
@@ -117,6 +121,66 @@ class ReportResource extends Resource
                     ->success()
                     ->send();
             });
+    }
+
+    public static function correctStatusAction(): Action
+    {
+        return Action::make('correctStatus')
+            ->label('Koreksi status')
+            ->icon(Heroicon::OutlinedArrowUturnLeft)
+            ->color('warning')
+            ->visible(fn (Report $record): bool => auth()->user()?->isSuperAdmin() === true && $record->status !== ReportStatus::Submitted)
+            ->modalHeading('Koreksi tahap penanganan')
+            ->modalDescription('Khusus Super Admin. Riwayat status lama tetap tersimpan dan alasan koreksi dicatat sebagai catatan internal.')
+            ->modalSubmitActionLabel('Simpan koreksi')
+            ->schema([
+                Select::make('status')
+                    ->label('Kembalikan ke tahap')
+                    ->options(fn (Report $record): array => self::previousStatusOptions($record))
+                    ->required(),
+                Textarea::make('reason')
+                    ->label('Alasan koreksi')
+                    ->required()
+                    ->minLength(10)
+                    ->maxLength(1000)
+                    ->rows(4),
+                Textarea::make('public_note')
+                    ->label('Keterangan untuk pelapor')
+                    ->helperText('Opsional. Alasan internal tidak akan ditampilkan kepada pelapor.')
+                    ->maxLength(1000)
+                    ->rows(3),
+            ])
+            ->action(function (Report $record, array $data): void {
+                $record->correctStatus(
+                    auth()->user(),
+                    ReportStatus::from($data['status']),
+                    $data['reason'],
+                    $data['public_note'] ?? null,
+                );
+
+                Notification::make()
+                    ->title('Status berhasil dikoreksi')
+                    ->body("{$record->public_code} dikembalikan ke tahap {$record->status->label()}.")
+                    ->warning()
+                    ->send();
+            });
+
+    }
+
+    /** @return array<string, string> */
+    private static function previousStatusOptions(Report $report): array
+    {
+        $options = [];
+
+        foreach (ReportStatus::cases() as $status) {
+            if ($status === $report->status) {
+                break;
+            }
+
+            $options[$status->value] = $status->label();
+        }
+
+        return $options;
     }
 
     public static function getPages(): array

@@ -28,6 +28,8 @@ class KupvaResource extends Resource
 
     protected static ?string $navigationLabel = 'Data KUPVA';
 
+    protected static ?string $slug = 'kupva';
+
     protected static ?int $navigationSort = 2;
 
     protected static ?string $recordTitleAttribute = 'name';

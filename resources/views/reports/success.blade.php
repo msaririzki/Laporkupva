@@ -14,11 +14,12 @@
                             <div class="access-code"><span>Kode laporan</span><strong id="report-code">{{ $submittedReport['code'] }}</strong></div>
                             <div class="access-code"><span>PIN pelacakan</span><strong id="report-pin">{{ $submittedReport['pin'] }}</strong></div>
                         </div>
+                        <p class="mt-4 text-center text-xs font-semibold text-blue-700">Dikirim {{ \Illuminate\Support\Carbon::parse($submittedReport['submitted_at'])->translatedFormat('d F Y, H:i') }} WITA</p>
                         <p class="mt-5 text-center text-xs leading-5 text-blue-800">PIN hanya ditampilkan pada halaman ini. Simpan keduanya di tempat aman dan jangan berikan kepada orang lain.</p>
                     </div>
                     <div class="mt-6 flex flex-col gap-3 sm:flex-row">
                         <button type="button" class="button-secondary flex-1" data-copy-access>Salin kode & PIN</button>
-                        <button type="button" class="button-secondary flex-1" onclick="window.print()">Cetak halaman</button>
+                        <button type="button" class="button-secondary flex-1" onclick="window.print()">Cetak / simpan PDF</button>
                     </div>
                     <a href="{{ route('reports.track') }}" class="button-primary mt-4 w-full">Cek status laporan</a>
                 </div>

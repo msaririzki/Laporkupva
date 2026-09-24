@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Kupvas\Pages;
 
 use App\Filament\Resources\Kupvas\KupvaResource;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
@@ -15,7 +14,6 @@ class EditKupva extends EditRecord
     {
         return [
             ViewAction::make(),
-            DeleteAction::make(),
         ];
     }
 }

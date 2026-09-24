@@ -39,6 +39,7 @@ class PublicReportControllerTest extends TestCase
 
         $this->assertMatchesRegularExpression('/^LKP-[A-Z0-9]{4}-[A-Z0-9]{4}$/', $report->public_code);
         $this->assertSame($report->public_code, $access['code']);
+        $this->assertArrayHasKey('submitted_at', $access);
         $this->assertTrue(Hash::check($access['pin'], $report->tracking_pin_hash));
         $this->assertNotSame($access['pin'], $report->tracking_pin_hash);
         $this->assertSame(ReportStatus::Submitted, $report->status);
@@ -79,6 +80,19 @@ class PublicReportControllerTest extends TestCase
         $this->assertDatabaseCount('reports', 0);
     }
 
+    public function test_good_faith_confirmation_is_required(): void
+    {
+        $payload = $this->validPayload();
+        unset($payload['good_faith']);
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $payload)
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('good_faith');
+
+        $this->assertDatabaseCount('reports', 0);
+    }
+
     public function test_success_page_cannot_be_reopened_without_submission_session(): void
     {
         $this->get(route('reports.success'))
@@ -104,6 +118,7 @@ class PublicReportControllerTest extends TestCase
             'latitude' => -8.5830695,
             'longitude' => 116.1161800,
             'location_accuracy' => 12.5,
+            'good_faith' => '1',
             ...$overrides,
         ];
     }
