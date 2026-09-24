@@ -1,0 +1,28 @@
+name: laporkupva
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laporkupva-app:latest
+    container_name: laporkupva-web
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    ports:
+      - "127.0.0.1:8014:80"
+    volumes:
+      - laporkupva-data:/var/lib/laporkupva
+      - laporkupva-storage:/var/www/html/storage
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "--show-error", "http://127.0.0.1/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s
+
+volumes:
+  laporkupva-data:
+  laporkupva-storage:
+
