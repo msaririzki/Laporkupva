@@ -10,7 +10,7 @@ class ReportStatusChart extends ChartWidget
 {
     protected static bool $isLazy = false;
 
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 4;
 
     protected int|string|array $columnSpan = 1;
 

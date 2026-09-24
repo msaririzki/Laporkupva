@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Reports\Tables;
 use App\Enums\ReportStatus;
 use App\Filament\Resources\Reports\ReportResource;
 use App\Models\Report;
+use Filament\Actions\Action;
 use Filament\Actions\ViewAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -68,6 +70,13 @@ class ReportsTable
                 SelectFilter::make('regency')
                     ->label('Wilayah')
                     ->options(fn (): array => Report::query()->distinct()->orderBy('regency')->pluck('regency', 'regency')->all()),
+            ])
+            ->toolbarActions([
+                Action::make('exportCsv')
+                    ->label('Ekspor CSV')
+                    ->icon(Heroicon::OutlinedArrowDownTray)
+                    ->color('gray')
+                    ->url(fn (): string => route('admin.reports.export')),
             ])
             ->recordActions([
                 ViewAction::make()->label('Detail'),

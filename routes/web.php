@@ -3,6 +3,7 @@
 use App\Http\Controllers\PublicReportController;
 use App\Http\Controllers\PublicReportMessageController;
 use App\Http\Controllers\ReportEvidenceController;
+use App\Http\Controllers\ReportExportController;
 use App\Http\Controllers\ReportTrackingController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,7 @@ Route::post('/status/{report:public_code}/pesan', PublicReportMessageController:
 Route::get('/admin/lampiran-laporan/{reportEvidence}/unduh', ReportEvidenceController::class)
     ->middleware('auth')
     ->name('admin.report-evidence.download');
+
+Route::get('/admin/ekspor/laporan.csv', ReportExportController::class)
+    ->middleware('auth')
+    ->name('admin.reports.export');

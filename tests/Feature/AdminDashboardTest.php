@@ -42,7 +42,9 @@ class AdminDashboardTest extends TestCase
             ->get('/admin')
             ->assertOk()
             ->assertSee('Ringkasan pengawasan')
+            ->assertSee('Tindakan lapangan')
             ->assertSee('Peta sebaran lokasi terlapor')
+            ->assertSee('Tren laporan bulanan')
             ->assertSee('Distribusi status laporan')
             ->assertSee('Wilayah laporan terbanyak')
             ->assertSee('Laporan terbaru');
@@ -50,7 +52,8 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($admin)
             ->get(ReportResource::getUrl('index'))
             ->assertOk()
-            ->assertSee('Laporan masyarakat');
+            ->assertSee('Laporan masyarakat')
+            ->assertSee('Ekspor CSV');
 
         $this->actingAs($admin)
             ->get(ReportResource::getUrl('view', ['record' => $report]))

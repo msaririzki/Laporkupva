@@ -14,7 +14,7 @@ class RecentReports extends TableWidget
 {
     protected static bool $isLazy = false;
 
-    protected static ?int $sort = 5;
+    protected static ?int $sort = 6;
 
     protected int|string|array $columnSpan = 'full';
 
