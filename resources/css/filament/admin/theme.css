@@ -2,3 +2,66 @@
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+.report-progress-connector {
+    background-size: 100% 220%;
+    animation: report-progress-flow-vertical 2.6s linear infinite;
+}
+
+.report-progress-connector--completed {
+    background-image: linear-gradient(180deg, #059669 0%, #34d399 45%, #059669 100%);
+}
+
+.report-progress-connector--current {
+    background-image: linear-gradient(180deg, #1d4ed8 0%, #60a5fa 45%, #1d4ed8 100%);
+    box-shadow: 0 0 12px rgb(59 130 246 / 45%);
+}
+
+.report-progress-connector--pending {
+    background-image: linear-gradient(180deg, #e5e7eb 0%, #cbd5e1 45%, #e5e7eb 100%);
+}
+
+@keyframes report-progress-flow-vertical {
+    from {
+        background-position: 0 -220%;
+    }
+
+    to {
+        background-position: 0 220%;
+    }
+}
+
+@keyframes report-progress-flow-horizontal {
+    from {
+        background-position: -220% 0;
+    }
+
+    to {
+        background-position: 220% 0;
+    }
+}
+
+@media (min-width: 80rem) {
+    .report-progress-connector {
+        background-size: 220% 100%;
+        animation-name: report-progress-flow-horizontal;
+    }
+
+    .report-progress-connector--completed {
+        background-image: linear-gradient(90deg, #059669 0%, #34d399 45%, #059669 100%);
+    }
+
+    .report-progress-connector--current {
+        background-image: linear-gradient(90deg, #1d4ed8 0%, #60a5fa 45%, #1d4ed8 100%);
+    }
+
+    .report-progress-connector--pending {
+        background-image: linear-gradient(90deg, #e5e7eb 0%, #cbd5e1 45%, #e5e7eb 100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .report-progress-connector {
+        animation: none;
+    }
+}

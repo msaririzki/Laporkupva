@@ -25,7 +25,7 @@ class AdminDashboardTest extends TestCase
     public function test_admin_can_open_dashboard_and_report_list(): void
     {
         $admin = User::factory()->create(['role' => UserRole::Admin]);
-        $report = Report::factory()->create();
+        $report = Report::factory()->create(['status' => ReportStatus::Received]);
         ReportEvidence::factory()->create([
             'report_id' => $report->getKey(),
             'original_name' => 'bukti-lokasi.jpg',
@@ -62,6 +62,9 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Progres penanganan')
             ->assertSee('Update progres')
             ->assertSee('Langkah berikutnya')
+            ->assertSee('data-progress-state="completed"', false)
+            ->assertSee('data-progress-state="current"', false)
+            ->assertSee('aria-current="step"', false)
             ->assertSee('bukti-lokasi.jpg')
             ->assertSee('Lokasi berada dekat pasar.');
 
