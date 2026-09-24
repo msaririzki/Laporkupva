@@ -1,0 +1,116 @@
+@import 'tailwindcss';
+@import './leaflet.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+    --color-navy-950: #071d3b;
+    --color-navy-900: #0a2a55;
+    --color-navy-800: #123d72;
+    --color-teal-300: #64dec8;
+    --color-teal-500: #18aa96;
+    --color-teal-600: #0b8f80;
+    --shadow-soft: 0 18px 50px -28px rgb(15 42 76 / 0.28);
+}
+
+@layer base {
+    html { scroll-behavior: smooth; }
+    body { font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; }
+    button, a, input, select, textarea { @apply outline-none; }
+    :focus-visible { @apply ring-2 ring-blue-600 ring-offset-2; }
+}
+
+@layer components {
+    .public-container { @apply mx-auto w-full max-w-7xl px-5 sm:px-7 lg:px-9; }
+    .brand-mark { @apply grid size-11 shrink-0 place-items-center text-blue-700; }
+    .brand-mark svg { @apply size-full; }
+    .brand-mark-sm { @apply size-8; }
+    .nav-link { @apply rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-navy-950; }
+
+    .button-primary, .button-secondary, .button-light, .button-ghost-light { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60; }
+    .button-primary { @apply bg-blue-700 text-white shadow-sm hover:-translate-y-px hover:bg-blue-800 hover:shadow-md; }
+    .button-secondary { @apply border border-slate-300 bg-white text-slate-700 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-800; }
+    .button-light { @apply bg-white px-6 text-blue-800 shadow-lg shadow-slate-950/10 hover:-translate-y-px hover:bg-blue-50; }
+    .button-ghost-light { @apply border border-white/25 bg-white/5 px-6 text-white hover:bg-white/10; }
+
+    .eyebrow, .eyebrow-dark { @apply text-xs font-extrabold uppercase tracking-[0.18em]; }
+    .eyebrow { @apply text-blue-700; }
+    .eyebrow-dark { @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-blue-100; }
+    .section-title { @apply mt-3 text-3xl font-extrabold tracking-[-0.025em] text-navy-950 sm:text-4xl; }
+    .section-lead { @apply mt-4 text-base leading-7 text-slate-600; }
+    .info-card { @apply rounded-3xl border border-slate-200 bg-white p-7 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-blue-200; }
+    .step-number { @apply inline-flex rounded-full bg-blue-50 px-3 py-1 font-mono text-xs font-extrabold tracking-wider text-blue-700; }
+
+    .security-card { @apply flex gap-4 rounded-2xl border border-white/80 bg-white p-5 shadow-sm; }
+    .security-card h3 { @apply text-sm font-extrabold text-navy-950; }
+    .security-card p { @apply mt-1 text-xs leading-5 text-slate-500; }
+    .security-icon { @apply grid size-9 shrink-0 place-items-center rounded-lg bg-navy-950 font-mono text-[10px] font-extrabold text-white; }
+    .footer-heading { @apply text-sm font-extrabold text-navy-950; }
+    .footer-link { @apply transition hover:text-blue-700; }
+
+    .form-progress { @apply flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 text-slate-400 transition sm:p-4; }
+    .form-progress strong, .form-progress small { @apply block; }
+    .form-progress strong { @apply text-sm; }
+    .form-progress small { @apply mt-0.5 text-[11px] font-medium; }
+    .form-progress-number { @apply grid size-8 shrink-0 place-items-center rounded-full bg-slate-100 text-xs font-extrabold; }
+    .form-progress.is-active { @apply border-blue-200 bg-blue-50 text-blue-800; }
+    .form-progress.is-active .form-progress-number { @apply bg-blue-700 text-white; }
+    .form-progress.is-complete { @apply border-teal-200 bg-teal-50 text-teal-800; }
+    .form-progress.is-complete .form-progress-number { @apply bg-teal-500 text-white; }
+
+    .form-heading { @apply flex items-start gap-4; }
+    .form-heading > span { @apply grid size-10 shrink-0 place-items-center rounded-xl bg-navy-950 text-sm font-extrabold text-white; }
+    .form-heading h2 { @apply text-xl font-extrabold text-navy-950; }
+    .form-heading p { @apply mt-1 text-sm leading-6 text-slate-500; }
+    .form-label { @apply mb-2 block text-sm font-bold text-slate-700; }
+    .form-label > span:not(.optional) { @apply text-red-600; }
+    .form-label .optional { @apply ml-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400; }
+    .form-control { @apply block min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 transition placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-600 focus:ring-3 focus:ring-blue-600/10; }
+    select.form-control { @apply cursor-pointer; }
+    .form-control.is-invalid { @apply border-red-400 bg-red-50/40; }
+    .form-error { @apply mt-2 text-xs font-semibold text-red-600; }
+
+    .upload-zone { @apply flex cursor-pointer flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 px-5 py-8 text-center transition hover:border-blue-400 hover:bg-blue-50/60 sm:flex-row sm:text-left; }
+    .upload-zone strong, .upload-zone small { @apply block; }
+    .upload-zone strong { @apply text-sm font-extrabold text-slate-700; }
+    .upload-zone small { @apply mt-1 text-xs leading-5 text-slate-500; }
+
+    .access-code { @apply rounded-xl bg-white p-4 text-center shadow-sm; }
+    .access-code span, .access-code strong { @apply block; }
+    .access-code span { @apply text-[10px] font-bold uppercase tracking-[.15em] text-slate-400; }
+    .access-code strong { @apply mt-2 font-mono text-xl font-extrabold tracking-wider text-navy-950; }
+
+    .status-item { @apply relative flex gap-4 pb-8 last:pb-0; }
+    .status-item:not(:last-child)::before { content: ''; @apply absolute left-[17px] top-9 h-[calc(100%-2.25rem)] w-0.5 bg-slate-200; }
+    .status-marker { @apply relative z-10 grid size-9 shrink-0 place-items-center rounded-full border-2 border-slate-200 bg-white text-xs font-extrabold text-slate-400; }
+    .status-marker svg { @apply size-4; }
+    .status-content { @apply min-w-0 flex-1 rounded-2xl border border-slate-200 p-4; }
+    .status-content h3 { @apply text-sm font-extrabold text-slate-500; }
+    .status-content time { @apply text-[10px] font-semibold text-slate-400; }
+    .status-content p { @apply mt-2 text-xs leading-5 text-slate-400; }
+    .status-item.is-done:not(:last-child)::before { @apply bg-teal-400; }
+    .status-item.is-done .status-marker { @apply border-teal-500 bg-teal-500 text-white; }
+    .status-item.is-done .status-content h3 { @apply text-slate-800; }
+    .status-item.is-done .status-content p { @apply text-slate-600; }
+    .status-item.is-current .status-content { @apply border-blue-200 bg-blue-50; }
+    .current-badge { @apply mt-3 inline-flex rounded-full bg-blue-700 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white; }
+}
+
+.hero-grid {
+    background-image: linear-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.08) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to right, transparent, black 30%, black);
+}
+
+.hero-glow { background: radial-gradient(circle, rgb(37 99 235 / 0.5), transparent 68%); }
+.text-gradient { background: linear-gradient(90deg, #86efdc, #bfdbfe); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.leaflet-container { font-family: inherit; }
+.leaflet-control-attribution { font-size: 9px; }
+
+@media print {
+    header, footer, [data-copy-access], button { display: none !important; }
+}

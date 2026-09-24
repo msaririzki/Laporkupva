@@ -1,0 +1,88 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Enums\ReportStatus;
+use App\Models\Report;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
+
+class ReportTrackingControllerTest extends TestCase
+{
+    use LazilyRefreshDatabase;
+
+    public function test_tracking_form_is_accessible(): void
+    {
+        $this->get(route('reports.track'))
+            ->assertOk()
+            ->assertSee('Cek status laporan')
+            ->assertSee('PIN 6 digit');
+    }
+
+    public function test_report_can_be_tracked_with_the_correct_code_and_pin(): void
+    {
+        $report = Report::factory()->received()->create([
+            'public_code' => 'LKP-AB12-CD34',
+            'tracking_pin_hash' => Hash::make('654321'),
+        ]);
+        $report->statusHistories()->create([
+            'from_status' => null,
+            'to_status' => ReportStatus::Submitted,
+            'public_note' => ReportStatus::Submitted->description(),
+        ]);
+        $report->statusHistories()->create([
+            'from_status' => ReportStatus::Submitted,
+            'to_status' => ReportStatus::Received,
+            'public_note' => 'Laporan telah diterima petugas.',
+        ]);
+
+        $this->post(route('reports.track.show'), [
+            'tracking_code' => 'lkp-ab12-cd34',
+            'tracking_pin' => '654321',
+        ])->assertOk()
+            ->assertSee('LKP-AB12-CD34')
+            ->assertSee('Laporan telah diterima petugas.')
+            ->assertSee('Tahap sekarang');
+    }
+
+    public function test_wrong_pin_and_unknown_code_return_the_same_generic_error(): void
+    {
+        Report::factory()->create([
+            'public_code' => 'LKP-AB12-CD34',
+            'tracking_pin_hash' => Hash::make('654321'),
+        ]);
+
+        foreach ([
+            ['tracking_code' => 'LKP-AB12-CD34', 'tracking_pin' => '111111'],
+            ['tracking_code' => 'LKP-ZZ99-ZZ99', 'tracking_pin' => '654321'],
+        ] as $credentials) {
+            $this->from(route('reports.track'))
+                ->post(route('reports.track.show'), $credentials)
+                ->assertRedirect(route('reports.track'))
+                ->assertSessionHasErrors([
+                    'tracking_code' => 'Kode laporan atau PIN tidak cocok. Periksa kembali data Anda.',
+                ]);
+        }
+    }
+
+    public function test_public_status_note_is_escaped_on_the_tracking_page(): void
+    {
+        $report = Report::factory()->create([
+            'public_code' => 'LKP-AB12-CD34',
+            'tracking_pin_hash' => Hash::make('654321'),
+        ]);
+        $report->statusHistories()->create([
+            'from_status' => null,
+            'to_status' => ReportStatus::Submitted,
+            'public_note' => '<script>alert("xss")</script>',
+        ]);
+
+        $this->post(route('reports.track.show'), [
+            'tracking_code' => 'LKP-AB12-CD34',
+            'tracking_pin' => '654321',
+        ])->assertOk()
+            ->assertDontSee('<script>alert("xss")</script>', false)
+            ->assertSee('&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;', false);
+    }
+}

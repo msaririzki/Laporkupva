@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Filament\Resources\Users\Schemas;
+
+use App\Enums\UserRole;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+
+class UserForm
+{
+    public static function configure(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Section::make('Akun admin')
+                    ->description('Admin dapat mengelola laporan dan data KUPVA, tetapi tidak dapat membuat akun admin lain.')
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Nama lengkap')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('email')
+                            ->label('Alamat email')
+                            ->email()
+                            ->unique(ignoreRecord: true)
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('password')
+                            ->label('Kata sandi')
+                            ->password()
+                            ->revealable()
+                            ->required(fn (string $operation): bool => $operation === 'create')
+                            ->dehydrated(fn (?string $state): bool => filled($state))
+                            ->minLength(8)
+                            ->helperText(fn (string $operation): string => $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah kata sandi.' : 'Gunakan minimal 8 karakter.')
+                            ->columnSpanFull(),
+                        Hidden::make('role')->default(UserRole::Admin->value),
+                    ]),
+            ]);
+    }
+}
