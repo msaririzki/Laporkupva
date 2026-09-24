@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Enums\ReportStatus;
 use App\Http\Requests\StorePublicReportRequest;
 use App\Models\Report;
+use chillerlan\QRCode\Common\EccLevel;
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -67,7 +70,17 @@ class PublicReportController extends Controller
             return to_route('reports.create');
         }
 
-        return view('reports.success', ['submittedReport' => $submittedReport]);
+        $trackingUrl = route('reports.track', ['code' => $submittedReport['code']]);
+        $trackingQrCode = (new QRCode(new QROptions([
+            'eccLevel' => EccLevel::M,
+            'outputBase64' => true,
+        ])))->render($trackingUrl);
+
+        return view('reports.success', [
+            'submittedReport' => $submittedReport,
+            'trackingQrCode' => $trackingQrCode,
+            'trackingUrl' => $trackingUrl,
+        ]);
     }
 
     private function generatePublicCode(): string

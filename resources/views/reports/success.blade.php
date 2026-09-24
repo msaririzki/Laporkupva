@@ -15,13 +15,20 @@
                             <div class="access-code"><span>PIN pelacakan</span><strong id="report-pin">{{ $submittedReport['pin'] }}</strong></div>
                         </div>
                         <p class="mt-4 text-center text-xs font-semibold text-blue-700">Dikirim {{ \Illuminate\Support\Carbon::parse($submittedReport['submitted_at'])->translatedFormat('d F Y, H:i') }} WITA</p>
+                        <div class="mt-5 flex flex-col items-center gap-4 rounded-2xl border border-blue-200 bg-white p-4 text-center sm:flex-row sm:text-left">
+                            <img class="size-32 shrink-0 rounded-xl" src="{{ $trackingQrCode }}" alt="QR untuk membuka pelacakan laporan {{ $submittedReport['code'] }}">
+                            <div>
+                                <p class="font-extrabold text-navy-950">Pindai untuk membuka pelacakan</p>
+                                <p class="mt-1 text-xs leading-5 text-slate-600">QR hanya memuat halaman pelacakan dan kode laporan. PIN tetap harus dimasukkan secara manual agar akses tetap aman.</p>
+                            </div>
+                        </div>
                         <p class="mt-5 text-center text-xs leading-5 text-blue-800">PIN hanya ditampilkan pada halaman ini. Simpan keduanya di tempat aman dan jangan berikan kepada orang lain.</p>
                     </div>
                     <div class="mt-6 flex flex-col gap-3 sm:flex-row">
                         <button type="button" class="button-secondary flex-1" data-copy-access>Salin kode & PIN</button>
                         <button type="button" class="button-secondary flex-1" onclick="window.print()">Cetak / simpan PDF</button>
                     </div>
-                    <a href="{{ route('reports.track') }}" class="button-primary mt-4 w-full">Cek status laporan</a>
+                    <a href="{{ $trackingUrl }}" class="button-primary mt-4 w-full">Cek status laporan</a>
                 </div>
             </div>
         </div>

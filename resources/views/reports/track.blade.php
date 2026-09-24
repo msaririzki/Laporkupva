@@ -9,7 +9,7 @@
             </div>
             <form action="{{ route('reports.track.show') }}" method="POST" class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8">
                 @csrf
-                <div><label class="form-label" for="tracking_code">Kode laporan</label><input class="form-control font-mono uppercase tracking-wider @error('tracking_code') is-invalid @enderror" id="tracking_code" name="tracking_code" value="{{ old('tracking_code') }}" placeholder="LKP-XXXX-XXXX" autocomplete="off" required>@error('tracking_code')<p class="form-error">{{ $message }}</p>@enderror</div>
+                <div><label class="form-label" for="tracking_code">Kode laporan</label><input class="form-control font-mono uppercase tracking-wider @error('tracking_code') is-invalid @enderror" id="tracking_code" name="tracking_code" value="{{ old('tracking_code', request('code')) }}" placeholder="LKP-XXXX-XXXX" autocomplete="off" required>@error('tracking_code')<p class="form-error">{{ $message }}</p>@enderror</div>
                 <div class="mt-5"><label class="form-label" for="tracking_pin">PIN 6 digit</label><input class="form-control font-mono tracking-[.3em] @error('tracking_pin') is-invalid @enderror" id="tracking_pin" name="tracking_pin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" placeholder="••••••" required>@error('tracking_pin')<p class="form-error">{{ $message }}</p>@enderror</div>
                 <button class="button-primary mt-7 w-full" type="submit">Lihat progres laporan</button>
                 <p class="mt-5 text-center text-xs leading-5 text-slate-400">Demi keamanan, petugas tidak dapat melihat atau mengirim ulang PIN Anda.</p>

@@ -99,6 +99,27 @@ class PublicReportControllerTest extends TestCase
             ->assertRedirect(route('reports.create'));
     }
 
+    public function test_success_page_contains_a_safe_tracking_qr_code_without_the_pin_in_its_url(): void
+    {
+        $submittedReport = [
+            'code' => 'LKP-AB12-CD34',
+            'pin' => '654321',
+            'submitted_at' => now()->toIso8601String(),
+        ];
+
+        $response = $this->withSession(['submitted_report' => $submittedReport])
+            ->get(route('reports.success'));
+
+        $response
+            ->assertOk()
+            ->assertSee('Pindai untuk membuka pelacakan')
+            ->assertSee('data:image/svg+xml;base64,', false)
+            ->assertViewHas('trackingUrl', function (string $trackingUrl): bool {
+                return $trackingUrl === route('reports.track', ['code' => 'LKP-AB12-CD34'])
+                    && ! str_contains($trackingUrl, '654321');
+            });
+    }
+
     /** @param array<string, mixed> $overrides
      * @return array<string, mixed>
      */

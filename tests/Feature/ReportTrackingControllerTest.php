@@ -20,6 +20,13 @@ class ReportTrackingControllerTest extends TestCase
             ->assertSee('PIN 6 digit');
     }
 
+    public function test_tracking_form_prefills_the_report_code_from_a_qr_link(): void
+    {
+        $this->get(route('reports.track', ['code' => 'LKP-AB12-CD34']))
+            ->assertOk()
+            ->assertSee('value="LKP-AB12-CD34"', false);
+    }
+
     public function test_report_can_be_tracked_with_the_correct_code_and_pin(): void
     {
         $report = Report::factory()->received()->create([
