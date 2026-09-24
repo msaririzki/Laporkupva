@@ -56,7 +56,7 @@ class Report extends Model
     /** @return HasMany<AnonymousMessage, $this> */
     public function anonymousMessages(): HasMany
     {
-        return $this->hasMany(AnonymousMessage::class);
+        return $this->hasMany(AnonymousMessage::class)->oldest();
     }
 
     public function advanceStatus(?User $user, ?string $publicNote = null): bool

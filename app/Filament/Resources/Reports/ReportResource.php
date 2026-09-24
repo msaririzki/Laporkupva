@@ -85,6 +85,40 @@ class ReportResource extends Resource
             });
     }
 
+    public static function sendMessageAction(): Action
+    {
+        return Action::make('sendMessage')
+            ->label('Kirim pesan')
+            ->icon(Heroicon::OutlinedChatBubbleLeftRight)
+            ->color('gray')
+            ->modalHeading('Kirim pesan anonim kepada pelapor')
+            ->modalDescription('Pelapor dapat membaca dan membalas pesan ini menggunakan kode laporan dan PIN miliknya.')
+            ->modalSubmitActionLabel('Kirim pesan')
+            ->schema([
+                Textarea::make('body')
+                    ->label('Pesan untuk pelapor')
+                    ->placeholder('Contoh: Mohon tambahkan petunjuk lokasi yang lebih rinci.')
+                    ->required()
+                    ->minLength(2)
+                    ->maxLength(2000)
+                    ->rows(5),
+            ])
+            ->action(function (Report $record, array $data): void {
+                $record->anonymousMessages()->create([
+                    'user_id' => auth()->id(),
+                    'sender_type' => 'admin',
+                    'body' => trim($data['body']),
+                ]);
+                $record->unsetRelation('anonymousMessages');
+
+                Notification::make()
+                    ->title('Pesan dikirim')
+                    ->body("Pesan untuk pelapor {$record->public_code} berhasil dikirim.")
+                    ->success()
+                    ->send();
+            });
+    }
+
     public static function getPages(): array
     {
         return [

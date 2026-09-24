@@ -40,7 +40,10 @@ class ReportTrackingControllerTest extends TestCase
         $this->post(route('reports.track.show'), [
             'tracking_code' => 'lkp-ab12-cd34',
             'tracking_pin' => '654321',
-        ])->assertOk()
+        ])->assertRedirect(route('reports.status', ['report' => $report->public_code]));
+
+        $this->get(route('reports.status', ['report' => $report->public_code]))
+            ->assertOk()
             ->assertSee('LKP-AB12-CD34')
             ->assertSee('Laporan telah diterima petugas.')
             ->assertSee('Tahap sekarang');
@@ -81,8 +84,19 @@ class ReportTrackingControllerTest extends TestCase
         $this->post(route('reports.track.show'), [
             'tracking_code' => 'LKP-AB12-CD34',
             'tracking_pin' => '654321',
-        ])->assertOk()
+        ])->assertRedirect(route('reports.status', ['report' => $report->public_code]));
+
+        $this->get(route('reports.status', ['report' => $report->public_code]))
+            ->assertOk()
             ->assertDontSee('<script>alert("xss")</script>', false)
             ->assertSee('&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;', false);
+    }
+
+    public function test_report_status_cannot_be_opened_without_a_verified_tracking_session(): void
+    {
+        $report = Report::factory()->create();
+
+        $this->get(route('reports.status', ['report' => $report->public_code]))
+            ->assertNotFound();
     }
 }

@@ -29,5 +29,16 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('report-tracking', function (Request $request): Limit {
             return Limit::perMinute(10)->by(hash('sha256', (string) $request->ip()));
         });
+
+        RateLimiter::for('report-messages', function (Request $request): Limit {
+            $report = $request->route('report');
+            $reportKey = is_object($report) && method_exists($report, 'getKey') ? $report->getKey() : 'unknown';
+
+            return Limit::perMinute(6)->by(hash('sha256', implode('|', [
+                (string) $request->ip(),
+                $request->session()->getId(),
+                (string) $reportKey,
+            ])));
+        });
     }
 }

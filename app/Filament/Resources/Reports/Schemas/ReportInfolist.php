@@ -3,10 +3,14 @@
 namespace App\Filament\Resources\Reports\Schemas;
 
 use App\Models\Report;
+use App\Models\ReportEvidence;
 use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\View as SchemaView;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 
 class ReportInfolist
 {
@@ -71,6 +75,48 @@ class ReportInfolist
                             ->label('Koordinat')
                             ->state(fn (Report $record): string => "{$record->latitude}, {$record->longitude}")
                             ->copyable(),
+                        SchemaView::make('filament.schemas.components.report-location-map')
+                            ->columnSpanFull(),
+                    ]),
+                Section::make('Lampiran bukti')
+                    ->description('Berkas tersimpan privat dan hanya dapat diakses oleh Admin TAMBORA.')
+                    ->visible(fn (Report $record): bool => $record->evidence()->exists())
+                    ->schema([
+                        RepeatableEntry::make('evidence')
+                            ->hiddenLabel()
+                            ->columns(3)
+                            ->schema([
+                                TextEntry::make('original_name')
+                                    ->label('Nama berkas')
+                                    ->icon(Heroicon::OutlinedArrowDownTray)
+                                    ->url(fn (ReportEvidence $record): string => route('admin.report-evidence.download', $record)),
+                                TextEntry::make('mime_type')
+                                    ->label('Tipe berkas'),
+                                TextEntry::make('size')
+                                    ->label('Ukuran')
+                                    ->formatStateUsing(fn (int $state): string => self::formatBytes($state)),
+                            ]),
+                    ]),
+                Section::make('Komunikasi anonim')
+                    ->description('Percakapan tidak menampilkan identitas pelapor. Gunakan tombol Kirim pesan untuk meminta informasi tambahan.')
+                    ->schema([
+                        RepeatableEntry::make('anonymousMessages')
+                            ->hiddenLabel()
+                            ->placeholder('Belum ada percakapan anonim pada laporan ini.')
+                            ->columns(3)
+                            ->schema([
+                                TextEntry::make('sender_type')
+                                    ->label('Pengirim')
+                                    ->badge()
+                                    ->color(fn (string $state): string => $state === 'admin' ? 'primary' : 'gray')
+                                    ->formatStateUsing(fn (string $state): string => $state === 'admin' ? 'Petugas TAMBORA' : 'Pelapor anonim'),
+                                TextEntry::make('created_at')
+                                    ->label('Waktu')
+                                    ->dateTime('d M Y, H:i'),
+                                TextEntry::make('body')
+                                    ->label('Pesan')
+                                    ->columnSpanFull(),
+                            ]),
                     ]),
                 Section::make('Catatan penanganan')
                     ->columns(2)
@@ -83,5 +129,14 @@ class ReportInfolist
                             ->placeholder('Belum ada catatan internal'),
                     ]),
             ]);
+    }
+
+    private static function formatBytes(int $bytes): string
+    {
+        if ($bytes >= 1_048_576) {
+            return number_format($bytes / 1_048_576, 1, ',', '.').' MB';
+        }
+
+        return number_format($bytes / 1024, 1, ',', '.').' KB';
     }
 }
