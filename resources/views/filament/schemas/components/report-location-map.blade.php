@@ -2,7 +2,7 @@
     <div
         id="report-location-map-{{ $record->getKey() }}"
         class="w-full overflow-hidden rounded-xl bg-gray-100"
-        style="height: 360px; width: 100%;"
+        style="height: 320px; width: 100%;"
     ></div>
 </div>
 

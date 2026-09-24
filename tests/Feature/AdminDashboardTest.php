@@ -59,6 +59,9 @@ class AdminDashboardTest extends TestCase
             ->get(ReportResource::getUrl('view', ['record' => $report]))
             ->assertOk()
             ->assertSee($report->public_code)
+            ->assertSee('Progres penanganan')
+            ->assertSee('Update progres')
+            ->assertSee('Langkah berikutnya')
             ->assertSee('bukti-lokasi.jpg')
             ->assertSee('Lokasi berada dekat pasar.');
 
@@ -95,6 +98,32 @@ class AdminDashboardTest extends TestCase
             'user_id' => $admin->getKey(),
             'sender_type' => 'admin',
             'body' => 'Mohon tambahkan patokan lokasi yang lebih jelas.',
+        ]);
+    }
+
+    public function test_admin_can_update_report_progress_from_report_detail(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $report = Report::factory()->create();
+
+        $this->actingAs($admin);
+
+        Livewire::test(ViewReport::class, ['record' => $report->getRouteKey()])
+            ->callAction('advanceStatus', [
+                'public_note' => 'Pemeriksaan awal telah selesai dilakukan.',
+            ])
+            ->assertNotified();
+
+        $this->assertDatabaseHas(Report::class, [
+            'id' => $report->getKey(),
+            'status' => ReportStatus::Received->value,
+            'public_update' => 'Pemeriksaan awal telah selesai dilakukan.',
+        ]);
+        $this->assertDatabaseHas('report_status_histories', [
+            'report_id' => $report->getKey(),
+            'user_id' => $admin->getKey(),
+            'from_status' => ReportStatus::Submitted->value,
+            'to_status' => ReportStatus::Received->value,
         ]);
     }
 

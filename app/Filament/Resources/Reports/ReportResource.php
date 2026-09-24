@@ -63,13 +63,14 @@ class ReportResource extends Resource
     public static function advanceStatusAction(): Action
     {
         return Action::make('advanceStatus')
-            ->label(fn (Report $record): string => $record->status->next()?->label() ?? 'Selesai')
+            ->label('Update progres')
             ->icon(Heroicon::OutlinedArrowRightCircle)
             ->color('primary')
             ->visible(fn (Report $record): bool => $record->status->next() !== null)
-            ->modalHeading('Lanjutkan tahap penanganan')
-            ->modalDescription(fn (Report $record): string => "Status akan diperbarui menjadi: {$record->status->next()?->label()}.")
-            ->modalSubmitActionLabel('Perbarui status')
+            ->modalIcon(Heroicon::OutlinedArrowRightCircle)
+            ->modalHeading('Update progres penanganan')
+            ->modalDescription(fn (Report $record): string => "Tahap saat ini: {$record->status->label()}. Setelah disimpan, laporan dilanjutkan ke tahap {$record->status->next()?->label()}.")
+            ->modalSubmitActionLabel('Simpan dan lanjutkan tahap')
             ->schema([
                 Textarea::make('public_note')
                     ->label('Keterangan untuk pelapor')
@@ -92,7 +93,7 @@ class ReportResource extends Resource
     public static function sendMessageAction(): Action
     {
         return Action::make('sendMessage')
-            ->label('Kirim pesan')
+            ->label('Hubungi pelapor')
             ->icon(Heroicon::OutlinedChatBubbleLeftRight)
             ->color('gray')
             ->modalHeading('Kirim pesan anonim kepada pelapor')
