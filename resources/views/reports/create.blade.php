@@ -12,24 +12,24 @@
                     Ceritakan kejadian, tentukan lokasi, lalu kirim laporan secara anonim.
                 </p>
 
-                <!-- Badges Row: Laporan Anonim, Identitas Anda tetap terlindungi, ±3 menit side-by-side -->
-                <div class="mt-3.5 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-                    <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-200/80 bg-blue-50/80 px-3 py-1 text-xs font-semibold text-[#2563EB]">
-                        <svg class="size-3.5 text-[#2563EB]" viewBox="0 0 20 20" fill="currentColor">
+                <!-- Badges Row: Laporan Anonim, Identitas Anda terlindungi, ±3 menit in neutral soft gray, single line on mobile -->
+                <div class="mt-3 flex items-center justify-center gap-1.5 sm:gap-2.5 overflow-x-auto">
+                    <span class="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-slate-200/60 bg-slate-100/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-[#64748B] whitespace-nowrap shrink-0">
+                        <svg class="size-3 sm:size-3.5 text-slate-400 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
                         </svg>
                         <span>Laporan Anonim</span>
                     </span>
 
-                    <span class="inline-flex items-center gap-1.5 text-xs text-[#64748B] font-medium bg-slate-100/90 border border-slate-200/60 px-3 py-1 rounded-full">
-                        <svg class="size-3.5 text-[#2563EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <span class="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-slate-200/60 bg-slate-100/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-[#64748B] whitespace-nowrap shrink-0">
+                        <svg class="size-3 sm:size-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
                         </svg>
-                        <span>Identitas Anda tetap terlindungi</span>
+                        <span>Identitas Anda terlindungi</span>
                     </span>
 
-                    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100/90 px-3 py-1 rounded-full border border-slate-200/60">
-                        <svg class="size-3.5 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                    <span class="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-slate-200/60 bg-slate-100/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-slate-500 whitespace-nowrap shrink-0">
+                        <svg class="size-3 sm:size-3.5 text-slate-400 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd"/>
                         </svg>
                         <span>±3 menit</span>
@@ -40,7 +40,7 @@
     </section>
 
     <!-- Main Service Canvas -->
-    <section class="py-8 sm:py-12 lg:py-14 bg-[#F8FAFC] min-h-[60vh]">
+    <section class="pt-6 sm:pt-10 pb-6 sm:pb-8 bg-[#F8FAFC] min-h-[60vh]">
         <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10">
             @if ($errors->any())
                 <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-xs sm:text-sm text-[#DC2626]" role="alert">
@@ -367,21 +367,21 @@
                                 <label class="form-label mb-0" for="evidence">Punya foto atau dokumen?</label>
                                 <span class="text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-0.5 rounded-full">Boleh dilewati</span>
                             </div>
-                            <label class="upload-zone group flex flex-col items-center justify-center p-5 sm:p-8 rounded-2xl sm:rounded-3xl border-2 border-dashed border-[#CBD5E1] bg-[#F8FAFC] hover:border-[#2563EB] hover:bg-blue-50/30 transition-all cursor-pointer text-center" for="evidence">
-                                <div class="grid size-11 sm:size-14 place-items-center rounded-2xl bg-blue-50 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-all shadow-xs">
-                                    <svg class="size-5 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <label class="upload-zone group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl border-2 border-dashed border-[#CBD5E1] bg-[#F8FAFC] hover:border-[#2563EB] hover:bg-blue-50/30 transition-all cursor-pointer text-center" for="evidence">
+                                <div class="grid size-10 sm:size-12 place-items-center rounded-xl bg-blue-50 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-all shadow-xs">
+                                    <svg class="size-5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                                         <polyline points="17 8 12 3 7 8"/>
                                         <line x1="12" y1="3" x2="12" y2="15"/>
                                     </svg>
                                 </div>
-                                <strong class="mt-3 sm:mt-4 block text-xs sm:text-sm font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
+                                <strong class="mt-2.5 sm:mt-3 block text-xs sm:text-[13px] font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
                                     Pilih foto atau seret ke sini
                                 </strong>
-                                <span class="mt-1 block text-[11px] sm:text-xs text-[#64748B]">
+                                <span class="mt-1 block text-[10px] sm:text-xs text-[#64748B]">
                                     Format: JPG, PNG, WEBP, atau PDF · Maks. 5 berkas, masing-masing 10 MB
                                 </span>
-                                <span class="mt-2.5 sm:mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-3 py-1.5 text-[11px] sm:text-xs font-semibold text-[#0F172A] shadow-2xs group-hover:border-[#2563EB] group-hover:text-[#2563EB]">
+                                <span class="mt-2 sm:mt-2.5 inline-flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-semibold text-[#0F172A] shadow-2xs group-hover:border-[#2563EB] group-hover:text-[#2563EB]">
                                     <svg class="size-3 sm:size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
                                         <circle cx="9" cy="9" r="2"/>
@@ -398,25 +398,25 @@
                         </div>
 
                         <!-- Post-Submission Information Callout -->
-                        <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-5 text-xs sm:text-sm leading-relaxed text-[#0F172A] shadow-xs">
+                        <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-4 sm:p-5 text-xs sm:text-sm leading-relaxed text-[#0F172A] shadow-xs">
                             <div class="flex items-center gap-2.5">
-                                <div class="grid size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
-                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="grid size-7 sm:size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
+                                    <svg class="size-4 sm:size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                                     </svg>
                                 </div>
                                 <strong class="font-bold text-[#0F172A]">Setelah laporan terkirim:</strong>
                             </div>
-                            <p class="mt-2.5 text-xs sm:text-sm text-[#475569] leading-relaxed">
+                            <p class="mt-2 text-xs sm:text-sm text-[#475569] leading-relaxed">
                                 Anda akan memperoleh <strong class="text-[#0F172A]">Kode Laporan</strong> dan <strong class="text-[#0F172A]">PIN Rahasia 6 digit</strong>. Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
                             </p>
                         </div>
 
-                        <!-- Good Faith Confirmation -->
-                        <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-colors hover:border-[#2563EB]/40 hover:bg-blue-50/20">
-                            <input class="mt-1 size-4.5 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
-                            <span class="text-xs sm:text-sm leading-relaxed text-[#0F172A] font-medium">
+                        <!-- Good Faith Confirmation (Compact, muted when checked) -->
+                        <label class="group flex cursor-pointer items-start gap-2.5 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 sm:p-3.5 shadow-xs transition-colors hover:border-[#2563EB]/40 hover:bg-blue-50/20 has-[:checked]:bg-slate-50/80 has-[:checked]:border-slate-200">
+                            <input class="peer mt-0.5 size-4 shrink-0 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
+                            <span class="text-[11px] sm:text-xs leading-relaxed text-[#0F172A] font-medium peer-checked:text-[#64748B] peer-checked:font-normal transition-colors">
                                 Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span>
                             </span>
                         </label>
@@ -424,16 +424,16 @@
                     </div>
                 </section>
 
-                <!-- Action Area: Clean Bar (NO arrow icons, buttons side-by-side on desktop) -->
-                <div class="sticky bottom-0 z-30 -mx-6 sm:-mx-9 lg:-mx-12 -mb-6 sm:-mb-9 lg:-mb-12 mt-8 bg-white/95 border-t border-[#E2E8F0] p-4 sm:p-6 lg:p-8 backdrop-blur-md rounded-b-3xl">
-                    <div class="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
-                        <button type="button" id="previous-step" class="hidden min-h-11 sm:min-h-12 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-5 sm:px-6 py-2.5 text-sm font-semibold text-[#0F172A] shadow-2xs hover:bg-slate-50 transition-colors shrink-0 w-auto">
+                <!-- Action Area: Clean Bar (Compact buttons) -->
+                <div class="sticky bottom-0 z-30 -mx-6 sm:-mx-9 lg:-mx-12 -mb-6 sm:-mb-9 lg:-mb-12 mt-6 bg-white/95 border-t border-[#E2E8F0] p-3.5 sm:p-5 lg:p-6 backdrop-blur-md rounded-b-3xl">
+                    <div class="flex items-center justify-between sm:justify-end gap-2.5 sm:gap-3">
+                        <button type="button" id="previous-step" class="hidden min-h-9 sm:min-h-10 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-[#0F172A] shadow-2xs hover:bg-slate-50 transition-colors shrink-0 w-auto">
                             <span>Kembali</span>
                         </button>
-                        <button type="button" id="next-step" class="flex-1 sm:flex-initial sm:w-auto min-h-11 sm:min-h-12 items-center justify-center rounded-xl bg-[#2563EB] px-6 sm:px-7 py-2.5 text-center text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
+                        <button type="button" id="next-step" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
                             <span>Lanjut ke lokasi</span>
                         </button>
-                        <button type="submit" id="submit-report" class="flex-1 sm:flex-initial sm:w-auto min-h-11 sm:min-h-12 items-center justify-center rounded-xl bg-[#2563EB] px-6 sm:px-7 py-2.5 text-center text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs hidden">
+                        <button type="submit" id="submit-report" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs hidden">
                             <span>Kirim laporan</span>
                         </button>
                     </div>

@@ -68,8 +68,8 @@
     <main id="main-content" class="flex-1">{{ $slot }}</main>
 
     <!-- Public Service Footer (Clean, Centered, Minimal, Stylish) -->
-    <footer class="mt-10 sm:mt-14 border-t border-[#E2E8F0] bg-white">
-        <div class="public-container py-7 sm:py-9 text-center">
+    <footer class="mt-6 sm:mt-8 border-t border-[#E2E8F0] bg-white">
+        <div class="public-container py-5 sm:py-6 text-center">
             <!-- Center Logos: TAMBORA + Bank Indonesia (Slightly enlarged for clear visibility) -->
             <div class="flex items-center justify-center gap-4 sm:gap-6">
                 <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-9 sm:h-10 w-auto object-contain" width="720" height="316" loading="lazy">
@@ -78,7 +78,7 @@
             </div>
 
             <!-- Compact Interactive Elements with tight, comfortable spacing -->
-            <div class="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+            <div class="mt-3.5 sm:mt-4 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
                 <!-- Pemberitahuan Dropdown / Details -->
                 <details class="group relative inline-block text-left">
                     <summary class="inline-flex cursor-pointer list-none select-none items-center gap-1.5 rounded-full border border-[#E2E8F0] bg-[#F8FAFC] px-4 py-1.5 text-xs font-semibold text-[#0F172A] hover:bg-slate-100 hover:border-slate-300 transition-colors">
@@ -105,14 +105,14 @@
             </div>
 
             <!-- Akses Petugas (Discreet secondary link, satisfies tests) -->
-            <div class="mt-3">
+            <div class="mt-2.5">
                 <a href="{{ route('filament.admin.auth.login') }}" aria-label="Masuk ke portal admin" class="text-xs text-slate-400 hover:text-[#2563EB] transition-colors">
                     Akses petugas
                 </a>
             </div>
 
             <!-- Copyright Line -->
-            <div class="mt-4 pt-3.5 border-t border-[#E2E8F0] text-center text-[11px] sm:text-xs text-slate-400">
+            <div class="mt-3.5 pt-3 border-t border-[#E2E8F0] text-center text-[11px] sm:text-xs text-slate-400">
                 © {{ date('Y') }} Kantor Perwakilan Bank Indonesia Provinsi NTB · TAMBORA (laporkupva.id)
             </div>
         </div>
