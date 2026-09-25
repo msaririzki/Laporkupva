@@ -30,6 +30,34 @@ class ReportEvidenceControllerTest extends TestCase
             ->assertDownload('bukti-lokasi.jpg');
     }
 
+    public function test_admin_can_preview_private_report_evidence_inline(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $evidence = ReportEvidence::factory()->create([
+            'path' => 'report-activity/photo.jpg',
+            'original_name' => 'kunjungan-lapangan.jpg',
+            'mime_type' => 'image/jpeg',
+        ]);
+        Storage::disk('local')->put($evidence->path, 'private image contents');
+
+        $this->actingAs($admin)
+            ->get(route('admin.report-evidence.preview', $evidence))
+            ->assertOk()
+            ->assertHeader('content-type', 'image/jpeg')
+            ->assertHeader('cache-control', 'max-age=300, private');
+    }
+
+    public function test_guest_cannot_preview_private_report_evidence(): void
+    {
+        Storage::fake('local');
+        $evidence = ReportEvidence::factory()->create();
+        Storage::disk('local')->put($evidence->path, 'private image contents');
+
+        $this->get(route('admin.report-evidence.preview', $evidence))
+            ->assertRedirect();
+    }
+
     public function test_guest_cannot_download_report_evidence(): void
     {
         Storage::fake('local');

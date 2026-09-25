@@ -80,7 +80,12 @@
                         <div class="flex gap-2"><button type="button" id="search-location" class="button-secondary flex-1 sm:flex-none">Cari</button><button type="button" id="use-location" class="button-primary flex-1 sm:flex-none" title="Gunakan lokasi perangkat"><svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.75a.75.75 0 0 1 .75.75v1.05a6.5 6.5 0 0 1 5.7 5.7h1.05a.75.75 0 0 1 0 1.5h-1.05a6.5 6.5 0 0 1-5.7 5.7v1.05a.75.75 0 0 1-1.5 0v-1.05a6.5 6.5 0 0 1-5.7-5.7H2.5a.75.75 0 0 1 0-1.5h1.05a6.5 6.5 0 0 1 5.7-5.7V2.5a.75.75 0 0 1 .75-.75ZM5 10a5 5 0 1 0 10 0 5 5 0 0 0-10 0Zm5-2.25a2.25 2.25 0 1 1 0 4.5 2.25 2.25 0 0 1 0-4.5Z"/></svg>Lokasi saya</button></div>
                     </div>
                     <p id="map-message" class="mt-3 hidden text-sm" role="status"></p>
-                    <div id="report-map" class="mt-4 h-[390px] overflow-hidden rounded-2xl border border-slate-200 bg-slate-100" aria-label="Peta pemilihan lokasi"></div>
+                    <div
+                        id="report-map"
+                        class="mt-4 h-[390px] overflow-hidden rounded-2xl border border-slate-200 bg-slate-100"
+                        data-mapbox-token="{{ config('services.mapbox.public_token') }}"
+                        aria-label="Peta pemilihan lokasi"
+                    ></div>
                     <p class="mt-3 text-xs leading-5 text-slate-500">Klik peta atau geser penanda untuk menyesuaikan lokasi. Pastikan titik berada di wilayah Nusa Tenggara Barat.</p>
 
                     <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}" required>

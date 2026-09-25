@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\NtbDemoLocation;
 use App\Enums\ReportStatus;
 use App\Enums\UserRole;
 use App\Models\Kupva;
@@ -43,7 +44,7 @@ class DemoDataSeeder extends Seeder
             $licenseNumber = $record['license_number'];
             unset($record['license_number']);
 
-            $kupva = Kupva::query()->firstOrCreate(
+            $kupva = Kupva::query()->updateOrCreate(
                 ['license_number' => $licenseNumber],
                 $record,
             );
@@ -60,15 +61,12 @@ class DemoDataSeeder extends Seeder
     {
         $createdCount = 0;
         $statuses = ReportStatus::cases();
-        $locations = $this->locations();
+        $locations = NtbDemoLocation::cases();
         $incidentTypes = $this->incidentTypes();
+        $descriptions = $this->descriptions();
 
         for ($number = 1; $number <= 28; $number++) {
             $publicCode = sprintf('LKP-DEMO-%04d', $number);
-
-            if (Report::query()->where('public_code', $publicCode)->exists()) {
-                continue;
-            }
 
             $statusPosition = ($number - 1) % count($statuses);
             $status = $statuses[$statusPosition];
@@ -76,23 +74,19 @@ class DemoDataSeeder extends Seeder
             $createdAt = now()->subDays($number * 3)->startOfDay()->addHours(9);
             $statusTimestamps = $this->statusTimestamps($statusPosition, $createdAt);
 
-            $report = Report::query()->create([
+            $report = Report::query()->updateOrCreate([
                 'public_code' => $publicCode,
+            ], [
                 'tracking_pin_hash' => $trackingPinHash,
                 'status' => $status,
                 'incident_type' => $incidentTypes[($number - 1) % count($incidentTypes)],
-                'business_name' => sprintf('Demo Money Changer %02d', $number),
+                'business_name' => sprintf('Demo Valas %s %02d', $location->areaName(), $number),
                 'incident_date' => $createdAt->toDateString(),
                 'incident_time' => sprintf('%02d:%02d:00', 8 + ($number % 10), ($number * 7) % 60),
-                'description' => 'Data simulasi laporan masyarakat untuk demonstrasi alur penanganan TAMBORA.',
+                'description' => $descriptions[($number - 1) % count($descriptions)],
                 'is_ongoing' => $number % 3 !== 0,
                 'province' => 'Nusa Tenggara Barat',
-                'regency' => $location['regency'],
-                'district' => $location['district'],
-                'village' => $location['village'],
-                'address' => $location['address'],
-                'latitude' => $location['latitude'],
-                'longitude' => $location['longitude'],
+                ...$location->attributes(),
                 'location_accuracy' => 15 + $number,
                 'public_update' => $status->description(),
                 'internal_notes' => 'DATA DEMO — bukan laporan masyarakat yang sebenarnya.',
@@ -104,8 +98,10 @@ class DemoDataSeeder extends Seeder
                 'updated_at' => $createdAt->copy()->addDays($statusPosition),
             ])->saveQuietly();
 
-            $this->seedStatusHistories($report, $superAdmin, $statuses, $statusPosition, $createdAt);
-            $createdCount++;
+            if ($report->wasRecentlyCreated) {
+                $this->seedStatusHistories($report, $superAdmin, $statuses, $statusPosition, $createdAt);
+                $createdCount++;
+            }
         }
 
         return $createdCount;
@@ -163,37 +159,23 @@ class DemoDataSeeder extends Seeder
     private function incidentTypes(): array
     {
         return [
-            'KUPVA tanpa izin',
-            'Dugaan pelanggaran kurs',
-            'Tidak menampilkan papan izin',
-            'Transaksi mencurigakan',
-            'Praktik penukaran valuta asing ilegal',
+            'kupva_tanpa_izin',
+            'transaksi_mencurigakan',
+            'pelanggaran_kurs',
+            'penolakan_rupiah',
+            'lainnya',
         ];
     }
 
-    /**
-     * @return list<array{
-     *     regency: string,
-     *     district: string,
-     *     village: string,
-     *     address: string,
-     *     latitude: float,
-     *     longitude: float
-     * }>
-     */
-    private function locations(): array
+    /** @return list<string> */
+    private function descriptions(): array
     {
         return [
-            ['regency' => 'Kota Mataram', 'district' => 'Selaparang', 'village' => 'Rembiga', 'address' => 'Area demo Jalan Adi Sucipto, Mataram', 'latitude' => -8.5705, 'longitude' => 116.1068],
-            ['regency' => 'Kota Mataram', 'district' => 'Cakranegara', 'village' => 'Cilinaya', 'address' => 'Area demo pusat perdagangan Cakranegara', 'latitude' => -8.5901, 'longitude' => 116.1322],
-            ['regency' => 'Lombok Barat', 'district' => 'Batu Layar', 'village' => 'Senggigi', 'address' => 'Area demo kawasan wisata Senggigi', 'latitude' => -8.4948, 'longitude' => 116.0475],
-            ['regency' => 'Lombok Tengah', 'district' => 'Praya', 'village' => 'Praya', 'address' => 'Area demo pusat Kota Praya', 'latitude' => -8.7053, 'longitude' => 116.2702],
-            ['regency' => 'Lombok Timur', 'district' => 'Selong', 'village' => 'Selong', 'address' => 'Area demo pusat Kota Selong', 'latitude' => -8.6507, 'longitude' => 116.5319],
-            ['regency' => 'Lombok Utara', 'district' => 'Tanjung', 'village' => 'Tanjung', 'address' => 'Area demo pusat Kecamatan Tanjung', 'latitude' => -8.3562, 'longitude' => 116.1564],
-            ['regency' => 'Sumbawa', 'district' => 'Sumbawa', 'village' => 'Seketeng', 'address' => 'Area demo pusat Sumbawa Besar', 'latitude' => -8.4931, 'longitude' => 117.4202],
-            ['regency' => 'Sumbawa Barat', 'district' => 'Taliwang', 'village' => 'Kuang', 'address' => 'Area demo pusat Kota Taliwang', 'latitude' => -8.7449, 'longitude' => 116.8532],
-            ['regency' => 'Dompu', 'district' => 'Dompu', 'village' => 'Bada', 'address' => 'Area demo pusat Kabupaten Dompu', 'latitude' => -8.5364, 'longitude' => 118.4634],
-            ['regency' => 'Kota Bima', 'district' => 'Rasanae Barat', 'village' => 'Paruga', 'address' => 'Area demo pusat Kota Bima', 'latitude' => -8.4606, 'longitude' => 118.7267],
+            'Terlihat aktivitas penukaran valuta asing pada tempat usaha yang tidak menampilkan papan izin secara jelas.',
+            'Pelapor menemukan layanan penukaran uang dengan informasi kurs yang tidak ditampilkan secara transparan.',
+            'Tempat usaha diduga melayani transaksi valuta asing secara rutin tanpa identitas KUPVA yang mudah dilihat.',
+            'Terdapat penawaran penukaran valuta asing kepada wisatawan tanpa keterangan izin resmi di lokasi usaha.',
+            'Petugas usaha tidak memberikan bukti transaksi maupun informasi nilai tukar secara terbuka kepada pelanggan.',
         ];
     }
 
@@ -214,7 +196,7 @@ class DemoDataSeeder extends Seeder
      */
     private function kupvaRecords(): array
     {
-        $locations = $this->locations();
+        $locations = NtbDemoLocation::cases();
         $records = [];
 
         for ($number = 1; $number <= 12; $number++) {
@@ -226,15 +208,10 @@ class DemoDataSeeder extends Seeder
             };
 
             $records[] = [
-                'name' => sprintf('Demo KUPVA Berizin %02d', $number),
+                'name' => sprintf('KUPVA Demo %s %02d', $location->areaName(), $number),
                 'license_number' => sprintf('DEMO-NTB-%04d', $number),
                 'license_status' => $licenseStatus,
-                'address' => $location['address'],
-                'regency' => $location['regency'],
-                'district' => $location['district'],
-                'village' => $location['village'],
-                'latitude' => $location['latitude'],
-                'longitude' => $location['longitude'],
+                ...$location->attributes(),
                 'license_expires_at' => now()->addMonths(24 - $number)->toDateString(),
                 'is_active' => $licenseStatus === 'active',
             ];

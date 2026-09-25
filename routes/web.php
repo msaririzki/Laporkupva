@@ -34,6 +34,10 @@ Route::get('/admin/lampiran-laporan/{reportEvidence}/unduh', ReportEvidenceContr
     ->middleware('auth')
     ->name('admin.report-evidence.download');
 
+Route::get('/admin/lampiran-laporan/{reportEvidence}/lihat', [ReportEvidenceController::class, 'preview'])
+    ->middleware('auth')
+    ->name('admin.report-evidence.preview');
+
 Route::get('/admin/ekspor/laporan.csv', ReportExportController::class)
     ->middleware('auth')
     ->name('admin.reports.export');

@@ -1,3 +1,4 @@
+import './map-layers';
 import './report-form';
 
 const copyButton = document.querySelector('[data-copy-access]');

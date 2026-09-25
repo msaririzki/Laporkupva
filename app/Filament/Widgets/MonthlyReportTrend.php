@@ -10,13 +10,15 @@ class MonthlyReportTrend extends ChartWidget
 {
     protected static bool $isLazy = false;
 
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 4;
 
-    protected int|string|array $columnSpan = 1;
+    protected int|string|array $columnSpan = [
+        'default' => 1,
+        'md' => 1,
+        'xl' => 7,
+    ];
 
-    protected ?string $heading = 'Tren laporan bulanan';
-
-    protected ?string $description = 'Jumlah laporan yang masuk selama enam bulan terakhir.';
+    protected ?string $heading = 'Tren 6 bulan';
 
     protected ?string $maxHeight = '310px';
 

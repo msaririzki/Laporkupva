@@ -14,7 +14,11 @@ class ReportMap extends Widget
 
     protected string $view = 'filament.widgets.report-map';
 
-    protected int|string|array $columnSpan = 'full';
+    protected int|string|array $columnSpan = [
+        'default' => 1,
+        'md' => 2,
+        'xl' => 8,
+    ];
 
     /** @return array<string, mixed> */
     protected function getViewData(): array

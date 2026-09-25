@@ -136,11 +136,19 @@ if (form) {
     const initializeMap = () => {
         if (map) return;
 
-        map = L.map('report-map', { zoomControl: true, minZoom: 7, maxZoom: 19 }).setView([-8.72, 117.35], 8);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        const mapElement = document.querySelector('#report-map');
+        const layers = window.TamboraMap.createBaseLayers(L, mapElement.dataset.mapboxToken);
+
+        map = L.map(mapElement, {
+            zoomControl: true,
+            minZoom: 7,
             maxZoom: 19,
-            attribution: '&copy; OpenStreetMap contributors',
-        }).addTo(map);
+            scrollWheelZoom: false,
+            wheelDebounceTime: 40,
+            wheelPxPerZoomLevel: 100,
+        }).setView([-8.72, 117.35], 8);
+        window.TamboraMap.addStyleControl(L, map, layers);
+        window.TamboraMap.enableSafeScrollZoom(map);
 
         map.on('click', (event) => {
             if (updatePoint(event.latlng.lat, event.latlng.lng)) scheduleReverseGeocode(event.latlng.lat, event.latlng.lng);

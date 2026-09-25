@@ -30,35 +30,45 @@ class ReportsTable
             ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('public_code')
-                    ->label('Kode')
+                    ->label('Kode laporan')
                     ->searchable()
                     ->copyable()
-                    ->weight('bold'),
+                    ->weight('bold')
+                    ->description(fn (Report $record): string => $record->created_at->diffForHumans()),
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
+                    ->wrap()
                     ->sortable(),
                 TextColumn::make('incident_type')
                     ->label('Jenis laporan')
                     ->formatStateUsing(fn (string $state): string => self::INCIDENT_TYPES[$state] ?? $state)
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('business_name')
-                    ->label('Tempat/usaha')
+                    ->label('Tempat / jenis laporan')
                     ->placeholder('Tidak disebutkan')
                     ->searchable()
-                    ->limit(28),
+                    ->limit(36)
+                    ->wrap()
+                    ->visibleFrom('md')
+                    ->description(fn (Report $record): string => self::INCIDENT_TYPES[$record->incident_type] ?? $record->incident_type),
                 TextColumn::make('regency')
                     ->label('Wilayah')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->wrap()
+                    ->visibleFrom('lg'),
                 IconColumn::make('is_ongoing')
                     ->label('Berlangsung')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Dikirim')
                     ->since()
                     ->dateTimeTooltip('d M Y, H:i')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('status')
@@ -79,7 +89,7 @@ class ReportsTable
                     ->url(fn (): string => route('admin.reports.export')),
             ])
             ->recordActions([
-                ViewAction::make()->label('Detail'),
+                ViewAction::make()->iconButton()->tooltip('Lihat detail laporan'),
                 ReportResource::advanceStatusAction()->iconButton()->tooltip('Lanjutkan ke tahap berikutnya'),
             ])
             ->emptyStateHeading('Belum ada laporan masyarakat')

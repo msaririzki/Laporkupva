@@ -26,7 +26,23 @@ class DemoDataSeederTest extends TestCase
         $this->assertDatabaseCount('report_status_histories', 94);
         $this->assertDatabaseHas('kupvas', [
             'license_number' => 'DEMO-NTB-0001',
-            'name' => 'Demo KUPVA Berizin 01',
+            'name' => 'KUPVA Demo Cakranegara 01',
+            'regency' => 'Kota Mataram',
+            'district' => 'Cakranegara',
+            'village' => 'Cilinaya',
+            'latitude' => -8.5901,
+            'longitude' => 116.1322,
+        ]);
+        $this->assertDatabaseHas('reports', [
+            'public_code' => 'LKP-DEMO-0001',
+            'business_name' => 'Demo Valas Cakranegara 01',
+            'incident_type' => 'kupva_tanpa_izin',
+            'description' => 'Terlihat aktivitas penukaran valuta asing pada tempat usaha yang tidak menampilkan papan izin secara jelas.',
+            'regency' => 'Kota Mataram',
+            'district' => 'Cakranegara',
+            'village' => 'Cilinaya',
+            'latitude' => -8.5901,
+            'longitude' => 116.1322,
         ]);
 
         $completedReport = Report::query()
@@ -43,10 +59,23 @@ class DemoDataSeederTest extends TestCase
         User::factory()->superAdmin()->create();
 
         $this->seed(DemoDataSeeder::class);
+        Report::query()->where('public_code', 'LKP-DEMO-0001')->update([
+            'regency' => 'Kota Bima',
+            'district' => 'Lokasi tidak valid',
+            'latitude' => -8.0000,
+            'longitude' => 118.0000,
+        ]);
         $this->seed(DemoDataSeeder::class);
 
         $this->assertDatabaseCount('kupvas', 12);
         $this->assertDatabaseCount('reports', 28);
         $this->assertDatabaseCount('report_status_histories', 94);
+        $this->assertDatabaseHas('reports', [
+            'public_code' => 'LKP-DEMO-0001',
+            'regency' => 'Kota Mataram',
+            'district' => 'Cakranegara',
+            'latitude' => -8.5901,
+            'longitude' => 116.1322,
+        ]);
     }
 }

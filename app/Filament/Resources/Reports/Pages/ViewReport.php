@@ -20,17 +20,13 @@ class ViewReport extends ViewRecord
         return "Laporan {$this->getRecord()->public_code}";
     }
 
-    public function getSubheading(): ?string
-    {
-        return "Detail laporan anonim · {$this->getRecord()->regency}";
-    }
-
     protected function getHeaderActions(): array
     {
         return [
             ReportResource::advanceStatusAction(),
             ReportResource::sendMessageAction(),
             ActionGroup::make([
+                ReportResource::addActivityEvidenceAction(),
                 EditAction::make()
                     ->label('Edit catatan internal')
                     ->icon(Heroicon::OutlinedPencilSquare),

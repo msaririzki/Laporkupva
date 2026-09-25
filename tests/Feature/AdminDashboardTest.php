@@ -15,6 +15,8 @@ use App\Models\Report;
 use App\Models\ReportEvidence;
 use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -41,27 +43,39 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($admin)
             ->get('/admin')
             ->assertOk()
-            ->assertSee('Ringkasan pengawasan')
+            ->assertSee('Ringkasan Laporan')
+            ->assertDontSee('Ringkasan laporan masyarakat dan aktivitas penanganan di Nusa Tenggara Barat.')
+            ->assertDontSee('Pusat kendali TAMBORA')
+            ->assertDontSee('Selamat datang, '.$admin->name)
+            ->assertDontSee('Ringkasan pengawasan')
             ->assertSee('Tindakan lapangan')
-            ->assertSee('Peta sebaran lokasi terlapor')
-            ->assertSee('Tren laporan bulanan')
-            ->assertSee('Distribusi status laporan')
-            ->assertSee('Wilayah laporan terbanyak')
-            ->assertSee('Laporan terbaru');
+            ->assertSee('Peta laporan')
+            ->assertSee('Tren 6 bulan')
+            ->assertSee('Status laporan')
+            ->assertSee('Laporan per wilayah')
+            ->assertSee('Laporan terbaru')
+            ->assertSee('Lihat semua')
+            ->assertDontSee('Pencarian global');
 
         $this->actingAs($admin)
             ->get(ReportResource::getUrl('index'))
             ->assertOk()
             ->assertSee('Laporan masyarakat')
+            ->assertSee('Pantau, saring, dan tindak lanjuti laporan masyarakat dari seluruh wilayah NTB.')
             ->assertSee('Ekspor CSV');
 
         $this->actingAs($admin)
             ->get(ReportResource::getUrl('view', ['record' => $report]))
             ->assertOk()
             ->assertSee($report->public_code)
-            ->assertSee('Progres penanganan')
+            ->assertSee('Status penanganan')
             ->assertSee('Update progres')
-            ->assertSee('Langkah berikutnya')
+            ->assertSee('Tambah dokumentasi')
+            ->assertSee('Sudah dikerjakan')
+            ->assertSee('Sedang dikerjakan')
+            ->assertSee('Belum dikerjakan')
+            ->assertDontSee("Detail laporan anonim · {$report->regency}")
+            ->assertDontSee('Laporan sudah diterima dan mulai diproses.')
             ->assertSee('data-progress-state="completed"', false)
             ->assertSee('data-progress-state="current"', false)
             ->assertSee('aria-current="step"', false)
@@ -71,7 +85,8 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($admin)
             ->get(KupvaResource::getUrl('index'))
             ->assertOk()
-            ->assertSee('Data KUPVA');
+            ->assertSee('Data KUPVA')
+            ->assertSee('Kelola referensi penyelenggara KUPVA dan pantau status izin operasionalnya.');
     }
 
     public function test_regular_admin_cannot_manage_other_admin_accounts(): void
@@ -81,6 +96,20 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($admin)
             ->get('/admin/users')
             ->assertForbidden();
+    }
+
+    public function test_dashboard_shows_status_percentages_without_hovering(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        Report::factory()->create(['status' => ReportStatus::Submitted]);
+        Report::factory()->count(3)->create(['status' => ReportStatus::Completed]);
+
+        $this->actingAs($admin)
+            ->get('/admin')
+            ->assertSee('Status laporan')
+            ->assertSee('75,0%')
+            ->assertSee('data-status-percentage="75,0%"', false)
+            ->assertDontSee('Kondisi laporan masyarakat yang diperbarui secara berkala.');
     }
 
     public function test_admin_can_send_an_anonymous_message_from_report_detail(): void
@@ -128,6 +157,80 @@ class AdminDashboardTest extends TestCase
             'from_status' => ReportStatus::Submitted->value,
             'to_status' => ReportStatus::Received->value,
         ]);
+    }
+
+    public function test_admin_can_attach_private_activity_photos_when_updating_progress(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $report = Report::factory()->received()->create();
+
+        $this->actingAs($admin);
+
+        Livewire::test(ViewReport::class, ['record' => $report->getRouteKey()])
+            ->callAction('advanceStatus', [
+                'public_note' => 'Koordinasi dengan APH sedang dilakukan.',
+                'internal_note' => 'Koordinasi dilakukan bersama tim pengawasan.',
+                'activity_photos' => [
+                    UploadedFile::fake()->image('koordinasi-aph.jpg', 1600, 1200)->size(900),
+                ],
+            ])
+            ->assertNotified();
+
+        $evidence = ReportEvidence::query()
+            ->where('report_id', $report->getKey())
+            ->where('source', 'admin_activity')
+            ->firstOrFail();
+
+        $this->assertSame($admin->getKey(), $evidence->uploaded_by_user_id);
+        $this->assertNotNull($evidence->report_status_history_id);
+        $this->assertSame('Koordinasi dilakukan bersama tim pengawasan.', $evidence->caption);
+        Storage::disk('local')->assertExists($evidence->path);
+
+        $this->get(ReportResource::getUrl('view', ['record' => $report]))
+            ->assertOk()
+            ->assertSee('Bukti kegiatan petugas')
+            ->assertSee('Koordinasi dilakukan bersama tim pengawasan.')
+            ->assertSee(route('admin.report-evidence.preview', $evidence), false);
+
+        $this->assertDatabaseHas('report_status_histories', [
+            'id' => $evidence->report_status_history_id,
+            'report_id' => $report->getKey(),
+            'to_status' => ReportStatus::Coordination->value,
+            'internal_note' => 'Koordinasi dilakukan bersama tim pengawasan.',
+        ]);
+    }
+
+    public function test_admin_can_add_activity_photos_without_changing_progress(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $report = Report::factory()->received()->create();
+        $history = $report->statusHistories()->create([
+            'user_id' => $admin->getKey(),
+            'from_status' => ReportStatus::Submitted,
+            'to_status' => ReportStatus::Received,
+            'public_note' => 'Laporan diterima.',
+        ]);
+
+        $this->actingAs($admin);
+
+        Livewire::test(ViewReport::class, ['record' => $report->getRouteKey()])
+            ->callAction('addActivityEvidence', [
+                'caption' => 'Dokumentasi pemeriksaan berkas tambahan.',
+                'activity_photos' => [
+                    UploadedFile::fake()->image('pemeriksaan-berkas.jpg', 1200, 900)->size(700),
+                ],
+            ])
+            ->assertNotified();
+
+        $report->refresh();
+        $evidence = $report->activityEvidence()->firstOrFail();
+
+        $this->assertSame(ReportStatus::Received, $report->status);
+        $this->assertSame($history->getKey(), $evidence->report_status_history_id);
+        $this->assertSame('Dokumentasi pemeriksaan berkas tambahan.', $evidence->caption);
+        Storage::disk('local')->assertExists($evidence->path);
     }
 
     public function test_only_super_admin_can_correct_a_report_status_with_a_reason(): void
@@ -182,7 +285,8 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($superAdmin)
             ->get(UserResource::getUrl('index'))
             ->assertOk()
-            ->assertSee('Manajemen admin');
+            ->assertSee('Manajemen admin')
+            ->assertSee('Atur akun dan akses admin yang membantu proses pengawasan.');
     }
 
     public function test_super_admin_can_deactivate_an_admin_without_deleting_the_account(): void

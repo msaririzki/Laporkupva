@@ -21,4 +21,21 @@ class ReportEvidenceController extends Controller
             ['Content-Type' => $reportEvidence->mime_type],
         );
     }
+
+    public function preview(ReportEvidence $reportEvidence): StreamedResponse
+    {
+        Gate::authorize('view', $reportEvidence);
+
+        abort_unless(Storage::disk('local')->exists($reportEvidence->path), 404);
+
+        return Storage::disk('local')->response(
+            $reportEvidence->path,
+            basename($reportEvidence->original_name),
+            [
+                'Content-Type' => $reportEvidence->mime_type,
+                'Content-Disposition' => 'inline; filename="'.basename($reportEvidence->original_name).'"',
+                'Cache-Control' => 'private, max-age=300',
+            ],
+        );
+    }
 }

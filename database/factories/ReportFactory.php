@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\NtbDemoLocation;
 use App\Enums\ReportStatus;
 use App\Models\Report;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,6 +21,8 @@ class ReportFactory extends Factory
      */
     public function definition(): array
     {
+        $location = fake()->randomElement(NtbDemoLocation::cases());
+
         return [
             'public_code' => 'LKP-'.Str::upper(Str::random(4)).'-'.Str::upper(Str::random(4)),
             'tracking_pin_hash' => Hash::make('123456'),
@@ -31,18 +34,25 @@ class ReportFactory extends Factory
                 'penolakan_rupiah',
                 'lainnya',
             ]),
-            'business_name' => fake()->company().' Money Changer',
+            'business_name' => fake()->randomElement([
+                'Nusa Valas',
+                'Rinjani Exchange',
+                'Samawa Valuta',
+                'Tambora Money Exchange',
+                'Mandalika Valas',
+            ]).' (Data Demo)',
             'incident_date' => fake()->dateTimeBetween('-30 days', 'now'),
             'incident_time' => fake()->time('H:i'),
-            'description' => fake()->paragraph(),
+            'description' => fake()->randomElement([
+                'Terlihat aktivitas penukaran valuta asing pada tempat usaha yang tidak menampilkan papan izin secara jelas.',
+                'Pelapor menemukan layanan penukaran uang dengan informasi kurs yang tidak ditampilkan secara transparan.',
+                'Tempat usaha diduga melayani transaksi valuta asing secara rutin tanpa identitas KUPVA yang mudah dilihat.',
+                'Terdapat penawaran penukaran valuta asing kepada wisatawan tanpa keterangan izin resmi di lokasi usaha.',
+                'Petugas usaha tidak memberikan bukti transaksi maupun informasi nilai tukar secara terbuka kepada pelanggan.',
+            ]),
             'is_ongoing' => fake()->boolean(),
             'province' => 'Nusa Tenggara Barat',
-            'regency' => fake()->randomElement(['Kota Mataram', 'Kabupaten Lombok Barat', 'Kabupaten Lombok Tengah', 'Kota Bima']),
-            'district' => fake()->citySuffix(),
-            'village' => fake()->streetName(),
-            'address' => fake()->streetAddress(),
-            'latitude' => fake()->latitude(-9.0, -8.0),
-            'longitude' => fake()->longitude(115.8, 119.3),
+            ...$location->attributes(),
             'location_accuracy' => fake()->randomFloat(2, 5, 80),
         ];
     }

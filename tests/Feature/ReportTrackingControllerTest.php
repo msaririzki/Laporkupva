@@ -4,6 +4,9 @@ namespace Tests\Feature;
 
 use App\Enums\ReportStatus;
 use App\Models\Report;
+use App\Models\ReportEvidence;
+use App\Models\ReportStatusHistory;
+use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -105,5 +108,33 @@ class ReportTrackingControllerTest extends TestCase
 
         $this->get(route('reports.status', ['report' => $report->public_code]))
             ->assertNotFound();
+    }
+
+    public function test_activity_photos_and_internal_notes_are_not_exposed_on_public_tracking(): void
+    {
+        $report = Report::factory()->received()->create();
+        $history = ReportStatusHistory::factory()->create([
+            'report_id' => $report->getKey(),
+            'to_status' => ReportStatus::Received,
+            'public_note' => 'Laporan sedang ditangani petugas.',
+            'internal_note' => 'Identitas tim lapangan dan strategi pemeriksaan.',
+        ]);
+        ReportEvidence::factory()->create([
+            'report_id' => $report->getKey(),
+            'report_status_history_id' => $history->getKey(),
+            'uploaded_by_user_id' => User::factory(),
+            'source' => 'admin_activity',
+            'original_name' => 'foto-kegiatan-internal.jpg',
+            'caption' => 'Dokumentasi internal kunjungan lapangan.',
+        ]);
+
+        $this->withSession([
+            "tracked_reports.{$report->getKey()}" => now()->addMinutes(10)->getTimestamp(),
+        ])->get(route('reports.status', $report))
+            ->assertOk()
+            ->assertSee('Laporan sedang ditangani petugas.')
+            ->assertDontSee('Identitas tim lapangan dan strategi pemeriksaan.')
+            ->assertDontSee('foto-kegiatan-internal.jpg')
+            ->assertDontSee('Dokumentasi internal kunjungan lapangan.');
     }
 }

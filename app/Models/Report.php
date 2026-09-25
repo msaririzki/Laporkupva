@@ -48,6 +48,21 @@ class Report extends Model
         return $this->hasMany(ReportEvidence::class);
     }
 
+    /** @return HasMany<ReportEvidence, $this> */
+    public function submissionEvidence(): HasMany
+    {
+        return $this->hasMany(ReportEvidence::class)
+            ->where('source', 'reporter_submission');
+    }
+
+    /** @return HasMany<ReportEvidence, $this> */
+    public function activityEvidence(): HasMany
+    {
+        return $this->hasMany(ReportEvidence::class)
+            ->where('source', 'admin_activity')
+            ->latest();
+    }
+
     /** @return HasMany<ReportStatusHistory, $this> */
     public function statusHistories(): HasMany
     {
@@ -60,7 +75,7 @@ class Report extends Model
         return $this->hasMany(AnonymousMessage::class)->oldest();
     }
 
-    public function advanceStatus(?User $user, ?string $publicNote = null): bool
+    public function advanceStatus(?User $user, ?string $publicNote = null, ?string $internalNote = null): bool
     {
         $fromStatus = $this->status;
         $toStatus = $fromStatus->next();
@@ -69,7 +84,7 @@ class Report extends Model
             return false;
         }
 
-        DB::transaction(function () use ($fromStatus, $publicNote, $toStatus, $user): void {
+        DB::transaction(function () use ($fromStatus, $internalNote, $publicNote, $toStatus, $user): void {
             $attributes = [
                 'status' => $toStatus,
                 'public_update' => $publicNote ?: $toStatus->description(),
@@ -94,6 +109,7 @@ class Report extends Model
                 'from_status' => $fromStatus,
                 'to_status' => $toStatus,
                 'public_note' => $attributes['public_update'],
+                'internal_note' => filled($internalNote) ? trim($internalNote) : null,
             ]);
         });
 

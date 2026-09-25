@@ -15,16 +15,19 @@ class ReportStats extends StatsOverviewWidget
 
     protected static ?int $sort = 1;
 
-    protected int|array|null $columns = [
+    protected int|string|array $columnSpan = [
+        'default' => 1,
         'md' => 2,
+        'xl' => 12,
+    ];
+
+    protected int|array|null $columns = [
+        'sm' => 2,
+        'lg' => 3,
         'xl' => 5,
     ];
 
     protected ?string $pollingInterval = '30s';
-
-    protected ?string $heading = 'Ringkasan pengawasan';
-
-    protected ?string $description = 'Kondisi laporan masyarakat yang diperbarui secara berkala.';
 
     protected function getStats(): array
     {
@@ -49,30 +52,25 @@ class ReportStats extends StatsOverviewWidget
 
         return [
             Stat::make('Total laporan', number_format($total, 0, ',', '.'))
-                ->description('Seluruh laporan masyarakat')
-                ->descriptionIcon('heroicon-m-clipboard-document-list')
                 ->chart($this->sevenDayChart())
                 ->color('primary')
+                ->extraAttributes(['class' => 'dashboard-stat-card'])
                 ->url(ReportResource::getUrl('index')),
             Stat::make('Laporan baru', number_format($new, 0, ',', '.'))
-                ->description('Perlu pemeriksaan awal')
-                ->descriptionIcon('heroicon-m-inbox-arrow-down')
                 ->color($new > 0 ? 'warning' : 'gray')
+                ->extraAttributes(['class' => 'dashboard-stat-card'])
                 ->url(ReportResource::getUrl('index')),
-            Stat::make('Sedang diproses', number_format($inProgress, 0, ',', '.'))
-                ->description('Diterima, koordinasi, dan hasil')
-                ->descriptionIcon('heroicon-m-arrow-path')
+            Stat::make('Sedang ditangani', number_format($inProgress, 0, ',', '.'))
                 ->color('info')
+                ->extraAttributes(['class' => 'dashboard-stat-card'])
                 ->url(ReportResource::getUrl('index')),
-            Stat::make('Tindakan lapangan', number_format($fieldAction, 0, ',', '.'))
-                ->description('Kunjungan atau penertiban')
-                ->descriptionIcon('heroicon-m-map-pin')
+            Stat::make('Ke lapangan', number_format($fieldAction, 0, ',', '.'))
                 ->color('warning')
+                ->extraAttributes(['class' => 'dashboard-stat-card'])
                 ->url(ReportResource::getUrl('index')),
             Stat::make('Selesai', number_format($completed, 0, ',', '.'))
-                ->description($total > 0 ? number_format(($completed / $total) * 100, 1, ',', '.').'% dari total laporan' : 'Belum ada laporan')
-                ->descriptionIcon('heroicon-m-check-circle')
                 ->color('success')
+                ->extraAttributes(['class' => 'dashboard-stat-card'])
                 ->url(ReportResource::getUrl('index')),
         ];
     }

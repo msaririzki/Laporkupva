@@ -11,11 +11,13 @@ class RegionalReportChart extends ChartWidget
 
     protected static ?int $sort = 5;
 
-    protected int|string|array $columnSpan = 1;
+    protected int|string|array $columnSpan = [
+        'default' => 1,
+        'md' => 2,
+        'xl' => 5,
+    ];
 
-    protected ?string $heading = 'Wilayah laporan terbanyak';
-
-    protected ?string $description = 'Enam kabupaten/kota dengan laporan terbanyak.';
+    protected ?string $heading = 'Laporan per wilayah';
 
     protected ?string $maxHeight = '310px';
 

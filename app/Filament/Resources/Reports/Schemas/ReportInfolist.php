@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Reports\Schemas;
 use App\Models\Report;
 use App\Models\ReportEvidence;
 use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
@@ -70,8 +71,8 @@ class ReportInfolist
                                         ->time('H:i')
                                         ->placeholder('Tidak disebutkan'),
                                     TextEntry::make('evidence_count')
-                                        ->label('Jumlah lampiran')
-                                        ->state(fn (Report $record): string => $record->evidence()->count().' berkas'),
+                                        ->label('Lampiran dari pelapor')
+                                        ->state(fn (Report $record): string => $record->submissionEvidence()->count().' berkas'),
                                     TextEntry::make('description')
                                         ->label('Kronologi')
                                         ->prose()
@@ -99,13 +100,13 @@ class ReportInfolist
                                     SchemaView::make('filament.schemas.components.report-location-map')
                                         ->columnSpanFull(),
                                 ]),
-                            Section::make('Lampiran bukti')
-                                ->description('Berkas tersimpan privat dan hanya dapat diakses oleh Admin TAMBORA.')
+                            Section::make('Lampiran dari pelapor')
+                                ->description('Berkas awal yang dikirim masyarakat. Tersimpan privat dan hanya dapat diakses Admin TAMBORA.')
                                 ->icon(Heroicon::OutlinedPaperClip)
-                                ->visible(fn (Report $record): bool => $record->evidence()->exists())
+                                ->visible(fn (Report $record): bool => $record->submissionEvidence()->exists())
                                 ->collapsible()
                                 ->schema([
-                                    RepeatableEntry::make('evidence')
+                                    RepeatableEntry::make('submissionEvidence')
                                         ->hiddenLabel()
                                         ->columns([
                                             'default' => 1,
@@ -121,6 +122,52 @@ class ReportInfolist
                                             TextEntry::make('size')
                                                 ->label('Ukuran')
                                                 ->formatStateUsing(fn (int $state): string => self::formatBytes($state)),
+                                        ]),
+                                ]),
+                            Section::make('Bukti kegiatan petugas')
+                                ->description('Dokumentasi internal pada setiap tahap penanganan. Foto tidak ditampilkan kepada pelapor atau pengunjung umum.')
+                                ->icon(Heroicon::OutlinedPhoto)
+                                ->visible(fn (Report $record): bool => $record->activityEvidence()->exists())
+                                ->collapsible()
+                                ->schema([
+                                    RepeatableEntry::make('activityEvidence')
+                                        ->hiddenLabel()
+                                        ->grid([
+                                            'default' => 1,
+                                            'lg' => 2,
+                                        ])
+                                        ->columns([
+                                            'default' => 1,
+                                            'sm' => 2,
+                                        ])
+                                        ->schema([
+                                            ImageEntry::make('preview_url')
+                                                ->hiddenLabel()
+                                                ->state(fn (ReportEvidence $record): string => route('admin.report-evidence.preview', $record))
+                                                ->url(fn (ReportEvidence $record): string => route('admin.report-evidence.download', $record))
+                                                ->openUrlInNewTab()
+                                                ->imageHeight('180px')
+                                                ->extraImgAttributes([
+                                                    'class' => 'w-full rounded-xl object-cover',
+                                                    'loading' => 'lazy',
+                                                ])
+                                                ->columnSpanFull(),
+                                            TextEntry::make('statusHistory.to_status')
+                                                ->label('Tahap kegiatan')
+                                                ->badge(),
+                                            TextEntry::make('created_at')
+                                                ->label('Diunggah')
+                                                ->dateTime('d M Y, H:i'),
+                                            TextEntry::make('uploadedBy.name')
+                                                ->label('Petugas')
+                                                ->placeholder('Admin TAMBORA'),
+                                            TextEntry::make('original_name')
+                                                ->label('Nama foto')
+                                                ->limit(32),
+                                            TextEntry::make('caption')
+                                                ->label('Catatan kegiatan')
+                                                ->placeholder('Tidak ada catatan tambahan')
+                                                ->columnSpanFull(),
                                         ]),
                                 ]),
                         ])->columnSpan([

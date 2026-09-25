@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\NtbDemoLocation;
 use App\Models\Kupva;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,16 +18,19 @@ class KupvaFactory extends Factory
      */
     public function definition(): array
     {
+        $location = fake()->randomElement(NtbDemoLocation::cases());
+
         return [
-            'name' => fake()->company().' Money Changer',
+            'name' => fake()->randomElement([
+                'KUPVA Nusa Valas',
+                'KUPVA Rinjani Exchange',
+                'KUPVA Samawa Valuta',
+                'KUPVA Tambora Exchange',
+                'KUPVA Mandalika Valas',
+            ]).' (Data Demo)',
             'license_number' => fake()->unique()->bothify('KUPVA-NTB-####'),
             'license_status' => 'active',
-            'address' => fake()->streetAddress(),
-            'regency' => fake()->randomElement(['Kota Mataram', 'Kabupaten Lombok Barat', 'Kabupaten Lombok Tengah', 'Kota Bima']),
-            'district' => fake()->citySuffix(),
-            'village' => fake()->streetName(),
-            'latitude' => fake()->latitude(-9.0, -8.0),
-            'longitude' => fake()->longitude(115.8, 119.3),
+            ...$location->attributes(),
             'license_expires_at' => fake()->dateTimeBetween('now', '+2 years'),
             'is_active' => true,
         ];

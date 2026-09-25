@@ -3,65 +3,444 @@
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
 
+.fi-body-has-navigation {
+    color: #172033;
+    background:
+        radial-gradient(circle at 78% 0%, rgb(219 234 254 / 55%), transparent 28rem),
+        #f4f7fb;
+}
+
+.fi-body-has-navigation .fi-topbar {
+    border-bottom: 1px solid rgb(51 79 131 / 12%);
+    background: linear-gradient(90deg, rgb(245 248 253 / 96%) 0%, rgb(255 255 255 / 94%) 34%, rgb(255 255 255 / 94%) 100%);
+    box-shadow: 0 10px 34px -30px rgb(43 70 117 / 45%);
+    backdrop-filter: blur(18px);
+}
+
+.fi-body-has-navigation .fi-topbar .fi-logo {
+    color: #2b4675;
+    letter-spacing: -0.025em;
+}
+
+.fi-body-has-navigation .fi-topbar .fi-input-wrp {
+    border-color: rgb(51 79 131 / 9%);
+    background: rgb(248 250 252 / 90%);
+}
+
+.fi-body-has-navigation .fi-sidebar,
+.fi-body-has-navigation .fi-sidebar-header-ctn {
+    border-right: 1px solid rgb(71 85 105 / 12%);
+    background:
+        radial-gradient(circle at -8% -2%, rgb(147 197 253 / 20%), transparent 17rem),
+        linear-gradient(180deg, #fbfcff 0%, #f5f7fb 48%, #eef3f9 100%);
+    box-shadow: 14px 0 36px -30px rgb(51 65 85 / 45%);
+}
+
+.fi-body-has-navigation .fi-sidebar-header {
+    border-bottom: 1px solid rgb(71 85 105 / 10%);
+    background: transparent;
+    box-shadow: none;
+}
+
+.fi-body-has-navigation .fi-sidebar .fi-logo {
+    color: #2b4675;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.fi-body-has-navigation .fi-sidebar .fi-logo::before {
+    display: inline-grid;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.65rem;
+    place-items: center;
+    border: 1px solid rgb(43 70 117 / 12%);
+    border-radius: 0.75rem;
+    color: #ffffff;
+    background: linear-gradient(145deg, #5878ad, #355783);
+    box-shadow: 0 10px 22px -14px rgb(43 70 117 / 65%);
+    content: 'T';
+    font-size: 0.9rem;
+    font-weight: 900;
+    vertical-align: middle;
+}
+
+.fi-body-has-navigation .fi-sidebar-nav {
+    gap: 1rem;
+    padding: 1.4rem 0.85rem;
+}
+
+.fi-body-has-navigation .fi-sidebar-nav::before {
+    padding-inline: 0.65rem;
+    color: #8a9ab2;
+    content: 'NAVIGASI';
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.fi-body-has-navigation .fi-sidebar-nav-groups {
+    gap: 0.4rem;
+}
+
+.fi-body-has-navigation .fi-sidebar-item-btn {
+    min-height: 3rem;
+    padding-inline: 0.8rem;
+    border: 1px solid transparent;
+    border-radius: 0.8rem;
+    color: #4b5d78;
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.fi-body-has-navigation .fi-sidebar-item-icon {
+    color: #7d91ad;
+    transition: color 180ms ease, transform 180ms ease;
+}
+
+.fi-body-has-navigation .fi-sidebar-item-label {
+    color: #4b5d78;
+    font-weight: 600;
+}
+
+.fi-body-has-navigation .fi-sidebar-item-btn:hover {
+    border-color: #d9e2ef;
+    color: #294a78;
+    background: rgb(255 255 255 / 80%);
+    box-shadow: 0 8px 18px -16px rgb(43 70 117 / 45%);
+    transform: translateX(2px);
+}
+
+.fi-body-has-navigation .fi-sidebar-item-btn:hover .fi-sidebar-item-icon {
+    color: #5273a6;
+    transform: scale(1.04);
+}
+
+.fi-body-has-navigation .fi-sidebar-item-btn:hover .fi-sidebar-item-label {
+    color: #294a78;
+}
+
+.fi-body-has-navigation .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    border-color: #cad8eb;
+    color: #254a7d;
+    background: linear-gradient(135deg, #edf3fc 0%, #dfe9f8 100%);
+    box-shadow: 0 12px 24px -20px rgb(43 70 117 / 60%), inset 0 1px #ffffff;
+}
+
+.fi-body-has-navigation .fi-sidebar-item.fi-active > .fi-sidebar-item-btn::before {
+    position: absolute;
+    inset-block: 0.72rem;
+    inset-inline-start: -1px;
+    width: 3px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #7392c2, #3f659d);
+    box-shadow: 0 0 10px rgb(79 111 165 / 30%);
+    content: '';
+}
+
+.fi-body-has-navigation .fi-sidebar-item.fi-active .fi-sidebar-item-icon,
+.fi-body-has-navigation .fi-sidebar-item.fi-active .fi-sidebar-item-label {
+    color: #254a7d;
+}
+
+.fi-body-has-navigation .fi-sidebar-group-label,
+.fi-body-has-navigation .fi-sidebar-group-collapse-button {
+    color: #8a9ab2;
+}
+
+.fi-body-has-navigation .fi-topbar-close-sidebar-btn,
+.fi-body-has-navigation .fi-topbar-close-collapse-sidebar-btn,
+.fi-body-has-navigation .fi-topbar-open-collapse-sidebar-btn {
+    color: #526b94;
+    border-radius: 0.7rem;
+}
+
+.fi-body-has-navigation .fi-topbar-close-sidebar-btn:hover,
+.fi-body-has-navigation .fi-topbar-close-collapse-sidebar-btn:hover,
+.fi-body-has-navigation .fi-topbar-open-collapse-sidebar-btn:hover {
+    color: #2b4675;
+    background: #eaf0f8;
+}
+
+@media (min-width: 64rem) {
+    .fi-body-has-navigation .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-nav::before {
+        display: none;
+    }
+
+    .fi-body-has-navigation .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-nav {
+        padding-inline: 0.6rem;
+    }
+}
+
+.fi-body-has-navigation .fi-main {
+    position: relative;
+}
+
+.fi-body-has-navigation .fi-page-header-heading {
+    color: #10213e;
+    font-size: clamp(1.75rem, 2vw, 2.25rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+}
+
+.fi-body-has-navigation .fi-page-header-subheading {
+    max-width: 48rem;
+    color: #64748b;
+    line-height: 1.65;
+}
+
+.fi-body-has-navigation .fi-breadcrumbs-item-label {
+    color: #718096;
+    font-weight: 600;
+}
+
+.fi-body-has-navigation .fi-section:not(.fi-section-not-contained),
+.fi-body-has-navigation .fi-ta-ctn {
+    overflow: hidden;
+    border: 1px solid rgb(226 232 240 / 90%);
+    border-radius: 1.35rem;
+    background: rgb(255 255 255 / 94%);
+    box-shadow: 0 22px 50px -38px rgb(15 23 42 / 52%);
+}
+
+.fi-body-has-navigation .fi-section-header,
+.fi-body-has-navigation .fi-ta-header {
+    border-bottom-color: rgb(226 232 240 / 75%);
+    background: linear-gradient(180deg, rgb(255 255 255 / 98%), rgb(248 250 252 / 88%));
+}
+
+.fi-body-has-navigation .fi-section-header-heading,
+.fi-body-has-navigation .fi-ta-header-heading {
+    color: #17294a;
+    font-weight: 750;
+    letter-spacing: -0.015em;
+}
+
+.fi-body-has-navigation .fi-section-header-description,
+.fi-body-has-navigation .fi-ta-header-description {
+    color: #718096;
+}
+
+.fi-body-has-navigation .fi-ta-header-cell {
+    border-bottom-color: #e8edf4;
+    color: #52617a;
+    background: #f8fafc;
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+}
+
+.fi-body-has-navigation .fi-ta-row {
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+}
+
+.fi-body-has-navigation .fi-ta-row:hover {
+    background: #f8fbff;
+    box-shadow: inset 3px 0 #3b82f6;
+}
+
+.fi-body-has-navigation .fi-ta-cell {
+    border-bottom-color: #edf1f6;
+}
+
+.fi-body-has-navigation .fi-input-wrp {
+    border-radius: 0.8rem;
+    border-color: #dce3ed;
+    background: rgb(255 255 255 / 92%);
+    box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+
+.fi-body-has-navigation .fi-input-wrp:focus-within {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgb(59 130 246 / 10%);
+}
+
+.fi-body-has-navigation .fi-btn {
+    border-radius: 0.8rem;
+    font-weight: 700;
+}
+
+.fi-body-has-navigation .fi-btn.fi-color-primary {
+    box-shadow: 0 12px 24px -14px rgb(37 99 235 / 70%);
+}
+
+.fi-body-has-navigation .fi-badge {
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.fi-body-has-navigation .fi-pagination {
+    border-top-color: #e8edf4;
+    background: #fbfcfe;
+}
+
+@media (max-width: 40rem) {
+    .fi-body-has-navigation .fi-ta-cell-status .fi-badge {
+        max-width: 9.5rem;
+        justify-content: flex-start;
+        white-space: normal;
+        line-height: 1.2;
+        text-align: left;
+    }
+}
+
+.dashboard-stat-card {
+    border-color: rgb(226 232 240 / 90%);
+    background: #ffffff;
+    box-shadow: 0 8px 24px -20px rgb(15 23 42 / 45%);
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.dashboard-stat-card:hover {
+    border-color: rgb(191 219 254 / 90%);
+    box-shadow: 0 10px 28px -20px rgb(37 99 235 / 30%);
+}
+
+.dashboard-recent-report .fi-ta-cell {
+    padding-block: 1rem;
+}
+
+.dashboard-recent-report .fi-ta-text-item-label {
+    color: #334155;
+}
+
+@media (max-width: 40rem) {
+    .dashboard-recent-report {
+        margin: 0.75rem;
+        overflow: hidden;
+        border: 1px solid #e8edf4;
+        border-radius: 1rem;
+        background: #ffffff;
+        box-shadow: 0 12px 28px -24px rgb(15 23 42 / 45%);
+    }
+
+    .dashboard-recent-report .fi-ta-cell {
+        padding-inline: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dashboard-stat-card {
+        transition: none;
+    }
+}
+
 .report-progress-connector {
-    background-size: 100% 220%;
-    animation: report-progress-flow-vertical 2.6s linear infinite;
+    background-size: 100% 240%;
 }
 
 .report-progress-connector--completed {
-    background-image: linear-gradient(180deg, #059669 0%, #34d399 45%, #059669 100%);
+    background-image: linear-gradient(180deg, #047857 0%, #10b981 38%, #a7f3d0 50%, #10b981 62%, #047857 100%);
+    animation: report-progress-flow-vertical 2s linear infinite;
 }
 
 .report-progress-connector--current {
-    background-image: linear-gradient(180deg, #1d4ed8 0%, #60a5fa 45%, #1d4ed8 100%);
-    box-shadow: 0 0 12px rgb(59 130 246 / 45%);
+    background-image: repeating-linear-gradient(180deg, #1d4ed8 0 7px, #93c5fd 7px 13px);
+    background-size: 100% 26px;
+    animation: report-progress-march-vertical 0.75s linear infinite;
+    box-shadow: 0 0 10px rgb(37 99 235 / 60%);
 }
 
 .report-progress-connector--pending {
-    background-image: linear-gradient(180deg, #e5e7eb 0%, #cbd5e1 45%, #e5e7eb 100%);
+    background-image: repeating-linear-gradient(180deg, #cbd5e1 0 6px, transparent 6px 11px);
+    background-size: 100% auto;
 }
 
 @keyframes report-progress-flow-vertical {
     from {
-        background-position: 0 -220%;
+        background-position: 0 220%;
     }
 
     to {
-        background-position: 0 220%;
+        background-position: 0 -220%;
     }
 }
 
 @keyframes report-progress-flow-horizontal {
     from {
-        background-position: -220% 0;
+        background-position: 220% 0;
     }
 
     to {
-        background-position: 220% 0;
+        background-position: -220% 0;
     }
 }
 
-@media (min-width: 80rem) {
+@keyframes report-progress-march-vertical {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 26px;
+    }
+}
+
+@keyframes report-progress-march-horizontal {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 26px 0;
+    }
+}
+
+@container report-progress (min-width: 42rem) {
     .report-progress-connector {
-        background-size: 220% 100%;
-        animation-name: report-progress-flow-horizontal;
+        background-size: 240% 100%;
     }
 
     .report-progress-connector--completed {
-        background-image: linear-gradient(90deg, #059669 0%, #34d399 45%, #059669 100%);
+        background-image: linear-gradient(90deg, #047857 0%, #10b981 38%, #a7f3d0 50%, #10b981 62%, #047857 100%);
+        animation-name: report-progress-flow-horizontal;
     }
 
     .report-progress-connector--current {
-        background-image: linear-gradient(90deg, #1d4ed8 0%, #60a5fa 45%, #1d4ed8 100%);
+        background-image: repeating-linear-gradient(90deg, #1d4ed8 0 7px, #93c5fd 7px 13px);
+        background-size: 26px 100%;
+        animation-name: report-progress-march-horizontal;
     }
 
     .report-progress-connector--pending {
-        background-image: linear-gradient(90deg, #e5e7eb 0%, #cbd5e1 45%, #e5e7eb 100%);
+        background-image: repeating-linear-gradient(90deg, #cbd5e1 0 6px, transparent 6px 11px);
+        background-size: auto 100%;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .report-progress-connector {
         animation: none;
+    }
+}
+
+.activity-photo-upload {
+    & .filepond--root {
+        min-height: 4.75rem;
+        background: #f8fafc;
+    }
+
+    & .filepond--root[data-style-panel-layout='grid'] .filepond--item {
+        width: min(calc(50% - 0.5rem), 10rem);
+    }
+
+    & .filepond--image-preview {
+        background: #f1f5f9;
+    }
+
+    & .filepond--image-preview-overlay-success {
+        color: rgb(15 118 110 / 88%);
+    }
+
+    & .filepond--file-status-sub {
+        display: none;
+    }
+}
+
+.dark .activity-photo-upload {
+    & .filepond--root,
+    & .filepond--image-preview {
+        background: #111827;
     }
 }

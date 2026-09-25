@@ -10,15 +10,26 @@ use App\Filament\Resources\Reports\Schemas\ReportForm;
 use App\Filament\Resources\Reports\Schemas\ReportInfolist;
 use App\Filament\Resources\Reports\Tables\ReportsTable;
 use App\Models\Report;
+use App\Models\ReportEvidence;
+use App\Models\ReportStatusHistory;
+use App\Models\User;
 use BackedEnum;
 use Filament\Actions\Action;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use RuntimeException;
 
 class ReportResource extends Resource
 {
@@ -69,18 +80,65 @@ class ReportResource extends Resource
             ->visible(fn (Report $record): bool => $record->status->next() !== null)
             ->modalIcon(Heroicon::OutlinedArrowRightCircle)
             ->modalHeading('Update progres penanganan')
-            ->modalDescription(fn (Report $record): string => "Tahap saat ini: {$record->status->label()}. Setelah disimpan, laporan dilanjutkan ke tahap {$record->status->next()?->label()}.")
-            ->modalSubmitActionLabel('Simpan dan lanjutkan tahap')
+            ->modalDescription(fn (Report $record): string => "Lanjutkan dari {$record->status->label()} ke {$record->status->next()?->label()}.")
+            ->modalSubmitActionLabel('Simpan & lanjutkan')
+            ->modalWidth(Width::FourExtraLarge)
             ->schema([
-                Textarea::make('public_note')
-                    ->label('Keterangan untuk pelapor')
-                    ->placeholder('Jelaskan perkembangan secara singkat tanpa memuat informasi internal atau data sensitif.')
-                    ->helperText('Keterangan ini dapat dilihat oleh pelapor anonim.')
-                    ->maxLength(1000)
-                    ->rows(4),
+                Grid::make([
+                    'default' => 1,
+                    'md' => 2,
+                ])->schema([
+                    Textarea::make('public_note')
+                        ->label('Keterangan untuk pelapor')
+                        ->placeholder('Tulis perkembangan yang aman dibaca pelapor.')
+                        ->helperText('Terlihat oleh pelapor.')
+                        ->maxLength(1000)
+                        ->rows(2),
+                    Textarea::make('internal_note')
+                        ->label('Catatan internal')
+                        ->placeholder('Contoh: Tim memeriksa lokasi dan berkoordinasi dengan pihak terkait.')
+                        ->helperText('Hanya untuk admin.')
+                        ->maxLength(2000)
+                        ->rows(2),
+                ]),
+                self::activityPhotoUpload(),
             ])
             ->action(function (Report $record, array $data): void {
-                $record->advanceStatus(auth()->user(), $data['public_note'] ?? null);
+                Gate::authorize('create', ReportEvidence::class);
+
+                /** @var User $user */
+                $user = auth()->user();
+
+                DB::transaction(function () use ($data, $record, $user): void {
+                    $advanced = $record->advanceStatus(
+                        $user,
+                        $data['public_note'] ?? null,
+                        $data['internal_note'] ?? null,
+                    );
+
+                    if (! $advanced) {
+                        throw new RuntimeException('Laporan tidak dapat dilanjutkan ke tahap berikutnya.');
+                    }
+
+                    $history = $record->statusHistories()
+                        ->where('user_id', $user->getKey())
+                        ->where('to_status', $record->status->value)
+                        ->latest('id')
+                        ->firstOrFail();
+
+                    self::storeActivityEvidence(
+                        $record,
+                        $history,
+                        $user,
+                        $data['activity_photos'] ?? [],
+                        $data['activity_photo_names'] ?? [],
+                        $data['internal_note'] ?? null,
+                    );
+                });
+
+                $record->unsetRelation('evidence');
+                $record->unsetRelation('activityEvidence');
+                $record->unsetRelation('statusHistories');
 
                 Notification::make()
                     ->title('Status laporan diperbarui')
@@ -88,6 +146,121 @@ class ReportResource extends Resource
                     ->success()
                     ->send();
             });
+    }
+
+    public static function addActivityEvidenceAction(): Action
+    {
+        return Action::make('addActivityEvidence')
+            ->label('Tambah dokumentasi')
+            ->icon(Heroicon::OutlinedPhoto)
+            ->color('gray')
+            ->modalIcon(Heroicon::OutlinedPhoto)
+            ->modalHeading('Tambah dokumentasi')
+            ->modalDescription(fn (Report $record): string => "Tahap: {$record->status->label()} · hanya untuk admin.")
+            ->modalSubmitActionLabel('Simpan')
+            ->modalWidth(Width::TwoExtraLarge)
+            ->schema([
+                Textarea::make('caption')
+                    ->label('Catatan')
+                    ->placeholder('Contoh: Pemeriksaan lokasi dan koordinasi dengan pihak terkait.')
+                    ->maxLength(2000)
+                    ->rows(2),
+                self::activityPhotoUpload(required: true),
+            ])
+            ->action(function (Report $record, array $data): void {
+                Gate::authorize('create', ReportEvidence::class);
+
+                /** @var User $user */
+                $user = auth()->user();
+                $history = $record->statusHistories()
+                    ->where('to_status', $record->status->value)
+                    ->latest('id')
+                    ->firstOrFail();
+
+                DB::transaction(function () use ($data, $history, $record, $user): void {
+                    self::storeActivityEvidence(
+                        $record,
+                        $history,
+                        $user,
+                        $data['activity_photos'] ?? [],
+                        $data['activity_photo_names'] ?? [],
+                        $data['caption'] ?? null,
+                    );
+                });
+
+                $record->unsetRelation('evidence');
+                $record->unsetRelation('activityEvidence');
+                $record->unsetRelation('statusHistories');
+
+                Notification::make()
+                    ->title('Dokumentasi disimpan')
+                    ->body('Foto tersimpan pada tahap '.$record->status->label().'.')
+                    ->success()
+                    ->send();
+            });
+    }
+
+    private static function activityPhotoUpload(bool $required = false): FileUpload
+    {
+        return FileUpload::make('activity_photos')
+            ->label($required ? 'Foto kegiatan' : 'Foto kegiatan (opsional)')
+            ->helperText('JPG, PNG, atau WebP · maksimal 6 foto · otomatis diperkecil.')
+            ->placeholder('Pilih atau seret foto')
+            ->image()
+            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+            ->rule(Rule::dimensions()->maxWidth(2048)->maxHeight(2048))
+            ->multiple()
+            ->required($required)
+            ->maxFiles(6)
+            ->maxSize(12288)
+            ->maxParallelUploads(2)
+            ->appendFiles()
+            ->panelLayout('grid')
+            ->itemPanelAspectRatio('3:4')
+            ->extraAttributes(['class' => 'activity-photo-upload'])
+            ->disk('local')
+            ->directory(fn (Report $record): string => "report-activity/{$record->getKey()}")
+            ->visibility('private')
+            ->storeFileNamesIn('activity_photo_names')
+            ->preventFilePathTampering()
+            ->automaticallyResizeImagesMode('contain')
+            ->automaticallyResizeImagesToWidth('2048')
+            ->automaticallyResizeImagesToHeight('2048')
+            ->automaticallyUpscaleImagesWhenResizing(false)
+            ->uploadingMessage('Mengoptimalkan dan mengunggah foto…');
+    }
+
+    /**
+     * @param  array<array-key, string>  $paths
+     * @param  array<string, string>  $originalNames
+     */
+    private static function storeActivityEvidence(
+        Report $report,
+        ReportStatusHistory $history,
+        User $user,
+        array $paths,
+        array $originalNames,
+        ?string $caption,
+    ): void {
+        $disk = Storage::disk('local');
+        $directory = "report-activity/{$report->getKey()}/";
+
+        foreach ($paths as $path) {
+            if (! is_string($path) || ! str_starts_with($path, $directory) || ! $disk->exists($path)) {
+                throw new RuntimeException('Lokasi foto kegiatan tidak valid.');
+            }
+
+            $report->evidence()->create([
+                'report_status_history_id' => $history->getKey(),
+                'uploaded_by_user_id' => $user->getKey(),
+                'source' => 'admin_activity',
+                'path' => $path,
+                'original_name' => $originalNames[$path] ?? basename($path),
+                'mime_type' => $disk->mimeType($path) ?: 'application/octet-stream',
+                'size' => $disk->size($path),
+                'caption' => filled($caption) ? trim($caption) : null,
+            ]);
+        }
     }
 
     public static function sendMessageAction(): Action
