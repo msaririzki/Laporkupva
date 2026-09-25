@@ -38,167 +38,142 @@
         </div>
     </section>
 
-    <section id="cara-kerja" class="relative overflow-hidden bg-gradient-to-b from-slate-100/90 via-slate-50/70 to-white py-24 sm:py-32 scroll-mt-20">
-        <!-- Ambient Metallic Atmosphere -->
-        <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-            <div class="absolute -top-32 left-1/2 -translate-x-1/2 h-80 w-[48rem] rounded-full bg-gradient-to-b from-blue-200/30 via-teal-100/20 to-transparent blur-3xl"></div>
-            <div class="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:28px_28px] opacity-25"></div>
-        </div>
-
-        <div class="public-container relative">
-            <div class="mx-auto max-w-3xl text-center">
-                <div class="inline-flex items-center gap-2.5 rounded-full border border-slate-300/80 bg-white/90 px-4 py-1.5 shadow-xs backdrop-blur-md">
-                    <span class="relative flex size-2">
-                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75"></span>
-                        <span class="relative inline-flex size-2 rounded-full bg-teal-500"></span>
-                    </span>
-                    <span class="text-[11px] font-black uppercase tracking-[0.22em] text-slate-700">Alur Mudah & Transparan</span>
-                </div>
-
-                <h2 class="mt-5 text-3xl font-black tracking-tight text-navy-950 sm:text-4xl lg:text-5xl">
-                    Tiga Langkah untuk <span class="bg-gradient-to-r from-blue-700 via-blue-800 to-teal-600 bg-clip-text text-transparent">Ikut Menjaga NTB</span>
+    <section id="cara-kerja" class="scroll-mt-20 bg-[#f0f6fe] py-20 sm:py-28 lg:py-32">
+        <div class="public-container">
+            <!-- Header Section -->
+            <div class="mx-auto max-w-2xl text-center">
+                <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-blue-700">MUDAH DAN TERARAH</p>
+                <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl lg:text-5xl">
+                    Tiga langkah untuk ikut menjaga NTB
                 </h2>
-
                 <p class="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
-                    Sistem dirancang cepat, aman, dan 100% anonim. Anda cukup menginformasikan kronologi kejadian dan lokasinya tanpa perlu mendaftar akun.
+                    Laporkan kejadian dengan mudah dan pantau perkembangannya secara aman.
                 </p>
             </div>
 
-            <!-- Step Cards Grid with Connecting Pipeline -->
-            <div class="relative mt-16 sm:mt-20">
-                <!-- Desktop Connecting Track -->
-                <div class="pointer-events-none absolute top-1/2 left-10 right-10 hidden h-[2px] -translate-y-10 bg-gradient-to-r from-transparent via-slate-200 to-transparent md:block" aria-hidden="true"></div>
+            <!-- Zig-zag 3-Card Flow Container -->
+            <div class="relative mt-16 sm:mt-20 lg:mt-24">
+                <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-10">
 
-                <div class="grid gap-6 md:grid-cols-3">
-                    <!-- LANGKAH 01 -->
-                    <article class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white via-slate-50/80 to-slate-100/70 p-7 shadow-lg shadow-slate-200/60 transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-500/10">
-                        <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                        <span class="pointer-events-none absolute -right-2 -top-4 select-none font-mono text-8xl font-black text-slate-200/40 transition-colors duration-300 group-hover:text-blue-100/50">01</span>
-
-                        <div class="relative">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2 rounded-full border border-slate-300/80 bg-white/95 px-3 py-1 shadow-xs backdrop-blur-sm">
-                                    <span class="size-1.5 rounded-full bg-blue-600"></span>
-                                    <span class="font-mono text-xs font-black tracking-widest text-navy-950">LANGKAH 01</span>
-                                </div>
-
-                                <div class="flex size-13 items-center justify-center rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-slate-200 text-blue-700 shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:border-blue-300 group-hover:text-blue-800">
-                                    <svg class="size-6.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                        <polyline points="14 2 14 8 20 8"></polyline>
-                                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                                        <polyline points="10 9 9 9 8 9"></polyline>
-                                    </svg>
-                                </div>
+                    <!-- STEP 01 (Kiri Atas) -->
+                    <div class="relative flex flex-col justify-start lg:translate-y-0">
+                        <article class="group relative rounded-3xl border border-blue-100/70 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-900/5 sm:p-9">
+                            <div class="text-2xl font-bold tracking-tight text-slate-900">
+                                Step <span class="font-normal text-slate-400">01</span>
                             </div>
 
-                            <h3 class="mt-6 text-xl font-black text-navy-950 transition-colors group-hover:text-blue-700">Ceritakan Kejadian</h3>
-                            <p class="mt-3 text-sm leading-relaxed text-slate-600">Pilih jenis dugaan pelanggaran, waktu kejadian, dan sampaikan kronologi peristiwa yang Anda ketahui atau alami.</p>
-                        </div>
-
-                        <div class="relative mt-8 border-t border-slate-200/80 pt-4">
-                            <div class="flex flex-wrap gap-2 text-[11px] font-bold text-slate-600">
-                                <span class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 shadow-2xs">
-                                    <svg class="size-3.5 text-teal-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/></svg>
-                                    Tanpa Identitas Pribadi
-                                </span>
-                                <span class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 shadow-2xs">
-                                    <svg class="size-3.5 text-teal-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/></svg>
-                                    5 Jenis Kasus
-                                </span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- LANGKAH 02 -->
-                    <article class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white via-slate-50/80 to-slate-100/70 p-7 shadow-lg shadow-slate-200/60 transition-all duration-300 hover:-translate-y-1.5 hover:border-teal-400 hover:shadow-2xl hover:shadow-teal-500/10">
-                        <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-teal-500/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                        <span class="pointer-events-none absolute -right-2 -top-4 select-none font-mono text-8xl font-black text-slate-200/40 transition-colors duration-300 group-hover:text-teal-100/50">02</span>
-
-                        <div class="relative">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2 rounded-full border border-slate-300/80 bg-white/95 px-3 py-1 shadow-xs backdrop-blur-sm">
-                                    <span class="size-1.5 rounded-full bg-teal-600"></span>
-                                    <span class="font-mono text-xs font-black tracking-widest text-navy-950">LANGKAH 02</span>
-                                </div>
-
-                                <div class="flex size-13 items-center justify-center rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-slate-200 text-teal-700 shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:border-teal-300 group-hover:text-teal-800">
-                                    <svg class="size-6.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
-                                        <line x1="9" y1="3" x2="9" y2="18"></line>
-                                        <line x1="15" y1="6" x2="15" y2="21"></line>
-                                    </svg>
-                                </div>
+                            <div class="mt-6 flex size-12 items-center justify-center rounded-full bg-blue-700 text-white shadow-md shadow-blue-700/20 transition-transform duration-300 group-hover:scale-105">
+                                <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
                             </div>
 
-                            <h3 class="mt-6 text-xl font-black text-navy-950 transition-colors group-hover:text-teal-700">Tandai Lokasinya</h3>
-                            <p class="mt-3 text-sm leading-relaxed text-slate-600">Gunakan posisi GPS perangkat secara otomatis, cari nama wilayah/patokan di NTB, atau geser penanda titik kejadian secara akurat.</p>
+                            <h3 class="mt-6 text-xl font-bold text-navy-950">Ceritakan kejadian</h3>
+                            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                                Jelaskan kejadian yang Anda temukan, pilih jenis laporan, waktu kejadian, dan tuliskan kronologi yang Anda ketahui.
+                            </p>
+                        </article>
+
+                        <!-- Connector Desktop (Step 01 -> Step 02) -->
+                        <div class="pointer-events-none absolute -right-9 top-10 z-10 hidden h-28 w-28 lg:block xl:-right-12 xl:w-36" aria-hidden="true">
+                            <svg class="h-full w-full overflow-visible" viewBox="0 0 140 100" fill="none">
+                                <defs>
+                                    <marker id="arrowhead-1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1d4ed8" />
+                                    </marker>
+                                </defs>
+                                <circle cx="6" cy="12" r="4" fill="#1d4ed8" />
+                                <path d="M 12 12 C 75 12 110 30 115 82" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowhead-1)" />
+                            </svg>
                         </div>
 
-                        <div class="relative mt-8 border-t border-slate-200/80 pt-4">
-                            <div class="flex flex-wrap gap-2 text-[11px] font-bold text-slate-600">
-                                <span class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 shadow-2xs">
-                                    <svg class="size-3.5 text-teal-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/></svg>
-                                    Peta Presisi Wilayah NTB
-                                </span>
-                                <span class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 shadow-2xs">
-                                    <svg class="size-3.5 text-teal-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/></svg>
-                                    Deteksi GPS & Pin Geser
-                                </span>
-                            </div>
+                        <!-- Connector Mobile (Step 01 -> Step 02) -->
+                        <div class="flex flex-col items-center justify-center py-4 lg:hidden" aria-hidden="true">
+                            <div class="size-2 rounded-full bg-blue-700"></div>
+                            <div class="h-8 w-0 border-l-2 border-dashed border-blue-700"></div>
+                            <svg class="-mt-1 size-3 text-blue-700" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M6 10L1.5 4h9L6 10z"/>
+                            </svg>
                         </div>
-                    </article>
+                    </div>
 
-                    <!-- LANGKAH 03 -->
-                    <article class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white via-slate-50/80 to-slate-100/70 p-7 shadow-lg shadow-slate-200/60 transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-400 hover:shadow-2xl hover:shadow-indigo-500/10">
-                        <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                        <span class="pointer-events-none absolute -right-2 -top-4 select-none font-mono text-8xl font-black text-slate-200/40 transition-colors duration-300 group-hover:text-indigo-100/50">03</span>
-
-                        <div class="relative">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2 rounded-full border border-slate-300/80 bg-white/95 px-3 py-1 shadow-xs backdrop-blur-sm">
-                                    <span class="size-1.5 rounded-full bg-indigo-600"></span>
-                                    <span class="font-mono text-xs font-black tracking-widest text-navy-950">LANGKAH 03</span>
-                                </div>
-
-                                <div class="flex size-13 items-center justify-center rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-slate-200 text-indigo-700 shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:border-indigo-300 group-hover:text-indigo-800">
-                                    <svg class="size-6.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                    </svg>
-                                </div>
+                    <!-- STEP 02 (Tengah, Agak Rendah) -->
+                    <div class="relative flex flex-col justify-start lg:translate-y-16 xl:translate-y-20">
+                        <article class="group relative rounded-3xl border border-blue-100/70 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-900/5 sm:p-9">
+                            <div class="text-2xl font-bold tracking-tight text-slate-900">
+                                Step <span class="font-normal text-slate-400">02</span>
                             </div>
 
-                            <h3 class="mt-6 text-xl font-black text-navy-950 transition-colors group-hover:text-indigo-700">Simpan Kode Akses</h3>
-                            <p class="mt-3 text-sm leading-relaxed text-slate-600">Dapatkan kode laporan unik (LKP-XXXX-XXXX) dan PIN rahasia 6-digit untuk memantau status serta berkomunikasi dengan aman.</p>
+                            <div class="mt-6 flex size-12 items-center justify-center rounded-full bg-blue-700 text-white shadow-md shadow-blue-700/20 transition-transform duration-300 group-hover:scale-105">
+                                <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+
+                            <h3 class="mt-6 text-xl font-bold text-navy-950">Tandai lokasinya</h3>
+                            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                                Tentukan lokasi kejadian menggunakan posisi perangkat, pencarian wilayah, atau pilih titik secara langsung pada peta.
+                            </p>
+                        </article>
+
+                        <!-- Connector Desktop (Step 02 -> Step 03) -->
+                        <div class="pointer-events-none absolute -right-9 bottom-6 z-10 hidden h-28 w-28 lg:block xl:-right-12 xl:w-36" aria-hidden="true">
+                            <svg class="h-full w-full overflow-visible" viewBox="0 0 140 100" fill="none">
+                                <defs>
+                                    <marker id="arrowhead-2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1d4ed8" />
+                                    </marker>
+                                </defs>
+                                <circle cx="6" cy="12" r="4" fill="#1d4ed8" />
+                                <path d="M 12 12 C 75 12 110 30 115 82" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowhead-2)" />
+                            </svg>
                         </div>
 
-                        <div class="relative mt-8 border-t border-slate-200/80 pt-4">
-                            <div class="flex flex-wrap gap-2 text-[11px] font-bold text-slate-600">
-                                <span class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 shadow-2xs">
-                                    <svg class="size-3.5 text-teal-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/></svg>
-                                    Kode Unik & PIN Rahasia
-                                </span>
-                                <span class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 shadow-2xs">
-                                    <svg class="size-3.5 text-teal-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/></svg>
-                                    QR Akses Pelacakan
-                                </span>
-                            </div>
+                        <!-- Connector Mobile (Step 02 -> Step 03) -->
+                        <div class="flex flex-col items-center justify-center py-4 lg:hidden" aria-hidden="true">
+                            <div class="size-2 rounded-full bg-blue-700"></div>
+                            <div class="h-8 w-0 border-l-2 border-dashed border-blue-700"></div>
+                            <svg class="-mt-1 size-3 text-blue-700" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M6 10L1.5 4h9L6 10z"/>
+                            </svg>
                         </div>
-                    </article>
+                    </div>
+
+                    <!-- STEP 03 (Kanan Bawah) -->
+                    <div class="relative flex flex-col justify-start lg:translate-y-32 xl:translate-y-40">
+                        <article class="group relative rounded-3xl border border-blue-100/70 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-900/5 sm:p-9">
+                            <div class="text-2xl font-bold tracking-tight text-slate-900">
+                                Step <span class="font-normal text-slate-400">03</span>
+                            </div>
+
+                            <div class="mt-6 flex size-12 items-center justify-center rounded-full bg-blue-700 text-white shadow-md shadow-blue-700/20 transition-transform duration-300 group-hover:scale-105">
+                                <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+
+                            <h3 class="mt-6 text-xl font-bold text-navy-950">Simpan kode akses</h3>
+                            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                                Dapatkan kode laporan dan PIN rahasia untuk melihat status serta memantau perkembangan laporan Anda.
+                            </p>
+                        </article>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Bottom Interactive Action Banner -->
-            <div class="mt-14 flex justify-center">
-                <div class="inline-flex flex-wrap items-center justify-center gap-4 rounded-2xl border border-slate-200/90 bg-white/90 p-3 shadow-md backdrop-blur-md sm:gap-6 sm:px-7 sm:py-3.5">
-                    <span class="flex items-center gap-2 text-xs font-bold text-slate-700">
-                        <span class="size-2 rounded-full bg-teal-500 animate-pulse"></span> Siap menyampaikan informasi kejadian?
-                    </span>
-                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2 rounded-xl bg-blue-700 px-4 py-2 text-xs font-extrabold text-white shadow-sm transition hover:bg-blue-800 hover:shadow-md hover:-translate-y-0.5">
-                        Mulai Buat Laporan <span aria-hidden="true">→</span>
-                    </a>
+                <!-- CTA Section Bawah (Clean & Minimalist TAMBORA) -->
+                <div class="mt-20 text-center lg:mt-56">
+                    <div class="inline-flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-8 rounded-2xl border border-blue-100 bg-white px-7 py-4 shadow-sm">
+                        <div class="text-center sm:text-left">
+                            <p class="text-sm font-bold text-navy-950">Siap membuat laporan?</p>
+                            <p class="mt-0.5 text-xs text-slate-500">Laporkan kejadian yang Anda temukan di sekitar Anda.</p>
+                        </div>
+                        <a href="{{ route('reports.create') }}" class="button-primary shrink-0 !min-h-10 !px-5 !py-2 text-xs">
+                            Buat laporan <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
