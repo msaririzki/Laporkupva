@@ -571,6 +571,197 @@
     background: #fbfcfe;
 }
 
+.tambora-profile {
+    display: grid;
+    width: 100%;
+    max-width: 68rem;
+    gap: 1.25rem;
+    margin-inline: auto;
+}
+
+.tambora-profile-hero {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    min-height: 9.5rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid rgb(255 255 255 / 76%);
+    border-radius: 1.5rem;
+    background:
+        radial-gradient(circle at 88% -25%, rgb(191 219 254 / 50%), transparent 17rem),
+        linear-gradient(135deg, rgb(255 255 255 / 95%), rgb(239 246 255 / 86%));
+    box-shadow: 0 24px 56px -40px rgb(30 64 175 / 52%), inset 0 1px rgb(255 255 255 / 96%);
+}
+
+.tambora-profile-hero::after {
+    position: absolute;
+    top: -4.5rem;
+    right: -3.5rem;
+    width: 12rem;
+    height: 12rem;
+    border: 1px solid rgb(147 197 253 / 28%);
+    border-radius: 999px;
+    content: '';
+    pointer-events: none;
+}
+
+.tambora-profile-hero__identity {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tambora-profile-hero__avatar {
+    position: relative;
+    display: grid;
+    width: 5.25rem;
+    height: 5.25rem;
+    flex: 0 0 auto;
+    place-items: center;
+    padding: 0.28rem;
+    border: 1px solid rgb(255 255 255 / 92%);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 70%);
+    box-shadow: 0 18px 35px -24px rgb(30 64 175 / 72%), inset 0 1px rgb(255 255 255 / 95%);
+}
+
+.tambora-profile-hero__avatar .fi-avatar {
+    width: 100%;
+    height: 100%;
+}
+
+.tambora-profile-hero__status {
+    position: absolute;
+    right: 0.2rem;
+    bottom: 0.35rem;
+    width: 0.95rem;
+    height: 0.95rem;
+    border: 3px solid #ffffff;
+    border-radius: 999px;
+    background: #10b981;
+    box-shadow: 0 0 0 2px rgb(16 185 129 / 12%);
+}
+
+.tambora-profile-hero__copy {
+    display: grid;
+    min-width: 0;
+    gap: 0.2rem;
+}
+
+.tambora-profile-hero__eyebrow {
+    color: #557197;
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.tambora-profile-hero__copy h2 {
+    overflow: hidden;
+    color: #132d50;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tambora-profile-hero__copy p {
+    overflow: hidden;
+    color: #6b7f9b;
+    font-size: 0.88rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tambora-profile-hero__role {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    min-width: 9rem;
+    gap: 0.15rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid rgb(255 255 255 / 88%);
+    border-radius: 1rem;
+    background: rgb(255 255 255 / 62%);
+    box-shadow: inset 0 1px rgb(255 255 255 / 94%);
+    backdrop-filter: blur(14px);
+}
+
+.tambora-profile-hero__role span {
+    color: #8090a6;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tambora-profile-hero__role strong {
+    color: #244f83;
+    font-size: 0.9rem;
+}
+
+.tambora-profile-form .fi-section {
+    border-radius: 1.35rem;
+}
+
+.tambora-profile-form .fi-sc-form {
+    gap: 1.25rem;
+}
+
+.tambora-profile-avatar-upload .filepond--root {
+    width: 7rem;
+    margin-inline: auto;
+}
+
+.tambora-profile-avatar-upload .filepond--drop-label {
+    min-height: 7rem;
+}
+
+@media (max-width: 40rem) {
+    .tambora-profile {
+        gap: 1rem;
+    }
+
+    .tambora-profile-hero {
+        align-items: flex-start;
+        padding: 1.15rem;
+        border-radius: 1.2rem;
+    }
+
+    .tambora-profile-hero__avatar {
+        width: 4.4rem;
+        height: 4.4rem;
+    }
+
+    .tambora-profile-hero__role {
+        min-width: 0;
+        padding: 0.55rem 0.7rem;
+    }
+
+    .tambora-profile-hero__role span {
+        display: none;
+    }
+}
+
+@media (max-width: 29rem) {
+    .tambora-profile-hero {
+        display: grid;
+    }
+
+    .tambora-profile-hero__role {
+        width: fit-content;
+        margin-left: 5.4rem;
+    }
+}
+
 @media (max-width: 40rem) {
     .fi-body-has-navigation .fi-ta-cell-status .fi-badge {
         max-width: 9.5rem;

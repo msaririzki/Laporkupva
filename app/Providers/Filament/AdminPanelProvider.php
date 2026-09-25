@@ -2,7 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Auth\EditProfile;
 use App\Filament\Auth\Login;
+use App\Filament\AvatarProviders\LocalInitialsAvatarProvider;
 use App\Filament\Pages\Dashboard;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Http\Middleware\Authenticate;
@@ -31,7 +33,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(Login::class)
-            ->profile()
+            ->profile(EditProfile::class, isSimple: false)
+            ->defaultAvatarProvider(LocalInitialsAvatarProvider::class)
             ->brandName('TAMBORA · BI NTB')
             ->brandLogo(asset('images/brand/tambora.webp'))
             ->brandLogoHeight('3rem')

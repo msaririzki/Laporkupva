@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\ReportStatus;
 use App\Enums\UserRole;
+use App\Filament\Auth\EditProfile;
 use App\Filament\Resources\Kupvas\KupvaResource;
 use App\Filament\Resources\Reports\Pages\ViewReport;
 use App\Filament\Resources\Reports\ReportResource;
@@ -43,6 +44,75 @@ class AdminDashboardTest extends TestCase
     {
         $this->get('/admin/multi-factor-authentication/set-up')
             ->assertNotFound();
+    }
+
+    public function test_admin_profile_uses_the_admin_layout_and_a_local_avatar(): void
+    {
+        $admin = User::factory()->create([
+            'name' => 'Sari Test',
+            'email' => 'sari@example.test',
+        ]);
+
+        $this->actingAs($admin)
+            ->get('/admin/profile')
+            ->assertSee('Profil saya')
+            ->assertSee('Identitas admin')
+            ->assertSee('Keamanan akun')
+            ->assertSee('Akun admin TAMBORA')
+            ->assertSee('data:image/svg+xml;base64,', false)
+            ->assertSee('fi-sidebar', false);
+    }
+
+    public function test_admin_can_upload_and_replace_their_profile_photo(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('admin-avatars/avatar-lama.jpg', 'old-avatar');
+        $admin = User::factory()->create([
+            'avatar_path' => 'admin-avatars/avatar-lama.jpg',
+        ]);
+
+        $this->actingAs($admin);
+
+        Livewire::test(EditProfile::class)
+            ->fillForm([
+                'name' => $admin->name,
+                'email' => $admin->email,
+                'avatar_path' => [
+                    UploadedFile::fake()->image('avatar-baru.jpg', 900, 900)->size(600),
+                ],
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors()
+            ->assertDispatched('refresh-topbar')
+            ->assertNotified();
+
+        $avatarPath = $admin->fresh()->avatar_path;
+
+        $this->assertNotNull($avatarPath);
+        $this->assertNotSame('admin-avatars/avatar-lama.jpg', $avatarPath);
+        Storage::disk('public')->assertExists($avatarPath);
+        Storage::disk('public')->assertMissing('admin-avatars/avatar-lama.jpg');
+    }
+
+    public function test_admin_profile_rejects_svg_avatar_uploads(): void
+    {
+        Storage::fake('public');
+        $admin = User::factory()->create();
+
+        $this->actingAs($admin);
+
+        Livewire::test(EditProfile::class)
+            ->fillForm([
+                'name' => $admin->name,
+                'email' => $admin->email,
+                'avatar_path' => [
+                    UploadedFile::fake()->create('avatar.svg', 100, 'image/svg+xml'),
+                ],
+            ])
+            ->call('save')
+            ->assertHasFormErrors(['avatar_path']);
+
+        $this->assertNull($admin->fresh()->avatar_path);
     }
 
     public function test_admin_can_open_dashboard_and_report_list(): void

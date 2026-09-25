@@ -16,7 +16,7 @@ touch "$database_path"
 chown -R www-data:www-data "$(dirname "$database_path")" storage bootstrap/cache
 
 php artisan migrate --force --no-interaction
+php artisan storage:link --force --no-interaction
 php artisan optimize
 
 exec "$@"
-
