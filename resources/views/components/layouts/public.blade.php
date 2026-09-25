@@ -13,20 +13,20 @@
 <body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-navy-900 focus:shadow-lg">Lewati ke konten utama</a>
 
-    <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-        <div class="public-container flex h-18 items-center justify-between gap-6">
+    <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl">
+        <div class="public-container flex h-20 sm:h-24 items-center justify-between gap-6">
             <a href="{{ route('home') }}" class="group flex shrink-0 items-center" aria-label="TAMBORA - Beranda">
-                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-11 w-auto object-contain sm:h-14" width="720" height="316">
+                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-13 w-auto object-contain sm:h-16 lg:h-17" width="720" height="316">
             </a>
 
-            <nav class="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
-                <a class="nav-link" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
-                <a class="nav-link" href="{{ route('home') }}#keamanan">Keamanan</a>
-                <a class="nav-link" href="{{ route('guide') }}">Panduan</a>
-                <a class="nav-link" href="{{ route('reports.track') }}">Cek status</a>
+            <nav class="hidden items-center gap-2 lg:gap-4 md:flex" aria-label="Navigasi utama">
+                <a class="nav-link !text-base lg:!text-lg font-bold" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
+                <a class="nav-link !text-base lg:!text-lg font-bold" href="{{ route('home') }}#keamanan">Keamanan</a>
+                <a class="nav-link !text-base lg:!text-lg font-bold" href="{{ route('guide') }}">Panduan</a>
+                <a class="nav-link !text-base lg:!text-lg font-bold" href="{{ route('reports.track') }}">Cek status</a>
             </nav>
 
-            <a href="{{ route('reports.create') }}" class="button-primary hidden sm:inline-flex">Buat laporan <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a>
+            <a href="{{ route('reports.create') }}" class="button-primary hidden sm:inline-flex min-h-12 px-6 sm:px-7 py-3 text-base lg:text-lg font-extrabold rounded-2xl shadow-md">Buat laporan <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a>
         </div>
     </header>
 
