@@ -258,16 +258,225 @@
         </div>
     </section>
 
-    <section id="keamanan" class="scroll-mt-24 bg-white py-20 sm:py-24">
-        <div class="public-container grid items-center gap-12 lg:grid-cols-2">
-            <div class="rounded-[2rem] bg-gradient-to-br from-blue-50 to-teal-50 p-7 sm:p-10">
-                <div class="grid gap-4 sm:grid-cols-2">
-                    <div class="security-card sm:col-span-2"><span class="security-icon">01</span><div><h3>Tanpa identitas pribadi</h3><p>Formulir tidak meminta nama, NIK, nomor telepon, atau alamat pelapor.</p></div></div>
-                    <div class="security-card"><span class="security-icon">02</span><div><h3>Akses privat</h3><p>Status hanya terbuka dengan kode dan PIN.</p></div></div>
-                    <div class="security-card"><span class="security-icon">03</span><div><h3>Bukti terbatas</h3><p>Lampiran hanya dapat diakses petugas.</p></div></div>
+    <section id="keamanan" class="relative overflow-hidden scroll-mt-20 bg-gradient-to-b from-[#eaf4fe] via-[#f3f8fe] to-[#e4f0fd] py-12 sm:py-20">
+        <!-- Mountain Silhouette Background at Bottom (TAMBORA Atmosphere) -->
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-28 sm:h-44 overflow-hidden opacity-35" aria-hidden="true">
+            <svg class="h-full w-full object-cover" viewBox="0 0 1440 240" fill="none" preserveAspectRatio="none">
+                <path d="M0 240 L0 150 L140 130 L280 180 L440 100 L590 160 L740 60 L890 150 L1040 85 L1190 140 L1340 75 L1440 120 L1440 240 Z" fill="url(#keamanan-mountains-grad)" />
+                <defs>
+                    <linearGradient id="keamanan-mountains-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#93c5fd" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#2563eb" stop-opacity="0.8"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <!-- Subtle Dot Grid Patterns on Sides -->
+        <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+            <div class="absolute top-10 left-8 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute top-10 right-8 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+        </div>
+
+        <div class="public-container">
+            <!-- Top Row: Heading on Left & Friendly Illustration with Floating Badges on Right -->
+            <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+                <!-- Left Content -->
+                <div class="text-center lg:col-span-7 lg:text-left">
+                    <!-- Badge Pill with Lock Icon -->
+                    <div class="inline-flex items-center gap-2 rounded-full bg-blue-100/90 px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wider text-blue-700">
+                        <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
+                        </svg>
+                        KEAMANAN
+                    </div>
+
+                    <!-- Main Title -->
+                    <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl lg:text-[2.65rem] lg:leading-[1.18]">
+                        Lapor dengan tenang,<br class="hidden sm:inline"> identitas tetap aman.
+                    </h2>
+
+                    <!-- Subtitle / Explanation -->
+                    <p class="mt-3.5 text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        TAMBORA tidak meminta data pribadi untuk membuat laporan. Kamu tetap bisa menyampaikan informasi dan memantau perkembangannya dengan kode dan PIN rahasia.
+                    </p>
+                </div>
+
+                <!-- Right Illustration with Floating Trust Badges -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto flex w-full max-w-[380px] sm:max-w-[420px] items-center justify-center py-4">
+                        <!-- Background Glow Accent -->
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-300/30 to-sky-200/40 blur-2xl -z-10"></div>
+
+                        <!-- Main Graphic: Smartphone with Security Shield & Reporter Character -->
+                        <svg class="h-64 sm:h-76 w-auto overflow-visible drop-shadow-md" viewBox="0 0 380 320" fill="none" aria-hidden="true">
+                            <!-- Smartphone Body -->
+                            <rect x="150" y="24" width="160" height="264" rx="22" fill="#1e293b"/>
+                            <!-- Smartphone Screen -->
+                            <rect x="157" y="32" width="146" height="248" rx="16" fill="#f8fafc"/>
+                            <!-- Smartphone Speaker Notch -->
+                            <rect x="205" y="38" width="50" height="4" rx="2" fill="#94a3b8"/>
+
+                            <!-- Smartphone Screen Content: Shield & Padlock -->
+                            <g>
+                                <!-- Blue Shield -->
+                                <path d="M 230 92 C 255 92, 266 82, 266 82 C 266 134, 230 162, 230 162 C 230 162, 194 134, 194 82 C 194 82, 205 92, 230 92 Z" fill="#2563eb" filter="drop-shadow(0 4px 8px rgb(37 99 235 / 0.35))"/>
+                                <!-- White Padlock on Shield -->
+                                <rect x="222" y="117" width="16" height="13" rx="2.5" fill="white"/>
+                                <path d="M 225.5 117 V 110 A 4.5 4.5 0 0 1 234.5 110 V 117" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                                <circle cx="230" cy="123" r="1.5" fill="#2563eb"/>
+
+                                <!-- Checkmark badge on screen -->
+                                <circle cx="270" cy="180" r="12" fill="#93c5fd" opacity="0.45"/>
+                                <path d="M 265 180 L 268 183 L 275 176" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                                <!-- Content lines on screen -->
+                                <rect x="194" y="206" width="72" height="3" rx="1.5" fill="#cbd5e1"/>
+                                <rect x="194" y="214" width="48" height="3" rx="1.5" fill="#e2e8f0"/>
+                            </g>
+
+                            <!-- Friendly Reporter Character (in front of smartphone) -->
+                            <g>
+                                <!-- Body / Blue Top -->
+                                <path d="M 85 195 C 65 195, 45 225, 35 290 L 175 290 C 165 225, 145 195, 125 195 Z" fill="#3b82f6"/>
+                                <!-- Neck & Collar -->
+                                <path d="M 98 175 L 116 175 L 116 200 L 98 200 Z" fill="#fed7aa"/>
+                                <path d="M 95 195 L 107 208 L 119 195" stroke="#1d4ed8" stroke-width="2" fill="none"/>
+                                <!-- Head -->
+                                <ellipse cx="107" cy="145" rx="28" ry="32" fill="#fed7aa"/>
+                                <!-- Ear -->
+                                <circle cx="80" cy="146" r="6" fill="#fecaca"/>
+                                <!-- Hair -->
+                                <path d="M 80 140 C 76 104, 102 95, 128 104 C 146 111, 150 135, 142 162 C 137 140, 124 126, 107 126 C 89 126, 82 135, 80 148 Z" fill="#1e293b"/>
+                                <path d="M 79 138 C 70 165, 70 200, 65 225 C 74 216, 79 190, 84 172 Z" fill="#1e293b"/>
+                                <!-- Eyes & Friendly Smile -->
+                                <ellipse cx="102" cy="145" rx="2.2" ry="3" fill="#0f172a"/>
+                                <ellipse cx="122" cy="145" rx="2.2" ry="3" fill="#0f172a"/>
+                                <path d="M 108 156 Q 112 161 116 156" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                                <!-- Cheeks blush -->
+                                <circle cx="97" cy="152" r="4" fill="#fca5a5" opacity="0.6"/>
+                                <circle cx="127" cy="152" r="4" fill="#fca5a5" opacity="0.6"/>
+
+                                <!-- Hand holding small phone -->
+                                <rect x="124" y="172" width="26" height="42" rx="5" fill="#1e293b" transform="rotate(-15 124 172)"/>
+                                <rect x="127" y="175" width="20" height="34" rx="3" fill="#38bdf8" transform="rotate(-15 124 172)"/>
+                                <circle cx="122" cy="200" r="7" fill="#fed7aa"/>
+                                <circle cx="138" cy="208" r="6" fill="#fed7aa"/>
+                            </g>
+
+                            <!-- Subtle Sparkles & Rays -->
+                            <path d="M 330 65 L 340 60 M 346 72 L 354 75 M 338 84 L 345 92" stroke="#93c5fd" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+
+                        <!-- Floating Badge 1: Top-Left (Anonim tanpa identitas) -->
+                        <div class="absolute -top-1 left-0 sm:top-2 sm:-left-4 flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-lg shadow-blue-900/10 backdrop-blur-md">
+                            <div class="flex size-7 sm:size-8 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+                                <svg class="size-4 sm:size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+                                    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+                                    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+                                    <line x1="2" y1="2" x2="22" y2="22" />
+                                </svg>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-xs font-extrabold text-navy-950 leading-tight">Anonim</div>
+                                <div class="text-[10px] text-slate-500">tanpa identitas</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge 2: Top-Right (Data laporan tetap aman) -->
+                        <div class="absolute top-12 right-0 sm:top-14 sm:-right-4 flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-lg shadow-blue-900/10 backdrop-blur-md">
+                            <div class="flex size-7 sm:size-8 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+                                <svg class="size-4 sm:size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                    <polyline points="14 2 14 8 20 8" />
+                                    <rect x="8" y="13" width="8" height="6" rx="1" fill="currentColor" fill-opacity="0.15" />
+                                    <path d="M10 13v-1.5a2 2 0 1 1 4 0V13" />
+                                </svg>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-xs font-extrabold text-navy-950 leading-tight">Data laporan</div>
+                                <div class="text-[10px] text-slate-500">tetap aman</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge 3: Bottom-Right (Akses dengan kode dan PIN) -->
+                        <div class="absolute bottom-5 right-0 sm:bottom-7 sm:-right-2 flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-lg shadow-blue-900/10 backdrop-blur-md">
+                            <div class="flex size-7 sm:size-8 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+                                <svg class="size-4 sm:size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="7.5" cy="15.5" r="4.5" />
+                                    <path d="m21 3-9.5 9.5" />
+                                    <path d="m15.5 7.5 3 3" />
+                                    <path d="m18 5 2 2" />
+                                </svg>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-xs font-extrabold text-navy-950 leading-tight">Akses dengan</div>
+                                <div class="text-[10px] text-slate-500">kode dan PIN</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div><p class="eyebrow">Anonim sejak awal</p><h2 class="section-title text-left">Lapor dengan tenang,<br>pantau dengan pasti.</h2><p class="section-lead text-left">TAMBORA dirancang agar masyarakat tidak ragu menyampaikan informasi. Sistem hanya mengumpulkan data kejadian yang dibutuhkan untuk penanganan.</p><a href="{{ route('reports.create') }}" class="mt-7 inline-flex items-center gap-2 font-bold text-blue-700 hover:text-blue-800">Mulai membuat laporan <span aria-hidden="true">→</span></a></div>
+
+            <!-- Bottom Row: 3 Security Cards (Sesuai Referensi Gambar) -->
+            <div class="mt-10 sm:mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+                <!-- Card 1: Tidak perlu identitas pribadi -->
+                <article class="group rounded-3xl border border-slate-100 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                    <div class="flex size-12 sm:size-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                        <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <line x1="2" y1="2" x2="22" y2="22" />
+                        </svg>
+                    </div>
+                    <h3 class="mt-5 text-base sm:text-lg font-extrabold text-navy-950">
+                        Tidak perlu identitas pribadi
+                    </h3>
+                    <p class="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                        Kamu tidak perlu memberikan nama, NIK, nomor telepon, atau alamat untuk melapor.
+                    </p>
+                    <div class="mt-5 h-1.5 w-7 rounded-full bg-blue-600"></div>
+                </article>
+
+                <!-- Card 2: Laporan tetap privat -->
+                <article class="group rounded-3xl border border-slate-100 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                    <div class="flex size-12 sm:size-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                        <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <rect x="8" y="13" width="8" height="6" rx="1" fill="currentColor" fill-opacity="0.15" />
+                            <path d="M10 13v-1.5a2 2 0 1 1 4 0V13" />
+                        </svg>
+                    </div>
+                    <h3 class="mt-5 text-base sm:text-lg font-extrabold text-navy-950">
+                        Laporan tetap privat
+                    </h3>
+                    <p class="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                        Laporan dan bukti yang kamu kirim tidak ditampilkan kepada masyarakat umum.
+                    </p>
+                    <div class="mt-5 h-1.5 w-7 rounded-full bg-blue-600"></div>
+                </article>
+
+                <!-- Card 3: Simpan kode dan PIN -->
+                <article class="group rounded-3xl border border-slate-100 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                    <div class="flex size-12 sm:size-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                        <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="7.5" cy="15.5" r="4.5" />
+                            <path d="m21 3-9.5 9.5" />
+                            <path d="m15.5 7.5 3 3" />
+                            <path d="m18 5 2 2" />
+                        </svg>
+                    </div>
+                    <h3 class="mt-5 text-base sm:text-lg font-extrabold text-navy-950">
+                        Simpan kode dan PIN
+                    </h3>
+                    <p class="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                        Setelah laporan dikirim, kamu akan mendapat kode laporan dan PIN untuk memantau perkembangannya.
+                    </p>
+                    <div class="mt-5 h-1.5 w-7 rounded-full bg-blue-600"></div>
+                </article>
+            </div>
         </div>
     </section>
 
