@@ -26,9 +26,6 @@
 
 @layer components {
     .public-container { @apply mx-auto w-full max-w-7xl px-5 sm:px-7 lg:px-9; }
-    .brand-mark { @apply grid size-11 shrink-0 place-items-center text-blue-700; }
-    .brand-mark svg { @apply size-full; }
-    .brand-mark-sm { @apply size-8; }
     .nav-link { @apply rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-navy-950; }
 
     .button-primary, .button-secondary, .button-light, .button-ghost-light { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60; }
@@ -52,7 +49,7 @@
     .footer-heading { @apply text-sm font-extrabold text-navy-950; }
     .footer-link { @apply transition hover:text-blue-700; }
 
-    .form-progress { @apply flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 text-slate-400 transition sm:p-4; }
+    .form-progress { @apply flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 text-left text-slate-400 transition disabled:cursor-default sm:justify-start sm:p-4; }
     .form-progress strong, .form-progress small { @apply block; }
     .form-progress strong { @apply text-sm; }
     .form-progress small { @apply mt-0.5 text-[11px] font-medium; }
@@ -61,6 +58,8 @@
     .form-progress.is-active .form-progress-number { @apply bg-blue-700 text-white; }
     .form-progress.is-complete { @apply border-teal-200 bg-teal-50 text-teal-800; }
     .form-progress.is-complete .form-progress-number { @apply bg-teal-500 text-white; }
+
+    .date-shortcut { @apply rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-500 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 aria-pressed:border-blue-200 aria-pressed:bg-blue-50 aria-pressed:text-blue-700; }
 
     .form-heading { @apply flex items-start gap-4; }
     .form-heading > span { @apply grid size-10 shrink-0 place-items-center rounded-xl bg-navy-950 text-sm font-extrabold text-white; }
@@ -74,10 +73,15 @@
     .form-control.is-invalid { @apply border-red-400 bg-red-50/40; }
     .form-error { @apply mt-2 text-xs font-semibold text-red-600; }
 
-    .upload-zone { @apply flex cursor-pointer flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 px-5 py-8 text-center transition hover:border-blue-400 hover:bg-blue-50/60 sm:flex-row sm:text-left; }
+    .upload-zone { @apply flex cursor-pointer flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 px-5 py-6 text-center transition hover:border-blue-400 hover:bg-blue-50/60 sm:flex-row sm:text-left; }
     .upload-zone strong, .upload-zone small { @apply block; }
     .upload-zone strong { @apply text-sm font-extrabold text-slate-700; }
     .upload-zone small { @apply mt-1 text-xs leading-5 text-slate-500; }
+
+    .report-review { @apply rounded-2xl border border-slate-200 bg-slate-50 p-4; }
+    .report-review span, .report-review strong { @apply block; }
+    .report-review span { @apply text-[10px] font-extrabold uppercase tracking-wider text-slate-400; }
+    .report-review strong { @apply mt-2 text-sm leading-5 text-slate-800; }
 
     .access-code { @apply rounded-xl bg-white p-4 text-center shadow-sm; }
     .access-code span, .access-code strong { @apply block; }

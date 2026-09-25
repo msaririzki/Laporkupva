@@ -18,8 +18,10 @@ class PublicReportControllerTest extends TestCase
     {
         $this->get(route('reports.create'))
             ->assertOk()
-            ->assertSee('Sampaikan informasi yang Anda ketahui')
-            ->assertSee('Lokasi kejadian')
+            ->assertSee('Laporkan dengan cepat dan aman')
+            ->assertSee('Gunakan lokasi saya')
+            ->assertSee('Boleh dilewati')
+            ->assertSee('Foto besar otomatis diperkecil di perangkat Anda')
             ->assertDontSee('NIK');
     }
 
@@ -73,6 +75,19 @@ class PublicReportControllerTest extends TestCase
 
         $response = $this->from(route('reports.create'))->post(route('reports.store'), $this->validPayload([
             'evidence' => [UploadedFile::fake()->create('program.exe', 64, 'application/octet-stream')],
+        ]));
+
+        $response->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors(['evidence.0']);
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_evidence_larger_than_ten_megabytes_is_rejected(): void
+    {
+        Storage::fake('local');
+
+        $response = $this->from(route('reports.create'))->post(route('reports.store'), $this->validPayload([
+            'evidence' => [UploadedFile::fake()->image('bukti-besar.jpg')->size(10241)],
         ]));
 
         $response->assertRedirect(route('reports.create'))

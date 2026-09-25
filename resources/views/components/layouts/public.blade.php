@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="TAMBORA - Kanal pelaporan masyarakat untuk pengawasan kegiatan usaha penukaran valuta asing di Nusa Tenggara Barat.">
     <meta name="theme-color" content="#092a57">
+    <link rel="icon" type="image/webp" href="{{ asset('images/brand/bank-indonesia-mark.webp') }}">
     <title>{{ isset($title) ? $title.' — ' : '' }}TAMBORA</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head')
@@ -14,11 +15,8 @@
 
     <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
         <div class="public-container flex h-18 items-center justify-between gap-6">
-            <a href="{{ route('home') }}" class="group flex items-center gap-3" aria-label="TAMBORA - Beranda">
-                <span class="brand-mark" aria-hidden="true">
-                    <svg viewBox="0 0 48 48" fill="none"><path d="M24 4 41 11v11c0 10.8-6.5 18.2-17 22C13.5 40.2 7 32.8 7 22V11l17-7Z" fill="currentColor"/><path d="M15 30.5 22.4 18l4.1 6.3 2.5-3.5 5 9.7H15Z" fill="white" opacity=".96"/><circle cx="22.5" cy="15" r="2.4" fill="#50c8b6"/></svg>
-                </span>
-                <span><span class="block text-lg font-extrabold leading-none tracking-tight text-navy-950">TAMBORA</span><span class="mt-1 block text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">Bank Indonesia • NTB</span></span>
+            <a href="{{ route('home') }}" class="group flex shrink-0 items-center" aria-label="TAMBORA - Beranda">
+                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-11 w-auto object-contain sm:h-14" width="720" height="316">
             </a>
 
             <nav class="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
@@ -37,9 +35,10 @@
     <footer class="border-t border-slate-200 bg-white">
         <div class="public-container grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
             <div>
-                <div class="flex items-center gap-3">
-                    <span class="brand-mark brand-mark-sm" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M24 4 41 11v11c0 10.8-6.5 18.2-17 22C13.5 40.2 7 32.8 7 22V11l17-7Z" fill="currentColor"/><path d="M15 30.5 22.4 18l4.1 6.3 2.5-3.5 5 9.7H15Z" fill="white"/><circle cx="22.5" cy="15" r="2.4" fill="#50c8b6"/></svg></span>
-                    <span class="font-extrabold text-navy-950">TAMBORA</span>
+                <div class="flex flex-wrap items-center gap-5">
+                    <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-16 w-auto object-contain" width="720" height="316" loading="lazy">
+                    <span class="hidden h-10 w-px bg-slate-200 sm:block" aria-hidden="true"></span>
+                    <img src="{{ asset('images/brand/bank-indonesia-full.webp') }}" alt="Bank Indonesia — Bank Sentral Republik Indonesia" class="h-9 w-auto object-contain" width="880" height="158" loading="lazy">
                 </div>
                 <p class="mt-4 max-w-md text-sm leading-6 text-slate-500">Kanal partisipasi masyarakat untuk membantu pengawasan kegiatan usaha penukaran valuta asing di wilayah Nusa Tenggara Barat.</p>
             </div>

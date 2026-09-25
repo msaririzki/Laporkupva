@@ -28,6 +28,9 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->brandName('TAMBORA · BI NTB')
+            ->brandLogo(asset('images/brand/tambora.webp'))
+            ->brandLogoHeight('3rem')
+            ->favicon(asset('images/brand/bank-indonesia-mark.webp'))
             ->darkMode(false)
             ->globalSearch(false)
             ->colors([

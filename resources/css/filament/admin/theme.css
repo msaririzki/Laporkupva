@@ -18,8 +18,9 @@
 }
 
 .fi-body-has-navigation .fi-topbar .fi-logo {
-    color: #2b4675;
-    letter-spacing: -0.025em;
+    width: auto;
+    max-width: 8rem;
+    object-fit: contain;
 }
 
 .fi-body-has-navigation .fi-topbar .fi-input-wrp {
@@ -43,27 +44,9 @@
 }
 
 .fi-body-has-navigation .fi-sidebar .fi-logo {
-    color: #2b4675;
-    font-size: 1.05rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-}
-
-.fi-body-has-navigation .fi-sidebar .fi-logo::before {
-    display: inline-grid;
-    width: 2rem;
-    height: 2rem;
-    margin-right: 0.65rem;
-    place-items: center;
-    border: 1px solid rgb(43 70 117 / 12%);
-    border-radius: 0.75rem;
-    color: #ffffff;
-    background: linear-gradient(145deg, #5878ad, #355783);
-    box-shadow: 0 10px 22px -14px rgb(43 70 117 / 65%);
-    content: 'T';
-    font-size: 0.9rem;
-    font-weight: 900;
-    vertical-align: middle;
+    width: auto;
+    max-width: 10rem;
+    object-fit: contain;
 }
 
 .fi-body-has-navigation .fi-sidebar-nav {
