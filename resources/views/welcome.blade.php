@@ -279,76 +279,109 @@
         </div>
 
         <div class="public-container">
-            <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10">
-                <!-- Left Column: 3 Security Cards (Grip Minimalis & Tidak Terlalu Panjang) -->
-                <div class="order-2 lg:order-1 lg:col-span-6 flex flex-col gap-2.5 sm:gap-3 w-full max-w-[420px] mx-auto lg:mx-0">
-                    <!-- Card 1: 100% Anonim & Tanpa Akun -->
-                    <article class="group relative flex items-start gap-3 rounded-2xl border border-slate-100 bg-white/95 p-3 sm:p-3.5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
-                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                            <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <line x1="2" y1="2" x2="22" y2="22" />
-                            </svg>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center justify-between gap-2">
-                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950">
+            <div class="grid items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-12">
+                <!-- Left Column: 3 Security Cards (Format Box Minimalis seperti Grip Cara Lapor) -->
+                <div class="order-2 lg:order-1 lg:col-span-6 w-full max-w-sm sm:max-w-none lg:max-w-[440px] mx-auto lg:mx-0">
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1 sm:gap-4">
+                        <!-- Card 1: 100% Anonim & Tanpa Akun -->
+                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-4 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                            <div>
+                                <!-- Number Badge -->
+                                <div class="flex justify-center">
+                                    <span class="flex size-7 sm:size-8 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-sm shadow-blue-600/30">
+                                        01
+                                    </span>
+                                </div>
+
+                                <!-- Icon -->
+                                <div class="my-2.5 flex justify-center">
+                                    <div class="flex size-10 sm:size-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                                        <svg class="size-5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                            <circle cx="9" cy="7" r="4" />
+                                            <line x1="2" y1="2" x2="22" y2="22" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Title -->
+                                <h3 class="text-sm sm:text-base font-extrabold text-navy-950">
                                     100% Anonim & Tanpa Akun
                                 </h3>
-                                <span class="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-black text-blue-700">01</span>
-                            </div>
-                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
-                                Tidak perlu daftar akun. Kami sama sekali tidak meminta nama, KTP, nomor HP, maupun email Anda.
-                            </p>
-                        </div>
-                    </article>
 
-                    <!-- Card 2: Pantau Pakai Kode Rahasia -->
-                    <article class="group relative flex items-start gap-3 rounded-2xl border border-slate-100 bg-white/95 p-3 sm:p-3.5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
-                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                            <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="7.5" cy="15.5" r="4.5" />
-                                <path d="m21 3-9.5 9.5" />
-                                <path d="m15.5 7.5 3 3" />
-                                <path d="m18 5 2 2" />
-                            </svg>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center justify-between gap-2">
-                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950">
+                                <!-- Description -->
+                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                    Tidak perlu daftar akun. Kami sama sekali tidak meminta nama, KTP, nomor HP, maupun email Anda.
+                                </p>
+                            </div>
+                        </article>
+
+                        <!-- Card 2: Pantau Pakai Kode Rahasia -->
+                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-4 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                            <div>
+                                <!-- Number Badge -->
+                                <div class="flex justify-center">
+                                    <span class="flex size-7 sm:size-8 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-sm shadow-blue-600/30">
+                                        02
+                                    </span>
+                                </div>
+
+                                <!-- Icon -->
+                                <div class="my-2.5 flex justify-center">
+                                    <div class="flex size-10 sm:size-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                                        <svg class="size-5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="7.5" cy="15.5" r="4.5" />
+                                            <path d="m21 3-9.5 9.5" />
+                                            <path d="m15.5 7.5 3 3" />
+                                            <path d="m18 5 2 2" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Title -->
+                                <h3 class="text-sm sm:text-base font-extrabold text-navy-950">
                                     Pantau Pakai Kode Rahasia
                                 </h3>
-                                <span class="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-black text-blue-700">02</span>
-                            </div>
-                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
-                                Anda mendapatkan kode acak dan PIN untuk mengecek status tindak lanjut tanpa meninggalkan jejak.
-                            </p>
-                        </div>
-                    </article>
 
-                    <!-- Card 3: Hanya Dibaca Petugas Resmi -->
-                    <article class="group relative flex items-start gap-3 rounded-2xl border border-slate-100 bg-white/95 p-3 sm:p-3.5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
-                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                            <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                <polyline points="14 2 14 8 20 8" />
-                                <rect x="8" y="13" width="8" height="6" rx="1" fill="currentColor" fill-opacity="0.15" />
-                                <path d="M10 13v-1.5a2 2 0 1 1 4 0V13" />
-                            </svg>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center justify-between gap-2">
-                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950">
+                                <!-- Description -->
+                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                    Anda mendapatkan kode acak dan PIN untuk mengecek status tindak lanjut tanpa meninggalkan jejak.
+                                </p>
+                            </div>
+                        </article>
+
+                        <!-- Card 3: Hanya Dibaca Petugas Resmi -->
+                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-4 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                            <div>
+                                <!-- Number Badge -->
+                                <div class="flex justify-center">
+                                    <span class="flex size-7 sm:size-8 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-sm shadow-blue-600/30">
+                                        03
+                                    </span>
+                                </div>
+
+                                <!-- Icon -->
+                                <div class="my-2.5 flex justify-center">
+                                    <div class="flex size-10 sm:size-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                                        <svg class="size-5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                            <path d="m9 12 2 2 4-4" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Title -->
+                                <h3 class="text-sm sm:text-base font-extrabold text-navy-950">
                                     Hanya Dibaca Petugas Resmi
                                 </h3>
-                                <span class="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-black text-blue-700">03</span>
+
+                                <!-- Description -->
+                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                    Laporan Anda dijaga ketat dan hanya dibuka oleh petugas resmi Bank Indonesia, tidak disebar ke umum.
+                                </p>
                             </div>
-                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
-                                Laporan Anda dijaga ketat dan hanya dibuka oleh petugas resmi Bank Indonesia, tidak disebar ke umum.
-                            </p>
-                        </div>
-                    </article>
+                        </article>
+                    </div>
                 </div>
 
                 <!-- Right Column: Gambar di Atas & Judul di Bawah Gambar -->
@@ -368,15 +401,15 @@
                     </div>
 
                     <!-- Teks di Bawah Gambar -->
-                    <div class="mt-3.5 sm:mt-5">
-                        <h2 class="text-xl font-extrabold tracking-tight text-navy-950 sm:text-2xl lg:text-[2rem] lg:leading-tight">
+                    <div class="mt-4 sm:mt-5">
+                        <h2 class="text-2xl font-extrabold tracking-tight text-navy-950 sm:text-3xl lg:text-[2.25rem] lg:leading-tight">
                             Lapor dengan tenang,<br class="hidden sm:inline"> identitas tetap aman.
                         </h2>
-                        <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto lg:mx-0">
+                        <p class="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed max-w-md mx-auto lg:mx-0">
                             TAMBORA dirancang agar masyarakat dapat berpartisipasi mengawasi KUPVA tidak berizin di NTB tanpa rasa khawatir. Sistem hanya mengumpulkan data kejadian yang diperlukan tanpa melacak identitas pelapor.
                         </p>
-                        <div class="mt-4 flex justify-center lg:justify-start">
-                            <a href="{{ route('reports.create') }}" class="button-primary inline-flex items-center gap-2 text-xs sm:text-sm shadow-sm py-2 px-4 sm:py-2.5 sm:px-5">
+                        <div class="mt-5 flex justify-center lg:justify-start">
+                            <a href="{{ route('reports.create') }}" class="button-primary inline-flex items-center gap-2 shadow-sm">
                                 Mulai membuat laporan <span aria-hidden="true">→</span>
                             </a>
                         </div>
