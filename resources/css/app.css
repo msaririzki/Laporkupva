@@ -214,7 +214,7 @@
         @apply absolute left-[16.666%] right-[16.666%] top-4 sm:top-5 -translate-y-1/2 h-[2px] bg-[#E2E8F0] z-0;
     }
     .stepper-track-progress {
-        @apply h-full bg-[#0B2342] transition-all duration-300 ease-out;
+        @apply h-full bg-[#2563EB] transition-all duration-300 ease-out;
     }
 
     .stepper-step, .form-progress {
@@ -235,19 +235,19 @@
     /* Active step */
     .stepper-step.is-active .stepper-circle,
     .form-progress.is-active .form-progress-number {
-        @apply bg-[#0B2342] border-2 border-[#0B2342] text-white shadow-xs;
-        box-shadow: 0 0 0 4px rgba(242, 184, 75, 0.35);
+        @apply bg-[#2563EB] border-2 border-[#2563EB] text-white shadow-xs;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
     }
     .stepper-step.is-active .stepper-title,
     .stepper-step.is-active .stepper-label,
     .form-progress.is-active strong {
-        @apply text-[#0F172A] font-bold;
+        @apply text-[#0B2342] font-bold;
         background: transparent !important;
         border: none !important;
     }
     .stepper-step.is-active .stepper-desc,
     .form-progress.is-active small {
-        @apply text-[#0F172A]/70 font-medium;
+        @apply text-[#2563EB] font-medium;
         background: transparent !important;
         border: none !important;
     }

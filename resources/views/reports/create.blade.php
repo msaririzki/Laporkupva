@@ -75,7 +75,7 @@
                     @foreach ([
                         ['step' => 1, 'num' => '01', 'name' => 'Kejadian', 'desc' => 'Ceritakan kejadian'],
                         ['step' => 2, 'num' => '02', 'name' => 'Lokasi', 'desc' => 'Tentukan lokasi'],
-                        ['step' => 3, 'num' => '03', 'name' => 'Bukti', 'desc' => 'Tambahkan bukti'],
+                        ['step' => 3, 'num' => '03', 'name' => 'Bukti', 'desc' => 'Tambahkan foto'],
                     ] as $item)
                         <button
                             type="button"
@@ -96,13 +96,13 @@
             <!-- Subtle Live Accessibility Step Status -->
             <p id="form-step-status" class="sr-only" aria-live="polite">Langkah 1 dari 3</p>
 
-            <!-- Service Flow Form (Desktop Single White Card Container) -->
+            <!-- Service Flow Form (Single Rounded Card Container) -->
             <form
                 action="{{ route('reports.store') }}"
                 method="POST"
                 enctype="multipart/form-data"
                 id="report-form"
-                class="lg:bg-white lg:border lg:border-[#E2E8F0] lg:rounded-2xl lg:p-8 xl:p-10 lg:shadow-[0_8px_30px_rgba(15,23,42,0.05)]"
+                class="bg-white border border-[#E2E8F0] rounded-3xl p-5 sm:p-8 lg:p-10 shadow-xs"
                 novalidate
             >
                 @csrf
@@ -115,9 +115,12 @@
 
                 <!-- STEP 1: KEJADIAN -->
                 <section class="form-step" data-step="1">
-                    <div>
-                        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#0F172A]">Apa yang terjadi?</h2>
-                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Ceritakan kejadian dengan singkat dan jelas. Tidak perlu bahasa resmi.</p>
+                    <div class="border-b border-slate-100 pb-5">
+                        <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB] mb-2.5">
+                            <span>Langkah 01</span>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#0B2342]">Ceritakan kejadiannya</h2>
+                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Pilih masalahnya dan ceritakan apa yang terjadi secara santai dan jujur.</p>
                     </div>
 
                     <div class="mt-6 space-y-5 sm:space-y-6">
@@ -187,10 +190,10 @@
                         </div>
 
                         <!-- Kegiatan Masih Berlangsung -->
-                        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 bg-white p-3.5 sm:p-4 shadow-2xs transition-colors hover:border-blue-300">
-                            <input class="mt-0.5 size-4 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" name="is_ongoing" value="1" @checked(old('is_ongoing'))>
+                        <label class="flex cursor-pointer items-start gap-3.5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 transition-all hover:border-[#2563EB]/40 hover:bg-blue-50/20 shadow-xs">
+                            <input class="mt-0.5 size-4.5 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" name="is_ongoing" value="1" @checked(old('is_ongoing'))>
                             <div>
-                                <strong class="block text-sm font-semibold text-[#0B2342]">Kegiatan masih berlangsung</strong>
+                                <strong class="block text-sm font-bold text-[#0B2342]">Kegiatan masih berlangsung</strong>
                                 <span class="mt-0.5 block text-xs leading-relaxed text-[#64748B]">Centang jika aktivitas masih beroperasi atau rutin dilakukan di lokasi tersebut.</span>
                             </div>
                         </label>
@@ -199,12 +202,15 @@
 
                 <!-- STEP 2: LOKASI -->
                 <section class="form-step hidden" data-step="2">
-                    <div>
-                        <div class="flex flex-wrap items-baseline justify-between gap-1">
-                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#0F172A]">Tentukan lokasi kejadian</h2>
-                            <span class="text-xs text-slate-400">Khusus wilayah Nusa Tenggara Barat</span>
+                    <div class="border-b border-slate-100 pb-5">
+                        <div class="flex items-center justify-between">
+                            <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB]">
+                                <span>Langkah 02</span>
+                            </div>
+                            <span class="text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-1 rounded-full">Khusus Wilayah NTB</span>
                         </div>
-                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Tentukan lokasi tempat kejadian.</p>
+                        <h2 class="mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0B2342]">Tentukan lokasinya</h2>
+                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Pilih kabupaten/kota dan tandai titik lokasi kejadian pada peta interaktif.</p>
                     </div>
 
                     <!-- Desktop 2-Column Split: Detail Lokasi (42%) vs Map (58%) -->
@@ -214,16 +220,20 @@
                             <!-- Quick Location Helpers -->
                             <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
                                 <!-- GPS Option -->
-                                <div class="flex flex-col justify-between rounded-xl bg-[#F8FAFC] p-3.5 sm:p-4 border border-[#CBD5E1] shadow-2xs">
-                                    <div>
-                                        <div class="flex items-center justify-between">
-                                            <p class="text-xs sm:text-sm font-semibold text-[#0F172A]">Masih di lokasi?</p>
-                                            <span class="rounded-full bg-blue-50 border border-blue-200 px-2 py-0.5 text-[10px] font-bold text-[#2563EB]">GPS</span>
+                                <div class="flex flex-col justify-between rounded-2xl bg-[#F8FAFC] p-4 border border-[#E2E8F0] shadow-xs hover:border-[#2563EB]/40 transition-colors">
+                                    <div class="flex items-start gap-3">
+                                        <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-[#2563EB]">
+                                            <svg class="size-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M10 1.75a.75.75 0 0 1 .75.75v1.05a6.5 6.5 0 0 1 5.7 5.7h1.05a.75.75 0 0 1 0 1.5h-1.05a6.5 6.5 0 0 1-5.7 5.7v1.05a.75.75 0 0 1-1.5 0v-1.05a6.5 6.5 0 0 1-5.7-5.7H2.5a.75.75 0 0 1 0-1.5h1.05a6.5 6.5 0 0 1 5.7-5.7V2.5a.75.75 0 0 1 .75-.75ZM5 10a5 5 0 1 0 10 0 5 5 0 0 0-10 0Zm5-2.25a2.25 2.25 0 1 1 0 4.5 2.25 2.25 0 0 1 0-4.5Z"/>
+                                            </svg>
                                         </div>
-                                        <p class="mt-1 text-xs text-[#64748B] leading-relaxed">Titik lokasi terisi otomatis dari perangkat Anda.</p>
+                                        <div>
+                                            <h3 class="text-sm font-bold text-[#0B2342]">Sedang di lokasi?</h3>
+                                            <p class="mt-0.5 text-xs text-[#64748B] leading-relaxed">Ambil koordinat otomatis dari sensor GPS perangkat Anda.</p>
+                                        </div>
                                     </div>
-                                    <button type="button" id="use-location" class="button-primary mt-3 w-full text-xs sm:text-sm font-semibold py-2.5 min-h-11">
-                                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor">
+                                    <button type="button" id="use-location" class="mt-3.5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white border border-[#CBD5E1] px-4 py-2.5 text-xs sm:text-sm font-semibold text-[#0B2342] hover:bg-slate-50 hover:border-[#2563EB] hover:text-[#2563EB] transition-colors shadow-2xs">
+                                        <svg class="size-4 text-[#2563EB]" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M10 1.75a.75.75 0 0 1 .75.75v1.05a6.5 6.5 0 0 1 5.7 5.7h1.05a.75.75 0 0 1 0 1.5h-1.05a6.5 6.5 0 0 1-5.7 5.7v1.05a.75.75 0 0 1-1.5 0v-1.05a6.5 6.5 0 0 1-5.7-5.7H2.5a.75.75 0 0 1 0-1.5h1.05a6.5 6.5 0 0 1 5.7-5.7V2.5a.75.75 0 0 1 .75-.75ZM5 10a5 5 0 1 0 10 0 5 5 0 0 0-10 0Zm5-2.25a2.25 2.25 0 1 1 0 4.5 2.25 2.25 0 0 1 0-4.5Z"/>
                                         </svg>
                                         <span>Gunakan lokasi saya</span>
@@ -231,17 +241,22 @@
                                 </div>
 
                                 <!-- Search Option -->
-                                <div class="flex flex-col justify-between rounded-xl bg-[#F8FAFC] p-3.5 sm:p-4 border border-[#CBD5E1] shadow-2xs">
-                                    <div>
-                                        <div class="flex items-center justify-between">
-                                            <label class="text-xs sm:text-sm font-semibold text-[#0F172A]" for="location-search">Sudah di luar lokasi?</label>
-                                            <span class="rounded-full bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] font-bold text-slate-600">Cari</span>
+                                <div class="flex flex-col justify-between rounded-2xl bg-[#F8FAFC] p-4 border border-[#E2E8F0] shadow-xs hover:border-[#2563EB]/40 transition-colors">
+                                    <div class="flex items-start gap-3">
+                                        <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-slate-100 text-[#0B2342]">
+                                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="11" cy="11" r="8"/>
+                                                <path d="m21 21-4.3-4.3"/>
+                                            </svg>
                                         </div>
-                                        <p class="mt-1 text-xs text-[#64748B] leading-relaxed">Cari jalan, desa, kecamatan, atau tempat di NTB.</p>
+                                        <div>
+                                            <label class="text-sm font-bold text-[#0B2342]" for="location-search">Cari nama tempat / jalan</label>
+                                            <p class="mt-0.5 text-xs text-[#64748B] leading-relaxed">Ketik jalan, desa, pasar, atau tempat di NTB.</p>
+                                        </div>
                                     </div>
-                                    <div class="mt-3 flex gap-2">
-                                        <input class="form-control text-xs sm:text-sm h-11" id="location-search" type="search" autocomplete="off" placeholder="Contoh: Pasar Tente Bima">
-                                        <button type="button" id="search-location" class="button-secondary px-3.5 text-xs sm:text-sm font-semibold h-11 shrink-0">Cari</button>
+                                    <div class="mt-3.5 flex gap-2">
+                                        <input class="form-control text-xs sm:text-sm h-10 rounded-xl" id="location-search" type="search" autocomplete="off" placeholder="Contoh: Pasar Tente Bima">
+                                        <button type="button" id="search-location" class="inline-flex items-center justify-center rounded-xl bg-[#2563EB] px-4 text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-2xs shrink-0">Cari</button>
                                     </div>
                                 </div>
                             </div>
@@ -264,8 +279,8 @@
 
                             <!-- Expandable Address Details -->
                             <div>
-                                <details class="group rounded-xl border border-[#CBD5E1] bg-white shadow-2xs" @if ($errors->has('district') || $errors->has('village') || $errors->has('address')) open @endif>
-                                    <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-xs sm:text-sm font-semibold text-[#0F172A]">
+                                <details class="group rounded-2xl border border-[#E2E8F0] bg-white shadow-xs" @if ($errors->has('district') || $errors->has('village') || $errors->has('address')) open @endif>
+                                    <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-xs sm:text-sm font-semibold text-[#0B2342]">
                                         <span id="location-details-summary">Tambahkan petunjuk alamat <span class="font-normal text-[#64748B]">(opsional)</span></span>
                                         <span class="text-base text-[#64748B] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
                                     </summary>
@@ -297,17 +312,22 @@
                             <!-- Map status message -->
                             <p id="map-message" class="mb-2 hidden text-xs sm:text-sm" role="status"></p>
 
-                            <!-- Interactive Map Frame (min-h 420px+, rounded-2xl) -->
+                            <!-- Interactive Map Frame (min-h 420px+, rounded-3xl) -->
                             <div
                                 id="report-map"
-                                class="h-72 sm:h-80 lg:h-[460px] w-full overflow-hidden rounded-2xl border border-[#CBD5E1] bg-slate-100 shadow-2xs"
+                                class="h-72 sm:h-80 lg:h-[480px] w-full overflow-hidden rounded-3xl border border-[#CBD5E1] bg-slate-100 shadow-xs"
                                 data-mapbox-token="{{ config('services.mapbox.public_token') }}"
                                 aria-label="Peta pemilihan lokasi kejadian"
                             ></div>
 
-                            <div class="mt-2.5 flex flex-wrap items-center justify-between gap-2 text-xs text-[#64748B]">
+                            <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-[#64748B]">
                                 <span id="report-map-zoom-hint" class="tambora-map-zoom-hint tambora-map-zoom-hint--inline"></span>
-                                <span>Klik peta atau geser penanda untuk menyesuaikan titik secara tepat.</span>
+                                <span class="flex items-center gap-1.5">
+                                    <svg class="size-3.5 text-[#2563EB]" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.549l.04.018.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Klik peta atau geser penanda untuk menyesuaikan titik secara tepat.
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -320,24 +340,39 @@
 
                 <!-- STEP 3: BUKTI -->
                 <section class="form-step hidden" data-step="3">
-                    <div>
-                        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#0F172A]">Tambahkan bukti</h2>
-                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Tambahkan foto atau file pendukung jika tersedia.</p>
+                    <div class="border-b border-slate-100 pb-5">
+                        <div class="flex items-center justify-between">
+                            <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB]">
+                                <span>Langkah 03</span>
+                            </div>
+                            <span class="text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-1 rounded-full">Boleh dilewati</span>
+                        </div>
+                        <h2 class="mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0B2342]">Tambahkan foto & bukti</h2>
+                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Sertakan foto lokasi, papan nama, atau dokumen pendukung untuk memperkuat laporan Anda.</p>
                     </div>
 
                     <!-- Review Summary Cards -->
                     <div class="mt-6 grid gap-3 sm:grid-cols-3" aria-label="Ringkasan laporan">
-                        <div class="rounded-xl border border-blue-100 bg-[#EEF4FF] p-3.5 shadow-2xs">
-                            <span class="block text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">Jenis kejadian</span>
-                            <strong id="review-incident" class="mt-1 block text-xs sm:text-sm font-semibold text-[#0F172A] break-words">—</strong>
+                        <div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="grid size-6 place-items-center rounded-md bg-blue-50 text-[11px] font-bold text-[#2563EB]">1</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Jenis kejadian</span>
+                            </div>
+                            <strong id="review-incident" class="mt-2 block text-sm font-bold text-[#0B2342] break-words leading-snug">—</strong>
                         </div>
-                        <div class="rounded-xl border border-teal-100 bg-[#E8F6F3] p-3.5 shadow-2xs">
-                            <span class="block text-[11px] font-bold uppercase tracking-wider text-[#168A7A]">Waktu kejadian</span>
-                            <strong id="review-date" class="mt-1 block text-xs sm:text-sm font-semibold text-[#0F172A] break-words">—</strong>
+                        <div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="grid size-6 place-items-center rounded-md bg-emerald-50 text-[11px] font-bold text-emerald-600">2</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Waktu kejadian</span>
+                            </div>
+                            <strong id="review-date" class="mt-2 block text-sm font-bold text-[#0B2342] break-words leading-snug">—</strong>
                         </div>
-                        <div class="rounded-xl border border-amber-100 bg-[#FFF7E3] p-3.5 shadow-2xs">
-                            <span class="block text-[11px] font-bold uppercase tracking-wider text-[#B45309]">Lokasi kejadian</span>
-                            <strong id="review-location" class="mt-1 block text-xs sm:text-sm font-semibold text-[#0F172A] break-words">—</strong>
+                        <div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="grid size-6 place-items-center rounded-md bg-amber-50 text-[11px] font-bold text-amber-600">3</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Lokasi kejadian</span>
+                            </div>
+                            <strong id="review-location" class="mt-2 block text-sm font-bold text-[#0B2342] break-words leading-snug">—</strong>
                         </div>
                     </div>
 
@@ -345,25 +380,36 @@
                     <div class="mt-6 grid gap-6 lg:grid-cols-12 lg:items-start">
                         <!-- Left: Upload Evidence Dropzone -->
                         <div class="lg:col-span-7">
-                            <div class="flex items-center justify-between">
-                                <label class="form-label" for="evidence">Punya foto atau dokumen?</label>
-                                <span class="text-xs text-slate-400">Boleh dilewati</span>
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="form-label mb-0" for="evidence">Punya foto atau dokumen?</label>
+                                <span class="text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-0.5 rounded-full">Boleh dilewati</span>
                             </div>
-                            <label class="upload-zone group bg-[#F8FAFC] border border-dashed border-[#CBD5E1] rounded-2xl hover:border-[#2563EB] hover:bg-[#EEF4FF] shadow-2xs transition-colors" for="evidence">
-                                <span class="grid size-12 place-items-center rounded-xl bg-blue-50 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-colors shrink-0">
-                                    <svg class="size-6" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M10.75 2.75a.75.75 0 0 0-1.5 0v6.69L7.03 7.22a.75.75 0 0 0-1.06 1.06l3.5 3.5a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 1 0-1.06-1.06l-2.22 2.22V2.75Z"/>
-                                        <path d="M3.5 10.75a.75.75 0 0 0-1.5 0v3.5A2.75 2.75 0 0 0 4.75 17h10.5A2.75 2.75 0 0 0 18 14.25v-3.5a.75.75 0 0 0-1.5 0v3.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-3.5Z"/>
+                            <label class="upload-zone group flex flex-col items-center justify-center p-8 rounded-3xl border-2 border-dashed border-[#CBD5E1] bg-[#F8FAFC] hover:border-[#2563EB] hover:bg-blue-50/30 transition-all cursor-pointer text-center" for="evidence">
+                                <div class="grid size-14 place-items-center rounded-2xl bg-blue-50 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-all shadow-xs">
+                                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17 8 12 3 7 8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
                                     </svg>
-                                </span>
-                                <div class="space-y-0.5">
-                                    <strong class="block text-sm font-semibold text-[#0F172A]">Tambahkan bukti</strong>
-                                    <small class="block text-xs text-[#64748B]">Boleh dilewati · Maks. 5 berkas, masing-masing 10 MB</small>
                                 </div>
+                                <strong class="mt-4 block text-sm font-bold text-[#0B2342] group-hover:text-[#2563EB] transition-colors">
+                                    Pilih foto atau seret ke sini
+                                </strong>
+                                <span class="mt-1 block text-xs text-[#64748B]">
+                                    Format: JPG, PNG, WEBP, atau PDF · Maks. 5 berkas, masing-masing 10 MB
+                                </span>
+                                <span class="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-3 py-1.5 text-xs font-semibold text-[#0B2342] shadow-2xs group-hover:border-[#2563EB] group-hover:text-[#2563EB]">
+                                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                                        <circle cx="9" cy="9" r="2"/>
+                                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                                    </svg>
+                                    <span>Pilih berkas dari perangkat</span>
+                                </span>
                             </label>
                             <input class="sr-only" id="evidence" name="evidence[]" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf" multiple>
                             <div id="file-list" class="mt-3 grid gap-2"></div>
-                            <p class="form-helper">Foto besar otomatis diperkecil di perangkat Anda. Foto yang sudah kecil tetap dikirim dalam kualitas asli.</p>
+                            <p class="form-helper">Foto besar otomatis diperkecil di perangkat Anda sebelum dikirim agar hemat kuota.</p>
                             @error('evidence')<p class="form-error">{{ $message }}</p>@enderror
                             @error('evidence.*')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
@@ -371,21 +417,26 @@
                         <!-- Right: Post-Submission Information & Confirmation -->
                         <div class="lg:col-span-5 space-y-4">
                             <!-- Post-Submission Information Callout -->
-                            <div class="rounded-xl border border-teal-200 bg-[#E8F6F3] p-4 text-xs sm:text-sm leading-relaxed text-[#0F172A] shadow-2xs">
-                                <strong class="font-semibold flex items-center gap-1.5 text-[#168A7A]">
-                                    <svg class="size-4 shrink-0 text-[#168A7A]" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd"/>
-                                    </svg>
-                                    Setelah laporan dikirim:
-                                </strong>
-                                <span class="mt-1 block text-xs text-[#0F172A]/90 leading-relaxed">Anda akan menerima kode laporan dan PIN untuk melihat perkembangan laporan. Simpan keduanya karena PIN hanya ditampilkan satu kali.</span>
+                            <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-5 text-xs sm:text-sm leading-relaxed text-[#0B2342] shadow-xs">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="grid size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
+                                        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                        </svg>
+                                    </div>
+                                    <strong class="font-bold text-[#0B2342]">Setelah laporan terkirim:</strong>
+                                </div>
+                                <p class="mt-2.5 text-xs sm:text-sm text-[#475569] leading-relaxed">
+                                    Anda akan memperoleh <strong class="text-[#0B2342]">Kode Laporan</strong> dan <strong class="text-[#0B2342]">PIN Rahasia 6 digit</strong>. Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
+                                </p>
                             </div>
 
                             <!-- Good Faith Confirmation -->
-                            <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[#CBD5E1] bg-white p-3.5 sm:p-4 shadow-2xs transition-colors hover:border-[#2563EB]">
-                                <input class="mt-0.5 size-4 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
-                                <span class="text-xs sm:text-sm leading-relaxed text-[#0F172A]">
-                                    Informasi ini saya sampaikan dengan itikad baik berdasarkan hal yang saya ketahui. <span class="text-[#DC2626] font-semibold">*</span>
+                            <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-colors hover:border-[#2563EB]/40 hover:bg-blue-50/20">
+                                <input class="mt-1 size-4.5 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
+                                <span class="text-xs sm:text-sm leading-relaxed text-[#0B2342] font-medium">
+                                    Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span>
                                 </span>
                             </label>
                             @error('good_faith')<p class="form-error mt-2">{{ $message }}</p>@enderror
@@ -394,18 +445,18 @@
                 </section>
 
                 <!-- Action Area: Sticky on mobile, Normal flow inside form card on desktop -->
-                <div class="sticky bottom-0 z-30 -mx-4 sm:-mx-6 mt-8 bg-[#F4F7FB]/95 border-t border-slate-200/80 px-4 py-3.5 backdrop-blur-md lg:static lg:z-auto lg:mx-0 lg:mt-10 lg:pt-6 lg:border-t lg:border-slate-200 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none">
+                <div class="sticky bottom-0 z-30 -mx-5 sm:-mx-8 lg:-mx-10 -mb-5 sm:-mb-8 lg:-mb-10 mt-8 bg-white/95 border-t border-[#E2E8F0] p-4 sm:p-6 lg:p-8 backdrop-blur-md rounded-b-3xl">
                     <div class="flex items-center justify-between gap-4">
                         <div>
-                            <button type="button" id="previous-step" class="button-secondary hidden h-11 sm:h-12 px-5 text-sm font-semibold rounded-xl bg-white border border-[#CBD5E1] text-[#0F172A] hover:bg-slate-50 transition-colors">
+                            <button type="button" id="previous-step" class="hidden min-h-11 sm:min-h-12 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-5 py-2.5 text-sm font-semibold text-[#0B2342] shadow-2xs hover:bg-slate-50 transition-colors">
                                 <span>Kembali</span>
                             </button>
                         </div>
                         <div class="flex-1 lg:flex-initial flex justify-end">
-                            <button type="button" id="next-step" class="button-primary w-full lg:w-auto lg:min-w-[200px] text-center text-sm font-semibold h-11 sm:h-12 px-6 rounded-xl bg-[#2563EB] text-white hover:bg-[#1D4ED8] transition-colors shadow-2xs">
+                            <button type="button" id="next-step" class="w-full lg:w-auto lg:min-w-[200px] min-h-11 sm:min-h-12 items-center justify-center rounded-xl bg-[#2563EB] px-6 py-2.5 text-center text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
                                 <span>Lanjut ke lokasi</span>
                             </button>
-                            <button type="submit" id="submit-report" class="button-primary w-full lg:w-auto lg:min-w-[200px] text-center text-sm font-semibold h-11 sm:h-12 px-6 rounded-xl bg-[#2563EB] text-white hover:bg-[#1D4ED8] transition-colors shadow-2xs hidden">
+                            <button type="submit" id="submit-report" class="w-full lg:w-auto lg:min-w-[200px] min-h-11 sm:min-h-12 items-center justify-center rounded-xl bg-[#2563EB] px-6 py-2.5 text-center text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs hidden">
                                 <span>Kirim laporan</span>
                             </button>
                         </div>
