@@ -51,25 +51,28 @@
                 </p>
             </div>
 
-            <!-- Zig-zag 3-Card Flow Container (Hyper-Minimal & Clean) -->
-            <div class="relative mt-7 sm:mt-9 pb-2 lg:pb-8">
+            <!-- Zig-zag 3-Card Flow Container (Aesthetic & Compact) -->
+            <div class="relative mt-8 sm:mt-10 pb-2 lg:pb-8">
                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6 xl:gap-8">
 
                     <!-- STEP 01 (Kiri Atas) -->
                     <div class="relative flex flex-col justify-start lg:translate-y-0">
-                        <article class="group relative mx-auto w-full max-w-[320px] rounded-2xl border border-blue-100/70 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:shadow-blue-900/5 sm:p-6">
-                            <div class="text-base font-bold tracking-tight text-slate-900 sm:text-lg">
-                                Step <span class="font-normal text-slate-400">01</span>
+                        <article class="group relative mx-auto w-full max-w-[320px] rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-900/5 sm:p-6">
+                            <!-- Header Row: Step on the left, Icon on the right (Sejajar) -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="font-mono text-xs font-bold uppercase tracking-widest text-slate-400">STEP</span>
+                                    <span class="font-mono text-2xl font-black text-navy-950">01</span>
+                                </div>
+                                <div class="flex size-10 items-center justify-center rounded-xl bg-blue-700 text-white shadow-sm shadow-blue-700/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-700/30">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                </div>
                             </div>
 
-                            <div class="mt-3.5 flex size-9.5 items-center justify-center rounded-full bg-blue-700 text-white shadow-xs transition-transform duration-300 group-hover:scale-105">
-                                <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                </svg>
-                            </div>
-
-                            <h3 class="mt-3.5 text-base font-bold text-navy-950">Ceritakan kejadian</h3>
+                            <h3 class="mt-4 text-base font-bold text-navy-950 transition-colors group-hover:text-blue-700">Ceritakan kejadian</h3>
                             <p class="mt-1.5 text-xs leading-relaxed text-slate-500">
                                 Jelaskan kejadian yang Anda temukan, pilih jenis laporan, waktu kejadian, dan tuliskan kronologi yang Anda ketahui.
                             </p>
@@ -100,19 +103,22 @@
 
                     <!-- STEP 02 (Tengah, Sedikit Lebih Rendah) -->
                     <div class="relative flex flex-col justify-start lg:translate-y-5">
-                        <article class="group relative mx-auto w-full max-w-[320px] rounded-2xl border border-blue-100/70 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:shadow-blue-900/5 sm:p-6">
-                            <div class="text-base font-bold tracking-tight text-slate-900 sm:text-lg">
-                                Step <span class="font-normal text-slate-400">02</span>
+                        <article class="group relative mx-auto w-full max-w-[320px] rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-900/5 sm:p-6">
+                            <!-- Header Row: Step on the left, Icon on the right (Sejajar) -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="font-mono text-xs font-bold uppercase tracking-widest text-slate-400">STEP</span>
+                                    <span class="font-mono text-2xl font-black text-navy-950">02</span>
+                                </div>
+                                <div class="flex size-10 items-center justify-center rounded-xl bg-blue-700 text-white shadow-sm shadow-blue-700/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-700/30">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                </div>
                             </div>
 
-                            <div class="mt-3.5 flex size-9.5 items-center justify-center rounded-full bg-blue-700 text-white shadow-xs transition-transform duration-300 group-hover:scale-105">
-                                <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                    <circle cx="12" cy="10" r="3"></circle>
-                                </svg>
-                            </div>
-
-                            <h3 class="mt-3.5 text-base font-bold text-navy-950">Tandai lokasinya</h3>
+                            <h3 class="mt-4 text-base font-bold text-navy-950 transition-colors group-hover:text-blue-700">Tandai lokasinya</h3>
                             <p class="mt-1.5 text-xs leading-relaxed text-slate-500">
                                 Tentukan lokasi kejadian menggunakan posisi perangkat, pencarian wilayah, atau pilih titik secara langsung pada peta.
                             </p>
@@ -143,19 +149,22 @@
 
                     <!-- STEP 03 (Kanan Bawah) -->
                     <div class="relative flex flex-col justify-start lg:translate-y-10">
-                        <article class="group relative mx-auto w-full max-w-[320px] rounded-2xl border border-blue-100/70 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:shadow-blue-900/5 sm:p-6">
-                            <div class="text-base font-bold tracking-tight text-slate-900 sm:text-lg">
-                                Step <span class="font-normal text-slate-400">03</span>
+                        <article class="group relative mx-auto w-full max-w-[320px] rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-900/5 sm:p-6">
+                            <!-- Header Row: Step on the left, Icon on the right (Sejajar) -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="font-mono text-xs font-bold uppercase tracking-widest text-slate-400">STEP</span>
+                                    <span class="font-mono text-2xl font-black text-navy-950">03</span>
+                                </div>
+                                <div class="flex size-10 items-center justify-center rounded-xl bg-blue-700 text-white shadow-sm shadow-blue-700/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-700/30">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </div>
                             </div>
 
-                            <div class="mt-3.5 flex size-9.5 items-center justify-center rounded-full bg-blue-700 text-white shadow-xs transition-transform duration-300 group-hover:scale-105">
-                                <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                            </div>
-
-                            <h3 class="mt-3.5 text-base font-bold text-navy-950">Simpan kode akses</h3>
+                            <h3 class="mt-4 text-base font-bold text-navy-950 transition-colors group-hover:text-blue-700">Simpan kode akses</h3>
                             <p class="mt-1.5 text-xs leading-relaxed text-slate-500">
                                 Dapatkan kode laporan dan PIN rahasia untuk melihat status serta memantau perkembangan laporan Anda.
                             </p>
