@@ -16,6 +16,7 @@ use App\Models\Kupva;
 use App\Models\Report;
 use App\Models\ReportEvidence;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -25,6 +26,18 @@ use Tests\TestCase;
 class AdminDashboardTest extends TestCase
 {
     use LazilyRefreshDatabase;
+
+    public function test_admin_panel_uses_spa_navigation_without_intercepting_file_responses(): void
+    {
+        $panel = Filament::getPanel('admin');
+
+        $this->assertTrue($panel->hasSpaMode());
+        $this->assertFalse($panel->hasSpaPrefetching());
+        $this->assertSame([
+            url('/admin/ekspor/*'),
+            url('/admin/lampiran-laporan/*'),
+        ], $panel->getSpaUrlExceptions());
+    }
 
     public function test_guest_sees_the_branded_admin_login_page(): void
     {
@@ -136,7 +149,7 @@ class AdminDashboardTest extends TestCase
             'body' => 'Lokasi berada dekat pasar.',
         ]);
         Report::factory()->count(2)->create();
-        Kupva::factory()->create();
+        $kupva = Kupva::factory()->create();
 
         $this->actingAs($admin)
             ->get('/admin')
@@ -172,6 +185,8 @@ class AdminDashboardTest extends TestCase
             ->assertOk()
             ->assertSee($report->public_code)
             ->assertSee('Status penanganan')
+            ->assertSee('Kembali ke daftar')
+            ->assertSee(ReportResource::getUrl('index'), false)
             ->assertSee('Update progres')
             ->assertSee('Tambah dokumentasi')
             ->assertSee('Sudah dikerjakan')
@@ -192,6 +207,12 @@ class AdminDashboardTest extends TestCase
             ->assertOk()
             ->assertSee('Data KUPVA')
             ->assertSee('Kelola referensi penyelenggara KUPVA dan pantau status izin operasionalnya.');
+
+        $this->actingAs($admin)
+            ->get(KupvaResource::getUrl('view', ['record' => $kupva]))
+            ->assertOk()
+            ->assertSee('Kembali ke daftar KUPVA')
+            ->assertSee(KupvaResource::getUrl('index'), false);
     }
 
     public function test_regular_admin_cannot_manage_other_admin_accounts(): void
