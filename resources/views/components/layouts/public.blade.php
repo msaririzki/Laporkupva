@@ -20,7 +20,7 @@
             </a>
 
             <nav class="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
-                <a class="nav-link" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
+                <a class="nav-link" href="{{ route('home') }}#cara-kerja">Cara kerja</a>
                 <a class="nav-link" href="{{ route('home') }}#keamanan">Keamanan</a>
                 <a class="nav-link" href="{{ route('guide') }}">Panduan</a>
                 <a class="nav-link" href="{{ route('reports.track') }}">Cek status</a>
