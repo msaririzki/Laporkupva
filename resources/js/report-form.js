@@ -133,11 +133,183 @@ const optimizeEvidenceImage = async (file) => {
     };
 };
 
+/**
+ * Accessible Custom Dropdown Enhancement
+ * Conforms to strict rules:
+ * - Trigger remains WHITE background (never turns gold when selected).
+ * - Only the highlighted/active option in the open menu has #FFF4D6 / #F2B84B background.
+ * - Text remains Navy #0B2342.
+ * - Two-way sync with native select.
+ */
+const initCustomSelect = (selectElement) => {
+    if (!selectElement || selectElement.dataset.customized === 'true') return;
+    selectElement.dataset.customized = 'true';
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'tambora-select-wrap relative';
+
+    // Create trigger button - ALWAYS WHITE, never gold
+    const trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'tambora-select-trigger';
+    trigger.setAttribute('aria-haspopup', 'listbox');
+    trigger.setAttribute('aria-expanded', 'false');
+
+    const triggerText = document.createElement('span');
+    triggerText.className = 'truncate text-left text-sm';
+    
+    const triggerIcon = document.createElement('span');
+    triggerIcon.className = 'tambora-select-arrow shrink-0 ml-2';
+    triggerIcon.innerHTML = `<svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>`;
+
+    trigger.append(triggerText, triggerIcon);
+
+    // Create menu listbox
+    const menu = document.createElement('div');
+    menu.className = 'tambora-select-menu hidden';
+    menu.setAttribute('role', 'listbox');
+    menu.setAttribute('tabindex', '-1');
+
+    const updateTriggerText = () => {
+        const selectedOption = selectElement.selectedOptions[0];
+        if (selectedOption && selectedOption.value) {
+            triggerText.textContent = selectedOption.textContent;
+            triggerText.className = 'truncate text-left text-sm text-[#0B2342] font-medium';
+        } else {
+            triggerText.textContent = selectElement.options[0]?.textContent || 'Pilih opsi';
+            triggerText.className = 'truncate text-left text-sm text-[#64748B]';
+        }
+    };
+
+    const renderOptions = () => {
+        menu.replaceChildren();
+        const currentValue = selectElement.value;
+
+        [...selectElement.options].forEach((option, index) => {
+            const item = document.createElement('div');
+            item.className = 'tambora-select-option';
+            item.setAttribute('role', 'option');
+            item.setAttribute('tabindex', '0');
+            item.dataset.value = option.value;
+            item.textContent = option.textContent;
+
+            const isSelected = option.value === currentValue || (!currentValue && index === 0);
+            if (isSelected && option.value) {
+                item.classList.add('is-selected');
+                item.setAttribute('aria-selected', 'true');
+            } else {
+                item.setAttribute('aria-selected', 'false');
+            }
+
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectElement.value = option.value;
+                selectElement.dispatchEvent(new Event('change', { bubbles: true }));
+                selectElement.dispatchEvent(new Event('input', { bubbles: true }));
+                closeMenu();
+                trigger.focus();
+            });
+
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    (item.nextElementSibling || menu.firstElementChild)?.focus();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    (item.previousElementSibling || menu.lastElementChild)?.focus();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeMenu();
+                    trigger.focus();
+                }
+            });
+
+            menu.appendChild(item);
+        });
+    };
+
+    const openMenu = () => {
+        renderOptions();
+        menu.classList.remove('hidden');
+        trigger.setAttribute('aria-expanded', 'true');
+        const selectedItem = menu.querySelector('.is-selected') || menu.firstElementChild;
+        selectedItem?.focus();
+    };
+
+    const closeMenu = () => {
+        menu.classList.add('hidden');
+        trigger.setAttribute('aria-expanded', 'false');
+    };
+
+    trigger.addEventListener('click', () => {
+        const isOpen = !menu.classList.contains('hidden');
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openMenu();
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!wrapper.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    selectElement.addEventListener('change', () => {
+        updateTriggerText();
+        renderOptions();
+        trigger.classList.remove('is-invalid');
+    });
+
+    // Intercept native value setter so programmatic updates (e.g. reverse geocode) auto-sync
+    const originalValueDesc = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value');
+    if (originalValueDesc && originalValueDesc.set) {
+        Object.defineProperty(selectElement, 'value', {
+            get() {
+                return originalValueDesc.get.call(this);
+            },
+            set(newValue) {
+                originalValueDesc.set.call(this, newValue);
+                updateTriggerText();
+                renderOptions();
+            },
+            configurable: true,
+        });
+    }
+
+    // Insert wrapper and hide native select off-screen while retaining form validation
+    selectElement.parentNode.insertBefore(wrapper, selectElement);
+    wrapper.appendChild(selectElement);
+    wrapper.appendChild(trigger);
+    wrapper.appendChild(menu);
+
+    selectElement.style.position = 'absolute';
+    selectElement.style.opacity = '0';
+    selectElement.style.pointerEvents = 'none';
+    selectElement.style.height = '1px';
+    selectElement.style.width = '1px';
+    selectElement.style.clip = 'rect(0, 0, 0, 0)';
+
+    updateTriggerText();
+};
+
 const form = document.querySelector('#report-form');
 
 if (form) {
     const steps = [...form.querySelectorAll('.form-step')];
     const progressItems = [...document.querySelectorAll('[data-progress]')];
+    const progressTrack = document.querySelector('#stepper-progress-fill');
     const previousButton = document.querySelector('#previous-step');
     const nextButton = document.querySelector('#next-step');
     const submitButton = document.querySelector('#submit-report');
@@ -160,6 +332,9 @@ if (form) {
     let marker;
     let reverseTimer;
     let isOptimizingEvidence = false;
+
+    // Enhance dropdowns
+    document.querySelectorAll('#incident_type, #regency').forEach(initCustomSelect);
 
     const firstInvalidStep = form.querySelector('.is-invalid, .form-error')?.closest('.form-step');
     if (firstInvalidStep) {
@@ -197,11 +372,16 @@ if (form) {
             }
         });
 
+        if (progressTrack) {
+            const pct = ((currentStep - 1) / (steps.length - 1)) * 100;
+            progressTrack.style.width = `${pct}%`;
+        }
+
         previousButton.classList.toggle('hidden', currentStep === 1);
         nextButton.classList.toggle('hidden', currentStep === steps.length);
         submitButton.classList.toggle('hidden', currentStep !== steps.length);
         stepStatus.textContent = `Langkah ${currentStep} dari ${steps.length}`;
-        nextButton.textContent = currentStep === 1 ? 'Lanjut ke lokasi →' : 'Periksa →';
+        nextButton.textContent = currentStep === 1 ? 'Lanjut ke lokasi →' : 'Lanjut ke bukti →';
 
         if (currentStep === 2) {
             initializeMap();
@@ -213,7 +393,7 @@ if (form) {
         }
 
         if (shouldScroll) {
-            window.scrollTo({ top: form.offsetTop - 120, behavior: 'smooth' });
+            window.scrollTo({ top: form.offsetTop - 100, behavior: 'smooth' });
         }
     };
 
@@ -239,7 +419,7 @@ if (form) {
 
     const showMapMessage = (message, isError = false) => {
         mapMessage.textContent = message;
-        mapMessage.className = `mt-3 text-sm font-semibold ${isError ? 'text-red-600' : 'text-teal-700'}`;
+        mapMessage.className = `mt-3 text-xs sm:text-sm font-semibold ${isError ? 'text-[#DC4C4C]' : 'text-[#2E9B68]'}`;
     };
 
     const withinNtb = (lat, lng) => lat >= -11 && lat <= -8 && lng >= 115 && lng <= 120;
@@ -266,7 +446,7 @@ if (form) {
         }
 
         map.panTo([lat, lng]);
-        showMapMessage('Titik lokasi sudah dipilih. Anda masih dapat menggeser penandanya.');
+        showMapMessage('Titik lokasi sudah dipilih. Anda dapat menggeser penanda jika perlu.');
         return true;
     };
 
@@ -303,7 +483,9 @@ if (form) {
         document.querySelector('#district').value = address.suburb || address.district || address.municipality || '';
         document.querySelector('#village').value = address.village || address.hamlet || address.neighbourhood || '';
         document.querySelector('#address').value = [address.road, address.house_number, address.shop].filter(Boolean).join(' ') || result.display_name?.split(',').slice(0, 2).join(',') || '';
-        locationDetailsSummary.firstChild.textContent = 'Petunjuk alamat terisi otomatis ';
+        if (locationDetailsSummary?.firstChild) {
+            locationDetailsSummary.firstChild.textContent = 'Petunjuk alamat terisi otomatis ';
+        }
     };
 
     const reverseGeocode = async (lat, lng) => {
@@ -311,7 +493,7 @@ if (form) {
             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lng)}&addressdetails=1&accept-language=id`);
             if (response.ok) fillAddress(await response.json());
         } catch {
-            showMapMessage('Titik sudah dipilih. Detail alamat dapat Anda isi secara manual.');
+            showMapMessage('Titik sudah dipilih. Detail alamat dapat Anda lengkapi secara manual.');
         }
     };
 
@@ -347,7 +529,6 @@ if (form) {
             updatePoint(lat, lng, accuracy.value);
             map.setView([lat, lng], 16);
         }
-
     };
 
     const searchLocation = async () => {
@@ -362,7 +543,7 @@ if (form) {
         const button = document.querySelector('#search-location');
         button.disabled = true;
         button.textContent = 'Mencari…';
-        showMapMessage('Sedang mencari lokasi di wilayah NTB…');
+        showMapMessage('Sedang mencari lokasi di NTB…');
 
         try {
             const params = new URLSearchParams({
@@ -391,7 +572,7 @@ if (form) {
                 fillAddress(result);
             }
         } catch {
-            showMapMessage('Pencarian sedang tidak tersedia. Anda tetap dapat memilih titik langsung pada peta.', true);
+            showMapMessage('Pencarian sedang tidak tersedia. Anda dapat langsung memilih titik pada peta.', true);
         } finally {
             button.disabled = false;
             button.textContent = 'Cari';
@@ -465,7 +646,7 @@ if (form) {
     const showEvidenceMessage = (message, isError = false) => {
         fileList.replaceChildren();
         const notice = document.createElement('p');
-        notice.className = isError ? 'form-error' : 'rounded-xl bg-blue-50 px-4 py-3 text-xs font-semibold text-blue-800';
+        notice.className = isError ? 'form-error' : 'rounded-xl bg-blue-50/70 border border-blue-100 px-4 py-3 text-xs font-semibold text-[#0B2342]';
         notice.textContent = message;
         fileList.append(notice);
     };
@@ -475,25 +656,25 @@ if (form) {
 
         files.forEach(({ file, originalSize, optimized }) => {
             const item = document.createElement('div');
-            item.className = 'flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs';
+            item.className = 'flex items-center justify-between gap-3 rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 text-xs shadow-sm';
 
             const details = document.createElement('span');
             details.className = 'min-w-0';
 
             const name = document.createElement('strong');
-            name.className = 'block truncate font-semibold text-slate-700';
+            name.className = 'block truncate font-semibold text-[#0B2342]';
             name.textContent = file.name;
 
             const result = document.createElement('span');
-            result.className = optimized ? 'mt-1 block text-teal-700' : 'mt-1 block text-slate-400';
+            result.className = optimized ? 'mt-1 block text-[#2E9B68] font-medium' : 'mt-1 block text-[#64748B]';
             result.textContent = optimized
-                ? `${formatFileSize(originalSize)} → ${formatFileSize(file.size)} · sudah diperkecil`
-                : `${formatFileSize(file.size)} · tetap asli`;
+                ? `${formatFileSize(originalSize)} → ${formatFileSize(file.size)} · dioptimalkan`
+                : `${formatFileSize(file.size)} · ukuran asli`;
 
             const badge = document.createElement('span');
             badge.className = optimized
-                ? 'shrink-0 rounded-full bg-teal-50 px-2.5 py-1 font-bold text-teal-700'
-                : 'shrink-0 rounded-full bg-slate-100 px-2.5 py-1 font-bold text-slate-500';
+                ? 'shrink-0 rounded-lg bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-[#2E9B68]'
+                : 'shrink-0 rounded-lg bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-[#64748B]';
             badge.textContent = optimized ? 'Siap kirim' : 'Asli';
 
             details.append(name, result);
@@ -519,7 +700,7 @@ if (form) {
         isOptimizingEvidence = true;
         evidence.disabled = true;
         submitButton.disabled = true;
-        submitButton.textContent = 'Menyiapkan foto…';
+        submitButton.textContent = 'Menyiapkan berkas…';
         uploadZone.setAttribute('aria-busy', 'true');
 
         const optimizedFiles = [];
@@ -538,7 +719,7 @@ if (form) {
             const oversizedFile = optimizedFiles.find(({ file }) => file.size > MAX_EVIDENCE_FILE_BYTES);
             if (oversizedFile) {
                 evidence.value = '';
-                showEvidenceMessage(`${oversizedFile.file.name} masih melebihi batas 10 MB. Pilih berkas yang lebih kecil.`, true);
+                showEvidenceMessage(`${oversizedFile.file.name} melebihi batas 10 MB. Pilih berkas yang lebih kecil.`, true);
                 return;
             }
 
@@ -565,7 +746,7 @@ if (form) {
     form.addEventListener('submit', (event) => {
         if (isOptimizingEvidence) {
             event.preventDefault();
-            showEvidenceMessage('Tunggu sebentar, foto sedang diperkecil sebelum dikirim.');
+            showEvidenceMessage('Tunggu sebentar, berkas sedang disiapkan sebelum dikirim.');
             return;
         }
 

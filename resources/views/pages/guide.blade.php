@@ -1,54 +1,68 @@
 <x-layouts.public title="Panduan dan FAQ">
-    <section class="bg-navy-950 py-14 text-white sm:py-18">
+    <!-- Hero Section -->
+    <section class="bg-[#0B2342] py-12 text-white sm:py-16">
         <div class="public-container max-w-4xl">
-            <p class="eyebrow-dark">Panduan masyarakat</p>
-            <h1 class="mt-5 text-3xl font-extrabold tracking-tight sm:text-4xl">Melapor dengan aman dan mudah</h1>
-            <p class="mt-4 max-w-2xl text-base leading-7 text-blue-100/75">Ikuti panduan singkat ini untuk mengirim informasi tentang tempat penukaran valuta asing atau money changer di wilayah NTB.</p>
+            <div class="eyebrow-dark">
+                <span class="size-2 rounded-full bg-[#F2B84B]"></span>
+                <span>Panduan Masyarakat</span>
+            </div>
+            <h1 class="mt-3.5 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl text-white">Melapor dengan aman dan mudah</h1>
+            <p class="mt-2.5 max-w-2xl text-xs sm:text-sm leading-6 text-slate-300">Ikuti panduan ringkas ini untuk menyampaikan informasi dugaan pelanggaran tempat penukaran valuta asing atau money changer di Nusa Tenggara Barat.</p>
         </div>
     </section>
 
-    <section class="py-12 sm:py-16">
+    <!-- Main Content -->
+    <section class="py-10 sm:py-16 bg-[#F7F9FC]">
         <div class="public-container max-w-4xl">
+            <!-- 3 Steps Grid -->
             <div class="grid gap-5 md:grid-cols-3">
                 @foreach ([
-                    ['01', 'Siapkan informasi', 'Catat jenis kejadian, waktu, nama tempat jika diketahui, dan petunjuk lokasi.'],
-                    ['02', 'Tentukan titik', 'Gunakan GPS saat masih di lokasi atau cari wilayah lalu geser pin ke titik kejadian.'],
-                    ['03', 'Simpan akses', 'Setelah mengirim, simpan kode laporan dan PIN karena keduanya tidak dapat dipulihkan.'],
+                    ['01', 'Siapkan informasi', 'Catat jenis dugaan kejadian, perkiraan waktu, nama atau ciri fisik tempat, serta patokan wilayah yang Anda amati.'],
+                    ['02', 'Tentukan titik', 'Gunakan fitur GPS saat berada di tempat kejadian atau cari nama wilayah lalu sesuaikan penanda pada peta interaktif NTB.'],
+                    ['03', 'Simpan akses', 'Setelah laporan terkirim, catat Kode Laporan dan PIN 6 digit karena akses tidak dapat dipulihkan demi privasi.'],
                 ] as [$number, $title, $description])
                     <article class="info-card">
                         <span class="step-number">{{ $number }}</span>
-                        <h2 class="mt-6 font-extrabold text-navy-950">{{ $title }}</h2>
-                        <p class="mt-3 text-sm leading-6 text-slate-600">{{ $description }}</p>
+                        <h2 class="mt-4 text-sm sm:text-base font-bold text-[#0B2342]">{{ $title }}</h2>
+                        <p class="mt-2 text-xs leading-5 text-[#64748B]">{{ $description }}</p>
                     </article>
                 @endforeach
             </div>
 
-            <div class="mt-12 rounded-3xl border border-slate-200 bg-white p-6 shadow-soft sm:p-9">
-                <p class="eyebrow">Pertanyaan umum</p>
-                <h2 class="mt-3 text-2xl font-extrabold text-navy-950">Hal yang perlu Anda ketahui</h2>
-                <div class="mt-7 divide-y divide-slate-200">
+            <!-- FAQ Accordion -->
+            <div class="mt-10 rounded-2xl sm:rounded-3xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-9">
+                <p class="eyebrow">Pertanyaan Umum</p>
+                <h2 class="mt-1.5 text-xl font-bold text-[#0B2342] sm:text-2xl">Hal yang sering ditanyakan masyarakat</h2>
+                
+                <div class="mt-6 divide-y divide-[#E2E8F0]">
                     @foreach ([
-                        ['Apakah saya harus membuat akun?', 'Tidak. TAMBORA tidak meminta akun, nama, NIK, email, atau nomor telepon pelapor.'],
-                        ['Bagaimana jika saya sudah meninggalkan lokasi?', 'Cari nama wilayah, jalan, desa, kecamatan, atau patokan. Setelah hasil tampil, geser pin ke lokasi kejadian yang paling akurat.'],
-                        ['Apakah foto wajib dilampirkan?', 'Tidak. Bukti foto atau PDF bersifat opsional. Utamakan keselamatan dan jangan mengambil bukti jika situasinya berisiko.'],
-                        ['Bagaimana saya mengetahui perkembangan laporan?', 'Buka halaman Cek status, lalu masukkan kode laporan dan PIN enam digit yang ditampilkan setelah laporan dikirim.'],
-                        ['Bisakah saya menjawab pertanyaan petugas?', 'Bisa. Setelah membuka progres laporan, gunakan kotak komunikasi anonim untuk membaca dan membalas pesan petugas.'],
-                        ['Apa yang harus dilakukan jika kode atau PIN hilang?', 'Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan kode dan PIN di tempat yang aman.'],
+                        ['Apakah saya harus membuat akun?', 'Tidak. TAMBORA tidak meminta pendaftaran akun, nama, NIK, alamat email, atau nomor telepon pelapor. Semua laporan bersifat 100% anonim.'],
+                        ['Bagaimana jika saya sudah meninggalkan lokasi?', 'Anda tetap bisa melapor dengan mencari nama wilayah, nama jalan, desa, kecamatan, atau patokan umum di formulir lokasi, lalu menggeser penanda peta ke titik kejadian.'],
+                        ['Apakah foto wajib dilampirkan?', 'Tidak. Bukti foto atau dokumen bersifat opsional. Utamakan keselamatan Anda dan jangan mengambil foto jika kondisi lapangan berisiko.'],
+                        ['Bagaimana saya mengetahui perkembangan laporan?', 'Buka menu Cek status laporan, lalu masukkan kode laporan dan PIN enam digit yang Anda peroleh saat mengirim laporan.'],
+                        ['Bisakah saya menjawab pertanyaan petugas?', 'Bisa. Setelah membuka halaman status laporan, gunakan fitur komunikasi anonim untuk membaca dan mengirimkan pesan tambahan ke petugas tanpa membuka identitas Anda.'],
+                        ['Apa yang harus dilakukan jika kode atau PIN hilang?', 'Akses pelacakan tidak dapat dipulihkan kembali karena sistem kami tidak menyimpan kontak atau identitas pribadi pelapor. Mohon simpan kode dan PIN di tempat yang aman.'],
                     ] as [$question, $answer])
-                        <details class="group py-5 first:pt-0 last:pb-0">
-                            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 font-bold text-slate-800">
-                                {{ $question }}
-                                <span class="grid size-8 shrink-0 place-items-center rounded-full bg-slate-100 text-lg text-blue-700 transition group-open:rotate-45">+</span>
+                        <details class="group py-4 first:pt-0 last:pb-0">
+                            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-xs sm:text-sm text-[#0B2342] hover:text-[#2563EB] transition-colors">
+                                <span>{{ $question }}</span>
+                                <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-slate-100 text-sm text-[#0B2342] transition-transform duration-200 group-open:rotate-45">+</span>
                             </summary>
-                            <p class="mt-3 pr-12 text-sm leading-6 text-slate-600">{{ $answer }}</p>
+                            <p class="mt-2.5 pr-8 text-xs sm:text-sm leading-6 text-[#64748B]">{{ $answer }}</p>
                         </details>
                     @endforeach
                 </div>
             </div>
 
-            <div class="mt-8 flex flex-col items-center justify-between gap-5 rounded-3xl bg-blue-700 p-7 text-center text-white sm:flex-row sm:text-left">
-                <div><h2 class="text-xl font-extrabold">Siap menyampaikan laporan?</h2><p class="mt-1 text-sm text-blue-100">Pastikan informasi disampaikan dengan itikad baik.</p></div>
-                <a href="{{ route('reports.create') }}" class="button-light shrink-0">Buat laporan anonim</a>
+            <!-- Bottom CTA Banner -->
+            <div class="mt-8 flex flex-col items-center justify-between gap-5 rounded-2xl bg-[#0B2342] p-6 text-center text-white sm:flex-row sm:text-left">
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold">Siap menyampaikan laporan?</h2>
+                    <p class="mt-1 text-xs text-slate-300">Partisipasi Anda sangat berarti bagi pengawasan KUPVA di Nusa Tenggara Barat.</p>
+                </div>
+                <a href="{{ route('reports.create') }}" class="button-primary shrink-0 text-xs sm:text-sm">
+                    <span>Buat laporan anonim →</span>
+                </a>
             </div>
         </div>
     </section>

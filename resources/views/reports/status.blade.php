@@ -10,96 +10,213 @@
             'lainnya' => 'Lainnya terkait penukaran valuta asing',
         ];
     @endphp
-    <section class="bg-navy-950 py-10 text-white sm:py-14">
+
+    <!-- Header Banner (Compact, Dignified) -->
+    <section class="bg-[#0B2342] py-5 sm:py-6 text-white">
         <div class="public-container max-w-4xl">
-            <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-                <div><p class="text-xs font-bold uppercase tracking-[.18em] text-blue-200">Progres laporan</p><h1 class="mt-2 font-mono text-2xl font-extrabold tracking-wide sm:text-3xl">{{ $report->public_code }}</h1></div>
-                <div class="rounded-xl bg-white/10 px-4 py-3"><span class="block text-xs text-blue-200">Status saat ini</span><strong class="mt-1 block text-sm">{{ $report->status->label() }}</strong></div>
+            <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+                <div>
+                    <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#F2B84B]">
+                        <span class="size-1.5 rounded-full bg-[#F2B84B]"></span>
+                        <span>Progres Laporan Pengaduan</span>
+                    </div>
+                    <h1 class="mt-1 font-mono text-xl sm:text-2xl font-bold tracking-wide text-white">{{ $report->public_code }}</h1>
+                </div>
+                <div class="inline-flex items-center gap-2 self-start rounded-lg border border-white/15 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm sm:self-auto">
+                    <span class="text-xs text-slate-300">Status:</span>
+                    <strong class="text-xs sm:text-sm font-semibold text-[#F2B84B]">{{ $report->status->label() }}</strong>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="py-10 sm:py-14">
-        <div class="public-container grid max-w-4xl gap-6 lg:grid-cols-[1fr_280px]">
-            <div class="space-y-6">
-                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8">
-                    <h2 class="text-xl font-extrabold text-navy-950">Tahapan penanganan</h2>
-                    <p class="mt-2 text-sm text-slate-500">Perkembangan terbaru akan tampil pada linimasa ini.</p>
-                    <div class="mt-8">
+    <!-- Main Content Area -->
+    <section class="py-6 sm:py-8 bg-[#F7F9FC]">
+        <div class="public-container grid max-w-4xl gap-5 lg:grid-cols-[1fr_280px]">
+            <div class="space-y-5">
+                @php
+                    $macroStep = match (true) {
+                        $report->status === \App\Enums\ReportStatus::Completed => 3,
+                        $currentIndex >= 1 => 2,
+                        default => 1,
+                    };
+                @endphp
+
+                <!-- Simplified Status Overview Card -->
+                <div class="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-xs">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-[#2563EB]">Ringkasan Status</p>
+                    <div class="mt-3 grid gap-3 sm:grid-cols-3">
+                        <!-- Step 1: Laporan diterima -->
+                        <div class="rounded-lg border p-3 transition-all {{ $macroStep >= 1 ? ($macroStep === 1 ? 'border-blue-200 bg-[#EAF2FF]/60' : 'border-slate-200 bg-slate-50/70') : 'border-slate-200 bg-slate-50/40 opacity-60' }}">
+                            <div class="flex items-center gap-2">
+                                <span class="grid size-5 place-items-center rounded-full text-[11px] font-bold {{ $macroStep > 1 ? 'bg-[#168A7A] text-white' : ($macroStep === 1 ? 'bg-[#2563EB] text-white' : 'bg-slate-200 text-slate-600') }}">
+                                    @if ($macroStep > 1) ✓ @else 1 @endif
+                                </span>
+                                <strong class="text-xs font-semibold text-[#0B2342]">Laporan diterima</strong>
+                            </div>
+                            <p class="mt-1 text-[11px] leading-relaxed text-[#64748B]">Laporan telah diterima petugas.</p>
+                        </div>
+
+                        <!-- Step 2: Sedang diproses -->
+                        <div class="rounded-lg border p-3 transition-all {{ $macroStep >= 2 ? ($macroStep === 2 ? 'border-amber-200 bg-[#FFF4D6]/60' : 'border-slate-200 bg-slate-50/70') : 'border-slate-200 bg-slate-50/40 opacity-60' }}">
+                            <div class="flex items-center gap-2">
+                                <span class="grid size-5 place-items-center rounded-full text-[11px] font-bold {{ $macroStep > 2 ? 'bg-[#168A7A] text-white' : ($macroStep === 2 ? 'bg-[#F2B84B] text-[#0B2342]' : 'bg-slate-200 text-slate-600') }}">
+                                    @if ($macroStep > 2) ✓ @else 2 @endif
+                                </span>
+                                <strong class="text-xs font-semibold text-[#0B2342]">Sedang diproses</strong>
+                            </div>
+                            <p class="mt-1 text-[11px] leading-relaxed text-[#64748B]">Laporan dalam penanganan.</p>
+                        </div>
+
+                        <!-- Step 3: Selesai -->
+                        <div class="rounded-lg border p-3 transition-all {{ $macroStep >= 3 ? 'border-teal-200 bg-[#E8F6F3]/60' : 'border-slate-200 bg-slate-50/40 opacity-60' }}">
+                            <div class="flex items-center gap-2">
+                                <span class="grid size-5 place-items-center rounded-full text-[11px] font-bold {{ $macroStep >= 3 ? 'bg-[#168A7A] text-white' : 'bg-slate-200 text-slate-600' }}">
+                                    @if ($macroStep >= 3) ✓ @else 3 @endif
+                                </span>
+                                <strong class="text-xs font-semibold text-[#0B2342]">Selesai</strong>
+                            </div>
+                            <p class="mt-1 text-[11px] leading-relaxed text-[#64748B]">Proses telah selesai.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Timeline Card -->
+                <div class="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
+                    <div class="border-b border-slate-100 pb-3.5">
+                        <h2 class="text-base sm:text-lg font-semibold text-[#0B2342]">Tahapan penanganan</h2>
+                        <p class="mt-0.5 text-xs text-[#64748B]">Perkembangan terbaru akan diperbarui secara langsung pada linimasa ini.</p>
+                    </div>
+
+                    <div class="mt-5">
                         @foreach ($statuses as $index => $status)
                             @php
                                 $history = $report->statusHistories->where('to_status', $status)->last();
-                                $isDone = $index <= $currentIndex;
+                                $isDone = $index < $currentIndex;
                                 $isCurrent = $index === $currentIndex;
                             @endphp
                             <div class="status-item {{ $isDone ? 'is-done' : '' }} {{ $isCurrent ? 'is-current' : '' }}">
-                                <div class="status-marker">@if ($isDone)<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/></svg>@else<span>{{ $index + 1 }}</span>@endif</div>
+                                <div class="status-marker">
+                                    @if ($isDone)
+                                        <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
+                                        </svg>
+                                    @else
+                                        <span>{{ $index + 1 }}</span>
+                                    @endif
+                                </div>
                                 <div class="status-content">
-                                    <div class="flex flex-wrap items-center justify-between gap-2"><h3>{{ $status->label() }}</h3>@if ($history)<time>{{ $history->created_at->translatedFormat('d M Y, H:i') }}</time>@endif</div>
-                                    <p>{{ $history?->public_note ?: $status->description() }}</p>
-                                    @if ($isCurrent)<span class="current-badge">Tahap sekarang</span>@endif
+                                    <div class="flex flex-wrap items-center justify-between gap-2">
+                                        <h3 class="text-xs sm:text-sm font-semibold text-[#0B2342]">{{ $status->label() }}</h3>
+                                        @if ($history)
+                                            <time class="text-[11px] text-[#64748B]">{{ $history->created_at->translatedFormat('d M Y, H:i') }}</time>
+                                        @endif
+                                    </div>
+                                    <p class="mt-0.5 text-xs text-[#64748B] leading-relaxed">{{ $history?->public_note ?: $status->description() }}</p>
+                                    @if ($isCurrent)
+                                        <span class="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-300/80 bg-[#FFF4D6] px-2.5 py-0.5 text-[11px] font-semibold text-[#B45309]">
+                                            <span class="size-1.5 rounded-full bg-[#B45309]"></span>
+                                            Tahap sekarang
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
 
-                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8">
-                    <div class="flex items-start gap-3">
-                        <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-700">
-                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 4.142-4.03 7.5-9 7.5a10.23 10.23 0 0 1-3.876-.74L3 20.25l1.61-4.293A6.97 6.97 0 0 1 3 12c0-4.142 4.03-7.5 9-7.5s9 3.358 9 7.5Z"/></svg>
-                        </span>
-                        <div>
-                            <h2 class="text-xl font-extrabold text-navy-950">Komunikasi dengan petugas</h2>
-                            <p class="mt-1 text-sm leading-6 text-slate-500">Sampaikan informasi tambahan tanpa membuka identitas Anda.</p>
-                        </div>
+                <!-- Anonymous Communication Card -->
+                <div class="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
+                    <div class="border-b border-slate-100 pb-3.5">
+                        <h2 class="text-base sm:text-lg font-semibold text-[#0B2342]">Komunikasi dengan petugas</h2>
+                        <p class="mt-0.5 text-xs text-[#64748B]">Sampaikan informasi tambahan tanpa membuka identitas pribadi Anda.</p>
                     </div>
 
                     @if (session('message_sent'))
-                        <div class="mt-5 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-sm font-semibold text-teal-800">{{ session('message_sent') }}</div>
+                        <div class="mt-3.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-[#2E9B68]">
+                            {{ session('message_sent') }}
+                        </div>
                     @endif
 
-                    <div class="mt-6 space-y-3">
+                    <!-- Message history thread -->
+                    <div class="mt-4 space-y-3">
                         @forelse ($report->anonymousMessages as $message)
                             <article class="flex {{ $message->sender_type === 'reporter' ? 'justify-end' : 'justify-start' }}">
-                                <div class="max-w-[88%] rounded-2xl px-4 py-3 {{ $message->sender_type === 'reporter' ? 'rounded-br-md bg-blue-700 text-white' : 'rounded-bl-md bg-slate-100 text-slate-700' }}">
-                                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-bold uppercase tracking-wider {{ $message->sender_type === 'reporter' ? 'text-blue-100' : 'text-slate-400' }}">
-                                        <span>{{ $message->sender_type === 'reporter' ? 'Anda' : 'Petugas TAMBORA' }}</span>
+                                <div class="max-w-[85%] rounded-xl px-3.5 py-2.5 {{ $message->sender_type === 'reporter' ? 'rounded-br-sm bg-[#2563EB] text-white' : 'rounded-bl-sm bg-slate-100 text-[#0B2342]' }}">
+                                    <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-wider {{ $message->sender_type === 'reporter' ? 'text-blue-100' : 'text-[#64748B]' }}">
+                                        <span>{{ $message->sender_type === 'reporter' ? 'Anda (Pelapor)' : 'Petugas TAMBORA' }}</span>
+                                        <span>·</span>
                                         <time>{{ $message->created_at->translatedFormat('d M Y, H:i') }}</time>
                                     </div>
-                                    <p class="mt-2 whitespace-pre-line text-sm leading-6">{{ $message->body }}</p>
+                                    <p class="mt-1 whitespace-pre-line text-xs sm:text-sm leading-relaxed">{{ $message->body }}</p>
                                 </div>
                             </article>
                         @empty
-                            <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-5 py-6 text-center text-sm leading-6 text-slate-500">Belum ada percakapan. Anda dapat mengirim informasi tambahan kapan saja.</div>
+                            <div class="rounded-lg border border-dashed border-slate-200 bg-slate-50/50 px-4 py-5 text-center text-xs text-[#64748B] leading-relaxed">
+                                Belum ada percakapan. Jika ada informasi atau klarifikasi baru yang ingin disampaikan, kirimkan melalui formulir di bawah ini.
+                            </div>
                         @endforelse
                     </div>
 
-                    <form method="POST" action="{{ route('reports.messages.store', ['report' => $report->public_code]) }}" class="mt-6 border-t border-slate-200 pt-6">
+                    <!-- Reply Form -->
+                    <form method="POST" action="{{ route('reports.messages.store', ['report' => $report->public_code]) }}" class="mt-4 border-t border-slate-100 pt-4">
                         @csrf
-                        <label for="body" class="form-label">Pesan tambahan <span>*</span></label>
-                        <textarea id="body" name="body" rows="4" maxlength="2000" required class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" placeholder="Tulis informasi tambahan atau balasan untuk petugas...">{{ old('body') }}</textarea>
+                        <label for="body" class="form-label text-xs sm:text-sm font-semibold">Pesan tambahan <span>*</span></label>
+                        <textarea
+                            id="body"
+                            name="body"
+                            rows="3"
+                            maxlength="2000"
+                            required
+                            class="form-control text-xs sm:text-sm {{ $errors->has('body') ? 'is-invalid' : '' }}"
+                            placeholder="Tuliskan informasi tambahan atau klarifikasi untuk petugas..."
+                        >{{ old('body') }}</textarea>
                         @error('body')<p class="form-error">{{ $message }}</p>@enderror
-                        <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                            <p class="text-xs leading-5 text-slate-500">Jangan menuliskan nama, NIK, nomor telepon, atau identitas pribadi lainnya.</p>
-                            <button type="submit" class="button-primary shrink-0">Kirim pesan</button>
+                        
+                        <div class="mt-3 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+                            <p class="text-[11px] leading-relaxed text-[#64748B]">Jangan menuliskan nama, NIK, nomor telepon, atau data sensitif pelapor.</p>
+                            <button type="submit" class="button-primary shrink-0 text-xs sm:text-sm font-semibold py-2">
+                                <span>Kirim pesan</span>
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <aside class="space-y-5">
-                <div class="rounded-2xl border border-slate-200 bg-white p-5">
-                    <h2 class="text-sm font-extrabold text-navy-950">Ringkasan laporan</h2>
-                    <dl class="mt-4 grid gap-4 text-sm">
-                        <div><dt class="text-xs text-slate-400">Jenis laporan</dt><dd class="mt-1 font-semibold text-slate-700">{{ $incidentTypes[$report->incident_type] ?? 'Laporan masyarakat' }}</dd></div>
-                        <div><dt class="text-xs text-slate-400">Tanggal kejadian</dt><dd class="mt-1 font-semibold text-slate-700">{{ $report->incident_date->translatedFormat('d F Y') }}</dd></div>
-                        <div><dt class="text-xs text-slate-400">Wilayah</dt><dd class="mt-1 font-semibold text-slate-700">{{ $report->regency }}</dd></div>
-                        <div><dt class="text-xs text-slate-400">Dikirim</dt><dd class="mt-1 font-semibold text-slate-700">{{ $report->created_at->translatedFormat('d M Y, H:i') }}</dd></div>
+            <!-- Sidebar Info -->
+            <aside class="space-y-4">
+                <!-- Summary Card -->
+                <div class="rounded-xl border border-slate-200/80 bg-white p-4 shadow-xs">
+                    <h2 class="text-xs font-semibold uppercase tracking-wider text-[#0B2342]">Ringkasan laporan</h2>
+                    <dl class="mt-3 grid gap-3 text-xs sm:text-sm">
+                        <div>
+                            <dt class="text-[11px] text-[#64748B]">Jenis laporan</dt>
+                            <dd class="mt-0.5 font-medium text-[#0B2342]">{{ $incidentTypes[$report->incident_type] ?? 'Laporan masyarakat' }}</dd>
+                        </div>
+                        <div>
+                            <dt class="text-[11px] text-[#64748B]">Tanggal kejadian</dt>
+                            <dd class="mt-0.5 font-medium text-[#0B2342]">{{ $report->incident_date->translatedFormat('d F Y') }}</dd>
+                        </div>
+                        <div>
+                            <dt class="text-[11px] text-[#64748B]">Wilayah</dt>
+                            <dd class="mt-0.5 font-medium text-[#0B2342]">{{ $report->regency }}</dd>
+                        </div>
+                        <div>
+                            <dt class="text-[11px] text-[#64748B]">Waktu dikirim</dt>
+                            <dd class="mt-0.5 font-medium text-[#0B2342]">{{ $report->created_at->translatedFormat('d M Y, H:i') }}</dd>
+                        </div>
                     </dl>
                 </div>
-                <div class="rounded-2xl bg-blue-50 p-5 text-sm leading-6 text-blue-900"><strong class="block">Jaga kode dan PIN</strong><span class="mt-1 block text-blue-800">Jangan membagikan akses pelacakan kepada pihak lain.</span></div>
-                <a href="{{ route('reports.track') }}" class="button-secondary w-full">Cek laporan lain</a>
+
+                <!-- Security Box -->
+                <div class="rounded-xl bg-blue-50/60 border border-blue-100 p-3.5 text-xs leading-relaxed text-[#0B2342]">
+                    <strong class="block font-semibold">Jaga kerahasiaan PIN</strong>
+                    <span class="mt-0.5 block text-[11px] text-[#64748B]">Hanya pihak yang memegang kode dan PIN yang dapat mengakses linimasa ini. Jangan membagikan akses kepada siapapun.</span>
+                </div>
+
+                <a href="{{ route('reports.track') }}" class="button-secondary w-full text-xs font-medium py-2">
+                    <span>Cek laporan lain</span>
+                </a>
             </aside>
         </div>
     </section>

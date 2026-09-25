@@ -1,6 +1,23 @@
 import './map-layers';
 import './report-form';
 
+// Mobile navigation toggle
+const mobileMenuButton = document.querySelector('#mobile-menu-button');
+const mobileNav = document.querySelector('#mobile-nav');
+const mobileOpenIcon = document.querySelector('#mobile-menu-open-icon');
+const mobileCloseIcon = document.querySelector('#mobile-menu-close-icon');
+
+if (mobileMenuButton && mobileNav) {
+    mobileMenuButton.addEventListener('click', () => {
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
+        mobileNav.classList.toggle('hidden', isExpanded);
+        mobileOpenIcon?.classList.toggle('hidden', !isExpanded);
+        mobileCloseIcon?.classList.toggle('hidden', isExpanded);
+    });
+}
+
+// Copy access code & PIN
 const copyButton = document.querySelector('[data-copy-access]');
 
 copyButton?.addEventListener('click', async () => {
@@ -22,6 +39,7 @@ copyButton?.addEventListener('click', async () => {
     }
 });
 
+// Format tracking code input
 const trackingCode = document.querySelector('#tracking_code');
 
 trackingCode?.addEventListener('input', (event) => {
