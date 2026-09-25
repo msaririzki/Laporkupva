@@ -282,7 +282,7 @@
             <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10">
                 <!-- Left Column: 3 Security Cards (Grip Minimalis di Kiri) -->
                 <div class="order-2 lg:order-1 lg:col-span-6 flex flex-col gap-2.5 sm:gap-3.5">
-                    <!-- Card 1: Tanpa identitas pribadi -->
+                    <!-- Card 1: 100% Anonim & Tanpa Akun -->
                     <article class="group relative flex items-start gap-3 sm:gap-4 rounded-2xl border border-slate-100 bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
                         <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                             <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -293,18 +293,18 @@
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between gap-2">
-                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950 truncate">
-                                    Tanpa identitas pribadi
+                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950">
+                                    100% Anonim & Tanpa Akun
                                 </h3>
                                 <span class="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-black text-blue-700">01</span>
                             </div>
                             <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
-                                Formulir tidak meminta nama, NIK, nomor telepon, ataupun email. Alamat IP tidak disimpan dan metadata EXIF foto dihapus otomatis.
+                                Tidak perlu daftar akun. Kami sama sekali tidak meminta nama, KTP, nomor HP, maupun email Anda.
                             </p>
                         </div>
                     </article>
 
-                    <!-- Card 2: Akses privat kode & PIN -->
+                    <!-- Card 2: Pantau Pakai Kode Rahasia -->
                     <article class="group relative flex items-start gap-3 sm:gap-4 rounded-2xl border border-slate-100 bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
                         <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                             <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -316,18 +316,18 @@
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between gap-2">
-                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950 truncate">
-                                    Akses privat kode & PIN
+                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950">
+                                    Pantau Pakai Kode Rahasia
                                 </h3>
                                 <span class="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-black text-blue-700">02</span>
                             </div>
                             <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
-                                Status perkembangan laporan hanya dapat dibuka dengan Kode Laporan unik dan PIN rahasia yang tersimpan secara terenkripsi (hash).
+                                Anda mendapatkan kode acak dan PIN untuk mengecek status tindak lanjut tanpa meninggalkan jejak.
                             </p>
                         </div>
                     </article>
 
-                    <!-- Card 3: Bukti terbatas & terproteksi -->
+                    <!-- Card 3: Hanya Dibaca Petugas Resmi -->
                     <article class="group relative flex items-start gap-3 sm:gap-4 rounded-2xl border border-slate-100 bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
                         <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                             <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -339,13 +339,13 @@
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between gap-2">
-                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950 truncate">
-                                    Bukti terbatas & aman
+                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950">
+                                    Hanya Dibaca Petugas Resmi
                                 </h3>
                                 <span class="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-black text-blue-700">03</span>
                             </div>
                             <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
-                                Lampiran dan kronologi hanya dapat diakses oleh petugas pemeriksa Bank Indonesia yang berwenang, tidak pernah dipublikasikan ke umum.
+                                Laporan Anda dijaga ketat dan hanya dibuka oleh petugas resmi Bank Indonesia, tidak disebar ke umum.
                             </p>
                         </div>
                     </article>
