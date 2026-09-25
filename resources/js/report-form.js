@@ -668,7 +668,7 @@ if (form) {
             const result = document.createElement('span');
             result.className = optimized ? 'mt-1 block text-[#2E9B68] font-medium' : 'mt-1 block text-[#64748B]';
             result.textContent = optimized
-                ? `${formatFileSize(originalSize)} → ${formatFileSize(file.size)} · dioptimalkan`
+                ? `${formatFileSize(originalSize)} menjadi ${formatFileSize(file.size)} · dioptimalkan`
                 : `${formatFileSize(file.size)} · ukuran asli`;
 
             const badge = document.createElement('span');

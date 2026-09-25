@@ -71,11 +71,11 @@
         @apply relative rounded-lg px-3.5 py-2 text-sm font-semibold text-[#64748B] transition-all duration-200 hover:bg-slate-100/80 hover:text-[#0B2342];
     }
     .nav-link.is-active {
-        @apply text-[#2563EB] bg-blue-50/80 font-bold;
+        @apply text-[#2563EB] font-bold bg-transparent;
     }
     .nav-link.is-active::after {
         content: '';
-        @apply absolute -bottom-1 left-3 right-3 h-[2.5px] bg-[#2563EB] rounded-full;
+        @apply absolute -bottom-0.5 left-3 right-3 h-[2px] bg-[#2563EB] rounded-full;
     }
 
     /* Buttons */

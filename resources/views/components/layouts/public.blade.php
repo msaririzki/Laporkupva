@@ -44,12 +44,9 @@
             <div class="flex items-center gap-2 sm:gap-2.5">
                 <a
                     href="{{ route('reports.create') }}"
-                    class="button-primary hidden sm:inline-flex text-xs sm:text-sm px-3.5 sm:px-4.5 py-2 {{ request()->routeIs('reports.create*') ? 'bg-[#1D4ED8]' : '' }}"
+                    class="button-primary hidden sm:inline-flex text-xs sm:text-sm px-4 sm:px-5 py-2.5 font-semibold {{ request()->routeIs('reports.create*') ? 'bg-[#1D4ED8]' : '' }}"
                 >
                     <span>Buat laporan</span>
-                    <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/>
-                    </svg>
                 </a>
 
                 <a
@@ -96,36 +93,41 @@
     <!-- Main Content Slot -->
     <main id="main-content" class="flex-1">{{ $slot }}</main>
 
-    <!-- Public Service Footer -->
-    <footer class="mt-auto border-t border-[#E2E8F0] bg-white">
-        <div class="public-container grid gap-8 py-10 sm:py-12 md:grid-cols-[1.5fr_1fr_1fr]">
-            <div>
-                <div class="flex flex-wrap items-center gap-4 sm:gap-5">
-                    <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-10 sm:h-12 w-auto object-contain" width="720" height="316" loading="lazy">
-                    <span class="h-8 w-px bg-[#E2E8F0]" aria-hidden="true"></span>
-                    <img src="{{ asset('images/brand/bank-indonesia-full.webp') }}" alt="Bank Indonesia" class="h-7 sm:h-8 w-auto object-contain" width="880" height="158" loading="lazy">
+    <!-- Public Service Footer (Compact, Secondary, Perfectly Balanced) -->
+    <footer class="mt-16 sm:mt-20 border-t border-[#E2E8F0] bg-white">
+        <div class="public-container py-8 sm:py-10">
+            <div class="grid gap-6 sm:gap-8 md:grid-cols-12 md:items-start">
+                <!-- Brand & Short Description -->
+                <div class="md:col-span-6 lg:col-span-5">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-7 sm:h-8 w-auto object-contain" width="720" height="316" loading="lazy">
+                        <span class="h-5 w-px bg-[#E2E8F0]" aria-hidden="true"></span>
+                        <img src="{{ asset('images/brand/bank-indonesia-full.webp') }}" alt="Bank Indonesia" class="h-6 sm:h-7 w-auto object-contain" width="880" height="158" loading="lazy">
+                    </div>
+                    <p class="mt-2.5 max-w-sm text-xs sm:text-[13px] leading-relaxed text-[#64748B]">Kanal pengawasan dan partisipasi masyarakat untuk pengawasan kegiatan usaha penukaran valuta asing (KUPVA) di wilayah Provinsi Nusa Tenggara Barat.</p>
                 </div>
-                <p class="mt-4 max-w-md text-xs sm:text-sm leading-6 text-[#64748B]">Kanal pengawasan dan partisipasi masyarakat untuk pengawasan kegiatan usaha penukaran valuta asing (KUPVA) di wilayah Provinsi Nusa Tenggara Barat.</p>
-                <div class="mt-4 flex items-center gap-2 text-xs font-semibold text-[#0B2342]">
-                    <span class="size-2 rounded-full bg-[#2E9B68]"></span>
-                    <span>Layanan Pengaduan Resmi & Terlindungi</span>
+
+                <!-- Service Links (Compact) -->
+                <div class="md:col-span-3 lg:col-span-3">
+                    <p class="text-xs font-bold uppercase tracking-wider text-[#0B2342]">Menu Layanan</p>
+                    <nav class="mt-2.5 grid grid-cols-2 sm:grid-cols-1 gap-1.5 sm:gap-2 text-xs sm:text-[13px]" aria-label="Menu layanan footer">
+                        <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('reports.create') }}">Buat laporan anonim</a>
+                        <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('reports.track') }}">Cek status laporan</a>
+                        <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('guide') }}">Panduan penggunaan</a>
+                        <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('privacy') }}">Informasi privasi</a>
+                    </nav>
                 </div>
-            </div>
-            <div>
-                <p class="footer-heading">Menu Layanan</p>
-                <div class="mt-3.5 grid gap-2.5">
-                    <a class="footer-link" href="{{ route('reports.create') }}">Buat laporan anonim</a>
-                    <a class="footer-link" href="{{ route('reports.track') }}">Cek status laporan</a>
-                    <a class="footer-link" href="{{ route('guide') }}">Panduan penggunaan</a>
-                    <a class="footer-link" href="{{ route('privacy') }}">Informasi privasi</a>
+
+                <!-- Notice / Disclaimer -->
+                <div class="md:col-span-3 lg:col-span-4">
+                    <p class="text-xs font-bold uppercase tracking-wider text-[#0B2342]">Pemberitahuan</p>
+                    <p class="mt-2.5 text-xs sm:text-[13px] leading-relaxed text-[#64748B]">Kanal ini dikelola untuk pengawasan KUPVA. Untuk keadaan darurat, segera hubungi pihak kepolisian atau aparat penegak hukum terdekat.</p>
                 </div>
-            </div>
-            <div>
-                <p class="footer-heading">Pemberitahuan</p>
-                <p class="mt-3.5 text-xs sm:text-sm leading-6 text-[#64748B]">Kanal ini dikelola untuk pengawasan KUPVA. Untuk tindak pidana umum atau keadaan darurat yang sedang berlangsung, segera hubungi pihak kepolisian atau aparat penegak hukum terdekat.</p>
             </div>
         </div>
-        <div class="border-t border-[#E2E8F0] py-4 text-center text-xs text-[#64748B]">
+
+        <!-- Copyright Line -->
+        <div class="border-t border-[#E2E8F0] py-3.5 text-center text-[11px] sm:text-xs text-slate-400">
             © {{ date('Y') }} Kantor Perwakilan Bank Indonesia Provinsi NTB · TAMBORA (laporkupva.id)
         </div>
     </footer>

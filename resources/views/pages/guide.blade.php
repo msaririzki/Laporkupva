@@ -61,7 +61,7 @@
                     <p class="mt-1 text-xs text-slate-300">Partisipasi Anda sangat berarti bagi pengawasan KUPVA di Nusa Tenggara Barat.</p>
                 </div>
                 <a href="{{ route('reports.create') }}" class="button-primary shrink-0 text-xs sm:text-sm">
-                    <span>Buat laporan anonim →</span>
+                    <span>Buat laporan anonim</span>
                 </a>
             </div>
         </div>
