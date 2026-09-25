@@ -280,11 +280,11 @@
 
         <div class="public-container">
             <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10">
-                <!-- Left Column: 3 Security Cards (Grip Minimalis di Kiri) -->
-                <div class="order-2 lg:order-1 lg:col-span-6 flex flex-col gap-2.5 sm:gap-3.5">
+                <!-- Left Column: 3 Security Cards (Grip Minimalis & Tidak Terlalu Panjang) -->
+                <div class="order-2 lg:order-1 lg:col-span-6 flex flex-col gap-2.5 sm:gap-3 w-full max-w-[420px] mx-auto lg:mx-0">
                     <!-- Card 1: 100% Anonim & Tanpa Akun -->
-                    <article class="group relative flex items-start gap-3 sm:gap-4 rounded-2xl border border-slate-100 bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
-                        <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                    <article class="group relative flex items-start gap-3 rounded-2xl border border-slate-100 bg-white/95 p-3 sm:p-3.5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
+                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                             <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                                 <circle cx="9" cy="7" r="4" />
@@ -305,8 +305,8 @@
                     </article>
 
                     <!-- Card 2: Pantau Pakai Kode Rahasia -->
-                    <article class="group relative flex items-start gap-3 sm:gap-4 rounded-2xl border border-slate-100 bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
-                        <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                    <article class="group relative flex items-start gap-3 rounded-2xl border border-slate-100 bg-white/95 p-3 sm:p-3.5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
+                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                             <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="7.5" cy="15.5" r="4.5" />
                                 <path d="m21 3-9.5 9.5" />
@@ -328,8 +328,8 @@
                     </article>
 
                     <!-- Card 3: Hanya Dibaca Petugas Resmi -->
-                    <article class="group relative flex items-start gap-3 sm:gap-4 rounded-2xl border border-slate-100 bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
-                        <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                    <article class="group relative flex items-start gap-3 rounded-2xl border border-slate-100 bg-white/95 p-3 sm:p-3.5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
+                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                             <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                                 <polyline points="14 2 14 8 20 8" />
