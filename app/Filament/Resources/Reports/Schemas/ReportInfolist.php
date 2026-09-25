@@ -84,6 +84,14 @@ class ReportInfolist
                             Section::make('Lokasi terlapor')
                                 ->description('Pastikan titik peta sesuai dengan petunjuk lokasi sebelum koordinasi lapangan.')
                                 ->icon(Heroicon::OutlinedMapPin)
+                                ->headerActions([
+                                    Action::make('openGoogleMaps')
+                                        ->label('Buka di Google Maps')
+                                        ->icon(Heroicon::OutlinedArrowTopRightOnSquare)
+                                        ->button()
+                                        ->url(fn (Report $record): string => self::googleMapsDirectionsUrl($record))
+                                        ->openUrlInNewTab(),
+                                ])
                                 ->columns([
                                     'default' => 1,
                                     'sm' => 2,
@@ -273,6 +281,15 @@ class ReportInfolist
         }
 
         return number_format($bytes / 1024, 1, ',', '.').' KB';
+    }
+
+    private static function googleMapsDirectionsUrl(Report $report): string
+    {
+        return 'https://www.google.com/maps/dir/?'.http_build_query([
+            'api' => 1,
+            'destination' => "{$report->latitude},{$report->longitude}",
+            'travelmode' => 'driving',
+        ], encoding_type: PHP_QUERY_RFC3986);
     }
 
     private static function previewAction(string $name): Action

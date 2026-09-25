@@ -121,7 +121,11 @@ class AdminDashboardTest extends TestCase
     public function test_admin_can_open_dashboard_and_report_list(): void
     {
         $admin = User::factory()->create(['role' => UserRole::Admin]);
-        $report = Report::factory()->create(['status' => ReportStatus::Received]);
+        $report = Report::factory()->create([
+            'status' => ReportStatus::Received,
+            'latitude' => -8.5830695,
+            'longitude' => 116.1161800,
+        ]);
         ReportEvidence::factory()->create([
             'report_id' => $report->getKey(),
             'original_name' => 'bukti-lokasi.jpg',
@@ -174,7 +178,9 @@ class AdminDashboardTest extends TestCase
             ->assertSee('data-progress-state="current"', false)
             ->assertSee('aria-current="step"', false)
             ->assertSee('bukti-lokasi.jpg')
-            ->assertSee('Lokasi berada dekat pasar.');
+            ->assertSee('Lokasi berada dekat pasar.')
+            ->assertSee('Buka di Google Maps')
+            ->assertSee('https://www.google.com/maps/dir/?api=1&destination=-8.5830695%2C116.1161800&travelmode=driving');
 
         $this->actingAs($admin)
             ->get(KupvaResource::getUrl('index'))
