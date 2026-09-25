@@ -31,8 +31,8 @@
     </section>
 
     <!-- Main Content Area -->
-    <section class="py-6 sm:py-8 lg:py-10 bg-[#F7F9FC]">
-        <div class="public-container grid max-w-4xl lg:max-w-5xl gap-6 lg:grid-cols-[1fr_320px]">
+    <section class="py-6 sm:py-8 lg:py-10 bg-[#F4F7FB]">
+        <div class="public-container grid max-w-[1240px] gap-6 lg:grid-cols-[1fr_340px]">
             <div class="space-y-5">
                 @php
                     $macroStep = match (true) {

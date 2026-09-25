@@ -1,13 +1,23 @@
 <x-layouts.public title="Panduan dan FAQ">
     <!-- Hero Section -->
-    <section class="bg-[#0B2342] py-12 text-white sm:py-16">
-        <div class="public-container max-w-4xl">
-            <div class="eyebrow-dark">
-                <span class="size-2 rounded-full bg-[#F2B84B]"></span>
+    <section class="relative bg-gradient-to-br from-[#0B2342] to-[#123B69] py-8 sm:py-9 lg:py-10 text-white overflow-hidden border-b border-[#163B68]/60">
+        <!-- Subtle background decorative radial glow -->
+        <div class="pointer-events-none absolute -top-24 right-1/4 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" aria-hidden="true"></div>
+
+        <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10 text-center">
+            <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-[#F2B84B] backdrop-blur-xs">
+                <span class="size-1.5 rounded-full bg-[#F2B84B]" aria-hidden="true"></span>
                 <span>Panduan Masyarakat</span>
             </div>
-            <h1 class="mt-3.5 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl text-white">Melapor dengan aman dan mudah</h1>
-            <p class="mt-2.5 max-w-2xl text-xs sm:text-sm leading-6 text-slate-300">Ikuti panduan ringkas ini untuk menyampaikan informasi dugaan pelanggaran tempat penukaran valuta asing atau money changer di Nusa Tenggara Barat.</p>
+
+            <h1 class="mt-3.5 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-[32px] lg:leading-tight">
+                Melapor dengan aman dan mudah
+            </h1>
+
+            <p class="mt-2.5 max-w-[760px] mx-auto text-xs sm:text-sm lg:text-[15px] leading-relaxed text-slate-300">
+                Ikuti panduan ringkas ini untuk menyampaikan informasi dugaan pelanggaran tempat penukaran valuta asing atau money changer di Nusa Tenggara Barat.
+            </p>
         </div>
     </section>
 

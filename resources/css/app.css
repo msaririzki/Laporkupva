@@ -11,28 +11,29 @@
 
     /* TAMBORA Official Refined Palette */
     --color-navy-primary: #0B2342;
-    --color-navy-secondary: #163B68;
+    --color-navy-secondary: #123B69;
+    --color-blue-primary: #1D4ED8;
+    --color-blue-bright: #2563EB;
     --color-blue-action: #2563EB;
-    --color-page-bg: #F7F9FC;
+    --color-gold-accent: #F2B84B;
+    --color-page-bg: #F4F7FB;
     --color-surface: #FFFFFF;
-    --color-border-subtle: #E2E8F0;
-    --color-text-primary: #0B2342;
+    --color-blue-soft: #EEF4FF;
+    --color-gold-soft: #FFF7E3;
+    --color-text-primary: #0F172A;
     --color-text-secondary: #64748B;
-    --color-gold-active: #F2B84B;
-    --color-gold-light: #FFF4D6;
-    --color-teal-accent: #0D9488;
-    --color-teal-light: #CCFBF1;
-    --color-status-success: #2E9B68;
-    --color-status-error: #DC4C4C;
-    --color-status-warning: #D99000;
+    --color-border: #D9E2EC;
+    --color-border-subtle: #E2E8F0;
+    --color-status-success: #168A7A;
+    --color-status-danger: #DC2626;
 
-    /* Semantic Aliases for compatibility */
+    /* Compatibility aliases */
     --color-navy-950: #0B2342;
     --color-navy-900: #0B2342;
-    --color-navy-800: #163B68;
+    --color-navy-800: #123B69;
     --color-teal-300: #F2B84B;
-    --color-teal-500: #2E9B68;
-    --color-teal-600: #268055;
+    --color-teal-500: #168A7A;
+    --color-teal-600: #0F766E;
     --shadow-soft: 0 4px 20px -2px rgba(11, 35, 66, 0.05);
     --shadow-card: 0 1px 3px 0 rgba(11, 35, 66, 0.04), 0 1px 2px -1px rgba(11, 35, 66, 0.04);
 }
@@ -40,13 +41,13 @@
 @layer base {
     html {
         scroll-behavior: smooth;
-        background-color: #F7F9FC;
-        color: #0B2342;
+        background-color: #F4F7FB;
+        color: #0F172A;
     }
     body {
         font-family: var(--font-sans);
-        background-color: #F7F9FC;
-        color: #0B2342;
+        background-color: #F4F7FB;
+        color: #0F172A;
         font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     }
     button, a, input, select, textarea {
@@ -60,7 +61,7 @@
 
 @layer components {
     .public-container {
-        @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+        @apply mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-10;
     }
     .admin-access-link {
         @apply grid size-10 shrink-0 place-items-center rounded-xl border border-slate-200 bg-white text-slate-500 shadow-xs transition-all duration-200 hover:border-blue-200 hover:bg-blue-50 hover:text-[#2563EB];
@@ -80,22 +81,22 @@
 
     /* Buttons */
     .button-primary, .button-secondary, .button-light, .button-ghost-light, .button-danger {
-        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex min-h-11 sm:min-h-12 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60;
     }
     .button-primary {
-        @apply bg-[#2563EB] text-white shadow-sm hover:bg-[#1D4ED8] hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:bg-[#1E40AF];
+        @apply bg-[#2563EB] text-white shadow-2xs hover:bg-[#1D4ED8] hover:shadow-xs active:bg-[#1E40AF];
     }
     .button-secondary {
-        @apply border border-[#E2E8F0] bg-white text-[#0B2342] shadow-sm hover:border-slate-300 hover:bg-[#F8FAFC] hover:shadow-sm;
+        @apply border border-[#CBD5E1] bg-white text-[#0F172A] shadow-2xs hover:border-slate-300 hover:bg-[#F8FAFC];
     }
     .button-light {
-        @apply bg-white text-[#0B2342] shadow-sm hover:bg-slate-100 hover:text-[#2563EB];
+        @apply bg-white text-[#0F172A] shadow-2xs hover:bg-slate-100 hover:text-[#2563EB];
     }
     .button-ghost-light {
         @apply border border-white/20 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:border-white/30;
     }
     .button-danger {
-        @apply bg-[#DC4C4C] text-white shadow-sm hover:bg-[#B91C1C];
+        @apply bg-[#DC2626] text-white shadow-2xs hover:bg-[#B91C1C];
     }
 
     /* Typography badges */
@@ -109,7 +110,7 @@
         @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-white/90;
     }
     .section-title {
-        @apply mt-2 text-2xl font-bold tracking-tight text-[#0B2342] sm:text-3xl lg:text-4xl;
+        @apply mt-2 text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl lg:text-4xl;
     }
     .section-lead {
         @apply mt-3 text-base leading-7 text-[#64748B];
@@ -127,7 +128,7 @@
         @apply flex gap-4 rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm transition-all hover:border-slate-300;
     }
     .security-card h3 {
-        @apply text-sm font-bold text-[#0B2342];
+        @apply text-sm font-bold text-[#0F172A];
     }
     .security-card p {
         @apply mt-1 text-xs leading-5 text-[#64748B];
@@ -137,7 +138,7 @@
     }
 
     .footer-heading {
-        @apply text-xs font-bold uppercase tracking-wider text-[#0B2342];
+        @apply text-xs font-bold uppercase tracking-wider text-[#0F172A];
     }
     .footer-link {
         @apply text-sm text-[#64748B] transition-colors hover:text-[#2563EB];
@@ -145,16 +146,16 @@
 
     /* Form Controls: Inputs, Textarea, Select */
     .form-heading h2 {
-        @apply text-xl font-bold tracking-tight text-[#0B2342] sm:text-2xl;
+        @apply text-xl font-bold tracking-tight text-[#0F172A] sm:text-2xl;
     }
     .form-heading p {
         @apply mt-1 text-xs text-[#64748B] sm:text-sm leading-relaxed;
     }
     .form-label {
-        @apply mb-1.5 block text-sm sm:text-[15px] font-semibold text-[#0B2342];
+        @apply mb-1.5 block text-sm sm:text-[15px] font-semibold text-[#0F172A];
     }
     .form-label > span:not(.optional) {
-        @apply text-[#DC4C4C] font-semibold;
+        @apply text-[#DC2626] font-semibold;
     }
     .form-label .optional {
         @apply ml-1 text-xs font-normal text-[#64748B];
@@ -164,16 +165,16 @@
     }
 
     .form-control {
-        @apply block h-12 w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm sm:text-base text-[#0B2342] transition-colors duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15;
+        @apply block h-11 sm:h-12 w-full rounded-xl border border-[#CBD5E1] bg-white px-4 py-2.5 text-sm sm:text-[15px] text-[#0F172A] transition-colors duration-200 placeholder:text-slate-400 hover:border-slate-400 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15;
     }
     textarea.form-control {
         @apply h-auto min-h-32 py-3;
     }
     .form-control.is-invalid {
-        @apply border-[#DC4C4C] bg-red-50/20 focus:border-[#DC4C4C] focus:ring-[#DC4C4C]/20;
+        @apply border-[#DC2626] bg-red-50/20 focus:border-[#DC2626] focus:ring-[#DC2626]/20;
     }
     .form-error {
-        @apply mt-1.5 text-xs font-medium text-[#DC4C4C];
+        @apply mt-1.5 text-xs font-medium text-[#DC2626];
     }
 
     /* Native select styling - ALWAYS white background, never gold */
@@ -201,20 +202,16 @@
     }
 
     /* =========================================================
-       Stepper: Kejadian -> Lokasi -> Bukti
-       RULE:
-       - Circle 1, 2, 3 indicates active state (#F2B84B)
-       - Numbers 1, 2, 3 are ALWAYS visible
-       - Text (title & caption) is PLAIN TEXT with NO pill, NO box, NO background!
+       Stepper: 01 ───── 02 ───── 03 (Modern Institutional)
        ========================================================= */
     .stepper-nav {
-        @apply relative mb-8 w-full max-w-lg mx-auto px-2;
+        @apply relative mb-6 sm:mb-8 w-full max-w-lg lg:max-w-xl mx-auto px-2;
     }
     .stepper-list {
         @apply relative grid grid-cols-3 items-start;
     }
     .stepper-track {
-        @apply absolute left-[16.666%] right-[16.666%] top-5 sm:top-[22px] -translate-y-1/2 h-[1.5px] bg-slate-200 z-0;
+        @apply absolute left-[16.666%] right-[16.666%] top-4 sm:top-5 -translate-y-1/2 h-[2px] bg-[#E2E8F0] z-0;
     }
     .stepper-track-progress {
         @apply h-full bg-[#0B2342] transition-all duration-300 ease-out;
@@ -225,32 +222,32 @@
     }
 
     .stepper-circle, .form-progress-number {
-        @apply size-10 sm:size-11 rounded-full border border-slate-200 bg-white text-slate-400 flex items-center justify-center font-bold text-sm sm:text-base transition-all duration-200 shrink-0;
+        @apply size-9 sm:size-10 rounded-full border border-[#CBD5E1] bg-white text-[#64748B] flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-200 shrink-0 shadow-2xs;
     }
 
     .stepper-title, .stepper-label {
-        @apply mt-2 text-xs sm:text-sm font-semibold tracking-tight text-slate-500 transition-colors duration-200 bg-transparent border-0 p-0 leading-tight text-center;
+        @apply mt-2 text-[11px] sm:text-xs font-bold tracking-wider uppercase text-[#64748B] transition-colors duration-200 bg-transparent border-0 p-0 leading-tight text-center;
     }
     .stepper-desc {
-        @apply mt-0.5 text-[11px] sm:text-xs leading-tight text-slate-400 font-normal transition-colors duration-200 bg-transparent border-0 p-0 block text-center max-w-[110px] sm:max-w-none;
+        @apply mt-0.5 text-[10px] sm:text-[11px] leading-tight text-slate-400 font-normal transition-colors duration-200 bg-transparent border-0 p-0 block text-center max-w-[110px] sm:max-w-none;
     }
 
     /* Active step */
     .stepper-step.is-active .stepper-circle,
     .form-progress.is-active .form-progress-number {
-        @apply bg-[#F2B84B] border-2 border-[#F2B84B] text-[#0B2342];
-        box-shadow: 0 0 0 4px rgba(242, 184, 75, 0.22);
+        @apply bg-[#0B2342] border-2 border-[#0B2342] text-white shadow-xs;
+        box-shadow: 0 0 0 4px rgba(242, 184, 75, 0.35);
     }
     .stepper-step.is-active .stepper-title,
     .stepper-step.is-active .stepper-label,
     .form-progress.is-active strong {
-        @apply text-[#0B2342] font-bold;
+        @apply text-[#0F172A] font-bold;
         background: transparent !important;
         border: none !important;
     }
     .stepper-step.is-active .stepper-desc,
     .form-progress.is-active small {
-        @apply text-[#0B2342]/80 font-medium;
+        @apply text-[#0F172A]/70 font-medium;
         background: transparent !important;
         border: none !important;
     }
@@ -262,7 +259,7 @@
     }
     .stepper-step.is-complete .stepper-title,
     .stepper-step.is-complete .stepper-label {
-        @apply text-[#0B2342] font-semibold;
+        @apply text-[#0F172A] font-semibold;
         background: transparent !important;
         border: none !important;
     }
@@ -277,10 +274,10 @@
         @apply relative w-full;
     }
     .tambora-select-trigger {
-        @apply flex min-h-12 w-full items-center justify-between rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 text-sm text-[#0B2342] transition-all duration-200 hover:border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 cursor-pointer shadow-sm;
+        @apply flex min-h-11 sm:min-h-12 w-full items-center justify-between rounded-xl border border-[#CBD5E1] bg-white px-4 py-2.5 text-sm text-[#0F172A] transition-all duration-200 hover:border-slate-400 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 cursor-pointer shadow-2xs;
     }
     .tambora-select-trigger.is-invalid {
-        @apply border-[#DC4C4C] ring-2 ring-[#DC4C4C]/20;
+        @apply border-[#DC2626] ring-2 ring-[#DC2626]/20;
     }
     .tambora-select-arrow {
         @apply size-4 text-[#64748B] transition-transform duration-200;
@@ -292,9 +289,9 @@
         @apply absolute left-0 right-0 top-full z-50 mt-1 max-h-60 overflow-auto rounded-xl border border-[#E2E8F0] bg-white p-1.5 shadow-lg;
     }
     .tambora-select-option {
-        @apply flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium text-[#0B2342] transition-colors duration-150 cursor-pointer hover:bg-[#FFF4D6] hover:text-[#0B2342];
+        @apply flex items-center justify-between rounded-lg px-3.5 py-2 text-sm font-medium text-[#0F172A] transition-colors duration-150 cursor-pointer hover:bg-[#FFF4D6] hover:text-[#0B2342];
     }
-    /* Active option: #FFF4D6 or #F2B84B accent */
+    /* Active option: #FFF4D6 with #F2B84B accent */
     .tambora-select-option.is-selected {
         @apply bg-[#FFF4D6] text-[#0B2342] font-bold border-l-4 border-[#F2B84B];
     }
@@ -304,10 +301,10 @@
 
     /* Upload Dropzone */
     .upload-zone {
-        @apply flex cursor-pointer flex-col items-center justify-center gap-3.5 rounded-2xl border-2 border-dashed border-blue-200/80 bg-blue-50/20 px-5 py-6 text-center transition-all duration-200 hover:border-[#2563EB] hover:bg-blue-50/40 sm:flex-row sm:text-left;
+        @apply flex cursor-pointer flex-col items-center justify-center gap-3.5 rounded-2xl border border-dashed border-[#CBD5E1] bg-[#F8FAFC] px-5 py-6 text-center transition-all duration-200 hover:border-[#2563EB] hover:bg-[#EEF4FF] sm:flex-row sm:text-left;
     }
     .upload-zone strong {
-        @apply block text-sm font-bold text-[#0B2342];
+        @apply block text-sm font-bold text-[#0F172A];
     }
     .upload-zone small {
         @apply block mt-0.5 text-xs text-[#64748B];

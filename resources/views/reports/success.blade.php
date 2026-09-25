@@ -1,10 +1,10 @@
 <x-layouts.public title="Laporan berhasil dikirim">
-    <section class="min-h-[75vh] py-8 sm:py-14 bg-[#F7F9FC]">
+    <section class="min-h-[75vh] py-8 sm:py-14 bg-[#F4F7FB]">
         <div class="public-container max-w-lg">
-            <div class="overflow-hidden rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white shadow-xs">
+            <div class="overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white shadow-[0_8px_30px_rgba(15,23,42,0.05)]">
                 <!-- Success Header -->
-                <div class="bg-[#0B2342] px-5 py-6 text-center text-white sm:px-8">
-                    <span class="mx-auto grid size-12 place-items-center rounded-xl bg-[#168A7A] text-white">
+                <div class="bg-[#0B2342] px-5 py-7 text-center text-white sm:px-8">
+                    <span class="mx-auto grid size-12 place-items-center rounded-xl bg-[#168A7A] text-white shadow-2xs">
                         <svg class="size-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
                         </svg>
@@ -15,17 +15,17 @@
 
                 <!-- Access Details -->
                 <div class="p-5 sm:p-7">
-                    <div class="rounded-xl border border-blue-100 bg-[#EAF2FF]/50 p-4 sm:p-5">
+                    <div class="rounded-xl border border-blue-100 bg-[#EEF4FF] p-4 sm:p-5">
                         <p class="text-center text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">Simpan akses rahasia Anda</p>
 
                         <div class="mt-3 grid gap-3 sm:grid-cols-2">
-                            <div class="rounded-lg bg-white border border-[#E2E8F0] p-3 text-center">
+                            <div class="rounded-lg bg-white border border-[#CBD5E1] p-3 text-center">
                                 <span class="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Kode laporan</span>
-                                <strong id="report-code" class="mt-1 block font-mono text-base sm:text-lg font-bold tracking-wider text-[#0B2342]">{{ $submittedReport['code'] }}</strong>
+                                <strong id="report-code" class="mt-1 block font-mono text-base sm:text-lg font-bold tracking-wider text-[#0F172A]">{{ $submittedReport['code'] }}</strong>
                             </div>
-                            <div class="rounded-lg bg-white border border-[#E2E8F0] p-3 text-center">
+                            <div class="rounded-lg bg-white border border-[#CBD5E1] p-3 text-center">
                                 <span class="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">PIN pelacakan</span>
-                                <strong id="report-pin" class="mt-1 block font-mono text-base sm:text-lg font-bold tracking-wider text-[#0B2342]">{{ $submittedReport['pin'] }}</strong>
+                                <strong id="report-pin" class="mt-1 block font-mono text-base sm:text-lg font-bold tracking-wider text-[#0F172A]">{{ $submittedReport['pin'] }}</strong>
                             </div>
                         </div>
 
@@ -34,15 +34,15 @@
                         </p>
 
                         <!-- QR Code Frame -->
-                        <div class="mt-4 flex flex-col items-center gap-3.5 rounded-lg border border-slate-200/80 bg-white p-3.5 text-center sm:flex-row sm:text-left">
+                        <div class="mt-4 flex flex-col items-center gap-3.5 rounded-lg border border-[#CBD5E1] bg-white p-3.5 text-center sm:flex-row sm:text-left">
                             <img class="size-24 shrink-0 rounded-md border border-slate-200" src="{{ $trackingQrCode }}" alt="QR untuk membuka pelacakan laporan {{ $submittedReport['code'] }}">
                             <div>
-                                <p class="text-xs sm:text-sm font-semibold text-[#0B2342]">Pindai untuk membuka pelacakan</p>
+                                <p class="text-xs sm:text-sm font-semibold text-[#0F172A]">Pindai untuk membuka pelacakan</p>
                                 <p class="mt-0.5 text-[11px] leading-relaxed text-[#64748B]">QR code membuka halaman pengecekan dengan kode laporan terisi otomatis. Masukkan PIN 6 digit Anda untuk melihat perkembangan tindak lanjut.</p>
                             </div>
                         </div>
 
-                        <p class="mt-3 text-center text-[11px] leading-relaxed text-[#DC4C4C] font-medium">
+                        <p class="mt-3 text-center text-[11px] leading-relaxed text-[#DC2626] font-medium">
                             PERHATIAN: PIN rahasia hanya ditampilkan satu kali pada layar ini. Segera salin atau simpan sebelum menutup halaman.
                         </p>
                     </div>
@@ -63,7 +63,7 @@
                         </button>
                     </div>
 
-                    <a href="{{ $trackingUrl }}" class="button-primary mt-2.5 w-full text-xs sm:text-sm font-semibold py-2.5">
+                    <a href="{{ $trackingUrl }}" class="button-primary mt-2.5 w-full text-xs sm:text-sm font-semibold py-2.5 shadow-2xs">
                         <span>Cek status</span>
                     </a>
                 </div>
