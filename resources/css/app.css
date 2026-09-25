@@ -144,20 +144,14 @@
     }
 
     /* Form Controls: Inputs, Textarea, Select */
-    .form-heading {
-        @apply flex items-start gap-3.5;
-    }
-    .form-heading-icon {
-        @apply grid size-10 shrink-0 place-items-center rounded-xl text-sm font-bold;
-    }
     .form-heading h2 {
-        @apply text-lg font-bold text-[#0B2342] sm:text-xl;
+        @apply text-xl font-bold tracking-tight text-[#0B2342] sm:text-2xl;
     }
     .form-heading p {
-        @apply mt-0.5 text-xs text-[#64748B] sm:text-sm leading-relaxed;
+        @apply mt-1 text-xs text-[#64748B] sm:text-sm leading-relaxed;
     }
     .form-label {
-        @apply mb-1.5 block text-sm font-semibold text-[#0B2342];
+        @apply mb-1.5 block text-sm sm:text-[15px] font-semibold text-[#0B2342];
     }
     .form-label > span:not(.optional) {
         @apply text-[#DC4C4C] font-semibold;
@@ -165,9 +159,15 @@
     .form-label .optional {
         @apply ml-1 text-xs font-normal text-[#64748B];
     }
+    .form-helper {
+        @apply mt-1.5 text-xs sm:text-[13px] text-[#64748B] leading-relaxed;
+    }
     
     .form-control {
-        @apply block min-h-12 w-full rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 text-sm text-[#0B2342] transition-colors duration-200 placeholder:text-[#94A3B8] hover:border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20;
+        @apply block h-12 w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm sm:text-base text-[#0B2342] transition-colors duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15;
+    }
+    textarea.form-control {
+        @apply h-auto min-h-32 py-3;
     }
     .form-control.is-invalid {
         @apply border-[#DC4C4C] bg-red-50/20 focus:border-[#DC4C4C] focus:ring-[#DC4C4C]/20;
@@ -197,7 +197,7 @@
 
     /* Date shortcuts */
     .date-shortcut {
-        @apply rounded-lg border border-[#E2E8F0] bg-white px-3 py-1.5 text-xs font-semibold text-[#64748B] transition-all hover:border-blue-300 hover:text-[#2563EB] aria-pressed:border-[#2563EB] aria-pressed:bg-blue-50/70 aria-pressed:text-[#2563EB];
+        @apply inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-3.5 py-1.5 text-xs sm:text-sm font-medium text-slate-600 transition-all hover:border-blue-300 hover:text-[#2563EB] aria-pressed:border-[#2563EB] aria-pressed:bg-blue-50 aria-pressed:text-[#2563EB] aria-pressed:font-semibold;
     }
 
     /* =========================================================
@@ -208,13 +208,13 @@
        - Text (title & caption) is PLAIN TEXT with NO pill, NO box, NO background!
        ========================================================= */
     .stepper-nav {
-        @apply relative mb-6 w-full max-w-xl mx-auto;
+        @apply relative mb-8 w-full max-w-lg mx-auto px-2;
     }
     .stepper-list {
         @apply relative grid grid-cols-3 items-start;
     }
     .stepper-track {
-        @apply absolute left-[16.666%] right-[16.666%] top-[18px] sm:top-5 -translate-y-1/2 h-[1.5px] bg-[#E2E8F0] z-0;
+        @apply absolute left-[16.666%] right-[16.666%] top-5 sm:top-[22px] -translate-y-1/2 h-[1.5px] bg-slate-200 z-0;
     }
     .stepper-track-progress {
         @apply h-full bg-[#0B2342] transition-all duration-300 ease-out;
@@ -225,32 +225,32 @@
     }
     
     .stepper-circle, .form-progress-number {
-        @apply size-9 sm:size-10 rounded-full border border-[#E2E8F0] bg-white text-[#64748B] flex items-center justify-center font-semibold text-xs sm:text-sm transition-all duration-200 shrink-0;
+        @apply size-10 sm:size-11 rounded-full border border-slate-200 bg-white text-slate-400 flex items-center justify-center font-bold text-sm sm:text-base transition-all duration-200 shrink-0;
     }
     
     .stepper-title, .stepper-label {
-        @apply mt-2 text-xs sm:text-sm font-medium text-[#64748B] transition-colors duration-200 bg-transparent border-0 p-0 leading-tight text-center;
+        @apply mt-2 text-xs sm:text-sm font-semibold tracking-tight text-slate-500 transition-colors duration-200 bg-transparent border-0 p-0 leading-tight text-center;
     }
     .stepper-desc {
-        @apply mt-0.5 text-[10px] sm:text-xs leading-tight text-[#94A3B8] font-normal transition-colors duration-200 bg-transparent border-0 p-0 block text-center max-w-[100px] sm:max-w-none;
+        @apply mt-0.5 text-[11px] sm:text-xs leading-tight text-slate-400 font-normal transition-colors duration-200 bg-transparent border-0 p-0 block text-center max-w-[110px] sm:max-w-none;
     }
 
     /* Active step */
     .stepper-step.is-active .stepper-circle,
     .form-progress.is-active .form-progress-number {
-        @apply bg-[#F2B84B] border-[#F2B84B] text-[#0B2342];
-        box-shadow: 0 0 0 3px rgba(242, 184, 75, 0.25);
+        @apply bg-[#F2B84B] border-2 border-[#F2B84B] text-[#0B2342];
+        box-shadow: 0 0 0 4px rgba(242, 184, 75, 0.22);
     }
     .stepper-step.is-active .stepper-title,
     .stepper-step.is-active .stepper-label,
     .form-progress.is-active strong {
-        @apply text-[#0B2342] font-semibold;
+        @apply text-[#0B2342] font-bold;
         background: transparent !important;
         border: none !important;
     }
     .stepper-step.is-active .stepper-desc,
     .form-progress.is-active small {
-        @apply text-[#0B2342]/80 font-normal;
+        @apply text-[#0B2342]/80 font-medium;
         background: transparent !important;
         border: none !important;
     }
@@ -258,16 +258,16 @@
     /* Completed step */
     .stepper-step.is-complete .stepper-circle,
     .form-progress.is-complete .form-progress-number {
-        @apply bg-[#0B2342] border-[#0B2342] text-white;
+        @apply bg-[#0B2342] border-2 border-[#0B2342] text-white;
     }
     .stepper-step.is-complete .stepper-title,
     .stepper-step.is-complete .stepper-label {
-        @apply text-[#0B2342] font-medium;
+        @apply text-[#0B2342] font-semibold;
         background: transparent !important;
         border: none !important;
     }
     .stepper-step.is-complete .stepper-desc {
-        @apply text-[#94A3B8];
+        @apply text-slate-400;
         background: transparent !important;
         border: none !important;
     }

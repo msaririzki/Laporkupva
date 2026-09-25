@@ -46,7 +46,7 @@
                     @error('tracking_pin')<p class="form-error">{{ $message }}</p>@enderror
                 </div>
 
-                <button class="button-primary mt-6 w-full text-xs sm:text-sm font-semibold py-2.5" type="submit">
+                <button class="button-primary mt-6 w-full text-sm sm:text-base font-semibold h-12" type="submit">
                     <span>Cek status laporan</span>
                     <svg class="size-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/>

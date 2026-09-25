@@ -40,11 +40,11 @@
                 <a class="nav-link {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'is-active' : '' }}" href="{{ route('reports.track') }}">Cek status</a>
             </nav>
 
-            <!-- Primary Action Button & Admin Access -->
+            <!-- Desktop Actions (Hidden on Mobile for Clean Hierarchy) -->
             <div class="flex items-center gap-2 sm:gap-2.5">
                 <a
                     href="{{ route('reports.create') }}"
-                    class="button-primary text-xs sm:text-sm px-3.5 sm:px-4.5 py-2 {{ request()->routeIs('reports.create*') ? 'bg-[#1D4ED8]' : '' }}"
+                    class="button-primary hidden sm:inline-flex text-xs sm:text-sm px-3.5 sm:px-4.5 py-2 {{ request()->routeIs('reports.create*') ? 'bg-[#1D4ED8]' : '' }}"
                 >
                     <span>Buat laporan</span>
                     <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -54,7 +54,7 @@
 
                 <a
                     href="{{ route('filament.admin.auth.login') }}"
-                    class="admin-access-link"
+                    class="admin-access-link hidden sm:grid"
                     aria-label="Masuk ke portal admin"
                     title="Portal admin"
                 >
