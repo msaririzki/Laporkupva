@@ -279,103 +279,109 @@
         </div>
 
         <div class="public-container">
-            <!-- Top Row: Heading on Left & Friendly Illustration with Floating Badges on Right -->
             <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
-                <!-- Left Content -->
-                <div class="text-center lg:col-span-7 lg:text-left">
-                    <!-- Badge Pill with Lock Icon -->
-                    <div class="inline-flex items-center gap-2 rounded-full bg-blue-100/90 px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wider text-blue-700">
-                        <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
-                        </svg>
-                        KEAMANAN
-                    </div>
+                <!-- Left Column: 3 Security Cards (Grip di Kiri) -->
+                <div class="order-2 lg:order-1 lg:col-span-6 flex flex-col gap-4 sm:gap-5">
+                    <!-- Card 1: Tanpa identitas pribadi -->
+                    <article class="group relative flex items-start gap-4 sm:gap-5 rounded-2xl sm:rounded-3xl border border-slate-100 bg-white/95 p-5 sm:p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div class="flex size-12 sm:size-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                            <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <line x1="2" y1="2" x2="22" y2="22" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
+                                    Tanpa identitas pribadi
+                                </h3>
+                                <span class="rounded-full bg-blue-50 px-2.5 py-0.5 font-sans text-xs font-black text-blue-700">01</span>
+                            </div>
+                            <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                Formulir tidak meminta nama, NIK, nomor telepon, ataupun email. Alamat IP tidak disimpan dan metadata EXIF foto dihapus otomatis.
+                            </p>
+                        </div>
+                    </article>
 
-                    <!-- Main Title -->
-                    <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl lg:text-[2.65rem] lg:leading-[1.18]">
-                        Lapor dengan tenang,<br class="hidden sm:inline"> identitas tetap aman.
-                    </h2>
+                    <!-- Card 2: Akses privat kode & PIN -->
+                    <article class="group relative flex items-start gap-4 sm:gap-5 rounded-2xl sm:rounded-3xl border border-slate-100 bg-white/95 p-5 sm:p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div class="flex size-12 sm:size-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                            <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="7.5" cy="15.5" r="4.5" />
+                                <path d="m21 3-9.5 9.5" />
+                                <path d="m15.5 7.5 3 3" />
+                                <path d="m18 5 2 2" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
+                                    Akses privat kode & PIN
+                                </h3>
+                                <span class="rounded-full bg-blue-50 px-2.5 py-0.5 font-sans text-xs font-black text-blue-700">02</span>
+                            </div>
+                            <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                Status perkembangan laporan hanya dapat dibuka dengan Kode Laporan unik dan PIN rahasia yang tersimpan secara terenkripsi (hash).
+                            </p>
+                        </div>
+                    </article>
 
-                    <!-- Subtitle / Explanation -->
-                    <p class="mt-3.5 text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                        TAMBORA tidak meminta data pribadi untuk membuat laporan. Kamu tetap bisa menyampaikan informasi dan memantau perkembangannya dengan kode dan PIN rahasia.
-                    </p>
+                    <!-- Card 3: Bukti terbatas & terproteksi -->
+                    <article class="group relative flex items-start gap-4 sm:gap-5 rounded-2xl sm:rounded-3xl border border-slate-100 bg-white/95 p-5 sm:p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div class="flex size-12 sm:size-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                            <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <rect x="8" y="13" width="8" height="6" rx="1" fill="currentColor" fill-opacity="0.15" />
+                                <path d="M10 13v-1.5a2 2 0 1 1 4 0V13" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
+                                    Bukti terbatas & aman
+                                </h3>
+                                <span class="rounded-full bg-blue-50 px-2.5 py-0.5 font-sans text-xs font-black text-blue-700">03</span>
+                            </div>
+                            <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                Lampiran dan kronologi hanya dapat diakses oleh petugas pemeriksa Bank Indonesia yang berwenang, tidak pernah dipublikasikan ke umum.
+                            </p>
+                        </div>
+                    </article>
                 </div>
 
-                <!-- Right Illustration (Menggunakan Aset Gambar Referensi) -->
-                <div class="lg:col-span-5 flex items-center justify-center">
-                    <div class="relative mx-auto flex w-full max-w-[420px] sm:max-w-[460px] items-center justify-center py-2">
+                <!-- Right Column: Gambar di Atas & Judul di Bawah Gambar -->
+                <div class="order-1 lg:order-2 lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <!-- Gambar Ilustrasi Keamanan -->
+                    <div class="relative mx-auto lg:mx-0 flex w-full max-w-[360px] sm:max-w-[420px] items-center justify-center">
                         <!-- Glow Accent Behind Image -->
                         <div class="absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-blue-300/30 via-sky-200/40 to-blue-100/30 blur-3xl"></div>
                         <img
                             src="{{ asset('images/illustrations/security-shield.png') }}"
                             alt="Ilustrasi Keamanan dan Privasi Pelapor TAMBORA"
-                            class="h-auto w-full max-w-[360px] sm:max-w-[440px] object-contain drop-shadow-xl transition-transform duration-500 hover:scale-[1.02]"
+                            class="h-auto w-full object-contain drop-shadow-xl transition-transform duration-500 hover:scale-[1.02]"
                             width="960"
                             height="540"
                             loading="lazy"
                         >
                     </div>
+
+                    <!-- Teks di Bawah Gambar -->
+                    <div class="mt-6 sm:mt-7">
+                        <h2 class="text-2xl font-extrabold tracking-tight text-navy-950 sm:text-3xl lg:text-[2.25rem] lg:leading-[1.2]">
+                            Lapor dengan tenang,<br class="hidden sm:inline"> identitas tetap aman.
+                        </h2>
+                        <p class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                            TAMBORA dirancang agar masyarakat dapat berpartisipasi mengawasi KUPVA tidak berizin di NTB tanpa rasa khawatir. Sistem hanya mengumpulkan data kejadian yang diperlukan tanpa melacak identitas pelapor.
+                        </p>
+                        <div class="mt-5 flex justify-center lg:justify-start">
+                            <a href="{{ route('reports.create') }}" class="button-primary inline-flex items-center gap-2 shadow-sm">
+                                Mulai membuat laporan <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Bottom Row: 3 Security Cards (Grip dengan Teks Sebelumnya yang Dipercantik) -->
-            <div class="mt-10 sm:mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-                <!-- Card 1: Tanpa identitas pribadi -->
-                <article class="group rounded-3xl border border-slate-100 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
-                    <div class="flex size-12 sm:size-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                        <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <line x1="2" y1="2" x2="22" y2="22" />
-                        </svg>
-                    </div>
-                    <h3 class="mt-5 text-base sm:text-lg font-extrabold text-navy-950">
-                        Tanpa identitas pribadi
-                    </h3>
-                    <p class="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
-                        Formulir tidak meminta nama, NIK, nomor telepon, atau alamat pelapor.
-                    </p>
-                    <div class="mt-5 h-1.5 w-7 rounded-full bg-blue-600"></div>
-                </article>
-
-                <!-- Card 2: Akses privat -->
-                <article class="group rounded-3xl border border-slate-100 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
-                    <div class="flex size-12 sm:size-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                        <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="7.5" cy="15.5" r="4.5" />
-                            <path d="m21 3-9.5 9.5" />
-                            <path d="m15.5 7.5 3 3" />
-                            <path d="m18 5 2 2" />
-                        </svg>
-                    </div>
-                    <h3 class="mt-5 text-base sm:text-lg font-extrabold text-navy-950">
-                        Akses privat
-                    </h3>
-                    <p class="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
-                        Status hanya terbuka dengan kode dan PIN.
-                    </p>
-                    <div class="mt-5 h-1.5 w-7 rounded-full bg-blue-600"></div>
-                </article>
-
-                <!-- Card 3: Bukti terbatas -->
-                <article class="group rounded-3xl border border-slate-100 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
-                    <div class="flex size-12 sm:size-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                        <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                            <polyline points="14 2 14 8 20 8" />
-                            <rect x="8" y="13" width="8" height="6" rx="1" fill="currentColor" fill-opacity="0.15" />
-                            <path d="M10 13v-1.5a2 2 0 1 1 4 0V13" />
-                        </svg>
-                    </div>
-                    <h3 class="mt-5 text-base sm:text-lg font-extrabold text-navy-950">
-                        Bukti terbatas
-                    </h3>
-                    <p class="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
-                        Lampiran hanya dapat diakses petugas.
-                    </p>
-                    <div class="mt-5 h-1.5 w-7 rounded-full bg-blue-600"></div>
-                </article>
             </div>
         </div>
     </section>
