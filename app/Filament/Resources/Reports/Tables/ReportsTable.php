@@ -29,7 +29,9 @@ class ReportsTable
     {
         return $table
             ->defaultSort('created_at', 'desc')
-            ->searchPlaceholder('Cari kode, tempat, jenis, wilayah…')
+            ->paginated([10, 25, 50])
+            ->defaultPaginationPageOption(10)
+            ->searchPlaceholder('Cari laporan…')
             ->searchDebounce('350ms')
             ->columns([
                 TextColumn::make('public_code')
@@ -76,12 +78,15 @@ class ReportsTable
             ->filters([
                 SelectFilter::make('status')
                     ->label('Status')
+                    ->native(false)
                     ->options(ReportStatus::class),
                 SelectFilter::make('incident_type')
                     ->label('Jenis laporan')
+                    ->native(false)
                     ->options(self::INCIDENT_TYPES),
                 SelectFilter::make('regency')
                     ->label('Wilayah')
+                    ->native(false)
                     ->options(NtbRegency::class),
             ])
             ->filtersTriggerAction(
@@ -100,20 +105,24 @@ class ReportsTable
             )
             ->toolbarActions([
                 Action::make('exportCsv')
-                    ->label('Ekspor CSV')
+                    ->label('Unduh CSV')
                     ->icon(Heroicon::OutlinedArrowDownTray)
                     ->color('gray')
                     ->url(fn (): string => route('admin.reports.export')),
             ])
             ->recordActions([
                 ViewAction::make()
-                    ->label('Lihat')
+                    ->label('Buka')
                     ->button()
                     ->size('sm')
                     ->color('gray'),
-                ReportResource::advanceStatusAction()->iconButton()->tooltip('Lanjutkan ke tahap berikutnya'),
+                ReportResource::advanceStatusAction()
+                    ->label('Lanjutkan')
+                    ->button()
+                    ->size('sm')
+                    ->tooltip('Lanjutkan ke tahap berikutnya'),
             ])
-            ->recordActionsColumnLabel('Tindakan')
+            ->recordActionsColumnLabel('Aksi')
             ->recordClasses(fn (Report $record): string => match ($record->status) {
                 ReportStatus::Submitted => 'report-list-row report-list-row--new',
                 ReportStatus::Completed => 'report-list-row report-list-row--completed',
