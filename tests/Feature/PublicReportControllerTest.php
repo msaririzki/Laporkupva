@@ -82,6 +82,85 @@ class PublicReportControllerTest extends TestCase
         $this->assertDatabaseCount('reports', 0);
     }
 
+    public function test_evidence_with_a_mismatched_extension_is_rejected(): void
+    {
+        Storage::fake('local');
+
+        $response = $this->from(route('reports.create'))->post(route('reports.store'), $this->validPayload([
+            'evidence' => [UploadedFile::fake()->image('foto-valid.php')],
+        ]));
+
+        $response->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors(['evidence.0']);
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_evidence_original_name_is_normalized_before_storage(): void
+    {
+        Storage::fake('local');
+
+        $this->post(route('reports.store'), $this->validPayload([
+            'evidence' => [UploadedFile::fake()->image('<script>.jpg')],
+        ]))->assertRedirect(route('reports.success'));
+
+        $report = Report::query()->sole();
+
+        $this->assertSame('script.jpg', $report->evidence()->sole()->original_name);
+    }
+
+    public function test_report_rejects_html_and_control_characters(): void
+    {
+        $response = $this->from(route('reports.create'))->post(route('reports.store'), $this->validPayload([
+            'business_name' => '<img src=x onerror=alert(1)>',
+            'description' => "Kronologi yang cukup panjang\0dengan karakter kontrol berbahaya.",
+        ]));
+
+        $response->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors(['business_name', 'description']);
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_ignores_unexpected_privileged_attributes(): void
+    {
+        $this->post(route('reports.store'), $this->validPayload([
+            'status' => ReportStatus::Completed->value,
+            'public_code' => 'LKP-EVIL-0000',
+            'tracking_pin_hash' => 'attacker-controlled',
+            'internal_notes' => 'Jangan terlihat oleh admin.',
+        ]))->assertRedirect(route('reports.success'));
+
+        $report = Report::query()->sole();
+
+        $this->assertSame(ReportStatus::Submitted, $report->status);
+        $this->assertNotSame('LKP-EVIL-0000', $report->public_code);
+        $this->assertNotSame('attacker-controlled', $report->tracking_pin_hash);
+        $this->assertNull($report->internal_notes);
+    }
+
+    public function test_report_honeypot_rejects_automated_submission(): void
+    {
+        $response = $this->from(route('reports.create'))->post(route('reports.store'), $this->validPayload([
+            'website' => 'https://spam.example',
+        ]));
+
+        $response->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('website');
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_submission_is_rate_limited_against_bursts(): void
+    {
+        $this->post(route('reports.store'), $this->validPayload())
+            ->assertRedirect(route('reports.success'));
+        $this->post(route('reports.store'), $this->validPayload())
+            ->assertRedirect(route('reports.success'));
+
+        $this->post(route('reports.store'), $this->validPayload())
+            ->assertTooManyRequests();
+
+        $this->assertDatabaseCount('reports', 2);
+    }
+
     public function test_evidence_larger_than_ten_megabytes_is_rejected(): void
     {
         Storage::fake('local');

@@ -56,6 +56,21 @@ class PublicReportMessageControllerTest extends TestCase
         $this->assertDatabaseCount(AnonymousMessage::class, 0);
     }
 
+    public function test_message_rejects_html_markup(): void
+    {
+        $report = Report::factory()->create();
+
+        $this->withSession($this->trackingSessionFor($report))
+            ->from(route('reports.status', ['report' => $report->public_code]))
+            ->post(route('reports.messages.store', ['report' => $report->public_code]), [
+                'body' => '<script>alert("message")</script>',
+            ])
+            ->assertRedirect(route('reports.status', ['report' => $report->public_code]))
+            ->assertSessionHasErrors('body');
+
+        $this->assertDatabaseCount(AnonymousMessage::class, 0);
+    }
+
     public function test_message_content_is_escaped_on_the_public_status_page(): void
     {
         $report = Report::factory()->create();

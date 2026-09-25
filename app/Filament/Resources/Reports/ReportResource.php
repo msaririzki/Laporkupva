@@ -13,6 +13,7 @@ use App\Models\Report;
 use App\Models\ReportEvidence;
 use App\Models\ReportStatusHistory;
 use App\Models\User;
+use App\Rules\NoHtml;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
@@ -93,12 +94,14 @@ class ReportResource extends Resource
                         ->placeholder('Tulis perkembangan yang aman dibaca pelapor.')
                         ->helperText('Terlihat oleh pelapor.')
                         ->maxLength(1000)
+                        ->rule(new NoHtml)
                         ->rows(2),
                     Textarea::make('internal_note')
                         ->label('Catatan internal')
                         ->placeholder('Contoh: Tim memeriksa lokasi dan berkoordinasi dengan pihak terkait.')
                         ->helperText('Hanya untuk admin.')
                         ->maxLength(2000)
+                        ->rule(new NoHtml)
                         ->rows(2),
                 ]),
                 self::activityPhotoUpload(),
@@ -164,6 +167,7 @@ class ReportResource extends Resource
                     ->label('Catatan')
                     ->placeholder('Contoh: Pemeriksaan lokasi dan koordinasi dengan pihak terkait.')
                     ->maxLength(2000)
+                    ->rule(new NoHtml)
                     ->rows(2),
                 self::activityPhotoUpload(required: true),
             ])
@@ -279,6 +283,7 @@ class ReportResource extends Resource
                     ->required()
                     ->minLength(2)
                     ->maxLength(2000)
+                    ->rule(new NoHtml)
                     ->rows(5),
             ])
             ->action(function (Report $record, array $data): void {
@@ -317,11 +322,13 @@ class ReportResource extends Resource
                     ->required()
                     ->minLength(10)
                     ->maxLength(1000)
+                    ->rule(new NoHtml)
                     ->rows(4),
                 Textarea::make('public_note')
                     ->label('Keterangan untuk pelapor')
                     ->helperText('Opsional. Alasan internal tidak akan ditampilkan kepada pelapor.')
                     ->maxLength(1000)
+                    ->rule(new NoHtml)
                     ->rows(3),
             ])
             ->action(function (Report $record, array $data): void {

@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Enums\UserRole;
 use App\Models\ReportEvidence;
 use App\Models\User;
+use Filament\Facades\Filament;
 
 class ReportEvidencePolicy
 {
@@ -60,6 +61,7 @@ class ReportEvidencePolicy
 
     private function isAdmin(User $user): bool
     {
-        return in_array($user->role, [UserRole::SuperAdmin, UserRole::Admin], true);
+        return in_array($user->role, [UserRole::SuperAdmin, UserRole::Admin], true)
+            && $user->canAccessPanel(Filament::getPanel('admin'));
     }
 }

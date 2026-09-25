@@ -3,12 +3,19 @@
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
 
-.fi-panel-admin .fi-simple-layout {
-    min-height: 100svh;
+.fi-panel-admin {
     background:
-        radial-gradient(circle at 12% 12%, rgb(191 219 254 / 45%), transparent 22rem),
-        radial-gradient(circle at 86% 88%, rgb(219 234 254 / 55%), transparent 24rem),
-        #f6f8fc;
+        linear-gradient(rgb(239 243 248 / 93%), rgb(239 243 248 / 93%)),
+        radial-gradient(circle at 1px 1px, #94a3b8 1px, transparent 0);
+    background-size: auto, 22px 22px;
+}
+
+.fi-panel-admin .fi-simple-layout {
+    display: block;
+    width: min(30rem, calc(100% - 1.25rem));
+    min-height: 100svh;
+    margin-inline: auto;
+    padding-block: 0.625rem;
 }
 
 .admin-login-intro {
@@ -19,34 +26,23 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1rem 1.25rem;
-    color: #ffffff;
-    background: linear-gradient(135deg, #17386a 0%, #245c9f 58%, #3679bc 100%);
+    padding: 1rem 1.15rem;
+    border: 1px solid #d9e2ee;
+    border-bottom: 0;
+    border-radius: 1.4rem 1.4rem 0 0;
+    color: #243b5a;
+    background: linear-gradient(145deg, #f9fbfd 0%, #edf2f8 100%);
+    box-shadow: 0 28px 70px -46px rgb(30 55 88 / 55%);
 }
 
-.admin-login-intro::before,
 .admin-login-intro::after {
     position: absolute;
-    border: 1px solid rgb(255 255 255 / 14%);
-    border-radius: 999px;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgb(65 91 127 / 10%) 1px, transparent 0);
+    background-size: 18px 18px;
     content: '';
+    mask-image: linear-gradient(125deg, transparent 48%, #000 100%);
     pointer-events: none;
-}
-
-.admin-login-intro::before {
-    top: -9rem;
-    right: -7rem;
-    width: 20rem;
-    height: 20rem;
-    background: rgb(255 255 255 / 6%);
-}
-
-.admin-login-intro::after {
-    bottom: -12rem;
-    left: -9rem;
-    width: 25rem;
-    height: 25rem;
-    background: rgb(96 165 250 / 10%);
 }
 
 .admin-login-brand,
@@ -58,19 +54,19 @@
 }
 
 .admin-login-brand {
-    gap: 0.75rem;
+    gap: 0.7rem;
 }
 
 .admin-login-logo-shell {
     display: grid;
-    width: 8.75rem;
-    min-height: 3.25rem;
-    padding: 0.45rem 0.7rem;
+    width: 7.75rem;
+    min-height: 3rem;
+    padding: 0.4rem 0.6rem;
     place-items: center;
-    border: 1px solid rgb(255 255 255 / 24%);
-    border-radius: 0.8rem;
-    background: rgb(255 255 255 / 96%);
-    box-shadow: 0 16px 35px -24px rgb(2 6 23 / 65%);
+    border: 1px solid #dce4ee;
+    border-radius: 0.75rem;
+    background: #ffffff;
+    box-shadow: 0 12px 30px -22px rgb(43 70 117 / 50%);
 }
 
 .admin-login-logo {
@@ -78,63 +74,125 @@
     height: auto;
 }
 
-.admin-login-badge,
-.admin-login-eyebrow {
-    font-size: 0.68rem;
+.admin-login-badge {
+    padding: 0.35rem 0.55rem;
+    border: 1px solid #d6e0ed;
+    border-radius: 999px;
+    color: #526985;
+    background: rgb(255 255 255 / 72%);
+    font-size: 0.62rem;
     font-weight: 800;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
-.admin-login-badge {
-    color: rgb(219 234 254);
-}
-
-.admin-login-copy {
+.admin-login-menu {
     position: relative;
     z-index: 1;
     display: none;
 }
 
-.admin-login-eyebrow {
-    color: #bfdbfe;
-}
-
-.admin-login-copy h2 {
-    max-width: 32rem;
-    font-size: clamp(2.35rem, 4vw, 4.25rem);
+.admin-login-menu-label {
+    padding-inline: 0.7rem;
+    color: #8a9ab2;
+    font-size: 0.64rem;
     font-weight: 800;
-    line-height: 1.04;
-    letter-spacing: -0.045em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
 }
 
-.admin-login-copy > p:last-child {
-    max-width: 30rem;
-    color: rgb(219 234 254 / 88%);
-    font-size: 1rem;
-    line-height: 1.75;
-}
-
-.admin-login-security {
-    gap: 0.5rem;
-    color: rgb(219 234 254 / 88%);
-    font-size: 0.74rem;
+.admin-login-menu-item {
+    display: flex;
+    min-height: 3rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding-inline: 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 0.8rem;
+    color: #7a8ca4;
+    font-size: 0.85rem;
     font-weight: 600;
 }
 
+.admin-login-menu-item svg {
+    color: #91a2b8;
+}
+
+.admin-login-menu-item.is-active {
+    position: relative;
+    border-color: #d6e0ed;
+    color: #294f80;
+    background: rgb(255 255 255 / 88%);
+    box-shadow: 0 14px 28px -24px rgb(43 70 117 / 55%), inset 0 1px #ffffff;
+}
+
+.admin-login-menu-item.is-active::before {
+    position: absolute;
+    inset-block: 0.7rem;
+    inset-inline-start: -1px;
+    width: 3px;
+    border-radius: 999px;
+    background: #426da5;
+    content: '';
+}
+
+.admin-login-menu-item.is-active svg {
+    color: #426da5;
+}
+
+.admin-login-security {
+    display: none;
+    gap: 0.7rem;
+}
+
+.admin-login-security-icon {
+    display: grid;
+    width: 2.4rem;
+    height: 2.4rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid #d6e0ed;
+    border-radius: 0.75rem;
+    color: #426da5;
+    background: rgb(255 255 255 / 78%);
+}
+
+.admin-login-security-copy {
+    display: grid;
+    gap: 0.15rem;
+}
+
+.admin-login-security-copy strong {
+    color: #3f526b;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.admin-login-security-copy small {
+    color: #8a9ab2;
+    font-size: 0.66rem;
+}
+
 .fi-panel-admin .fi-simple-main-ctn {
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 1.25rem;
+    width: 100%;
+    min-height: 31rem;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.35rem;
+    border: 1px solid #dfe6ef;
+    border-radius: 0 0 1.4rem 1.4rem;
+    background: rgb(255 255 255 / 97%);
+    box-shadow: 0 32px 80px -46px rgb(30 55 88 / 52%);
 }
 
 .fi-panel-admin .fi-simple-main {
     width: 100%;
-    max-width: 28rem;
-    padding: 1.75rem;
-    border: 1px solid rgb(226 232 240 / 90%);
-    border-radius: 1.5rem;
-    box-shadow: 0 30px 70px -44px rgb(15 23 42 / 62%);
+    max-width: 24rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 
 .fi-panel-admin .fi-simple-header {
@@ -143,94 +201,127 @@
 }
 
 .fi-panel-admin .fi-simple-header-heading {
-    color: #10213e;
-    font-size: 1.75rem;
+    color: #172b47;
+    font-size: 1.8rem;
     font-weight: 800;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.04em;
 }
 
 .fi-panel-admin .fi-simple-header-subheading {
-    color: #64748b;
+    color: #78899f;
     line-height: 1.6;
 }
 
+.fi-panel-admin .fi-simple-main .fi-fo-field-label-content {
+    color: #475c76;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
 .fi-panel-admin .fi-simple-main .fi-input-wrp {
-    min-height: 3.1rem;
-    border-color: #dce5f0;
-    border-radius: 0.85rem;
+    min-height: 3.2rem;
+    border-color: #dce4ee;
+    border-radius: 0.8rem;
     background: #f8fafc;
-    box-shadow: none;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 90%) inset;
+    transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 
 .fi-panel-admin .fi-simple-main .fi-input-wrp:focus-within {
-    border-color: #3b82f6;
+    border-color: #6487b4;
     background: #ffffff;
-    box-shadow: 0 0 0 4px rgb(59 130 246 / 10%);
+    box-shadow: 0 0 0 4px rgb(66 109 165 / 10%);
 }
 
 .fi-panel-admin .fi-simple-main .fi-btn.fi-color-primary {
-    min-height: 3.1rem;
-    border-radius: 0.85rem;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    box-shadow: 0 14px 28px -16px rgb(37 99 235 / 70%);
+    min-height: 3.2rem;
+    border-radius: 0.8rem;
+    background: #315b8e;
+    box-shadow: 0 14px 26px -18px rgb(37 74 120 / 72%);
+    transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
-@media (min-width: 64rem) {
+.fi-panel-admin .fi-simple-main .fi-btn.fi-color-primary:hover {
+    background: #284e7c;
+    box-shadow: 0 18px 30px -18px rgb(37 74 120 / 78%);
+    transform: translateY(-1px);
+}
+
+@media (min-width: 56rem) {
     .fi-panel-admin .fi-simple-layout {
         display: grid;
-        grid-template-columns: minmax(32rem, 1.08fr) minmax(28rem, 0.92fr);
-        padding: 1rem;
+        width: min(64rem, calc(100% - 3rem));
+        grid-template-columns: 17.5rem minmax(0, 1fr);
+        align-content: center;
+        padding-block: 1.5rem;
+    }
+
+    .admin-login-intro,
+    .fi-panel-admin .fi-simple-main-ctn {
+        height: 39rem;
+        min-height: 0;
+        box-sizing: border-box;
     }
 
     .admin-login-intro {
         flex-direction: column;
-        align-items: flex-start;
-        padding: clamp(2rem, 5vw, 5rem);
-        border-radius: 1.65rem;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: 1.5rem 1.25rem;
+        border-right: 0;
+        border-bottom: 1px solid #d9e2ee;
+        border-radius: 1.65rem 0 0 1.65rem;
+    }
+
+    .admin-login-brand {
+        justify-content: space-between;
     }
 
     .admin-login-logo-shell {
-        width: 11.5rem;
-        min-height: 4.3rem;
-        padding: 0.65rem 0.9rem;
-        border-radius: 1rem;
+        width: 8.75rem;
     }
 
-    .admin-login-copy {
+    .admin-login-menu {
         display: grid;
-        gap: 1.15rem;
+        gap: 0.35rem;
+        margin-top: 4.25rem;
+    }
+
+    .admin-login-menu-label {
+        margin-bottom: 0.4rem;
     }
 
     .admin-login-security {
-        padding: 0.7rem 0.9rem;
-        border: 1px solid rgb(255 255 255 / 12%);
-        border-radius: 999px;
-        background: rgb(15 23 42 / 12%);
+        display: flex;
+        margin-top: auto;
+        padding-top: 1.25rem;
+        border-top: 1px solid #d9e2ee;
     }
 
     .fi-panel-admin .fi-simple-main-ctn {
-        align-items: center;
-        justify-content: center;
-        padding: clamp(2rem, 5vw, 5rem);
-    }
-
-    .fi-panel-admin .fi-simple-main {
-        padding: 2.5rem;
+        padding: clamp(3rem, 7vw, 5.5rem);
+        border-left: 0;
+        border-radius: 0 1.65rem 1.65rem 0;
     }
 }
 
 @media (max-width: 30rem) {
-    .admin-login-security {
+    .fi-panel-admin .fi-simple-layout {
+        width: min(100% - 1rem, 28rem);
+        padding-block: 0.5rem;
+    }
+
+    .admin-login-badge {
         display: none;
     }
 
     .fi-panel-admin .fi-simple-main-ctn {
-        padding: 1rem;
+        min-height: 29rem;
+        padding: 1.75rem 1.15rem;
     }
 
-    .fi-panel-admin .fi-simple-main {
-        padding: 1.35rem;
-        border-radius: 1.25rem;
+    .fi-panel-admin .fi-simple-header-heading {
+        font-size: 1.65rem;
     }
 }
 

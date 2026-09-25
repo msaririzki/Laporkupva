@@ -9,6 +9,7 @@ use chillerlan\QRCode\Common\EccLevel;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -46,8 +47,8 @@ class PublicReportController extends Controller
 
                 $report->evidence()->create([
                     'path' => $path,
-                    'original_name' => $file->getClientOriginalName(),
-                    'mime_type' => $file->getMimeType(),
+                    'original_name' => $this->safeOriginalName($file),
+                    'mime_type' => $file->getMimeType() ?: 'application/octet-stream',
                     'size' => $file->getSize(),
                 ]);
             }
@@ -90,5 +91,20 @@ class PublicReportController extends Controller
         } while (Report::query()->where('public_code', $code)->exists());
 
         return $code;
+    }
+
+    private function safeOriginalName(UploadedFile $file): string
+    {
+        $extension = match ($file->getMimeType()) {
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/webp' => 'webp',
+            'application/pdf' => 'pdf',
+            default => 'bin',
+        };
+        $baseName = pathinfo(str_replace(["\0", "\r", "\n"], '', $file->getClientOriginalName()), PATHINFO_FILENAME);
+        $safeBaseName = Str::slug(Str::limit($baseName, 120, '')) ?: 'lampiran';
+
+        return "{$safeBaseName}.{$extension}";
     }
 }

@@ -7,6 +7,7 @@ use App\Enums\UserRole;
 use App\Filament\Resources\Kupvas\KupvaResource;
 use App\Filament\Resources\Reports\Pages\ViewReport;
 use App\Filament\Resources\Reports\ReportResource;
+use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\AnonymousMessage;
@@ -28,13 +29,13 @@ class AdminDashboardTest extends TestCase
     {
         $this->get('/admin/login')
             ->assertOk()
-            ->assertSee('Selamat datang')
-            ->assertSee('Masuk untuk melanjutkan ke dasbor admin.')
-            ->assertSee('Kelola laporan dengan lebih terarah.')
-            ->assertSee('Akses khusus petugas berwenang')
+            ->assertSee('Masuk ke TAMBORA')
+            ->assertSee('Gunakan akun admin Anda.')
+            ->assertSee('Ruang kerja')
+            ->assertSee('Akses internal')
             ->assertSee('Email admin')
-            ->assertSee('Masuk ke dasbor')
-            ->assertDontSee('Masuk ke akun Anda');
+            ->assertSee('Masuk')
+            ->assertDontSee('Kelola laporan dengan lebih terarah.');
     }
 
     public function test_admin_can_open_dashboard_and_report_list(): void
@@ -204,7 +205,9 @@ class AdminDashboardTest extends TestCase
             ->assertOk()
             ->assertSee('Bukti kegiatan petugas')
             ->assertSee('Koordinasi dilakukan bersama tim pengawasan.')
-            ->assertSee(route('admin.report-evidence.preview', $evidence), false);
+            ->assertSee(route('admin.report-evidence.preview', $evidence), false)
+            ->assertSee('previewActivityEvidence', false)
+            ->assertDontSee(route('admin.report-evidence.download', $evidence), false);
 
         $this->assertDatabaseHas('report_status_histories', [
             'id' => $evidence->report_status_history_id,
@@ -212,6 +215,38 @@ class AdminDashboardTest extends TestCase
             'to_status' => ReportStatus::Coordination->value,
             'internal_note' => 'Koordinasi dilakukan bersama tim pengawasan.',
         ]);
+    }
+
+    public function test_reporter_image_opens_in_an_in_page_preview_instead_of_downloading(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $report = Report::factory()->create();
+        $evidence = ReportEvidence::factory()->create([
+            'report_id' => $report,
+            'original_name' => 'foto-lokasi.jpg',
+            'mime_type' => 'image/jpeg',
+        ]);
+
+        $this->actingAs($admin)
+            ->get(ReportResource::getUrl('view', ['record' => $report]))
+            ->assertSee('previewSubmissionEvidence', false)
+            ->assertDontSee(route('admin.report-evidence.download', $evidence), false);
+    }
+
+    public function test_reporter_pdf_remains_a_download_only_attachment(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $report = Report::factory()->create();
+        $evidence = ReportEvidence::factory()->create([
+            'report_id' => $report,
+            'original_name' => 'dokumen.pdf',
+            'mime_type' => 'application/pdf',
+        ]);
+
+        $this->actingAs($admin)
+            ->get(ReportResource::getUrl('view', ['record' => $report]))
+            ->assertSee(route('admin.report-evidence.download', $evidence), false)
+            ->assertDontSee(route('admin.report-evidence.preview', $evidence), false);
     }
 
     public function test_admin_can_add_activity_photos_without_changing_progress(): void
@@ -302,6 +337,27 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Atur akun dan akses admin yang membantu proses pengawasan.');
     }
 
+    public function test_super_admin_cannot_create_an_admin_with_a_weak_password(): void
+    {
+        $superAdmin = User::factory()->superAdmin()->create();
+
+        $this->actingAs($superAdmin);
+
+        Livewire::test(CreateUser::class)
+            ->fillForm([
+                'name' => 'Admin Baru',
+                'email' => 'admin-baru@example.test',
+                'password' => 'password123',
+                'is_active' => true,
+            ])
+            ->call('create')
+            ->assertHasFormErrors(['password']);
+
+        $this->assertDatabaseMissing(User::class, [
+            'email' => 'admin-baru@example.test',
+        ]);
+    }
+
     public function test_super_admin_can_deactivate_an_admin_without_deleting_the_account(): void
     {
         $superAdmin = User::factory()->superAdmin()->create();
@@ -328,5 +384,22 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($admin)
             ->get('/admin')
             ->assertForbidden();
+    }
+
+    public function test_mfa_secrets_are_encrypted_and_hidden_from_serialization(): void
+    {
+        $admin = User::factory()->create();
+
+        $admin->saveAppAuthenticationSecret('totp-secret');
+        $admin->saveAppAuthenticationRecoveryCodes(['recovery-code']);
+        $serializedAdmin = $admin->fresh()->toArray();
+
+        $this->assertArrayNotHasKey('app_authentication_secret', $serializedAdmin);
+        $this->assertArrayNotHasKey('app_authentication_recovery_codes', $serializedAdmin);
+        $this->assertDatabaseMissing(User::class, [
+            'id' => $admin->getKey(),
+            'app_authentication_secret' => 'totp-secret',
+            'app_authentication_recovery_codes' => json_encode(['recovery-code']),
+        ]);
     }
 }

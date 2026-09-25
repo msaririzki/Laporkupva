@@ -45,7 +45,44 @@ class ReportEvidenceControllerTest extends TestCase
             ->get(route('admin.report-evidence.preview', $evidence))
             ->assertOk()
             ->assertHeader('content-type', 'image/jpeg')
-            ->assertHeader('cache-control', 'max-age=300, private');
+            ->assertHeader('cache-control', 'no-store, private')
+            ->assertHeader('content-security-policy', "sandbox; default-src 'none'")
+            ->assertHeader('x-content-type-options', 'nosniff');
+    }
+
+    public function test_pdf_evidence_cannot_be_rendered_inline(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $evidence = ReportEvidence::factory()->create([
+            'path' => 'report-evidence/document.pdf',
+            'original_name' => 'dokumen.pdf',
+            'mime_type' => 'application/pdf',
+        ]);
+        Storage::disk('local')->put($evidence->path, '%PDF private contents');
+
+        $this->actingAs($admin)
+            ->get(route('admin.report-evidence.preview', $evidence))
+            ->assertNotFound();
+    }
+
+    public function test_inactive_admin_cannot_access_private_evidence(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create([
+            'role' => UserRole::Admin,
+            'is_active' => false,
+        ]);
+        $evidence = ReportEvidence::factory()->create();
+        Storage::disk('local')->put($evidence->path, 'private image contents');
+
+        $this->actingAs($admin)
+            ->get(route('admin.report-evidence.download', $evidence))
+            ->assertForbidden();
+
+        $this->actingAs($admin)
+            ->get(route('admin.report-evidence.preview', $evidence))
+            ->assertForbidden();
     }
 
     public function test_guest_cannot_preview_private_report_evidence(): void

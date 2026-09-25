@@ -3,11 +3,13 @@
 namespace App\Filament\Resources\Users\Schemas;
 
 use App\Enums\UserRole;
+use App\Rules\NoHtml;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Validation\Rules\Password;
 
 class UserForm
 {
@@ -22,7 +24,8 @@ class UserForm
                         TextInput::make('name')
                             ->label('Nama lengkap')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->rule(new NoHtml),
                         TextInput::make('email')
                             ->label('Alamat email')
                             ->email()
@@ -35,8 +38,9 @@ class UserForm
                             ->revealable()
                             ->required(fn (string $operation): bool => $operation === 'create')
                             ->dehydrated(fn (?string $state): bool => filled($state))
-                            ->minLength(8)
-                            ->helperText(fn (string $operation): string => $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah kata sandi.' : 'Gunakan minimal 8 karakter.')
+                            ->minLength(12)
+                            ->rule(Password::min(12)->mixedCase()->numbers()->symbols())
+                            ->helperText(fn (string $operation): string => $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah kata sandi.' : 'Minimal 12 karakter dengan huruf besar, huruf kecil, angka, dan simbol.')
                             ->columnSpanFull(),
                         Toggle::make('is_active')
                             ->label('Akun aktif')

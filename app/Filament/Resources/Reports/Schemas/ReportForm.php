@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Reports\Schemas;
 
+use App\Rules\NoHtml;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -19,6 +20,7 @@ class ReportForm
                             ->label('Catatan internal')
                             ->rows(8)
                             ->maxLength(5000)
+                            ->rule(new NoHtml)
                             ->columnSpanFull(),
                     ]),
             ]);

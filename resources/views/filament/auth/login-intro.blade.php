@@ -10,17 +10,36 @@
             >
         </div>
 
-        <span class="admin-login-badge">Portal Admin</span>
+        <span class="admin-login-badge">Admin</span>
     </div>
 
-    <div class="admin-login-copy">
-        <p class="admin-login-eyebrow">Pengawasan KUPVA NTB</p>
-        <h2>Kelola laporan dengan lebih terarah.</h2>
-        <p>Pantau laporan dan tindak lanjutnya dalam satu tempat yang aman.</p>
+    <div class="admin-login-menu" aria-label="Ruang kerja TAMBORA">
+        <p class="admin-login-menu-label">Ruang kerja</p>
+
+        <div class="admin-login-menu-item is-active">
+            <x-filament::icon icon="heroicon-m-squares-2x2" class="size-5" />
+            <span>Portal admin</span>
+        </div>
+
+        <div class="admin-login-menu-item">
+            <x-filament::icon icon="heroicon-m-document-text" class="size-5" />
+            <span>Kelola laporan</span>
+        </div>
+
+        <div class="admin-login-menu-item">
+            <x-filament::icon icon="heroicon-m-building-office-2" class="size-5" />
+            <span>Data KUPVA</span>
+        </div>
     </div>
 
     <div class="admin-login-security">
-        <x-filament::icon icon="heroicon-m-shield-check" class="size-5" />
-        <span>Akses khusus petugas berwenang</span>
+        <span class="admin-login-security-icon">
+            <x-filament::icon icon="heroicon-m-shield-check" class="size-5" />
+        </span>
+
+        <span class="admin-login-security-copy">
+            <strong>Akses internal</strong>
+            <small>Bank Indonesia · NTB</small>
+        </span>
     </div>
 </aside>

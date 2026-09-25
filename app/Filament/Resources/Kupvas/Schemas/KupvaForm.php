@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Kupvas\Schemas;
 
+use App\Rules\NoHtml;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -33,8 +34,8 @@ class KupvaForm
                 Section::make('Identitas KUPVA')
                     ->columns(2)
                     ->schema([
-                        TextInput::make('name')->label('Nama usaha')->required()->maxLength(255),
-                        TextInput::make('license_number')->label('Nomor izin')->unique(ignoreRecord: true)->maxLength(255),
+                        TextInput::make('name')->label('Nama usaha')->required()->maxLength(255)->rule(new NoHtml),
+                        TextInput::make('license_number')->label('Nomor izin')->unique(ignoreRecord: true)->maxLength(255)->rule(new NoHtml),
                         Select::make('license_status')->label('Status izin')->options([
                             'active' => 'Aktif',
                             'expired' => 'Kedaluwarsa',
@@ -47,9 +48,9 @@ class KupvaForm
                     ->columns(2)
                     ->schema([
                         Select::make('regency')->label('Kabupaten/kota')->options(self::REGENCIES)->searchable()->required(),
-                        TextInput::make('district')->label('Kecamatan')->maxLength(120),
-                        TextInput::make('village')->label('Desa/kelurahan')->maxLength(120),
-                        Textarea::make('address')->label('Alamat')->rows(3)->columnSpanFull(),
+                        TextInput::make('district')->label('Kecamatan')->maxLength(120)->rule(new NoHtml),
+                        TextInput::make('village')->label('Desa/kelurahan')->maxLength(120)->rule(new NoHtml),
+                        Textarea::make('address')->label('Alamat')->rows(3)->rule(new NoHtml)->columnSpanFull(),
                         TextInput::make('latitude')->label('Latitude')->numeric()->minValue(-11)->maxValue(-8),
                         TextInput::make('longitude')->label('Longitude')->numeric()->minValue(115)->maxValue(120),
                     ]),

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Reports\Schemas;
 
 use App\Models\Report;
 use App\Models\ReportEvidence;
+use Filament\Actions\Action;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\RepeatableEntry;
@@ -13,7 +14,9 @@ use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\View as SchemaView;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Contracts\View\View;
 
 class ReportInfolist
 {
@@ -115,8 +118,16 @@ class ReportInfolist
                                         ->schema([
                                             TextEntry::make('original_name')
                                                 ->label('Nama berkas')
-                                                ->icon(Heroicon::OutlinedArrowDownTray)
-                                                ->url(fn (ReportEvidence $record): string => route('admin.report-evidence.download', $record)),
+                                                ->icon(fn (ReportEvidence $record): Heroicon => self::isPreviewableImage($record)
+                                                    ? Heroicon::OutlinedEye
+                                                    : Heroicon::OutlinedArrowDownTray)
+                                                ->url(fn (ReportEvidence $record): ?string => self::isPreviewableImage($record)
+                                                    ? null
+                                                    : route('admin.report-evidence.download', $record))
+                                                ->action(
+                                                    self::previewAction('previewSubmissionEvidence')
+                                                        ->visible(fn (ReportEvidence $record): bool => self::isPreviewableImage($record)),
+                                                ),
                                             TextEntry::make('mime_type')
                                                 ->label('Tipe berkas'),
                                             TextEntry::make('size')
@@ -144,8 +155,8 @@ class ReportInfolist
                                             ImageEntry::make('preview_url')
                                                 ->hiddenLabel()
                                                 ->state(fn (ReportEvidence $record): string => route('admin.report-evidence.preview', $record))
-                                                ->url(fn (ReportEvidence $record): string => route('admin.report-evidence.download', $record))
-                                                ->openUrlInNewTab()
+                                                ->action(self::previewAction('previewActivityEvidence'))
+                                                ->alt(fn (ReportEvidence $record): string => 'Pratinjau '.$record->original_name)
                                                 ->imageHeight('180px')
                                                 ->extraImgAttributes([
                                                     'class' => 'w-full rounded-xl object-cover',
@@ -262,5 +273,28 @@ class ReportInfolist
         }
 
         return number_format($bytes / 1024, 1, ',', '.').' KB';
+    }
+
+    private static function previewAction(string $name): Action
+    {
+        return Action::make($name)
+            ->modalHeading(fn (ReportEvidence $record): string => 'Pratinjau '.$record->original_name)
+            ->modalDescription('Foto ditampilkan langsung tanpa meninggalkan halaman laporan.')
+            ->modalContent(fn (ReportEvidence $record): View => view(
+                'filament.reports.evidence-preview',
+                ['reportEvidence' => $record],
+            ))
+            ->modalWidth(Width::FiveExtraLarge)
+            ->modalSubmitAction(false)
+            ->modalCancelActionLabel('Tutup');
+    }
+
+    private static function isPreviewableImage(ReportEvidence $reportEvidence): bool
+    {
+        return in_array($reportEvidence->mime_type, [
+            'image/jpeg',
+            'image/png',
+            'image/webp',
+        ], true);
     }
 }

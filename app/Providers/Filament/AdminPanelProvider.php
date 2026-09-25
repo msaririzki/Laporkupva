@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Auth\Login;
 use App\Filament\Pages\Dashboard;
+use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -30,6 +31,14 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(Login::class)
+            ->profile()
+            ->multiFactorAuthentication([
+                AppAuthentication::make()
+                    ->brandName('TAMBORA · BI NTB')
+                    ->recoverable()
+                    ->recoveryCodeCount(10)
+                    ->codeWindow(4),
+            ], isRequired: (bool) config('tambora.require_admin_mfa'))
             ->brandName('TAMBORA · BI NTB')
             ->brandLogo(asset('images/brand/tambora.webp'))
             ->brandLogoHeight('3rem')

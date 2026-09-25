@@ -44,6 +44,11 @@
             <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data" id="report-form" class="rounded-3xl border border-slate-200 bg-white shadow-soft" novalidate>
                 @csrf
 
+                <div class="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+                    <label for="website">Situs web</label>
+                    <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+                </div>
+
                 <section class="form-step p-5 sm:p-8" data-step="1">
                     <div class="form-heading"><span>1</span><div><h2>Apa yang terjadi?</h2><p>Isi informasi inti yang Anda ketahui. Tidak harus menggunakan bahasa resmi.</p></div></div>
                     <div class="mt-6 grid gap-5 sm:grid-cols-2">

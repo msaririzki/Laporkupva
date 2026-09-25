@@ -14,6 +14,12 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        if (! app()->isLocal()) {
+            $this->command?->warn('Seeder utama hanya dapat dijalankan pada lingkungan lokal.');
+
+            return;
+        }
+
         $email = config('tambora.seed_super_admin_email');
         $password = config('tambora.seed_super_admin_password');
 
@@ -33,7 +39,7 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        if (! app()->isLocal() || Report::query()->exists()) {
+        if (Report::query()->exists()) {
             return;
         }
 

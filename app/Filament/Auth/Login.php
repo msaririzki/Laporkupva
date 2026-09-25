@@ -16,12 +16,12 @@ class Login extends BaseLogin
 
     public function getHeading(): string|Htmlable|null
     {
-        return 'Selamat datang';
+        return 'Masuk ke TAMBORA';
     }
 
     public function getSubheading(): string|Htmlable|null
     {
-        return 'Masuk untuk melanjutkan ke dasbor admin.';
+        return 'Gunakan akun admin Anda.';
     }
 
     public function hasLogo(): bool
@@ -48,7 +48,7 @@ class Login extends BaseLogin
     protected function getAuthenticateFormAction(): Action
     {
         return parent::getAuthenticateFormAction()
-            ->label('Masuk ke dasbor')
+            ->label('Masuk')
             ->icon('heroicon-m-arrow-right-on-rectangle');
     }
 }
