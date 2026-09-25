@@ -69,16 +69,16 @@
 
     <!-- Public Service Footer (Clean, Centered, Minimal, Stylish) -->
     <footer class="mt-16 sm:mt-20 border-t border-[#E2E8F0] bg-white">
-        <div class="public-container py-10 sm:py-12 text-center">
-            <!-- Center Logos: TAMBORA + Bank Indonesia -->
+        <div class="public-container py-12 sm:py-14 text-center">
+            <!-- Center Logos: TAMBORA + Bank Indonesia (Slightly enlarged for clear visibility) -->
             <div class="flex items-center justify-center gap-4 sm:gap-6">
-                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-7 sm:h-8 w-auto object-contain" width="720" height="316" loading="lazy">
-                <span class="h-5 w-px bg-[#E2E8F0]" aria-hidden="true"></span>
-                <img src="{{ asset('images/brand/bank-indonesia-full.webp') }}" alt="Bank Indonesia" class="h-6 sm:h-7 w-auto object-contain" width="880" height="158" loading="lazy">
+                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-9 sm:h-10 w-auto object-contain" width="720" height="316" loading="lazy">
+                <span class="h-6 w-px bg-[#CBD5E1]" aria-hidden="true"></span>
+                <img src="{{ asset('images/brand/bank-indonesia-full.webp') }}" alt="Bank Indonesia" class="h-8 sm:h-9 w-auto object-contain" width="880" height="158" loading="lazy">
             </div>
 
-            <!-- Compact Interactive Elements -->
-            <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <!-- Compact Interactive Elements with comfortable spacing -->
+            <div class="mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-3">
                 <!-- Pemberitahuan Dropdown / Details -->
                 <details class="group relative inline-block text-left">
                     <summary class="inline-flex cursor-pointer list-none select-none items-center gap-1.5 rounded-full border border-[#E2E8F0] bg-[#F8FAFC] px-4 py-1.5 text-xs font-semibold text-[#0F172A] hover:bg-slate-100 hover:border-slate-300 transition-colors">
@@ -105,14 +105,14 @@
             </div>
 
             <!-- Akses Petugas (Discreet secondary link, satisfies tests) -->
-            <div class="mt-4">
+            <div class="mt-5">
                 <a href="{{ route('filament.admin.auth.login') }}" aria-label="Masuk ke portal admin" class="text-xs text-slate-400 hover:text-[#2563EB] transition-colors">
                     Akses petugas
                 </a>
             </div>
 
             <!-- Copyright Line -->
-            <div class="mt-6 pt-6 border-t border-[#E2E8F0] text-center text-[11px] sm:text-xs text-slate-400">
+            <div class="mt-8 pt-6 border-t border-[#E2E8F0] text-center text-[11px] sm:text-xs text-slate-400">
                 © {{ date('Y') }} Kantor Perwakilan Bank Indonesia Provinsi NTB · TAMBORA (laporkupva.id)
             </div>
         </div>

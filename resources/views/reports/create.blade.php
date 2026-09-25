@@ -28,10 +28,15 @@
                     Ceritakan kejadian, tentukan lokasi, lalu kirim laporan secara anonim.
                 </p>
 
-                <!-- Indicator Bullets -->
-                <p class="mt-3 text-xs font-semibold text-slate-400">
-                    ±3 menit &nbsp;·&nbsp; Bukti foto opsional &nbsp;·&nbsp; Tanpa identitas
-                </p>
+                <!-- Single Simple Badge: ±3 menit with small clock icon -->
+                <div class="mt-3 flex items-center lg:justify-center">
+                    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100/90 px-3 py-1 rounded-full border border-slate-200/60">
+                        <svg class="size-3.5 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>±3 menit</span>
+                    </span>
+                </div>
             </div>
         </div>
     </section>
@@ -60,9 +65,9 @@
                     </div>
 
                     @foreach ([
-                        ['step' => 1, 'num' => '01', 'name' => 'Kejadian', 'desc' => 'Ceritakan kejadian'],
-                        ['step' => 2, 'num' => '02', 'name' => 'Lokasi', 'desc' => 'Tentukan lokasi'],
-                        ['step' => 3, 'num' => '03', 'name' => 'Bukti', 'desc' => 'Tambahkan foto'],
+                        ['step' => 1, 'num' => '01', 'name' => 'Rincian Laporan', 'desc' => 'Ceritakan kejadian'],
+                        ['step' => 2, 'num' => '02', 'name' => 'Lokasi Kejadian', 'desc' => 'Tentukan lokasi'],
+                        ['step' => 3, 'num' => '03', 'name' => 'Bukti Pendukung', 'desc' => 'Tambahkan foto'],
                     ] as $item)
                         <button
                             type="button"
@@ -101,7 +106,7 @@
                 </div>
 
                 <!-- STEP 1: KEJADIAN -->
-                <section class="form-step" data-step="1">
+                <section class="form-step max-w-3xl mx-auto" data-step="1">
                     <div class="border-b border-slate-100 pb-5">
                         <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB] mb-2.5">
                             <span>Langkah 01</span>
@@ -124,7 +129,6 @@
                                     <option value="penolakan_rupiah" @selected(old('incident_type') === 'penolakan_rupiah')>Penolakan penggunaan Rupiah</option>
                                     <option value="lainnya" @selected(old('incident_type') === 'lainnya')>Lainnya terkait penukaran valuta asing</option>
                                 </select>
-                                <p class="form-helper">Pilih jenis kejadian yang sesuai dengan laporan Anda.</p>
                                 @error('incident_type')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
 
@@ -148,8 +152,7 @@
                                     <label class="form-label" for="business_name">Nama atau ciri tempat</label>
                                     <span class="text-xs text-slate-400">Opsional</span>
                                 </div>
-                                <input class="form-control @error('business_name') is-invalid @enderror" id="business_name" name="business_name" value="{{ old('business_name') }}" maxlength="255" autocomplete="off" placeholder="Contoh: Money Changer XYZ atau toko dekat pasar">
-                                <p class="form-helper">Nama tempat, papan nama usaha, atau ciri fisik lokasi.</p>
+                                <input class="form-control @error('business_name') is-invalid @enderror" id="business_name" name="business_name" value="{{ old('business_name') }}" maxlength="255" autocomplete="off" placeholder="Nama toko, usaha, atau ciri fisik tempat">
                                 @error('business_name')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
 
@@ -160,7 +163,6 @@
                                     <span class="text-xs text-slate-400">Opsional</span>
                                 </div>
                                 <input class="form-control @error('incident_time') is-invalid @enderror" id="incident_time" name="incident_time" type="time" value="{{ old('incident_time') }}">
-                                <p class="form-helper">Contoh: 14:30 (jam saat aktivitas berlangsung).</p>
                                 @error('incident_time')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
                         </div>
@@ -168,7 +170,7 @@
                         <!-- Kronologi Kejadian -->
                         <div>
                             <label class="form-label" for="description">Kronologi kejadian <span class="text-[#DC4C4C]">*</span></label>
-                            <textarea class="form-control min-h-32 sm:min-h-36 py-3 @error('description') is-invalid @enderror" id="description" name="description" minlength="20" maxlength="5000" placeholder="Contoh: Pada sore hari saya melihat kegiatan penukaran uang asing tanpa plang nama resmi Bank Indonesia di dekat area..." required>{{ old('description') }}</textarea>
+                            <textarea class="form-control min-h-32 sm:min-h-36 py-3 @error('description') is-invalid @enderror" id="description" name="description" minlength="20" maxlength="5000" placeholder="Jelaskan kronologi kejadian secara singkat dan jelas..." required>{{ old('description') }}</textarea>
                             <div class="mt-1.5 flex items-center justify-between text-xs text-[#64748B]">
                                 <span>Minimal 20 karakter.</span>
                                 <span id="description-count" class="font-mono text-slate-400">0/5000</span>
@@ -326,7 +328,7 @@
                 </section>
 
                 <!-- STEP 3: BUKTI -->
-                <section class="form-step hidden" data-step="3">
+                <section class="form-step hidden max-w-3xl mx-auto" data-step="3">
                     <div class="border-b border-slate-100 pb-5">
                         <div class="flex items-center justify-between">
                             <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB]">
@@ -363,10 +365,9 @@
                         </div>
                     </div>
 
-                    <!-- Desktop 2-Column: Evidence Upload & Confirmation Details -->
-                    <div class="mt-6 grid gap-6 lg:grid-cols-12 lg:items-start">
-                        <!-- Left: Upload Evidence Dropzone -->
-                        <div class="lg:col-span-7">
+                    <!-- Evidence Upload Dropzone (Proportional desktop width, centered) -->
+                    <div class="mt-6 space-y-6">
+                        <div>
                             <div class="flex items-center justify-between mb-2">
                                 <label class="form-label mb-0" for="evidence">Punya foto atau dokumen?</label>
                                 <span class="text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-0.5 rounded-full">Boleh dilewati</span>
@@ -401,52 +402,45 @@
                             @error('evidence.*')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
 
-                        <!-- Right: Post-Submission Information & Confirmation -->
-                        <div class="lg:col-span-5 space-y-4">
-                            <!-- Post-Submission Information Callout -->
-                            <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-5 text-xs sm:text-sm leading-relaxed text-[#0F172A] shadow-xs">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="grid size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
-                                        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
-                                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                                        </svg>
-                                    </div>
-                                    <strong class="font-bold text-[#0F172A]">Setelah laporan terkirim:</strong>
+                        <!-- Post-Submission Information Callout -->
+                        <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-5 text-xs sm:text-sm leading-relaxed text-[#0F172A] shadow-xs">
+                            <div class="flex items-center gap-2.5">
+                                <div class="grid size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                    </svg>
                                 </div>
-                                <p class="mt-2.5 text-xs sm:text-sm text-[#475569] leading-relaxed">
-                                    Anda akan memperoleh <strong class="text-[#0F172A]">Kode Laporan</strong> dan <strong class="text-[#0F172A]">PIN Rahasia 6 digit</strong>. Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
-                                </p>
+                                <strong class="font-bold text-[#0F172A]">Setelah laporan terkirim:</strong>
                             </div>
-
-                            <!-- Good Faith Confirmation -->
-                            <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-colors hover:border-[#2563EB]/40 hover:bg-blue-50/20">
-                                <input class="mt-1 size-4.5 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
-                                <span class="text-xs sm:text-sm leading-relaxed text-[#0F172A] font-medium">
-                                    Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span>
-                                </span>
-                            </label>
-                            @error('good_faith')<p class="form-error mt-2">{{ $message }}</p>@enderror
+                            <p class="mt-2.5 text-xs sm:text-sm text-[#475569] leading-relaxed">
+                                Anda akan memperoleh <strong class="text-[#0F172A]">Kode Laporan</strong> dan <strong class="text-[#0F172A]">PIN Rahasia 6 digit</strong>. Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
+                            </p>
                         </div>
+
+                        <!-- Good Faith Confirmation -->
+                        <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-colors hover:border-[#2563EB]/40 hover:bg-blue-50/20">
+                            <input class="mt-1 size-4.5 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
+                            <span class="text-xs sm:text-sm leading-relaxed text-[#0F172A] font-medium">
+                                Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span>
+                            </span>
+                        </label>
+                        @error('good_faith')<p class="form-error mt-2">{{ $message }}</p>@enderror
                     </div>
                 </section>
 
-                <!-- Action Area: Clean Bar (NO arrow icons!) -->
+                <!-- Action Area: Clean Bar (NO arrow icons, buttons side-by-side on desktop) -->
                 <div class="sticky bottom-0 z-30 -mx-6 sm:-mx-9 lg:-mx-12 -mb-6 sm:-mb-9 lg:-mb-12 mt-8 bg-white/95 border-t border-[#E2E8F0] p-4 sm:p-6 lg:p-8 backdrop-blur-md rounded-b-3xl">
-                    <div class="flex items-center justify-between gap-4">
-                        <div>
-                            <button type="button" id="previous-step" class="hidden min-h-11 sm:min-h-12 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-5 py-2.5 text-sm font-semibold text-[#0F172A] shadow-2xs hover:bg-slate-50 transition-colors">
-                                <span>Kembali</span>
-                            </button>
-                        </div>
-                        <div class="flex-1 lg:flex-initial flex justify-end">
-                            <button type="button" id="next-step" class="w-full lg:w-auto lg:min-w-[200px] min-h-11 sm:min-h-12 items-center justify-center rounded-xl bg-[#2563EB] px-6 py-2.5 text-center text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
-                                <span>Lanjut ke lokasi</span>
-                            </button>
-                            <button type="submit" id="submit-report" class="w-full lg:w-auto lg:min-w-[200px] min-h-11 sm:min-h-12 items-center justify-center rounded-xl bg-[#2563EB] px-6 py-2.5 text-center text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs hidden">
-                                <span>Kirim laporan</span>
-                            </button>
-                        </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
+                        <button type="button" id="previous-step" class="hidden min-h-11 sm:min-h-12 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-5 sm:px-6 py-2.5 text-sm font-semibold text-[#0F172A] shadow-2xs hover:bg-slate-50 transition-colors shrink-0 w-auto">
+                            <span>Kembali</span>
+                        </button>
+                        <button type="button" id="next-step" class="flex-1 sm:flex-initial sm:w-auto min-h-11 sm:min-h-12 items-center justify-center rounded-xl bg-[#2563EB] px-6 sm:px-7 py-2.5 text-center text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
+                            <span>Lanjut ke lokasi</span>
+                        </button>
+                        <button type="submit" id="submit-report" class="flex-1 sm:flex-initial sm:w-auto min-h-11 sm:min-h-12 items-center justify-center rounded-xl bg-[#2563EB] px-6 sm:px-7 py-2.5 text-center text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs hidden">
+                            <span>Kirim laporan</span>
+                        </button>
                     </div>
                 </div>
             </form>

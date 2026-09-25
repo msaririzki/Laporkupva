@@ -211,7 +211,7 @@
         @apply relative grid grid-cols-3 items-start;
     }
     .stepper-track {
-        @apply absolute left-[16.666%] right-[16.666%] top-5 sm:top-5.5 -translate-y-1/2 h-[2px] bg-[#E2E8F0] z-0;
+        @apply absolute left-[16.666%] right-[16.666%] top-5 sm:top-5.5 -translate-y-1/2 h-[2px] bg-[#CBD5E1] z-0;
     }
     .stepper-track-progress {
         @apply h-full bg-[#2563EB] transition-all duration-300 ease-out;
