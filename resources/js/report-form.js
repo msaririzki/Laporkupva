@@ -381,7 +381,7 @@ if (form) {
         nextButton.classList.toggle('hidden', currentStep === steps.length);
         submitButton.classList.toggle('hidden', currentStep !== steps.length);
         stepStatus.textContent = `Langkah ${currentStep} dari ${steps.length}`;
-        nextButton.textContent = currentStep === 1 ? 'Lanjut ke lokasi →' : 'Lanjut ke bukti →';
+        nextButton.textContent = currentStep === 1 ? 'Lanjut ke lokasi' : 'Lanjut ke bukti';
 
         if (currentStep === 2) {
             initializeMap();
@@ -738,7 +738,7 @@ if (form) {
             isOptimizingEvidence = false;
             evidence.disabled = false;
             submitButton.disabled = false;
-            submitButton.textContent = 'Kirim sekarang';
+            submitButton.textContent = 'Kirim laporan';
             uploadZone.removeAttribute('aria-busy');
         }
     });
