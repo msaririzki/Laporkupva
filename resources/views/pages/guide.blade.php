@@ -33,7 +33,7 @@
             <div class="mt-10 rounded-2xl sm:rounded-3xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-9">
                 <p class="eyebrow">Pertanyaan Umum</p>
                 <h2 class="mt-1.5 text-xl font-bold text-[#0B2342] sm:text-2xl">Hal yang sering ditanyakan masyarakat</h2>
-                
+
                 <div class="mt-6 divide-y divide-[#E2E8F0]">
                     @foreach ([
                         ['Apakah saya harus membuat akun?', 'Tidak. TAMBORA tidak meminta pendaftaran akun, nama, NIK, alamat email, atau nomor telepon pelapor. Semua laporan bersifat 100% anonim.'],

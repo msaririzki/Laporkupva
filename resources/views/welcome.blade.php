@@ -12,12 +12,12 @@
                     <span class="size-1.5 rounded-full bg-[#F2B84B]"></span>
                     <span>Kanal Pelaporan Resmi Wilayah NTB</span>
                 </div>
-                
+
                 <h1 class="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-white">
                     Berani melapor,<br>
                     <span class="text-[#F2B84B]">bersama menjaga NTB.</span>
                 </h1>
-                
+
                 <p class="mt-4 max-w-xl text-xs sm:text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">
                     Laporkan dugaan kegiatan usaha penukaran valuta asing (money changer) yang tidak berizin atau transaksi mencurigakan. Identitas Anda tidak diminta dan proses penanganannya dapat dipantau secara mandiri.
                 </p>
@@ -134,7 +134,7 @@
                 <p class="eyebrow">Keamanan Terjamin</p>
                 <h2 class="section-title">Melapor dengan tenang, diproses dengan pasti.</h2>
                 <p class="section-lead">TAMBORA dirancang agar seluruh lapisan masyarakat dapat menyampaikan informasi tanpa rasa cemas. Sistem tidak merekam identitas pribadi Anda.</p>
-                
+
                 <div class="mt-6 flex flex-col sm:flex-row gap-3">
                     <a href="{{ route('reports.create') }}" class="button-primary text-xs sm:text-sm">
                         <span>Buat laporan sekarang</span>

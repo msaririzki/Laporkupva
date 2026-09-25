@@ -8,7 +8,7 @@
 
 @theme {
     --font-sans: 'Plus Jakarta Sans', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
-    
+
     /* TAMBORA Official Refined Palette */
     --color-navy-primary: #0B2342;
     --color-navy-secondary: #163B68;
@@ -162,7 +162,7 @@
     .form-helper {
         @apply mt-1.5 text-xs sm:text-[13px] text-[#64748B] leading-relaxed;
     }
-    
+
     .form-control {
         @apply block h-12 w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm sm:text-base text-[#0B2342] transition-colors duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15;
     }
@@ -219,15 +219,15 @@
     .stepper-track-progress {
         @apply h-full bg-[#0B2342] transition-all duration-300 ease-out;
     }
-    
+
     .stepper-step, .form-progress {
         @apply relative z-10 flex flex-col items-center text-center cursor-pointer bg-transparent border-0 p-0 shadow-none disabled:cursor-default w-full focus:outline-none transition-all duration-200 px-1;
     }
-    
+
     .stepper-circle, .form-progress-number {
         @apply size-10 sm:size-11 rounded-full border border-slate-200 bg-white text-slate-400 flex items-center justify-center font-bold text-sm sm:text-base transition-all duration-200 shrink-0;
     }
-    
+
     .stepper-title, .stepper-label {
         @apply mt-2 text-xs sm:text-sm font-semibold tracking-tight text-slate-500 transition-colors duration-200 bg-transparent border-0 p-0 leading-tight text-center;
     }

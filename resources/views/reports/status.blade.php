@@ -172,7 +172,7 @@
                             placeholder="Tuliskan informasi tambahan atau klarifikasi untuk petugas..."
                         >{{ old('body') }}</textarea>
                         @error('body')<p class="form-error">{{ $message }}</p>@enderror
-                        
+
                         <div class="mt-3 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
                             <p class="text-[11px] leading-relaxed text-[#64748B]">Jangan menuliskan nama, NIK, nomor telepon, atau data sensitif pelapor.</p>
                             <button type="submit" class="button-primary shrink-0 text-xs sm:text-sm font-semibold py-2">

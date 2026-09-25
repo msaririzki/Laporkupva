@@ -17,7 +17,7 @@
                 <div class="p-5 sm:p-7">
                     <div class="rounded-xl border border-blue-100 bg-[#EAF2FF]/50 p-4 sm:p-5">
                         <p class="text-center text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">Simpan akses rahasia Anda</p>
-                        
+
                         <div class="mt-3 grid gap-3 sm:grid-cols-2">
                             <div class="rounded-lg bg-white border border-[#E2E8F0] p-3 text-center">
                                 <span class="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Kode laporan</span>
