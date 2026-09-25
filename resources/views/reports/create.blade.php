@@ -336,27 +336,36 @@
                     </div>
 
                     <!-- Review Summary Cards (Compact, Balanced) -->
-                    <div class="mt-4 sm:mt-6 grid grid-cols-3 gap-2 sm:gap-3" aria-label="Ringkasan laporan">
-                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 sm:p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
-                            <div class="flex items-center gap-1.5 sm:gap-2">
-                                <span class="grid size-4.5 sm:size-6 place-items-center rounded-md bg-blue-50 text-[10px] sm:text-[11px] font-bold text-[#2563EB]">1</span>
-                                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#64748B] truncate">Jenis kejadian</span>
+                    <div class="mt-4 sm:mt-6 grid grid-cols-3 gap-1.5 sm:gap-3" aria-label="Ringkasan laporan">
+                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-2 sm:p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
+                            <div class="flex items-center gap-1 sm:gap-2">
+                                <span class="grid size-4 sm:size-6 place-items-center rounded-md bg-blue-50 text-[9px] sm:text-[11px] font-bold text-[#2563EB]">1</span>
+                                <span class="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-[#64748B] truncate">
+                                    <span class="sm:hidden">Kejadian</span>
+                                    <span class="hidden sm:inline">Jenis kejadian</span>
+                                </span>
                             </div>
-                            <strong id="review-incident" class="mt-1 sm:mt-2 block text-xs sm:text-sm font-bold text-[#0F172A] truncate leading-snug">—</strong>
+                            <strong id="review-incident" class="mt-1 sm:mt-2 block text-[11px] sm:text-sm font-bold text-[#0F172A] truncate leading-snug">—</strong>
                         </div>
-                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 sm:p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
-                            <div class="flex items-center gap-1.5 sm:gap-2">
-                                <span class="grid size-4.5 sm:size-6 place-items-center rounded-md bg-emerald-50 text-[10px] sm:text-[11px] font-bold text-emerald-600">2</span>
-                                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#64748B] truncate">Waktu kejadian</span>
+                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-2 sm:p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
+                            <div class="flex items-center gap-1 sm:gap-2">
+                                <span class="grid size-4 sm:size-6 place-items-center rounded-md bg-emerald-50 text-[9px] sm:text-[11px] font-bold text-emerald-600">2</span>
+                                <span class="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-[#64748B] truncate">
+                                    <span class="sm:hidden">Waktu</span>
+                                    <span class="hidden sm:inline">Waktu kejadian</span>
+                                </span>
                             </div>
-                            <strong id="review-date" class="mt-1 sm:mt-2 block text-xs sm:text-sm font-bold text-[#0F172A] truncate leading-snug">—</strong>
+                            <strong id="review-date" class="mt-1 sm:mt-2 block text-[11px] sm:text-sm font-bold text-[#0F172A] truncate leading-snug">—</strong>
                         </div>
-                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 sm:p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
-                            <div class="flex items-center gap-1.5 sm:gap-2">
-                                <span class="grid size-4.5 sm:size-6 place-items-center rounded-md bg-amber-50 text-[10px] sm:text-[11px] font-bold text-amber-600">3</span>
-                                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#64748B] truncate">Lokasi kejadian</span>
+                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-2 sm:p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
+                            <div class="flex items-center gap-1 sm:gap-2">
+                                <span class="grid size-4 sm:size-6 place-items-center rounded-md bg-amber-50 text-[9px] sm:text-[11px] font-bold text-amber-600">3</span>
+                                <span class="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-[#64748B] truncate">
+                                    <span class="sm:hidden">Lokasi</span>
+                                    <span class="hidden sm:inline">Lokasi kejadian</span>
+                                </span>
                             </div>
-                            <strong id="review-location" class="mt-1 sm:mt-2 block text-xs sm:text-sm font-bold text-[#0F172A] truncate leading-snug">—</strong>
+                            <strong id="review-location" class="mt-1 sm:mt-2 block text-[11px] sm:text-sm font-bold text-[#0F172A] truncate leading-snug">—</strong>
                         </div>
                     </div>
 
@@ -398,42 +407,44 @@
                         </div>
 
                         <!-- Post-Submission Information Callout -->
-                        <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-4 sm:p-5 text-xs sm:text-sm leading-relaxed text-[#0F172A] shadow-xs">
-                            <div class="flex items-center gap-2.5">
-                                <div class="grid size-7 sm:size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
-                                    <svg class="size-4 sm:size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-3 sm:p-5 text-xs sm:text-sm leading-relaxed text-[#0F172A] shadow-xs">
+                            <div class="flex items-center gap-2 sm:gap-2.5">
+                                <div class="grid size-6 sm:size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
+                                    <svg class="size-3.5 sm:size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                                     </svg>
                                 </div>
-                                <strong class="font-bold text-[#0F172A]">Setelah laporan terkirim:</strong>
+                                <strong class="font-bold text-[#0F172A] text-xs sm:text-sm">Setelah laporan terkirim:</strong>
                             </div>
-                            <p class="mt-2 text-xs sm:text-sm text-[#475569] leading-relaxed">
-                                Anda akan memperoleh <strong class="text-[#0F172A]">Kode Laporan</strong> dan <strong class="text-[#0F172A]">PIN Rahasia 6 digit</strong>. Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
+                            <p class="mt-1.5 sm:mt-2 text-[11px] sm:text-sm text-[#475569] leading-normal sm:leading-relaxed">
+                                <span class="sm:hidden">Anda akan mendapat <strong class="text-[#0F172A]">Kode Laporan</strong> & <strong class="text-[#0F172A]">PIN 6 digit</strong> untuk cek status tanpa akun.</span>
+                                <span class="hidden sm:inline">Anda akan memperoleh <strong class="text-[#0F172A]">Kode Laporan</strong> dan <strong class="text-[#0F172A]">PIN Rahasia 6 digit</strong>. Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.</span>
                             </p>
                         </div>
 
                         <!-- Good Faith Confirmation (Compact, muted when checked) -->
-                        <label class="group flex cursor-pointer items-start gap-2.5 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 sm:p-3.5 shadow-xs transition-colors hover:border-[#2563EB]/40 hover:bg-blue-50/20 has-[:checked]:bg-slate-50/80 has-[:checked]:border-slate-200">
-                            <input class="peer mt-0.5 size-4 shrink-0 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
-                            <span class="text-[11px] sm:text-xs leading-relaxed text-[#0F172A] font-medium peer-checked:text-[#64748B] peer-checked:font-normal transition-colors">
-                                Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span>
+                        <label class="group flex cursor-pointer items-start gap-2 sm:gap-2.5 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 sm:p-3.5 shadow-xs transition-colors hover:border-[#2563EB]/40 hover:bg-blue-50/20 has-[:checked]:bg-slate-50/80 has-[:checked]:border-slate-200">
+                            <input class="peer mt-0.5 size-3.5 sm:size-4 shrink-0 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
+                            <span class="text-[10px] sm:text-xs leading-normal sm:leading-relaxed text-[#0F172A] font-medium peer-checked:text-[#64748B] peer-checked:font-normal transition-colors">
+                                <span class="sm:hidden">Laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata. <span class="text-[#DC2626] font-bold">*</span></span>
+                                <span class="hidden sm:inline">Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span></span>
                             </span>
                         </label>
                         @error('good_faith')<p class="form-error mt-2">{{ $message }}</p>@enderror
                     </div>
                 </section>
 
-                <!-- Action Area: Clean Bar (Compact buttons) -->
+                <!-- Action Area: Clean Bar (Compact buttons, close together on mobile and desktop) -->
                 <div class="sticky bottom-0 z-30 -mx-6 sm:-mx-9 lg:-mx-12 -mb-6 sm:-mb-9 lg:-mb-12 mt-6 bg-white/95 border-t border-[#E2E8F0] p-3.5 sm:p-5 lg:p-6 backdrop-blur-md rounded-b-3xl">
-                    <div class="flex items-center justify-between sm:justify-end gap-2.5 sm:gap-3">
-                        <button type="button" id="previous-step" class="hidden min-h-9 sm:min-h-10 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-[#0F172A] shadow-2xs hover:bg-slate-50 transition-colors shrink-0 w-auto">
+                    <div class="flex items-center justify-end gap-2 sm:gap-3">
+                        <button type="button" id="previous-step" class="hidden min-h-9 sm:min-h-10 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-[#0F172A] shadow-2xs hover:bg-slate-50 transition-colors shrink-0 w-auto">
                             <span>Kembali</span>
                         </button>
-                        <button type="button" id="next-step" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
+                        <button type="button" id="next-step" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-3.5 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
                             <span>Lanjut ke lokasi</span>
                         </button>
-                        <button type="submit" id="submit-report" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs hidden">
+                        <button type="submit" id="submit-report" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-3.5 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs hidden">
                             <span>Kirim laporan</span>
                         </button>
                     </div>
