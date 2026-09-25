@@ -31,18 +31,20 @@
                     ['02', 'Tentukan titik', 'Gunakan fitur GPS saat berada di tempat kejadian atau cari nama wilayah lalu sesuaikan penanda pada peta interaktif NTB.'],
                     ['03', 'Simpan akses', 'Setelah laporan terkirim, catat Kode Laporan dan PIN 6 digit karena akses tidak dapat dipulihkan demi privasi.'],
                 ] as [$number, $title, $description])
-                    <article class="info-card">
-                        <span class="step-number">{{ $number }}</span>
-                        <h2 class="mt-4 text-sm sm:text-base font-bold text-[#0B2342]">{{ $title }}</h2>
-                        <p class="mt-2 text-xs leading-5 text-[#64748B]">{{ $description }}</p>
+                    <article class="flex flex-col justify-between rounded-3xl border border-[#E2E8F0] bg-white p-6 shadow-xs transition-all hover:shadow-md hover:border-[#2563EB]/40">
+                        <div>
+                            <span class="inline-flex size-8 items-center justify-center rounded-full bg-[#2563EB] text-xs font-bold text-white shadow-2xs">{{ $number }}</span>
+                            <h2 class="mt-4 text-base font-bold text-[#0B2342]">{{ $title }}</h2>
+                            <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">{{ $description }}</p>
+                        </div>
                     </article>
                 @endforeach
             </div>
 
             <!-- FAQ Accordion -->
-            <div class="mt-10 rounded-2xl sm:rounded-3xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-9">
-                <p class="eyebrow">Pertanyaan Umum</p>
-                <h2 class="mt-1.5 text-xl font-bold text-[#0B2342] sm:text-2xl">Hal yang sering ditanyakan masyarakat</h2>
+            <div class="mt-10 rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-9 shadow-xs">
+                <span class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB]">Pertanyaan Umum</span>
+                <h2 class="mt-3 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0B2342]">Hal yang sering ditanyakan masyarakat</h2>
 
                 <div class="mt-6 divide-y divide-[#E2E8F0]">
                     @foreach ([
@@ -64,14 +66,14 @@
                 </div>
             </div>
 
-            <!-- Bottom CTA Banner -->
-            <div class="mt-8 flex flex-col items-center justify-between gap-5 rounded-2xl bg-[#0B2342] p-6 text-center text-white sm:flex-row sm:text-left">
+            <!-- Bottom CTA Banner (Clean Card Style) -->
+            <div class="mt-8 flex flex-col items-center justify-between gap-5 rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-8 shadow-xs text-center sm:flex-row sm:text-left">
                 <div>
-                    <h2 class="text-base sm:text-lg font-bold">Siap menyampaikan laporan?</h2>
-                    <p class="mt-1 text-xs text-slate-300">Partisipasi Anda sangat berarti bagi pengawasan KUPVA di Nusa Tenggara Barat.</p>
+                    <h2 class="text-base sm:text-lg font-bold text-[#0B2342]">Siap menyampaikan laporan?</h2>
+                    <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Sampaikan laporan KUPVA sekarang secara anonim, cepat, dan terlindungi.</p>
                 </div>
-                <a href="{{ route('reports.create') }}" class="button-primary shrink-0 text-xs sm:text-sm">
-                    <span>Buat laporan anonim</span>
+                <a href="{{ route('reports.create') }}" class="button-primary shrink-0 text-xs sm:text-sm font-semibold rounded-xl bg-[#2563EB] px-5 py-2.5 text-white hover:bg-[#1D4ED8] transition-colors shadow-2xs">
+                    <span>Buat laporan</span>
                 </a>
             </div>
         </div>

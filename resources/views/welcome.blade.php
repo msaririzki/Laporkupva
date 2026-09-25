@@ -6,92 +6,35 @@
         <div class="absolute -right-24 -top-24 size-96 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" aria-hidden="true"></div>
         <div class="absolute -left-20 bottom-0 size-80 rounded-full bg-teal-500/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
 
-        <div class="public-container relative grid min-h-[560px] items-center gap-10 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
-            <div>
-                <div class="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3.5 py-1.5 text-xs font-bold text-[#F2B84B]">
-                    <span class="size-1.5 rounded-full bg-[#F2B84B]"></span>
-                    <span>Kanal Pelaporan Resmi Wilayah NTB</span>
-                </div>
-
-                <h1 class="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-white">
-                    Berani melapor,<br>
-                    <span class="text-[#F2B84B]">bersama menjaga NTB.</span>
-                </h1>
-
-                <p class="mt-4 max-w-xl text-xs sm:text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">
-                    Laporkan dugaan kegiatan usaha penukaran valuta asing (money changer) yang tidak berizin atau transaksi mencurigakan. Identitas Anda tidak diminta dan proses penanganannya dapat dipantau secara mandiri.
-                </p>
-
-                <!-- Actions -->
-                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <a href="{{ route('reports.create') }}" class="button-primary px-6 py-3 text-sm">
-                        <span>Buat laporan sekarang</span>
-                    </a>
-                    <a href="{{ route('reports.track') }}" class="button-ghost-light px-5 py-3 text-sm">
-                        <span>Cek status laporan</span>
-                    </a>
-                </div>
-
-                <!-- Trust Badges -->
-                <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-semibold text-slate-300">
-                    <span class="inline-flex items-center gap-1.5">
-                        <svg class="size-4 text-[#F2B84B]" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
-                        </svg>
-                        Tanpa nama &amp; NIK
-                    </span>
-                    <span class="inline-flex items-center gap-1.5">
-                        <svg class="size-4 text-[#F2B84B]" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
-                        </svg>
-                        Titik peta akurat
-                    </span>
-                    <span class="inline-flex items-center gap-1.5">
-                        <svg class="size-4 text-[#F2B84B]" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
-                        </svg>
-                        Progres transparan
-                    </span>
-                </div>
+        <div class="public-container relative py-16 sm:py-20 lg:py-24 text-center max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3.5 py-1.5 text-xs font-bold text-[#F2B84B]">
+                <span class="size-1.5 rounded-full bg-[#F2B84B]"></span>
+                <span>Kanal Pelaporan Resmi Wilayah NTB</span>
             </div>
 
-            <!-- Workflow Visual Card -->
-            <div class="relative w-full max-w-md mx-auto lg:ml-auto">
-                <div class="rounded-2xl border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-md">
-                    <div class="flex items-center justify-between pb-3 border-b border-white/10">
-                        <div>
-                            <p class="text-[11px] font-bold uppercase tracking-wider text-[#F2B84B]">Alur Tindak Lanjut</p>
-                            <p class="mt-0.5 text-sm font-bold text-white">Transparan & Terlindungi</p>
-                        </div>
-                        <span class="rounded-full bg-emerald-500/20 border border-emerald-400/30 px-2.5 py-0.5 text-[11px] font-bold text-emerald-300">Resmi BI NTB</span>
-                    </div>
+            <h1 class="mt-5 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-white">
+                Berani melapor,<br>
+                <span class="text-[#F2B84B]">bersama menjaga NTB.</span>
+            </h1>
 
-                    <div class="mt-4 space-y-3 bg-white rounded-xl p-4 text-[#0B2342] shadow-sm">
-                        @foreach ([
-                            ['step' => '01', 'title' => 'Laporan Diterima', 'desc' => 'Tersimpan aman & dianalisis oleh petugas', 'status' => 'done'],
-                            ['step' => '02', 'title' => 'Verifikasi Lapangan', 'desc' => 'Pemeriksaan izin & aktivitas operasional', 'status' => 'done'],
-                            ['step' => '03', 'title' => 'Koordinasi Penanganan', 'desc' => 'Tindak lanjut bersama aparat penegak hukum', 'status' => 'pending'],
-                            ['step' => '04', 'title' => 'Penyelesaian & Evaluasi', 'desc' => 'Hasil penertiban dan pembaruan status', 'status' => 'pending'],
-                        ] as $item)
-                            <div class="flex items-start gap-3">
-                                <span class="grid size-7 shrink-0 place-items-center rounded-lg text-xs font-bold {{ $item['status'] === 'done' ? 'bg-emerald-100 text-[#2E9B68]' : 'bg-slate-100 text-[#64748B]' }}">
-                                    @if ($item['status'] === 'done')
-                                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
-                                        </svg>
-                                    @else
-                                        {{ $item['step'] }}
-                                    @endif
-                                </span>
-                                <div>
-                                    <h3 class="text-xs sm:text-sm font-bold text-[#0B2342]">{{ $item['title'] }}</h3>
-                                    <p class="text-[11px] text-[#64748B]">{{ $item['desc'] }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+            <p class="mt-4 text-xs sm:text-sm lg:text-base leading-relaxed text-slate-300 max-w-2xl mx-auto">
+                Laporkan dugaan money changer (KUPVA) tidak berizin atau transaksi mencurigakan di NTB secara cepat, aman, dan 100% anonim.
+            </p>
+
+            <!-- Actions (No arrows) -->
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+                <a href="{{ route('reports.create') }}" class="button-primary px-6 py-3 text-xs sm:text-sm font-semibold rounded-xl bg-[#2563EB] text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
+                    <span>Buat laporan</span>
+                </a>
+                <a href="{{ route('reports.track') }}" class="button-ghost-light px-5 py-3 text-xs sm:text-sm font-semibold rounded-xl border border-white/20 bg-white/10 text-white hover:bg-white/20 transition-colors">
+                    <span>Cek status</span>
+                </a>
             </div>
+
+            <!-- Trust Line -->
+            <p class="mt-8 text-xs font-semibold text-slate-300">
+                Tanpa nama &amp; NIK &nbsp;·&nbsp; Titik peta akurat &nbsp;·&nbsp; Progres transparan
+            </p>
         </div>
     </section>
 
@@ -282,9 +225,8 @@
                         <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Sampaikan laporan KUPVA sekarang secara anonim, cepat, dan terlindungi.</p>
                     </div>
                     <div class="mt-5">
-                        <a href="{{ route('reports.create') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 py-2.5 text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-2xs">
+                        <a href="{{ route('reports.create') }}" class="inline-flex w-full items-center justify-center rounded-xl bg-[#2563EB] px-4 py-2.5 text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-2xs">
                             <span>Mulai membuat laporan</span>
-                            <span aria-hidden="true">→</span>
                         </a>
                     </div>
                 </article>
@@ -343,8 +285,8 @@
                 <h2 class="mt-1 text-xl sm:text-2xl font-bold text-white">Pantau perkembangan tindak lanjut laporan Anda.</h2>
                 <p class="mt-1 text-xs sm:text-sm text-slate-300">Masukkan kode laporan dan PIN rahasia untuk memeriksa status terkini.</p>
             </div>
-            <a href="{{ route('reports.track') }}" class="button-light shrink-0 text-xs sm:text-sm font-semibold">
-                <span>Cek status sekarang</span>
+            <a href="{{ route('reports.track') }}" class="button-light shrink-0 text-xs sm:text-sm font-semibold rounded-xl">
+                <span>Cek status</span>
             </a>
         </div>
     </section>

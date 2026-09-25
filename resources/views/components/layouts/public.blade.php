@@ -40,25 +40,13 @@
                 <a class="nav-link {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'is-active' : '' }}" href="{{ route('reports.track') }}">Cek status</a>
             </nav>
 
-            <!-- Desktop Actions (Hidden on Mobile for Clean Hierarchy) -->
+            <!-- Desktop Actions -->
             <div class="flex items-center gap-2 sm:gap-2.5">
                 <a
                     href="{{ route('reports.create') }}"
                     class="button-primary hidden sm:inline-flex text-xs sm:text-sm px-4 sm:px-5 py-2.5 font-semibold {{ request()->routeIs('reports.create*') ? 'bg-[#1D4ED8]' : '' }}"
                 >
                     <span>Buat laporan</span>
-                </a>
-
-                <a
-                    href="{{ route('filament.admin.auth.login') }}"
-                    class="admin-access-link hidden sm:grid"
-                    aria-label="Masuk ke portal admin"
-                    title="Portal admin"
-                >
-                    <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M10 1.75a4.25 4.25 0 0 0-4.25 4.25v1.1A2.75 2.75 0 0 0 3.5 9.8v5.7a2.75 2.75 0 0 0 2.75 2.75h7.5a2.75 2.75 0 0 0 2.75-2.75V9.8a2.75 2.75 0 0 0-2.25-2.7V6A4.25 4.25 0 0 0 10 1.75ZM7.25 6a2.75 2.75 0 1 1 5.5 0v1.05h-5.5V6Zm3.5 6.25a.75.75 0 1 0-1.5 0v1.5a.75.75 0 1 0 1.5 0v-1.5Z" clip-rule="evenodd"/>
-                    </svg>
-                    <span class="sr-only">Portal admin</span>
                 </a>
 
                 <!-- Mobile Menu Button -->
@@ -115,6 +103,7 @@
                         <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('reports.track') }}">Cek status laporan</a>
                         <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('guide') }}">Panduan penggunaan</a>
                         <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('privacy') }}">Informasi privasi</a>
+                        <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('filament.admin.auth.login') }}" aria-label="Masuk ke portal admin">Akses petugas</a>
                     </nav>
                 </div>
 
