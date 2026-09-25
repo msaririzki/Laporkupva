@@ -31,11 +31,12 @@ class AdminDashboardTest extends TestCase
             ->assertOk()
             ->assertSee('Masuk ke TAMBORA')
             ->assertSee('Gunakan akun admin Anda.')
-            ->assertSee('Ruang kerja')
-            ->assertSee('Akses internal')
+            ->assertSee('Portal internal')
+            ->assertSee('Kelola laporan dengan lebih terarah.')
+            ->assertSee('Akses terlindungi')
             ->assertSee('Email admin')
             ->assertSee('Masuk')
-            ->assertDontSee('Kelola laporan dengan lebih terarah.');
+            ->assertDontSee('Ruang kerja');
     }
 
     public function test_admin_can_open_dashboard_and_report_list(): void
