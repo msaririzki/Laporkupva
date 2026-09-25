@@ -138,8 +138,8 @@
                             <label class="form-label" for="regency">Kabupaten/kota <span>*</span></label>
                             <select class="form-control @error('regency') is-invalid @enderror" id="regency" name="regency" required>
                                 <option value="">Pilih kabupaten/kota</option>
-                                @foreach (['Kota Mataram', 'Kota Bima', 'Kabupaten Lombok Barat', 'Kabupaten Lombok Tengah', 'Kabupaten Lombok Timur', 'Kabupaten Lombok Utara', 'Kabupaten Sumbawa', 'Kabupaten Sumbawa Barat', 'Kabupaten Dompu', 'Kabupaten Bima'] as $regency)
-                                    <option value="{{ $regency }}" @selected(old('regency') === $regency)>{{ $regency }}</option>
+                                @foreach (\App\Enums\NtbRegency::cases() as $regency)
+                                    <option value="{{ $regency->value }}" @selected(old('regency') === $regency->value)>{{ $regency->getLabel() }}</option>
                                 @endforeach
                             </select>
                             @error('regency')<p class="form-error">{{ $message }}</p>@enderror

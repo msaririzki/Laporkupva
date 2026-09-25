@@ -3,6 +3,7 @@
 namespace Tests\Feature\Database\Factories;
 
 use App\Enums\NtbDemoLocation;
+use App\Enums\NtbRegency;
 use App\Models\Kupva;
 use App\Models\Report;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
@@ -37,6 +38,23 @@ class CuratedNtbLocationFactoryTest extends TestCase
             'latitude',
             'longitude',
         ])), $knownLocations);
+    }
+
+    public function test_curated_locations_cover_every_supported_ntb_regency(): void
+    {
+        $expectedRegencies = array_map(
+            fn (NtbRegency $regency): string => $regency->value,
+            NtbRegency::cases(),
+        );
+        $coveredRegencies = array_values(array_unique(array_map(
+            fn (NtbDemoLocation $location): string => $location->attributes()['regency'],
+            NtbDemoLocation::cases(),
+        )));
+
+        sort($expectedRegencies);
+        sort($coveredRegencies);
+
+        $this->assertSame($expectedRegencies, $coveredRegencies);
     }
 
     /**

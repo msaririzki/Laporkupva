@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Reports\Tables;
 
+use App\Enums\NtbRegency;
 use App\Enums\ReportStatus;
 use App\Filament\Resources\Reports\ReportResource;
 use App\Models\Report;
@@ -79,7 +80,7 @@ class ReportsTable
                     ->options(self::INCIDENT_TYPES),
                 SelectFilter::make('regency')
                     ->label('Wilayah')
-                    ->options(fn (): array => Report::query()->distinct()->orderBy('regency')->pluck('regency', 'regency')->all()),
+                    ->options(NtbRegency::class),
             ])
             ->toolbarActions([
                 Action::make('exportCsv')

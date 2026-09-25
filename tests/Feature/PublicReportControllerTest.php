@@ -22,6 +22,18 @@ class PublicReportControllerTest extends TestCase
             ->assertSee('Gunakan lokasi saya')
             ->assertSee('Boleh dilewati')
             ->assertSee('Foto besar otomatis diperkecil di perangkat Anda')
+            ->assertSeeInOrder([
+                'Kabupaten Lombok Barat',
+                'Kabupaten Lombok Tengah',
+                'Kabupaten Lombok Timur',
+                'Kabupaten Lombok Utara',
+                'Kabupaten Sumbawa',
+                'Kabupaten Sumbawa Barat',
+                'Kabupaten Dompu',
+                'Kabupaten Bima',
+                'Kota Mataram',
+                'Kota Bima',
+            ])
             ->assertDontSee('NIK');
     }
 
@@ -66,6 +78,17 @@ class PublicReportControllerTest extends TestCase
 
         $response->assertRedirect(route('reports.create'))
             ->assertSessionHasErrors(['description', 'regency', 'latitude', 'longitude']);
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_rejects_a_regency_outside_the_supported_ntb_regions(): void
+    {
+        $response = $this->from(route('reports.create'))->post(route('reports.store'), $this->validPayload([
+            'regency' => 'Kabupaten Badung',
+        ]));
+
+        $response->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('regency');
         $this->assertDatabaseCount('reports', 0);
     }
 

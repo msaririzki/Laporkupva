@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Kupvas\Schemas;
 
+use App\Enums\NtbRegency;
 use App\Rules\NoHtml;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
@@ -13,20 +14,6 @@ use Filament\Schemas\Schema;
 
 class KupvaForm
 {
-    /** @var array<string, string> */
-    private const REGENCIES = [
-        'Kota Mataram' => 'Kota Mataram',
-        'Kota Bima' => 'Kota Bima',
-        'Kabupaten Lombok Barat' => 'Kabupaten Lombok Barat',
-        'Kabupaten Lombok Tengah' => 'Kabupaten Lombok Tengah',
-        'Kabupaten Lombok Timur' => 'Kabupaten Lombok Timur',
-        'Kabupaten Lombok Utara' => 'Kabupaten Lombok Utara',
-        'Kabupaten Sumbawa' => 'Kabupaten Sumbawa',
-        'Kabupaten Sumbawa Barat' => 'Kabupaten Sumbawa Barat',
-        'Kabupaten Dompu' => 'Kabupaten Dompu',
-        'Kabupaten Bima' => 'Kabupaten Bima',
-    ];
-
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -47,7 +34,7 @@ class KupvaForm
                 Section::make('Lokasi')
                     ->columns(2)
                     ->schema([
-                        Select::make('regency')->label('Kabupaten/kota')->options(self::REGENCIES)->searchable()->required(),
+                        Select::make('regency')->label('Kabupaten/kota')->options(NtbRegency::class)->enum(NtbRegency::class)->searchable()->required(),
                         TextInput::make('district')->label('Kecamatan')->maxLength(120)->rule(new NoHtml),
                         TextInput::make('village')->label('Desa/kelurahan')->maxLength(120)->rule(new NoHtml),
                         Textarea::make('address')->label('Alamat')->rows(3)->rule(new NoHtml)->columnSpanFull(),

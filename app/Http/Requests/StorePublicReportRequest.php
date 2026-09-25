@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\NtbRegency;
 use App\Rules\NoHtml;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -37,18 +38,7 @@ class StorePublicReportRequest extends FormRequest
             'incident_time' => ['nullable', 'date_format:H:i'],
             'description' => ['required', 'string', 'min:20', 'max:5000', new NoHtml],
             'is_ongoing' => ['sometimes', 'boolean'],
-            'regency' => ['required', Rule::in([
-                'Kota Mataram',
-                'Kota Bima',
-                'Kabupaten Lombok Barat',
-                'Kabupaten Lombok Tengah',
-                'Kabupaten Lombok Timur',
-                'Kabupaten Lombok Utara',
-                'Kabupaten Sumbawa',
-                'Kabupaten Sumbawa Barat',
-                'Kabupaten Dompu',
-                'Kabupaten Bima',
-            ])],
+            'regency' => ['required', Rule::enum(NtbRegency::class)],
             'district' => ['nullable', 'string', 'max:120', new NoHtml],
             'village' => ['nullable', 'string', 'max:120', new NoHtml],
             'address' => ['nullable', 'string', 'max:1000', new NoHtml],

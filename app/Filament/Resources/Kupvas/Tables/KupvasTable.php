@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Kupvas\Tables;
 
+use App\Enums\NtbRegency;
 use App\Models\Kupva;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -52,7 +53,7 @@ class KupvasTable
                     'expired' => 'Kedaluwarsa',
                     'suspended' => 'Dibekukan',
                 ]),
-                SelectFilter::make('regency')->label('Wilayah')->options(fn (): array => Kupva::query()->distinct()->orderBy('regency')->pluck('regency', 'regency')->all()),
+                SelectFilter::make('regency')->label('Wilayah')->options(NtbRegency::class),
             ])
             ->recordActions([
                 ViewAction::make()->iconButton()->tooltip('Lihat detail KUPVA'),
