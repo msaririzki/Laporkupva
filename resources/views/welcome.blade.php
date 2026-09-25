@@ -67,18 +67,15 @@
 
                     <!-- STEP 01 (Kiri Atas - Paling Tinggi) -->
                     <div class="relative flex flex-col justify-start lg:translate-y-0">
-                        <article class="group relative mx-auto w-full max-w-[340px] overflow-hidden rounded-2xl border border-blue-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
-                            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600/0 via-blue-600/40 to-blue-600/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-
-                            <!-- Header Row: Step Number on Left, Icon on Right (Sejajar & Cantik) -->
+                        <article class="group relative mx-auto w-full max-w-[340px] rounded-3xl border border-slate-100/90 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-200/80 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
+                            <!-- Header Row: Step Number on Left, Icon on Right (Minimalist & Aesthetic) -->
                             <div class="flex items-center justify-between">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="font-sans text-2xl font-black tracking-tight text-navy-950 sm:text-[28px]">Step</span>
-                                    <span class="font-sans text-2xl font-bold tracking-tight text-blue-600 sm:text-[28px]">01</span>
-                                    <span class="ml-0.5 inline-block size-1.5 rounded-full bg-blue-500 ring-4 ring-blue-100/80"></span>
+                                <div class="flex items-baseline gap-1.5">
+                                    <span class="font-sans text-xl font-bold tracking-tight text-navy-950 sm:text-2xl">Step</span>
+                                    <span class="font-sans text-xl font-normal tracking-tight text-slate-400 sm:text-2xl">01</span>
                                 </div>
-                                <div class="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-700 via-blue-600 to-blue-500 text-white shadow-md shadow-blue-600/25 ring-4 ring-blue-50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-600/35">
-                                    <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="flex size-11 items-center justify-center rounded-full bg-blue-600 text-white shadow-sm shadow-blue-600/20 transition-transform duration-300 group-hover:scale-105">
+                                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                     </svg>
@@ -86,15 +83,12 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="mt-4 text-base font-extrabold text-navy-950 transition-colors group-hover:text-blue-700 sm:text-lg">
+                            <h3 class="mt-5 text-base font-bold text-navy-950 transition-colors group-hover:text-blue-700 sm:text-lg">
                                 Ceritakan kejadian
                             </h3>
 
-                            <!-- Subtle Horizontal Divider -->
-                            <div class="my-3.5 h-px w-full bg-gradient-to-r from-slate-200/90 via-slate-100 to-transparent"></div>
-
                             <!-- Description -->
-                            <p class="text-xs leading-relaxed text-slate-500 sm:text-[13px]">
+                            <p class="mt-2 text-xs leading-relaxed text-slate-500 sm:text-[13px]">
                                 Jelaskan kejadian yang Anda temukan, pilih jenis laporan, waktu kejadian, dan tuliskan kronologi yang Anda ketahui.
                             </p>
                         </article>
@@ -124,18 +118,15 @@
 
                     <!-- STEP 02 (Tengah - Sedikit Lebih Rendah) -->
                     <div class="relative flex flex-col justify-start lg:translate-y-8 xl:translate-y-10">
-                        <article class="group relative mx-auto w-full max-w-[340px] overflow-hidden rounded-2xl border border-blue-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
-                            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600/0 via-blue-600/40 to-blue-600/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-
-                            <!-- Header Row: Step Number on Left, Icon on Right (Sejajar & Cantik) -->
+                        <article class="group relative mx-auto w-full max-w-[340px] rounded-3xl border border-slate-100/90 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-200/80 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
+                            <!-- Header Row: Step Number on Left, Icon on Right (Minimalist & Aesthetic) -->
                             <div class="flex items-center justify-between">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="font-sans text-2xl font-black tracking-tight text-navy-950 sm:text-[28px]">Step</span>
-                                    <span class="font-sans text-2xl font-bold tracking-tight text-blue-600 sm:text-[28px]">02</span>
-                                    <span class="ml-0.5 inline-block size-1.5 rounded-full bg-blue-500 ring-4 ring-blue-100/80"></span>
+                                <div class="flex items-baseline gap-1.5">
+                                    <span class="font-sans text-xl font-bold tracking-tight text-navy-950 sm:text-2xl">Step</span>
+                                    <span class="font-sans text-xl font-normal tracking-tight text-slate-400 sm:text-2xl">02</span>
                                 </div>
-                                <div class="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-700 via-blue-600 to-blue-500 text-white shadow-md shadow-blue-600/25 ring-4 ring-blue-50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-600/35">
-                                    <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="flex size-11 items-center justify-center rounded-full bg-blue-600 text-white shadow-sm shadow-blue-600/20 transition-transform duration-300 group-hover:scale-105">
+                                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                         <circle cx="12" cy="10" r="3"></circle>
                                     </svg>
@@ -143,15 +134,12 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="mt-4 text-base font-extrabold text-navy-950 transition-colors group-hover:text-blue-700 sm:text-lg">
+                            <h3 class="mt-5 text-base font-bold text-navy-950 transition-colors group-hover:text-blue-700 sm:text-lg">
                                 Tandai lokasinya
                             </h3>
 
-                            <!-- Subtle Horizontal Divider -->
-                            <div class="my-3.5 h-px w-full bg-gradient-to-r from-slate-200/90 via-slate-100 to-transparent"></div>
-
                             <!-- Description -->
-                            <p class="text-xs leading-relaxed text-slate-500 sm:text-[13px]">
+                            <p class="mt-2 text-xs leading-relaxed text-slate-500 sm:text-[13px]">
                                 Tentukan lokasi kejadian menggunakan posisi perangkat, pencarian wilayah, atau pilih titik secara langsung pada peta.
                             </p>
                         </article>
@@ -181,18 +169,15 @@
 
                     <!-- STEP 03 (Kanan Bawah - Paling Rendah) -->
                     <div class="relative flex flex-col justify-start lg:translate-y-16 xl:translate-y-20">
-                        <article class="group relative mx-auto w-full max-w-[340px] overflow-hidden rounded-2xl border border-blue-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
-                            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600/0 via-blue-600/40 to-blue-600/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-
-                            <!-- Header Row: Step Number on Left, Icon on Right (Sejajar & Cantik) -->
+                        <article class="group relative mx-auto w-full max-w-[340px] rounded-3xl border border-slate-100/90 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-200/80 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
+                            <!-- Header Row: Step Number on Left, Icon on Right (Minimalist & Aesthetic) -->
                             <div class="flex items-center justify-between">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="font-sans text-2xl font-black tracking-tight text-navy-950 sm:text-[28px]">Step</span>
-                                    <span class="font-sans text-2xl font-bold tracking-tight text-blue-600 sm:text-[28px]">03</span>
-                                    <span class="ml-0.5 inline-block size-1.5 rounded-full bg-blue-500 ring-4 ring-blue-100/80"></span>
+                                <div class="flex items-baseline gap-1.5">
+                                    <span class="font-sans text-xl font-bold tracking-tight text-navy-950 sm:text-2xl">Step</span>
+                                    <span class="font-sans text-xl font-normal tracking-tight text-slate-400 sm:text-2xl">03</span>
                                 </div>
-                                <div class="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-700 via-blue-600 to-blue-500 text-white shadow-md shadow-blue-600/25 ring-4 ring-blue-50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-600/35">
-                                    <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="flex size-11 items-center justify-center rounded-full bg-blue-600 text-white shadow-sm shadow-blue-600/20 transition-transform duration-300 group-hover:scale-105">
+                                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
@@ -200,15 +185,12 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="mt-4 text-base font-extrabold text-navy-950 transition-colors group-hover:text-blue-700 sm:text-lg">
+                            <h3 class="mt-5 text-base font-bold text-navy-950 transition-colors group-hover:text-blue-700 sm:text-lg">
                                 Simpan kode akses
                             </h3>
 
-                            <!-- Subtle Horizontal Divider -->
-                            <div class="my-3.5 h-px w-full bg-gradient-to-r from-slate-200/90 via-slate-100 to-transparent"></div>
-
                             <!-- Description -->
-                            <p class="text-xs leading-relaxed text-slate-500 sm:text-[13px]">
+                            <p class="mt-2 text-xs leading-relaxed text-slate-500 sm:text-[13px]">
                                 Dapatkan kode laporan dan PIN rahasia untuk melihat status serta memantau perkembangan laporan Anda.
                             </p>
                         </article>
