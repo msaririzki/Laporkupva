@@ -38,9 +38,9 @@
         </div>
     </section>
 
-    <section id="cara-kerja" class="relative overflow-hidden scroll-mt-20 bg-gradient-to-b from-[#eef6ff] via-[#f4f9ff] to-[#e8f2fe] py-14 sm:py-20">
+    <section id="cara-kerja" class="relative overflow-hidden scroll-mt-20 bg-gradient-to-b from-[#eef6ff] via-[#f4f9ff] to-[#e8f2fe] py-12 sm:py-18">
         <!-- Mountain Silhouette Background at Bottom (TAMBORA Atmosphere) -->
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-28 sm:h-40 overflow-hidden opacity-35" aria-hidden="true">
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 sm:h-36 overflow-hidden opacity-30" aria-hidden="true">
             <svg class="h-full w-full object-cover" viewBox="0 0 1440 220" fill="none" preserveAspectRatio="none">
                 <path d="M0 220L0 130L110 115L230 165L390 90L530 145L680 45L820 135L960 75L1120 125L1270 65L1440 105L1440 220Z" fill="url(#mountains-soft-grad)" />
                 <defs>
@@ -54,302 +54,255 @@
 
         <!-- Subtle Dot Grid Patterns on Sides -->
         <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-            <div class="absolute top-10 right-8 size-36 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
-            <div class="absolute bottom-12 left-8 size-36 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute top-10 right-8 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute bottom-10 left-8 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
         </div>
 
         <div class="public-container">
-            <!-- Header Section (Sesuai Referensi Gambar) -->
+            <!-- Header Section (Sesuai Referensi & Minimalis) -->
             <div class="mx-auto max-w-2xl text-center">
                 <div class="inline-flex items-center gap-2 rounded-full bg-blue-100/90 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-blue-700">
                     <span class="size-2 rounded-full bg-blue-600"></span>
                     CARA MELAPOR YANG BAIK
                 </div>
-                <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl lg:text-[42px]">
+                <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
                     Cara melapor di TAMBORA
                 </h2>
-                <p class="mt-3 text-sm sm:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
-                    Gampang, kok. Cukup ceritakan, tunjukkan lokasinya, tambahkan foto (jika ada), lalu pantau perkembangan laporanmu.
+                <p class="mt-2 text-sm sm:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
+                    Gampang, kok. Cukup buka web, ceritakan, tunjukkan lokasinya, tambahkan foto (jika ada), lalu pantau perkembangannya.
                 </p>
             </div>
 
-            <!-- 4-Step Flow Layout Sesuai Gambar Referensi -->
-            <div class="relative mt-10 sm:mt-14">
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5 xl:gap-7">
+            <!-- 5-Step Clean & Minimalist Cards Grid (Tanpa Garis Rumit) -->
+            <div class="mt-8 sm:mt-12">
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3 xl:gap-4">
 
-                    <!-- STEP 01: Ceritakan kejadiannya -->
-                    <div class="relative flex flex-col">
-                        <!-- Top Illustration Area with Number Badge -->
-                        <div class="relative flex h-36 items-center justify-center sm:h-40">
-                            <!-- Number Badge 01 on Top Left -->
-                            <span class="absolute left-2 top-1 z-10 flex size-9 sm:size-10 items-center justify-center rounded-full bg-blue-600 font-sans text-xs sm:text-sm font-black text-white shadow-md shadow-blue-600/30">
-                                01
-                            </span>
-
-                            <!-- Character with Speech Bubble Illustration -->
-                            <svg class="h-32 sm:h-36 w-auto overflow-visible" viewBox="0 0 160 140" fill="none" aria-hidden="true">
-                                <!-- Floating Speech Bubble -->
-                                <g>
-                                    <rect x="80" y="16" width="62" height="44" rx="10" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.5"/>
-                                    <path d="M88 60 L83 70 L98 60 Z" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.5"/>
-                                    <rect x="90" y="26" width="38" height="3.5" rx="1.75" fill="#38bdf8"/>
-                                    <rect x="90" y="34" width="44" height="3.5" rx="1.75" fill="#93c5fd"/>
-                                    <rect x="90" y="42" width="28" height="3.5" rx="1.75" fill="#93c5fd"/>
-                                </g>
-
-                                <!-- Character Drawing -->
-                                <g>
-                                    <!-- Long Hair -->
-                                    <path d="M 28 58 C 24 36, 52 18, 68 28 C 82 38, 84 62, 80 82 C 76 94, 62 94, 56 84 C 46 94, 30 84, 28 58 Z" fill="#1e293b"/>
-                                    <!-- Face -->
-                                    <circle cx="56" cy="50" r="16" fill="#fed7aa"/>
-                                    <!-- Bangs -->
-                                    <path d="M 40 44 C 46 34, 66 34, 72 44 C 64 40, 50 40, 40 44 Z" fill="#0f172a"/>
-                                    <!-- Eye & Smile -->
-                                    <circle cx="63" cy="50" r="1.5" fill="#0f172a"/>
-                                    <path d="M 64 54 Q 66 57 69 54" stroke="#0f172a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-                                    <!-- Body / Shirt -->
-                                    <path d="M 36 90 C 36 74, 74 74, 74 90 L 74 105 L 36 105 Z" fill="#2563eb"/>
-                                    <!-- Arm holding phone -->
-                                    <path d="M 58 82 C 66 80, 76 82, 80 72" stroke="#fed7aa" stroke-width="6" stroke-linecap="round" fill="none"/>
-                                    <!-- Smartphone -->
-                                    <rect x="75" y="54" width="20" height="36" rx="4" fill="#0f172a"/>
-                                    <rect x="77" y="57" width="16" height="28" rx="2" fill="#38bdf8"/>
-                                    <circle cx="85" cy="88" r="1.5" fill="#64748b"/>
-                                </g>
-
-                                <!-- Sparkle rays -->
-                                <path d="M 148 20 L 152 16 M 150 30 L 156 30 M 148 40 L 153 43" stroke="#93c5fd" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-
-                        <!-- Connector Desktop: 01 -> 02 -->
-                        <div class="pointer-events-none absolute -right-6 top-18 z-20 hidden w-12 lg:block xl:-right-7 xl:w-14" aria-hidden="true">
-                            <svg class="w-full overflow-visible" viewBox="0 0 60 30" fill="none">
-                                <defs>
-                                    <marker id="arrow-1-2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 1 2 L 7 5 L 1 8" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                                    </marker>
-                                </defs>
-                                <path d="M 4 8 C 24 0, 40 8, 54 22" stroke="#2563eb" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow-1-2)" />
-                            </svg>
-                        </div>
-
-                        <!-- Card Step 01 -->
-                        <article class="mt-4 flex flex-1 flex-col justify-between rounded-3xl border border-slate-100 bg-white p-6 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg sm:p-7">
-                            <div>
-                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
-                                    Ceritakan kejadiannya
-                                </h3>
-                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
-                                    Ceritakan apa yang terjadi.
-                                </p>
+                    <!-- STEP 01: Buka websitenya -->
+                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div>
+                            <!-- Number Badge -->
+                            <div class="flex justify-center">
+                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
+                                    01
+                                </span>
                             </div>
-                            <!-- Blue Bottom Bar Accent -->
-                            <div class="mx-auto mt-5 h-1 w-8 rounded-full bg-blue-600"></div>
-                        </article>
-                    </div>
 
-                    <!-- STEP 02: Tentukan lokasinya -->
-                    <div class="relative flex flex-col">
-                        <!-- Top Illustration Area with Number Badge -->
-                        <div class="relative flex h-36 items-center justify-center sm:h-40">
-                            <!-- Number Badge 02 on Top Left -->
-                            <span class="absolute left-2 top-1 z-10 flex size-9 sm:size-10 items-center justify-center rounded-full bg-blue-600 font-sans text-xs sm:text-sm font-black text-white shadow-md shadow-blue-600/30">
-                                02
-                            </span>
-
-                            <!-- Folded Map with 3D Location Pin Illustration -->
-                            <svg class="h-32 sm:h-36 w-auto overflow-visible" viewBox="0 0 160 140" fill="none" aria-hidden="true">
-                                <!-- Folded 3D Paper Map -->
-                                <g>
-                                    <!-- Left panel -->
-                                    <polygon points="18,48 58,36 58,102 18,114" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                                    <!-- Green Terrain on left -->
-                                    <path d="M 22 80 Q 35 70 45 85 L 58 75 L 58 102 L 18 114 Z" fill="#dcfce7" opacity="0.8"/>
-
-                                    <!-- Center panel -->
-                                    <polygon points="58,36 102,48 102,114 58,102" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1.5"/>
-                                    <!-- River on center -->
-                                    <path d="M 64 103 Q 75 75 85 80 Q 95 85 102 65 L 102 75 Q 92 95 82 90 Q 72 85 64 103 Z" fill="#bae6fd"/>
-
-                                    <!-- Right panel -->
-                                    <polygon points="102,48 142,36 142,102 102,114" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-                                    <!-- Green Terrain on right -->
-                                    <path d="M 102 85 Q 115 65 130 75 L 142 68 L 142 102 L 102 114 Z" fill="#dcfce7" opacity="0.8"/>
-                                </g>
-
-                                <!-- Location Pin Shadow -->
-                                <ellipse cx="80" cy="98" rx="14" ry="4" fill="#64748b" opacity="0.3"/>
-
-                                <!-- Large Blue Location Pin -->
-                                <g>
-                                    <path d="M 80 26 C 65 26, 53 38, 53 53 C 53 72, 80 97, 80 97 C 80 97, 107 72, 107 53 C 107 38, 95 26, 80 26 Z" fill="#2563eb" filter="drop-shadow(0 4px 6px rgb(37 99 235 / 0.3))"/>
-                                    <!-- Inner White Circle -->
-                                    <circle cx="80" cy="51" r="9" fill="white"/>
-                                </g>
-
-                                <!-- Sparkle / Motion Rays -->
-                                <path d="M 52 22 L 46 16 M 108 22 L 114 16 M 80 14 L 80 8" stroke="#93c5fd" stroke-width="1.8" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-
-                        <!-- Connector Desktop: 02 -> 03 -->
-                        <div class="pointer-events-none absolute -right-6 top-18 z-20 hidden w-12 lg:block xl:-right-7 xl:w-14" aria-hidden="true">
-                            <svg class="w-full overflow-visible" viewBox="0 0 60 30" fill="none">
-                                <defs>
-                                    <marker id="arrow-2-3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 1 2 L 7 5 L 1 8" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                                    </marker>
-                                </defs>
-                                <path d="M 4 8 C 24 0, 40 8, 54 22" stroke="#2563eb" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow-2-3)" />
-                            </svg>
-                        </div>
-
-                        <!-- Card Step 02 -->
-                        <article class="mt-4 flex flex-1 flex-col justify-between rounded-3xl border border-slate-100 bg-white p-6 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg sm:p-7">
-                            <div>
-                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
-                                    Tentukan lokasinya
-                                </h3>
-                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
-                                    Tunjukkan di mana kejadiannya.
-                                </p>
+                            <!-- Illustration: Laptop / Web Browser -->
+                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
+                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                                    <!-- Laptop Base -->
+                                    <path d="M 14 80 L 106 80 L 114 86 L 6 86 Z" fill="#94a3b8"/>
+                                    <!-- Laptop Screen -->
+                                    <rect x="20" y="20" width="80" height="60" rx="5" fill="#1e293b"/>
+                                    <!-- Screen Interior -->
+                                    <rect x="23" y="24" width="74" height="52" rx="3" fill="#f8fafc"/>
+                                    <!-- Browser Header Bar -->
+                                    <rect x="23" y="24" width="74" height="12" fill="#e2e8f0"/>
+                                    <!-- Browser Action Dots -->
+                                    <circle cx="29" cy="30" r="1.5" fill="#ef4444"/>
+                                    <circle cx="34" cy="30" r="1.5" fill="#f59e0b"/>
+                                    <circle cx="39" cy="30" r="1.5" fill="#10b981"/>
+                                    <!-- URL Address Bar -->
+                                    <rect x="45" y="27" width="46" height="6" rx="3" fill="#ffffff"/>
+                                    <!-- Web Content Banner -->
+                                    <rect x="28" y="41" width="64" height="30" rx="3" fill="#dbeafe"/>
+                                    <!-- TAMBORA Shield Mark -->
+                                    <path d="M 60 46 C 66 46, 69 44, 69 44 C 69 55, 60 62, 60 62 C 60 62, 51 55, 51 44 C 51 44, 54 46, 60 46 Z" fill="#2563eb"/>
+                                    <path d="M 57 53 L 59 55 L 64 50" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </svg>
                             </div>
-                            <!-- Blue Bottom Bar Accent -->
-                            <div class="mx-auto mt-5 h-1 w-8 rounded-full bg-blue-600"></div>
-                        </article>
-                    </div>
 
-                    <!-- STEP 03: Tambahkan foto -->
-                    <div class="relative flex flex-col">
-                        <!-- Top Illustration Area with Number Badge -->
-                        <div class="relative flex h-36 items-center justify-center sm:h-40">
-                            <!-- Number Badge 03 on Top Left -->
-                            <span class="absolute left-2 top-1 z-10 flex size-9 sm:size-10 items-center justify-center rounded-full bg-blue-600 font-sans text-xs sm:text-sm font-black text-white shadow-md shadow-blue-600/30">
-                                03
-                            </span>
+                            <!-- Title -->
+                            <h3 class="text-base font-extrabold text-navy-950">
+                                Buka websitenya
+                            </h3>
 
-                            <!-- Two Photo Polaroid Frames with Plus Badge Illustration -->
-                            <svg class="h-32 sm:h-36 w-auto overflow-visible" viewBox="0 0 160 140" fill="none" aria-hidden="true">
-                                <!-- Back Photo (Tilted Left) -->
-                                <g transform="rotate(-9 55 65)">
-                                    <rect x="22" y="25" width="68" height="58" rx="7" fill="white" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(0 2px 4px rgb(0 0 0 / 0.06))"/>
-                                    <!-- Photo Content -->
-                                    <rect x="26" y="29" width="60" height="42" rx="4" fill="#e0f2fe"/>
-                                    <!-- Sun -->
-                                    <circle cx="72" cy="40" r="5" fill="#fde047"/>
-                                    <!-- Mountains -->
-                                    <path d="M 26 65 L 42 48 L 56 62 L 68 52 L 86 71 L 26 71 Z" fill="#93c5fd"/>
-                                </g>
-
-                                <!-- Front Photo (Tilted Right) -->
-                                <g transform="rotate(5 90 65)">
-                                    <rect x="52" y="24" width="74" height="64" rx="7" fill="white" stroke="#94a3b8" stroke-width="1.5" filter="drop-shadow(0 4px 8px rgb(0 0 0 / 0.1))"/>
-                                    <!-- Photo Content -->
-                                    <rect x="56" y="28" width="66" height="48" rx="4" fill="#dbeafe"/>
-                                    <!-- Sun -->
-                                    <circle cx="106" cy="40" r="6" fill="#f59e0b"/>
-                                    <!-- Mountains & Hills -->
-                                    <path d="M 56 70 L 78 50 L 96 66 L 108 56 L 122 76 L 56 76 Z" fill="#3b82f6"/>
-                                    <path d="M 56 74 Q 85 64 122 74 L 122 76 L 56 76 Z" fill="#2563eb" opacity="0.6"/>
-                                </g>
-
-                                <!-- Plus Badge Button on Bottom Right -->
-                                <g>
-                                    <circle cx="116" cy="85" r="14" fill="#2563eb" stroke="white" stroke-width="2.5" filter="drop-shadow(0 2px 6px rgb(37 99 235 / 0.4))"/>
-                                    <path d="M 116 78 L 116 92 M 109 85 L 123 85" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                                </g>
-
-                                <!-- Sparkle rays -->
-                                <path d="M 132 30 L 138 24 M 140 42 L 147 42 M 134 54 L 140 58" stroke="#93c5fd" stroke-width="1.8" stroke-linecap="round"/>
-                            </svg>
+                            <!-- Description -->
+                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                                Buka <a href="https://laporkupva.ikydev.com/" target="_blank" rel="noopener noreferrer" class="font-bold text-blue-700 underline decoration-blue-300 hover:text-blue-900 transition-colors">laporkupva.ikydev.com</a> lewat HP atau laptop tanpa perlu login.
+                            </p>
                         </div>
+                    </article>
 
-                        <!-- Connector Desktop: 03 -> 04 -->
-                        <div class="pointer-events-none absolute -right-6 top-18 z-20 hidden w-12 lg:block xl:-right-7 xl:w-14" aria-hidden="true">
-                            <svg class="w-full overflow-visible" viewBox="0 0 60 30" fill="none">
-                                <defs>
-                                    <marker id="arrow-3-4" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 1 2 L 7 5 L 1 8" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                                    </marker>
-                                </defs>
-                                <path d="M 4 8 C 24 0, 40 8, 54 22" stroke="#2563eb" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow-3-4)" />
-                            </svg>
-                        </div>
-
-                        <!-- Card Step 03 -->
-                        <article class="mt-4 flex flex-1 flex-col justify-between rounded-3xl border border-slate-100 bg-white p-6 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg sm:p-7">
-                            <div>
-                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
-                                    Tambahkan foto
-                                </h3>
-                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
-                                    Ada foto? Boleh ikut dikirim.
-                                </p>
+                    <!-- STEP 02: Ceritakan kejadiannya -->
+                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div>
+                            <!-- Number Badge -->
+                            <div class="flex justify-center">
+                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
+                                    02
+                                </span>
                             </div>
-                            <!-- Blue Bottom Bar Accent -->
-                            <div class="mx-auto mt-5 h-1 w-8 rounded-full bg-blue-600"></div>
-                        </article>
-                    </div>
 
-                    <!-- STEP 04: Pantau laporanmu -->
-                    <div class="relative flex flex-col">
-                        <!-- Top Illustration Area with Number Badge -->
-                        <div class="relative flex h-36 items-center justify-center sm:h-40">
-                            <!-- Number Badge 04 on Top Left -->
-                            <span class="absolute left-2 top-1 z-10 flex size-9 sm:size-10 items-center justify-center rounded-full bg-blue-600 font-sans text-xs sm:text-sm font-black text-white shadow-md shadow-blue-600/30">
-                                04
-                            </span>
+                            <!-- Illustration: Character with Phone & Speech Bubble -->
+                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
+                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                                    <!-- Speech Bubble -->
+                                    <g>
+                                        <rect x="52" y="12" width="56" height="38" rx="8" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.2"/>
+                                        <path d="M60 50 L56 58 L68 50 Z" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.2"/>
+                                        <rect x="60" y="20" width="34" height="3" rx="1.5" fill="#38bdf8"/>
+                                        <rect x="60" y="27" width="40" height="3" rx="1.5" fill="#93c5fd"/>
+                                        <rect x="60" y="34" width="24" height="3" rx="1.5" fill="#93c5fd"/>
+                                    </g>
 
-                            <!-- Smartphone with Security Shield, Padlock & Green Checkmark Illustration -->
-                            <svg class="h-32 sm:h-36 w-auto overflow-visible" viewBox="0 0 160 140" fill="none" aria-hidden="true">
-                                <!-- Smartphone Body -->
-                                <g>
-                                    <rect x="52" y="16" width="58" height="96" rx="10" fill="#1e293b" filter="drop-shadow(0 6px 12px rgb(0 0 0 / 0.12))"/>
-                                    <!-- Screen -->
-                                    <rect x="56" y="22" width="50" height="84" rx="7" fill="#f8fafc"/>
-                                    <!-- Top Speaker Notch -->
-                                    <rect x="73" y="19" width="16" height="2" rx="1" fill="#64748b"/>
-
-                                    <!-- Blue Security Shield in Center -->
-                                    <path d="M 81 38 C 92 38, 97 34, 97 34 C 97 56, 81 70, 81 70 C 81 70, 65 56, 65 34 C 65 34, 70 38, 81 38 Z" fill="#2563eb" filter="drop-shadow(0 3px 5px rgb(37 99 235 / 0.35))"/>
-
-                                    <!-- White Padlock inside Shield -->
-                                    <rect x="76" y="49" width="10" height="9" rx="2" fill="white"/>
-                                    <path d="M 78 49 V 45 A 3 3 0 0 1 84 45 V 49" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-                                    <circle cx="81" cy="53.5" r="1.2" fill="#2563eb"/>
-
-                                    <!-- Progress Lines on Screen -->
-                                    <rect x="65" y="78" width="32" height="3" rx="1.5" fill="#cbd5e1"/>
-                                    <rect x="65" y="85" width="22" height="3" rx="1.5" fill="#e2e8f0"/>
-                                </g>
-
-                                <!-- Green Checkmark Badge on Right -->
-                                <g>
-                                    <circle cx="116" cy="74" r="14" fill="#22c55e" stroke="white" stroke-width="2.5" filter="drop-shadow(0 3px 6px rgb(34 197 94 / 0.4))"/>
-                                    <path d="M 110 74 L 114 78 L 122 69" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                </g>
-
-                                <!-- Sparkle rays -->
-                                <path d="M 40 28 L 34 22 M 32 40 L 25 40 M 36 52 L 30 56" stroke="#93c5fd" stroke-width="1.8" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-
-                        <!-- Card Step 04 -->
-                        <article class="mt-4 flex flex-1 flex-col justify-between rounded-3xl border border-slate-100 bg-white p-6 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg sm:p-7">
-                            <div>
-                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
-                                    Pantau laporanmu
-                                </h3>
-                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
-                                    Simpan kode laporan untuk melihat perkembangannya.
-                                </p>
+                                    <!-- Character -->
+                                    <g>
+                                        <path d="M 18 48 C 14 30, 38 16, 50 24 C 62 32, 64 50, 60 68 C 56 78, 44 78, 40 70 C 32 78, 20 70, 18 48 Z" fill="#1e293b"/>
+                                        <circle cx="38" cy="42" r="13" fill="#fed7aa"/>
+                                        <path d="M 28 36 C 32 28, 48 28, 52 36 C 46 32, 36 32, 28 36 Z" fill="#0f172a"/>
+                                        <circle cx="44" cy="42" r="1.2" fill="#0f172a"/>
+                                        <path d="M 44 46 Q 46 48 48 46" stroke="#0f172a" stroke-width="1" fill="none" stroke-linecap="round"/>
+                                        <path d="M 24 74 C 24 62, 54 62, 54 74 L 54 86 L 24 86 Z" fill="#2563eb"/>
+                                        <!-- Phone -->
+                                        <rect x="52" y="46" width="16" height="28" rx="3" fill="#0f172a"/>
+                                        <rect x="54" y="48" width="12" height="22" rx="1.5" fill="#38bdf8"/>
+                                    </g>
+                                </svg>
                             </div>
-                            <!-- Blue Bottom Bar Accent -->
-                            <div class="mx-auto mt-5 h-1 w-8 rounded-full bg-blue-600"></div>
-                        </article>
-                    </div>
+
+                            <!-- Title -->
+                            <h3 class="text-base font-extrabold text-navy-950">
+                                Ceritakan kejadiannya
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                                Pilih masalahnya dan ceritakan apa yang terjadi secara santai dan jujur.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- STEP 03: Tentukan lokasinya -->
+                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div>
+                            <!-- Number Badge -->
+                            <div class="flex justify-center">
+                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
+                                    03
+                                </span>
+                            </div>
+
+                            <!-- Illustration: Folded Map & Blue Pin -->
+                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
+                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                                    <!-- Map panels -->
+                                    <polygon points="15,40 45,30 45,82 15,92" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+                                    <path d="M 18 68 Q 28 60 36 72 L 45 64 L 45 82 L 15 92 Z" fill="#dcfce7" opacity="0.8"/>
+                                    <polygon points="45,30 75,40 75,92 45,82" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1.2"/>
+                                    <polygon points="75,40 105,30 105,82 75,92" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+                                    <path d="M 75 70 Q 85 54 96 62 L 105 56 L 105 82 L 75 92 Z" fill="#dcfce7" opacity="0.8"/>
+
+                                    <!-- Pin Shadow -->
+                                    <ellipse cx="60" cy="78" rx="11" ry="3.5" fill="#64748b" opacity="0.25"/>
+
+                                    <!-- Location Pin -->
+                                    <path d="M 60 20 C 47 20, 37 30, 37 42 C 37 57, 60 78, 60 78 C 60 78, 83 57, 83 42 C 83 30, 73 20, 60 20 Z" fill="#2563eb" filter="drop-shadow(0 3px 5px rgb(37 99 235 / 0.35))"/>
+                                    <circle cx="60" cy="40" r="7" fill="white"/>
+                                </svg>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 class="text-base font-extrabold text-navy-950">
+                                Tentukan lokasinya
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                                Tunjukkan titik tempat kejadiannya langsung di peta wilayah NTB.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- STEP 04: Tambahkan foto -->
+                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div>
+                            <!-- Number Badge -->
+                            <div class="flex justify-center">
+                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
+                                    04
+                                </span>
+                            </div>
+
+                            <!-- Illustration: Polaroid Photos & Plus Badge -->
+                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
+                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                                    <!-- Back Photo -->
+                                    <g transform="rotate(-8 45 50)">
+                                        <rect x="18" y="20" width="54" height="46" rx="5" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+                                        <rect x="21" y="23" width="48" height="34" rx="3" fill="#e0f2fe"/>
+                                        <circle cx="56" cy="32" r="4" fill="#fde047"/>
+                                        <path d="M 21 52 L 34 38 L 45 49 L 55 41 L 69 57 L 21 57 Z" fill="#93c5fd"/>
+                                    </g>
+
+                                    <!-- Front Photo -->
+                                    <g transform="rotate(5 70 50)">
+                                        <rect x="42" y="20" width="58" height="50" rx="5" fill="white" stroke="#94a3b8" stroke-width="1.2" filter="drop-shadow(0 3px 6px rgb(0 0 0 / 0.08))"/>
+                                        <rect x="45" y="23" width="52" height="38" rx="3" fill="#dbeafe"/>
+                                        <circle cx="84" cy="32" r="4.5" fill="#f59e0b"/>
+                                        <path d="M 45 56 L 62 40 L 76 53 L 86 45 L 97 61 L 45 61 Z" fill="#3b82f6"/>
+                                    </g>
+
+                                    <!-- Plus Badge -->
+                                    <circle cx="92" cy="68" r="11" fill="#2563eb" stroke="white" stroke-width="2" filter="drop-shadow(0 2px 5px rgb(37 99 235 / 0.4))"/>
+                                    <path d="M 92 62 L 92 74 M 86 68 L 98 68" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 class="text-base font-extrabold text-navy-950">
+                                Tambahkan foto
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                                Ada foto plang atau bukti nota? Boleh dikirim, atau lewati jika tidak ada.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- STEP 05: Pantau laporanmu -->
+                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div>
+                            <!-- Number Badge -->
+                            <div class="flex justify-center">
+                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
+                                    05
+                                </span>
+                            </div>
+
+                            <!-- Illustration: Smartphone with Shield, Lock & Checkmark -->
+                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
+                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                                    <!-- Phone Body -->
+                                    <rect x="36" y="14" width="48" height="76" rx="8" fill="#1e293b" filter="drop-shadow(0 4px 8px rgb(0 0 0 / 0.1))"/>
+                                    <rect x="39" y="18" width="42" height="68" rx="5" fill="#f8fafc"/>
+                                    <rect x="53" y="16" width="14" height="1.5" rx="0.75" fill="#64748b"/>
+
+                                    <!-- Blue Shield -->
+                                    <path d="M 60 30 C 69 30, 73 27, 73 27 C 73 45, 60 57, 60 57 C 60 57, 47 45, 47 27 C 47 27, 51 30, 60 30 Z" fill="#2563eb" filter="drop-shadow(0 2px 4px rgb(37 99 235 / 0.3))"/>
+
+                                    <!-- Padlock -->
+                                    <rect x="56" y="39" width="8" height="7" rx="1.5" fill="white"/>
+                                    <path d="M 57.5 39 V 36 A 2.5 2.5 0 0 1 62.5 36 V 39" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+
+                                    <!-- Checkmark Badge -->
+                                    <circle cx="88" cy="62" r="11" fill="#22c55e" stroke="white" stroke-width="2" filter="drop-shadow(0 2px 5px rgb(34 197 94 / 0.4))"/>
+                                    <path d="M 83 62 L 87 66 L 93 58" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </svg>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 class="text-base font-extrabold text-navy-950">
+                                Pantau laporanmu
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                                Simpan Kode Laporan dan PIN rahasiamu untuk melihat perkembangan laporanmu.
+                            </p>
+                        </div>
+                    </article>
 
                 </div>
             </div>
