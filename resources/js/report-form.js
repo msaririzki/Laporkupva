@@ -337,8 +337,11 @@ if (form) {
     document.querySelectorAll('#incident_type, #regency').forEach(initCustomSelect);
 
     const firstInvalidStep = form.querySelector('.is-invalid, .form-error')?.closest('.form-step');
+    const urlStep = new URLSearchParams(window.location.search).get('step');
     if (firstInvalidStep) {
         currentStep = Number(firstInvalidStep.dataset.step);
+    } else if (urlStep && [1, 2, 3].includes(Number(urlStep))) {
+        currentStep = Number(urlStep);
     }
 
     const updateReview = () => {

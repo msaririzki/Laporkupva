@@ -1,21 +1,17 @@
 <x-layouts.public title="Informasi privasi">
-    <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-[#0B2342] to-[#123B69] py-8 sm:py-9 lg:py-10 text-white overflow-hidden border-b border-[#163B68]/60">
-        <!-- Subtle background decorative radial glow -->
-        <div class="pointer-events-none absolute -top-24 right-1/4 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" aria-hidden="true"></div>
-
+    <!-- Hero Section (Clean Light Palette) -->
+    <section class="relative bg-white py-8 sm:py-10 lg:py-12 border-b border-[#E2E8F0]">
         <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10 text-center">
-            <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-[#F2B84B] backdrop-blur-xs">
-                <span class="size-1.5 rounded-full bg-[#F2B84B]" aria-hidden="true"></span>
+            <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/80 px-3.5 py-1 text-xs font-semibold text-[#2563EB]">
+                <span class="size-1.5 rounded-full bg-[#2563EB]"></span>
                 <span>Privasi & Perlindungan Pelapor</span>
             </div>
 
-            <h1 class="mt-3.5 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-[32px] lg:leading-tight">
+            <h1 class="mt-4 text-2xl font-extrabold tracking-tight text-[#0F172A] sm:text-3xl lg:text-[34px] lg:leading-tight">
                 Anonim sejak awal
             </h1>
 
-            <p class="mt-2.5 max-w-[760px] mx-auto text-xs sm:text-sm lg:text-[15px] leading-relaxed text-slate-300">
+            <p class="mt-2.5 max-w-[760px] mx-auto text-xs sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B]">
                 TAMBORA hanya mengumpulkan data kejadian yang diperlukan untuk proses pengawasan, tanpa pernah meminta data identitas pribadi masyarakat.
             </p>
         </div>

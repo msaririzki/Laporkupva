@@ -202,46 +202,46 @@
     }
 
     /* =========================================================
-       Stepper: 01 ───── 02 ───── 03 (Modern Institutional)
+       Stepper: 01 ━━━━━━━━━━━━━━ 02 ━━━━━━━━━━━━━━ 03 (Modern Wide Desktop)
        ========================================================= */
     .stepper-nav {
-        @apply relative mb-6 sm:mb-8 w-full max-w-lg lg:max-w-xl mx-auto px-2;
+        @apply relative mb-8 sm:mb-10 lg:mb-12 w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4;
     }
     .stepper-list {
         @apply relative grid grid-cols-3 items-start;
     }
     .stepper-track {
-        @apply absolute left-[16.666%] right-[16.666%] top-4 sm:top-5 -translate-y-1/2 h-[2px] bg-[#E2E8F0] z-0;
+        @apply absolute left-[16.666%] right-[16.666%] top-5 sm:top-5.5 -translate-y-1/2 h-[2px] bg-[#E2E8F0] z-0;
     }
     .stepper-track-progress {
         @apply h-full bg-[#2563EB] transition-all duration-300 ease-out;
     }
 
     .stepper-step, .form-progress {
-        @apply relative z-10 flex flex-col items-center text-center cursor-pointer bg-transparent border-0 p-0 shadow-none disabled:cursor-default w-full focus:outline-none transition-all duration-200 px-1;
+        @apply relative z-10 flex flex-col items-center text-center cursor-pointer bg-transparent border-0 p-0 shadow-none disabled:cursor-default w-full focus:outline-none transition-all duration-200 px-2;
     }
 
     .stepper-circle, .form-progress-number {
-        @apply size-9 sm:size-10 rounded-full border border-[#CBD5E1] bg-white text-[#64748B] flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-200 shrink-0 shadow-2xs;
+        @apply size-10 sm:size-11 rounded-full border border-[#CBD5E1] bg-white text-[#64748B] flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-200 shrink-0 shadow-2xs;
     }
 
     .stepper-title, .stepper-label {
-        @apply mt-2 text-[11px] sm:text-xs font-bold tracking-wider uppercase text-[#64748B] transition-colors duration-200 bg-transparent border-0 p-0 leading-tight text-center;
+        @apply mt-2.5 text-xs sm:text-[13px] font-bold tracking-tight text-[#64748B] transition-colors duration-200 bg-transparent border-0 p-0 leading-tight text-center;
     }
     .stepper-desc {
-        @apply mt-0.5 text-[10px] sm:text-[11px] leading-tight text-slate-400 font-normal transition-colors duration-200 bg-transparent border-0 p-0 block text-center max-w-[110px] sm:max-w-none;
+        @apply mt-0.5 text-[11px] sm:text-xs leading-tight text-slate-400 font-normal transition-colors duration-200 bg-transparent border-0 p-0 block text-center;
     }
 
     /* Active step */
     .stepper-step.is-active .stepper-circle,
     .form-progress.is-active .form-progress-number {
         @apply bg-[#2563EB] border-2 border-[#2563EB] text-white shadow-xs;
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
     }
     .stepper-step.is-active .stepper-title,
     .stepper-step.is-active .stepper-label,
     .form-progress.is-active strong {
-        @apply text-[#0B2342] font-bold;
+        @apply text-[#0F172A] font-extrabold;
         background: transparent !important;
         border: none !important;
     }
@@ -255,7 +255,7 @@
     /* Completed step */
     .stepper-step.is-complete .stepper-circle,
     .form-progress.is-complete .form-progress-number {
-        @apply bg-[#0B2342] border-2 border-[#0B2342] text-white;
+        @apply bg-[#0F172A] border-2 border-[#0F172A] text-white;
     }
     .stepper-step.is-complete .stepper-title,
     .stepper-step.is-complete .stepper-label {

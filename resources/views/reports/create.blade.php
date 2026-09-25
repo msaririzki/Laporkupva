@@ -1,48 +1,46 @@
 <x-layouts.public title="Buat laporan anonim">
-    <!-- Hero Header -->
-    <section class="relative bg-gradient-to-br from-[#0B2342] to-[#123B69] py-6 sm:py-7 lg:py-8 text-white overflow-hidden border-b border-[#163B68]/60">
-        <!-- Subtle background decorative radial glow -->
-        <div class="pointer-events-none absolute -top-24 right-1/4 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" aria-hidden="true"></div>
-
+    <!-- Hero Header (Clean Light Canvas, Elegant Reassurance) -->
+    <section class="relative bg-white py-8 sm:py-10 lg:py-12 border-b border-[#E2E8F0]">
         <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10">
-            <!-- Baris paling atas: Laporan Anonim (kiri) & Identitas Anda tetap terlindungi (kanan di desktop) -->
+            <!-- Top Row: Laporan Anonim (Left) & Identitas Anda tetap terlindungi (Right) -->
             <div class="flex items-center justify-between w-full">
-                <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-[#F2B84B] backdrop-blur-xs">
-                    <span class="size-1.5 rounded-full bg-[#F2B84B]" aria-hidden="true"></span>
+                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/80 px-3.5 py-1 text-xs font-semibold text-[#2563EB]">
+                    <svg class="size-3.5 text-[#2563EB]" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
+                    </svg>
                     <span>Laporan Anonim</span>
                 </div>
-                <div class="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-300 font-medium">
-                    <svg class="size-3.5 text-[#F2B84B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <div class="hidden sm:inline-flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
+                    <svg class="size-3.5 text-[#2563EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
                     </svg>
                     <span>Identitas Anda tetap terlindungi</span>
                 </div>
             </div>
 
-            <!-- Content Area: Mobile left-aligned, Desktop centered with natural max-width -->
-            <div class="mt-3.5 sm:mt-4 text-left lg:text-center max-w-[800px] lg:mx-auto">
-                <h1 class="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-[32px] lg:leading-tight">
+            <!-- Content Area -->
+            <div class="mt-4 sm:mt-5 text-left lg:text-center max-w-[800px] lg:mx-auto">
+                <h1 class="text-2xl font-extrabold tracking-tight text-[#0F172A] sm:text-3xl lg:text-[34px] lg:leading-tight">
                     Laporkan dengan cepat dan aman
                 </h1>
 
-                <p class="mt-1.5 text-xs sm:text-sm lg:text-[15px] leading-relaxed text-slate-300 max-w-[720px] lg:mx-auto">
+                <p class="mt-2 text-xs sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B] max-w-[720px] lg:mx-auto">
                     Ceritakan kejadian, tentukan lokasi, lalu kirim laporan secara anonim.
                 </p>
 
-                <!-- Benefits (Di bawah deskripsi) -->
-                <p class="mt-3 text-xs font-medium text-slate-300">
+                <!-- Indicator Bullets -->
+                <p class="mt-3 text-xs font-semibold text-slate-400">
                     ±3 menit &nbsp;·&nbsp; Bukti foto opsional &nbsp;·&nbsp; Tanpa identitas
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Main Service Canvas (Clean open canvas, desktop elevated card) -->
-    <section class="py-6 sm:py-10 lg:py-12 bg-[#F4F7FB] min-h-[60vh]">
+    <!-- Main Service Canvas -->
+    <section class="py-8 sm:py-12 lg:py-14 bg-[#F8FAFC] min-h-[60vh]">
         <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10">
             @if ($errors->any())
-                <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-xs sm:text-sm text-[#DC2626]" role="alert">
+                <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-xs sm:text-sm text-[#DC2626]" role="alert">
                     <p class="font-bold flex items-center gap-2">
                         <svg class="size-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd"/>
@@ -53,8 +51,8 @@
                 </div>
             @endif
 
-            <!-- Stepper Navigation (Modern 01 - 02 - 03 Track) -->
-            <nav class="stepper-nav mb-8 sm:mb-10 lg:mb-12 lg:max-w-xl mx-auto" aria-label="Tahapan formulir">
+            <!-- Stepper Navigation (Modern Wide Horizontal Desktop Track) -->
+            <nav class="stepper-nav" aria-label="Tahapan formulir">
                 <div class="stepper-list">
                     <!-- Connecting Track -->
                     <div class="stepper-track" aria-hidden="true">
@@ -85,13 +83,13 @@
             <!-- Subtle Live Accessibility Step Status -->
             <p id="form-step-status" class="sr-only" aria-live="polite">Langkah 1 dari 3</p>
 
-            <!-- Service Flow Form (Single Rounded Card Container) -->
+            <!-- Service Flow Form (Single Clean Card Container) -->
             <form
                 action="{{ route('reports.store') }}"
                 method="POST"
                 enctype="multipart/form-data"
                 id="report-form"
-                class="bg-white border border-[#E2E8F0] rounded-3xl p-5 sm:p-8 lg:p-10 shadow-xs"
+                class="bg-white border border-[#E2E8F0] rounded-3xl p-6 sm:p-9 lg:p-12 shadow-xs"
                 novalidate
             >
                 @csrf
@@ -108,7 +106,7 @@
                         <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB] mb-2.5">
                             <span>Langkah 01</span>
                         </div>
-                        <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#0B2342]">Ceritakan kejadiannya</h2>
+                        <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]">Ceritakan kejadian</h2>
                         <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Pilih masalahnya dan ceritakan apa yang terjadi secara santai dan jujur.</p>
                     </div>
 
@@ -182,7 +180,7 @@
                         <label class="flex cursor-pointer items-start gap-3.5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 transition-all hover:border-[#2563EB]/40 hover:bg-blue-50/20 shadow-xs">
                             <input class="mt-0.5 size-4.5 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" name="is_ongoing" value="1" @checked(old('is_ongoing'))>
                             <div>
-                                <strong class="block text-sm font-bold text-[#0B2342]">Kegiatan masih berlangsung</strong>
+                                <strong class="block text-sm font-bold text-[#0F172A]">Kegiatan masih berlangsung</strong>
                                 <span class="mt-0.5 block text-xs leading-relaxed text-[#64748B]">Centang jika aktivitas masih beroperasi atau rutin dilakukan di lokasi tersebut.</span>
                             </div>
                         </label>
@@ -198,11 +196,11 @@
                             </div>
                             <span class="text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-1 rounded-full">Khusus Wilayah NTB</span>
                         </div>
-                        <h2 class="mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0B2342]">Tentukan lokasinya</h2>
+                        <h2 class="mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]">Tentukan lokasinya</h2>
                         <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Pilih kabupaten/kota dan tandai titik lokasi kejadian pada peta interaktif.</p>
                     </div>
 
-                    <!-- Desktop 2-Column Split: Detail Lokasi (42%) vs Map (58%) -->
+                    <!-- Desktop 2-Column Split: Form (42%) vs Map (58%) -->
                     <div class="mt-6 lg:grid lg:grid-cols-12 lg:gap-8 lg:items-start">
                         <!-- Left Column: Form & Helpers (42%) -->
                         <div class="lg:col-span-5 space-y-4">
@@ -217,11 +215,11 @@
                                             </svg>
                                         </div>
                                         <div>
-                                            <h3 class="text-sm font-bold text-[#0B2342]">Sedang di lokasi?</h3>
+                                            <h3 class="text-sm font-bold text-[#0F172A]">Sedang di lokasi?</h3>
                                             <p class="mt-0.5 text-xs text-[#64748B] leading-relaxed">Ambil koordinat otomatis dari sensor GPS perangkat Anda.</p>
                                         </div>
                                     </div>
-                                    <button type="button" id="use-location" class="mt-3.5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white border border-[#CBD5E1] px-4 py-2.5 text-xs sm:text-sm font-semibold text-[#0B2342] hover:bg-slate-50 hover:border-[#2563EB] hover:text-[#2563EB] transition-colors shadow-2xs">
+                                    <button type="button" id="use-location" class="mt-3.5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white border border-[#CBD5E1] px-4 py-2.5 text-xs sm:text-sm font-semibold text-[#0F172A] hover:bg-slate-50 hover:border-[#2563EB] hover:text-[#2563EB] transition-colors shadow-2xs">
                                         <svg class="size-4 text-[#2563EB]" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M10 1.75a.75.75 0 0 1 .75.75v1.05a6.5 6.5 0 0 1 5.7 5.7h1.05a.75.75 0 0 1 0 1.5h-1.05a6.5 6.5 0 0 1-5.7 5.7v1.05a.75.75 0 0 1-1.5 0v-1.05a6.5 6.5 0 0 1-5.7-5.7H2.5a.75.75 0 0 1 0-1.5h1.05a6.5 6.5 0 0 1 5.7-5.7V2.5a.75.75 0 0 1 .75-.75ZM5 10a5 5 0 1 0 10 0 5 5 0 0 0-10 0Zm5-2.25a2.25 2.25 0 1 1 0 4.5 2.25 2.25 0 0 1 0-4.5Z"/>
                                         </svg>
@@ -232,14 +230,14 @@
                                 <!-- Search Option -->
                                 <div class="flex flex-col justify-between rounded-2xl bg-[#F8FAFC] p-4 border border-[#E2E8F0] shadow-xs hover:border-[#2563EB]/40 transition-colors">
                                     <div class="flex items-start gap-3">
-                                        <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-slate-100 text-[#0B2342]">
+                                        <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-slate-100 text-[#0F172A]">
                                             <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <circle cx="11" cy="11" r="8"/>
                                                 <path d="m21 21-4.3-4.3"/>
                                             </svg>
                                         </div>
                                         <div>
-                                            <label class="text-sm font-bold text-[#0B2342]" for="location-search">Cari nama tempat / jalan</label>
+                                            <label class="text-sm font-bold text-[#0F172A]" for="location-search">Cari nama tempat / jalan</label>
                                             <p class="mt-0.5 text-xs text-[#64748B] leading-relaxed">Ketik jalan, desa, pasar, atau tempat di NTB.</p>
                                         </div>
                                     </div>
@@ -269,7 +267,7 @@
                             <!-- Expandable Address Details -->
                             <div>
                                 <details class="group rounded-2xl border border-[#E2E8F0] bg-white shadow-xs" @if ($errors->has('district') || $errors->has('village') || $errors->has('address')) open @endif>
-                                    <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-xs sm:text-sm font-semibold text-[#0B2342]">
+                                    <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-xs sm:text-sm font-semibold text-[#0F172A]">
                                         <span id="location-details-summary">Tambahkan petunjuk alamat <span class="font-normal text-[#64748B]">(opsional)</span></span>
                                         <span class="text-base text-[#64748B] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
                                     </summary>
@@ -289,7 +287,7 @@
                                         <div>
                                             <label class="form-label text-xs sm:text-sm" for="address">Patokan atau nama jalan</label>
                                             <input class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" maxlength="1000" autocomplete="street-address" placeholder="Contoh: Depan pasar induk, samping ruko biru">
-                                            @error('address')<p class="form-error">{{ $message }}</p>@enderror
+                                             @error('address')<p class="form-error">{{ $message }}</p>@enderror
                                         </div>
                                     </div>
                                 </details>
@@ -301,10 +299,10 @@
                             <!-- Map status message -->
                             <p id="map-message" class="mb-2 hidden text-xs sm:text-sm" role="status"></p>
 
-                            <!-- Interactive Map Frame (min-h 420px+, rounded-3xl) -->
+                            <!-- Interactive Map Frame (h-[480px], rounded-3xl) -->
                             <div
                                 id="report-map"
-                                class="h-72 sm:h-80 lg:h-[480px] w-full overflow-hidden rounded-3xl border border-[#CBD5E1] bg-slate-100 shadow-xs"
+                                class="h-80 sm:h-96 lg:h-[480px] w-full overflow-hidden rounded-3xl border border-[#CBD5E1] bg-slate-100 shadow-xs"
                                 data-mapbox-token="{{ config('services.mapbox.public_token') }}"
                                 aria-label="Peta pemilihan lokasi kejadian"
                             ></div>
@@ -336,7 +334,7 @@
                             </div>
                             <span class="text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-1 rounded-full">Boleh dilewati</span>
                         </div>
-                        <h2 class="mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0B2342]">Tambahkan foto & bukti</h2>
+                        <h2 class="mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]">Tambahkan foto & bukti</h2>
                         <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Sertakan foto lokasi, papan nama, atau dokumen pendukung untuk memperkuat laporan Anda.</p>
                     </div>
 
@@ -347,21 +345,21 @@
                                 <span class="grid size-6 place-items-center rounded-md bg-blue-50 text-[11px] font-bold text-[#2563EB]">1</span>
                                 <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Jenis kejadian</span>
                             </div>
-                            <strong id="review-incident" class="mt-2 block text-sm font-bold text-[#0B2342] break-words leading-snug">—</strong>
+                            <strong id="review-incident" class="mt-2 block text-sm font-bold text-[#0F172A] break-words leading-snug">—</strong>
                         </div>
                         <div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
                             <div class="flex items-center gap-2">
                                 <span class="grid size-6 place-items-center rounded-md bg-emerald-50 text-[11px] font-bold text-emerald-600">2</span>
                                 <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Waktu kejadian</span>
                             </div>
-                            <strong id="review-date" class="mt-2 block text-sm font-bold text-[#0B2342] break-words leading-snug">—</strong>
+                            <strong id="review-date" class="mt-2 block text-sm font-bold text-[#0F172A] break-words leading-snug">—</strong>
                         </div>
                         <div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
                             <div class="flex items-center gap-2">
                                 <span class="grid size-6 place-items-center rounded-md bg-amber-50 text-[11px] font-bold text-amber-600">3</span>
                                 <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Lokasi kejadian</span>
                             </div>
-                            <strong id="review-location" class="mt-2 block text-sm font-bold text-[#0B2342] break-words leading-snug">—</strong>
+                            <strong id="review-location" class="mt-2 block text-sm font-bold text-[#0F172A] break-words leading-snug">—</strong>
                         </div>
                     </div>
 
@@ -381,13 +379,13 @@
                                         <line x1="12" y1="3" x2="12" y2="15"/>
                                     </svg>
                                 </div>
-                                <strong class="mt-4 block text-sm font-bold text-[#0B2342] group-hover:text-[#2563EB] transition-colors">
+                                <strong class="mt-4 block text-sm font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
                                     Pilih foto atau seret ke sini
                                 </strong>
                                 <span class="mt-1 block text-xs text-[#64748B]">
                                     Format: JPG, PNG, WEBP, atau PDF · Maks. 5 berkas, masing-masing 10 MB
                                 </span>
-                                <span class="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-3 py-1.5 text-xs font-semibold text-[#0B2342] shadow-2xs group-hover:border-[#2563EB] group-hover:text-[#2563EB]">
+                                <span class="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-3 py-1.5 text-xs font-semibold text-[#0F172A] shadow-2xs group-hover:border-[#2563EB] group-hover:text-[#2563EB]">
                                     <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
                                         <circle cx="9" cy="9" r="2"/>
@@ -406,7 +404,7 @@
                         <!-- Right: Post-Submission Information & Confirmation -->
                         <div class="lg:col-span-5 space-y-4">
                             <!-- Post-Submission Information Callout -->
-                            <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-5 text-xs sm:text-sm leading-relaxed text-[#0B2342] shadow-xs">
+                            <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-5 text-xs sm:text-sm leading-relaxed text-[#0F172A] shadow-xs">
                                 <div class="flex items-center gap-2.5">
                                     <div class="grid size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
                                         <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -414,17 +412,17 @@
                                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                                         </svg>
                                     </div>
-                                    <strong class="font-bold text-[#0B2342]">Setelah laporan terkirim:</strong>
+                                    <strong class="font-bold text-[#0F172A]">Setelah laporan terkirim:</strong>
                                 </div>
                                 <p class="mt-2.5 text-xs sm:text-sm text-[#475569] leading-relaxed">
-                                    Anda akan memperoleh <strong class="text-[#0B2342]">Kode Laporan</strong> dan <strong class="text-[#0B2342]">PIN Rahasia 6 digit</strong>. Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
+                                    Anda akan memperoleh <strong class="text-[#0F172A]">Kode Laporan</strong> dan <strong class="text-[#0F172A]">PIN Rahasia 6 digit</strong>. Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
                                 </p>
                             </div>
 
                             <!-- Good Faith Confirmation -->
                             <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-colors hover:border-[#2563EB]/40 hover:bg-blue-50/20">
                                 <input class="mt-1 size-4.5 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
-                                <span class="text-xs sm:text-sm leading-relaxed text-[#0B2342] font-medium">
+                                <span class="text-xs sm:text-sm leading-relaxed text-[#0F172A] font-medium">
                                     Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span>
                                 </span>
                             </label>
@@ -433,11 +431,11 @@
                     </div>
                 </section>
 
-                <!-- Action Area: Sticky on mobile, Normal flow inside form card on desktop -->
-                <div class="sticky bottom-0 z-30 -mx-5 sm:-mx-8 lg:-mx-10 -mb-5 sm:-mb-8 lg:-mb-10 mt-8 bg-white/95 border-t border-[#E2E8F0] p-4 sm:p-6 lg:p-8 backdrop-blur-md rounded-b-3xl">
+                <!-- Action Area: Clean Bar (NO arrow icons!) -->
+                <div class="sticky bottom-0 z-30 -mx-6 sm:-mx-9 lg:-mx-12 -mb-6 sm:-mb-9 lg:-mb-12 mt-8 bg-white/95 border-t border-[#E2E8F0] p-4 sm:p-6 lg:p-8 backdrop-blur-md rounded-b-3xl">
                     <div class="flex items-center justify-between gap-4">
                         <div>
-                            <button type="button" id="previous-step" class="hidden min-h-11 sm:min-h-12 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-5 py-2.5 text-sm font-semibold text-[#0B2342] shadow-2xs hover:bg-slate-50 transition-colors">
+                            <button type="button" id="previous-step" class="hidden min-h-11 sm:min-h-12 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-5 py-2.5 text-sm font-semibold text-[#0F172A] shadow-2xs hover:bg-slate-50 transition-colors">
                                 <span>Kembali</span>
                             </button>
                         </div>
@@ -452,14 +450,6 @@
                     </div>
                 </div>
             </form>
-
-            <!-- Quick Assistance Links -->
-            <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs text-[#64748B]">
-                <span>Butuh informasi sebelum melapor?</span>
-                <a href="{{ route('privacy') }}" class="font-semibold text-[#2563EB] hover:underline">Informasi Privasi</a>
-                <span>·</span>
-                <a href="{{ route('guide') }}" class="font-semibold text-[#2563EB] hover:underline">Panduan Penggunaan</a>
-            </div>
         </div>
     </section>
 </x-layouts.public>

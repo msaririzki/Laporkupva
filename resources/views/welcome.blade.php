@@ -1,23 +1,22 @@
 <x-layouts.public title="Lapor KUPVA secara aman">
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-[#0B2342] text-white">
-        <!-- Background subtle lighting effects -->
-        <div class="hero-grid absolute inset-0 opacity-20" aria-hidden="true"></div>
-        <div class="absolute -right-24 -top-24 size-96 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" aria-hidden="true"></div>
-        <div class="absolute -left-20 bottom-0 size-80 rounded-full bg-teal-500/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+    <!-- Hero Section (Fresh, Modern Light Palette, No Heavy Navy) -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#F1F5F9] to-white text-[#0F172A] border-b border-[#E2E8F0]">
+        <!-- Subtle ambient radial lighting -->
+        <div class="pointer-events-none absolute -right-24 -top-24 size-96 rounded-full bg-blue-500/10 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -left-20 bottom-0 size-80 rounded-full bg-teal-500/5 blur-3xl" aria-hidden="true"></div>
 
         <div class="public-container relative py-16 sm:py-20 lg:py-24 text-center max-w-3xl mx-auto">
-            <div class="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3.5 py-1.5 text-xs font-bold text-[#F2B84B]">
-                <span class="size-1.5 rounded-full bg-[#F2B84B]"></span>
+            <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/80 px-3.5 py-1.5 text-xs font-bold text-[#2563EB]">
+                <span class="size-1.5 rounded-full bg-[#2563EB]"></span>
                 <span>Kanal Pelaporan Resmi Wilayah NTB</span>
             </div>
 
-            <h1 class="mt-5 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-white">
+            <h1 class="mt-5 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-[#0F172A]">
                 Berani melapor,<br>
-                <span class="text-[#F2B84B]">bersama menjaga NTB.</span>
+                <span class="text-[#2563EB]">bersama menjaga NTB.</span>
             </h1>
 
-            <p class="mt-4 text-xs sm:text-sm lg:text-base leading-relaxed text-slate-300 max-w-2xl mx-auto">
+            <p class="mt-4 text-xs sm:text-sm lg:text-base leading-relaxed text-[#64748B] max-w-2xl mx-auto">
                 Laporkan dugaan money changer (KUPVA) tidak berizin atau transaksi mencurigakan di NTB secara cepat, aman, dan 100% anonim.
             </p>
 
@@ -26,13 +25,13 @@
                 <a href="{{ route('reports.create') }}" class="button-primary px-6 py-3 text-xs sm:text-sm font-semibold rounded-xl bg-[#2563EB] text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
                     <span>Buat laporan</span>
                 </a>
-                <a href="{{ route('reports.track') }}" class="button-ghost-light px-5 py-3 text-xs sm:text-sm font-semibold rounded-xl border border-white/20 bg-white/10 text-white hover:bg-white/20 transition-colors">
+                <a href="{{ route('reports.track') }}" class="button-secondary px-5 py-3 text-xs sm:text-sm font-semibold rounded-xl border border-[#CBD5E1] bg-white text-[#0F172A] hover:bg-slate-50 transition-colors shadow-2xs">
                     <span>Cek status</span>
                 </a>
             </div>
 
             <!-- Trust Line -->
-            <p class="mt-8 text-xs font-semibold text-slate-300">
+            <p class="mt-8 text-xs font-semibold text-[#64748B]">
                 Tanpa nama &amp; NIK &nbsp;·&nbsp; Titik peta akurat &nbsp;·&nbsp; Progres transparan
             </p>
         </div>
@@ -42,7 +41,7 @@
     <section id="cara-kerja" class="scroll-mt-20 py-16 sm:py-24 bg-white">
         <div class="public-container">
             <div class="mx-auto max-w-2xl text-center">
-                <h2 class="text-3xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight text-[#0B2342]">Cara melapor di TAMBORA</h2>
+                <h2 class="text-3xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight text-[#0F172A]">Cara melapor di TAMBORA</h2>
                 <p class="mt-3 text-sm sm:text-base leading-relaxed text-[#64748B]">Gampang, kok. Cukup buka web, ceritakan, tunjukkan lokasinya, tambahkan foto (jika ada), lalu pantau perkembangannya.</p>
             </div>
 
@@ -53,7 +52,7 @@
                     <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 flex size-7 items-center justify-center rounded-full bg-[#2563EB] text-xs font-bold text-white shadow-sm ring-4 ring-white">01</span>
                     <div class="flex h-24 items-center justify-center">
                         <svg class="h-20 w-auto" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="20" y="8" width="80" height="52" rx="6" fill="#0B2342" stroke="#CBD5E1" stroke-width="2"/>
+                            <rect x="20" y="8" width="80" height="52" rx="6" fill="#0F172A" stroke="#CBD5E1" stroke-width="2"/>
                             <rect x="25" y="13" width="70" height="42" rx="3" fill="#F8FAFC"/>
                             <path d="M60 22L70 26V35C70 41 65.5 45.5 60 47.5C54.5 45.5 50 41 50 35V26L60 22Z" fill="#2563EB"/>
                             <path d="M60 22V47.5C65.5 45.5 70 41 70 35V26L60 22Z" fill="#1D4ED8"/>
@@ -62,7 +61,7 @@
                         </svg>
                     </div>
                     <div class="mt-4">
-                        <h3 class="text-sm sm:text-base font-bold text-[#0B2342]">Buka websitenya</h3>
+                        <h3 class="text-sm sm:text-base font-bold text-[#0F172A]">Buka websitenya</h3>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-[#64748B]">Buka laporkupva.ikydev.com lewat HP atau laptop tanpa perlu login.</p>
                     </div>
                 </article>
@@ -76,9 +75,9 @@
                             <rect x="60" y="18" width="40" height="4" rx="2" fill="#38BDF8"/>
                             <rect x="60" y="26" width="28" height="4" rx="2" fill="#7DD3FC"/>
                             <path d="M52 32L46 36L52 38V32Z" fill="#E0F2FE"/>
-                            <circle cx="38" cy="38" r="16" fill="#0B2342"/>
+                            <circle cx="38" cy="38" r="16" fill="#0F172A"/>
                             <circle cx="43" cy="36" r="8" fill="#FED7AA"/>
-                            <path d="M30 40C30 30 38 24 46 26C52 28 54 36 52 42C50 48 42 52 36 50C32 48 30 44 30 40Z" fill="#0B2342"/>
+                            <path d="M30 40C30 30 38 24 46 26C52 28 54 36 52 42C50 48 42 52 36 50C32 48 30 44 30 40Z" fill="#0F172A"/>
                             <circle cx="46" cy="36" r="1.5" fill="#0F172A"/>
                             <path d="M44 40Q47 43 49 40" stroke="#0F172A" stroke-width="1.2" stroke-linecap="round"/>
                             <path d="M22 66C22 56 30 52 40 52C50 52 58 56 58 66V68H22V66Z" fill="#2563EB"/>
@@ -86,7 +85,7 @@
                         </svg>
                     </div>
                     <div class="mt-4">
-                        <h3 class="text-sm sm:text-base font-bold text-[#0B2342]">Ceritakan kejadiannya</h3>
+                        <h3 class="text-sm sm:text-base font-bold text-[#0F172A]">Ceritakan kejadiannya</h3>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-[#64748B]">Pilih masalahnya dan ceritakan apa yang terjadi secara santai dan jujur.</p>
                     </div>
                 </article>
@@ -109,7 +108,7 @@
                         </svg>
                     </div>
                     <div class="mt-4">
-                        <h3 class="text-sm sm:text-base font-bold text-[#0B2342]">Tentukan lokasinya</h3>
+                        <h3 class="text-sm sm:text-base font-bold text-[#0F172A]">Tentukan lokasinya</h3>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-[#64748B]">Tunjukkan titik tempat kejadiannya langsung di peta wilayah NTB.</p>
                     </div>
                 </article>
@@ -135,7 +134,7 @@
                         </svg>
                     </div>
                     <div class="mt-4">
-                        <h3 class="text-sm sm:text-base font-bold text-[#0B2342]">Tambahkan foto</h3>
+                        <h3 class="text-sm sm:text-base font-bold text-[#0F172A]">Tambahkan foto</h3>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-[#64748B]">Ada foto plang atau bukti nota? Boleh dikirim, atau lewati jika tidak ada.</p>
                     </div>
                 </article>
@@ -145,7 +144,7 @@
                     <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 flex size-7 items-center justify-center rounded-full bg-[#2563EB] text-xs font-bold text-white shadow-sm ring-4 ring-white">05</span>
                     <div class="flex h-24 items-center justify-center">
                         <svg class="h-20 w-auto" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="44" y="8" width="36" height="64" rx="7" fill="#0B2342" stroke="#CBD5E1" stroke-width="2"/>
+                            <rect x="44" y="8" width="36" height="64" rx="7" fill="#0F172A" stroke="#CBD5E1" stroke-width="2"/>
                             <rect x="47" y="13" width="30" height="50" rx="4" fill="#F8FAFC"/>
                             <rect x="58" y="10" width="8" height="2" rx="1" fill="#64748B"/>
                             <path d="M62 26L69 29V36C69 41 65.5 44 62 45.5C58.5 44 55 41 55 36V29L62 26Z" fill="#2563EB"/>
@@ -156,7 +155,7 @@
                         </svg>
                     </div>
                     <div class="mt-4">
-                        <h3 class="text-sm sm:text-base font-bold text-[#0B2342]">Pantau laporanmu</h3>
+                        <h3 class="text-sm sm:text-base font-bold text-[#0F172A]">Pantau laporanmu</h3>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-[#64748B]">Simpan Kode Laporan dan PIN rahasiamu untuk melihat perkembangan laporanmu.</p>
                     </div>
                 </article>
@@ -178,7 +177,7 @@
                                 <path d="m9 12 2 2 4-4"/>
                             </svg>
                         </div>
-                        <h3 class="mt-4 text-base font-bold text-[#0B2342]">100% Anonim &amp; Tanpa Akun</h3>
+                        <h3 class="mt-4 text-base font-bold text-[#0F172A]">100% Anonim &amp; Tanpa Akun</h3>
                         <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Tidak perlu daftar akun. Kami sama sekali tidak meminta nama, KTP, nomor HP, maupun email Anda.</p>
                     </div>
                 </article>
@@ -193,7 +192,7 @@
                                 <path d="m15.5 7.5 3 3L22 7l-3-3"/>
                             </svg>
                         </div>
-                        <h3 class="mt-4 text-base font-bold text-[#0B2342]">Pantau Pakai Kode Rahasia</h3>
+                        <h3 class="mt-4 text-base font-bold text-[#0F172A]">Pantau Pakai Kode Rahasia</h3>
                         <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Anda mendapatkan kode acak dan PIN untuk mengecek status tindak lanjut tanpa meninggalkan jejak.</p>
                     </div>
                 </article>
@@ -207,7 +206,7 @@
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
                         </div>
-                        <h3 class="mt-4 text-base font-bold text-[#0B2342]">Hanya Dibaca Petugas Resmi</h3>
+                        <h3 class="mt-4 text-base font-bold text-[#0F172A]">Hanya Dibaca Petugas Resmi</h3>
                         <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Laporan Anda dijaga ketat dan hanya dibuka oleh petugas resmi Bank Indonesia, tidak ke umum.</p>
                     </div>
                 </article>
@@ -221,7 +220,7 @@
                                 <path d="M22 2 11 13"/>
                             </svg>
                         </div>
-                        <h3 class="mt-4 text-base font-bold text-[#0B2342]">Mulai Buat Laporan</h3>
+                        <h3 class="mt-4 text-base font-bold text-[#0F172A]">Mulai Buat Laporan</h3>
                         <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Sampaikan laporan KUPVA sekarang secara anonim, cepat, dan terlindungi.</p>
                     </div>
                     <div class="mt-5">
@@ -250,7 +249,7 @@
                             <path d="M16 14L21 9M18 12L20 10" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/>
                         </g>
                         <!-- Big Smartphone -->
-                        <rect x="85" y="20" width="70" height="140" rx="14" fill="#0B2342" stroke="#CBD5E1" stroke-width="3"/>
+                        <rect x="85" y="20" width="70" height="140" rx="14" fill="#0F172A" stroke="#CBD5E1" stroke-width="3"/>
                         <rect x="90" y="28" width="60" height="124" rx="8" fill="#F8FAFC"/>
                         <rect x="110" y="24" width="20" height="3" rx="1.5" fill="#64748B"/>
                         <!-- Shield on phone screen -->
@@ -267,7 +266,7 @@
                     </svg>
                 </div>
 
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0B2342] leading-tight">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] leading-tight">
                     Lapor dengan tenang, identitas tetap aman.
                 </h2>
                 <p class="mt-4 text-xs sm:text-sm lg:text-base leading-relaxed text-[#64748B]">
@@ -277,17 +276,25 @@
         </div>
     </section>
 
-    <!-- CTA Banner -->
-    <section class="bg-[#0B2342] py-12 text-white border-t border-[#163B68]">
-        <div class="public-container flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-            <div>
-                <p class="text-xs font-bold uppercase tracking-wider text-[#F2B84B]">Sudah pernah melapor?</p>
-                <h2 class="mt-1 text-xl sm:text-2xl font-bold text-white">Pantau perkembangan tindak lanjut laporan Anda.</h2>
-                <p class="mt-1 text-xs sm:text-sm text-slate-300">Masukkan kode laporan dan PIN rahasia untuk memeriksa status terkini.</p>
+    <!-- Modern Bottom CTA Banner (No Oppressive Navy Block) -->
+    <section class="py-12 bg-white border-t border-[#E2E8F0]">
+        <div class="public-container">
+            <div class="rounded-3xl bg-gradient-to-r from-blue-600 to-[#1D4ED8] p-8 sm:p-10 text-white shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <span class="inline-block rounded-full bg-white/15 px-3 py-1 text-xs font-bold text-amber-300 backdrop-blur-xs">
+                        Sudah pernah melapor?
+                    </span>
+                    <h2 class="mt-2.5 text-xl sm:text-2xl font-bold text-white">
+                        Pantau perkembangan tindak lanjut laporan Anda.
+                    </h2>
+                    <p class="mt-1 text-xs sm:text-sm text-blue-100">
+                        Masukkan kode laporan dan PIN rahasia untuk memeriksa status terkini.
+                    </p>
+                </div>
+                <a href="{{ route('reports.track') }}" class="inline-flex shrink-0 items-center justify-center rounded-xl bg-white px-6 py-3 text-xs sm:text-sm font-bold text-[#1D4ED8] hover:bg-slate-100 transition-colors shadow-xs">
+                    <span>Cek status</span>
+                </a>
             </div>
-            <a href="{{ route('reports.track') }}" class="button-light shrink-0 text-xs sm:text-sm font-semibold rounded-xl">
-                <span>Cek status</span>
-            </a>
         </div>
     </section>
 </x-layouts.public>
