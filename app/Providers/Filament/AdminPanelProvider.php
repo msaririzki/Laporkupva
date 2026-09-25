@@ -25,20 +25,13 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        return $panel
+        $panel = $panel
             ->default()
             ->id('admin')
             ->path('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(Login::class)
             ->profile()
-            ->multiFactorAuthentication([
-                AppAuthentication::make()
-                    ->brandName('TAMBORA · BI NTB')
-                    ->recoverable()
-                    ->recoveryCodeCount(10)
-                    ->codeWindow(4),
-            ], isRequired: (bool) config('tambora.require_admin_mfa'))
             ->brandName('TAMBORA · BI NTB')
             ->brandLogo(asset('images/brand/tambora.webp'))
             ->brandLogoHeight('3rem')
@@ -76,5 +69,17 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ]);
+
+        if ((bool) config('tambora.require_admin_mfa')) {
+            $panel->multiFactorAuthentication([
+                AppAuthentication::make()
+                    ->brandName('TAMBORA · BI NTB')
+                    ->recoverable()
+                    ->recoveryCodeCount(10)
+                    ->codeWindow(4),
+            ], isRequired: true);
+        }
+
+        return $panel;
     }
 }

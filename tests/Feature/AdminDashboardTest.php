@@ -39,6 +39,12 @@ class AdminDashboardTest extends TestCase
             ->assertDontSee('Ruang kerja');
     }
 
+    public function test_mfa_setup_is_unavailable_while_admin_mfa_is_disabled(): void
+    {
+        $this->get('/admin/multi-factor-authentication/set-up')
+            ->assertNotFound();
+    }
+
     public function test_admin_can_open_dashboard_and_report_list(): void
     {
         $admin = User::factory()->create(['role' => UserRole::Admin]);
