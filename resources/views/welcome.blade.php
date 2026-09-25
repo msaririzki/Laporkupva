@@ -67,15 +67,18 @@
 
                     <!-- STEP 01 (Kiri Atas - Paling Tinggi) -->
                     <div class="relative flex flex-col justify-start lg:translate-y-0">
-                        <article class="group relative mx-auto w-full max-w-[340px] rounded-2xl border border-blue-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
-                            <!-- Header Row: Step Number on Left, Icon on Right -->
+                        <article class="group relative mx-auto w-full max-w-[340px] overflow-hidden rounded-2xl border border-blue-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
+                            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600/0 via-blue-600/40 to-blue-600/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+
+                            <!-- Header Row: Step Number on Left, Icon on Right (Sejajar & Cantik) -->
                             <div class="flex items-center justify-between">
                                 <div class="flex items-baseline gap-2">
-                                    <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 font-sans">STEP</span>
-                                    <span class="font-mono text-2xl font-black text-navy-950">01</span>
+                                    <span class="font-sans text-2xl font-black tracking-tight text-navy-950 sm:text-[28px]">Step</span>
+                                    <span class="font-sans text-2xl font-bold tracking-tight text-blue-600 sm:text-[28px]">01</span>
+                                    <span class="ml-0.5 inline-block size-1.5 rounded-full bg-blue-500 ring-4 ring-blue-100/80"></span>
                                 </div>
-                                <div class="flex size-10 items-center justify-center rounded-xl bg-blue-700 text-white shadow-sm shadow-blue-700/25 transition-transform duration-300 group-hover:scale-105">
-                                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-700 via-blue-600 to-blue-500 text-white shadow-md shadow-blue-600/25 ring-4 ring-blue-50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-600/35">
+                                    <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                     </svg>
@@ -88,7 +91,7 @@
                             </h3>
 
                             <!-- Subtle Horizontal Divider -->
-                            <div class="my-3.5 h-px w-full bg-slate-100"></div>
+                            <div class="my-3.5 h-px w-full bg-gradient-to-r from-slate-200/90 via-slate-100 to-transparent"></div>
 
                             <!-- Description -->
                             <p class="text-xs leading-relaxed text-slate-500 sm:text-[13px]">
@@ -97,7 +100,7 @@
                         </article>
 
                         <!-- Connector Desktop (Step 01 -> Step 02 - Elegant Flowing Arc) -->
-                        <div class="pointer-events-none absolute left-[calc(100%-6px)] top-5 z-10 hidden h-20 w-28 lg:block xl:w-36" aria-hidden="true">
+                        <div class="pointer-events-none absolute left-[calc(100%-6px)] top-7 z-10 hidden h-20 w-28 lg:block xl:w-36" aria-hidden="true">
                             <svg class="h-full w-full overflow-visible" viewBox="0 0 130 80" fill="none">
                                 <defs>
                                     <marker id="arrowhead-1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -121,15 +124,18 @@
 
                     <!-- STEP 02 (Tengah - Sedikit Lebih Rendah) -->
                     <div class="relative flex flex-col justify-start lg:translate-y-8 xl:translate-y-10">
-                        <article class="group relative mx-auto w-full max-w-[340px] rounded-2xl border border-blue-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
-                            <!-- Header Row: Step Number on Left, Icon on Right -->
+                        <article class="group relative mx-auto w-full max-w-[340px] overflow-hidden rounded-2xl border border-blue-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
+                            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600/0 via-blue-600/40 to-blue-600/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+
+                            <!-- Header Row: Step Number on Left, Icon on Right (Sejajar & Cantik) -->
                             <div class="flex items-center justify-between">
                                 <div class="flex items-baseline gap-2">
-                                    <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 font-sans">STEP</span>
-                                    <span class="font-mono text-2xl font-black text-navy-950">02</span>
+                                    <span class="font-sans text-2xl font-black tracking-tight text-navy-950 sm:text-[28px]">Step</span>
+                                    <span class="font-sans text-2xl font-bold tracking-tight text-blue-600 sm:text-[28px]">02</span>
+                                    <span class="ml-0.5 inline-block size-1.5 rounded-full bg-blue-500 ring-4 ring-blue-100/80"></span>
                                 </div>
-                                <div class="flex size-10 items-center justify-center rounded-xl bg-blue-700 text-white shadow-sm shadow-blue-700/25 transition-transform duration-300 group-hover:scale-105">
-                                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-700 via-blue-600 to-blue-500 text-white shadow-md shadow-blue-600/25 ring-4 ring-blue-50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-600/35">
+                                    <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                         <circle cx="12" cy="10" r="3"></circle>
                                     </svg>
@@ -142,7 +148,7 @@
                             </h3>
 
                             <!-- Subtle Horizontal Divider -->
-                            <div class="my-3.5 h-px w-full bg-slate-100"></div>
+                            <div class="my-3.5 h-px w-full bg-gradient-to-r from-slate-200/90 via-slate-100 to-transparent"></div>
 
                             <!-- Description -->
                             <p class="text-xs leading-relaxed text-slate-500 sm:text-[13px]">
@@ -151,7 +157,7 @@
                         </article>
 
                         <!-- Connector Desktop (Step 02 -> Step 03 - Elegant Flowing Arc) -->
-                        <div class="pointer-events-none absolute left-[calc(100%-6px)] top-5 z-10 hidden h-20 w-28 lg:block xl:w-36" aria-hidden="true">
+                        <div class="pointer-events-none absolute left-[calc(100%-6px)] top-7 z-10 hidden h-20 w-28 lg:block xl:w-36" aria-hidden="true">
                             <svg class="h-full w-full overflow-visible" viewBox="0 0 130 80" fill="none">
                                 <defs>
                                     <marker id="arrowhead-2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -175,15 +181,18 @@
 
                     <!-- STEP 03 (Kanan Bawah - Paling Rendah) -->
                     <div class="relative flex flex-col justify-start lg:translate-y-16 xl:translate-y-20">
-                        <article class="group relative mx-auto w-full max-w-[340px] rounded-2xl border border-blue-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
-                            <!-- Header Row: Step Number on Left, Icon on Right -->
+                        <article class="group relative mx-auto w-full max-w-[340px] overflow-hidden rounded-2xl border border-blue-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 sm:p-7">
+                            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600/0 via-blue-600/40 to-blue-600/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+
+                            <!-- Header Row: Step Number on Left, Icon on Right (Sejajar & Cantik) -->
                             <div class="flex items-center justify-between">
                                 <div class="flex items-baseline gap-2">
-                                    <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 font-sans">STEP</span>
-                                    <span class="font-mono text-2xl font-black text-navy-950">03</span>
+                                    <span class="font-sans text-2xl font-black tracking-tight text-navy-950 sm:text-[28px]">Step</span>
+                                    <span class="font-sans text-2xl font-bold tracking-tight text-blue-600 sm:text-[28px]">03</span>
+                                    <span class="ml-0.5 inline-block size-1.5 rounded-full bg-blue-500 ring-4 ring-blue-100/80"></span>
                                 </div>
-                                <div class="flex size-10 items-center justify-center rounded-xl bg-blue-700 text-white shadow-sm shadow-blue-700/25 transition-transform duration-300 group-hover:scale-105">
-                                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-700 via-blue-600 to-blue-500 text-white shadow-md shadow-blue-600/25 ring-4 ring-blue-50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-600/35">
+                                    <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
@@ -196,7 +205,7 @@
                             </h3>
 
                             <!-- Subtle Horizontal Divider -->
-                            <div class="my-3.5 h-px w-full bg-slate-100"></div>
+                            <div class="my-3.5 h-px w-full bg-gradient-to-r from-slate-200/90 via-slate-100 to-transparent"></div>
 
                             <!-- Description -->
                             <p class="text-xs leading-relaxed text-slate-500 sm:text-[13px]">
