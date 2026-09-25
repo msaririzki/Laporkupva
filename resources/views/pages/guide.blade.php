@@ -115,13 +115,13 @@
             </div>
 
             <!-- 3 Grip Cards with Flow Arrows -->
-            <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-2.5 sm:gap-3 lg:gap-2.5">
+            <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-3 lg:gap-3">
                 <!-- Card 01: Siapkan informasi -->
-                <article class="flex-1 rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-3 sm:p-3.5 lg:p-4 shadow-xs hover:border-blue-200 hover:shadow-sm transition-all duration-200">
-                    <div class="flex items-center gap-3 sm:gap-3.5">
-                        <div class="relative shrink-0 flex items-center justify-center size-12 sm:size-13 rounded-xl bg-gradient-to-br from-blue-50/80 to-sky-50/40 p-1 border border-blue-100/60">
+                <article class="flex-1 rounded-2xl border border-slate-200/80 bg-white p-3.5 sm:p-4 lg:p-4.5 shadow-xs hover:border-blue-200 hover:shadow-sm transition-all duration-200">
+                    <div class="flex items-center gap-3.5 sm:gap-4">
+                        <div class="relative shrink-0 flex items-center justify-center size-13 sm:size-14 rounded-2xl bg-gradient-to-br from-blue-50/80 to-sky-50/40 p-1 border border-blue-100/60">
                             <!-- SVG: Document & Pencil Illustration -->
-                            <svg class="size-9 sm:size-10" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="size-10 sm:size-11" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="14" y="14" width="44" height="52" rx="8" fill="#93c5fd" fill-opacity="0.25" />
                                 <rect x="14" y="12" width="44" height="52" rx="8" fill="url(#card1-paper-grad)" stroke="#bae6fd" stroke-width="1.5" />
                                 <path d="M44 12V22C44 23.1046 44.8954 24 46 24H58" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.5" />
@@ -148,27 +148,27 @@
                             </svg>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2 py-0.5 text-[10px] font-extrabold text-blue-600">01</span>
-                            <h3 class="mt-0.5 text-xs sm:text-[13px] font-extrabold text-navy-950 leading-tight">Siapkan informasi</h3>
-                            <p class="mt-0.5 text-[11px] sm:text-xs leading-normal text-slate-500">Catat jenis kejadian, waktu, nama tempat (jika diketahui), dan keterangan singkat.</p>
+                            <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">01</span>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950">Siapkan informasi</h3>
+                            <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Catat jenis kejadian, waktu, nama tempat (jika diketahui), dan keterangan singkat.</p>
                         </div>
                     </div>
                 </article>
 
                 <!-- Arrow Connector 1 (Desktop) -->
-                <div class="hidden lg:flex size-6 shrink-0 items-center justify-center rounded-full bg-blue-50/90 text-blue-500 border border-blue-100 shadow-xs" aria-hidden="true">
-                    <svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <div class="hidden lg:flex size-7 shrink-0 items-center justify-center rounded-full bg-blue-50/90 text-blue-500 border border-blue-100 shadow-xs" aria-hidden="true">
+                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14" />
                         <path d="m12 5 7 7-7 7" />
                     </svg>
                 </div>
 
                 <!-- Card 02: Tentukan titik lokasi -->
-                <article class="flex-1 rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-3 sm:p-3.5 lg:p-4 shadow-xs hover:border-blue-200 hover:shadow-sm transition-all duration-200">
-                    <div class="flex items-center gap-3 sm:gap-3.5">
-                        <div class="relative shrink-0 flex items-center justify-center size-12 sm:size-13 rounded-xl bg-gradient-to-br from-blue-50/80 to-emerald-50/40 p-1 border border-blue-100/60">
+                <article class="flex-1 rounded-2xl border border-slate-200/80 bg-white p-3.5 sm:p-4 lg:p-4.5 shadow-xs hover:border-blue-200 hover:shadow-sm transition-all duration-200">
+                    <div class="flex items-center gap-3.5 sm:gap-4">
+                        <div class="relative shrink-0 flex items-center justify-center size-13 sm:size-14 rounded-2xl bg-gradient-to-br from-blue-50/80 to-emerald-50/40 p-1 border border-blue-100/60">
                             <!-- SVG: Folded Map & Location Pin Illustration -->
-                            <svg class="size-9 sm:size-10" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="size-10 sm:size-11" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <ellipse cx="40" cy="62" rx="25" ry="5" fill="#93c5fd" fill-opacity="0.3" />
                                 <polygon points="13,29 29,23 29,55 13,61" fill="url(#card2-panel-1)" stroke="#93c5fd" stroke-width="1.2" stroke-linejoin="round" />
                                 <polygon points="29,23 51,29 51,61 29,55" fill="url(#card2-panel-2)" stroke="#93c5fd" stroke-width="1.2" stroke-linejoin="round" />
@@ -198,27 +198,27 @@
                             </svg>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2 py-0.5 text-[10px] font-extrabold text-blue-600">02</span>
-                            <h3 class="mt-0.5 text-xs sm:text-[13px] font-extrabold text-navy-950 leading-tight">Tentukan titik lokasi</h3>
-                            <p class="mt-0.5 text-[11px] sm:text-xs leading-normal text-slate-500">Gunakan GPS atau cari wilayah lalu geser pin ke titik kejadian yang paling akurat.</p>
+                            <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">02</span>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950">Tentukan titik lokasi</h3>
+                            <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Gunakan GPS atau cari wilayah lalu geser pin ke titik kejadian yang paling akurat.</p>
                         </div>
                     </div>
                 </article>
 
                 <!-- Arrow Connector 2 (Desktop) -->
-                <div class="hidden lg:flex size-6 shrink-0 items-center justify-center rounded-full bg-blue-50/90 text-blue-500 border border-blue-100 shadow-xs" aria-hidden="true">
-                    <svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <div class="hidden lg:flex size-7 shrink-0 items-center justify-center rounded-full bg-blue-50/90 text-blue-500 border border-blue-100 shadow-xs" aria-hidden="true">
+                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14" />
                         <path d="m12 5 7 7-7 7" />
                     </svg>
                 </div>
 
                 <!-- Card 03: Simpan kode akses -->
-                <article class="flex-1 rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-3 sm:p-3.5 lg:p-4 shadow-xs hover:border-blue-200 hover:shadow-sm transition-all duration-200">
-                    <div class="flex items-center gap-3 sm:gap-3.5">
-                        <div class="relative shrink-0 flex items-center justify-center size-12 sm:size-13 rounded-xl bg-gradient-to-br from-amber-50/80 to-blue-50/40 p-1 border border-amber-100/60">
+                <article class="flex-1 rounded-2xl border border-slate-200/80 bg-white p-3.5 sm:p-4 lg:p-4.5 shadow-xs hover:border-blue-200 hover:shadow-sm transition-all duration-200">
+                    <div class="flex items-center gap-3.5 sm:gap-4">
+                        <div class="relative shrink-0 flex items-center justify-center size-13 sm:size-14 rounded-2xl bg-gradient-to-br from-amber-50/80 to-blue-50/40 p-1 border border-amber-100/60">
                             <!-- SVG: Vault Folder & Checkmark Illustration -->
-                            <svg class="size-9 sm:size-10" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="size-10 sm:size-11" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="14" y="21" width="44" height="40" rx="8" fill="#f59e0b" fill-opacity="0.2" />
                                 <path d="M14 23C14 19.6863 16.6863 17 20 17H31L35 21H52C55.3137 21 58 23.6863 58 27V33H14V23Z" fill="#d97706" />
                                 <rect x="17" y="21" width="37" height="11" rx="3" fill="#ffffff" fill-opacity="0.9" />
@@ -242,9 +242,9 @@
                             </svg>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2 py-0.5 text-[10px] font-extrabold text-blue-600">03</span>
-                            <h3 class="mt-0.5 text-xs sm:text-[13px] font-extrabold text-navy-950 leading-tight">Simpan kode akses</h3>
-                            <p class="mt-0.5 text-[11px] sm:text-xs leading-normal text-slate-500">Setelah laporan dikirim, simpan kode laporan dan PIN untuk memantau perkembangannya.</p>
+                            <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">03</span>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950">Simpan kode akses</h3>
+                            <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Setelah laporan dikirim, simpan kode laporan dan PIN untuk memantau perkembangannya.</p>
                         </div>
                     </div>
                 </article>
