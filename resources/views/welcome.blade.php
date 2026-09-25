@@ -61,11 +61,7 @@
         <div class="public-container">
             <!-- Header Section (Sesuai Referensi & Minimalis) -->
             <div class="mx-auto max-w-2xl text-center">
-                <div class="inline-flex items-center gap-2 rounded-full bg-blue-100/90 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-blue-700">
-                    <span class="size-2 rounded-full bg-blue-600"></span>
-                    CARA LAPOR
-                </div>
-                <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
+                <h2 class="text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
                     Cara lapor di TAMBORA
                 </h2>
                 <p class="mt-2 text-sm sm:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
