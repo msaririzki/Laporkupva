@@ -280,143 +280,107 @@
 
         <div class="public-container">
             <div class="grid items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-12">
-                <!-- Left Column: 2x2 Grid (2 Jejer, 2 Baris dengan Tombol Melapor di Kartu ke-4) -->
-                <div class="order-2 lg:order-1 lg:col-span-7 w-full">
-                    <div class="grid grid-cols-2 gap-2.5 sm:gap-4">
+                <!-- Left Column: Grid Kartu Minimalis (1 Kolom di Mobile, 2 Kolom di Desktop/Tablet) -->
+                <div class="order-2 lg:order-1 lg:col-span-7 w-full max-w-md sm:max-w-none mx-auto lg:mx-0">
+                    <div class="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-4">
                         <!-- Card 1: 100% Anonim & Tanpa Akun -->
-                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-4 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
                             <div>
-                                <!-- Number Badge -->
-                                <div class="flex justify-center">
-                                    <span class="flex size-7 sm:size-8 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-sm shadow-blue-600/30">
-                                        01
-                                    </span>
-                                </div>
-
-                                <!-- Icon -->
-                                <div class="my-2 sm:my-2.5 flex justify-center">
-                                    <div class="flex size-9 sm:size-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                                        <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                            <circle cx="9" cy="7" r="4" />
-                                            <line x1="2" y1="2" x2="22" y2="22" />
-                                        </svg>
-                                    </div>
+                                <!-- Icon: Identitas / Profil Tersembunyi (Anonim) -->
+                                <div class="mx-auto mb-3 flex size-11 sm:size-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                                    <svg class="size-5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <line x1="2" y1="2" x2="22" y2="22" />
+                                    </svg>
                                 </div>
 
                                 <!-- Title -->
-                                <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                                <h3 class="text-sm sm:text-base font-extrabold text-navy-950">
                                     100% Anonim & Tanpa Akun
                                 </h3>
 
                                 <!-- Description -->
-                                <p class="mt-1 text-[11px] sm:text-xs lg:text-sm text-slate-500 leading-snug sm:leading-relaxed">
-                                    Tidak perlu daftar akun. Kami tidak meminta nama, KTP, nomor HP, ataupun email Anda.
+                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                    Tidak perlu daftar akun. Kami sama sekali tidak meminta nama, KTP, nomor HP, maupun email Anda.
                                 </p>
                             </div>
                         </article>
 
                         <!-- Card 2: Pantau Pakai Kode Rahasia -->
-                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-4 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
                             <div>
-                                <!-- Number Badge -->
-                                <div class="flex justify-center">
-                                    <span class="flex size-7 sm:size-8 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-sm shadow-blue-600/30">
-                                        02
-                                    </span>
-                                </div>
-
-                                <!-- Icon -->
-                                <div class="my-2 sm:my-2.5 flex justify-center">
-                                    <div class="flex size-9 sm:size-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                                        <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <circle cx="7.5" cy="15.5" r="4.5" />
-                                            <path d="m21 3-9.5 9.5" />
-                                            <path d="m15.5 7.5 3 3" />
-                                            <path d="m18 5 2 2" />
-                                        </svg>
-                                    </div>
+                                <!-- Icon: Kunci Akses / PIN Pelacakan Rahasia -->
+                                <div class="mx-auto mb-3 flex size-11 sm:size-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                                    <svg class="size-5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="7.5" cy="15.5" r="4.5" />
+                                        <path d="m21 3-9.5 9.5" />
+                                        <path d="m15.5 7.5 3 3" />
+                                        <path d="m18 5 2 2" />
+                                    </svg>
                                 </div>
 
                                 <!-- Title -->
-                                <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                                <h3 class="text-sm sm:text-base font-extrabold text-navy-950">
                                     Pantau Pakai Kode Rahasia
                                 </h3>
 
                                 <!-- Description -->
-                                <p class="mt-1 text-[11px] sm:text-xs lg:text-sm text-slate-500 leading-snug sm:leading-relaxed">
-                                    Anda mendapatkan kode acak dan PIN untuk mengecek status tindak lanjut tanpa jejak.
+                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                    Anda mendapatkan kode acak dan PIN untuk mengecek status tindak lanjut tanpa meninggalkan jejak.
                                 </p>
                             </div>
                         </article>
 
                         <!-- Card 3: Hanya Dibaca Petugas Resmi -->
-                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-4 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
                             <div>
-                                <!-- Number Badge -->
-                                <div class="flex justify-center">
-                                    <span class="flex size-7 sm:size-8 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-sm shadow-blue-600/30">
-                                        03
-                                    </span>
-                                </div>
-
-                                <!-- Icon -->
-                                <div class="my-2 sm:my-2.5 flex justify-center">
-                                    <div class="flex size-9 sm:size-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                                        <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                            <path d="m9 12 2 2 4-4" />
-                                        </svg>
-                                    </div>
+                                <!-- Icon: Perisai Verifikasi / Otoritas Resmi BI -->
+                                <div class="mx-auto mb-3 flex size-11 sm:size-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                                    <svg class="size-5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
                                 </div>
 
                                 <!-- Title -->
-                                <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                                <h3 class="text-sm sm:text-base font-extrabold text-navy-950">
                                     Hanya Dibaca Petugas Resmi
                                 </h3>
 
                                 <!-- Description -->
-                                <p class="mt-1 text-[11px] sm:text-xs lg:text-sm text-slate-500 leading-snug sm:leading-relaxed">
-                                    Laporan dijaga ketat dan hanya dibuka petugas resmi Bank Indonesia, tidak ke umum.
+                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                    Laporan Anda dijaga ketat dan hanya dibuka oleh petugas resmi Bank Indonesia, tidak ke umum.
                                 </p>
                             </div>
                         </article>
 
-                        <!-- Card 4: Mulai Membuat Laporan (Teman Grip 03 agar Tidak Kosong) -->
-                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-blue-200/80 bg-gradient-to-b from-blue-50/70 via-white to-blue-50/40 p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg">
+                        <!-- Card 4: Mulai Membuat Laporan (Teman Grip 03) -->
+                        <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-blue-200/80 bg-gradient-to-b from-blue-50/60 via-white to-blue-50/30 p-4 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-md">
                             <div>
-                                <!-- Number Badge -->
-                                <div class="flex justify-center">
-                                    <span class="flex size-7 sm:size-8 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-sm shadow-blue-600/30">
-                                        04
-                                    </span>
-                                </div>
-
-                                <!-- Icon -->
-                                <div class="my-2 sm:my-2.5 flex justify-center">
-                                    <div class="flex size-9 sm:size-11 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-transform group-hover:scale-105">
-                                        <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                                        </svg>
-                                    </div>
+                                <!-- Icon: Pesawat Kertas Kirim Laporan -->
+                                <div class="mx-auto mb-3 flex size-11 sm:size-12 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-transform group-hover:scale-105">
+                                    <svg class="size-5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m22 2-7 20-4-9-9-4Z" />
+                                        <path d="M22 2 11 13" />
+                                    </svg>
                                 </div>
 
                                 <!-- Title -->
-                                <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                                <h3 class="text-sm sm:text-base font-extrabold text-navy-950">
                                     Mulai Buat Laporan
                                 </h3>
 
                                 <!-- Description -->
-                                <p class="mt-1 text-[11px] sm:text-xs lg:text-sm text-slate-500 leading-snug sm:leading-relaxed">
-                                    Sampaikan laporan KUPVA sekarang secara anonim dan terproteksi.
+                                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                    Sampaikan laporan KUPVA sekarang secara anonim, cepat, dan terlindungi.
                                 </p>
                             </div>
 
                             <!-- Button Teman Grip 03 -->
-                            <div class="mt-3 sm:mt-4">
-                                <a href="{{ route('reports.create') }}" class="button-primary w-full inline-flex items-center justify-center gap-1.5 py-2 px-2.5 text-xs sm:text-sm font-bold shadow-sm">
-                                    Mulai melapor <span aria-hidden="true">→</span>
+                            <div class="mt-3.5 sm:mt-4">
+                                <a href="{{ route('reports.create') }}" class="button-primary w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 text-xs sm:text-sm font-bold shadow-sm">
+                                    Mulai membuat laporan <span aria-hidden="true">→</span>
                                 </a>
                             </div>
                         </article>
