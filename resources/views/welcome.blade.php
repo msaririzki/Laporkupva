@@ -38,7 +38,7 @@
         </div>
     </section>
 
-    <section id="cara-kerja" class="relative overflow-hidden scroll-mt-20 bg-gradient-to-b from-[#eef6ff] via-[#f4f9ff] to-[#e8f2fe] py-12 sm:py-18">
+    <section id="cara-kerja" class="relative overflow-hidden scroll-mt-20 bg-gradient-to-b from-[#eef6ff] via-[#f4f9ff] to-[#e8f2fe] py-8 sm:py-16">
         <!-- Mountain Silhouette Background at Bottom (TAMBORA Atmosphere) -->
         <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 sm:h-36 overflow-hidden opacity-30" aria-hidden="true">
             <svg class="h-full w-full object-cover" viewBox="0 0 1440 220" fill="none" preserveAspectRatio="none">
@@ -61,31 +61,31 @@
         <div class="public-container">
             <!-- Header Section (Sesuai Referensi & Minimalis) -->
             <div class="mx-auto max-w-2xl text-center">
-                <h2 class="text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
+                <h2 class="text-2xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
                     Cara lapor di TAMBORA
                 </h2>
-                <p class="mt-2 text-sm sm:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
-                    Gampang, kok. Cukup ikuti 5 langkah sederhana berikut tanpa perlu login atau registrasi akun.
+                <p class="mt-1.5 text-xs sm:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
+                    Gampang, kok. Cukup ikuti 4 langkah sederhana berikut tanpa perlu login atau registrasi akun.
                 </p>
             </div>
 
-            <!-- 5-Step Clean & Minimalist Cards Grid (Tanpa Garis Rumit) -->
-            <div class="mt-8 sm:mt-12">
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3 xl:gap-4">
+            <!-- 4-Step Cards Grid: 2x2 on Mobile, 4 Columns on Desktop (Minimal Scroll) -->
+            <div class="mt-6 sm:mt-10">
+                <div class="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
 
                     <!-- STEP 01: Buka TAMBORA -->
-                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                    <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                         <div>
                             <!-- Number Badge -->
                             <div class="flex justify-center">
-                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
+                                <span class="flex size-7 sm:size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-[11px] sm:text-xs font-black text-white shadow-sm sm:shadow-md shadow-blue-600/30">
                                     01
                                 </span>
                             </div>
 
                             <!-- Illustration: Laptop / Web Browser -->
-                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
-                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                            <div class="my-2 sm:my-3 flex h-14 sm:h-20 lg:h-24 items-center justify-center">
+                                <svg class="h-full w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
                                     <!-- Laptop Base -->
                                     <path d="M 14 80 L 106 80 L 114 86 L 6 86 Z" fill="#94a3b8"/>
                                     <!-- Laptop Screen -->
@@ -109,30 +109,30 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
                                 Buka TAMBORA
                             </h3>
 
                             <!-- Description -->
-                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
                                 Buka <a href="https://laporkupva.ikydev.com/" target="_blank" rel="noopener noreferrer" class="font-bold text-blue-700 underline decoration-blue-300 hover:text-blue-900 transition-colors">TAMBORA</a> tanpa perlu login.
                             </p>
                         </div>
                     </article>
 
                     <!-- STEP 02: Ceritakan -->
-                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                    <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                         <div>
                             <!-- Number Badge -->
                             <div class="flex justify-center">
-                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
+                                <span class="flex size-7 sm:size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-[11px] sm:text-xs font-black text-white shadow-sm sm:shadow-md shadow-blue-600/30">
                                     02
                                 </span>
                             </div>
 
                             <!-- Illustration: Character with Phone & Speech Bubble -->
-                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
-                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                            <div class="my-2 sm:my-3 flex h-14 sm:h-20 lg:h-24 items-center justify-center">
+                                <svg class="h-full w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
                                     <!-- Speech Bubble -->
                                     <g>
                                         <rect x="52" y="12" width="56" height="38" rx="8" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.2"/>
@@ -158,30 +158,30 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
                                 Ceritakan
                             </h3>
 
                             <!-- Description -->
-                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
                                 Ceritakan apa yang terjadi.
                             </p>
                         </div>
                     </article>
 
                     <!-- STEP 03: Tentukan lokasi -->
-                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                    <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                         <div>
                             <!-- Number Badge -->
                             <div class="flex justify-center">
-                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
+                                <span class="flex size-7 sm:size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-[11px] sm:text-xs font-black text-white shadow-sm sm:shadow-md shadow-blue-600/30">
                                     03
                                 </span>
                             </div>
 
                             <!-- Illustration: Folded Map & Blue Pin -->
-                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
-                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                            <div class="my-2 sm:my-3 flex h-14 sm:h-20 lg:h-24 items-center justify-center">
+                                <svg class="h-full w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
                                     <!-- Map panels -->
                                     <polygon points="15,40 45,30 45,82 15,92" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
                                     <path d="M 18 68 Q 28 60 36 72 L 45 64 L 45 82 L 15 92 Z" fill="#dcfce7" opacity="0.8"/>
@@ -199,77 +199,30 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
                                 Tentukan lokasi
                             </h3>
 
                             <!-- Description -->
-                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
                                 Tunjukkan di mana kejadiannya.
                             </p>
                         </div>
                     </article>
 
-                    <!-- STEP 04: Tambah foto -->
-                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                    <!-- STEP 04: Pantau laporan -->
+                    <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                         <div>
                             <!-- Number Badge -->
                             <div class="flex justify-center">
-                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
+                                <span class="flex size-7 sm:size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-[11px] sm:text-xs font-black text-white shadow-sm sm:shadow-md shadow-blue-600/30">
                                     04
                                 </span>
                             </div>
 
-                            <!-- Illustration: Polaroid Photos & Plus Badge -->
-                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
-                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
-                                    <!-- Back Photo -->
-                                    <g transform="rotate(-8 45 50)">
-                                        <rect x="18" y="20" width="54" height="46" rx="5" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
-                                        <rect x="21" y="23" width="48" height="34" rx="3" fill="#e0f2fe"/>
-                                        <circle cx="56" cy="32" r="4" fill="#fde047"/>
-                                        <path d="M 21 52 L 34 38 L 45 49 L 55 41 L 69 57 L 21 57 Z" fill="#93c5fd"/>
-                                    </g>
-
-                                    <!-- Front Photo -->
-                                    <g transform="rotate(5 70 50)">
-                                        <rect x="42" y="20" width="58" height="50" rx="5" fill="white" stroke="#94a3b8" stroke-width="1.2" filter="drop-shadow(0 3px 6px rgb(0 0 0 / 0.08))"/>
-                                        <rect x="45" y="23" width="52" height="38" rx="3" fill="#dbeafe"/>
-                                        <circle cx="84" cy="32" r="4.5" fill="#f59e0b"/>
-                                        <path d="M 45 56 L 62 40 L 76 53 L 86 45 L 97 61 L 45 61 Z" fill="#3b82f6"/>
-                                    </g>
-
-                                    <!-- Plus Badge -->
-                                    <circle cx="92" cy="68" r="11" fill="#2563eb" stroke="white" stroke-width="2" filter="drop-shadow(0 2px 5px rgb(37 99 235 / 0.4))"/>
-                                    <path d="M 92 62 L 92 74 M 86 68 L 98 68" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                            </div>
-
-                            <!-- Title -->
-                            <h3 class="text-base font-extrabold text-navy-950">
-                                Tambah foto
-                            </h3>
-
-                            <!-- Description -->
-                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
-                                Ada bukti? Tambahkan jika ada.
-                            </p>
-                        </div>
-                    </article>
-
-                    <!-- STEP 05: Pantau laporan -->
-                    <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
-                        <div>
-                            <!-- Number Badge -->
-                            <div class="flex justify-center">
-                                <span class="flex size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-xs font-black text-white shadow-md shadow-blue-600/30">
-                                    05
-                                </span>
-                            </div>
-
                             <!-- Illustration: Smartphone with Shield, Lock & Checkmark -->
-                            <div class="my-3 flex h-24 items-center justify-center sm:h-28">
-                                <svg class="h-22 sm:h-24 w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                            <div class="my-2 sm:my-3 flex h-14 sm:h-20 lg:h-24 items-center justify-center">
+                                <svg class="h-full w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
                                     <!-- Phone Body -->
                                     <rect x="36" y="14" width="48" height="76" rx="8" fill="#1e293b" filter="drop-shadow(0 4px 8px rgb(0 0 0 / 0.1))"/>
                                     <rect x="39" y="18" width="42" height="68" rx="5" fill="#f8fafc"/>
@@ -289,12 +242,12 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
                                 Pantau laporan
                             </h3>
 
                             <!-- Description -->
-                            <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
                                 Simpan kode untuk melihat perkembangan laporan.
                             </p>
                         </div>
