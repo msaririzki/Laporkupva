@@ -24,6 +24,19 @@ class AdminDashboardTest extends TestCase
 {
     use LazilyRefreshDatabase;
 
+    public function test_guest_sees_the_branded_admin_login_page(): void
+    {
+        $this->get('/admin/login')
+            ->assertOk()
+            ->assertSee('Selamat datang')
+            ->assertSee('Masuk untuk melanjutkan ke dasbor admin.')
+            ->assertSee('Kelola laporan dengan lebih terarah.')
+            ->assertSee('Akses khusus petugas berwenang')
+            ->assertSee('Email admin')
+            ->assertSee('Masuk ke dasbor')
+            ->assertDontSee('Masuk ke akun Anda');
+    }
+
     public function test_admin_can_open_dashboard_and_report_list(): void
     {
         $admin = User::factory()->create(['role' => UserRole::Admin]);
