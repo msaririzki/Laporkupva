@@ -63,13 +63,13 @@
             <div class="mx-auto max-w-2xl text-center">
                 <div class="inline-flex items-center gap-2 rounded-full bg-blue-100/90 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-blue-700">
                     <span class="size-2 rounded-full bg-blue-600"></span>
-                    CARA MELAPOR YANG BAIK
+                    CARA LAPOR
                 </div>
                 <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
-                    Cara melapor di TAMBORA
+                    Cara lapor di TAMBORA
                 </h2>
                 <p class="mt-2 text-sm sm:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
-                    Gampang, kok. Cukup buka web, ceritakan, tunjukkan lokasinya, tambahkan foto (jika ada), lalu pantau perkembangannya.
+                    Gampang, kok. Cukup ikuti 5 langkah sederhana berikut tanpa perlu login atau registrasi akun.
                 </p>
             </div>
 
@@ -77,7 +77,7 @@
             <div class="mt-8 sm:mt-12">
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3 xl:gap-4">
 
-                    <!-- STEP 01: Buka websitenya -->
+                    <!-- STEP 01: Buka TAMBORA -->
                     <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                         <div>
                             <!-- Number Badge -->
@@ -114,17 +114,17 @@
 
                             <!-- Title -->
                             <h3 class="text-base font-extrabold text-navy-950">
-                                Buka websitenya
+                                Buka TAMBORA
                             </h3>
 
                             <!-- Description -->
                             <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
-                                Buka <a href="https://laporkupva.ikydev.com/" target="_blank" rel="noopener noreferrer" class="font-bold text-blue-700 underline decoration-blue-300 hover:text-blue-900 transition-colors">laporkupva.ikydev.com</a> lewat HP atau laptop tanpa perlu login.
+                                Buka <a href="https://laporkupva.ikydev.com/" target="_blank" rel="noopener noreferrer" class="font-bold text-blue-700 underline decoration-blue-300 hover:text-blue-900 transition-colors">TAMBORA</a> tanpa perlu login.
                             </p>
                         </div>
                     </article>
 
-                    <!-- STEP 02: Ceritakan kejadiannya -->
+                    <!-- STEP 02: Ceritakan -->
                     <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                         <div>
                             <!-- Number Badge -->
@@ -163,17 +163,17 @@
 
                             <!-- Title -->
                             <h3 class="text-base font-extrabold text-navy-950">
-                                Ceritakan kejadiannya
+                                Ceritakan
                             </h3>
 
                             <!-- Description -->
                             <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
-                                Pilih masalahnya dan ceritakan apa yang terjadi secara santai dan jujur.
+                                Ceritakan apa yang terjadi.
                             </p>
                         </div>
                     </article>
 
-                    <!-- STEP 03: Tentukan lokasinya -->
+                    <!-- STEP 03: Tentukan lokasi -->
                     <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                         <div>
                             <!-- Number Badge -->
@@ -204,17 +204,17 @@
 
                             <!-- Title -->
                             <h3 class="text-base font-extrabold text-navy-950">
-                                Tentukan lokasinya
+                                Tentukan lokasi
                             </h3>
 
                             <!-- Description -->
                             <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
-                                Tunjukkan titik tempat kejadiannya langsung di peta wilayah NTB.
+                                Tunjukkan di mana kejadiannya.
                             </p>
                         </div>
                     </article>
 
-                    <!-- STEP 04: Tambahkan foto -->
+                    <!-- STEP 04: Tambah foto -->
                     <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                         <div>
                             <!-- Number Badge -->
@@ -251,17 +251,17 @@
 
                             <!-- Title -->
                             <h3 class="text-base font-extrabold text-navy-950">
-                                Tambahkan foto
+                                Tambah foto
                             </h3>
 
                             <!-- Description -->
                             <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
-                                Ada foto plang atau bukti nota? Boleh dikirim, atau lewati jika tidak ada.
+                                Ada bukti? Tambahkan jika ada.
                             </p>
                         </div>
                     </article>
 
-                    <!-- STEP 05: Pantau laporanmu -->
+                    <!-- STEP 05: Pantau laporan -->
                     <article class="group flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                         <div>
                             <!-- Number Badge -->
@@ -294,12 +294,12 @@
 
                             <!-- Title -->
                             <h3 class="text-base font-extrabold text-navy-950">
-                                Pantau laporanmu
+                                Pantau laporan
                             </h3>
 
                             <!-- Description -->
                             <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
-                                Simpan Kode Laporan dan PIN rahasiamu untuk melihat perkembangan laporanmu.
+                                Simpan kode untuk melihat perkembangan laporan.
                             </p>
                         </div>
                     </article>
