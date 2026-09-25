@@ -17,6 +17,7 @@ use App\Models\Report;
 use App\Models\ReportEvidence;
 use App\Models\User;
 use Filament\Facades\Filament;
+use Filament\Navigation\NavigationItem;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -30,6 +31,8 @@ class AdminDashboardTest extends TestCase
     public function test_admin_panel_uses_spa_navigation_without_intercepting_file_responses(): void
     {
         $panel = Filament::getPanel('admin');
+        $publicPortalItem = collect($panel->getNavigationItems())
+            ->first(fn (NavigationItem $item): bool => $item->getLabel() === 'Portal Publik');
 
         $this->assertTrue($panel->hasSpaMode());
         $this->assertFalse($panel->hasSpaPrefetching());
@@ -37,6 +40,9 @@ class AdminDashboardTest extends TestCase
             url('/admin/ekspor/*'),
             url('/admin/lampiran-laporan/*'),
         ], $panel->getSpaUrlExceptions());
+        $this->assertNotNull($publicPortalItem);
+        $this->assertSame(route('home'), $publicPortalItem->getUrl());
+        $this->assertTrue($publicPortalItem->shouldOpenUrlInNewTab());
     }
 
     public function test_guest_sees_the_branded_admin_login_page(): void

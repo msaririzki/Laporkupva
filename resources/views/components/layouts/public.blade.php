@@ -26,7 +26,21 @@
                 <a class="nav-link" href="{{ route('reports.track') }}">Cek status</a>
             </nav>
 
-            <a href="{{ route('reports.create') }}" class="button-primary hidden sm:inline-flex">Buat laporan <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a>
+            <div class="flex shrink-0 items-center gap-2">
+                <a href="{{ route('reports.create') }}" class="button-primary hidden sm:inline-flex">Buat laporan <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a>
+
+                <a
+                    href="{{ route('filament.admin.auth.login') }}"
+                    class="admin-access-link"
+                    aria-label="Masuk ke portal admin"
+                    title="Portal admin"
+                >
+                    <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 1.75a4.25 4.25 0 0 0-4.25 4.25v1.1A2.75 2.75 0 0 0 3.5 9.8v5.7a2.75 2.75 0 0 0 2.75 2.75h7.5a2.75 2.75 0 0 0 2.75-2.75V9.8a2.75 2.75 0 0 0-2.25-2.7V6A4.25 4.25 0 0 0 10 1.75ZM7.25 6a2.75 2.75 0 1 1 5.5 0v1.05h-5.5V6Zm3.5 6.25a.75.75 0 1 0-1.5 0v1.5a.75.75 0 1 0 1.5 0v-1.5Z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="sr-only">Portal admin</span>
+                </a>
+            </div>
         </div>
     </header>
 
