@@ -29,6 +29,8 @@ class ReportsTable
     {
         return $table
             ->defaultSort('created_at', 'desc')
+            ->searchPlaceholder('Cari kode, tempat, jenis, wilayah…')
+            ->searchDebounce('350ms')
             ->columns([
                 TextColumn::make('public_code')
                     ->label('Kode laporan')
@@ -82,6 +84,20 @@ class ReportsTable
                     ->label('Wilayah')
                     ->options(NtbRegency::class),
             ])
+            ->filtersTriggerAction(
+                fn (Action $action): Action => $action
+                    ->button()
+                    ->label('Saring')
+                    ->icon(Heroicon::OutlinedAdjustmentsHorizontal)
+                    ->color('gray'),
+            )
+            ->columnManagerTriggerAction(
+                fn (Action $action): Action => $action
+                    ->button()
+                    ->label('Atur kolom')
+                    ->icon(Heroicon::OutlinedViewColumns)
+                    ->color('gray'),
+            )
             ->toolbarActions([
                 Action::make('exportCsv')
                     ->label('Ekspor CSV')
@@ -90,9 +106,19 @@ class ReportsTable
                     ->url(fn (): string => route('admin.reports.export')),
             ])
             ->recordActions([
-                ViewAction::make()->iconButton()->tooltip('Lihat detail laporan'),
+                ViewAction::make()
+                    ->label('Lihat')
+                    ->button()
+                    ->size('sm')
+                    ->color('gray'),
                 ReportResource::advanceStatusAction()->iconButton()->tooltip('Lanjutkan ke tahap berikutnya'),
             ])
+            ->recordActionsColumnLabel('Tindakan')
+            ->recordClasses(fn (Report $record): string => match ($record->status) {
+                ReportStatus::Submitted => 'report-list-row report-list-row--new',
+                ReportStatus::Completed => 'report-list-row report-list-row--completed',
+                default => 'report-list-row report-list-row--active',
+            })
             ->emptyStateHeading('Belum ada laporan masyarakat')
             ->emptyStateDescription('Laporan yang masuk melalui portal publik akan tampil di halaman ini.')
             ->emptyStateIcon('heroicon-o-inbox');

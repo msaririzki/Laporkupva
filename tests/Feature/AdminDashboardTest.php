@@ -159,7 +159,10 @@ class AdminDashboardTest extends TestCase
             ->get(ReportResource::getUrl('index'))
             ->assertOk()
             ->assertSee('Laporan masyarakat')
-            ->assertSee('Pantau, saring, dan tindak lanjuti laporan masyarakat dari seluruh wilayah NTB.')
+            ->assertSee('Temukan dan tindak lanjuti laporan masyarakat di seluruh NTB.')
+            ->assertSee('Cari kode, tempat, jenis, wilayah…')
+            ->assertSee('Saring')
+            ->assertSee('Atur kolom')
             ->assertSee('Ekspor CSV');
 
         $this->actingAs($admin)

@@ -11,7 +11,7 @@ class ListReports extends ListRecords
 
     public function getSubheading(): ?string
     {
-        return 'Pantau, saring, dan tindak lanjuti laporan masyarakat dari seluruh wilayah NTB.';
+        return 'Temukan dan tindak lanjuti laporan masyarakat di seluruh NTB.';
     }
 
     protected function getHeaderActions(): array
