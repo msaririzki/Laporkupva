@@ -2,34 +2,32 @@
     <!-- Hero Header (Clean Light Canvas, Elegant Reassurance) -->
     <section class="relative bg-white py-8 sm:py-10 lg:py-12 border-b border-[#E2E8F0]">
         <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10">
-            <!-- Top Row: Laporan Anonim (Left) & Identitas Anda tetap terlindungi (Right) -->
-            <div class="flex items-center justify-between w-full">
-                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/80 px-3.5 py-1 text-xs font-semibold text-[#2563EB]">
-                    <svg class="size-3.5 text-[#2563EB]" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
-                    </svg>
-                    <span>Laporan Anonim</span>
-                </div>
-                <div class="hidden sm:inline-flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
-                    <svg class="size-3.5 text-[#2563EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                    </svg>
-                    <span>Identitas Anda tetap terlindungi</span>
-                </div>
-            </div>
-
-            <!-- Content Area -->
-            <div class="mt-4 sm:mt-5 text-left lg:text-center max-w-[800px] lg:mx-auto">
+            <!-- Content Area (Centered, Clean, Airy) -->
+            <div class="text-center max-w-[800px] mx-auto">
                 <h1 class="text-2xl font-extrabold tracking-tight text-[#0F172A] sm:text-3xl lg:text-[34px] lg:leading-tight">
                     Laporkan dengan cepat dan aman
                 </h1>
 
-                <p class="mt-2 text-xs sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B] max-w-[720px] lg:mx-auto">
+                <p class="mt-2 text-xs sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B] max-w-[720px] mx-auto">
                     Ceritakan kejadian, tentukan lokasi, lalu kirim laporan secara anonim.
                 </p>
 
-                <!-- Single Simple Badge: ±3 menit with small clock icon -->
-                <div class="mt-3 flex items-center lg:justify-center">
+                <!-- Badges Row: Laporan Anonim, Identitas Anda tetap terlindungi, ±3 menit side-by-side -->
+                <div class="mt-3.5 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+                    <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-200/80 bg-blue-50/80 px-3 py-1 text-xs font-semibold text-[#2563EB]">
+                        <svg class="size-3.5 text-[#2563EB]" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
+                        </svg>
+                        <span>Laporan Anonim</span>
+                    </span>
+
+                    <span class="inline-flex items-center gap-1.5 text-xs text-[#64748B] font-medium bg-slate-100/90 border border-slate-200/60 px-3 py-1 rounded-full">
+                        <svg class="size-3.5 text-[#2563EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                        </svg>
+                        <span>Identitas Anda tetap terlindungi</span>
+                    </span>
+
                     <span class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-100/90 px-3 py-1 rounded-full border border-slate-200/60">
                         <svg class="size-3.5 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd"/>
@@ -330,38 +328,35 @@
                 <!-- STEP 3: BUKTI -->
                 <section class="form-step hidden max-w-3xl mx-auto" data-step="3">
                     <div class="border-b border-slate-100 pb-5">
-                        <div class="flex items-center justify-between">
-                            <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB]">
-                                <span>Langkah 03</span>
-                            </div>
-                            <span class="text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-1 rounded-full">Boleh dilewati</span>
+                        <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB]">
+                            <span>Langkah 03</span>
                         </div>
                         <h2 class="mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]">Tambahkan foto & bukti</h2>
                         <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Sertakan foto lokasi, papan nama, atau dokumen pendukung untuk memperkuat laporan Anda.</p>
                     </div>
 
-                    <!-- Review Summary Cards -->
-                    <div class="mt-6 grid gap-3 sm:grid-cols-3" aria-label="Ringkasan laporan">
-                        <div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
-                            <div class="flex items-center gap-2">
-                                <span class="grid size-6 place-items-center rounded-md bg-blue-50 text-[11px] font-bold text-[#2563EB]">1</span>
-                                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Jenis kejadian</span>
+                    <!-- Review Summary Cards (Compact, Balanced) -->
+                    <div class="mt-4 sm:mt-6 grid grid-cols-3 gap-2 sm:gap-3" aria-label="Ringkasan laporan">
+                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 sm:p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
+                            <div class="flex items-center gap-1.5 sm:gap-2">
+                                <span class="grid size-4.5 sm:size-6 place-items-center rounded-md bg-blue-50 text-[10px] sm:text-[11px] font-bold text-[#2563EB]">1</span>
+                                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#64748B] truncate">Jenis kejadian</span>
                             </div>
-                            <strong id="review-incident" class="mt-2 block text-sm font-bold text-[#0F172A] break-words leading-snug">—</strong>
+                            <strong id="review-incident" class="mt-1 sm:mt-2 block text-xs sm:text-sm font-bold text-[#0F172A] truncate leading-snug">—</strong>
                         </div>
-                        <div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
-                            <div class="flex items-center gap-2">
-                                <span class="grid size-6 place-items-center rounded-md bg-emerald-50 text-[11px] font-bold text-emerald-600">2</span>
-                                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Waktu kejadian</span>
+                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 sm:p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
+                            <div class="flex items-center gap-1.5 sm:gap-2">
+                                <span class="grid size-4.5 sm:size-6 place-items-center rounded-md bg-emerald-50 text-[10px] sm:text-[11px] font-bold text-emerald-600">2</span>
+                                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#64748B] truncate">Waktu kejadian</span>
                             </div>
-                            <strong id="review-date" class="mt-2 block text-sm font-bold text-[#0F172A] break-words leading-snug">—</strong>
+                            <strong id="review-date" class="mt-1 sm:mt-2 block text-xs sm:text-sm font-bold text-[#0F172A] truncate leading-snug">—</strong>
                         </div>
-                        <div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
-                            <div class="flex items-center gap-2">
-                                <span class="grid size-6 place-items-center rounded-md bg-amber-50 text-[11px] font-bold text-amber-600">3</span>
-                                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Lokasi kejadian</span>
+                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 sm:p-4 shadow-xs transition-all hover:bg-white hover:shadow-sm">
+                            <div class="flex items-center gap-1.5 sm:gap-2">
+                                <span class="grid size-4.5 sm:size-6 place-items-center rounded-md bg-amber-50 text-[10px] sm:text-[11px] font-bold text-amber-600">3</span>
+                                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#64748B] truncate">Lokasi kejadian</span>
                             </div>
-                            <strong id="review-location" class="mt-2 block text-sm font-bold text-[#0F172A] break-words leading-snug">—</strong>
+                            <strong id="review-location" class="mt-1 sm:mt-2 block text-xs sm:text-sm font-bold text-[#0F172A] truncate leading-snug">—</strong>
                         </div>
                     </div>
 
@@ -372,22 +367,22 @@
                                 <label class="form-label mb-0" for="evidence">Punya foto atau dokumen?</label>
                                 <span class="text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-0.5 rounded-full">Boleh dilewati</span>
                             </div>
-                            <label class="upload-zone group flex flex-col items-center justify-center p-8 rounded-3xl border-2 border-dashed border-[#CBD5E1] bg-[#F8FAFC] hover:border-[#2563EB] hover:bg-blue-50/30 transition-all cursor-pointer text-center" for="evidence">
-                                <div class="grid size-14 place-items-center rounded-2xl bg-blue-50 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-all shadow-xs">
-                                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <label class="upload-zone group flex flex-col items-center justify-center p-5 sm:p-8 rounded-2xl sm:rounded-3xl border-2 border-dashed border-[#CBD5E1] bg-[#F8FAFC] hover:border-[#2563EB] hover:bg-blue-50/30 transition-all cursor-pointer text-center" for="evidence">
+                                <div class="grid size-11 sm:size-14 place-items-center rounded-2xl bg-blue-50 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-all shadow-xs">
+                                    <svg class="size-5 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                                         <polyline points="17 8 12 3 7 8"/>
                                         <line x1="12" y1="3" x2="12" y2="15"/>
                                     </svg>
                                 </div>
-                                <strong class="mt-4 block text-sm font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
+                                <strong class="mt-3 sm:mt-4 block text-xs sm:text-sm font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
                                     Pilih foto atau seret ke sini
                                 </strong>
-                                <span class="mt-1 block text-xs text-[#64748B]">
+                                <span class="mt-1 block text-[11px] sm:text-xs text-[#64748B]">
                                     Format: JPG, PNG, WEBP, atau PDF · Maks. 5 berkas, masing-masing 10 MB
                                 </span>
-                                <span class="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-3 py-1.5 text-xs font-semibold text-[#0F172A] shadow-2xs group-hover:border-[#2563EB] group-hover:text-[#2563EB]">
-                                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <span class="mt-2.5 sm:mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-3 py-1.5 text-[11px] sm:text-xs font-semibold text-[#0F172A] shadow-2xs group-hover:border-[#2563EB] group-hover:text-[#2563EB]">
+                                    <svg class="size-3 sm:size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
                                         <circle cx="9" cy="9" r="2"/>
                                         <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
@@ -397,7 +392,7 @@
                             </label>
                             <input class="sr-only" id="evidence" name="evidence[]" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf" multiple>
                             <div id="file-list" class="mt-3 grid gap-2"></div>
-                            <p class="form-helper">Foto besar otomatis diperkecil di perangkat Anda sebelum dikirim agar hemat kuota.</p>
+                            <p class="sr-only">Foto besar otomatis diperkecil di perangkat Anda sebelum dikirim agar hemat kuota.</p>
                             @error('evidence')<p class="form-error">{{ $message }}</p>@enderror
                             @error('evidence.*')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
