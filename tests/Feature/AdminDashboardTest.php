@@ -476,6 +476,19 @@ class AdminDashboardTest extends TestCase
         ]);
     }
 
+    public function test_super_admin_sees_the_streamlined_create_admin_form(): void
+    {
+        $superAdmin = User::factory()->superAdmin()->create();
+
+        $this->actingAs($superAdmin)
+            ->get(UserResource::getUrl('create'))
+            ->assertOk()
+            ->assertSee('Tambah admin')
+            ->assertSee('Informasi admin')
+            ->assertSee('Simpan admin')
+            ->assertDontSee('Buat &amp; buat lainnya', false);
+    }
+
     public function test_super_admin_can_deactivate_an_admin_without_deleting_the_account(): void
     {
         $superAdmin = User::factory()->superAdmin()->create();
