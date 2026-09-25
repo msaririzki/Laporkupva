@@ -1,5 +1,6 @@
 import './map-layers';
 import './report-form';
+import './report-access';
 
 // Mobile navigation toggle
 const mobileMenuButton = document.querySelector('#mobile-menu-button');

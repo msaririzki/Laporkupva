@@ -20,7 +20,7 @@
                     </span>
                     <span class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 border border-white/15">
                         <span class="text-[#F2B84B] font-bold">•</span>
-                        <span>Bukti foto opsional</span>
+                        <span>Bukti pendukung wajib</span>
                     </span>
                     <span class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 border border-white/15">
                         <span class="text-[#F2B84B] font-bold">•</span>
@@ -291,7 +291,7 @@
                 <section class="form-step hidden" data-step="3">
                     <div>
                         <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#0B2342]">Tambahkan bukti</h2>
-                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Tambahkan foto atau file pendukung jika tersedia.</p>
+                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Lampirkan minimal satu foto atau dokumen sebagai dasar verifikasi.</p>
                     </div>
 
                     <!-- Review Summary Cards -->
@@ -314,9 +314,9 @@
                     <div class="mt-6 grid gap-6 lg:grid-cols-12 lg:items-start">
                         <!-- Left: Upload Evidence Dropzone -->
                         <div class="lg:col-span-7">
-                            <div class="flex items-center justify-between">
-                                <label class="form-label" for="evidence">Punya foto atau dokumen?</label>
-                                <span class="text-xs text-slate-400">Boleh dilewati</span>
+                            <div class="flex items-center justify-between gap-3">
+                                <label class="form-label" for="evidence">Bukti pendukung <span class="text-[#DC4C4C]">*</span></label>
+                                <span class="rounded-full bg-rose-50 px-2.5 py-1 text-[11px] font-bold text-rose-600">Wajib</span>
                             </div>
                             <label class="upload-zone group bg-white border-2 border-dashed border-blue-200/80 rounded-xl hover:border-[#2563EB] shadow-2xs" for="evidence">
                                 <span class="grid size-12 place-items-center rounded-xl bg-blue-50 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-colors shrink-0">
@@ -326,11 +326,11 @@
                                     </svg>
                                 </span>
                                 <div class="space-y-0.5">
-                                    <strong class="block text-sm font-semibold text-[#0B2342]">Tambahkan bukti</strong>
-                                    <small class="block text-xs text-[#64748B]">Boleh dilewati · Maks. 5 berkas, masing-masing 10 MB</small>
+                                    <strong class="block text-sm font-semibold text-[#0B2342]">Pilih foto atau dokumen</strong>
+                                    <small class="block text-xs text-[#64748B]">1–5 berkas sekaligus · Maks. 10 MB per berkas</small>
                                 </div>
                             </label>
-                            <input class="sr-only" id="evidence" name="evidence[]" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf" multiple>
+                            <input class="sr-only" id="evidence" name="evidence[]" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf" multiple required>
                             <div id="file-list" class="mt-3 grid gap-2"></div>
                             <p class="form-helper">Foto besar otomatis diperkecil di perangkat Anda. Foto yang sudah kecil tetap dikirim dalam kualitas asli.</p>
                             @error('evidence')<p class="form-error">{{ $message }}</p>@enderror

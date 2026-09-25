@@ -38,7 +38,7 @@
                     @foreach ([
                         ['Apakah saya harus membuat akun?', 'Tidak. TAMBORA tidak meminta pendaftaran akun, nama, NIK, alamat email, atau nomor telepon pelapor. Semua laporan bersifat 100% anonim.'],
                         ['Bagaimana jika saya sudah meninggalkan lokasi?', 'Anda tetap bisa melapor dengan mencari nama wilayah, nama jalan, desa, kecamatan, atau patokan umum di formulir lokasi, lalu menggeser penanda peta ke titik kejadian.'],
-                        ['Apakah foto wajib dilampirkan?', 'Tidak. Bukti foto atau dokumen bersifat opsional. Utamakan keselamatan Anda dan jangan mengambil foto jika kondisi lapangan berisiko.'],
+                        ['Apakah bukti wajib dilampirkan?', 'Ya. Lampirkan minimal satu foto atau dokumen yang relevan sebagai dasar verifikasi. Tetap utamakan keselamatan dan jangan mengambil bukti dengan cara yang berisiko.'],
                         ['Bagaimana saya mengetahui perkembangan laporan?', 'Buka menu Cek status laporan, lalu masukkan kode laporan dan PIN enam digit yang Anda peroleh saat mengirim laporan.'],
                         ['Bisakah saya menjawab pertanyaan petugas?', 'Bisa. Setelah membuka halaman status laporan, gunakan fitur komunikasi anonim untuk membaca dan mengirimkan pesan tambahan ke petugas tanpa membuka identitas Anda.'],
                         ['Apa yang harus dilakukan jika kode atau PIN hilang?', 'Akses pelacakan tidak dapat dipulihkan kembali karena sistem kami tidak menyimpan kontak atau identitas pribadi pelapor. Mohon simpan kode dan PIN di tempat yang aman.'],

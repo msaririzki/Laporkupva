@@ -8,6 +8,7 @@ use App\Models\ReportEvidence;
 use App\Models\ReportStatusHistory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
@@ -20,6 +21,8 @@ class ReportTrackingControllerTest extends TestCase
         $this->get(route('reports.track'))
             ->assertOk()
             ->assertSee('Cek status laporan')
+            ->assertSee('Unggah QR akses')
+            ->assertSee('data-qr-upload', false)
             ->assertSee('PIN 6 digit');
     }
 
@@ -57,6 +60,35 @@ class ReportTrackingControllerTest extends TestCase
             ->assertSee('LKP-AB12-CD34')
             ->assertSee('Laporan telah diterima petugas.')
             ->assertSee('Tahap sekarang');
+    }
+
+    public function test_report_can_be_tracked_with_an_encrypted_qr_access_token(): void
+    {
+        $report = Report::factory()->received()->create([
+            'public_code' => 'LKP-AB12-CD34',
+            'tracking_pin_hash' => Hash::make('654321'),
+        ]);
+        $accessToken = Crypt::encryptString(json_encode([
+            'version' => 1,
+            'code' => $report->public_code,
+            'pin' => '654321',
+        ], JSON_THROW_ON_ERROR));
+
+        $this->post(route('reports.track.show'), [
+            'access_token' => $accessToken,
+        ])->assertRedirect(route('reports.status', ['report' => $report->public_code]));
+
+        $this->get(route('reports.status', ['report' => $report->public_code]))
+            ->assertOk()
+            ->assertSee($report->public_code);
+    }
+
+    public function test_invalid_qr_access_token_does_not_open_a_report(): void
+    {
+        $this->from(route('reports.track'))
+            ->post(route('reports.track.show'), ['access_token' => 'invalid-token'])
+            ->assertRedirect(route('reports.track'))
+            ->assertSessionHasErrors(['tracking_code', 'tracking_pin']);
     }
 
     public function test_wrong_pin_and_unknown_code_return_the_same_generic_error(): void
