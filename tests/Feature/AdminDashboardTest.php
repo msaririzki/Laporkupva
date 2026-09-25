@@ -56,7 +56,10 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($admin)
             ->get('/admin/profile')
             ->assertSee('Profil saya')
-            ->assertSee('Identitas admin')
+            ->assertSee('Informasi profil')
+            ->assertSee('Dikompres otomatis')
+            ->assertSee('hingga 10 MB')
+            ->assertSee('tambora-profile-photo-panel', false)
             ->assertSee('Keamanan akun')
             ->assertSee('Akun admin TAMBORA')
             ->assertSee('data:image/svg+xml;base64,', false)
@@ -78,7 +81,7 @@ class AdminDashboardTest extends TestCase
                 'name' => $admin->name,
                 'email' => $admin->email,
                 'avatar_path' => [
-                    UploadedFile::fake()->image('avatar-baru.jpg', 900, 900)->size(600),
+                    UploadedFile::fake()->image('avatar-baru.jpg', 2400, 2400)->size(8192),
                 ],
             ])
             ->call('save')

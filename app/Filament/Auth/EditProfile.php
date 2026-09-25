@@ -4,7 +4,10 @@ namespace App\Filament\Auth;
 
 use Filament\Auth\Pages\EditProfile as BaseEditProfile;
 use Filament\Forms\Components\FileUpload;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Text;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -40,41 +43,64 @@ class EditProfile extends BaseEditProfile
     {
         return $schema
             ->components([
-                Section::make('Identitas admin')
-                    ->description('Foto dan nama ini tampil pada menu akun agar pengguna mudah dikenali.')
+                Section::make('Informasi profil')
+                    ->description('Perbarui foto dan identitas yang tampil pada akun admin.')
                     ->icon('heroicon-o-identification')
-                    ->columns([
-                        'default' => 1,
-                        'md' => 2,
-                    ])
                     ->schema([
-                        FileUpload::make('avatar_path')
-                            ->label('Foto profil')
-                            ->helperText('JPG, PNG, atau WebP. Maksimal 2 MB; gambar otomatis dipotong dan diperkecil.')
-                            ->disk('public')
-                            ->directory('admin-avatars')
-                            ->visibility('public')
-                            ->avatar()
-                            ->acceptedFileTypes([
-                                'image/jpeg',
-                                'image/png',
-                                'image/webp',
-                            ])
-                            ->rule('extensions:jpg,jpeg,png,webp')
-                            ->maxSize(2048)
-                            ->imageEditor()
-                            ->circleCropper()
-                            ->preventFilePathTampering()
-                            ->columnSpanFull()
-                            ->extraAttributes(['class' => 'tambora-profile-avatar-upload']),
-                        $this->getNameFormComponent()
-                            ->label('Nama lengkap')
-                            ->placeholder('Nama admin')
-                            ->prefixIcon('heroicon-m-user'),
-                        $this->getEmailFormComponent()
-                            ->label('Alamat email')
-                            ->placeholder('nama@domain.com')
-                            ->prefixIcon('heroicon-m-envelope'),
+                        Grid::make([
+                            'default' => 1,
+                            'lg' => 12,
+                        ])
+                            ->schema([
+                                Group::make([
+                                    Text::make('Dikompres otomatis')
+                                        ->badge()
+                                        ->color('success')
+                                        ->icon('heroicon-m-bolt'),
+                                    FileUpload::make('avatar_path')
+                                        ->label('Foto profil')
+                                        ->helperText('JPG, PNG, atau WebP hingga 10 MB. Foto diperkecil menjadi 500 × 500 piksel di perangkat sebelum dikirim.')
+                                        ->disk('public')
+                                        ->directory('admin-avatars')
+                                        ->visibility('public')
+                                        ->avatar()
+                                        ->acceptedFileTypes([
+                                            'image/jpeg',
+                                            'image/png',
+                                            'image/webp',
+                                        ])
+                                        ->rule('extensions:jpg,jpeg,png,webp')
+                                        ->maxSize(10240)
+                                        ->imageEditor()
+                                        ->circleCropper()
+                                        ->preventFilePathTampering()
+                                        ->extraAttributes(['class' => 'tambora-profile-avatar-upload']),
+                                ])
+                                    ->columnSpan([
+                                        'default' => 1,
+                                        'lg' => 4,
+                                    ])
+                                    ->extraAttributes(['class' => 'tambora-profile-photo-panel']),
+                                Group::make([
+                                    $this->getNameFormComponent()
+                                        ->label('Nama lengkap')
+                                        ->placeholder('Nama admin')
+                                        ->prefixIcon('heroicon-m-user'),
+                                    $this->getEmailFormComponent()
+                                        ->label('Alamat email')
+                                        ->placeholder('nama@domain.com')
+                                        ->prefixIcon('heroicon-m-envelope'),
+                                ])
+                                    ->columns([
+                                        'default' => 1,
+                                        'md' => 2,
+                                    ])
+                                    ->columnSpan([
+                                        'default' => 1,
+                                        'lg' => 8,
+                                    ])
+                                    ->extraAttributes(['class' => 'tambora-profile-fields-panel']),
+                            ]),
                     ]),
                 Section::make('Keamanan akun')
                     ->description('Kosongkan bagian ini jika Anda tidak ingin mengganti kata sandi.')

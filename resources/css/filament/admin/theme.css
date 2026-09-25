@@ -586,7 +586,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1.25rem;
-    min-height: 9.5rem;
+    min-height: 8.75rem;
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid rgb(255 255 255 / 76%);
     border-radius: 1.5rem;
@@ -716,13 +716,55 @@
     gap: 1.25rem;
 }
 
+.tambora-profile-photo-panel {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    min-height: 13.5rem;
+    padding: 1.15rem;
+    border: 1px solid #dbeafe;
+    border-radius: 1.15rem;
+    background:
+        radial-gradient(circle at 50% 0%, rgb(219 234 254 / 72%), transparent 8rem),
+        linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+}
+
+.tambora-profile-photo-panel > .fi-sc-component {
+    width: 100%;
+}
+
+.tambora-profile-photo-panel .fi-sc-text {
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.tambora-profile-fields-panel {
+    display: grid;
+    align-content: center;
+    min-height: 13.5rem;
+    padding: 1.15rem 0.35rem;
+}
+
 .tambora-profile-avatar-upload .filepond--root {
-    width: 7rem;
+    width: 7.5rem;
     margin-inline: auto;
 }
 
 .tambora-profile-avatar-upload .filepond--drop-label {
-    min-height: 7rem;
+    min-height: 7.5rem;
+}
+
+.tambora-profile-avatar-upload .fi-fo-field-wrp-label,
+.tambora-profile-avatar-upload .fi-fo-field-wrp-helper-text {
+    justify-content: center;
+    text-align: center;
+}
+
+.tambora-profile-avatar-upload .fi-fo-field-wrp-helper-text {
+    max-width: 18rem;
+    margin-inline: auto;
+    color: #64748b;
+    line-height: 1.45;
 }
 
 @media (max-width: 40rem) {
@@ -748,6 +790,15 @@
 
     .tambora-profile-hero__role span {
         display: none;
+    }
+
+    .tambora-profile-photo-panel,
+    .tambora-profile-fields-panel {
+        min-height: auto;
+    }
+
+    .tambora-profile-fields-panel {
+        padding: 0.25rem 0;
     }
 }
 
