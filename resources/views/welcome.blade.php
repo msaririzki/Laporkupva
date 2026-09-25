@@ -258,9 +258,9 @@
         </div>
     </section>
 
-    <section id="keamanan" class="relative overflow-hidden scroll-mt-20 bg-gradient-to-b from-[#eaf4fe] via-[#f3f8fe] to-[#e4f0fd] py-12 sm:py-20">
+    <section id="keamanan" class="relative overflow-hidden scroll-mt-20 bg-gradient-to-b from-[#eaf4fe] via-[#f3f8fe] to-[#e4f0fd] py-8 sm:py-16">
         <!-- Mountain Silhouette Background at Bottom (TAMBORA Atmosphere) -->
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-28 sm:h-44 overflow-hidden opacity-35" aria-hidden="true">
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 sm:h-36 overflow-hidden opacity-30" aria-hidden="true">
             <svg class="h-full w-full object-cover" viewBox="0 0 1440 240" fill="none" preserveAspectRatio="none">
                 <path d="M0 240 L0 150 L140 130 L280 180 L440 100 L590 160 L740 60 L890 150 L1040 85 L1190 140 L1340 75 L1440 120 L1440 240 Z" fill="url(#keamanan-mountains-grad)" />
                 <defs>
@@ -274,77 +274,77 @@
 
         <!-- Subtle Dot Grid Patterns on Sides -->
         <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-            <div class="absolute top-10 left-8 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
-            <div class="absolute top-10 right-8 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute top-8 left-6 size-24 sm:size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute top-8 right-6 size-24 sm:size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
         </div>
 
         <div class="public-container">
-            <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
-                <!-- Left Column: 3 Security Cards (Grip di Kiri) -->
-                <div class="order-2 lg:order-1 lg:col-span-6 flex flex-col gap-4 sm:gap-5">
+            <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10">
+                <!-- Left Column: 3 Security Cards (Grip Minimalis di Kiri) -->
+                <div class="order-2 lg:order-1 lg:col-span-6 flex flex-col gap-2.5 sm:gap-3.5">
                     <!-- Card 1: Tanpa identitas pribadi -->
-                    <article class="group relative flex items-start gap-4 sm:gap-5 rounded-2xl sm:rounded-3xl border border-slate-100 bg-white/95 p-5 sm:p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
-                        <div class="flex size-12 sm:size-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                            <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <article class="group relative flex items-start gap-3 sm:gap-4 rounded-2xl border border-slate-100 bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
+                        <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                            <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                                 <circle cx="9" cy="7" r="4" />
                                 <line x1="2" y1="2" x2="22" y2="22" />
                             </svg>
                         </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between">
-                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between gap-2">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950 truncate">
                                     Tanpa identitas pribadi
                                 </h3>
-                                <span class="rounded-full bg-blue-50 px-2.5 py-0.5 font-sans text-xs font-black text-blue-700">01</span>
+                                <span class="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-black text-blue-700">01</span>
                             </div>
-                            <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
                                 Formulir tidak meminta nama, NIK, nomor telepon, ataupun email. Alamat IP tidak disimpan dan metadata EXIF foto dihapus otomatis.
                             </p>
                         </div>
                     </article>
 
                     <!-- Card 2: Akses privat kode & PIN -->
-                    <article class="group relative flex items-start gap-4 sm:gap-5 rounded-2xl sm:rounded-3xl border border-slate-100 bg-white/95 p-5 sm:p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
-                        <div class="flex size-12 sm:size-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                            <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <article class="group relative flex items-start gap-3 sm:gap-4 rounded-2xl border border-slate-100 bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
+                        <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                            <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="7.5" cy="15.5" r="4.5" />
                                 <path d="m21 3-9.5 9.5" />
                                 <path d="m15.5 7.5 3 3" />
                                 <path d="m18 5 2 2" />
                             </svg>
                         </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between">
-                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between gap-2">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950 truncate">
                                     Akses privat kode & PIN
                                 </h3>
-                                <span class="rounded-full bg-blue-50 px-2.5 py-0.5 font-sans text-xs font-black text-blue-700">02</span>
+                                <span class="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-black text-blue-700">02</span>
                             </div>
-                            <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
                                 Status perkembangan laporan hanya dapat dibuka dengan Kode Laporan unik dan PIN rahasia yang tersimpan secara terenkripsi (hash).
                             </p>
                         </div>
                     </article>
 
                     <!-- Card 3: Bukti terbatas & terproteksi -->
-                    <article class="group relative flex items-start gap-4 sm:gap-5 rounded-2xl sm:rounded-3xl border border-slate-100 bg-white/95 p-5 sm:p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
-                        <div class="flex size-12 sm:size-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                            <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <article class="group relative flex items-start gap-3 sm:gap-4 rounded-2xl border border-slate-100 bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
+                        <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                            <svg class="size-4.5 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                                 <polyline points="14 2 14 8 20 8" />
                                 <rect x="8" y="13" width="8" height="6" rx="1" fill="currentColor" fill-opacity="0.15" />
                                 <path d="M10 13v-1.5a2 2 0 1 1 4 0V13" />
                             </svg>
                         </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between">
-                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between gap-2">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-navy-950 truncate">
                                     Bukti terbatas & aman
                                 </h3>
-                                <span class="rounded-full bg-blue-50 px-2.5 py-0.5 font-sans text-xs font-black text-blue-700">03</span>
+                                <span class="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-black text-blue-700">03</span>
                             </div>
-                            <p class="mt-1.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
                                 Lampiran dan kronologi hanya dapat diakses oleh petugas pemeriksa Bank Indonesia yang berwenang, tidak pernah dipublikasikan ke umum.
                             </p>
                         </div>
@@ -353,30 +353,30 @@
 
                 <!-- Right Column: Gambar di Atas & Judul di Bawah Gambar -->
                 <div class="order-1 lg:order-2 lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <!-- Gambar Ilustrasi Keamanan -->
-                    <div class="relative mx-auto lg:mx-0 flex w-full max-w-[360px] sm:max-w-[420px] items-center justify-center">
+                    <!-- Gambar Ilustrasi Keamanan (Diperkecil agar Minimalis di Mobile) -->
+                    <div class="relative mx-auto lg:mx-0 flex w-full max-w-[200px] sm:max-w-[260px] lg:max-w-[340px] items-center justify-center">
                         <!-- Glow Accent Behind Image -->
-                        <div class="absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-blue-300/30 via-sky-200/40 to-blue-100/30 blur-3xl"></div>
+                        <div class="absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-blue-300/25 via-sky-200/30 to-blue-100/20 blur-2xl"></div>
                         <img
                             src="{{ asset('images/illustrations/security-shield.png') }}"
                             alt="Ilustrasi Keamanan dan Privasi Pelapor TAMBORA"
-                            class="h-auto w-full object-contain drop-shadow-xl transition-transform duration-500 hover:scale-[1.02]"
-                            width="960"
-                            height="540"
+                            class="h-auto w-full object-contain drop-shadow-md transition-transform duration-500 hover:scale-[1.02]"
+                            width="680"
+                            height="382"
                             loading="lazy"
                         >
                     </div>
 
                     <!-- Teks di Bawah Gambar -->
-                    <div class="mt-6 sm:mt-7">
-                        <h2 class="text-2xl font-extrabold tracking-tight text-navy-950 sm:text-3xl lg:text-[2.25rem] lg:leading-[1.2]">
+                    <div class="mt-3.5 sm:mt-5">
+                        <h2 class="text-xl font-extrabold tracking-tight text-navy-950 sm:text-2xl lg:text-[2rem] lg:leading-tight">
                             Lapor dengan tenang,<br class="hidden sm:inline"> identitas tetap aman.
                         </h2>
-                        <p class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                        <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto lg:mx-0">
                             TAMBORA dirancang agar masyarakat dapat berpartisipasi mengawasi KUPVA tidak berizin di NTB tanpa rasa khawatir. Sistem hanya mengumpulkan data kejadian yang diperlukan tanpa melacak identitas pelapor.
                         </p>
-                        <div class="mt-5 flex justify-center lg:justify-start">
-                            <a href="{{ route('reports.create') }}" class="button-primary inline-flex items-center gap-2 shadow-sm">
+                        <div class="mt-4 flex justify-center lg:justify-start">
+                            <a href="{{ route('reports.create') }}" class="button-primary inline-flex items-center gap-2 text-xs sm:text-sm shadow-sm py-2 px-4 sm:py-2.5 sm:px-5">
                                 Mulai membuat laporan <span aria-hidden="true">→</span>
                             </a>
                         </div>
