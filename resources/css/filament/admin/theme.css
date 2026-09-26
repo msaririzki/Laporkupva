@@ -1,7 +1,12 @@
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
 
 @source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/components/admin/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+html {
+    scrollbar-gutter: stable;
+}
 
 .fi-panel-admin {
     background:
@@ -1681,6 +1686,56 @@
     box-shadow: 0 10px 28px -20px rgb(37 99 235 / 30%);
 }
 
+.dashboard-collapsible-chart > .fi-section {
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.dashboard-collapsible-chart > .fi-section.fi-collapsed {
+    border-color: rgb(218 226 237 / 92%);
+    box-shadow: 0 10px 26px -22px rgb(15 23 42 / 42%);
+}
+
+.dashboard-collapsible-chart > .fi-section.fi-collapsed > .fi-section-header {
+    min-height: 4.75rem;
+    align-items: center;
+    border-bottom: 0;
+    background: linear-gradient(135deg, rgb(255 255 255 / 98%), rgb(246 249 253 / 94%));
+}
+
+.dashboard-collapsible-chart .fi-section-collapse-btn {
+    border: 1px solid #dbe5f1;
+    border-radius: 0.7rem;
+    color: #476486;
+    background: #ffffff;
+    box-shadow: 0 8px 18px -15px rgb(15 23 42 / 55%);
+}
+
+.dashboard-collapsible-chart .dashboard-chart-filter {
+    min-width: min(13rem, 42vw);
+}
+
+.dashboard-collapsible-chart .dashboard-chart-filter select {
+    font-size: 0.78rem;
+    font-weight: 650;
+}
+
+@media (max-width: 40rem) {
+    .dashboard-collapsible-chart > .fi-section > .fi-section-header {
+        flex-wrap: wrap;
+        padding: 1rem;
+    }
+
+    .dashboard-collapsible-chart .fi-section-header-after-ctn {
+        width: calc(100% - 3rem);
+        order: 3;
+    }
+
+    .dashboard-collapsible-chart .dashboard-chart-filter {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
 .dashboard-recent-report .fi-ta-cell {
     padding-block: 1rem;
 }
@@ -1705,7 +1760,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .dashboard-stat-card {
+    .dashboard-stat-card,
+    .dashboard-collapsible-chart > .fi-section {
         transition: none;
     }
 }
@@ -1822,16 +1878,18 @@
     }
 }
 
-/* Dialog operasional memakai overlay biasa agar konteks halaman tetap tenang dan mudah dibaca. */
+/* Dialog operasional tetap menampilkan konteks halaman tanpa lapisan gelap. */
 .tambora-action-modal-overlay.fi-modal-close-overlay {
-    background: rgb(15 23 42 / 42%);
+    background: transparent;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
 
+.fi-modal:has(> .tambora-action-modal-overlay) > .fi-modal-window-ctn {
+    overscroll-behavior: contain;
+}
+
 .tambora-action-modal.fi-modal-window {
-    max-height: calc(100dvh - 2rem);
-    overflow: hidden;
     border: 1px solid rgb(203 216 232 / 92%);
     border-radius: 1.35rem;
     background: rgb(255 255 255 / 98%);
@@ -1839,7 +1897,6 @@
 }
 
 .tambora-action-modal .fi-modal-header {
-    flex-shrink: 0;
     gap: 0.9rem;
     padding: 1.2rem 1.4rem 1rem;
     border-bottom: 1px solid #e8eef6;
@@ -1874,13 +1931,8 @@
 }
 
 .tambora-action-modal .fi-modal-content {
-    min-height: 0;
-    flex: 1 1 auto;
     gap: 1rem;
-    overflow-y: auto;
-    overscroll-behavior: contain;
     padding: 1.15rem 1.4rem;
-    scrollbar-gutter: stable;
 }
 
 .tambora-action-modal .fi-sc-form,
@@ -1913,7 +1965,6 @@
 }
 
 .tambora-action-modal .fi-modal-footer {
-    flex-shrink: 0;
     padding: 0.9rem 1.4rem;
     border-top: 1px solid #e8eef6;
     background: #f8fbff;
@@ -1939,7 +1990,7 @@ body:has(.fi-modal-open) .admin-detail-floating-back {
 }
 
 .dark .tambora-action-modal-overlay.fi-modal-close-overlay {
-    background: rgb(4 15 31 / 52%);
+    background: transparent;
 }
 
 .dark .tambora-action-modal.fi-modal-window {
@@ -1955,7 +2006,6 @@ body:has(.fi-modal-open) .admin-detail-floating-back {
 
 @media (max-width: 40rem) {
     .tambora-action-modal.fi-modal-window {
-        max-height: calc(100dvh - 1rem);
         border-radius: 1.1rem;
     }
 

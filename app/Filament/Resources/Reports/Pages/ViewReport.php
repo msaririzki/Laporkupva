@@ -24,7 +24,6 @@ class ViewReport extends ViewRecord
     {
         return [
             ReportResource::advanceStatusAction(),
-            ReportResource::sendMessageAction(),
             ActionGroup::make([
                 ReportResource::addActivityEvidenceAction(),
                 EditAction::make()

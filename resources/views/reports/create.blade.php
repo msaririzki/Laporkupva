@@ -331,7 +331,7 @@
                                 </div>
                             </label>
                             <input class="sr-only" id="evidence" name="evidence[]" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf" multiple required>
-                            <div id="file-list" class="mt-3 grid gap-2"></div>
+                            <div id="file-list" class="mt-4 grid gap-3 sm:grid-cols-2"></div>
                             <p class="form-helper">Foto besar otomatis diperkecil di perangkat Anda. Foto yang sudah kecil tetap dikirim dalam kualitas asli.</p>
                             @error('evidence')<p class="form-error">{{ $message }}</p>@enderror
                             @error('evidence.*')<p class="form-error">{{ $message }}</p>@enderror
@@ -383,4 +383,54 @@
             </form>
         </div>
     </section>
+
+    <div
+        id="evidence-preview-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center p-3 sm:p-6"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="evidence-preview-title"
+    >
+        <button
+            type="button"
+            class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm"
+            data-evidence-preview-close
+            aria-label="Tutup pratinjau"
+        ></button>
+
+        <div class="relative flex max-h-[94vh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-slate-950 shadow-2xl sm:rounded-3xl">
+            <div class="flex items-center justify-between gap-4 border-b border-white/10 bg-slate-900/95 px-4 py-3 sm:px-5">
+                <div class="min-w-0">
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-300">Pratinjau foto</p>
+                    <h2 id="evidence-preview-title" class="truncate text-sm font-semibold text-white sm:text-base">Foto bukti</h2>
+                </div>
+
+                <button
+                    id="evidence-preview-close"
+                    type="button"
+                    class="grid size-10 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/15 focus:outline-none focus:ring-4 focus:ring-white/15"
+                    data-evidence-preview-close
+                    aria-label="Tutup pratinjau"
+                >
+                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="flex min-h-[45vh] flex-1 items-center justify-center overflow-auto bg-slate-950 p-2 sm:min-h-[60vh] sm:p-5">
+                <img
+                    id="evidence-preview-image"
+                    src=""
+                    alt=""
+                    class="block max-h-[72vh] max-w-full rounded-lg object-contain shadow-2xl sm:rounded-xl"
+                >
+            </div>
+
+            <div class="flex flex-col gap-1 border-t border-white/10 bg-slate-900/95 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+                <p id="evidence-preview-meta" class="text-xs text-slate-300"></p>
+                <p class="text-[11px] text-slate-500">Foto ditampilkan utuh sesuai orientasi aslinya.</p>
+            </div>
+        </div>
+    </div>
 </x-layouts.public>

@@ -83,9 +83,7 @@ class ReportResource extends Resource
             ->modalHeading('Update progres')
             ->modalDescription(fn (Report $record): string => "{$record->status->label()} → {$record->status->next()?->label()}")
             ->modalSubmitActionLabel('Lanjutkan tahap')
-            ->modalWidth(Width::ThreeExtraLarge)
-            ->stickyModalHeader()
-            ->stickyModalFooter()
+            ->modalWidth(Width::TwoExtraLarge)
             ->extraModalWindowAttributes(['class' => 'tambora-action-modal tambora-action-modal--progress'])
             ->extraModalOverlayAttributes(['class' => 'tambora-action-modal-overlay'])
             ->schema([
@@ -269,45 +267,6 @@ class ReportResource extends Resource
                 'caption' => filled($caption) ? trim($caption) : null,
             ]);
         }
-    }
-
-    public static function sendMessageAction(): Action
-    {
-        return Action::make('sendMessage')
-            ->label('Hubungi pelapor')
-            ->icon(Heroicon::OutlinedChatBubbleLeftRight)
-            ->color('gray')
-            ->modalIcon(Heroicon::OutlinedChatBubbleLeftRight)
-            ->modalHeading('Hubungi pelapor')
-            ->modalDescription('Percakapan tetap anonim. Pelapor membalas melalui halaman status laporannya.')
-            ->modalSubmitActionLabel('Kirim pesan')
-            ->modalWidth(Width::Large)
-            ->extraModalWindowAttributes(['class' => 'tambora-action-modal tambora-action-modal--message'])
-            ->extraModalOverlayAttributes(['class' => 'tambora-action-modal-overlay'])
-            ->schema([
-                Textarea::make('body')
-                    ->label('Pesan')
-                    ->placeholder('Contoh: Mohon tambahkan petunjuk lokasi yang lebih rinci.')
-                    ->required()
-                    ->minLength(2)
-                    ->maxLength(2000)
-                    ->rule(new NoHtml)
-                    ->rows(4),
-            ])
-            ->action(function (Report $record, array $data): void {
-                $record->anonymousMessages()->create([
-                    'user_id' => auth()->id(),
-                    'sender_type' => 'admin',
-                    'body' => trim($data['body']),
-                ]);
-                $record->unsetRelation('anonymousMessages');
-
-                Notification::make()
-                    ->title('Pesan dikirim')
-                    ->body("Pesan untuk pelapor {$record->public_code} berhasil dikirim.")
-                    ->success()
-                    ->send();
-            });
     }
 
     public static function correctStatusAction(): Action

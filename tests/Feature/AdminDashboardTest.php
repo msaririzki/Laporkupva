@@ -11,6 +11,7 @@ use App\Filament\Resources\Reports\ReportResource;
 use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\UserResource;
+use App\Filament\Widgets\MonthlyReportTrend;
 use App\Models\AnonymousMessage;
 use App\Models\Kupva;
 use App\Models\Report;
@@ -36,6 +37,7 @@ class AdminDashboardTest extends TestCase
 
         $this->assertTrue($panel->hasSpaMode());
         $this->assertFalse($panel->hasSpaPrefetching());
+        $this->assertSame(asset('images/brand/tambora.webp'), $panel->getFavicon());
         $this->assertSame([
             url('/admin/ekspor/*'),
             url('/admin/lampiran-laporan/*'),
@@ -170,6 +172,9 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Tindakan lapangan')
             ->assertSee('Peta laporan')
             ->assertSee('Tren 6 bulan')
+            ->assertSee('data-dashboard-chart="monthly-report-trend"', false)
+            ->assertSee('data-dashboard-chart="regional-report-chart"', false)
+            ->assertSee('aria-expanded="false"', false)
             ->assertSee('Status laporan')
             ->assertSee('Laporan per wilayah')
             ->assertSee('Laporan terbaru')
@@ -223,6 +228,27 @@ class AdminDashboardTest extends TestCase
             ->assertSee(KupvaResource::getUrl('index'), false);
     }
 
+    public function test_admin_can_filter_the_report_trend_by_relative_period_or_specific_month(): void
+    {
+        $this->travelTo('2026-09-26 12:00:00');
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+
+        $this->actingAs($admin);
+
+        Livewire::test(MonthlyReportTrend::class)
+            ->assertSet('filter', 'last_6_months')
+            ->assertSee('Tren 6 bulan')
+            ->assertSee('Bulan ini')
+            ->assertSee('Bulan tertentu · Agustus 2026')
+            ->set('filter', 'this_month')
+            ->assertSee('Tren bulan ini')
+            ->assertSee('Jumlah laporan masuk per hari.')
+            ->set('filter', 'month_2026-08')
+            ->assertSee('Tren Agustus 2026')
+            ->set('filter', 'month_2026-99')
+            ->assertSee('Tren 6 bulan');
+    }
+
     public function test_regular_admin_cannot_manage_other_admin_accounts(): void
     {
         $admin = User::factory()->create(['role' => UserRole::Admin]);
@@ -253,11 +279,10 @@ class AdminDashboardTest extends TestCase
 
         $this->actingAs($admin);
 
-        Livewire::test(ViewReport::class, ['record' => $report->getRouteKey()])
-            ->callAction('sendMessage', [
-                'body' => 'Mohon tambahkan patokan lokasi yang lebih jelas.',
-            ])
-            ->assertNotified();
+        Livewire::test('admin.report-conversation', ['record' => $report])
+            ->set('body', 'Mohon tambahkan patokan lokasi yang lebih jelas.')
+            ->call('send')
+            ->assertHasNoErrors();
 
         $this->assertDatabaseHas(AnonymousMessage::class, [
             'report_id' => $report->getKey(),
@@ -350,6 +375,8 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($admin)
             ->get(ReportResource::getUrl('view', ['record' => $report]))
             ->assertSee('previewSubmissionEvidence', false)
+            ->assertSee(route('admin.report-evidence.preview', $evidence), false)
+            ->assertSee('Klik foto untuk memperbesar')
             ->assertDontSee(route('admin.report-evidence.download', $evidence), false);
     }
 

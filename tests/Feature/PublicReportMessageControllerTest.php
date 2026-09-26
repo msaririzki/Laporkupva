@@ -49,9 +49,13 @@ class PublicReportMessageControllerTest extends TestCase
 
         $this->assertSame(NewReporterMessage::class, $adminNotification->type);
         $this->assertSame('Pesan baru dari pelapor', $adminNotification->data['title']);
+        $this->assertSame($report->getKey(), $adminNotification->data['report_id']);
         $this->assertStringContainsString($report->public_code, $adminNotification->data['body']);
         $this->assertStringContainsString('samping pintu timur pasar', $adminNotification->data['body']);
         $this->assertStringContainsString("/admin/laporan/{$report->getRouteKey()}", $adminNotification->data['actions'][0]['url']);
+        $this->assertStringEndsWith('#komunikasi-anonim', $adminNotification->data['actions'][0]['url']);
+        $this->assertNull($adminNotification->data['actions'][0]['alpineClickHandler']);
+        $this->assertTrue($adminNotification->data['actions'][0]['shouldMarkAsRead']);
         $this->assertSame(1, $superAdmin->notifications()->count());
         $this->assertSame(0, $inactiveAdmin->notifications()->count());
     }

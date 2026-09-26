@@ -11,6 +11,7 @@ use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\View as SchemaView;
 use Filament\Schemas\Schema;
@@ -119,23 +120,45 @@ class ReportInfolist
                                 ->schema([
                                     RepeatableEntry::make('submissionEvidence')
                                         ->hiddenLabel()
+                                        ->grid([
+                                            'default' => 1,
+                                            'md' => 2,
+                                            'xl' => 3,
+                                        ])
                                         ->columns([
                                             'default' => 1,
-                                            'sm' => 3,
+                                            'sm' => 2,
                                         ])
                                         ->schema([
+                                            ImageEntry::make('preview_url')
+                                                ->hiddenLabel()
+                                                ->state(fn (ReportEvidence $record): string => route('admin.report-evidence.preview', $record))
+                                                ->visible(fn (ReportEvidence $record): bool => self::isPreviewableImage($record))
+                                                ->action(self::previewAction('previewSubmissionEvidenceImage'))
+                                                ->alt(fn (ReportEvidence $record): string => 'Pratinjau '.$record->original_name)
+                                                ->imageHeight('220px')
+                                                ->extraImgAttributes([
+                                                    'class' => 'w-full rounded-xl bg-gray-950 object-contain p-2',
+                                                    'loading' => 'lazy',
+                                                ])
+                                                ->columnSpanFull(),
                                             TextEntry::make('original_name')
                                                 ->label('Nama berkas')
-                                                ->icon(fn (ReportEvidence $record): Heroicon => self::isPreviewableImage($record)
-                                                    ? Heroicon::OutlinedEye
+                                                ->icon(fn (ReportEvidence $record): ?Heroicon => self::isPreviewableImage($record)
+                                                    ? null
                                                     : Heroicon::OutlinedArrowDownTray)
                                                 ->url(fn (ReportEvidence $record): ?string => self::isPreviewableImage($record)
                                                     ? null
                                                     : route('admin.report-evidence.download', $record))
-                                                ->action(
-                                                    self::previewAction('previewSubmissionEvidence')
-                                                        ->visible(fn (ReportEvidence $record): bool => self::isPreviewableImage($record)),
-                                                ),
+                                                ->columnSpanFull(),
+                                            TextEntry::make('preview_hint')
+                                                ->hiddenLabel()
+                                                ->state('Klik foto untuk memperbesar')
+                                                ->icon(Heroicon::OutlinedArrowsPointingOut)
+                                                ->color('primary')
+                                                ->visible(fn (ReportEvidence $record): bool => self::isPreviewableImage($record))
+                                                ->action(self::previewAction('previewSubmissionEvidence'))
+                                                ->columnSpanFull(),
                                             TextEntry::make('mime_type')
                                                 ->label('Tipe berkas'),
                                             TextEntry::make('size')
@@ -240,30 +263,12 @@ class ReportInfolist
                                         ]),
                                 ]),
                             Section::make('Komunikasi anonim')
-                                ->description('Gunakan tombol Hubungi pelapor di atas untuk meminta informasi tambahan tanpa mengetahui identitasnya.')
+                                ->description('Tanggapi informasi tambahan dari pelapor.')
                                 ->icon(Heroicon::OutlinedChatBubbleLeftRight)
-                                ->collapsible()
+                                ->extraAttributes(['id' => 'komunikasi-anonim'])
                                 ->schema([
-                                    RepeatableEntry::make('anonymousMessages')
-                                        ->hiddenLabel()
-                                        ->placeholder('Belum ada percakapan anonim pada laporan ini.')
-                                        ->columns([
-                                            'default' => 1,
-                                            'sm' => 2,
-                                        ])
-                                        ->schema([
-                                            TextEntry::make('sender_type')
-                                                ->label('Pengirim')
-                                                ->badge()
-                                                ->color(fn (string $state): string => $state === 'admin' ? 'primary' : 'gray')
-                                                ->formatStateUsing(fn (string $state): string => $state === 'admin' ? 'Petugas TAMBORA' : 'Pelapor anonim'),
-                                            TextEntry::make('created_at')
-                                                ->label('Waktu')
-                                                ->dateTime('d M Y, H:i'),
-                                            TextEntry::make('body')
-                                                ->label('Pesan')
-                                                ->columnSpanFull(),
-                                        ]),
+                                    Livewire::make('admin.report-conversation')
+                                        ->key(fn (?Report $record): string => 'report-conversation-'.$record?->getKey()),
                                 ]),
                         ])->columnSpan([
                             'default' => 1,
@@ -301,7 +306,8 @@ class ReportInfolist
                 'filament.reports.evidence-preview',
                 ['reportEvidence' => $record],
             ))
-            ->modalWidth(Width::FiveExtraLarge)
+            ->modalWidth(Width::ScreenTwoExtraLarge)
+            ->extraModalWindowAttributes(['class' => 'tambora-image-preview-modal'])
             ->modalSubmitAction(false)
             ->modalCancelActionLabel('Tutup');
     }

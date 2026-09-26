@@ -31,6 +31,8 @@ class PublicReportControllerTest extends TestCase
             ->assertSee('Bukti pendukung wajib')
             ->assertSee('1–5 berkas sekaligus')
             ->assertSee('Foto besar otomatis diperkecil di perangkat Anda')
+            ->assertSee('evidence-preview-modal', false)
+            ->assertSee('Foto ditampilkan utuh sesuai orientasi aslinya')
             ->assertSeeInOrder([
                 'Kabupaten Lombok Barat',
                 'Kabupaten Lombok Tengah',
@@ -91,8 +93,12 @@ class PublicReportControllerTest extends TestCase
 
         $this->assertSame(NewReportSubmitted::class, $adminNotification->type);
         $this->assertSame('Laporan baru masuk', $adminNotification->data['title']);
+        $this->assertSame($report->getKey(), $adminNotification->data['report_id']);
         $this->assertStringContainsString($report->public_code, $adminNotification->data['body']);
         $this->assertStringContainsString("/admin/laporan/{$report->getRouteKey()}", $adminNotification->data['actions'][0]['url']);
+        $this->assertStringEndsWith('#komunikasi-anonim', $adminNotification->data['actions'][0]['url']);
+        $this->assertNull($adminNotification->data['actions'][0]['alpineClickHandler']);
+        $this->assertTrue($adminNotification->data['actions'][0]['shouldMarkAsRead']);
         $this->assertSame(1, $superAdmin->notifications()->count());
         $this->assertSame(0, $inactiveAdmin->notifications()->count());
     }

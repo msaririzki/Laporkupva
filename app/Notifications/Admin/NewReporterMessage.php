@@ -32,7 +32,7 @@ class NewReporterMessage extends Notification
      */
     public function toDatabase(object $notifiable): array
     {
-        return FilamentNotification::make()
+        $notification = FilamentNotification::make()
             ->title('Pesan baru dari pelapor')
             ->body("{$this->report->public_code}: ".Str::limit($this->messageBody, 100))
             ->icon(Heroicon::OutlinedChatBubbleLeftRight)
@@ -40,10 +40,20 @@ class NewReporterMessage extends Notification
             ->actions([
                 Action::make('viewConversation')
                     ->label('Buka percakapan')
-                    ->url(ReportResource::getUrl('view', ['record' => $this->report], isAbsolute: false))
+                    ->url($this->reportConversationUrl())
                     ->button()
                     ->markAsRead(),
             ])
             ->getDatabaseMessage();
+
+        return [
+            ...$notification,
+            'report_id' => $this->report->getKey(),
+        ];
+    }
+
+    private function reportConversationUrl(): string
+    {
+        return ReportResource::getUrl('view', ['record' => $this->report], isAbsolute: false).'#komunikasi-anonim';
     }
 }

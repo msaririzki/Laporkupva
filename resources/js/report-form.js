@@ -318,6 +318,11 @@ if (form) {
     const evidence = document.querySelector('#evidence');
     const fileList = document.querySelector('#file-list');
     const uploadZone = document.querySelector('.upload-zone');
+    const evidencePreviewModal = document.querySelector('#evidence-preview-modal');
+    const evidencePreviewImage = document.querySelector('#evidence-preview-image');
+    const evidencePreviewTitle = document.querySelector('#evidence-preview-title');
+    const evidencePreviewMeta = document.querySelector('#evidence-preview-meta');
+    const evidencePreviewCloseButton = document.querySelector('#evidence-preview-close');
     const latitude = document.querySelector('#latitude');
     const longitude = document.querySelector('#longitude');
     const accuracy = document.querySelector('#location_accuracy');
@@ -332,6 +337,8 @@ if (form) {
     let marker;
     let reverseTimer;
     let isOptimizingEvidence = false;
+    let evidencePreviewUrls = [];
+    let evidencePreviewTrigger = null;
 
     // Enhance dropdowns
     document.querySelectorAll('#incident_type, #regency').forEach(initCustomSelect);
@@ -644,6 +651,8 @@ if (form) {
     });
 
     const showEvidenceMessage = (message, isError = false) => {
+        evidencePreviewUrls.forEach((url) => URL.revokeObjectURL(url));
+        evidencePreviewUrls = [];
         fileList.replaceChildren();
         const notice = document.createElement('p');
         notice.className = isError ? 'form-error' : 'rounded-xl bg-blue-50/70 border border-blue-100 px-4 py-3 text-xs font-semibold text-[#0B2342]';
@@ -651,12 +660,82 @@ if (form) {
         fileList.append(notice);
     };
 
+    const closeEvidencePreview = () => {
+        if (!evidencePreviewModal || evidencePreviewModal.classList.contains('hidden')) return;
+
+        evidencePreviewModal.classList.add('hidden');
+        evidencePreviewModal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+        evidencePreviewImage.removeAttribute('src');
+        evidencePreviewTrigger?.focus();
+        evidencePreviewTrigger = null;
+    };
+
+    const openEvidencePreview = ({ name, size, url }, trigger) => {
+        if (!evidencePreviewModal || !evidencePreviewImage) return;
+
+        evidencePreviewTrigger = trigger;
+        evidencePreviewTitle.textContent = name;
+        evidencePreviewMeta.textContent = `${formatFileSize(size)} · siap dilampirkan`;
+        evidencePreviewImage.src = url;
+        evidencePreviewImage.alt = `Pratinjau ${name}`;
+        evidencePreviewModal.classList.remove('hidden');
+        evidencePreviewModal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+        evidencePreviewCloseButton?.focus();
+    };
+
+    evidencePreviewModal?.querySelectorAll('[data-evidence-preview-close]').forEach((button) => {
+        button.addEventListener('click', closeEvidencePreview);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeEvidencePreview();
+    });
+
     const renderEvidenceFiles = (files) => {
+        evidencePreviewUrls.forEach((url) => URL.revokeObjectURL(url));
+        evidencePreviewUrls = [];
         fileList.replaceChildren();
 
         files.forEach(({ file, originalSize, optimized }) => {
             const item = document.createElement('div');
-            item.className = 'flex items-center justify-between gap-3 rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 text-xs shadow-sm';
+            item.className = 'overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white text-xs shadow-sm';
+
+            if (file.type.startsWith('image/')) {
+                const previewUrl = URL.createObjectURL(file);
+                evidencePreviewUrls.push(previewUrl);
+
+                const previewButton = document.createElement('button');
+                previewButton.type = 'button';
+                previewButton.className = 'group relative block aspect-[4/3] w-full overflow-hidden bg-slate-950 focus:outline-none focus:ring-4 focus:ring-inset focus:ring-blue-500/40';
+                previewButton.setAttribute('aria-label', `Perbesar pratinjau ${file.name}`);
+
+                const previewImage = document.createElement('img');
+                previewImage.src = previewUrl;
+                previewImage.alt = `Pratinjau ${file.name}`;
+                previewImage.className = 'size-full object-contain transition duration-300 group-hover:scale-[1.02]';
+
+                const previewLabel = document.createElement('span');
+                previewLabel.className = 'absolute inset-x-3 bottom-3 flex items-center justify-center gap-1.5 rounded-full bg-slate-950/75 px-3 py-2 text-[11px] font-semibold text-white opacity-100 shadow-lg backdrop-blur-sm transition sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100';
+                previewLabel.innerHTML = '<svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12s3-5.25 8.25-5.25S20.25 12 20.25 12 17.25 17.25 12 17.25 3.75 12 3.75 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 12a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg><span>Perbesar foto</span>';
+
+                previewButton.append(previewImage, previewLabel);
+                previewButton.addEventListener('click', () => openEvidencePreview({
+                    name: file.name,
+                    size: file.size,
+                    url: previewUrl,
+                }, previewButton));
+                item.append(previewButton);
+            } else {
+                const documentPreview = document.createElement('div');
+                documentPreview.className = 'grid aspect-[4/3] place-items-center bg-slate-50 text-slate-400';
+                documentPreview.innerHTML = '<div class="flex flex-col items-center gap-2"><svg class="size-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5A3.375 3.375 0 0 0 10.125 2.25H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg><span class="text-[11px] font-semibold uppercase tracking-wider">Dokumen PDF</span></div>';
+                item.append(documentPreview);
+            }
+
+            const footer = document.createElement('div');
+            footer.className = 'flex items-center justify-between gap-3 px-3.5 py-3';
 
             const details = document.createElement('span');
             details.className = 'min-w-0';
@@ -678,7 +757,8 @@ if (form) {
             badge.textContent = optimized ? 'Siap kirim' : 'Asli';
 
             details.append(name, result);
-            item.append(details, badge);
+            footer.append(details, badge);
+            item.append(footer);
             fileList.append(item);
         });
     };

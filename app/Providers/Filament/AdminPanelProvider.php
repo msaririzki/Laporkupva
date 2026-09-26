@@ -44,7 +44,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('TAMBORA · BI NTB')
             ->brandLogo(asset('images/brand/tambora.webp'))
             ->brandLogoHeight('3rem')
-            ->favicon(asset('images/brand/bank-indonesia-mark.webp'))
+            ->favicon(asset('images/brand/tambora.webp'))
             ->darkMode(false)
             ->globalSearch(false)
             ->databaseNotifications()
@@ -75,6 +75,10 @@ class AdminPanelProvider extends PanelProvider
                 PanelsRenderHook::SIMPLE_PAGE_END,
                 fn (): View => view('filament.auth.login-home-link'),
                 scopes: Login::class,
+            )
+            ->renderHook(
+                PanelsRenderHook::BODY_END,
+                fn (): View => view('filament.shared.notification-conversation-navigation'),
             )
             ->renderHook(
                 PanelsRenderHook::BODY_END,
