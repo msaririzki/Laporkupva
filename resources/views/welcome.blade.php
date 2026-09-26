@@ -13,17 +13,8 @@
         <div class="public-container relative grid items-start lg:items-center gap-8 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10">
             <!-- Left Column: Typography & Actions -->
             <div class="relative z-10 pt-1 lg:pt-0">
-                <!-- Eyebrow Badge (Bank Indonesia NTB Official) -->
-                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-blue-50/90 px-3 py-0.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-blue-700 shadow-2xs backdrop-blur-xs">
-                    <span class="relative flex size-2">
-                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
-                    </span>
-                    <span>KANAL PELAPORAN RESMI WILAYAH NTB</span>
-                </div>
-
                 <!-- Headline with Harmonious Navy and Blue Accents -->
-                <h1 class="mt-2.5 sm:mt-3 text-2xl sm:text-3xl lg:text-[2.75rem] font-black tracking-tight text-navy-950 leading-tight lg:leading-[1.14]">
+                <h1 class="text-2xl sm:text-3xl lg:text-[2.75rem] font-black tracking-tight text-navy-950 leading-tight lg:leading-[1.14]">
                     Berani melapor,<br>
                     <span class="text-blue-600">untuk NTB</span> yang lebih baik.
                 </h1>
@@ -40,7 +31,7 @@
                             <path d="m22 2-7 20-4-9-9-4Z"/>
                             <path d="M22 2 11 13"/>
                         </svg>
-                        <span>Buat laporan anonim</span>
+                        <span>Buat laporan</span>
                         <span aria-hidden="true" class="text-base sm:text-lg">→</span>
                     </a>
                     <a href="{{ route('reports.track') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs sm:text-sm font-bold text-navy-950 shadow-2xs hover:bg-blue-50/70 hover:border-blue-300 hover:text-blue-700 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
