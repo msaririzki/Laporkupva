@@ -11,6 +11,7 @@ use App\Notifications\Admin\NewReportSubmitted;
 use chillerlan\QRCode\Common\EccLevel;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
+use Filament\Notifications\Events\DatabaseNotificationsSent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Crypt;
@@ -61,13 +62,13 @@ class PublicReportController extends Controller
             return $report;
         });
 
-        Notification::send(
-            User::query()
-                ->where('is_active', true)
-                ->whereIn('role', [UserRole::Admin->value, UserRole::SuperAdmin->value])
-                ->get(),
-            new NewReportSubmitted($report),
-        );
+        $admins = User::query()
+            ->where('is_active', true)
+            ->whereIn('role', [UserRole::Admin->value, UserRole::SuperAdmin->value])
+            ->get();
+
+        Notification::send($admins, new NewReportSubmitted($report));
+        $admins->each(fn (User $admin) => DatabaseNotificationsSent::dispatch($admin));
 
         return to_route('reports.success')->with('submitted_report', [
             'code' => $report->public_code,

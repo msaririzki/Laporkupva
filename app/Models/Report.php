@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ReportStatus;
+use App\Events\ReportRealtimeUpdated;
 use Database\Factories\ReportFactory;
 use DomainException;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -42,6 +43,15 @@ class Report extends Model
     /** @use HasFactory<ReportFactory> */
     use HasFactory;
 
+    protected static function booted(): void
+    {
+        static::updated(function (Report $report): void {
+            if ($report->wasChanged(['status', 'public_update'])) {
+                ReportRealtimeUpdated::dispatch($report, 'status');
+            }
+        });
+    }
+
     /** @return HasMany<ReportEvidence, $this> */
     public function evidence(): HasMany
     {
@@ -73,6 +83,11 @@ class Report extends Model
     public function anonymousMessages(): HasMany
     {
         return $this->hasMany(AnonymousMessage::class)->oldest();
+    }
+
+    public function realtimeChannelName(): string
+    {
+        return 'reports.'.hash_hmac('sha256', (string) $this->getKey(), (string) config('app.key'));
     }
 
     public function advanceStatus(?User $user, ?string $publicNote = null, ?string $internalNote = null): bool

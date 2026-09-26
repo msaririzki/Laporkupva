@@ -63,8 +63,16 @@ class ReportTrackingController extends Controller
     {
         $this->ensureTrackingSessionIsValid($request, $report);
 
+        $report->load([
+            'statusHistories' => fn ($query) => $query->oldest(),
+            'anonymousMessages' => fn ($query) => $query->oldest(),
+        ]);
+
         return response()->json([
             'version' => $this->statusVersion($report),
+            'status_label' => $report->status->label(),
+            'timeline_html' => view('reports.partials.status-timeline', ['report' => $report])->render(),
+            'messages_html' => view('reports.partials.conversation-messages', ['report' => $report])->render(),
         ], headers: [
             'Cache-Control' => 'private, no-store, max-age=0',
             'Pragma' => 'no-cache',

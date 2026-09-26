@@ -1,3 +1,4 @@
+import './realtime';
 import './map-layers';
 import './report-form';
 import './report-access';
@@ -48,18 +49,21 @@ trackingCode?.addEventListener('input', (event) => {
     event.target.value = parts.join('-');
 });
 
-// Lightweight status polling for public report tracking.
+// Real-time status and conversation updates with a lightweight polling fallback.
 const liveRefresh = document.querySelector('[data-report-live-refresh]');
 
 if (liveRefresh) {
     const updateUrl = liveRefresh.dataset.updateUrl;
+    const channelName = liveRefresh.dataset.channel;
     const liveRefreshLabel = liveRefresh.querySelector('[data-live-refresh-label]');
     const liveRefreshDot = liveRefresh.querySelector('[data-live-refresh-dot]');
-    const messageField = document.querySelector('#body');
+    const statusLabel = document.querySelector('[data-report-status-label]');
+    const timeline = document.querySelector('[data-report-timeline]');
+    const conversation = document.querySelector('[data-report-conversation]');
     let currentVersion = liveRefresh.dataset.version;
     let refreshTimer;
     let failedChecks = 0;
-    let updateAvailable = false;
+    let isChecking = false;
 
     const setLiveRefreshState = (label, state = 'active') => {
         liveRefreshLabel.textContent = label;
@@ -79,15 +83,17 @@ if (liveRefresh) {
         liveRefreshDot.classList.toggle('hidden', state !== 'active');
     };
 
-    const scheduleRefreshCheck = (delay = 5000) => {
+    const scheduleRefreshCheck = (delay = 30000) => {
         window.clearTimeout(refreshTimer);
         refreshTimer = window.setTimeout(checkForUpdates, delay);
     };
 
-    const checkForUpdates = async () => {
-        if (document.hidden || updateAvailable) {
+    const checkForUpdates = async (fromRealtime = false) => {
+        if (isChecking || (!fromRealtime && document.hidden)) {
             return;
         }
+
+        isChecking = true;
 
         try {
             const response = await fetch(updateUrl, {
@@ -105,40 +111,39 @@ if (liveRefresh) {
                 throw new Error('Status update check failed.');
             }
 
-            const { version } = await response.json();
+            const update = await response.json();
             failedChecks = 0;
 
-            if (version !== currentVersion) {
-                currentVersion = version;
+            if (update.version !== currentVersion) {
+                currentVersion = update.version;
+                liveRefresh.dataset.version = update.version;
 
-                if (messageField?.value.trim()) {
-                    updateAvailable = true;
-                    setLiveRefreshState('Pembaruan baru — klik untuk memuat', 'available');
-                    return;
+                if (statusLabel) {
+                    statusLabel.textContent = update.status_label;
                 }
 
-                setLiveRefreshState('Pembaruan ditemukan…', 'available');
-                window.setTimeout(() => window.location.reload(), 450);
-                return;
+                if (timeline) {
+                    timeline.innerHTML = update.timeline_html;
+                }
+
+                if (conversation) {
+                    conversation.innerHTML = update.messages_html;
+                }
             }
 
-            setLiveRefreshState('Pembaruan otomatis aktif');
-            scheduleRefreshCheck();
+            setLiveRefreshState(window.Echo ? 'Terhubung real-time' : 'Pembaruan otomatis aktif');
         } catch {
             failedChecks += 1;
             setLiveRefreshState('Mencoba menghubungkan kembali…', 'offline');
-            scheduleRefreshCheck(Math.min(30000, 5000 * (2 ** failedChecks)));
+        } finally {
+            isChecking = false;
+            scheduleRefreshCheck(Math.min(60000, 30000 * (2 ** failedChecks)));
         }
     };
 
     liveRefresh.addEventListener('click', () => {
-        if (updateAvailable) {
-            window.location.reload();
-            return;
-        }
-
         window.clearTimeout(refreshTimer);
-        checkForUpdates();
+        checkForUpdates(true);
     });
 
     document.addEventListener('visibilitychange', () => {
@@ -153,6 +158,16 @@ if (liveRefresh) {
         window.clearTimeout(refreshTimer);
         setLiveRefreshState('Tidak ada koneksi', 'offline');
     });
+
+    if (window.Echo && channelName) {
+        window.Echo.channel(channelName)
+            .listen('.report.updated', () => checkForUpdates(true));
+
+        const connection = window.Echo.connector?.pusher?.connection;
+        connection?.bind('connected', () => setLiveRefreshState('Terhubung real-time'));
+        connection?.bind('unavailable', () => setLiveRefreshState('Mencoba menghubungkan kembali…', 'offline'));
+        connection?.bind('failed', () => setLiveRefreshState('Pembaruan otomatis aktif', 'available'));
+    }
 
     scheduleRefreshCheck();
 }

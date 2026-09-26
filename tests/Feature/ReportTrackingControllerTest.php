@@ -65,6 +65,7 @@ class ReportTrackingControllerTest extends TestCase
             ->assertSee('LKP-AB12-CD34')
             ->assertSee('Laporan telah diterima petugas.')
             ->assertSee('data-report-live-refresh', false)
+            ->assertSee('data-channel=', false)
             ->assertSee('Pembaruan otomatis aktif')
             ->assertSee('Tahap sekarang');
     }
@@ -185,14 +186,24 @@ class ReportTrackingControllerTest extends TestCase
             ->getJson(route('reports.status.updates', ['report' => $report->public_code]))
             ->assertOk()
             ->assertHeaderContains('Cache-Control', 'no-store')
-            ->assertExactJsonStructure(['version']);
+            ->assertExactJsonStructure([
+                'version',
+                'status_label',
+                'timeline_html',
+                'messages_html',
+            ]);
 
         $report->update(['status' => ReportStatus::Coordination]);
 
         $statusUpdatedResponse = $this->withSession($session)
             ->getJson(route('reports.status.updates', ['report' => $report->public_code]))
             ->assertOk()
-            ->assertExactJsonStructure(['version']);
+            ->assertExactJsonStructure([
+                'version',
+                'status_label',
+                'timeline_html',
+                'messages_html',
+            ]);
 
         $this->assertNotSame(
             $initialResponse->json('version'),
@@ -207,7 +218,12 @@ class ReportTrackingControllerTest extends TestCase
         $updatedResponse = $this->withSession($session)
             ->getJson(route('reports.status.updates', ['report' => $report->public_code]))
             ->assertOk()
-            ->assertExactJsonStructure(['version']);
+            ->assertExactJsonStructure([
+                'version',
+                'status_label',
+                'timeline_html',
+                'messages_html',
+            ]);
 
         $this->assertNotSame(
             $statusUpdatedResponse->json('version'),

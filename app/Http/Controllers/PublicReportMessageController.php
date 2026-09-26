@@ -7,6 +7,7 @@ use App\Http\Requests\StoreAnonymousMessageRequest;
 use App\Models\Report;
 use App\Models\User;
 use App\Notifications\Admin\NewReporterMessage;
+use Filament\Notifications\Events\DatabaseNotificationsSent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Notification;
 
@@ -22,13 +23,13 @@ class PublicReportMessageController extends Controller
             'body' => $messageBody,
         ]);
 
-        Notification::send(
-            User::query()
-                ->where('is_active', true)
-                ->whereIn('role', [UserRole::Admin->value, UserRole::SuperAdmin->value])
-                ->get(),
-            new NewReporterMessage($report, $messageBody),
-        );
+        $admins = User::query()
+            ->where('is_active', true)
+            ->whereIn('role', [UserRole::Admin->value, UserRole::SuperAdmin->value])
+            ->get();
+
+        Notification::send($admins, new NewReporterMessage($report, $messageBody));
+        $admins->each(fn (User $admin) => DatabaseNotificationsSent::dispatch($admin));
 
         return redirect()
             ->route('reports.status', ['report' => $report->public_code])

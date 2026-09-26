@@ -22,7 +22,7 @@ RUN apt-get update \
         pdo_sqlite \
         xml \
         zip \
-    && a2enmod expires headers rewrite \
+    && a2enmod expires headers proxy proxy_http proxy_wstunnel rewrite \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && rm -rf /var/lib/apt/lists/*
 
