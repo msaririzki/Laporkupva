@@ -246,8 +246,8 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
-                                Ceritakan
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950 uppercase tracking-wide">
+                                CERITAKAN
                             </h3>
 
                             <!-- Description -->
@@ -287,8 +287,8 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
-                                Tentukan lokasi
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950 uppercase tracking-wide">
+                                TENTUKAN LOKASI
                             </h3>
 
                             <!-- Description -->
@@ -338,8 +338,8 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
-                                Masukkan gambar
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950 uppercase tracking-wide">
+                                MASUKKAN GAMBAR
                             </h3>
 
                             <!-- Description -->
@@ -381,8 +381,8 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
-                                Pantau laporan
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950 uppercase tracking-wide">
+                                PANTAU LAPORAN
                             </h3>
 
                             <!-- Description -->
@@ -440,8 +440,8 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
-                                        Tidak Perlu Membuat Akun
+                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">
+                                        TIDAK PERLU MEMBUAT AKUN
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
                                         Sampaikan informasi tanpa mendaftar atau mengisi data pribadi.
@@ -469,8 +469,8 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
-                                        Pantau dengan Kode Rahasia
+                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">
+                                        PANTAU DENGAN KODE RAHASIA
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
                                         Gunakan kode tiket dan PIN untuk melihat perkembangan penanganan.
@@ -496,8 +496,8 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
-                                        Diakses Petugas Berwenang
+                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">
+                                        DIAKSES PETUGAS BERWENANG
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
                                         Informasi hanya dapat dilihat oleh petugas yang memiliki kewenangan.
@@ -523,8 +523,8 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
-                                        Sampaikan dengan Mudah
+                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">
+                                        SAMPAIKAN DENGAN MUDAH
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
                                         Ceritakan kejadian, lokasi, dan informasi pendukung yang Anda ketahui.

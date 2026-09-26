@@ -108,7 +108,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">01</span>
-                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950">Siapkan informasi</h3>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">SIAPKAN INFORMASI</h3>
                             <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Ceritakan apa yang terjadi, waktu kejadian, dan nama tempat jika tahu.</p>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">02</span>
-                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950">Tentukan titik lokasi</h3>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">TENTUKAN TITIK LOKASI</h3>
                             <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Tunjukkan lokasi tempatnya di peta atau gunakan titik lokasi HP kamu.</p>
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">03</span>
-                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950">Simpan kode akses</h3>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">SIMPAN KODE AKSES</h3>
                             <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Simpan kode dan PIN rahasiamu untuk mengecek hasil laporan kapan saja.</p>
                         </div>
                     </div>
@@ -354,11 +354,11 @@
                         <div class="flex items-center gap-2.5">
                             <div class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/80">
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <path d="m21 21-4.3-4.3"/>
-                                </svg>
+                                     <circle cx="11" cy="11" r="8"/>
+                                     <path d="m21 21-4.3-4.3"/>
+                                 </svg>
                             </div>
-                            <h3 class="text-sm sm:text-base font-extrabold text-navy-950">Sudah pernah melapor?</h3>
+                            <h3 class="text-sm sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">SUDAH PERNAH MELAPOR?</h3>
                         </div>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-500">
                             Gunakan kode tiket dan PIN rahasia untuk memantau perkembangan tindak lanjut laporan Anda.
@@ -384,7 +384,7 @@
                                     <path d="M22 2 11 13"/>
                                 </svg>
                             </div>
-                            <h3 class="text-sm sm:text-base font-extrabold text-white">Siap menyampaikan laporan?</h3>
+                            <h3 class="text-sm sm:text-base font-extrabold text-white uppercase tracking-wide">SIAP MENYAMPAIKAN LAPORAN?</h3>
                         </div>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-blue-100/90">
                             Sampaikan dugaan pelanggaran secara aman tanpa mencantumkan identitas pribadi Anda.

@@ -12,7 +12,7 @@ class PublicInformationPagesTest extends TestCase
             ->assertOk()
             ->assertSee('Melapor dengan aman dan mudah')
             ->assertSee('Apakah saya harus membuat akun?')
-            ->assertSee('Sudah pernah melapor?')
+            ->assertSee('SUDAH PERNAH MELAPOR?')
             ->assertSee(route('reports.track'))
             ->assertSee('Apakah bukti wajib dilampirkan?')
             ->assertSee('minimal satu foto atau PDF')
