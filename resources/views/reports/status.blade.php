@@ -34,53 +34,6 @@
     <section class="py-6 sm:py-8 lg:py-10 bg-[#F7F9FC]">
         <div class="public-container grid max-w-4xl lg:max-w-5xl gap-6 lg:grid-cols-[1fr_320px]">
             <div class="space-y-5">
-                @php
-                    $macroStep = match (true) {
-                        $report->status === \App\Enums\ReportStatus::Completed => 3,
-                        $currentIndex >= 1 => 2,
-                        default => 1,
-                    };
-                @endphp
-
-                <!-- Simplified Status Overview Card -->
-                <div class="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-xs">
-                    <p class="text-xs font-semibold uppercase tracking-wider text-[#2563EB]">Ringkasan Status</p>
-                    <div class="mt-3 grid gap-3 sm:grid-cols-3">
-                        <!-- Step 1: Laporan diterima -->
-                        <div class="rounded-lg border p-3 transition-all {{ $macroStep >= 1 ? ($macroStep === 1 ? 'border-blue-200 bg-[#EAF2FF]/60' : 'border-slate-200 bg-slate-50/70') : 'border-slate-200 bg-slate-50/40 opacity-60' }}">
-                            <div class="flex items-center gap-2">
-                                <span class="grid size-5 place-items-center rounded-full text-[11px] font-bold {{ $macroStep > 1 ? 'bg-[#168A7A] text-white' : ($macroStep === 1 ? 'bg-[#2563EB] text-white' : 'bg-slate-200 text-slate-600') }}">
-                                    @if ($macroStep > 1) ✓ @else 1 @endif
-                                </span>
-                                <strong class="text-xs font-semibold text-[#0B2342]">Laporan diterima</strong>
-                            </div>
-                            <p class="mt-1 text-[11px] leading-relaxed text-[#64748B]">Laporan telah diterima petugas.</p>
-                        </div>
-
-                        <!-- Step 2: Sedang diproses -->
-                        <div class="rounded-lg border p-3 transition-all {{ $macroStep >= 2 ? ($macroStep === 2 ? 'border-amber-200 bg-[#FFF4D6]/60' : 'border-slate-200 bg-slate-50/70') : 'border-slate-200 bg-slate-50/40 opacity-60' }}">
-                            <div class="flex items-center gap-2">
-                                <span class="grid size-5 place-items-center rounded-full text-[11px] font-bold {{ $macroStep > 2 ? 'bg-[#168A7A] text-white' : ($macroStep === 2 ? 'bg-[#F2B84B] text-[#0B2342]' : 'bg-slate-200 text-slate-600') }}">
-                                    @if ($macroStep > 2) ✓ @else 2 @endif
-                                </span>
-                                <strong class="text-xs font-semibold text-[#0B2342]">Sedang diproses</strong>
-                            </div>
-                            <p class="mt-1 text-[11px] leading-relaxed text-[#64748B]">Laporan dalam penanganan.</p>
-                        </div>
-
-                        <!-- Step 3: Selesai -->
-                        <div class="rounded-lg border p-3 transition-all {{ $macroStep >= 3 ? 'border-teal-200 bg-[#E8F6F3]/60' : 'border-slate-200 bg-slate-50/40 opacity-60' }}">
-                            <div class="flex items-center gap-2">
-                                <span class="grid size-5 place-items-center rounded-full text-[11px] font-bold {{ $macroStep >= 3 ? 'bg-[#168A7A] text-white' : 'bg-slate-200 text-slate-600' }}">
-                                    @if ($macroStep >= 3) ✓ @else 3 @endif
-                                </span>
-                                <strong class="text-xs font-semibold text-[#0B2342]">Selesai</strong>
-                            </div>
-                            <p class="mt-1 text-[11px] leading-relaxed text-[#64748B]">Proses telah selesai.</p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Status Timeline Card -->
                 <div class="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
                     <div class="flex flex-col gap-3 border-b border-slate-100 pb-3.5 sm:flex-row sm:items-start sm:justify-between">
