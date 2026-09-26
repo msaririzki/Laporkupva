@@ -58,23 +58,6 @@
                             class="w-full rounded-2xl border border-slate-200/90 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all"
                         >
                     </div>
-
-                    <!-- Popular Topics -->
-                    <div class="mt-3.5 flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs text-slate-500">
-                        <span class="font-medium text-slate-400">Topik populer:</span>
-                        <a href="#panduan-cepat" class="rounded-xl bg-blue-50/90 border border-blue-100 px-3 py-1 font-semibold text-blue-700 hover:bg-blue-600 hover:text-white transition-colors">
-                            Buat laporan
-                        </a>
-                        <a href="#panduan-cepat" class="rounded-xl bg-blue-50/90 border border-blue-100 px-3 py-1 font-semibold text-blue-700 hover:bg-blue-600 hover:text-white transition-colors">
-                            Lokasi kejadian
-                        </a>
-                        <a href="#panduan-cepat" class="rounded-xl bg-blue-50/90 border border-blue-100 px-3 py-1 font-semibold text-blue-700 hover:bg-blue-600 hover:text-white transition-colors">
-                            Kode dan PIN
-                        </a>
-                        <a href="#panduan-cepat" class="rounded-xl bg-blue-50/90 border border-blue-100 px-3 py-1 font-semibold text-blue-700 hover:bg-blue-600 hover:text-white transition-colors">
-                            Bukti laporan
-                        </a>
-                    </div>
                 </div>
 
                 <!-- Right Illustration -->
@@ -99,19 +82,10 @@
     <!-- Panduan Cepat Section: 3 Grip Cards Minimalist -->
     <section class="py-6 sm:py-8 bg-slate-50/60" id="panduan-cepat">
         <div class="public-container">
-            <!-- Header of Panduan Cepat -->
-            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-4 sm:mb-5">
-                <div>
-                    <h2 class="text-xl font-extrabold tracking-tight text-navy-950 sm:text-2xl">Panduan cepat</h2>
-                    <p class="mt-0.5 text-xs sm:text-sm text-slate-500">Ikuti langkah-langkah singkat ini untuk membuat laporan di TAMBORA.</p>
-                </div>
-                <a href="#pertanyaan-umum" class="inline-flex items-center gap-1.5 self-start sm:self-auto rounded-full bg-blue-50 px-3.5 py-1.5 text-xs font-bold text-blue-700 hover:bg-blue-100 transition-colors">
-                    <span>Lihat panduan lengkap</span>
-                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                    </svg>
-                </a>
+            <!-- Header of Panduan Cepat (Without button) -->
+            <div class="mb-4 sm:mb-5">
+                <h2 class="text-xl font-extrabold tracking-tight text-navy-950 sm:text-2xl">Panduan cepat</h2>
+                <p class="mt-0.5 text-xs sm:text-sm text-slate-500">Ikuti langkah-langkah singkat ini untuk membuat laporan di TAMBORA.</p>
             </div>
 
             <!-- 3 Grip Cards with Flow Arrows -->
@@ -252,160 +226,218 @@
         </div>
     </section>
 
-    <!-- Pertanyaan Umum Section (Matching user reference mockup) -->
+    <!-- Pertanyaan Umum Section (2-Column Layout matching reference mockup) -->
     <section class="py-10 sm:py-14" id="pertanyaan-umum">
-        <div class="public-container max-w-4xl">
-            <!-- Header Pertanyaan Umum -->
-            <div>
-                <h2 class="text-2xl font-extrabold tracking-tight text-navy-950 sm:text-3xl">Pertanyaan Umum</h2>
-                <p class="mt-1.5 text-sm text-slate-500">Temukan jawaban untuk pertanyaan yang paling sering ditanyakan.</p>
-            </div>
+        <div class="public-container">
+            <div class="grid items-start gap-8 lg:grid-cols-12 lg:gap-8 xl:gap-10">
+                <!-- Left Column: FAQ Accordion Cards with Colored Icons -->
+                <div class="lg:col-span-7 xl:col-span-8">
+                    <!-- Header Pertanyaan Umum -->
+                    <div>
+                        <h2 class="text-2xl font-extrabold tracking-tight text-navy-950 sm:text-3xl">Pertanyaan Umum</h2>
+                        <p class="mt-1.5 text-sm text-slate-500">Temukan jawaban untuk pertanyaan yang paling sering ditanyakan.</p>
+                    </div>
 
-            <!-- Filter Categories (Horizontal Tabs) -->
-            <div class="mt-6 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none sm:flex-wrap">
-                <button
-                    type="button"
-                    data-faq-filter="all"
-                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-blue-600 px-4 py-2 text-xs font-bold text-white shadow-xs transition-all cursor-pointer"
-                >
-                    Semua
-                </button>
-                <button
-                    type="button"
-                    data-faq-filter="akun"
-                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
-                >
-                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                    </svg>
-                    Akun & Identitas
-                </button>
-                <button
-                    type="button"
-                    data-faq-filter="lapor"
-                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
-                >
-                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                        <polyline points="14 2 14 8 20 8" />
-                        <line x1="16" y1="13" x2="8" y2="13" />
-                        <line x1="16" y1="17" x2="8" y2="17" />
-                        <polyline points="10 9 9 9 8 9" />
-                    </svg>
-                    Membuat Laporan
-                </button>
-                <button
-                    type="button"
-                    data-faq-filter="lokasi"
-                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
-                >
-                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                        <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    Lokasi & Peta
-                </button>
-                <button
-                    type="button"
-                    data-faq-filter="bukti"
-                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
-                >
-                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                        <circle cx="9" cy="9" r="2" />
-                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-                    </svg>
-                    Bukti Laporan
-                </button>
-                <button
-                    type="button"
-                    data-faq-filter="status"
-                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
-                >
-                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                    </svg>
-                    Cek Status
-                </button>
-                <button
-                    type="button"
-                    data-faq-filter="keamanan"
-                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
-                >
-                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                    Keamanan
-                </button>
-            </div>
+                    <!-- FAQ List with Individual Rounded Cards & Category Icons -->
+                    <div class="mt-6 flex flex-col gap-3 sm:gap-3.5">
+                        <!-- Q1: Akun & Identitas (Blue User Icon) -->
+                        <details class="group rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-4.5 shadow-xs transition-all duration-200 hover:border-blue-200 open:border-blue-200">
+                            <summary class="flex cursor-pointer list-none items-center gap-3.5 sm:gap-4 select-none">
+                                <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </span>
+                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Apakah saya harus membuat akun?</span>
+                                <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
+                                    <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </svg>
+                                </span>
+                            </summary>
+                            <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6 pt-3 border-t border-slate-100 pl-12.5">
+                                Tidak. TAMBORA tidak meminta akun, nama, NIK, email, atau nomor telepon pelapor.
+                            </div>
+                        </details>
 
-            <!-- FAQ Accordion Cards List -->
-            <div class="mt-6 flex flex-col gap-3">
-                @foreach ([
-                    ['Apakah saya harus membuat akun?', 'Tidak. TAMBORA tidak meminta akun, nama, NIK, email, atau nomor telepon pelapor.', 'akun'],
-                    ['Bagaimana jika saya sudah meninggalkan lokasi?', 'Cari nama wilayah, jalan, desa, kecamatan, atau patokan. Setelah hasil tampil, geser pin ke lokasi kejadian yang paling akurat.', 'lokasi'],
-                    ['Apakah foto wajib dilampirkan?', 'Tidak. Bukti foto atau PDF bersifat opsional. Utamakan keselamatan dan jangan mengambil bukti jika situasinya berisiko.', 'bukti'],
-                    ['Bagaimana saya mengetahui perkembangan laporan?', 'Buka halaman Cek status, lalu masukkan kode laporan dan PIN enam digit yang ditampilkan setelah laporan dikirim.', 'status'],
-                    ['Bisakah saya menjawab pertanyaan petugas?', 'Bisa. Setelah membuka progres laporan, gunakan kotak komunikasi anonim untuk membaca dan membalas pesan petugas.', 'lapor'],
-                    ['Apa yang harus dilakukan jika kode atau PIN hilang?', 'Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan kode dan PIN di tempat yang aman.', 'keamanan'],
-                ] as [$question, $answer, $category])
-                    <details class="group rounded-2xl border border-slate-200/90 bg-white p-4.5 sm:p-5 shadow-xs transition-all duration-200 hover:border-blue-200 open:border-blue-200" data-category="{{ $category }}">
-                        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-extrabold text-navy-950 text-sm sm:text-base select-none">
-                            <span>{{ $question }}</span>
-                            <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
-                                <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="m6 9 6 6 6-6"/>
-                                </svg>
-                            </span>
-                        </summary>
-                        <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-8 pt-2.5 border-t border-slate-100">
-                            {{ $answer }}
-                        </div>
-                    </details>
-                @endforeach
-            </div>
+                        <!-- Q2: Lokasi & Peta (Rose Pin Icon) -->
+                        <details class="group rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-4.5 shadow-xs transition-all duration-200 hover:border-blue-200 open:border-blue-200">
+                            <summary class="flex cursor-pointer list-none items-center gap-3.5 sm:gap-4 select-none">
+                                <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-500">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                </span>
+                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Bagaimana jika saya sudah meninggalkan lokasi?</span>
+                                <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
+                                    <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </svg>
+                                </span>
+                            </summary>
+                            <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6 pt-3 border-t border-slate-100 pl-12.5">
+                                Cari nama wilayah, jalan, desa, kecamatan, atau patokan. Setelah hasil tampil, geser pin ke lokasi kejadian yang paling akurat.
+                            </div>
+                        </details>
 
-            <!-- CTA Box (Preserved) -->
-            <div class="mt-10 flex flex-col items-center justify-between gap-5 rounded-3xl bg-blue-700 p-7 text-center text-white sm:flex-row sm:text-left">
-                <div>
-                    <h2 class="text-xl font-extrabold">Siap menyampaikan laporan?</h2>
-                    <p class="mt-1 text-sm text-blue-100">Pastikan informasi disampaikan dengan itikad baik.</p>
+                        <!-- Q3: Bukti Laporan (Emerald Photo Icon) -->
+                        <details class="group rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-4.5 shadow-xs transition-all duration-200 hover:border-blue-200 open:border-blue-200">
+                            <summary class="flex cursor-pointer list-none items-center gap-3.5 sm:gap-4 select-none">
+                                <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                                    </svg>
+                                </span>
+                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Apakah foto wajib dilampirkan?</span>
+                                <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
+                                    <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </svg>
+                                </span>
+                            </summary>
+                            <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6 pt-3 border-t border-slate-100 pl-12.5">
+                                Tidak. Bukti foto atau PDF bersifat opsional. Utamakan keselamatan dan jangan mengambil bukti jika situasinya berisiko.
+                            </div>
+                        </details>
+
+                        <!-- Q4: Cek Status (Purple Chart Icon) -->
+                        <details class="group rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-4.5 shadow-xs transition-all duration-200 hover:border-blue-200 open:border-blue-200">
+                            <summary class="flex cursor-pointer list-none items-center gap-3.5 sm:gap-4 select-none">
+                                <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M4 9h4v11H4zm6-5h4v16h-4zm6 8h4v8h-4z"/>
+                                    </svg>
+                                </span>
+                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Bagaimana saya mengetahui perkembangan laporan?</span>
+                                <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
+                                    <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </svg>
+                                </span>
+                            </summary>
+                            <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6 pt-3 border-t border-slate-100 pl-12.5">
+                                Buka halaman Cek status, lalu masukkan kode laporan dan PIN enam digit yang ditampilkan setelah laporan dikirim.
+                            </div>
+                        </details>
+
+                        <!-- Q5: Tanya Jawab Petugas (Amber Chat Icon) -->
+                        <details class="group rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-4.5 shadow-xs transition-all duration-200 hover:border-blue-200 open:border-blue-200">
+                            <summary class="flex cursor-pointer list-none items-center gap-3.5 sm:gap-4 select-none">
+                                <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-600">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+                                    </svg>
+                                </span>
+                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Bisakah saya menjawab pertanyaan petugas?</span>
+                                <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
+                                    <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </svg>
+                                </span>
+                            </summary>
+                            <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6 pt-3 border-t border-slate-100 pl-12.5">
+                                Bisa. Setelah membuka progres laporan, gunakan kotak komunikasi anonim untuk membaca dan membalas pesan petugas.
+                            </div>
+                        </details>
+
+                        <!-- Q6: Keamanan & PIN (Pink Lock Icon) -->
+                        <details class="group rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-4.5 shadow-xs transition-all duration-200 hover:border-blue-200 open:border-blue-200">
+                            <summary class="flex cursor-pointer list-none items-center gap-3.5 sm:gap-4 select-none">
+                                <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-pink-100 text-pink-600">
+                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                    </svg>
+                                </span>
+                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Apa yang harus dilakukan jika kode atau PIN hilang?</span>
+                                <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
+                                    <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </svg>
+                                </span>
+                            </summary>
+                            <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6 pt-3 border-t border-slate-100 pl-12.5">
+                                Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan kode dan PIN di tempat yang aman.
+                            </div>
+                        </details>
+                    </div>
                 </div>
-                <a href="{{ route('reports.create') }}" class="button-light shrink-0">Buat laporan anonim</a>
+
+                <!-- Right Column: 2 Stacked Cards (Masih Bingung & Siap Menyampaikan Laporan) -->
+                <div class="lg:col-span-5 xl:col-span-4 flex flex-col gap-4 sm:gap-5">
+                    <!-- Card 1: Masih bingung? -->
+                    <div class="relative overflow-hidden rounded-3xl border border-blue-100/90 bg-gradient-to-br from-[#eff6ff] via-[#f6faff] to-[#eaf3fe] p-6 shadow-sm">
+                        <!-- Decorative Guide Tablet Illustration on Right -->
+                        <div class="absolute -right-2 top-1/2 -translate-y-1/2 pointer-events-none w-28 sm:w-32 h-28 sm:h-32 opacity-95">
+                            <svg viewBox="0 0 120 120" fill="none" class="w-full h-full">
+                                <circle cx="60" cy="60" r="45" fill="#93c5fd" fill-opacity="0.3" filter="blur(8px)"/>
+                                <rect x="25" y="20" width="65" height="80" rx="14" fill="#ffffff" stroke="#bfdbfe" stroke-width="2"/>
+                                <rect x="38" y="36" width="38" height="34" rx="8" fill="#2563eb"/>
+                                <path d="M47 48C49 46 52 46 54 47C56 46 59 46 61 48V58C59 56 56 56 54 57C52 56 49 56 47 58V48Z" fill="#ffffff"/>
+                                <path d="M88 20L91 26M97 28L92 31M99 38L93 37" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M76 68L88 88L82 90L77 80L71 85L76 68Z" fill="#2563eb" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                        <!-- Card 1 Content -->
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-2">
+                                <div class="flex size-7 items-center justify-center rounded-full bg-blue-100 text-blue-700 shrink-0">
+                                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                                        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-base sm:text-lg font-extrabold text-navy-950">Masih bingung?</h3>
+                            </div>
+                            <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-600 max-w-[210px] sm:max-w-[240px]">
+                                Lihat panduan langkah demi langkah untuk membuat laporan di TAMBORA.
+                            </p>
+                            <div class="mt-4">
+                                <a href="#panduan-cepat" class="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs sm:text-sm font-bold text-blue-700 shadow-xs border border-blue-100 hover:bg-blue-50 transition-colors">
+                                    <span>Lihat panduan lengkap</span>
+                                    <span aria-hidden="true">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Siap menyampaikan laporan? -->
+                    <div class="relative overflow-hidden rounded-3xl bg-blue-700 p-6 shadow-md text-white">
+                        <!-- Decorative Document Illustration on Right -->
+                        <div class="hidden sm:block absolute right-3 top-3 pointer-events-none w-24 h-24 opacity-80">
+                            <svg viewBox="0 0 100 100" fill="none" class="w-full h-full">
+                                <rect x="20" y="16" width="52" height="66" rx="10" fill="#ffffff" fill-opacity="0.2" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.4"/>
+                                <rect x="30" y="28" width="32" height="4" rx="2" fill="#ffffff" fill-opacity="0.6"/>
+                                <rect x="30" y="38" width="24" height="4" rx="2" fill="#ffffff" fill-opacity="0.4"/>
+                                <circle cx="62" cy="64" r="16" fill="#2563eb" stroke="#ffffff" stroke-width="2.5"/>
+                                <path d="M56 64L60 68L68 59" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                        <!-- Card 2 Content -->
+                        <div class="relative z-10">
+                            <div class="flex items-start gap-3">
+                                <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-blue-600 border border-blue-500/80 text-white shadow-xs">
+                                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m22 2-7 20-4-9-9-4Z"/>
+                                        <path d="M22 2 11 13"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-base sm:text-lg font-extrabold text-white">Siap menyampaikan laporan?</h3>
+                                    <p class="mt-1 text-xs text-blue-100/90 leading-relaxed max-w-[210px] sm:max-w-none">Pastikan informasi disampaikan dengan itikad baik.</p>
+                                </div>
+                            </div>
+                            <div class="mt-5 w-full">
+                                <a href="{{ route('reports.create') }}" class="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-white py-3 px-5 text-sm sm:text-base font-extrabold text-blue-700 shadow-sm hover:bg-blue-50 transition-all">
+                                    <span>Buat laporan anonim</span>
+                                    <span aria-hidden="true">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
-    @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const filterButtons = document.querySelectorAll('.faq-filter-btn');
-            const faqItems = document.querySelectorAll('[data-category]');
-
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const filter = this.getAttribute('data-faq-filter');
-
-                    filterButtons.forEach(btn => {
-                        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-xs', 'font-bold');
-                        btn.classList.add('bg-slate-100/90', 'text-slate-600', 'hover:bg-slate-200/80', 'hover:text-navy-950', 'font-semibold');
-                    });
-
-                    this.classList.remove('bg-slate-100/90', 'text-slate-600', 'hover:bg-slate-200/80', 'hover:text-navy-950', 'font-semibold');
-                    this.classList.add('bg-blue-600', 'text-white', 'shadow-xs', 'font-bold');
-
-                    faqItems.forEach(item => {
-                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                            item.style.display = '';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                });
-            });
-        });
-    </script>
-    @endpush
 </x-layouts.public>
