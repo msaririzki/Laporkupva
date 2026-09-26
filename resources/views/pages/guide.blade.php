@@ -252,33 +252,123 @@
         </div>
     </section>
 
-    <!-- FAQ & Help Section: Hal Yang Perlu Anda Ketahui (Preserved as requested) -->
-    <section class="py-12 sm:py-16" id="pertanyaan-umum">
+    <!-- Pertanyaan Umum Section (Matching user reference mockup) -->
+    <section class="py-10 sm:py-14" id="pertanyaan-umum">
         <div class="public-container max-w-4xl">
-            <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft sm:p-9">
-                <p class="eyebrow">Pertanyaan umum</p>
-                <h2 class="mt-3 text-2xl font-extrabold text-navy-950">Hal yang perlu Anda ketahui</h2>
-                <div class="mt-7 divide-y divide-slate-200">
-                    @foreach ([
-                        ['Apakah saya harus membuat akun?', 'Tidak. TAMBORA tidak meminta akun, nama, NIK, email, atau nomor telepon pelapor.'],
-                        ['Bagaimana jika saya sudah meninggalkan lokasi?', 'Cari nama wilayah, jalan, desa, kecamatan, atau patokan. Setelah hasil tampil, geser pin ke lokasi kejadian yang paling akurat.'],
-                        ['Apakah foto wajib dilampirkan?', 'Tidak. Bukti foto atau PDF bersifat opsional. Utamakan keselamatan dan jangan mengambil bukti jika situasinya berisiko.'],
-                        ['Bagaimana saya mengetahui perkembangan laporan?', 'Buka halaman Cek status, lalu masukkan kode laporan dan PIN enam digit yang ditampilkan setelah laporan dikirim.'],
-                        ['Bisakah saya menjawab pertanyaan petugas?', 'Bisa. Setelah membuka progres laporan, gunakan kotak komunikasi anonim untuk membaca dan membalas pesan petugas.'],
-                        ['Apa yang harus dilakukan jika kode atau PIN hilang?', 'Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan kode dan PIN di tempat yang aman.'],
-                    ] as [$question, $answer])
-                        <details class="group py-5 first:pt-0 last:pb-0">
-                            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 font-bold text-slate-800">
-                                {{ $question }}
-                                <span class="grid size-8 shrink-0 place-items-center rounded-full bg-slate-100 text-lg text-blue-700 transition group-open:rotate-45">+</span>
-                            </summary>
-                            <p class="mt-3 pr-12 text-sm leading-6 text-slate-600">{{ $answer }}</p>
-                        </details>
-                    @endforeach
-                </div>
+            <!-- Header Pertanyaan Umum -->
+            <div>
+                <h2 class="text-2xl font-extrabold tracking-tight text-navy-950 sm:text-3xl">Pertanyaan Umum</h2>
+                <p class="mt-1.5 text-sm text-slate-500">Temukan jawaban untuk pertanyaan yang paling sering ditanyakan.</p>
             </div>
 
-            <div class="mt-8 flex flex-col items-center justify-between gap-5 rounded-3xl bg-blue-700 p-7 text-center text-white sm:flex-row sm:text-left">
+            <!-- Filter Categories (Horizontal Tabs) -->
+            <div class="mt-6 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none sm:flex-wrap">
+                <button
+                    type="button"
+                    data-faq-filter="all"
+                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-blue-600 px-4 py-2 text-xs font-bold text-white shadow-xs transition-all cursor-pointer"
+                >
+                    Semua
+                </button>
+                <button
+                    type="button"
+                    data-faq-filter="akun"
+                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
+                >
+                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    Akun & Identitas
+                </button>
+                <button
+                    type="button"
+                    data-faq-filter="lapor"
+                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
+                >
+                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                    </svg>
+                    Membuat Laporan
+                </button>
+                <button
+                    type="button"
+                    data-faq-filter="lokasi"
+                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
+                >
+                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Lokasi & Peta
+                </button>
+                <button
+                    type="button"
+                    data-faq-filter="bukti"
+                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
+                >
+                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                        <circle cx="9" cy="9" r="2" />
+                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                    </svg>
+                    Bukti Laporan
+                </button>
+                <button
+                    type="button"
+                    data-faq-filter="status"
+                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
+                >
+                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.3-4.3" />
+                    </svg>
+                    Cek Status
+                </button>
+                <button
+                    type="button"
+                    data-faq-filter="keamanan"
+                    class="faq-filter-btn inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200/80 hover:text-navy-950 transition-all cursor-pointer"
+                >
+                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    Keamanan
+                </button>
+            </div>
+
+            <!-- FAQ Accordion Cards List -->
+            <div class="mt-6 flex flex-col gap-3">
+                @foreach ([
+                    ['Apakah saya harus membuat akun?', 'Tidak. TAMBORA tidak meminta akun, nama, NIK, email, atau nomor telepon pelapor.', 'akun'],
+                    ['Bagaimana jika saya sudah meninggalkan lokasi?', 'Cari nama wilayah, jalan, desa, kecamatan, atau patokan. Setelah hasil tampil, geser pin ke lokasi kejadian yang paling akurat.', 'lokasi'],
+                    ['Apakah foto wajib dilampirkan?', 'Tidak. Bukti foto atau PDF bersifat opsional. Utamakan keselamatan dan jangan mengambil bukti jika situasinya berisiko.', 'bukti'],
+                    ['Bagaimana saya mengetahui perkembangan laporan?', 'Buka halaman Cek status, lalu masukkan kode laporan dan PIN enam digit yang ditampilkan setelah laporan dikirim.', 'status'],
+                    ['Bisakah saya menjawab pertanyaan petugas?', 'Bisa. Setelah membuka progres laporan, gunakan kotak komunikasi anonim untuk membaca dan membalas pesan petugas.', 'lapor'],
+                    ['Apa yang harus dilakukan jika kode atau PIN hilang?', 'Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan kode dan PIN di tempat yang aman.', 'keamanan'],
+                ] as [$question, $answer, $category])
+                    <details class="group rounded-2xl border border-slate-200/90 bg-white p-4.5 sm:p-5 shadow-xs transition-all duration-200 hover:border-blue-200 open:border-blue-200" data-category="{{ $category }}">
+                        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-extrabold text-navy-950 text-sm sm:text-base select-none">
+                            <span>{{ $question }}</span>
+                            <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
+                                <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="m6 9 6 6 6-6"/>
+                                </svg>
+                            </span>
+                        </summary>
+                        <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-8 pt-2.5 border-t border-slate-100">
+                            {{ $answer }}
+                        </div>
+                    </details>
+                @endforeach
+            </div>
+
+            <!-- CTA Box (Preserved) -->
+            <div class="mt-10 flex flex-col items-center justify-between gap-5 rounded-3xl bg-blue-700 p-7 text-center text-white sm:flex-row sm:text-left">
                 <div>
                     <h2 class="text-xl font-extrabold">Siap menyampaikan laporan?</h2>
                     <p class="mt-1 text-sm text-blue-100">Pastikan informasi disampaikan dengan itikad baik.</p>
@@ -287,4 +377,35 @@
             </div>
         </div>
     </section>
+
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterButtons = document.querySelectorAll('.faq-filter-btn');
+            const faqItems = document.querySelectorAll('[data-category]');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const filter = this.getAttribute('data-faq-filter');
+
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-xs', 'font-bold');
+                        btn.classList.add('bg-slate-100/90', 'text-slate-600', 'hover:bg-slate-200/80', 'hover:text-navy-950', 'font-semibold');
+                    });
+
+                    this.classList.remove('bg-slate-100/90', 'text-slate-600', 'hover:bg-slate-200/80', 'hover:text-navy-950', 'font-semibold');
+                    this.classList.add('bg-blue-600', 'text-white', 'shadow-xs', 'font-bold');
+
+                    faqItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    @endpush
 </x-layouts.public>
