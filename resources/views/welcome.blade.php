@@ -1,20 +1,20 @@
 <x-layouts.public title="Lapor KUPVA secara aman">
-    <section class="relative overflow-hidden bg-gradient-to-b from-[#f0f7ff] via-[#f8fbff] to-[#eaf4fe] py-10 sm:py-16 lg:py-20 text-navy-950">
+    <section class="relative overflow-hidden bg-gradient-to-b from-[#f0f7ff] via-[#f8fbff] to-[#eaf4fe] pt-4 pb-8 sm:pt-6 sm:pb-12 lg:pt-6 lg:pb-12 text-navy-950">
         <!-- Ambient Decorative Glows & Dot Patterns (Consistent with Cara Lapor & Keamanan) -->
         <div class="pointer-events-none absolute -top-24 -left-20 size-96 rounded-full bg-blue-400/15 blur-3xl" aria-hidden="true"></div>
         <div class="pointer-events-none absolute top-1/3 -right-20 size-96 rounded-full bg-sky-300/20 blur-3xl" aria-hidden="true"></div>
         
         <!-- Subtle Dot Grid Patterns on Sides -->
         <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-            <div class="absolute top-10 right-10 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
-            <div class="absolute bottom-10 left-10 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute top-8 right-10 size-28 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute bottom-8 left-10 size-28 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
         </div>
 
-        <div class="public-container relative grid min-h-[500px] lg:min-h-[560px] items-center gap-10 py-4 sm:py-6 lg:grid-cols-[1.18fr_0.82fr] lg:gap-12">
+        <div class="public-container relative grid items-start lg:items-center gap-8 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10">
             <!-- Left Column: Typography & Actions -->
-            <div class="relative z-10">
+            <div class="relative z-10 pt-1 lg:pt-0">
                 <!-- Eyebrow Badge (Bank Indonesia NTB Official) -->
-                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-blue-50/90 px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-blue-700 shadow-2xs backdrop-blur-xs">
+                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-blue-50/90 px-3 py-0.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-blue-700 shadow-2xs backdrop-blur-xs">
                     <span class="relative flex size-2">
                         <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                         <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
@@ -23,27 +23,27 @@
                 </div>
 
                 <!-- Headline with Harmonious Navy and Blue Accents -->
-                <h1 class="mt-4 text-3xl font-black tracking-tight text-navy-950 sm:text-4xl lg:text-[3.25rem] lg:leading-[1.12]">
+                <h1 class="mt-2.5 sm:mt-3 text-2xl sm:text-3xl lg:text-[2.75rem] font-black tracking-tight text-navy-950 leading-tight lg:leading-[1.14]">
                     Berani melapor,<br>
                     <span class="text-blue-600">untuk NTB</span> yang lebih baik.
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="mt-4 max-w-xl text-xs sm:text-sm lg:text-[15px] leading-relaxed text-slate-600 font-normal">
+                <p class="mt-2.5 sm:mt-3 max-w-xl text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-normal">
                     Kanal pengawasan resmi dari Kantor Perwakilan Bank Indonesia Provinsi NTB untuk melaporkan dugaan kegiatan usaha penukaran valuta asing (money changer) yang tidak berizin. Identitas Anda tidak diminta dan proses penanganan dipantau secara mandiri.
                 </p>
 
                 <!-- CTA Buttons -->
-                <div class="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
-                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2.5 rounded-2xl bg-[#2563EB] px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-blue-600/30 hover:bg-[#1D4ED8] hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all">
-                        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <div class="mt-5 sm:mt-6 flex flex-wrap items-center gap-3">
+                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m22 2-7 20-4-9-9-4Z"/>
                             <path d="M22 2 11 13"/>
                         </svg>
                         <span>Buat laporan anonim</span>
                         <span aria-hidden="true" class="text-base sm:text-lg">→</span>
                     </a>
-                    <a href="{{ route('reports.track') }}" class="inline-flex items-center gap-2 rounded-2xl border border-slate-200/90 bg-white px-6 py-3.5 text-xs sm:text-sm font-bold text-navy-950 shadow-xs hover:bg-blue-50/70 hover:border-blue-300 hover:text-blue-700 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                    <a href="{{ route('reports.track') }}" class="inline-flex items-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs sm:text-sm font-bold text-navy-950 shadow-2xs hover:bg-blue-50/70 hover:border-blue-300 hover:text-blue-700 hover:-translate-y-0.5 active:translate-y-0 transition-all">
                         <svg class="size-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="7"/>
                             <path d="m21 21-4.3-4.3"/>
@@ -53,60 +53,60 @@
                 </div>
 
                 <!-- 3 Key Features Row (Light Frosted Cards Matching Atmosphere) -->
-                <div class="mt-9 sm:mt-11 flex flex-wrap items-center gap-3 sm:gap-4">
+                <div class="mt-6 sm:mt-8 flex flex-wrap items-center gap-2.5 sm:gap-3">
                     <!-- Feature 1 -->
-                    <div class="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 bg-white/80 px-3.5 py-2.5 shadow-xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-sm">
-                        <div class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/70 shadow-2xs">
-                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/70 bg-white/80 px-3 py-2 shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
+                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200/70 shadow-2xs">
+                            <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
                                 <path d="m9 12 2 2 4-4"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-[13px] font-bold text-navy-950">Tanpa nama &amp; NIK</p>
-                            <p class="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Identitas Anda terlindungi</p>
+                            <p class="text-xs sm:text-[12.5px] font-bold text-navy-950">Tanpa nama &amp; NIK</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5">Identitas Anda terlindungi</p>
                         </div>
                     </div>
 
                     <!-- Feature 2 -->
-                    <div class="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 bg-white/80 px-3.5 py-2.5 shadow-xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-sm">
-                        <div class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-200/70 shadow-2xs">
-                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/70 bg-white/80 px-3 py-2 shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
+                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-200/70 shadow-2xs">
+                            <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
                                 <circle cx="12" cy="10" r="3"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-[13px] font-bold text-navy-950">Lokasi akurat</p>
-                            <p class="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Gunakan GPS atau cari lokasi</p>
+                            <p class="text-xs sm:text-[12.5px] font-bold text-navy-950">Lokasi akurat</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5">Gunakan GPS atau cari lokasi</p>
                         </div>
                     </div>
 
                     <!-- Feature 3 -->
-                    <div class="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 bg-white/80 px-3.5 py-2.5 shadow-xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-sm">
-                        <div class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600 border border-amber-200/70 shadow-2xs">
-                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/70 bg-white/80 px-3 py-2 shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
+                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-600 border border-amber-200/70 shadow-2xs">
+                            <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 20V10"/>
                                 <path d="M12 20V4"/>
                                 <path d="M6 20v-6"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-[13px] font-bold text-navy-950">Proses transparan</p>
-                            <p class="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Pantau perkembangan laporan</p>
+                            <p class="text-xs sm:text-[12.5px] font-bold text-navy-950">Proses transparan</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5">Pantau perkembangan laporan</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Right Column: Alur Penanganan Floating Card -->
-            <div class="relative z-10 mx-auto w-full max-w-[400px] lg:ml-auto">
-                <div class="relative rounded-3xl bg-white p-5 sm:p-6 shadow-xl shadow-blue-900/10 backdrop-blur-md border border-slate-200/90 ring-1 ring-slate-900/5">
+            <div class="relative z-10 mx-auto w-full max-w-[390px] lg:ml-auto">
+                <div class="relative rounded-2xl sm:rounded-3xl bg-white p-4 sm:p-5 shadow-lg shadow-blue-900/5 backdrop-blur-md border border-slate-200/90 ring-1 ring-slate-900/5">
                     <!-- Subtle Corner Ambient Light -->
-                    <div class="pointer-events-none absolute -top-10 -right-10 size-32 rounded-full bg-blue-500/10 blur-2xl" aria-hidden="true"></div>
+                    <div class="pointer-events-none absolute -top-8 -right-8 size-28 rounded-full bg-blue-500/10 blur-xl" aria-hidden="true"></div>
 
                     <!-- Card Header -->
-                    <div class="relative flex items-start justify-between pb-3 border-b border-slate-100">
+                    <div class="relative flex items-start justify-between pb-2.5 border-b border-slate-100">
                         <div>
                             <div class="flex items-center gap-1.5">
                                 <span class="relative flex size-2">
@@ -115,9 +115,9 @@
                                 </span>
                                 <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#2563EB]">Alur penanganan</p>
                             </div>
-                            <h2 class="mt-0.5 text-sm sm:text-base font-black text-navy-950">Laporan Anda terus bergerak</h2>
+                            <h2 class="mt-0.5 text-xs sm:text-[14px] font-black text-navy-950">Laporan Anda terus bergerak</h2>
                         </div>
-                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-[#2E9B68] border border-emerald-200/80 shadow-2xs">
+                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] sm:text-[11px] font-bold text-[#2E9B68] border border-emerald-200/80 shadow-2xs">
                             <svg class="size-3 text-[#2E9B68]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                             </svg>
@@ -126,18 +126,18 @@
                     </div>
 
                     <!-- Mini Progress Summary -->
-                    <div class="mt-3 rounded-xl bg-slate-50/90 p-2.5 border border-slate-100/90">
-                        <div class="flex items-center justify-between text-[11px]">
+                    <div class="mt-2.5 rounded-lg bg-slate-50/90 p-2 border border-slate-100/90">
+                        <div class="flex items-center justify-between text-[10px] sm:text-[11px]">
                             <span class="font-medium text-slate-500">Transparansi Penanganan</span>
                             <span class="font-bold text-blue-600">Tahap 2 dari 6 Selesai</span>
                         </div>
-                        <div class="mt-1.5 h-1.5 w-full bg-slate-200/80 rounded-full overflow-hidden">
+                        <div class="mt-1 h-1.5 w-full bg-slate-200/80 rounded-full overflow-hidden">
                             <div class="h-full bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 rounded-full w-2/6"></div>
                         </div>
                     </div>
 
                     <!-- Steps Micro-Tiles Grid/List -->
-                    <div class="relative mt-3 space-y-2">
+                    <div class="relative mt-2.5 space-y-1.5">
                         @php
                             $timelineSteps = [
                                 [
@@ -187,51 +187,51 @@
 
                         @foreach ($timelineSteps as $step)
                             @if ($step['status'] === 'completed')
-                                <div class="group relative flex items-center justify-between gap-3 rounded-xl border border-emerald-100 bg-emerald-50/40 p-2 sm:p-2.5 transition-all duration-200 hover:bg-emerald-50/70 hover:shadow-2xs">
-                                    <div class="flex items-center gap-2.5 min-w-0">
-                                        <span class="flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white shadow-xs">
-                                            <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor">
+                                <div class="group relative flex items-center justify-between gap-2.5 rounded-lg border border-emerald-100 bg-emerald-50/40 p-1.5 sm:p-2 transition-all duration-200 hover:bg-emerald-50/70 hover:shadow-2xs">
+                                    <div class="flex items-center gap-2 min-w-0">
+                                        <span class="flex size-6 shrink-0 items-center justify-center rounded-md bg-emerald-600 text-white shadow-xs">
+                                            <svg class="size-3" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                         <div class="min-w-0">
-                                            <p class="text-xs sm:text-[13px] font-bold text-slate-800 leading-snug">{{ $step['title'] }}</p>
-                                            <p class="text-[10px] sm:text-[11px] text-slate-500 leading-tight truncate">{{ $step['desc'] }}</p>
+                                            <p class="text-xs sm:text-[12.5px] font-bold text-slate-800 leading-tight">{{ $step['title'] }}</p>
+                                            <p class="text-[10px] text-slate-500 leading-tight truncate mt-0.5">{{ $step['desc'] }}</p>
                                         </div>
                                     </div>
-                                    <span class="shrink-0 rounded-md bg-emerald-100/90 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                                    <span class="shrink-0 rounded bg-emerald-100/90 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold text-emerald-800">
                                         {{ $step['statusLabel'] }}
                                     </span>
                                 </div>
                             @elseif ($step['status'] === 'active')
-                                <div class="group relative flex items-center justify-between gap-3 rounded-xl border border-blue-200 bg-blue-50/60 p-2 sm:p-2.5 shadow-2xs ring-1 ring-blue-500/20 transition-all duration-200 hover:bg-blue-50/90">
-                                    <div class="flex items-center gap-2.5 min-w-0">
-                                        <span class="relative flex size-7 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white font-extrabold text-xs shadow-xs shadow-blue-500/30">
-                                            <span class="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-amber-400 ring-2 ring-white animate-pulse"></span>
+                                <div class="group relative flex items-center justify-between gap-2.5 rounded-lg border border-blue-200 bg-blue-50/60 p-1.5 sm:p-2 shadow-2xs ring-1 ring-blue-500/20 transition-all duration-200 hover:bg-blue-50/90">
+                                    <div class="flex items-center gap-2 min-w-0">
+                                        <span class="relative flex size-6 shrink-0 items-center justify-center rounded-md bg-blue-600 text-white font-extrabold text-[11px] shadow-xs shadow-blue-500/30">
+                                            <span class="absolute -top-0.5 -right-0.5 size-1.5 rounded-full bg-amber-400 ring-1 ring-white animate-pulse"></span>
                                             {{ $step['step'] }}
                                         </span>
                                         <div class="min-w-0">
-                                            <p class="text-xs sm:text-[13px] font-extrabold text-navy-950 leading-snug">{{ $step['title'] }}</p>
-                                            <p class="text-[10px] sm:text-[11px] text-blue-700/80 leading-tight truncate">{{ $step['desc'] }}</p>
+                                            <p class="text-xs sm:text-[12.5px] font-extrabold text-navy-950 leading-tight">{{ $step['title'] }}</p>
+                                            <p class="text-[10px] text-blue-700/80 leading-tight truncate mt-0.5">{{ $step['desc'] }}</p>
                                         </div>
                                     </div>
-                                    <span class="inline-flex shrink-0 items-center gap-1 rounded-md bg-blue-600 px-2 py-0.5 text-[10px] font-extrabold text-white shadow-2xs">
+                                    <span class="inline-flex shrink-0 items-center gap-1 rounded bg-blue-600 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-extrabold text-white shadow-2xs">
                                         <span class="size-1 rounded-full bg-white animate-ping"></span>
                                         {{ $step['statusLabel'] }}
                                     </span>
                                 </div>
                             @else
-                                <div class="group relative flex items-center justify-between gap-3 rounded-xl border border-transparent p-2 sm:p-2.5 transition-all duration-200 hover:border-slate-100 hover:bg-slate-50/70">
-                                    <div class="flex items-center gap-2.5 min-w-0">
-                                        <span class="flex size-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500 font-bold text-xs border border-slate-200/60">
+                                <div class="group relative flex items-center justify-between gap-2.5 rounded-lg border border-transparent p-1.5 sm:p-2 transition-all duration-200 hover:border-slate-100 hover:bg-slate-50/70">
+                                    <div class="flex items-center gap-2 min-w-0">
+                                        <span class="flex size-6 shrink-0 items-center justify-center rounded-md bg-slate-100 text-slate-500 font-bold text-[11px] border border-slate-200/60">
                                             {{ $step['step'] }}
                                         </span>
                                         <div class="min-w-0">
-                                            <p class="text-xs sm:text-[13px] font-semibold text-slate-600 leading-snug">{{ $step['title'] }}</p>
-                                            <p class="text-[10px] sm:text-[11px] text-slate-400 leading-tight truncate">{{ $step['desc'] }}</p>
+                                            <p class="text-xs sm:text-[12.5px] font-semibold text-slate-600 leading-tight">{{ $step['title'] }}</p>
+                                            <p class="text-[10px] text-slate-400 leading-tight truncate mt-0.5">{{ $step['desc'] }}</p>
                                         </div>
                                     </div>
-                                    <span class="shrink-0 text-[10px] font-medium text-slate-400">
+                                    <span class="shrink-0 text-[9px] sm:text-[10px] font-medium text-slate-400">
                                         {{ $step['statusLabel'] }}
                                     </span>
                                 </div>
@@ -240,9 +240,9 @@
                     </div>
 
                     <!-- Trust Seal Footer Inside Card -->
-                    <div class="mt-3.5 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-                        <span class="inline-flex items-center gap-1.5 font-semibold text-slate-600">
-                            <svg class="size-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[10.5px] text-slate-400">
+                        <span class="inline-flex items-center gap-1 font-semibold text-slate-600">
+                            <svg class="size-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
