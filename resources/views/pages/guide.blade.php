@@ -364,12 +364,12 @@
                             Gunakan kode tiket dan PIN rahasia untuk memantau perkembangan tindak lanjut laporan Anda.
                         </p>
                         <div class="mt-4">
-                            <a href="{{ route('reports.track') }}" class="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200/90 bg-blue-50/70 py-2.5 px-4 text-xs sm:text-sm font-bold text-blue-700 shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-200">
+                            <a href="{{ route('reports.track') }}" class="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200/90 bg-blue-50/70 py-2.5 px-4 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-blue-700 shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-200">
                                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="11" cy="11" r="8"/>
                                     <path d="m21 21-4.3-4.3"/>
                                 </svg>
-                                <span>Cek status sekarang</span>
+                                <span>CEK STATUS SEKARANG</span>
                                 <span aria-hidden="true">→</span>
                             </a>
                         </div>
@@ -390,12 +390,12 @@
                             Sampaikan dugaan pelanggaran secara aman tanpa mencantumkan identitas pribadi Anda.
                         </p>
                         <div class="mt-4">
-                            <a href="{{ route('reports.create') }}" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-white py-2.5 px-4 text-xs sm:text-sm font-bold text-blue-700 shadow-xs hover:bg-blue-50 transition-all duration-200">
+                            <a href="{{ route('reports.create') }}" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-white py-2.5 px-4 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-blue-700 shadow-xs hover:bg-blue-50 transition-all duration-200">
                                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="m22 2-7 20-4-9-9-4Z"/>
                                     <path d="M22 2 11 13"/>
                                 </svg>
-                                <span>Buat laporan</span>
+                                <span>BUAT LAPORAN</span>
                                 <span aria-hidden="true">→</span>
                             </a>
                         </div>
