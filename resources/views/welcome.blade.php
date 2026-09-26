@@ -1,8 +1,8 @@
 <x-layouts.public title="Lapor KUPVA secara aman">
-    <section class="relative overflow-hidden bg-[#04285b] text-white bg-cover bg-center" style="background-image: url('{{ asset('images/hero-bg.jpg') }}');">
-        <!-- Angled & Gradual Dark Blue Overlay Matching Mockup -->
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(112deg,#032c69_0%,#053982_30%,rgba(5,57,130,0.8)_42%,rgba(5,57,130,0.12)_58%,transparent_70%)] hidden lg:block" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#032c69]/95 via-[#053982]/85 to-[#032c69]/90 lg:hidden" aria-hidden="true"></div>
+    <section class="relative overflow-hidden bg-[#021b44] text-white bg-cover bg-center lg:bg-[center_top]" style="background-image: url('{{ asset('images/hero-bg.jpg') }}');">
+        <!-- Soft Ambient Overlay for Text Contrast -->
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy-950/80 via-navy-950/50 to-transparent lg:from-navy-950/60 lg:via-transparent lg:to-transparent" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0 bg-slate-950/40 lg:hidden" aria-hidden="true"></div>
 
         <div class="public-container relative grid min-h-[520px] lg:min-h-[560px] items-center gap-8 py-12 sm:py-16 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10 lg:py-16">
             <!-- Left Column Content -->
