@@ -21,7 +21,7 @@ class ReportTrackingControllerTest extends TestCase
         $this->get(route('reports.track'))
             ->assertOk()
             ->assertSee('Cek status laporan')
-            ->assertSee('Unggah QR akses')
+            ->assertSee('Pilih gambar QR')
             ->assertSee('data-qr-upload', false)
             ->assertSee('PIN 6 digit');
     }

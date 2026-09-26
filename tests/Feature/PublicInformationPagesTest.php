@@ -10,8 +10,10 @@ class PublicInformationPagesTest extends TestCase
     {
         $this->get(route('guide'))
             ->assertOk()
-            ->assertSee('Melapor dengan aman dan mudah')
+            ->assertSee('Melapor dengan jelas, aman, dan mudah')
+            ->assertSee('Lampirkan minimal satu foto atau PDF')
             ->assertSee('Apakah saya harus membuat akun?')
+            ->assertDontSee('bersifat opsional')
             ->assertSee(route('reports.create'));
     }
 
