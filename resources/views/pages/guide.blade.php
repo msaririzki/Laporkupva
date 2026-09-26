@@ -54,8 +54,8 @@
                             src="{{ asset('images/illustrations/guide-hero.webp') }}"
                             alt="Ilustrasi Panduan Masyarakat TAMBORA"
                             class="h-auto w-full object-contain drop-shadow-lg transition-transform duration-500 hover:scale-[1.02]"
-                            width="960"
-                            height="720"
+                            width="1024"
+                            height="718"
                             loading="eager"
                         >
                     </div>
