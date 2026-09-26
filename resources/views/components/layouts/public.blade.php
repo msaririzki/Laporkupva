@@ -18,24 +18,35 @@
 <body class="min-h-full flex flex-col bg-[#F8FAFC] text-[#0F172A] antialiased">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-white focus:px-4 focus:py-2 focus:text-[#0F172A] focus:shadow-lg focus:ring-2 focus:ring-[#2563EB]">Lewati ke konten utama</a>
 
-    <!-- Main Header (Minimal, Clean, Logo Only & Nav Links) -->
-    <header class="sticky top-0 z-50 border-b border-[#E2E8F0] bg-white/95 backdrop-blur-md transition-shadow duration-200">
-        <div class="public-container flex h-16 sm:h-18 items-center justify-between gap-4">
-            <!-- Brand Identity (TAMBORA Logo Only) -->
-            <a href="{{ route('home') }}" class="flex items-center gap-3 focus:outline-none rounded-lg py-1 group" aria-label="TAMBORA - Beranda">
-                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-[1.02]" width="720" height="316">
+    <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl">
+        <div class="public-container flex h-16 items-center justify-between gap-5 sm:h-18 sm:gap-6">
+            <a href="{{ route('home') }}" class="group flex shrink-0 items-center" aria-label="TAMBORA - Beranda">
+                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-9 w-auto object-contain sm:h-10 lg:h-11" width="720" height="316">
             </a>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center gap-2 lg:gap-3" aria-label="Navigasi utama">
-                <a class="nav-link" href="{{ route('home') }}#cara-kerja">Cara kerja</a>
-                <a class="nav-link" href="{{ route('home') }}#keamanan">Keamanan</a>
-                <a class="nav-link {{ request()->routeIs('guide') ? 'is-active' : '' }}" href="{{ route('guide') }}">Panduan</a>
-                <a class="nav-link {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'is-active' : '' }}" href="{{ route('reports.track') }}">Cek status</a>
+            <nav class="hidden items-center gap-1 sm:gap-2 lg:gap-3 md:flex" aria-label="Navigasi utama">
+                <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
+                <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#keamanan">Keamanan</a>
+                <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('guide') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('guide') }}">Panduan</a>
+                <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('reports.track') }}">Cek status</a>
             </nav>
 
-            <!-- Mobile Menu Toggle Button (Desktop has no redundant Buat Laporan) -->
-            <div class="flex items-center md:hidden">
+            <div class="flex items-center gap-2 sm:gap-2.5">
+                <a href="{{ route('reports.create') }}" class="button-primary hidden min-h-10 rounded-xl px-4 py-2 text-sm font-bold shadow-sm sm:inline-flex sm:px-5">Buat laporan <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a>
+
+                <a
+                    href="{{ route('filament.admin.auth.login') }}"
+                    class="admin-access-link hidden sm:grid"
+                    aria-label="Masuk ke portal admin"
+                    title="Portal admin"
+                >
+                    <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 1.75a4.25 4.25 0 0 0-4.25 4.25v1.1A2.75 2.75 0 0 0 3.5 9.8v5.7a2.75 2.75 0 0 0 2.75 2.75h7.5a2.75 2.75 0 0 0 2.75-2.75V9.8a2.75 2.75 0 0 0-2.25-2.7V6A4.25 4.25 0 0 0 10 1.75ZM7.25 6a2.75 2.75 0 1 1 5.5 0v1.05h-5.5V6Zm3.5 6.25a.75.75 0 1 0-1.5 0v1.5a.75.75 0 1 0 1.5 0v-1.5Z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="sr-only">Portal admin</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
                 <button
                     type="button"
                     id="mobile-menu-button"
@@ -56,10 +67,10 @@
 
         <!-- Mobile Navigation Menu -->
         <div id="mobile-nav" class="hidden md:hidden border-t border-[#E2E8F0] bg-white px-4 py-3.5 space-y-1 shadow-md">
-            <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0F172A] hover:bg-slate-50" href="{{ route('home') }}#cara-kerja">Cara kerja</a>
+            <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0F172A] hover:bg-slate-50" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0F172A] hover:bg-slate-50" href="{{ route('home') }}#keamanan">Keamanan</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('guide') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0F172A] hover:bg-slate-50' }}" href="{{ route('guide') }}">Panduan</a>
-            <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0F172A] hover:bg-slate-50' }}" href="{{ route('reports.track') }}">Cek status laporan</a>
+            <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0F172A] hover:bg-slate-50' }}" href="{{ route('reports.track') }}">Cek status</a>
             <a class="mt-2 block text-center rounded-xl bg-[#2563EB] px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-[#1D4ED8]" href="{{ route('reports.create') }}">Buat laporan</a>
         </div>
     </header>

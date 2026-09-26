@@ -14,9 +14,11 @@
         "vite": "^8.0.0"
     },
     "optionalDependencies": {
-        "@laravel/multiplex": "^0.4.1"
+        "@laravel/multiplex": "^0.4.1",
+        "@rolldown/binding-win32-x64-msvc": "^1.2.10"
     },
     "dependencies": {
-        "leaflet": "^1.9.4"
+        "leaflet": "^1.9.4",
+        "qr-scanner": "^1.4.2"
     }
 }

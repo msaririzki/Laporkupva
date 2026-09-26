@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TrackPublicReportRequest;
 use App\Models\Report;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -40,15 +41,51 @@ class ReportTrackingController extends Controller
 
     public function show(Request $request, Report $report): View
     {
-        $expiresAt = (int) $request->session()->get("tracked_reports.{$report->getKey()}", 0);
-
-        abort_if($expiresAt < now()->getTimestamp(), 404);
+        $this->ensureTrackingSessionIsValid($request, $report);
 
         $report->load([
             'statusHistories' => fn ($query) => $query->oldest(),
             'anonymousMessages' => fn ($query) => $query->oldest(),
         ]);
 
-        return view('reports.status', ['report' => $report]);
+        return view('reports.status', [
+            'report' => $report,
+            'statusVersion' => $this->statusVersion($report),
+        ]);
+    }
+
+    public function updates(Request $request, Report $report): JsonResponse
+    {
+        $this->ensureTrackingSessionIsValid($request, $report);
+
+        return response()->json([
+            'version' => $this->statusVersion($report),
+        ], headers: [
+            'Cache-Control' => 'private, no-store, max-age=0',
+            'Pragma' => 'no-cache',
+        ]);
+    }
+
+    private function ensureTrackingSessionIsValid(Request $request, Report $report): void
+    {
+        $expiresAt = (int) $request->session()->get("tracked_reports.{$report->getKey()}", 0);
+
+        abort_if($expiresAt < now()->getTimestamp(), 404);
+    }
+
+    private function statusVersion(Report $report): string
+    {
+        $report
+            ->loadCount(['statusHistories', 'anonymousMessages'])
+            ->loadMax(['statusHistories', 'anonymousMessages'], 'id');
+
+        return hash('sha256', implode('|', [
+            $report->status->value,
+            $report->updated_at?->toJSON() ?? '',
+            (string) $report->status_histories_count,
+            (string) ($report->status_histories_max_id ?? 0),
+            (string) $report->anonymous_messages_count,
+            (string) ($report->anonymous_messages_max_id ?? 0),
+        ]));
     }
 }

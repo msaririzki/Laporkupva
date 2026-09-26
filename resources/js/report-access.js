@@ -134,20 +134,6 @@ const initializeAccessCardDownload = () => {
     });
 };
 
-const qrImageSource = async (file) => {
-    if ('createImageBitmap' in window) {
-        return createImageBitmap(file, { imageOrientation: 'from-image' });
-    }
-
-    const objectUrl = URL.createObjectURL(file);
-
-    try {
-        return await loadImage(objectUrl);
-    } finally {
-        URL.revokeObjectURL(objectUrl);
-    }
-};
-
 const accessDetailsFromQrValue = (value) => {
     try {
         const url = new URL(value, window.location.origin);
@@ -229,31 +215,21 @@ const initializeQrAccess = () => {
             return;
         }
 
-        if (!('BarcodeDetector' in window)) {
-            showStatus('Browser ini belum mendukung pembacaan QR dari gambar. Gunakan kamera ponsel atau isi kode dan PIN.', true);
-            qrUpload.value = '';
-
-            return;
-        }
-
-        showStatus('Membaca QR di perangkat Anda…');
+        showStatus('Membaca gambar QR…');
 
         try {
-            const detector = new BarcodeDetector({ formats: ['qr_code'] });
-            const imageSource = await qrImageSource(file);
-            const detectedCodes = await detector.detect(imageSource);
-
-            imageSource.close?.();
-
-            const details = detectedCodes
-                .map(({ rawValue }) => accessDetailsFromQrValue(rawValue))
-                .find(Boolean);
+            const { default: QrScanner } = await import('qr-scanner');
+            const result = await QrScanner.scanImage(file, {
+                alsoTryWithoutScanRegion: true,
+                returnDetailedScanResult: true,
+            });
+            const details = accessDetailsFromQrValue(result.data);
 
             if (!useAccessDetails(details)) {
-                showStatus('QR TAMBORA tidak ditemukan. Pastikan gambar terang dan QR terlihat utuh.', true);
+                showStatus('Gambar ini bukan QR akses TAMBORA. Pilih gambar akses yang Anda simpan setelah melapor.', true);
             }
         } catch {
-            showStatus('QR belum dapat dibaca. Coba gambar yang lebih jelas atau isi akses secara manual.', true);
+            showStatus('QR belum terbaca. Pilih gambar yang lebih jelas atau masukkan kode dan PIN.', true);
         } finally {
             qrUpload.value = '';
         }
