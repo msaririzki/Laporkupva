@@ -83,9 +83,25 @@
 
                 <!-- Status Timeline Card -->
                 <div class="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
-                    <div class="border-b border-slate-100 pb-3.5">
-                        <h2 class="text-base sm:text-lg font-semibold text-[#0B2342]">Tahapan penanganan</h2>
-                        <p class="mt-0.5 text-xs text-[#64748B]">Perkembangan terbaru akan diperbarui secara langsung pada linimasa ini.</p>
+                    <div class="flex flex-col gap-3 border-b border-slate-100 pb-3.5 sm:flex-row sm:items-start sm:justify-between">
+                        <div>
+                            <h2 class="text-base sm:text-lg font-semibold text-[#0B2342]">Tahapan penanganan</h2>
+                            <p class="mt-0.5 text-xs text-[#64748B]">Status terbaru muncul otomatis tanpa perlu memuat ulang halaman.</p>
+                        </div>
+                        <button
+                            type="button"
+                            data-report-live-refresh
+                            data-update-url="{{ route('reports.status.updates', ['report' => $report->public_code]) }}"
+                            data-version="{{ $statusVersion }}"
+                            class="inline-flex min-h-8 shrink-0 items-center gap-2 self-start rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-semibold text-emerald-700 transition-colors hover:border-emerald-300 hover:bg-emerald-100"
+                            title="Periksa pembaruan sekarang"
+                        >
+                            <span data-live-refresh-dot class="relative flex size-2" aria-hidden="true">
+                                <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60"></span>
+                                <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+                            </span>
+                            <span data-live-refresh-label>Pembaruan otomatis aktif</span>
+                        </button>
                     </div>
 
                     <div class="mt-5">

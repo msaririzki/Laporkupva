@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\ReportStatus;
+use App\Models\AnonymousMessage;
 use App\Models\Report;
 use App\Models\ReportEvidence;
 use App\Models\ReportStatusHistory;
@@ -59,6 +60,8 @@ class ReportTrackingControllerTest extends TestCase
             ->assertOk()
             ->assertSee('LKP-AB12-CD34')
             ->assertSee('Laporan telah diterima petugas.')
+            ->assertSee('data-report-live-refresh', false)
+            ->assertSee('Pembaruan otomatis aktif')
             ->assertSee('Tahap sekarang');
     }
 
@@ -140,6 +143,55 @@ class ReportTrackingControllerTest extends TestCase
 
         $this->get(route('reports.status', ['report' => $report->public_code]))
             ->assertNotFound();
+    }
+
+    public function test_report_status_updates_cannot_be_checked_without_a_verified_tracking_session(): void
+    {
+        $report = Report::factory()->create();
+
+        $this->getJson(route('reports.status.updates', ['report' => $report->public_code]))
+            ->assertNotFound();
+    }
+
+    public function test_report_status_updates_return_a_new_version_after_public_data_changes(): void
+    {
+        $report = Report::factory()->received()->create();
+        $session = [
+            "tracked_reports.{$report->getKey()}" => now()->addMinutes(10)->getTimestamp(),
+        ];
+
+        $initialResponse = $this->withSession($session)
+            ->getJson(route('reports.status.updates', ['report' => $report->public_code]))
+            ->assertOk()
+            ->assertHeaderContains('Cache-Control', 'no-store')
+            ->assertExactJsonStructure(['version']);
+
+        $report->update(['status' => ReportStatus::Coordination]);
+
+        $statusUpdatedResponse = $this->withSession($session)
+            ->getJson(route('reports.status.updates', ['report' => $report->public_code]))
+            ->assertOk()
+            ->assertExactJsonStructure(['version']);
+
+        $this->assertNotSame(
+            $initialResponse->json('version'),
+            $statusUpdatedResponse->json('version'),
+        );
+
+        AnonymousMessage::factory()->create([
+            'report_id' => $report->getKey(),
+            'sender_type' => 'admin',
+        ]);
+
+        $updatedResponse = $this->withSession($session)
+            ->getJson(route('reports.status.updates', ['report' => $report->public_code]))
+            ->assertOk()
+            ->assertExactJsonStructure(['version']);
+
+        $this->assertNotSame(
+            $statusUpdatedResponse->json('version'),
+            $updatedResponse->json('version'),
+        );
     }
 
     public function test_activity_photos_and_internal_notes_are_not_exposed_on_public_tracking(): void

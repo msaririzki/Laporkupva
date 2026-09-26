@@ -23,6 +23,7 @@ Route::controller(PublicReportController::class)->group(function (): void {
 Route::controller(ReportTrackingController::class)->group(function (): void {
     Route::get('/status', 'create')->name('reports.track');
     Route::post('/status', 'store')->middleware('throttle:report-tracking')->name('reports.track.show');
+    Route::get('/status/{report:public_code}/pembaruan', 'updates')->name('reports.status.updates');
     Route::get('/status/{report:public_code}', 'show')->name('reports.status');
 });
 
