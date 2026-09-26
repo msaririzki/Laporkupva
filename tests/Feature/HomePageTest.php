@@ -11,7 +11,7 @@ class HomePageTest extends TestCase
         $this->get(route('home'))
             ->assertOk()
             ->assertSee('Berani melapor')
-            ->assertSee('Tanpa nama &amp; NIK', false)
+            ->assertSee('tanpa mengungkap identitas')
             ->assertSee(route('reports.create'))
             ->assertSee(route('reports.track'))
             ->assertSee(route('filament.admin.auth.login'))

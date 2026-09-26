@@ -42,52 +42,6 @@
                         <span>Cek status laporan</span>
                     </a>
                 </div>
-
-                <!-- 3 Key Features Row (Balanced 3-Col Grid on Mobile, Flex on Desktop) -->
-                <div class="mt-4 sm:mt-8 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
-                    <!-- Feature 1 -->
-                    <div class="flex flex-col sm:flex-row items-center sm:items-center gap-1.5 sm:gap-2.5 rounded-xl border border-slate-200/80 bg-white/90 p-2 sm:px-3 sm:py-2 text-center sm:text-left shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
-                        <div class="flex size-7 sm:size-7.5 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200/70 shadow-2xs">
-                            <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
-                                <path d="m9 12 2 2 4-4"/>
-                            </svg>
-                        </div>
-                        <div class="leading-tight">
-                            <p class="text-[11px] sm:text-[12.5px] font-bold text-navy-950">Tanpa nama &amp; NIK</p>
-                            <p class="text-[9px] sm:text-[10px] text-slate-500 mt-0.5">Identitas aman</p>
-                        </div>
-                    </div>
-
-                    <!-- Feature 2 -->
-                    <div class="flex flex-col sm:flex-row items-center sm:items-center gap-1.5 sm:gap-2.5 rounded-xl border border-slate-200/80 bg-white/90 p-2 sm:px-3 sm:py-2 text-center sm:text-left shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
-                        <div class="flex size-7 sm:size-7.5 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-200/70 shadow-2xs">
-                            <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                        </div>
-                        <div class="leading-tight">
-                            <p class="text-[11px] sm:text-[12.5px] font-bold text-navy-950">Lokasi akurat</p>
-                            <p class="text-[9px] sm:text-[10px] text-slate-500 mt-0.5">GPS &amp; Peta</p>
-                        </div>
-                    </div>
-
-                    <!-- Feature 3 -->
-                    <div class="flex flex-col sm:flex-row items-center sm:items-center gap-1.5 sm:gap-2.5 rounded-xl border border-slate-200/80 bg-white/90 p-2 sm:px-3 sm:py-2 text-center sm:text-left shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
-                        <div class="flex size-7 sm:size-7.5 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-600 border border-amber-200/70 shadow-2xs">
-                            <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 20V10"/>
-                                <path d="M12 20V4"/>
-                                <path d="M6 20v-6"/>
-                            </svg>
-                        </div>
-                        <div class="leading-tight">
-                            <p class="text-[11px] sm:text-[12.5px] font-bold text-navy-950">Proses transparan</p>
-                            <p class="text-[9px] sm:text-[10px] text-slate-500 mt-0.5">Pantau status</p>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Right Column: Alur Penanganan Floating Card -->
