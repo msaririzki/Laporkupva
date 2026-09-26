@@ -45,8 +45,8 @@ class StorePublicReportRequest extends FormRequest
             'latitude' => ['required', 'numeric', 'between:-11,-8'],
             'longitude' => ['required', 'numeric', 'between:115,120'],
             'location_accuracy' => ['nullable', 'numeric', 'min:0', 'max:100000'],
-            'evidence' => ['nullable', 'array', 'max:5'],
-            'evidence.*' => ['file', 'mimes:jpg,jpeg,png,webp,pdf', 'extensions:jpg,jpeg,png,webp,pdf', 'max:10240'],
+            'evidence' => ['required', 'array', 'min:1', 'max:5'],
+            'evidence.*' => ['required', 'file', 'mimes:jpg,jpeg,png,webp,pdf', 'extensions:jpg,jpeg,png,webp,pdf', 'max:10240'],
             'good_faith' => ['accepted'],
             'website' => ['prohibited'],
         ];

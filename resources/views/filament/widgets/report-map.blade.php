@@ -84,7 +84,7 @@
                         status.textContent = `Status: ${item.status}`;
                         const link = document.createElement('a');
                         link.href = item.url;
-                        link.textContent = 'Buka detail laporan →';
+                        link.textContent = 'Buka detail laporan';
                         link.style.fontWeight = '700';
                         popup.append(title, details, status, link);
                         L.marker(point, { icon }).addTo(map).bindPopup(popup);

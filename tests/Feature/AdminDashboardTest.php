@@ -16,6 +16,8 @@ use App\Models\Kupva;
 use App\Models\Report;
 use App\Models\ReportEvidence;
 use App\Models\User;
+use Filament\Facades\Filament;
+use Filament\Navigation\NavigationItem;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -25,6 +27,23 @@ use Tests\TestCase;
 class AdminDashboardTest extends TestCase
 {
     use LazilyRefreshDatabase;
+
+    public function test_admin_panel_uses_spa_navigation_without_intercepting_file_responses(): void
+    {
+        $panel = Filament::getPanel('admin');
+        $publicPortalItem = collect($panel->getNavigationItems())
+            ->first(fn (NavigationItem $item): bool => $item->getLabel() === 'Portal Publik');
+
+        $this->assertTrue($panel->hasSpaMode());
+        $this->assertFalse($panel->hasSpaPrefetching());
+        $this->assertSame([
+            url('/admin/ekspor/*'),
+            url('/admin/lampiran-laporan/*'),
+        ], $panel->getSpaUrlExceptions());
+        $this->assertNotNull($publicPortalItem);
+        $this->assertSame(route('home'), $publicPortalItem->getUrl());
+        $this->assertTrue($publicPortalItem->shouldOpenUrlInNewTab());
+    }
 
     public function test_guest_sees_the_branded_admin_login_page(): void
     {
@@ -136,7 +155,7 @@ class AdminDashboardTest extends TestCase
             'body' => 'Lokasi berada dekat pasar.',
         ]);
         Report::factory()->count(2)->create();
-        Kupva::factory()->create();
+        $kupva = Kupva::factory()->create();
 
         $this->actingAs($admin)
             ->get('/admin')
@@ -160,16 +179,20 @@ class AdminDashboardTest extends TestCase
             ->assertOk()
             ->assertSee('Laporan masyarakat')
             ->assertSee('Temukan dan tindak lanjuti laporan masyarakat di seluruh NTB.')
-            ->assertSee('Cari kode, tempat, jenis, wilayah…')
+            ->assertSee('Cari laporan…')
             ->assertSee('Saring')
             ->assertSee('Atur kolom')
-            ->assertSee('Ekspor CSV');
+            ->assertSee('Unduh CSV')
+            ->assertSee('Buka')
+            ->assertSee('Lanjutkan');
 
         $this->actingAs($admin)
             ->get(ReportResource::getUrl('view', ['record' => $report]))
             ->assertOk()
             ->assertSee($report->public_code)
             ->assertSee('Status penanganan')
+            ->assertSee('Kembali ke daftar')
+            ->assertSee(ReportResource::getUrl('index'), false)
             ->assertSee('Update progres')
             ->assertSee('Tambah dokumentasi')
             ->assertSee('Sudah dikerjakan')
@@ -190,6 +213,12 @@ class AdminDashboardTest extends TestCase
             ->assertOk()
             ->assertSee('Data KUPVA')
             ->assertSee('Kelola referensi penyelenggara KUPVA dan pantau status izin operasionalnya.');
+
+        $this->actingAs($admin)
+            ->get(KupvaResource::getUrl('view', ['record' => $kupva]))
+            ->assertOk()
+            ->assertSee('Kembali ke daftar KUPVA')
+            ->assertSee(KupvaResource::getUrl('index'), false);
     }
 
     public function test_regular_admin_cannot_manage_other_admin_accounts(): void
@@ -445,6 +474,19 @@ class AdminDashboardTest extends TestCase
         $this->assertDatabaseMissing(User::class, [
             'email' => 'admin-baru@example.test',
         ]);
+    }
+
+    public function test_super_admin_sees_the_streamlined_create_admin_form(): void
+    {
+        $superAdmin = User::factory()->superAdmin()->create();
+
+        $this->actingAs($superAdmin)
+            ->get(UserResource::getUrl('create'))
+            ->assertOk()
+            ->assertSee('Tambah admin')
+            ->assertSee('Informasi admin')
+            ->assertSee('Simpan admin')
+            ->assertDontSee('Buat &amp; buat lainnya', false);
     }
 
     public function test_super_admin_can_deactivate_an_admin_without_deleting_the_account(): void

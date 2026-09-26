@@ -13,6 +13,8 @@ class HomePageTest extends TestCase
             ->assertSee('Berani melapor')
             ->assertSee('Tanpa nama &amp; NIK', false)
             ->assertSee(route('reports.create'))
-            ->assertSee(route('reports.track'));
+            ->assertSee(route('reports.track'))
+            ->assertSee(route('filament.admin.auth.login'))
+            ->assertSee('aria-label="Masuk ke portal admin"', false);
     }
 }
