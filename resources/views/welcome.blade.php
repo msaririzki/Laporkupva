@@ -627,7 +627,41 @@
         </div>
     </section>
 
-    <section class="bg-blue-700 py-14 text-white">
-        <div class="public-container flex flex-col items-start justify-between gap-7 md:flex-row md:items-center"><div><p class="text-sm font-bold uppercase tracking-[.18em] text-blue-200">Sudah pernah melapor?</p><h2 class="mt-2 text-2xl font-extrabold sm:text-3xl">Lihat progres penanganan laporan Anda.</h2></div><a href="{{ route('reports.track') }}" class="button-light shrink-0">Cek status sekarang</a></div>
+    <!-- Bottom CTA Banner: Cek Status Laporan -->
+    <section class="relative overflow-hidden bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 py-12 sm:py-16 text-white shadow-inner">
+        <!-- Ambient Decorative Glows -->
+        <div class="pointer-events-none absolute -right-16 -top-16 size-72 rounded-full bg-white/10 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -left-16 -bottom-16 size-72 rounded-full bg-blue-400/20 blur-3xl" aria-hidden="true"></div>
+
+        <div class="public-container relative z-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+            <div class="max-w-xl">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-blue-100 border border-white/15 backdrop-blur-xs">
+                    <span class="size-1.5 rounded-full bg-emerald-400"></span>
+                    Sudah pernah melapor?
+                </span>
+                <h2 class="mt-2.5 text-2xl font-black sm:text-3xl lg:text-[2rem] leading-tight text-white tracking-tight">
+                    Lihat progres penanganan laporan Anda.
+                </h2>
+                <p class="mt-1.5 text-xs sm:text-sm text-blue-100/90 leading-relaxed">
+                    Cukup masukkan kode tiket dan PIN rahasia untuk memantau status tindak lanjut secara real-time.
+                </p>
+            </div>
+
+            <!-- Upgraded "Cek Status Sekarang" Button -->
+            <a href="{{ route('reports.track') }}"
+               class="group inline-flex shrink-0 items-center justify-center gap-3 rounded-2xl bg-white px-6 py-3.5 sm:px-7 sm:py-4 text-sm sm:text-base font-extrabold text-blue-700 shadow-xl shadow-blue-950/25 transition-all duration-300 hover:-translate-y-1 hover:bg-blue-50/95 hover:text-blue-800 hover:shadow-2xl hover:shadow-blue-950/35 active:translate-y-0 active:scale-[0.98] ring-4 ring-white/20">
+                <svg class="size-5 text-blue-600 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+                <span>Cek status sekarang</span>
+                <span class="flex size-7 items-center justify-center rounded-xl bg-blue-100/80 text-blue-700 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:translate-x-0.5 shadow-2xs">
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                </span>
+            </a>
+        </div>
     </section>
 </x-layouts.public>
