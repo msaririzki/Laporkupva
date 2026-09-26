@@ -1,4 +1,4 @@
-<x-layouts.public title="Buat laporan anonim">
+<x-layouts.public title="Buat laporan">
     <!-- Hero Header (Mobile-First, Focused, Clean, Desktop Horizontal) -->
     <section class="relative bg-[#0B2342] py-6 sm:py-8 lg:py-10 text-white overflow-hidden">
         <div class="public-container max-w-xl lg:max-w-4xl px-4 sm:px-6">
@@ -6,10 +6,10 @@
                 <div class="lg:max-w-xl">
                     <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#F2B84B] tracking-wide">
                         <span class="size-1.5 rounded-full bg-[#F2B84B]"></span>
-                        <span>Laporan Anonim</span>
+                        <span>Form Pelaporan</span>
                     </span>
                     <h1 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">Laporkan dengan cepat dan aman</h1>
-                    <p class="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-300">Ceritakan kejadian, tentukan lokasi, lalu kirim laporan secara anonim.</p>
+                    <p class="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-300">Ceritakan kejadian, tentukan lokasi, lalu kirim laporan tanpa mengungkap identitas.</p>
                 </div>
 
                 <!-- Desktop Quick Badges (Horizontal on mobile, chips on desktop) -->

@@ -321,7 +321,7 @@
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Bisa. Setelah membuka progres laporan, gunakan kotak komunikasi anonim untuk membaca dan membalas pesan petugas.
+                                Bisa. Setelah membuka progres laporan, gunakan kotak komunikasi untuk membaca dan membalas pesan petugas.
                             </div>
                         </details>
 
@@ -395,7 +395,7 @@
                                     <path d="m22 2-7 20-4-9-9-4Z"/>
                                     <path d="M22 2 11 13"/>
                                 </svg>
-                                <span>Buat laporan anonim</span>
+                                <span>Buat laporan</span>
                                 <span aria-hidden="true">→</span>
                             </a>
                         </div>

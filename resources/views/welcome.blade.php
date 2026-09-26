@@ -426,7 +426,7 @@
                         <article class="group flex flex-col justify-between rounded-xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
                             <div>
                                 <div class="flex items-center justify-between">
-                                    <!-- Icon: Identitas / Profil Tersembunyi (Anonim) -->
+                                    <!-- Icon: Identitas / Profil Tersembunyi -->
                                     <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                                         <svg class="size-4.5 sm:size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
