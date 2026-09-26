@@ -347,7 +347,7 @@
                                     </svg>
                                     Setelah laporan dikirim:
                                 </strong>
-                                <span class="mt-1 block text-xs text-[#0B2342]/90 leading-relaxed">Anda akan menerima kode laporan dan PIN untuk melihat perkembangan laporan. Simpan keduanya karena PIN hanya ditampilkan satu kali.</span>
+                                <span class="mt-1 block text-xs text-[#0B2342]/90 leading-relaxed">Anda akan menerima nomor laporan dan gambar QR untuk melihat perkembangan laporan. Simpan salah satunya agar mudah digunakan kembali.</span>
                             </div>
 
                             <!-- Good Faith Confirmation -->

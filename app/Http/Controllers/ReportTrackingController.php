@@ -8,7 +8,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -25,9 +24,9 @@ class ReportTrackingController extends Controller
             ->where('public_code', $request->string('tracking_code')->value())
             ->first();
 
-        if (! $report || ! Hash::check($request->string('tracking_pin')->value(), $report->tracking_pin_hash)) {
+        if (! $report) {
             throw ValidationException::withMessages([
-                'tracking_code' => 'Kode laporan atau PIN tidak cocok. Periksa kembali data Anda.',
+                'tracking_code' => 'Nomor laporan tidak ditemukan. Periksa kembali nomor yang Anda masukkan.',
             ]);
         }
 

@@ -4,7 +4,7 @@
             ['number' => '01', 'title' => 'Ceritakan kejadian', 'description' => 'Sampaikan informasi penting secara singkat dan jelas.'],
             ['number' => '02', 'title' => 'Tentukan lokasi', 'description' => 'Gunakan lokasi saat ini atau pilih titik pada peta.'],
             ['number' => '03', 'title' => 'Lampirkan bukti', 'description' => 'Tambahkan minimal satu foto atau PDF sebagai petunjuk.'],
-            ['number' => '04', 'title' => 'Simpan akses', 'description' => 'Gunakan kode, PIN, atau QR untuk memantau laporan.'],
+            ['number' => '04', 'title' => 'Simpan akses', 'description' => 'Gunakan nomor laporan atau QR untuk memantau laporan.'],
         ];
 
         $timelineSteps = [
@@ -80,7 +80,7 @@
                         <span class="grid size-7 shrink-0 place-items-center rounded-full bg-amber-400/12 text-amber-300">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/><path d="M22 19V3"/></svg>
                         </span>
-                        <span><strong class="block text-white">Dapat dipantau</strong>Dengan kode dan PIN</span>
+                        <span><strong class="block text-white">Dapat dipantau</strong>Dengan nomor laporan</span>
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                 <div class="max-w-2xl">
                     <p class="text-xs font-extrabold uppercase tracking-[0.15em] text-blue-600">Mudah dan cepat</p>
                     <h2 class="mt-2 text-2xl font-extrabold tracking-tight text-[#0B2342] sm:text-3xl lg:text-4xl">Empat langkah untuk melapor</h2>
-                    <p class="mt-3 text-sm leading-6 text-slate-600 sm:text-base">Tidak perlu login. Siapkan informasi lokasi dan bukti pendukung, lalu simpan akses rahasia Anda.</p>
+                    <p class="mt-3 text-sm leading-6 text-slate-600 sm:text-base">Tidak perlu login. Siapkan informasi lokasi dan bukti pendukung, lalu simpan nomor laporan Anda.</p>
                 </div>
                 <a href="{{ route('guide') }}" class="inline-flex items-center gap-2 self-start text-sm font-bold text-blue-700 transition hover:text-blue-900 sm:self-auto">Lihat panduan lengkap <span aria-hidden="true">→</span></a>
             </div>
@@ -171,7 +171,7 @@
                             </li>
                             <li class="flex items-start gap-2.5 text-sm font-semibold text-slate-700">
                                 <span class="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700"><svg class="size-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 4.15a.75.75 0 0 1 .15 1.05l-8 10.5a.75.75 0 0 1-1.13.08l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.9 3.89 7.47-9.82a.75.75 0 0 1 1.05-.14Z" clip-rule="evenodd"/></svg></span>
-                                Akses dengan PIN rahasia
+                                Akses dengan nomor laporan
                             </li>
                         </ul>
 
@@ -203,7 +203,7 @@
             <div class="max-w-2xl">
                 <p class="text-xs font-extrabold uppercase tracking-[0.15em] text-sky-300">Sudah pernah melapor?</p>
                 <h2 class="mt-2 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">Lihat status tindak lanjut terbaru.</h2>
-                <p class="mt-2 text-sm leading-6 text-slate-300">Masukkan kode laporan dan PIN, atau unggah QR yang tersimpan pada perangkat Anda.</p>
+                <p class="mt-2 text-sm leading-6 text-slate-300">Masukkan nomor laporan atau unggah QR yang tersimpan pada perangkat Anda.</p>
             </div>
             <a href="{{ route('reports.track') }}" class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 self-start rounded-xl bg-white px-6 py-3 text-sm font-extrabold text-[#0B2342] shadow-lg transition hover:-translate-y-0.5 hover:bg-sky-50 md:self-auto">
                 Cek status laporan

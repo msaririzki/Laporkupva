@@ -10,7 +10,6 @@ use App\Models\ReportStatusHistory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class ReportTrackingControllerTest extends TestCase
@@ -26,7 +25,8 @@ class ReportTrackingControllerTest extends TestCase
             ->assertSee('Pilih gambar dari perangkat')
             ->assertSee('Gambar hanya dibaca di perangkat ini dan tidak diunggah.')
             ->assertSee('data-qr-upload', false)
-            ->assertSee('PIN 6 digit')
+            ->assertSee('Masukkan nomor laporan')
+            ->assertDontSee('PIN 6 digit')
             ->assertDontSee('Browser ini belum mendukung pembacaan QR');
     }
 
@@ -37,11 +37,10 @@ class ReportTrackingControllerTest extends TestCase
             ->assertSee('value="LKP-AB12-CD34"', false);
     }
 
-    public function test_report_can_be_tracked_with_the_correct_code_and_pin(): void
+    public function test_report_can_be_tracked_with_its_report_number(): void
     {
         $report = Report::factory()->received()->create([
             'public_code' => 'LKP-AB12-CD34',
-            'tracking_pin_hash' => Hash::make('654321'),
         ]);
         $report->statusHistories()->create([
             'from_status' => null,
@@ -56,7 +55,6 @@ class ReportTrackingControllerTest extends TestCase
 
         $this->post(route('reports.track.show'), [
             'tracking_code' => 'lkp-ab12-cd34',
-            'tracking_pin' => '654321',
         ])->assertRedirect(route('reports.status', ['report' => $report->public_code]));
 
         $this->get(route('reports.status', ['report' => $report->public_code]))
@@ -75,12 +73,10 @@ class ReportTrackingControllerTest extends TestCase
     {
         $report = Report::factory()->received()->create([
             'public_code' => 'LKP-AB12-CD34',
-            'tracking_pin_hash' => Hash::make('654321'),
         ]);
         $accessToken = Crypt::encryptString(json_encode([
-            'version' => 1,
+            'version' => 2,
             'code' => $report->public_code,
-            'pin' => '654321',
         ], JSON_THROW_ON_ERROR));
 
         $this->post(route('reports.track.show'), [
@@ -92,39 +88,42 @@ class ReportTrackingControllerTest extends TestCase
             ->assertSee($report->public_code);
     }
 
+    public function test_legacy_qr_access_token_remains_usable(): void
+    {
+        $report = Report::factory()->create(['public_code' => 'LKP-AB12-CD34']);
+        $accessToken = Crypt::encryptString(json_encode([
+            'version' => 1,
+            'code' => $report->public_code,
+            'pin' => '654321',
+        ], JSON_THROW_ON_ERROR));
+
+        $this->post(route('reports.track.show'), [
+            'access_token' => $accessToken,
+        ])->assertRedirect(route('reports.status', ['report' => $report->public_code]));
+    }
+
     public function test_invalid_qr_access_token_does_not_open_a_report(): void
     {
         $this->from(route('reports.track'))
             ->post(route('reports.track.show'), ['access_token' => 'invalid-token'])
             ->assertRedirect(route('reports.track'))
-            ->assertSessionHasErrors(['tracking_code', 'tracking_pin']);
+            ->assertSessionHasErrors(['tracking_code']);
     }
 
-    public function test_wrong_pin_and_unknown_code_return_the_same_generic_error(): void
+    public function test_unknown_report_number_returns_a_clear_error(): void
     {
-        Report::factory()->create([
-            'public_code' => 'LKP-AB12-CD34',
-            'tracking_pin_hash' => Hash::make('654321'),
-        ]);
-
-        foreach ([
-            ['tracking_code' => 'LKP-AB12-CD34', 'tracking_pin' => '111111'],
-            ['tracking_code' => 'LKP-ZZ99-ZZ99', 'tracking_pin' => '654321'],
-        ] as $credentials) {
-            $this->from(route('reports.track'))
-                ->post(route('reports.track.show'), $credentials)
-                ->assertRedirect(route('reports.track'))
-                ->assertSessionHasErrors([
-                    'tracking_code' => 'Kode laporan atau PIN tidak cocok. Periksa kembali data Anda.',
-                ]);
-        }
+        $this->from(route('reports.track'))
+            ->post(route('reports.track.show'), ['tracking_code' => 'LKP-ZZ99-ZZ99'])
+            ->assertRedirect(route('reports.track'))
+            ->assertSessionHasErrors([
+                'tracking_code' => 'Nomor laporan tidak ditemukan. Periksa kembali nomor yang Anda masukkan.',
+            ]);
     }
 
     public function test_public_status_note_is_escaped_on_the_tracking_page(): void
     {
         $report = Report::factory()->create([
             'public_code' => 'LKP-AB12-CD34',
-            'tracking_pin_hash' => Hash::make('654321'),
         ]);
         $report->statusHistories()->create([
             'from_status' => null,
@@ -134,7 +133,6 @@ class ReportTrackingControllerTest extends TestCase
 
         $this->post(route('reports.track.show'), [
             'tracking_code' => 'LKP-AB12-CD34',
-            'tracking_pin' => '654321',
         ])->assertRedirect(route('reports.status', ['report' => $report->public_code]));
 
         $this->get(route('reports.status', ['report' => $report->public_code]))

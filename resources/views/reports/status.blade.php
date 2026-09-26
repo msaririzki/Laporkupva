@@ -179,8 +179,8 @@
 
                 <!-- Security Box -->
                 <div class="rounded-xl bg-blue-50/60 border border-blue-100 p-3.5 text-xs leading-relaxed text-[#0B2342]">
-                    <strong class="block font-semibold">Jaga kerahasiaan PIN</strong>
-                    <span class="mt-0.5 block text-[11px] text-[#64748B]">Hanya pihak yang memegang kode dan PIN yang dapat mengakses linimasa ini. Jangan membagikan akses kepada siapapun.</span>
+                    <strong class="block font-semibold">Simpan nomor laporan</strong>
+                    <span class="mt-0.5 block text-[11px] text-[#64748B]">Siapa pun yang mengetahui nomor laporan dapat melihat perkembangan dan percakapan ini. Bagikan hanya kepada pihak yang dipercaya.</span>
                 </div>
 
                 <a href="{{ route('reports.track') }}" class="button-secondary w-full text-xs font-medium py-2">

@@ -18,25 +18,24 @@ if (mobileMenuButton && mobileNav) {
     });
 }
 
-// Copy access code & PIN
+// Copy the public report number.
 const copyButton = document.querySelector('[data-copy-access]');
 
 copyButton?.addEventListener('click', async () => {
     const code = document.querySelector('#report-code')?.textContent?.trim();
-    const pin = document.querySelector('#report-pin')?.textContent?.trim();
 
-    if (!code || !pin) {
+    if (!code) {
         return;
     }
 
     try {
-        await navigator.clipboard.writeText(`Kode laporan: ${code}\nPIN: ${pin}`);
+        await navigator.clipboard.writeText(`Nomor laporan: ${code}`);
         copyButton.textContent = 'Berhasil disalin';
         window.setTimeout(() => {
-            copyButton.textContent = 'Salin kode & PIN';
+            copyButton.textContent = 'Salin nomor laporan';
         }, 2200);
     } catch {
-        window.prompt('Salin kode laporan dan PIN berikut:', `${code} / ${pin}`);
+        window.prompt('Salin nomor laporan berikut:', code);
     }
 });
 
