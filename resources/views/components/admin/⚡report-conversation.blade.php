@@ -110,7 +110,6 @@ new class extends Component
 ?>
 
 <div
-    wire:poll.15s="refreshConversation"
     x-data="{
         scrollToLatest() {
             this.$nextTick(() => {
@@ -118,7 +117,22 @@ new class extends Component
             })
         },
     }"
-    x-init="scrollToLatest()"
+    x-init="
+        scrollToLatest()
+
+        const subscribe = () => {
+            if (! window.Echo || $el.dataset.realtimeSubscribed === 'true') return
+
+            $el.dataset.realtimeSubscribed = 'true'
+            window.Echo.channel(@js($this->record->realtimeChannelName()))
+                .listen('.report.updated', () => {
+                    $wire.refreshConversation().then(() => scrollToLatest())
+                })
+        }
+
+        if (window.Echo) subscribe()
+        else window.addEventListener('EchoLoaded', subscribe, { once: true })
+    "
     x-on:report-message-sent.window="scrollToLatest()"
     class="overflow-hidden rounded-[1.35rem] border border-slate-200/90 bg-white shadow-[0_18px_50px_-38px_rgba(15,23,42,0.55)] dark:border-white/10 dark:bg-slate-900"
 >
@@ -139,7 +153,7 @@ new class extends Component
                 <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-50"></span>
                 <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
             </span>
-            Pesan diperbarui otomatis
+            Percakapan real-time
         </div>
     </div>
 

@@ -8,6 +8,7 @@ use Filament\Actions\Action;
 use Filament\Notifications\Notification as FilamentNotification;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 
@@ -24,7 +25,7 @@ class NewReporterMessage extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -32,7 +33,20 @@ class NewReporterMessage extends Notification
      */
     public function toDatabase(object $notifiable): array
     {
-        $notification = FilamentNotification::make()
+        return [
+            ...$this->filamentNotification()->getDatabaseMessage(),
+            'report_id' => $this->report->getKey(),
+        ];
+    }
+
+    public function toBroadcast(object $notifiable): BroadcastMessage
+    {
+        return $this->filamentNotification()->getBroadcastMessage();
+    }
+
+    private function filamentNotification(): FilamentNotification
+    {
+        return FilamentNotification::make()
             ->title('Pesan baru dari pelapor')
             ->body("{$this->report->public_code}: ".Str::limit($this->messageBody, 100))
             ->icon(Heroicon::OutlinedChatBubbleLeftRight)
@@ -43,13 +57,7 @@ class NewReporterMessage extends Notification
                     ->url($this->reportConversationUrl())
                     ->button()
                     ->markAsRead(),
-            ])
-            ->getDatabaseMessage();
-
-        return [
-            ...$notification,
-            'report_id' => $this->report->getKey(),
-        ];
+            ]);
     }
 
     private function reportConversationUrl(): string

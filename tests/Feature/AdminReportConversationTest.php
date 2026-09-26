@@ -25,6 +25,8 @@ class AdminReportConversationTest extends TestCase
             ->assertSeeLivewire('admin.report-conversation')
             ->assertSee('Balas pelapor')
             ->assertSee('Identitas pelapor terlindungi')
+            ->assertSee('Percakapan real-time')
+            ->assertDontSee('wire:poll.15s', false)
             ->assertSee('Tulis balasan untuk pelapor')
             ->assertSee('data-notification-conversation-navigation', false);
     }
