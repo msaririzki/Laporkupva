@@ -205,7 +205,7 @@
        Stepper: 01 ━━━━━━━━━━━━━━ 02 ━━━━━━━━━━━━━━ 03 (Modern Wide Desktop)
        ========================================================= */
     .stepper-nav {
-        @apply relative mb-8 sm:mb-10 lg:mb-12 w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4;
+        @apply relative mb-4 sm:mb-6 lg:mb-7 w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4;
     }
     .stepper-list {
         @apply relative grid grid-cols-3 items-start;
@@ -301,7 +301,7 @@
 
     /* Upload Dropzone: Pure vertical layout, centered, responsive */
     .upload-zone {
-        @apply flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[#CBD5E1] bg-[#F8FAFC] p-5 sm:p-7 text-center transition-all duration-200 hover:border-[#2563EB] hover:bg-blue-50/40;
+        @apply flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[#CBD5E1] bg-[#F8FAFC] p-4 sm:p-5 text-center transition-all duration-200 hover:border-[#2563EB] hover:bg-blue-50/40;
     }
     .upload-zone strong {
         @apply block text-sm sm:text-base font-bold text-[#0F172A];
@@ -314,13 +314,13 @@
     .bukti-pendukung {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 14px;
     }
     @media (max-width: 768px) {
         .bukti-pendukung {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
         }
     }
 

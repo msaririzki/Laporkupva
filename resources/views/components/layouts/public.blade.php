@@ -32,8 +32,10 @@
             </nav>
 
             <div class="flex items-center gap-2 sm:gap-2.5">
+                @unless (request()->routeIs('reports.create'))
                 <a href="{{ route('reports.create') }}" class="inline-flex min-h-9 items-center justify-center rounded-lg bg-[#2563EB] px-3 text-xs font-bold text-white shadow-sm transition hover:bg-[#1D4ED8] sm:hidden">Lapor</a>
                 <a href="{{ route('reports.create') }}" class="button-primary hidden min-h-10 rounded-xl px-4 py-2 text-sm font-bold shadow-sm sm:inline-flex sm:px-5">Buat laporan <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a>
+                @endunless
 
                 <a
                     href="{{ route('filament.admin.auth.login') }}"
@@ -84,14 +86,21 @@
                 </span>
                 <span class="ml-auto text-slate-400" aria-hidden="true">→</span>
             </a>
+            @unless (request()->routeIs('reports.create'))
             <a class="mt-2 block text-center rounded-xl bg-[#2563EB] px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-[#1D4ED8]" href="{{ route('reports.create') }}">Buat laporan</a>
+            @endunless
         </div>
     </header>
 
     <!-- Main Content Slot -->
     <main id="main-content" class="flex-1">{{ $slot }}</main>
 
-    @unless (request()->routeIs('reports.create'))
+    @if (request()->routeIs('reports.create'))
+    <!-- Minimalist Bottom Line for Report Creation Flow -->
+    <footer class="py-3 sm:py-4 text-center text-[10px] sm:text-[11px] text-slate-400 border-t border-[#E2E8F0] bg-white">
+        © {{ date('Y') }} Kantor Perwakilan Bank Indonesia Provinsi NTB · TAMBORA (laporkupva.id)
+    </footer>
+    @else
     <!-- Public Service Footer (Compact, Secondary, Perfectly Balanced) -->
     <footer class="{{ request()->routeIs('home') ? 'mt-0' : 'mt-12 sm:mt-16' }} border-t border-[#E2E8F0] bg-white">
         <div class="public-container py-8 sm:py-10">
@@ -130,7 +139,7 @@
             © {{ date('Y') }} Kantor Perwakilan Bank Indonesia Provinsi NTB · TAMBORA (laporkupva.id)
         </div>
     </footer>
-    @endunless
+    @endif
 
     @stack('scripts')
 </body>
