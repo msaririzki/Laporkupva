@@ -1,19 +1,19 @@
 <x-layouts.public title="Buat laporan anonim">
     <!-- Hero Header (Clean Light Canvas, Elegant Reassurance) -->
-    <section class="relative bg-white py-8 sm:py-10 lg:py-12 border-b border-[#E2E8F0]">
+    <section class="relative bg-white py-4 sm:py-8 lg:py-10 border-b border-[#E2E8F0]">
         <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10">
             <!-- Content Area (Centered, Clean, Airy) -->
             <div class="text-center max-w-[800px] mx-auto">
-                <h1 class="text-2xl font-extrabold tracking-tight text-[#0F172A] sm:text-3xl lg:text-[34px] lg:leading-tight">
+                <h1 class="text-lg sm:text-2xl lg:text-[32px] font-extrabold tracking-tight text-[#0F172A] leading-snug sm:leading-tight">
                     Laporkan dengan cepat dan aman
                 </h1>
 
-                <p class="mt-2 text-xs sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B] max-w-[720px] mx-auto">
+                <p class="mt-1.5 text-[11px] sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B] max-w-[720px] mx-auto">
                     Ceritakan kejadian, tentukan lokasi, lalu kirim laporan secara anonim.
                 </p>
 
                 <!-- Badges Row: Laporan Anonim, Identitas Anda terlindungi, ±3 menit in neutral soft gray, single line on mobile -->
-                <div class="mt-3 flex items-center justify-center gap-1.5 sm:gap-2.5 overflow-x-auto">
+                <div class="mt-2.5 flex items-center justify-center gap-1.5 sm:gap-2.5 overflow-x-auto">
                     <span class="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-slate-200/60 bg-slate-100/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-[#64748B] whitespace-nowrap shrink-0">
                         <svg class="size-3 sm:size-3.5 text-slate-400 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
@@ -42,7 +42,7 @@
     </section>
 
     <!-- Main Service Canvas -->
-    <section class="pt-6 sm:pt-10 pb-6 sm:pb-8 bg-[#F8FAFC] min-h-[60vh]">
+    <section class="pt-4 sm:pt-8 pb-6 sm:pb-8 bg-[#F8FAFC]">
         <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10">
             @if ($errors->any())
                 <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-xs sm:text-sm text-[#DC2626]" role="alert">
@@ -94,7 +94,7 @@
                 method="POST"
                 enctype="multipart/form-data"
                 id="report-form"
-                class="bg-white border border-[#E2E8F0] rounded-3xl p-6 sm:p-9 lg:p-12 shadow-xs"
+                class="bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 shadow-xs"
                 novalidate
             >
                 @csrf
@@ -107,12 +107,12 @@
 
                 <!-- STEP 1: KEJADIAN -->
                 <section class="form-step max-w-3xl mx-auto" data-step="1">
-                    <div class="border-b border-slate-100 pb-5">
-                        <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB] mb-2.5">
+                    <div class="border-b border-slate-100 pb-3.5 sm:pb-5">
+                        <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-bold text-[#2563EB] mb-2">
                             <span>Langkah 01</span>
                         </div>
-                        <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]">Ceritakan kejadian</h2>
-                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Pilih masalahnya dan ceritakan apa yang terjadi secara santai dan jujur.</p>
+                        <h2 class="text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-[#0F172A]">Ceritakan kejadian</h2>
+                        <p class="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#64748B]">Pilih masalahnya dan ceritakan apa yang terjadi secara santai dan jujur.</p>
                     </div>
 
                     <div class="mt-6 space-y-5 sm:space-y-6">
@@ -191,15 +191,15 @@
 
                 <!-- STEP 2: LOKASI -->
                 <section class="form-step hidden" data-step="2">
-                    <div class="border-b border-slate-100 pb-5">
+                    <div class="border-b border-slate-100 pb-3.5 sm:pb-5">
                         <div class="flex items-center justify-between">
-                            <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB]">
+                            <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-bold text-[#2563EB]">
                                 <span>Langkah 02</span>
                             </div>
-                            <span class="text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-1 rounded-full">Khusus Wilayah NTB</span>
+                            <span class="text-[10px] sm:text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-0.5 sm:py-1 rounded-full">Khusus Wilayah NTB</span>
                         </div>
-                        <h2 class="mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]">Tentukan lokasinya</h2>
-                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Pilih kabupaten/kota dan tandai titik lokasi kejadian pada peta interaktif.</p>
+                        <h2 class="mt-1.5 sm:mt-2.5 text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-[#0F172A]">Tentukan lokasinya</h2>
+                        <p class="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#64748B]">Pilih kabupaten/kota dan tandai titik lokasi kejadian pada peta interaktif.</p>
                     </div>
 
                     <!-- Desktop 2-Column Split: Form (42%) vs Map (58%) -->
@@ -329,12 +329,12 @@
 
                 <!-- STEP 3: BUKTI -->
                 <section class="form-step hidden max-w-3xl mx-auto" data-step="3">
-                    <div class="border-b border-slate-100 pb-5">
-                        <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-3 py-1 text-xs font-bold text-[#2563EB]">
+                    <div class="border-b border-slate-100 pb-3.5 sm:pb-5">
+                        <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-bold text-[#2563EB]">
                             <span>Langkah 03</span>
                         </div>
-                        <h2 class="mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]">Tambahkan foto & bukti</h2>
-                        <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Lampirkan minimal satu foto atau dokumen sebagai dasar verifikasi.</p>
+                        <h2 class="mt-1.5 sm:mt-2.5 text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-[#0F172A]">Tambahkan foto & bukti</h2>
+                        <p class="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#64748B]">Lampirkan minimal satu foto atau dokumen sebagai dasar verifikasi.</p>
                     </div>
 
                     <!-- Review Summary Cards (Compact, Balanced) -->
@@ -372,7 +372,7 @@
                     </div>
 
                     <!-- Layout Bukti Pendukung: Vertikal Bersih & Proporsional -->
-                    <div class="bukti-pendukung mt-6">
+                    <div class="bukti-pendukung mt-5 sm:mt-6 space-y-4 sm:space-y-5">
                         <!-- 1. Area Upload Bukti Pendukung -->
                         <div class="w-full">
                             <div class="flex items-center justify-between mb-2">
@@ -409,8 +409,36 @@
                             @error('evidence.*')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
 
-                        <!-- 2. Section/Card Terpisah: Setelah laporan terkirim -->
-                        <div class="rounded-2xl border border-blue-100 bg-blue-50/70 p-4 sm:p-5 text-[#0F172A] shadow-xs">
+                        <!-- 2. Area Kirim Pesan ke Admin (Opsional) -->
+                        <div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3.5 sm:p-5 shadow-xs">
+                            <div class="flex items-center gap-2 sm:gap-2.5">
+                                <div class="grid size-7 sm:size-8 shrink-0 place-items-center rounded-lg bg-blue-50 text-[#2563EB]">
+                                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                </div>
+                                <label for="user_message" class="text-xs sm:text-sm font-bold text-[#0F172A] cursor-pointer">
+                                    Kirim pesan ke admin <span class="text-[10px] sm:text-xs font-normal text-[#64748B]">(Opsional)</span>
+                                </label>
+                            </div>
+                            <p class="mt-1 text-[11px] sm:text-xs text-[#64748B] leading-relaxed">
+                                Sampaikan catatan khusus, kronologi tambahan, atau pesan yang ingin disampaikan langsung kepada petugas verifikator TAMBORA.
+                            </p>
+                            <div class="mt-2.5">
+                                <textarea
+                                    id="user_message"
+                                    name="user_message"
+                                    rows="3"
+                                    maxlength="2000"
+                                    class="form-control text-xs sm:text-sm bg-white"
+                                    placeholder="Tulis pesan atau catatan untuk admin di sini..."
+                                >{{ old('user_message') }}</textarea>
+                                @error('user_message')<p class="form-error mt-1">{{ $message }}</p>@enderror
+                            </div>
+                        </div>
+
+                        <!-- 3. Section/Card Terpisah: Setelah laporan terkirim -->
+                        <div class="rounded-2xl border border-blue-100 bg-blue-50/70 p-3.5 sm:p-5 text-[#0F172A] shadow-xs">
                             <div class="flex items-center gap-2.5">
                                 <div class="grid size-7 sm:size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
                                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -421,32 +449,25 @@
                                 <strong class="font-bold text-xs sm:text-sm text-[#0F172A]">Setelah laporan terkirim:</strong>
                             </div>
 
-                            <div class="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                            <div class="mt-2.5 sm:mt-3.5">
                                 <div class="rounded-xl border border-blue-200/60 bg-white/95 p-3 sm:p-3.5 shadow-2xs">
-                                    <span class="block text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">Kode Laporan</span>
+                                    <span class="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">Kode Laporan</span>
                                     <div class="mt-1 flex items-center justify-between">
-                                        <code class="font-mono text-sm sm:text-base font-extrabold tracking-wider text-[#0F172A]">XXXXXX</code>
-                                        <span class="text-[10px] font-medium text-[#64748B] bg-slate-100 px-2 py-0.5 rounded">Dibuat otomatis</span>
-                                    </div>
-                                </div>
-                                <div class="rounded-xl border border-blue-200/60 bg-white/95 p-3 sm:p-3.5 shadow-2xs">
-                                    <span class="block text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">PIN Rahasia 6 digit</span>
-                                    <div class="mt-1 flex items-center justify-between">
-                                        <code class="font-mono text-sm sm:text-base font-extrabold tracking-wider text-[#0F172A]">XXXXXX</code>
-                                        <span class="text-[10px] font-medium text-amber-700 bg-amber-50 border border-amber-200/60 px-2 py-0.5 rounded">Tampil 1 kali</span>
+                                        <code class="font-mono text-xs sm:text-base font-extrabold tracking-wider text-[#0F172A]">XXXXXX</code>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-[#64748B] bg-slate-100 px-2 py-0.5 rounded">Dibuat otomatis</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <p class="mt-3 text-xs sm:text-[13px] text-[#475569] leading-relaxed">
-                                Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
+                            <p class="mt-2.5 sm:mt-3 text-[11px] sm:text-xs text-[#475569] leading-relaxed">
+                                Kode laporan akan dibuat secara otomatis dan digunakan untuk mengecek perkembangan atau tindak lanjut laporan Anda tanpa perlu membuat akun.
                             </p>
                         </div>
 
-                        <!-- 3. Checkbox Pernyataan (Di bawah card, wrap bersih, padding aman) -->
-                        <label class="group flex cursor-pointer items-start gap-2.5 sm:gap-3 rounded-xl border border-[#CBD5E1] bg-white p-3.5 sm:p-4 shadow-xs transition-colors hover:border-[#2563EB]/50 hover:bg-blue-50/20 has-[:checked]:bg-slate-50/90 has-[:checked]:border-slate-200">
+                        <!-- 4. Checkbox Pernyataan (Di bawah card, wrap bersih, padding aman) -->
+                        <label class="group flex cursor-pointer items-start gap-2.5 sm:gap-3 rounded-xl border border-[#CBD5E1] bg-white p-3 sm:p-4 shadow-xs transition-colors hover:border-[#2563EB]/50 hover:bg-blue-50/20 has-[:checked]:bg-slate-50/90 has-[:checked]:border-slate-200">
                             <input class="peer mt-0.5 size-4 sm:size-4.5 shrink-0 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
-                            <span class="text-xs sm:text-sm leading-relaxed text-[#0F172A] font-medium peer-checked:text-[#64748B] peer-checked:font-normal transition-colors select-none">
+                            <span class="text-[11px] sm:text-xs lg:text-sm leading-relaxed text-[#0F172A] font-medium peer-checked:text-[#64748B] peer-checked:font-normal transition-colors select-none">
                                 Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span>
                             </span>
                         </label>
@@ -454,16 +475,16 @@
                     </div>
                 </section>
 
-                <!-- Action Area: Clean Bar (Compact buttons, close together on mobile and desktop) -->
-                <div class="sticky bottom-0 z-30 -mx-6 sm:-mx-9 lg:-mx-12 -mb-6 sm:-mb-9 lg:-mb-12 mt-6 bg-white/95 border-t border-[#E2E8F0] p-3.5 sm:p-5 lg:p-6 backdrop-blur-md rounded-b-3xl">
+                <!-- Action Area: Clean Bar (Mobile: No container box/border/sticky; Desktop: Elegant sticky bar) -->
+                <div class="mt-5 sm:mt-8 pt-3 sm:pt-5 border-t-0 sm:border-t sm:border-[#E2E8F0] bg-transparent sm:bg-white/95 sm:sticky sm:bottom-0 sm:z-30 sm:-mx-8 sm:-mb-8 sm:p-5 lg:-mx-10 lg:-mb-10 lg:p-6 sm:backdrop-blur-md sm:rounded-b-3xl">
                     <div class="flex items-center justify-end gap-2 sm:gap-3">
-                        <button type="button" id="previous-step" class="hidden min-h-9 sm:min-h-10 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-[#0F172A] shadow-2xs hover:bg-slate-50 transition-colors shrink-0 w-auto">
+                        <button type="button" id="previous-step" class="hidden min-h-9 sm:min-h-10 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-[#0F172A] shadow-2xs hover:bg-slate-50 transition-colors shrink-0 w-auto">
                             <span>Kembali</span>
                         </button>
-                        <button type="button" id="next-step" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-3.5 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
+                        <button type="button" id="next-step" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
                             <span>Lanjut ke lokasi</span>
                         </button>
-                        <button type="submit" id="submit-report" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-3.5 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs hidden">
+                        <button type="submit" id="submit-report" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs hidden">
                             <span>Kirim laporan</span>
                         </button>
                     </div>

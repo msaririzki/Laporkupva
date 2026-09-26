@@ -54,6 +54,13 @@ class PublicReportController extends Controller
                 ]);
             }
 
+            if ($request->filled('user_message')) {
+                $report->anonymousMessages()->create([
+                    'sender_type' => 'reporter',
+                    'body' => $request->string('user_message')->trim()->value(),
+                ]);
+            }
+
             return $report;
         });
 

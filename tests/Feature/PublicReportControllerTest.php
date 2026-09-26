@@ -75,6 +75,22 @@ class PublicReportControllerTest extends TestCase
         Storage::disk('local')->assertExists($report->evidence->pluck('path')->all());
     }
 
+    public function test_report_can_include_optional_initial_message_to_admin(): void
+    {
+        $response = $this->post(route('reports.store'), $this->validPayload([
+            'user_message' => 'Catatan khusus untuk petugas verifikator.',
+        ]));
+
+        $response->assertRedirect(route('reports.success'));
+
+        $report = Report::query()->sole();
+        $this->assertDatabaseHas('anonymous_messages', [
+            'report_id' => $report->getKey(),
+            'sender_type' => 'reporter',
+            'body' => 'Catatan khusus untuk petugas verifikator.',
+        ]);
+    }
+
     public function test_at_least_one_evidence_file_is_required(): void
     {
         $payload = $this->validPayload();
