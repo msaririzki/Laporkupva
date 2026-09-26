@@ -12,6 +12,8 @@ class PublicInformationPagesTest extends TestCase
             ->assertOk()
             ->assertSee('Melapor dengan aman dan mudah')
             ->assertSee('Apakah saya harus membuat akun?')
+            ->assertSee('Sudah pernah melapor?')
+            ->assertSee(route('reports.track'))
             ->assertSee(route('reports.create'));
     }
 
