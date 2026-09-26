@@ -1086,6 +1086,7 @@
     z-index: 30;
     right: max(1.25rem, env(safe-area-inset-right));
     bottom: max(1.25rem, env(safe-area-inset-bottom));
+    transition: opacity 160ms ease, transform 160ms ease;
 }
 
 .admin-detail-floating-back-button.fi-btn {
@@ -1685,6 +1686,152 @@
 
     & .filepond--file-status-sub {
         display: none;
+    }
+}
+
+/* Dialog operasional dibuat ringan agar konteks laporan tetap terasa tanpa menggelapkan layar. */
+.tambora-action-modal-overlay.fi-modal-close-overlay {
+    background: rgb(30 64 108 / 24%);
+    backdrop-filter: blur(5px) saturate(115%);
+}
+
+.tambora-action-modal.fi-modal-window {
+    overflow: hidden;
+    border: 1px solid rgb(203 216 232 / 92%);
+    border-radius: 1.35rem;
+    background: rgb(255 255 255 / 98%);
+    box-shadow: 0 28px 75px -34px rgb(15 38 70 / 52%), 0 12px 30px -22px rgb(37 99 235 / 30%);
+}
+
+.tambora-action-modal .fi-modal-header {
+    gap: 0.9rem;
+    padding: 1.2rem 1.4rem 1rem;
+    border-bottom: 1px solid #e8eef6;
+    background: linear-gradient(135deg, #f9fcff 0%, #eff6ff 100%);
+}
+
+.tambora-action-modal .fi-modal-icon-bg {
+    margin: 0;
+    padding: 0.55rem;
+    border: 1px solid #cfe0f7;
+    background: #ffffff;
+    box-shadow: 0 8px 18px -13px rgb(37 99 235 / 62%);
+}
+
+.tambora-action-modal .fi-modal-icon-bg > .fi-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #2563eb;
+}
+
+.tambora-action-modal .fi-modal-heading {
+    color: #142b4a;
+    font-size: 1.05rem;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+}
+
+.tambora-action-modal .fi-modal-description {
+    margin-top: 0.2rem;
+    color: #61758f;
+    line-height: 1.45;
+}
+
+.tambora-action-modal .fi-modal-content {
+    gap: 1rem;
+    padding: 1.15rem 1.4rem;
+}
+
+.tambora-action-modal .fi-sc-form,
+.tambora-action-modal .fi-grid {
+    gap: 1rem;
+}
+
+.tambora-action-modal .fi-fo-field-wrp-label {
+    color: #243b5a;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.tambora-action-modal .fi-fo-field-wrp-helper-text {
+    color: #73849a;
+    font-size: 0.75rem;
+}
+
+.tambora-action-modal .fi-input-wrp {
+    border-color: #d9e3ef;
+    border-radius: 0.85rem;
+    background: #fbfdff;
+    box-shadow: inset 0 1px rgb(255 255 255 / 90%);
+}
+
+.tambora-action-modal .fi-input-wrp:focus-within {
+    border-color: #86aee5;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgb(59 130 246 / 10%);
+}
+
+.tambora-action-modal .fi-modal-footer {
+    padding: 0.9rem 1.4rem;
+    border-top: 1px solid #e8eef6;
+    background: #f8fbff;
+}
+
+.tambora-action-modal .fi-modal-footer-actions {
+    gap: 0.65rem;
+}
+
+.tambora-action-modal .fi-modal-footer .fi-btn {
+    min-height: 2.55rem;
+    border-radius: 0.75rem;
+}
+
+.tambora-action-modal--progress .activity-photo-upload .filepond--root {
+    min-height: 4.25rem;
+}
+
+body:has(.fi-modal-open) .admin-detail-floating-back {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0.5rem);
+}
+
+.dark .tambora-action-modal-overlay.fi-modal-close-overlay {
+    background: rgb(4 15 31 / 52%);
+}
+
+.dark .tambora-action-modal.fi-modal-window {
+    border-color: rgb(71 92 119 / 72%);
+    background: rgb(17 24 39 / 98%);
+}
+
+.dark .tambora-action-modal .fi-modal-header,
+.dark .tambora-action-modal .fi-modal-footer {
+    border-color: rgb(71 85 105 / 54%);
+    background: #111827;
+}
+
+@media (max-width: 40rem) {
+    .tambora-action-modal.fi-modal-window {
+        border-radius: 1.1rem;
+    }
+
+    .tambora-action-modal .fi-modal-header {
+        padding: 1rem 1rem 0.85rem;
+    }
+
+    .tambora-action-modal .fi-modal-content {
+        padding: 1rem;
+    }
+
+    .tambora-action-modal .fi-modal-footer {
+        padding: 0.8rem 1rem;
+    }
+
+    .tambora-action-modal .fi-modal-footer-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        width: 100%;
     }
 }
 

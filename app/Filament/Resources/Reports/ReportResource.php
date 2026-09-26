@@ -80,26 +80,29 @@ class ReportResource extends Resource
             ->color('primary')
             ->visible(fn (Report $record): bool => $record->status->next() !== null)
             ->modalIcon(Heroicon::OutlinedArrowRightCircle)
-            ->modalHeading('Update progres penanganan')
-            ->modalDescription(fn (Report $record): string => "Lanjutkan dari {$record->status->label()} ke {$record->status->next()?->label()}.")
-            ->modalSubmitActionLabel('Simpan & lanjutkan')
-            ->modalWidth(Width::FourExtraLarge)
+            ->modalHeading('Update progres')
+            ->modalDescription(fn (Report $record): string => "{$record->status->label()} → {$record->status->next()?->label()}")
+            ->modalSubmitActionLabel('Lanjutkan tahap')
+            ->modalWidth(Width::ThreeExtraLarge)
+            ->stickyModalFooter()
+            ->extraModalWindowAttributes(['class' => 'tambora-action-modal tambora-action-modal--progress'])
+            ->extraModalOverlayAttributes(['class' => 'tambora-action-modal-overlay'])
             ->schema([
                 Grid::make([
                     'default' => 1,
-                    'md' => 2,
+                    'sm' => 2,
                 ])->schema([
                     Textarea::make('public_note')
-                        ->label('Keterangan untuk pelapor')
-                        ->placeholder('Tulis perkembangan yang aman dibaca pelapor.')
-                        ->helperText('Terlihat oleh pelapor.')
+                        ->label('Informasi untuk pelapor')
+                        ->placeholder('Tulis perkembangan yang dapat dibaca pelapor.')
+                        ->helperText('Dapat dilihat pelapor.')
                         ->maxLength(1000)
                         ->rule(new NoHtml)
                         ->rows(2),
                     Textarea::make('internal_note')
-                        ->label('Catatan internal')
-                        ->placeholder('Contoh: Tim memeriksa lokasi dan berkoordinasi dengan pihak terkait.')
-                        ->helperText('Hanya untuk admin.')
+                        ->label('Catatan admin')
+                        ->placeholder('Contoh: Hasil pemeriksaan atau koordinasi petugas.')
+                        ->helperText('Hanya dapat dilihat admin.')
                         ->maxLength(2000)
                         ->rule(new NoHtml)
                         ->rows(2),
@@ -273,18 +276,22 @@ class ReportResource extends Resource
             ->label('Hubungi pelapor')
             ->icon(Heroicon::OutlinedChatBubbleLeftRight)
             ->color('gray')
-            ->modalHeading('Kirim pesan anonim kepada pelapor')
-            ->modalDescription('Pelapor dapat membaca dan membalas pesan ini menggunakan kode laporan dan PIN miliknya.')
+            ->modalIcon(Heroicon::OutlinedChatBubbleLeftRight)
+            ->modalHeading('Hubungi pelapor')
+            ->modalDescription('Percakapan tetap anonim. Pelapor membalas melalui halaman status laporannya.')
             ->modalSubmitActionLabel('Kirim pesan')
+            ->modalWidth(Width::Large)
+            ->extraModalWindowAttributes(['class' => 'tambora-action-modal tambora-action-modal--message'])
+            ->extraModalOverlayAttributes(['class' => 'tambora-action-modal-overlay'])
             ->schema([
                 Textarea::make('body')
-                    ->label('Pesan untuk pelapor')
+                    ->label('Pesan')
                     ->placeholder('Contoh: Mohon tambahkan petunjuk lokasi yang lebih rinci.')
                     ->required()
                     ->minLength(2)
                     ->maxLength(2000)
                     ->rule(new NoHtml)
-                    ->rows(5),
+                    ->rows(4),
             ])
             ->action(function (Report $record, array $data): void {
                 $record->anonymousMessages()->create([

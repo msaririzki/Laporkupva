@@ -15,7 +15,14 @@
 
                 <!-- Access Details -->
                 <div class="p-5 sm:p-7">
-                    <div class="rounded-xl border border-blue-100 bg-[#EEF4FF] p-4 sm:p-5">
+                    <div
+                        class="rounded-xl border border-blue-100 bg-[#EAF2FF]/50 p-4 sm:p-5"
+                        data-access-card
+                        data-code="{{ $submittedReport['code'] }}"
+                        data-pin="{{ $submittedReport['pin'] }}"
+                        data-submitted-at="{{ \Illuminate\Support\Carbon::parse($submittedReport['submitted_at'])->translatedFormat('d F Y, H:i') }} WITA"
+                        data-logo-url="{{ asset('images/brand/tambora.webp') }}"
+                    >
                         <p class="text-center text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">Simpan akses rahasia Anda</p>
 
                         <div class="mt-3 grid gap-3 sm:grid-cols-2">
@@ -34,11 +41,11 @@
                         </p>
 
                         <!-- QR Code Frame -->
-                        <div class="mt-4 flex flex-col items-center gap-3.5 rounded-lg border border-[#CBD5E1] bg-white p-3.5 text-center sm:flex-row sm:text-left">
-                            <img class="size-24 shrink-0 rounded-md border border-slate-200" src="{{ $trackingQrCode }}" alt="QR untuk membuka pelacakan laporan {{ $submittedReport['code'] }}">
+                        <div class="mt-4 flex flex-col items-center gap-3.5 rounded-lg border border-slate-200/80 bg-white p-3.5 text-center sm:flex-row sm:text-left">
+                            <img id="tracking-qr" class="size-40 shrink-0 rounded-md border border-slate-200 sm:size-44" src="{{ $trackingQrCode }}" alt="QR akses rahasia laporan {{ $submittedReport['code'] }}">
                             <div>
-                                <p class="text-xs sm:text-sm font-semibold text-[#0F172A]">Pindai untuk membuka pelacakan</p>
-                                <p class="mt-0.5 text-[11px] leading-relaxed text-[#64748B]">QR code membuka halaman pengecekan dengan kode laporan terisi otomatis. Masukkan PIN 6 digit Anda untuk melihat perkembangan tindak lanjut.</p>
+                                <p class="text-xs sm:text-sm font-semibold text-[#0B2342]">Pindai untuk membuka status langsung</p>
+                                <p class="mt-0.5 text-[11px] leading-relaxed text-[#64748B]">QR ini menyimpan akses laporan secara aman. Pindai dengan kamera atau unggah gambarnya di halaman cek status tanpa mengetik kode dan PIN.</p>
                             </div>
                         </div>
 
@@ -55,13 +62,15 @@
                             </svg>
                             <span>Salin kode & PIN</span>
                         </button>
-                        <button type="button" class="button-secondary flex-1 text-xs font-semibold py-2" onclick="window.print()">
+                        <button type="button" class="button-secondary flex-1 text-xs font-semibold py-2" data-download-access>
                             <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24-1.076-.672-2.03-1.27-2.814C4.34 9.53 3 8.35 3 6.75 3 4.679 4.679 3 6.75 3h10.5C19.321 3 21 4.679 21 6.75c0 1.6-.34 2.78-1.45 4.265-.598.784-1.03 1.738-1.27 2.814m-11.56 0h11.56m-11.56 0A2.25 2.25 0 0 0 5.25 16h13.5a2.25 2.25 0 0 0 2.25-2.171M9 21h6m-3-3v3"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-4.5-6L12 15m0 0-4.5-4.5M12 15V3"/>
                             </svg>
-                            <span>Cetak / simpan PDF</span>
+                            <span data-download-label>Unduh gambar akses</span>
                         </button>
                     </div>
+
+                    <p class="mt-3 text-center text-[11px] text-[#64748B]" aria-live="polite" data-access-download-status></p>
 
                     <a href="{{ $trackingUrl }}" class="button-primary mt-2.5 w-full text-xs sm:text-sm font-semibold py-2.5 shadow-2xs">
                         <span>Cek status</span>

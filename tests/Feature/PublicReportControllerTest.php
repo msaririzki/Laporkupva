@@ -14,13 +14,21 @@ class PublicReportControllerTest extends TestCase
 {
     use LazilyRefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Storage::fake('local');
+    }
+
     public function test_anonymous_report_form_is_accessible(): void
     {
         $this->get(route('reports.create'))
             ->assertOk()
             ->assertSee('Laporkan dengan cepat dan aman')
             ->assertSee('Gunakan lokasi saya')
-            ->assertSee('Boleh dilewati')
+            ->assertSee('Bukti pendukung wajib')
+            ->assertSee('1–5 berkas sekaligus')
             ->assertSee('Foto besar otomatis diperkecil di perangkat Anda')
             ->assertSeeInOrder([
                 'Kabupaten Lombok Barat',
@@ -39,10 +47,11 @@ class PublicReportControllerTest extends TestCase
 
     public function test_valid_anonymous_report_is_stored_with_private_tracking_pin_and_evidence(): void
     {
-        Storage::fake('local');
-
         $response = $this->post(route('reports.store'), $this->validPayload([
-            'evidence' => [UploadedFile::fake()->create('bukti.pdf', 128, 'application/pdf')],
+            'evidence' => [
+                UploadedFile::fake()->create('bukti-pertama.pdf', 128, 'application/pdf'),
+                UploadedFile::fake()->image('bukti-kedua.jpg'),
+            ],
         ]));
 
         $response->assertRedirect(route('reports.success'))
@@ -63,8 +72,21 @@ class PublicReportControllerTest extends TestCase
             'to_status' => ReportStatus::Submitted->value,
         ]);
 
-        $evidence = $report->evidence()->sole();
-        Storage::disk('local')->assertExists($evidence->path);
+        $this->assertCount(2, $report->evidence);
+        Storage::disk('local')->assertExists($report->evidence->pluck('path')->all());
+    }
+
+    public function test_at_least_one_evidence_file_is_required(): void
+    {
+        $payload = $this->validPayload();
+        unset($payload['evidence']);
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $payload)
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('evidence');
+
+        $this->assertDatabaseCount('reports', 0);
     }
 
     public function test_incomplete_or_outside_ntb_report_is_rejected(): void
@@ -94,8 +116,6 @@ class PublicReportControllerTest extends TestCase
 
     public function test_unsupported_evidence_type_is_rejected(): void
     {
-        Storage::fake('local');
-
         $response = $this->from(route('reports.create'))->post(route('reports.store'), $this->validPayload([
             'evidence' => [UploadedFile::fake()->create('program.exe', 64, 'application/octet-stream')],
         ]));
@@ -107,8 +127,6 @@ class PublicReportControllerTest extends TestCase
 
     public function test_evidence_with_a_mismatched_extension_is_rejected(): void
     {
-        Storage::fake('local');
-
         $response = $this->from(route('reports.create'))->post(route('reports.store'), $this->validPayload([
             'evidence' => [UploadedFile::fake()->image('foto-valid.php')],
         ]));
@@ -120,8 +138,6 @@ class PublicReportControllerTest extends TestCase
 
     public function test_evidence_original_name_is_normalized_before_storage(): void
     {
-        Storage::fake('local');
-
         $this->post(route('reports.store'), $this->validPayload([
             'evidence' => [UploadedFile::fake()->image('<script>.jpg')],
         ]))->assertRedirect(route('reports.success'));
@@ -186,8 +202,6 @@ class PublicReportControllerTest extends TestCase
 
     public function test_evidence_larger_than_ten_megabytes_is_rejected(): void
     {
-        Storage::fake('local');
-
         $response = $this->from(route('reports.create'))->post(route('reports.store'), $this->validPayload([
             'evidence' => [UploadedFile::fake()->image('bukti-besar.jpg')->size(10241)],
         ]));
@@ -216,7 +230,7 @@ class PublicReportControllerTest extends TestCase
             ->assertRedirect(route('reports.create'));
     }
 
-    public function test_success_page_contains_a_safe_tracking_qr_code_without_the_pin_in_its_url(): void
+    public function test_success_page_contains_a_safe_tracking_qr_and_image_download_action(): void
     {
         $submittedReport = [
             'code' => 'LKP-AB12-CD34',
@@ -229,10 +243,11 @@ class PublicReportControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSee('Pindai untuk membuka pelacakan')
+            ->assertSee('Pindai untuk membuka status langsung')
+            ->assertSee('Unduh gambar akses')
             ->assertSee('data:image/svg+xml;base64,', false)
             ->assertViewHas('trackingUrl', function (string $trackingUrl): bool {
-                return $trackingUrl === route('reports.track', ['code' => 'LKP-AB12-CD34'])
+                return str_starts_with($trackingUrl, route('reports.track').'#access=')
                     && ! str_contains($trackingUrl, '654321');
             });
     }
@@ -256,6 +271,7 @@ class PublicReportControllerTest extends TestCase
             'latitude' => -8.5830695,
             'longitude' => 116.1161800,
             'location_accuracy' => 12.5,
+            'evidence' => [UploadedFile::fake()->create('bukti.pdf', 128, 'application/pdf')],
             'good_faith' => '1',
             ...$overrides,
         ];

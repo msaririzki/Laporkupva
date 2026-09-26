@@ -10,6 +10,7 @@ use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -71,7 +72,12 @@ class PublicReportController extends Controller
             return to_route('reports.create');
         }
 
-        $trackingUrl = route('reports.track', ['code' => $submittedReport['code']]);
+        $trackingAccessToken = Crypt::encryptString(json_encode([
+            'version' => 1,
+            'code' => $submittedReport['code'],
+            'pin' => $submittedReport['pin'],
+        ], JSON_THROW_ON_ERROR));
+        $trackingUrl = route('reports.track').'#access='.rawurlencode($trackingAccessToken);
         $trackingQrCode = (new QRCode(new QROptions([
             'eccLevel' => EccLevel::M,
             'outputBase64' => true,
