@@ -48,7 +48,6 @@ class StorePublicReportRequest extends FormRequest
             'evidence' => ['required', 'array', 'min:1', 'max:5'],
             'evidence.*' => ['required', 'file', 'mimes:jpg,jpeg,png,webp,pdf', 'extensions:jpg,jpeg,png,webp,pdf', 'max:10240'],
             'good_faith' => ['accepted'],
-            'user_message' => ['nullable', 'string', 'max:2000', new NoHtml],
             'website' => ['prohibited'],
         ];
     }
@@ -71,7 +70,6 @@ class StorePublicReportRequest extends FormRequest
             'evidence' => 'bukti pendukung',
             'evidence.*' => 'berkas bukti',
             'good_faith' => 'pernyataan itikad baik',
-            'user_message' => 'pesan untuk admin',
         ];
     }
 
@@ -84,7 +82,6 @@ class StorePublicReportRequest extends FormRequest
             'village' => $this->filled('village') ? trim((string) $this->input('village')) : null,
             'address' => $this->filled('address') ? trim((string) $this->input('address')) : null,
             'description' => trim((string) $this->input('description')),
-            'user_message' => $this->filled('user_message') ? trim((string) $this->input('user_message')) : null,
         ]);
     }
 }

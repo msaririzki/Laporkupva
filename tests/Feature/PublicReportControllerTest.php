@@ -79,7 +79,7 @@ class PublicReportControllerTest extends TestCase
         Storage::disk('local')->assertExists($report->evidence->pluck('path')->all());
     }
 
-    public function test_report_can_include_optional_initial_message_to_admin(): void
+    public function test_report_ignores_an_unexpected_initial_message_field(): void
     {
         $response = $this->post(route('reports.store'), $this->validPayload([
             'user_message' => 'Catatan khusus untuk petugas verifikator.',
@@ -88,11 +88,7 @@ class PublicReportControllerTest extends TestCase
         $response->assertRedirect(route('reports.success'));
 
         $report = Report::query()->sole();
-        $this->assertDatabaseHas('anonymous_messages', [
-            'report_id' => $report->getKey(),
-            'sender_type' => 'reporter',
-            'body' => 'Catatan khusus untuk petugas verifikator.',
-        ]);
+        $this->assertCount(0, $report->anonymousMessages);
     }
 
     public function test_new_report_notifies_each_active_admin(): void
