@@ -34,8 +34,8 @@
                 </p>
 
                 <!-- CTA Buttons -->
-                <div class="mt-5 sm:mt-6 flex flex-wrap items-center gap-3">
-                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
+                    <a href="{{ route('reports.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m22 2-7 20-4-9-9-4Z"/>
                             <path d="M22 2 11 13"/>
@@ -43,7 +43,7 @@
                         <span>Buat laporan anonim</span>
                         <span aria-hidden="true" class="text-base sm:text-lg">→</span>
                     </a>
-                    <a href="{{ route('reports.track') }}" class="inline-flex items-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs sm:text-sm font-bold text-navy-950 shadow-2xs hover:bg-blue-50/70 hover:border-blue-300 hover:text-blue-700 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                    <a href="{{ route('reports.track') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs sm:text-sm font-bold text-navy-950 shadow-2xs hover:bg-blue-50/70 hover:border-blue-300 hover:text-blue-700 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
                         <svg class="size-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="7"/>
                             <path d="m21 21-4.3-4.3"/>
@@ -52,39 +52,39 @@
                     </a>
                 </div>
 
-                <!-- 3 Key Features Row (Light Frosted Cards Matching Atmosphere) -->
-                <div class="mt-6 sm:mt-8 flex flex-wrap items-center gap-2.5 sm:gap-3">
+                <!-- 3 Key Features Row (Balanced 3-Col Grid on Mobile, Flex on Desktop) -->
+                <div class="mt-4 sm:mt-8 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
                     <!-- Feature 1 -->
-                    <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/70 bg-white/80 px-3 py-2 shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
-                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200/70 shadow-2xs">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-center gap-1.5 sm:gap-2.5 rounded-xl border border-slate-200/80 bg-white/90 p-2 sm:px-3 sm:py-2 text-center sm:text-left shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
+                        <div class="flex size-7 sm:size-7.5 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200/70 shadow-2xs">
                             <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
                                 <path d="m9 12 2 2 4-4"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-[12.5px] font-bold text-navy-950">Tanpa nama &amp; NIK</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Identitas Anda terlindungi</p>
+                            <p class="text-[11px] sm:text-[12.5px] font-bold text-navy-950">Tanpa nama &amp; NIK</p>
+                            <p class="text-[9px] sm:text-[10px] text-slate-500 mt-0.5">Identitas aman</p>
                         </div>
                     </div>
 
                     <!-- Feature 2 -->
-                    <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/70 bg-white/80 px-3 py-2 shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
-                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-200/70 shadow-2xs">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-center gap-1.5 sm:gap-2.5 rounded-xl border border-slate-200/80 bg-white/90 p-2 sm:px-3 sm:py-2 text-center sm:text-left shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
+                        <div class="flex size-7 sm:size-7.5 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-200/70 shadow-2xs">
                             <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
                                 <circle cx="12" cy="10" r="3"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-[12.5px] font-bold text-navy-950">Lokasi akurat</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Gunakan GPS atau cari lokasi</p>
+                            <p class="text-[11px] sm:text-[12.5px] font-bold text-navy-950">Lokasi akurat</p>
+                            <p class="text-[9px] sm:text-[10px] text-slate-500 mt-0.5">GPS &amp; Peta</p>
                         </div>
                     </div>
 
                     <!-- Feature 3 -->
-                    <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/70 bg-white/80 px-3 py-2 shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
-                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-600 border border-amber-200/70 shadow-2xs">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-center gap-1.5 sm:gap-2.5 rounded-xl border border-slate-200/80 bg-white/90 p-2 sm:px-3 sm:py-2 text-center sm:text-left shadow-2xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-xs">
+                        <div class="flex size-7 sm:size-7.5 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-600 border border-amber-200/70 shadow-2xs">
                             <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 20V10"/>
                                 <path d="M12 20V4"/>
@@ -92,8 +92,8 @@
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-[12.5px] font-bold text-navy-950">Proses transparan</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Pantau perkembangan laporan</p>
+                            <p class="text-[11px] sm:text-[12.5px] font-bold text-navy-950">Proses transparan</p>
+                            <p class="text-[9px] sm:text-[10px] text-slate-500 mt-0.5">Pantau status</p>
                         </div>
                     </div>
                 </div>
