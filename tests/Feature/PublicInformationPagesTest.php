@@ -14,8 +14,11 @@ class PublicInformationPagesTest extends TestCase
             ->assertSee('Apakah saya harus membuat akun?')
             ->assertSee('Apakah bukti wajib dilampirkan?')
             ->assertSee('minimal satu foto atau PDF')
+            ->assertSee('Sudah pernah melapor?')
+            ->assertSee(route('reports.track'))
             ->assertDontSee('Cari pertanyaan atau topik panduan')
             ->assertDontSee('bersifat opsional')
+            ->assertDontSee('kode tiket dan PIN')
             ->assertSee(route('reports.create'));
     }
 
@@ -25,7 +28,8 @@ class PublicInformationPagesTest extends TestCase
             ->assertOk()
             ->assertSee('Contoh alur penanganan')
             ->assertSee('Contoh: tahap 2 dari 6 selesai')
-            ->assertSee('status tindak lanjut terbaru')
+            ->assertSee('Laporan Anda terus bergerak')
+            ->assertSee('Simpan nomor laporan atau QR')
             ->assertDontSee('secara real-time')
             ->assertDontSee('https://laporkupva.ikydev.com/');
     }
