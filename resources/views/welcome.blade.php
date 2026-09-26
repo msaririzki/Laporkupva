@@ -46,7 +46,7 @@
 
             <!-- Right Column: Alur Penanganan Floating Card -->
             <div class="relative z-10 mx-auto w-full max-w-[390px]">
-                <div class="relative rounded-2xl sm:rounded-3xl bg-white p-3.5 sm:p-4 shadow-lg shadow-blue-900/5 backdrop-blur-md border border-slate-200/90 ring-1 ring-slate-900/5">
+                <div class="relative rounded-2xl sm:rounded-3xl bg-white p-4 sm:p-5 shadow-lg shadow-blue-900/5 backdrop-blur-md border border-slate-200/90 ring-1 ring-slate-900/5">
                     <!-- Subtle Corner Ambient Light -->
                     <div class="pointer-events-none absolute -top-8 -right-8 size-28 rounded-full bg-blue-500/10 blur-xl" aria-hidden="true"></div>
 
@@ -71,7 +71,7 @@
                     </div>
 
                     <!-- Mini Progress Summary -->
-                    <div class="mt-2 rounded-lg bg-slate-50/90 px-2.5 py-1.5 border border-slate-100/90">
+                    <div class="mt-2.5 rounded-lg bg-slate-50/90 px-2.5 py-1.5 border border-slate-100/90">
                         <div class="flex items-center justify-between text-[10px]">
                             <span class="font-medium text-slate-500">Transparansi Penanganan</span>
                             <span class="font-bold text-blue-600">Contoh: tahap 2 dari 6 selesai</span>
@@ -82,7 +82,7 @@
                     </div>
 
                     <!-- Steps Micro-Tiles List (Compact without description) -->
-                    <div class="relative mt-2 space-y-1">
+                    <div class="relative mt-2.5 space-y-1.5">
                         @php
                             $timelineSteps = [
                                 [
@@ -126,27 +126,27 @@
 
                         @foreach ($timelineSteps as $step)
                             @if ($step['status'] === 'completed')
-                                <div class="group relative flex items-center justify-between gap-2 rounded-lg border border-emerald-100 bg-emerald-50/40 px-2.5 py-1.5 transition-all duration-200 hover:bg-emerald-50/70 hover:shadow-2xs">
+                                <div class="group relative flex items-center justify-between gap-2.5 rounded-lg border border-emerald-100 bg-emerald-50/40 px-2.5 py-1.5 transition-all duration-200 hover:bg-emerald-50/70 hover:shadow-2xs">
                                     <div class="flex items-center gap-2 min-w-0">
                                         <span class="flex size-5 shrink-0 items-center justify-center rounded-md bg-emerald-600 text-white shadow-xs">
                                             <svg class="size-2.5" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
-                                        <p class="text-xs font-bold text-slate-800 leading-none truncate">{{ $step['title'] }}</p>
+                                        <p class="text-xs font-bold text-slate-800 leading-normal">{{ $step['title'] }}</p>
                                     </div>
                                     <span class="shrink-0 rounded bg-emerald-100/90 px-1.5 py-0.5 text-[9px] font-bold text-emerald-800">
                                         {{ $step['statusLabel'] }}
                                     </span>
                                 </div>
                             @elseif ($step['status'] === 'active')
-                                <div class="group relative flex items-center justify-between gap-2 rounded-lg border border-blue-200 bg-blue-50/60 px-2.5 py-1.5 shadow-2xs ring-1 ring-blue-500/20 transition-all duration-200 hover:bg-blue-50/90">
+                                <div class="group relative flex items-center justify-between gap-2.5 rounded-lg border border-blue-200 bg-blue-50/60 px-2.5 py-1.5 shadow-2xs ring-1 ring-blue-500/20 transition-all duration-200 hover:bg-blue-50/90">
                                     <div class="flex items-center gap-2 min-w-0">
                                         <span class="relative flex size-5 shrink-0 items-center justify-center rounded-md bg-blue-600 text-white font-extrabold text-[10px] shadow-xs shadow-blue-500/30">
                                             <span class="absolute -top-0.5 -right-0.5 size-1.5 rounded-full bg-amber-400 ring-1 ring-white animate-pulse"></span>
                                             {{ $step['step'] }}
                                         </span>
-                                        <p class="text-xs font-extrabold text-navy-950 leading-none truncate">{{ $step['title'] }}</p>
+                                        <p class="text-xs font-extrabold text-navy-950 leading-normal">{{ $step['title'] }}</p>
                                     </div>
                                     <span class="inline-flex shrink-0 items-center gap-1 rounded bg-blue-600 px-1.5 py-0.5 text-[9px] font-extrabold text-white shadow-2xs">
                                         <span class="size-1 rounded-full bg-white animate-ping"></span>
@@ -154,12 +154,12 @@
                                     </span>
                                 </div>
                             @else
-                                <div class="group relative flex items-center justify-between gap-2 rounded-lg border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:border-slate-100 hover:bg-slate-50/70">
+                                <div class="group relative flex items-center justify-between gap-2.5 rounded-lg border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:border-slate-100 hover:bg-slate-50/70">
                                     <div class="flex items-center gap-2 min-w-0">
                                         <span class="flex size-5 shrink-0 items-center justify-center rounded-md bg-slate-100 text-slate-500 font-bold text-[10px] border border-slate-200/60">
                                             {{ $step['step'] }}
                                         </span>
-                                        <p class="text-xs font-semibold text-slate-600 leading-none truncate">{{ $step['title'] }}</p>
+                                        <p class="text-xs font-semibold text-slate-600 leading-normal">{{ $step['title'] }}</p>
                                     </div>
                                     <span class="shrink-0 text-[9px] font-medium text-slate-400">
                                         {{ $step['statusLabel'] }}
