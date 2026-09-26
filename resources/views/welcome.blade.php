@@ -1,35 +1,145 @@
 <x-layouts.public title="Lapor KUPVA secara aman">
-    <section class="relative overflow-hidden bg-navy-950 text-white">
-        <div class="hero-grid absolute inset-0 opacity-25" aria-hidden="true"></div>
-        <div class="hero-glow absolute -right-32 -top-40 size-[36rem] rounded-full" aria-hidden="true"></div>
-        <div class="public-container relative grid min-h-[650px] items-center gap-12 py-20 lg:grid-cols-[1.08fr_.92fr] lg:py-24">
-            <div>
-                <div class="eyebrow-dark"><span class="size-2 rounded-full bg-teal-300"></span>Kanal pelaporan resmi wilayah NTB</div>
-                <h1 class="mt-7 max-w-3xl text-4xl font-extrabold leading-[1.08] tracking-[-0.035em] sm:text-5xl lg:text-6xl">Berani melapor,<br><span class="text-gradient">bersama menjaga.</span></h1>
-                <p class="mt-6 max-w-xl text-base leading-7 text-blue-100/80 sm:text-lg">Laporkan dugaan kegiatan penukaran valuta asing yang tidak sesuai ketentuan. Identitas Anda tidak diminta dan proses penanganannya dapat dipantau secara aman.</p>
-                <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-                    <a href="{{ route('reports.create') }}" class="button-light">Buat laporan anonim <svg class="size-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a>
-                    <a href="{{ route('reports.track') }}" class="button-ghost-light">Cek status laporan</a>
+    <section class="relative overflow-hidden bg-[#04285b] text-white bg-cover bg-center" style="background-image: url('{{ asset('images/hero-bg.jpg') }}');">
+        <!-- Angled & Gradual Dark Blue Overlay Matching Mockup -->
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(112deg,#032c69_0%,#053982_32%,rgba(5,57,130,0.82)_44%,rgba(5,57,130,0.15)_60%,transparent_72%)] hidden lg:block" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#032c69]/95 via-[#053982]/85 to-[#032c69]/90 lg:hidden" aria-hidden="true"></div>
+
+        <div class="public-container relative grid min-h-[640px] items-center gap-10 py-16 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-24">
+            <!-- Left Column Content -->
+            <div class="relative z-10">
+                <!-- Eyebrow Badge -->
+                <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-slate-900/40 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-xs backdrop-blur-md">
+                    <span class="size-2 rounded-full bg-emerald-400"></span>
+                    <span>KANAL PELAPORAN RESMI WILAYAH NTB</span>
                 </div>
-                <div class="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm text-blue-100/70">
-                    @foreach (['Tanpa nama & NIK', 'Lokasi akurat', 'Progres transparan'] as $feature)
-                        <span class="inline-flex items-center gap-2"><svg class="size-4 text-teal-300" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/></svg>{{ $feature }}</span>
-                    @endforeach
+
+                <!-- Headline -->
+                <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.12]">
+                    Berani melapor,<br>
+                    <span class="text-[#2dd4bf]">untuk NTB yang<br>lebih baik.</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="mt-5 max-w-xl text-sm leading-relaxed text-blue-50/90 sm:text-base font-normal">
+                    Laporkan dugaan kegiatan penukaran valuta asing (money changer) yang tidak sesuai ketentuan. Identitas Anda tidak diminta dan proses penanganannya dapat dipantau secara aman.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
+                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2.5 rounded-2xl bg-blue-600 px-6 py-3.5 text-sm sm:text-base font-bold text-white shadow-lg shadow-blue-900/30 hover:bg-blue-500 transition-all">
+                        <svg class="size-4 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m22 2-7 20-4-9-9-4Z"/>
+                            <path d="M22 2 11 13"/>
+                        </svg>
+                        <span>Buat laporan anonim</span>
+                        <span aria-hidden="true" class="text-base sm:text-lg">→</span>
+                    </a>
+                    <a href="{{ route('reports.track') }}" class="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm sm:text-base font-bold text-navy-950 shadow-md hover:bg-slate-50 transition-all">
+                        <svg class="size-4 sm:size-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="7"/>
+                            <path d="m21 21-4.3-4.3"/>
+                        </svg>
+                        <span>Cek status laporan</span>
+                    </a>
+                </div>
+
+                <!-- 3 Key Features Row -->
+                <div class="mt-10 sm:mt-12 flex flex-wrap items-center gap-6 sm:gap-8 lg:gap-9">
+                    <!-- Feature 1 -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white shadow-xs">
+                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+                                <path d="m9 12 2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <div class="leading-tight">
+                            <p class="text-xs sm:text-sm font-bold text-white">Tanpa nama &amp; NIK</p>
+                            <p class="text-[11px] sm:text-xs text-blue-100/75 mt-0.5">Identitas Anda terlindungi</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white shadow-xs">
+                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="leading-tight">
+                            <p class="text-xs sm:text-sm font-bold text-white">Lokasi akurat</p>
+                            <p class="text-[11px] sm:text-xs text-blue-100/75 mt-0.5">Gunakan GPS atau cari lokasi</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white shadow-xs">
+                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <div class="leading-tight">
+                            <p class="text-xs sm:text-sm font-bold text-white">Proses transparan</p>
+                            <p class="text-[11px] sm:text-xs text-blue-100/75 mt-0.5">Pantau perkembangan laporan</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="relative mx-auto w-full max-w-lg lg:ml-auto">
-                <div class="absolute -inset-4 rounded-[2.2rem] bg-white/5 blur-sm" aria-hidden="true"></div>
-                <div class="relative overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/10 p-4 shadow-2xl backdrop-blur-md">
-                    <div class="flex items-center justify-between px-2 py-2"><div><p class="text-xs font-semibold uppercase tracking-[.18em] text-blue-200">Alur penanganan</p><p class="mt-1 font-bold">Laporan Anda terus bergerak</p></div><span class="rounded-full bg-teal-300/15 px-3 py-1 text-xs font-bold text-teal-200">Terlindungi</span></div>
-                    <div class="mt-3 rounded-2xl bg-white p-5 text-slate-900">
-                        @foreach ([['Laporan dikirim', 'Data tersimpan dengan aman'], ['Laporan diterima', 'Pemeriksaan awal oleh petugas'], ['Koordinasi dengan APH', 'Koordinasi penanganan'], ['Kunjungan lapangan', 'Verifikasi atau penertiban'], ['Laporan hasil', 'Hasil penanganan tersedia'], ['Selesai', 'Proses telah dituntaskan']] as $index => [$label, $description])
-                            <div class="relative flex gap-4 pb-5 last:pb-0">
-                                @if (! $loop->last)<span class="absolute left-[15px] top-8 h-[calc(100%-1.5rem)] w-px bg-slate-200"></span>@endif
-                                <span class="relative z-10 grid size-8 shrink-0 place-items-center rounded-full {{ $index < 2 ? 'bg-teal-500 text-white' : 'bg-slate-100 text-slate-400' }}">
-                                    @if ($index < 2)<svg class="size-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/></svg>@else<span class="text-[11px] font-extrabold">{{ $index + 1 }}</span>@endif
-                                </span>
-                                <span><span class="block text-sm font-bold text-slate-800">{{ $label }}</span><span class="mt-0.5 block text-xs text-slate-500">{{ $description }}</span></span>
+            <!-- Right Column: Alur Penanganan Floating Card -->
+            <div class="relative z-10 mx-auto w-full max-w-md lg:ml-auto">
+                <div class="rounded-3xl bg-white/95 p-6 sm:p-7 shadow-2xl backdrop-blur-md border border-white/60">
+                    <!-- Card Header -->
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-[11px] font-extrabold uppercase tracking-wider text-blue-600">Alur penanganan</p>
+                            <h2 class="mt-0.5 text-base sm:text-lg font-black text-navy-950">Laporan Anda terus bergerak</h2>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700 border border-emerald-200/70">
+                            <svg class="size-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>Terlindungi</span>
+                        </span>
+                    </div>
+
+                    <!-- Steps Timeline -->
+                    <div class="relative mt-6 space-y-4">
+                        <div class="absolute left-3.5 sm:left-4 top-3 bottom-4 w-0.5 bg-slate-200" aria-hidden="true"></div>
+
+                        @php
+                            $timelineSteps = [
+                                ['title' => 'Laporan dikirim', 'desc' => 'Data tersimpan dengan aman', 'completed' => true, 'step' => 1],
+                                ['title' => 'Laporan diterima', 'desc' => 'Pemeriksaan awal oleh petugas', 'completed' => true, 'step' => 2],
+                                ['title' => 'Koordinasi dengan APH', 'desc' => 'Koordinasi penanganan', 'completed' => false, 'step' => 3],
+                                ['title' => 'Kunjungan lapangan', 'desc' => 'Verifikasi atau penertiban', 'completed' => false, 'step' => 4],
+                                ['title' => 'Laporan hasil', 'desc' => 'Hasil penanganan tersedia', 'completed' => false, 'step' => 5],
+                                ['title' => 'Selesai', 'desc' => 'Proses telah dituntaskan', 'completed' => false, 'step' => 6],
+                            ];
+                        @endphp
+
+                        @foreach ($timelineSteps as $index => $step)
+                            <div class="relative flex items-start gap-3.5">
+                                @if ($step['completed'])
+                                    <span class="relative z-10 flex size-7 sm:size-8 shrink-0 items-center justify-center rounded-full bg-[#06b6d4] text-white shadow-xs">
+                                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </span>
+                                @else
+                                    <span class="relative z-10 flex size-7 sm:size-8 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-900 font-extrabold text-xs">
+                                        {{ $step['step'] }}
+                                    </span>
+                                @endif
+
+                                <div class="min-w-0 pt-0.5">
+                                    <p class="text-xs sm:text-sm font-bold text-slate-900 leading-snug">{{ $step['title'] }}</p>
+                                    <p class="text-[11px] sm:text-xs text-slate-500 leading-normal">{{ $step['desc'] }}</p>
+                                </div>
                             </div>
                         @endforeach
                     </div>
