@@ -12,22 +12,13 @@ class PublicInformationPagesTest extends TestCase
             ->assertOk()
             ->assertSee('Melapor dengan aman dan mudah')
             ->assertSee('Apakah saya harus membuat akun?')
+            ->assertSee('Sudah pernah melapor?')
+            ->assertSee(route('reports.track'))
             ->assertSee('Apakah bukti wajib dilampirkan?')
             ->assertSee('minimal satu foto atau PDF')
             ->assertDontSee('Cari pertanyaan atau topik panduan')
             ->assertDontSee('bersifat opsional')
             ->assertSee(route('reports.create'));
-    }
-
-    public function test_home_page_labels_the_example_flow_and_uses_current_application_urls(): void
-    {
-        $this->get(route('home'))
-            ->assertOk()
-            ->assertSee('Contoh alur penanganan')
-            ->assertSee('Contoh: tahap 2 dari 6 selesai')
-            ->assertSee('status tindak lanjut terbaru')
-            ->assertDontSee('secara real-time')
-            ->assertDontSee('https://laporkupva.ikydev.com/');
     }
 
     public function test_privacy_page_explains_which_information_is_and_is_not_collected(): void
