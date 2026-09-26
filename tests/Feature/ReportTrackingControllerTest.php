@@ -61,6 +61,9 @@ class ReportTrackingControllerTest extends TestCase
 
         $this->get(route('reports.status', ['report' => $report->public_code]))
             ->assertOk()
+            ->assertHeaderContains('Cache-Control', 'no-store')
+            ->assertHeader('Referrer-Policy', 'no-referrer')
+            ->assertHeader('X-Robots-Tag', 'noindex, nofollow, noarchive')
             ->assertSee('LKP-AB12-CD34')
             ->assertSee('Laporan telah diterima petugas.')
             ->assertSee('data-report-live-refresh', false)
@@ -145,6 +148,23 @@ class ReportTrackingControllerTest extends TestCase
         $report = Report::factory()->create();
 
         $this->get(route('reports.status', ['report' => $report->public_code]))
+            ->assertNotFound();
+    }
+
+    public function test_verified_session_for_one_report_cannot_open_another_report_by_changing_the_url(): void
+    {
+        $verifiedReport = Report::factory()->create();
+        $otherReport = Report::factory()->create();
+        $session = [
+            "tracked_reports.{$verifiedReport->getKey()}" => now()->addMinutes(10)->getTimestamp(),
+        ];
+
+        $this->withSession($session)
+            ->get(route('reports.status', ['report' => $otherReport->public_code]))
+            ->assertNotFound();
+
+        $this->withSession($session)
+            ->getJson(route('reports.status.updates', ['report' => $otherReport->public_code]))
             ->assertNotFound();
     }
 

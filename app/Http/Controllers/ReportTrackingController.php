@@ -7,6 +7,7 @@ use App\Models\Report;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -39,7 +40,7 @@ class ReportTrackingController extends Controller
         return redirect()->route('reports.status', ['report' => $report->public_code]);
     }
 
-    public function show(Request $request, Report $report): View
+    public function show(Request $request, Report $report): Response
     {
         $this->ensureTrackingSessionIsValid($request, $report);
 
@@ -48,9 +49,14 @@ class ReportTrackingController extends Controller
             'anonymousMessages' => fn ($query) => $query->oldest(),
         ]);
 
-        return view('reports.status', [
+        return response()->view('reports.status', [
             'report' => $report,
             'statusVersion' => $this->statusVersion($report),
+        ], headers: [
+            'Cache-Control' => 'private, no-store, max-age=0',
+            'Pragma' => 'no-cache',
+            'Referrer-Policy' => 'no-referrer',
+            'X-Robots-Tag' => 'noindex, nofollow, noarchive',
         ]);
     }
 

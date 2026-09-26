@@ -44,7 +44,9 @@ class AddSecurityHeaders
         $response->headers->set('Cross-Origin-Opener-Policy', 'same-origin');
         $response->headers->set('Cross-Origin-Resource-Policy', 'same-origin');
         $response->headers->set('Permissions-Policy', 'accelerometer=(), camera=(), geolocation=(self), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()');
-        $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
+        if (! $response->headers->has('Referrer-Policy')) {
+            $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
+        }
         $response->headers->set('X-Content-Type-Options', 'nosniff');
         $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
         $response->headers->set('X-Permitted-Cross-Domain-Policies', 'none');
