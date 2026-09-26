@@ -44,20 +44,6 @@
                         Melapor dengan aman dan mudah. Temukan langkah-langkah membuat laporan, informasi keamanan, dan jawaban untuk pertanyaan yang sering ditanyakan.
                     </p>
 
-                    <!-- Search Bar UI -->
-                    <div class="relative mt-5 max-w-lg mx-auto lg:mx-0">
-                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-blue-600">
-                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8" />
-                                <path d="m21 21-4.3-4.3" />
-                            </svg>
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Cari pertanyaan atau topik panduan..."
-                            class="w-full rounded-2xl border border-slate-200/90 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all"
-                        >
-                    </div>
                 </div>
 
                 <!-- Right Illustration -->
