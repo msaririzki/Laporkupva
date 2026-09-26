@@ -1,32 +1,41 @@
 <x-layouts.public title="Lapor KUPVA secara aman">
-    <section class="relative overflow-hidden bg-[#021a42] text-white bg-cover bg-center" style="background-image: url('{{ asset('images/hero-bg.jpg') }}');">
-        <!-- Angled & Gradual Dark Navy Overlay for Maximum Text Contrast (Matching Reference) -->
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,#02193f_0%,#03255c_34%,rgba(3,37,92,0.75)_48%,rgba(3,37,92,0.1)_64%,transparent_75%)] hidden lg:block" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#02193f]/95 via-[#03255c]/85 to-[#02193f]/90 lg:hidden" aria-hidden="true"></div>
+    <section class="relative overflow-hidden bg-gradient-to-b from-[#f0f7ff] via-[#f8fbff] to-[#eaf4fe] py-10 sm:py-16 lg:py-20 text-navy-950">
+        <!-- Ambient Decorative Glows & Dot Patterns (Consistent with Cara Lapor & Keamanan) -->
+        <div class="pointer-events-none absolute -top-24 -left-20 size-96 rounded-full bg-blue-400/15 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute top-1/3 -right-20 size-96 rounded-full bg-sky-300/20 blur-3xl" aria-hidden="true"></div>
+        
+        <!-- Subtle Dot Grid Patterns on Sides -->
+        <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+            <div class="absolute top-10 right-10 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute bottom-10 left-10 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+        </div>
 
-        <div class="public-container relative grid min-h-[540px] lg:min-h-[580px] items-center gap-10 py-14 sm:py-18 lg:grid-cols-[1.18fr_0.82fr] lg:gap-12 lg:py-20">
+        <div class="public-container relative grid min-h-[500px] lg:min-h-[560px] items-center gap-10 py-4 sm:py-6 lg:grid-cols-[1.18fr_0.82fr] lg:gap-12">
             <!-- Left Column: Typography & Actions -->
             <div class="relative z-10">
                 <!-- Eyebrow Badge (Bank Indonesia NTB Official) -->
-                <div class="inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-950/50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-teal-300 shadow-xs backdrop-blur-md">
-                    <span class="size-2 rounded-full bg-emerald-400"></span>
+                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-blue-50/90 px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-blue-700 shadow-2xs backdrop-blur-xs">
+                    <span class="relative flex size-2">
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+                    </span>
                     <span>KANAL PELAPORAN RESMI WILAYAH NTB</span>
                 </div>
 
-                <!-- Headline with Exact Reference Accents (White + Amber/Gold + Sky Blue) -->
-                <h1 class="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-[3.25rem] lg:leading-[1.12]">
+                <!-- Headline with Harmonious Navy and Blue Accents -->
+                <h1 class="mt-4 text-3xl font-black tracking-tight text-navy-950 sm:text-4xl lg:text-[3.25rem] lg:leading-[1.12]">
                     Berani melapor,<br>
-                    <span class="text-[#F2B84B]">untuk NTB</span> <span class="text-[#38bdf8]">yang<br>lebih baik.</span>
+                    <span class="text-blue-600">untuk NTB</span> yang lebih baik.
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="mt-4 max-w-xl text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-blue-50/90 font-normal">
+                <p class="mt-4 max-w-xl text-xs sm:text-sm lg:text-[15px] leading-relaxed text-slate-600 font-normal">
                     Kanal pengawasan resmi dari Kantor Perwakilan Bank Indonesia Provinsi NTB untuk melaporkan dugaan kegiatan usaha penukaran valuta asing (money changer) yang tidak berizin. Identitas Anda tidak diminta dan proses penanganan dipantau secara mandiri.
                 </p>
 
-                <!-- CTA Buttons (Matching Reference) -->
+                <!-- CTA Buttons -->
                 <div class="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
-                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2.5 rounded-2xl bg-[#2563EB] px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-blue-600/35 hover:bg-[#1D4ED8] hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2.5 rounded-2xl bg-[#2563EB] px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-blue-600/30 hover:bg-[#1D4ED8] hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all">
                         <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m22 2-7 20-4-9-9-4Z"/>
                             <path d="M22 2 11 13"/>
@@ -34,8 +43,8 @@
                         <span>Buat laporan anonim</span>
                         <span aria-hidden="true" class="text-base sm:text-lg">→</span>
                     </a>
-                    <a href="{{ route('reports.track') }}" class="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-slate-900/50 px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-sm backdrop-blur-md hover:bg-slate-900/70 hover:border-white/30 transition-all">
-                        <svg class="size-4 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <a href="{{ route('reports.track') }}" class="inline-flex items-center gap-2 rounded-2xl border border-slate-200/90 bg-white px-6 py-3.5 text-xs sm:text-sm font-bold text-navy-950 shadow-xs hover:bg-blue-50/70 hover:border-blue-300 hover:text-blue-700 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                        <svg class="size-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="7"/>
                             <path d="m21 21-4.3-4.3"/>
                         </svg>
@@ -43,39 +52,39 @@
                     </a>
                 </div>
 
-                <!-- 3 Key Features Row (Glass Cards Matching Reference) -->
+                <!-- 3 Key Features Row (Light Frosted Cards Matching Atmosphere) -->
                 <div class="mt-9 sm:mt-11 flex flex-wrap items-center gap-3 sm:gap-4">
                     <!-- Feature 1 -->
-                    <div class="flex items-center gap-2.5 rounded-xl border border-white/10 bg-slate-950/40 px-3.5 py-2 backdrop-blur-md shadow-xs">
-                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-teal-500/20 text-teal-300 border border-teal-400/30">
+                    <div class="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 bg-white/80 px-3.5 py-2.5 shadow-xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-sm">
+                        <div class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/70 shadow-2xs">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
                                 <path d="m9 12 2 2 4-4"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-[13px] font-bold text-white">Tanpa nama &amp; NIK</p>
-                            <p class="text-[10px] sm:text-[11px] text-slate-300 mt-0.5">Identitas Anda terlindungi</p>
+                            <p class="text-xs sm:text-[13px] font-bold text-navy-950">Tanpa nama &amp; NIK</p>
+                            <p class="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Identitas Anda terlindungi</p>
                         </div>
                     </div>
 
                     <!-- Feature 2 -->
-                    <div class="flex items-center gap-2.5 rounded-xl border border-white/10 bg-slate-950/40 px-3.5 py-2 backdrop-blur-md shadow-xs">
-                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-blue-500/20 text-sky-300 border border-blue-400/30">
+                    <div class="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 bg-white/80 px-3.5 py-2.5 shadow-xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-sm">
+                        <div class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-200/70 shadow-2xs">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
                                 <circle cx="12" cy="10" r="3"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-[13px] font-bold text-white">Lokasi akurat</p>
-                            <p class="text-[10px] sm:text-[11px] text-slate-300 mt-0.5">Gunakan GPS atau cari lokasi</p>
+                            <p class="text-xs sm:text-[13px] font-bold text-navy-950">Lokasi akurat</p>
+                            <p class="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Gunakan GPS atau cari lokasi</p>
                         </div>
                     </div>
 
                     <!-- Feature 3 -->
-                    <div class="flex items-center gap-2.5 rounded-xl border border-white/10 bg-slate-950/40 px-3.5 py-2 backdrop-blur-md shadow-xs">
-                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-amber-500/20 text-[#F2B84B] border border-amber-400/30">
+                    <div class="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 bg-white/80 px-3.5 py-2.5 shadow-xs backdrop-blur-md transition-all hover:border-blue-200 hover:bg-white hover:shadow-sm">
+                        <div class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600 border border-amber-200/70 shadow-2xs">
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 20V10"/>
                                 <path d="M12 20V4"/>
@@ -83,8 +92,8 @@
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-[13px] font-bold text-white">Proses transparan</p>
-                            <p class="text-[10px] sm:text-[11px] text-slate-300 mt-0.5">Pantau perkembangan laporan</p>
+                            <p class="text-xs sm:text-[13px] font-bold text-navy-950">Proses transparan</p>
+                            <p class="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Pantau perkembangan laporan</p>
                         </div>
                     </div>
                 </div>
@@ -92,7 +101,7 @@
 
             <!-- Right Column: Alur Penanganan Floating Card -->
             <div class="relative z-10 mx-auto w-full max-w-[400px] lg:ml-auto">
-                <div class="relative rounded-3xl bg-white/95 p-5 sm:p-6 shadow-2xl backdrop-blur-md border border-white/90 ring-1 ring-slate-900/5">
+                <div class="relative rounded-3xl bg-white p-5 sm:p-6 shadow-xl shadow-blue-900/10 backdrop-blur-md border border-slate-200/90 ring-1 ring-slate-900/5">
                     <!-- Subtle Corner Ambient Light -->
                     <div class="pointer-events-none absolute -top-10 -right-10 size-32 rounded-full bg-blue-500/10 blur-2xl" aria-hidden="true"></div>
 
