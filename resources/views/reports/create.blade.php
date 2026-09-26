@@ -453,17 +453,17 @@
             aria-label="Tutup pratinjau"
         ></button>
 
-        <div class="relative flex max-h-[94vh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-slate-950 shadow-2xl sm:rounded-3xl">
-            <div class="flex items-center justify-between gap-4 border-b border-white/10 bg-slate-900/95 px-4 py-3 sm:px-5">
+        <div class="relative flex max-h-[94vh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl sm:rounded-3xl">
+            <div class="flex items-center justify-between gap-4 border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-5">
                 <div class="min-w-0">
-                    <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-300">Pratinjau foto</p>
-                    <h2 id="evidence-preview-title" class="truncate text-sm font-semibold text-white sm:text-base">Foto bukti</h2>
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2563EB]">Pratinjau foto</p>
+                    <h2 id="evidence-preview-title" class="truncate text-sm font-semibold text-[#0F172A] sm:text-base">Foto bukti</h2>
                 </div>
 
                 <button
                     id="evidence-preview-close"
                     type="button"
-                    class="grid size-10 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/15 focus:outline-none focus:ring-4 focus:ring-white/15"
+                    class="grid size-10 shrink-0 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-100 focus:outline-none focus:ring-4 focus:ring-blue-500/20"
                     data-evidence-preview-close
                     aria-label="Tutup pratinjau"
                 >
@@ -473,18 +473,18 @@
                 </button>
             </div>
 
-            <div class="flex min-h-[45vh] flex-1 items-center justify-center overflow-auto bg-slate-950 p-2 sm:min-h-[60vh] sm:p-5">
+            <div class="flex min-h-[45vh] flex-1 items-center justify-center overflow-auto bg-white p-2 sm:min-h-[60vh] sm:p-5">
                 <img
                     id="evidence-preview-image"
                     src=""
                     alt=""
-                    class="block max-h-[72vh] max-w-full rounded-lg object-contain shadow-2xl sm:rounded-xl"
+                    class="block max-h-[72vh] max-w-full rounded-lg object-contain shadow-md sm:rounded-xl"
                 >
             </div>
 
-            <div class="flex flex-col gap-1 border-t border-white/10 bg-slate-900/95 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-                <p id="evidence-preview-meta" class="text-xs text-slate-300"></p>
-                <p class="text-[11px] text-slate-500">Foto ditampilkan utuh sesuai orientasi aslinya.</p>
+            <div class="flex flex-col gap-1 border-t border-slate-200 bg-slate-50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+                <p id="evidence-preview-meta" class="text-xs text-slate-600"></p>
+                <p class="text-[11px] text-slate-400">Foto ditampilkan utuh sesuai orientasi aslinya.</p>
             </div>
         </div>
     </div>

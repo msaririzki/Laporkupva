@@ -711,7 +711,7 @@ if (form) {
 
                 const previewButton = document.createElement('button');
                 previewButton.type = 'button';
-                previewButton.className = 'group relative block aspect-[4/3] w-full overflow-hidden bg-slate-950 focus:outline-none focus:ring-4 focus:ring-inset focus:ring-blue-500/40';
+                previewButton.className = 'group relative block aspect-[4/3] w-full overflow-hidden bg-white border-b border-slate-100 focus:outline-none focus:ring-4 focus:ring-inset focus:ring-blue-500/40';
                 previewButton.setAttribute('aria-label', `Perbesar pratinjau ${file.name}`);
 
                 const previewImage = document.createElement('img');
