@@ -409,35 +409,7 @@
                             @error('evidence.*')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
 
-                        <!-- 2. Area Kirim Pesan ke Admin (Opsional) -->
-                        <div class="rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 sm:p-3.5 shadow-xs">
-                            <div class="flex items-center gap-2">
-                                <div class="grid size-6 sm:size-7 shrink-0 place-items-center rounded-lg bg-blue-50 text-[#2563EB]">
-                                    <svg class="size-3.5 sm:size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                                    </svg>
-                                </div>
-                                <label for="user_message" class="text-xs sm:text-sm font-bold text-[#0F172A] cursor-pointer">
-                                    Kirim pesan ke admin <span class="text-[10px] sm:text-xs font-normal text-[#64748B]">(Opsional)</span>
-                                </label>
-                            </div>
-                            <p class="mt-1 text-[11px] sm:text-xs text-[#64748B] leading-relaxed">
-                                Sampaikan catatan khusus, kronologi tambahan, atau pesan yang ingin disampaikan langsung kepada petugas verifikator TAMBORA.
-                            </p>
-                            <div class="mt-2">
-                                <textarea
-                                    id="user_message"
-                                    name="user_message"
-                                    rows="2"
-                                    maxlength="2000"
-                                    class="form-control text-xs sm:text-sm bg-white min-h-[60px] sm:min-h-[70px] py-2"
-                                    placeholder="Tulis pesan atau catatan untuk admin di sini..."
-                                >{{ old('user_message') }}</textarea>
-                                @error('user_message')<p class="form-error mt-1">{{ $message }}</p>@enderror
-                            </div>
-                        </div>
-
-                        <!-- 3. Kode Laporan Card dengan keterangan abu-abu di dalamnya -->
+                        <!-- 2. Kode Laporan Card dengan keterangan abu-abu di dalamnya -->
                         <div class="rounded-xl sm:rounded-2xl border border-blue-200/80 bg-blue-50/50 p-3 sm:p-3.5 shadow-2xs">
                             <div class="flex items-center justify-between gap-2">
                                 <div class="flex items-center gap-2">
