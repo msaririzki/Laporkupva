@@ -10,22 +10,22 @@
             <div class="absolute bottom-8 left-10 size-28 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
         </div>
 
-        <div class="public-container relative grid items-start lg:items-center gap-8 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10">
+        <div class="public-container relative grid items-center gap-8 lg:grid-cols-2 lg:gap-10 max-w-6xl mx-auto">
             <!-- Left Column: Typography & Actions -->
-            <div class="relative z-10 pt-1 lg:pt-0">
+            <div class="relative z-10 flex flex-col items-center text-center">
                 <!-- Headline with Harmonious Navy and Blue Accents -->
-                <h1 class="text-2xl sm:text-3xl lg:text-[2.75rem] font-black tracking-tight text-navy-950 leading-tight lg:leading-[1.14]">
+                <h1 class="text-2xl sm:text-3xl lg:text-[2.65rem] font-black tracking-tight text-navy-950 leading-tight lg:leading-[1.15]">
                     Berani melapor,<br>
                     <span class="text-blue-600">untuk NTB</span> yang lebih baik.
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="mt-2.5 sm:mt-3 max-w-xl text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-normal">
+                <p class="mt-2.5 sm:mt-3 max-w-md text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-normal">
                     Bantu menjaga aktivitas penukaran valuta asing di NTB tetap aman dan sesuai aturan. Sampaikan laporan Anda tanpa mengungkap identitas.
                 </p>
 
-                <!-- CTA Buttons -->
-                <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
+                <!-- CTA Buttons (Centered) -->
+                <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                     <a href="{{ route('reports.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m22 2-7 20-4-9-9-4Z"/>
@@ -45,24 +45,24 @@
             </div>
 
             <!-- Right Column: Alur Penanganan Floating Card -->
-            <div class="relative z-10 mx-auto w-full max-w-[390px] lg:ml-auto">
-                <div class="relative rounded-2xl sm:rounded-3xl bg-white p-4 sm:p-5 shadow-lg shadow-blue-900/5 backdrop-blur-md border border-slate-200/90 ring-1 ring-slate-900/5">
+            <div class="relative z-10 mx-auto w-full max-w-[390px]">
+                <div class="relative rounded-2xl sm:rounded-3xl bg-white p-3.5 sm:p-4 shadow-lg shadow-blue-900/5 backdrop-blur-md border border-slate-200/90 ring-1 ring-slate-900/5">
                     <!-- Subtle Corner Ambient Light -->
                     <div class="pointer-events-none absolute -top-8 -right-8 size-28 rounded-full bg-blue-500/10 blur-xl" aria-hidden="true"></div>
 
                     <!-- Card Header -->
-                    <div class="relative flex items-start justify-between pb-2.5 border-b border-slate-100">
+                    <div class="relative flex items-start justify-between pb-2 border-b border-slate-100">
                         <div>
                             <div class="flex items-center gap-1.5">
                                 <span class="relative flex size-2">
                                     <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
                                     <span class="relative inline-flex size-2 rounded-full bg-blue-600"></span>
                                 </span>
-                                <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#2563EB]">Contoh alur penanganan</p>
+                                <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#2563EB]">Contoh alur penanganan</p>
                             </div>
-                            <h2 class="mt-0.5 text-xs sm:text-[14px] font-black text-navy-950">Laporan Anda terus bergerak</h2>
+                            <h2 class="mt-0.5 text-xs sm:text-[13px] font-black text-navy-950">Laporan Anda terus bergerak</h2>
                         </div>
-                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] sm:text-[11px] font-bold text-[#2E9B68] border border-emerald-200/80 shadow-2xs">
+                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-[#2E9B68] border border-emerald-200/80 shadow-2xs">
                             <svg class="size-3 text-[#2E9B68]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                             </svg>
@@ -71,8 +71,8 @@
                     </div>
 
                     <!-- Mini Progress Summary -->
-                    <div class="mt-2.5 rounded-lg bg-slate-50/90 p-2 border border-slate-100/90">
-                        <div class="flex items-center justify-between text-[10px] sm:text-[11px]">
+                    <div class="mt-2 rounded-lg bg-slate-50/90 px-2.5 py-1.5 border border-slate-100/90">
+                        <div class="flex items-center justify-between text-[10px]">
                             <span class="font-medium text-slate-500">Transparansi Penanganan</span>
                             <span class="font-bold text-blue-600">Contoh: tahap 2 dari 6 selesai</span>
                         </div>
@@ -81,49 +81,43 @@
                         </div>
                     </div>
 
-                    <!-- Steps Micro-Tiles Grid/List -->
-                    <div class="relative mt-2.5 space-y-1.5">
+                    <!-- Steps Micro-Tiles List (Compact without description) -->
+                    <div class="relative mt-2 space-y-1">
                         @php
                             $timelineSteps = [
                                 [
                                     'step' => 1,
                                     'title' => 'Laporan dikirim',
-                                    'desc' => 'Data tersimpan dengan aman',
                                     'status' => 'completed',
                                     'statusLabel' => 'Selesai',
                                 ],
                                 [
                                     'step' => 2,
                                     'title' => 'Laporan diterima',
-                                    'desc' => 'Pemeriksaan awal oleh petugas',
                                     'status' => 'completed',
                                     'statusLabel' => 'Selesai',
                                 ],
                                 [
                                     'step' => 3,
                                     'title' => 'Koordinasi dengan APH',
-                                    'desc' => 'Koordinasi penanganan',
                                     'status' => 'active',
                                     'statusLabel' => 'Proses',
                                 ],
                                 [
                                     'step' => 4,
                                     'title' => 'Kunjungan lapangan',
-                                    'desc' => 'Verifikasi atau penertiban',
                                     'status' => 'upcoming',
                                     'statusLabel' => 'Tahap 4',
                                 ],
                                 [
                                     'step' => 5,
                                     'title' => 'Laporan hasil',
-                                    'desc' => 'Hasil penanganan tersedia',
                                     'status' => 'upcoming',
                                     'statusLabel' => 'Tahap 5',
                                 ],
                                 [
                                     'step' => 6,
                                     'title' => 'Selesai',
-                                    'desc' => 'Proses telah dituntaskan',
                                     'status' => 'upcoming',
                                     'statusLabel' => 'Tahap 6',
                                 ],
@@ -132,51 +126,42 @@
 
                         @foreach ($timelineSteps as $step)
                             @if ($step['status'] === 'completed')
-                                <div class="group relative flex items-center justify-between gap-2.5 rounded-lg border border-emerald-100 bg-emerald-50/40 p-1.5 sm:p-2 transition-all duration-200 hover:bg-emerald-50/70 hover:shadow-2xs">
+                                <div class="group relative flex items-center justify-between gap-2 rounded-lg border border-emerald-100 bg-emerald-50/40 px-2.5 py-1.5 transition-all duration-200 hover:bg-emerald-50/70 hover:shadow-2xs">
                                     <div class="flex items-center gap-2 min-w-0">
-                                        <span class="flex size-6 shrink-0 items-center justify-center rounded-md bg-emerald-600 text-white shadow-xs">
-                                            <svg class="size-3" viewBox="0 0 20 20" fill="currentColor">
+                                        <span class="flex size-5 shrink-0 items-center justify-center rounded-md bg-emerald-600 text-white shadow-xs">
+                                            <svg class="size-2.5" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
-                                        <div class="min-w-0">
-                                            <p class="text-xs sm:text-[12.5px] font-bold text-slate-800 leading-tight">{{ $step['title'] }}</p>
-                                            <p class="text-[10px] text-slate-500 leading-tight truncate mt-0.5">{{ $step['desc'] }}</p>
-                                        </div>
+                                        <p class="text-xs font-bold text-slate-800 leading-none truncate">{{ $step['title'] }}</p>
                                     </div>
-                                    <span class="shrink-0 rounded bg-emerald-100/90 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold text-emerald-800">
+                                    <span class="shrink-0 rounded bg-emerald-100/90 px-1.5 py-0.5 text-[9px] font-bold text-emerald-800">
                                         {{ $step['statusLabel'] }}
                                     </span>
                                 </div>
                             @elseif ($step['status'] === 'active')
-                                <div class="group relative flex items-center justify-between gap-2.5 rounded-lg border border-blue-200 bg-blue-50/60 p-1.5 sm:p-2 shadow-2xs ring-1 ring-blue-500/20 transition-all duration-200 hover:bg-blue-50/90">
+                                <div class="group relative flex items-center justify-between gap-2 rounded-lg border border-blue-200 bg-blue-50/60 px-2.5 py-1.5 shadow-2xs ring-1 ring-blue-500/20 transition-all duration-200 hover:bg-blue-50/90">
                                     <div class="flex items-center gap-2 min-w-0">
-                                        <span class="relative flex size-6 shrink-0 items-center justify-center rounded-md bg-blue-600 text-white font-extrabold text-[11px] shadow-xs shadow-blue-500/30">
+                                        <span class="relative flex size-5 shrink-0 items-center justify-center rounded-md bg-blue-600 text-white font-extrabold text-[10px] shadow-xs shadow-blue-500/30">
                                             <span class="absolute -top-0.5 -right-0.5 size-1.5 rounded-full bg-amber-400 ring-1 ring-white animate-pulse"></span>
                                             {{ $step['step'] }}
                                         </span>
-                                        <div class="min-w-0">
-                                            <p class="text-xs sm:text-[12.5px] font-extrabold text-navy-950 leading-tight">{{ $step['title'] }}</p>
-                                            <p class="text-[10px] text-blue-700/80 leading-tight truncate mt-0.5">{{ $step['desc'] }}</p>
-                                        </div>
+                                        <p class="text-xs font-extrabold text-navy-950 leading-none truncate">{{ $step['title'] }}</p>
                                     </div>
-                                    <span class="inline-flex shrink-0 items-center gap-1 rounded bg-blue-600 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-extrabold text-white shadow-2xs">
+                                    <span class="inline-flex shrink-0 items-center gap-1 rounded bg-blue-600 px-1.5 py-0.5 text-[9px] font-extrabold text-white shadow-2xs">
                                         <span class="size-1 rounded-full bg-white animate-ping"></span>
                                         {{ $step['statusLabel'] }}
                                     </span>
                                 </div>
                             @else
-                                <div class="group relative flex items-center justify-between gap-2.5 rounded-lg border border-transparent p-1.5 sm:p-2 transition-all duration-200 hover:border-slate-100 hover:bg-slate-50/70">
+                                <div class="group relative flex items-center justify-between gap-2 rounded-lg border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:border-slate-100 hover:bg-slate-50/70">
                                     <div class="flex items-center gap-2 min-w-0">
-                                        <span class="flex size-6 shrink-0 items-center justify-center rounded-md bg-slate-100 text-slate-500 font-bold text-[11px] border border-slate-200/60">
+                                        <span class="flex size-5 shrink-0 items-center justify-center rounded-md bg-slate-100 text-slate-500 font-bold text-[10px] border border-slate-200/60">
                                             {{ $step['step'] }}
                                         </span>
-                                        <div class="min-w-0">
-                                            <p class="text-xs sm:text-[12.5px] font-semibold text-slate-600 leading-tight">{{ $step['title'] }}</p>
-                                            <p class="text-[10px] text-slate-400 leading-tight truncate mt-0.5">{{ $step['desc'] }}</p>
-                                        </div>
+                                        <p class="text-xs font-semibold text-slate-600 leading-none truncate">{{ $step['title'] }}</p>
                                     </div>
-                                    <span class="shrink-0 text-[9px] sm:text-[10px] font-medium text-slate-400">
+                                    <span class="shrink-0 text-[9px] font-medium text-slate-400">
                                         {{ $step['statusLabel'] }}
                                     </span>
                                 </div>
@@ -185,7 +170,7 @@
                     </div>
 
                     <!-- Trust Seal Footer Inside Card -->
-                    <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[10.5px] text-slate-400">
+                    <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
                         <span class="inline-flex items-center gap-1 font-semibold text-slate-600">
                             <svg class="size-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
