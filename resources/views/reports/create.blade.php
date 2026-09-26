@@ -409,24 +409,6 @@
                             @error('evidence.*')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
 
-                        <!-- 2. Kode Laporan Card dengan keterangan abu-abu di dalamnya -->
-                        <div class="rounded-xl sm:rounded-2xl border border-blue-200/80 bg-blue-50/50 p-3 sm:p-3.5 shadow-2xs">
-                            <div class="flex items-center justify-between gap-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="grid size-6 sm:size-7 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
-                                        <svg class="size-3.5 sm:size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
-                                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                                        </svg>
-                                    </span>
-                                    <span class="text-xs sm:text-sm font-bold text-[#0F172A]">Kode Laporan: <code class="font-mono text-xs sm:text-sm font-extrabold text-[#2563EB]">XXXXXX</code></span>
-                                </div>
-                                <span class="text-[9px] sm:text-[10px] font-medium text-[#64748B] bg-white border border-blue-100 px-2 py-0.5 rounded-full shrink-0">Dibuat otomatis</span>
-                            </div>
-                            <p class="mt-2 text-[10px] sm:text-xs text-[#64748B] leading-relaxed border-t border-blue-100/80 pt-2">
-                                Kode laporan dibuat otomatis saat terkirim dan digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
-                            </p>
-                        </div>
 
                         <!-- 4. Checkbox Pernyataan (Di bawah card, wrap bersih, padding aman) -->
                         <label class="group flex cursor-pointer items-start gap-2.5 sm:gap-3 rounded-xl border border-[#CBD5E1] bg-white p-2.5 sm:p-3.5 shadow-xs transition-colors hover:border-[#2563EB]/50 hover:bg-blue-50/20 has-[:checked]:bg-slate-50/90 has-[:checked]:border-slate-200">
