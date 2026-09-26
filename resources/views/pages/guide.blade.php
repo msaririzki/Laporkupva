@@ -43,22 +43,6 @@
                     <p class="mt-2 text-xs sm:text-sm lg:text-[14.5px] text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
                         Melapor dengan aman dan mudah. Temukan langkah-langkah membuat laporan, informasi keamanan, dan jawaban untuk pertanyaan yang sering ditanyakan.
                     </p>
-
-                    <!-- Search Bar UI -->
-                    <div class="relative mt-4 sm:mt-5 max-w-md mx-auto lg:mx-0">
-                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-blue-600">
-                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8" />
-                                <path d="m21 21-4.3-4.3" />
-                            </svg>
-                        </div>
-                        <input
-                            id="faq-search"
-                            type="text"
-                            placeholder="Cari pertanyaan atau kata kunci..."
-                            class="w-full rounded-xl border border-slate-200/90 bg-white py-2.5 pl-10 pr-4 text-xs sm:text-sm text-slate-800 shadow-2xs placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-3 focus:ring-blue-100 transition-all"
-                        >
-                    </div>
                 </div>
 
                 <!-- Right Illustration -->
@@ -67,7 +51,7 @@
                         <!-- Glow Accent Behind Image -->
                         <div class="absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-blue-300/30 via-sky-200/40 to-blue-100/30 blur-2xl"></div>
                         <img
-                            src="{{ asset('images/illustrations/guide-hero.png') }}"
+                            src="{{ asset('images/illustrations/guide-hero.webp') }}"
                             alt="Ilustrasi Panduan Masyarakat TAMBORA"
                             class="h-auto w-full object-contain drop-shadow-lg transition-transform duration-500 hover:scale-[1.02]"
                             width="960"
@@ -289,7 +273,7 @@
                                         <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
                                     </svg>
                                 </span>
-                                <span class="flex-1 font-bold text-navy-950 text-xs sm:text-sm group-open:text-blue-700 transition-colors">Apakah foto wajib dilampirkan?</span>
+                                <span class="flex-1 font-bold text-navy-950 text-xs sm:text-sm group-open:text-blue-700 transition-colors">Apakah bukti wajib dilampirkan?</span>
                                 <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
                                     <svg class="size-4 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m6 9 6 6 6-6"/>
@@ -297,7 +281,7 @@
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Tidak. Bukti foto atau PDF bersifat opsional. Utamakan keselamatan dan jangan mengambil bukti jika situasinya berisiko.
+                                Ya. Setiap laporan wajib menyertakan minimal satu foto atau PDF sebagai dasar verifikasi. Utamakan keselamatan dan jangan mengambil bukti langsung jika situasinya berisiko.
                             </div>
                         </details>
 
@@ -360,11 +344,6 @@
                                 Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan kode dan PIN di tempat yang aman.
                             </div>
                         </details>
-
-                        <!-- Empty State when search has no match -->
-                        <div id="faq-empty" class="hidden rounded-xl border border-dashed border-slate-200 p-8 text-center">
-                            <p class="text-xs sm:text-sm font-semibold text-slate-500">Tidak ada pertanyaan yang sesuai dengan kata kunci pencarian.</p>
-                        </div>
                     </div>
                 </div>
 
@@ -425,35 +404,4 @@
             </div>
         </div>
     </section>
-
-    <!-- Client-side FAQ search script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const searchInput = document.getElementById('faq-search');
-            const faqItems = document.querySelectorAll('.faq-item');
-            const emptyState = document.getElementById('faq-empty');
-
-            if (!searchInput || !faqItems.length) return;
-
-            searchInput.addEventListener('input', function (e) {
-                const query = e.target.value.toLowerCase().trim();
-                let matches = 0;
-
-                faqItems.forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    if (!query || text.includes(query)) {
-                        item.style.display = '';
-                        matches++;
-                        if (query) item.setAttribute('open', '');
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-
-                if (emptyState) {
-                    emptyState.classList.toggle('hidden', matches > 0);
-                }
-            });
-        });
-    </script>
 </x-layouts.public>

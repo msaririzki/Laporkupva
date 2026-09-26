@@ -14,6 +14,10 @@ class PublicInformationPagesTest extends TestCase
             ->assertSee('Apakah saya harus membuat akun?')
             ->assertSee('Sudah pernah melapor?')
             ->assertSee(route('reports.track'))
+            ->assertSee('Apakah bukti wajib dilampirkan?')
+            ->assertSee('minimal satu foto atau PDF')
+            ->assertDontSee('Cari pertanyaan atau topik panduan')
+            ->assertDontSee('bersifat opsional')
             ->assertSee(route('reports.create'));
     }
 
