@@ -1,132 +1,667 @@
 <x-layouts.public title="Lapor KUPVA secara aman">
-    <section class="relative overflow-hidden bg-[#071D3B] text-white">
-        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(37,99,235,0.24),transparent_34%)]" aria-hidden="true"></div>
+    <section class="relative overflow-hidden bg-[#021a42] text-white bg-cover bg-center" style="background-image: url('{{ asset('images/hero-bg.webp') }}');">
+        <!-- Angled & Gradual Dark Navy Overlay for Maximum Text Contrast (Matching Reference) -->
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,#02193f_0%,#03255c_34%,rgba(3,37,92,0.75)_48%,rgba(3,37,92,0.1)_64%,transparent_75%)] hidden lg:block" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#02193f]/95 via-[#03255c]/85 to-[#02193f]/90 lg:hidden" aria-hidden="true"></div>
 
-        <div class="public-container relative grid items-center gap-10 py-14 sm:py-18 lg:min-h-[590px] lg:grid-cols-[1.06fr_0.94fr] lg:gap-16 lg:py-20">
-            <div class="max-w-2xl">
-                <p class="text-xs font-bold uppercase tracking-[0.16em] text-blue-200">Kanal resmi Bank Indonesia NTB</p>
-                <h1 class="mt-4 text-4xl font-extrabold leading-[1.12] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
-                    Laporkan KUPVA tidak berizin dengan aman.
+        <div class="public-container relative grid min-h-[540px] lg:min-h-[580px] items-center gap-10 py-14 sm:py-18 lg:grid-cols-[1.18fr_0.82fr] lg:gap-12 lg:py-20">
+            <!-- Left Column: Typography & Actions -->
+            <div class="relative z-10">
+                <!-- Eyebrow Badge (Bank Indonesia NTB Official) -->
+                <div class="inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-950/50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-teal-300 shadow-xs backdrop-blur-md">
+                    <span class="size-2 rounded-full bg-emerald-400"></span>
+                    <span>KANAL PELAPORAN RESMI WILAYAH NTB</span>
+                </div>
+
+                <!-- Headline with Exact Reference Accents (White + Amber/Gold + Sky Blue) -->
+                <h1 class="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-[3.25rem] lg:leading-[1.12]">
+                    Berani melapor,<br>
+                    <span class="text-[#F2B84B]">untuk NTB</span> <span class="text-[#38bdf8]">yang<br>lebih baik.</span>
                 </h1>
-                <p class="mt-5 max-w-xl text-sm leading-7 text-slate-200 sm:text-base">
-                    Sampaikan informasi money changer yang diduga tidak berizin. Anda tidak perlu membuat akun atau memberikan identitas pribadi.
+
+                <!-- Subtitle -->
+                <p class="mt-4 max-w-xl text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-blue-50/90 font-normal">
+                    Kanal pengawasan resmi dari Kantor Perwakilan Bank Indonesia Provinsi NTB untuk melaporkan dugaan kegiatan usaha penukaran valuta asing (money changer) yang tidak berizin. Identitas Anda tidak diminta dan proses penanganan dipantau secara mandiri.
                 </p>
 
-                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <a href="{{ route('reports.create') }}" class="button-primary sm:min-w-44">
-                        Buat laporan
-                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/>
+                <!-- CTA Buttons (Matching Reference) -->
+                <div class="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
+                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2.5 rounded-2xl bg-[#2563EB] px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-blue-600/35 hover:bg-[#1D4ED8] hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m22 2-7 20-4-9-9-4Z"/>
+                            <path d="M22 2 11 13"/>
                         </svg>
+                        <span>Buat laporan anonim</span>
+                        <span aria-hidden="true" class="text-base sm:text-lg">→</span>
                     </a>
-                    <a href="{{ route('reports.track') }}" class="button-ghost-light sm:min-w-44">Cek status laporan</a>
+                    <a href="{{ route('reports.track') }}" class="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-slate-900/50 px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-sm backdrop-blur-md hover:bg-slate-900/70 hover:border-white/30 transition-all">
+                        <svg class="size-4 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="7"/>
+                            <path d="m21 21-4.3-4.3"/>
+                        </svg>
+                        <span>Cek status laporan</span>
+                    </a>
                 </div>
 
-                <div class="mt-8 flex items-start gap-3 border-t border-white/15 pt-5 text-xs leading-5 text-slate-300 sm:text-sm">
-                    <svg class="mt-0.5 size-4 shrink-0 text-emerald-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 0 1 3.172 4.33 12.02 12.02 0 0 0 3 6.36c0 5.103 3.182 9.463 7 11.197 3.818-1.734 7-6.094 7-11.197 0-.69-.058-1.366-.172-2.03A11.954 11.954 0 0 1 10 1.944Zm3.03 6.086a.75.75 0 0 0-1.06-1.06L9 9.94 8.03 8.97a.75.75 0 0 0-1.06 1.06l1.5 1.5a.75.75 0 0 0 1.06 0l3.5-3.5Z" clip-rule="evenodd"/>
-                    </svg>
-                    <p>Tanpa nama, NIK, email, atau nomor telepon. Simpan kode akses untuk memantau laporan secara mandiri.</p>
-                </div>
-            </div>
-
-            <div class="rounded-3xl border border-white/10 bg-white p-5 text-[#0B2342] shadow-2xl shadow-black/20 sm:p-7">
-                <p class="text-xs font-bold uppercase tracking-[0.14em] text-[#2563EB]">Contoh alur penanganan</p>
-                <h2 class="mt-2 text-xl font-bold tracking-tight sm:text-2xl">Enam tahap yang mudah dipantau</h2>
-
-                @php
-                    $handlingSteps = [
-                        ['Laporan dikirim', 'Informasi tersimpan'],
-                        ['Laporan diterima', 'Pemeriksaan awal'],
-                        ['Koordinasi dengan APH', 'Koordinasi penanganan'],
-                        ['Kunjungan lapangan', 'Verifikasi atau penertiban'],
-                        ['Laporan hasil', 'Hasil tindak lanjut tersedia'],
-                        ['Selesai', 'Penanganan dituntaskan'],
-                    ];
-                @endphp
-
-                <ol class="mt-6 grid gap-x-6 gap-y-1 sm:grid-cols-2" aria-label="Contoh alur penanganan laporan">
-                    @foreach ($handlingSteps as [$title, $description])
-                        <li class="flex gap-3 border-t border-slate-100 py-3.5 first:border-t-0 sm:first:border-t">
-                            <span class="grid size-7 shrink-0 place-items-center rounded-full bg-blue-50 text-xs font-bold text-[#2563EB]">{{ $loop->iteration }}</span>
-                            <div>
-                                <h3 class="text-sm font-semibold text-[#0B2342]">{{ $title }}</h3>
-                                <p class="mt-0.5 text-xs leading-5 text-slate-500">{{ $description }}</p>
-                            </div>
-                        </li>
-                    @endforeach
-                </ol>
-            </div>
-        </div>
-    </section>
-
-    <section id="cara-kerja" class="scroll-mt-20 bg-white py-14 sm:py-18">
-        <div class="public-container">
-            <div class="max-w-2xl">
-                <p class="eyebrow">Cara lapor</p>
-                <h2 class="section-title">Empat langkah, tanpa registrasi</h2>
-                <p class="section-lead">Siapkan informasi yang relevan. Seluruh proses dirancang singkat agar laporan dapat dikirim dari ponsel.</p>
-            </div>
-
-            <ol class="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach ([
-                    ['Ceritakan kejadian', 'Tuliskan apa yang terjadi dan perkiraan waktunya.'],
-                    ['Tentukan lokasi', 'Cari wilayah atau gunakan titik lokasi perangkat.'],
-                    ['Lampirkan bukti', 'Tambahkan minimal satu foto atau PDF yang relevan.'],
-                    ['Simpan akses', 'Unduh QR atau simpan kode laporan dan PIN.'],
-                ] as [$title, $description])
-                    <li class="border-t-2 border-slate-200 pt-5">
-                        <span class="text-sm font-bold text-[#2563EB]">0{{ $loop->iteration }}</span>
-                        <h3 class="mt-3 text-base font-bold text-[#0B2342]">{{ $title }}</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-500">{{ $description }}</p>
-                    </li>
-                @endforeach
-            </ol>
-        </div>
-    </section>
-
-    <section id="keamanan" class="scroll-mt-20 border-y border-slate-200 bg-[#F7F9FC] py-14 sm:py-18">
-        <div class="public-container grid items-center gap-10 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
-            <div>
-                <p class="eyebrow">Privasi pelapor</p>
-                <h2 class="section-title">Informasi kejadian yang dibutuhkan, bukan identitas Anda.</h2>
-                <p class="section-lead max-w-2xl">TAMBORA tidak meminta akun, nama, NIK, email, atau nomor telepon. Akses laporan hanya menggunakan kode dan PIN yang Anda simpan sendiri.</p>
-
-                <ul class="mt-8 divide-y divide-slate-200 border-y border-slate-200">
-                    @foreach ([
-                        ['Anonim sejak awal', 'Formulir tidak meminta identitas pribadi.'],
-                        ['Bukti tersimpan privat', 'Foto dan dokumen hanya dapat dibuka petugas berwenang.'],
-                        ['Progres dapat dipantau', 'Gunakan akses rahasia tanpa membuat akun.'],
-                    ] as [$title, $description])
-                        <li class="flex gap-3 py-4">
-                            <svg class="mt-0.5 size-5 shrink-0 text-emerald-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
+                <!-- 3 Key Features Row (Glass Cards Matching Reference) -->
+                <div class="mt-9 sm:mt-11 flex flex-wrap items-center gap-3 sm:gap-4">
+                    <!-- Feature 1 -->
+                    <div class="flex items-center gap-2.5 rounded-xl border border-white/10 bg-slate-950/40 px-3.5 py-2 backdrop-blur-md shadow-xs">
+                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-teal-500/20 text-teal-300 border border-teal-400/30">
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+                                <path d="m9 12 2 2 4-4"/>
                             </svg>
-                            <div>
-                                <h3 class="text-sm font-bold text-[#0B2342]">{{ $title }}</h3>
-                                <p class="mt-1 text-sm leading-6 text-slate-500">{{ $description }}</p>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                        </div>
+                        <div class="leading-tight">
+                            <p class="text-xs sm:text-[13px] font-bold text-white">Tanpa nama &amp; NIK</p>
+                            <p class="text-[10px] sm:text-[11px] text-slate-300 mt-0.5">Identitas Anda terlindungi</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="flex items-center gap-2.5 rounded-xl border border-white/10 bg-slate-950/40 px-3.5 py-2 backdrop-blur-md shadow-xs">
+                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-blue-500/20 text-sky-300 border border-blue-400/30">
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="leading-tight">
+                            <p class="text-xs sm:text-[13px] font-bold text-white">Lokasi akurat</p>
+                            <p class="text-[10px] sm:text-[11px] text-slate-300 mt-0.5">Gunakan GPS atau cari lokasi</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="flex items-center gap-2.5 rounded-xl border border-white/10 bg-slate-950/40 px-3.5 py-2 backdrop-blur-md shadow-xs">
+                        <div class="flex size-7.5 shrink-0 items-center justify-center rounded-lg bg-amber-500/20 text-[#F2B84B] border border-amber-400/30">
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <div class="leading-tight">
+                            <p class="text-xs sm:text-[13px] font-bold text-white">Proses transparan</p>
+                            <p class="text-[10px] sm:text-[11px] text-slate-300 mt-0.5">Pantau perkembangan laporan</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="border-y border-slate-300 py-8 lg:py-10">
-                <p class="text-6xl font-extrabold tracking-tight text-[#0B2342] sm:text-7xl">0</p>
-                <p class="mt-3 text-lg font-bold text-[#0B2342]">identitas pribadi wajib diisi</p>
-                <p class="mt-2 max-w-md text-sm leading-6 text-slate-500">Fokus laporan hanya pada kejadian, lokasi, dan bukti yang membantu proses verifikasi.</p>
+            <!-- Right Column: Alur Penanganan Floating Card -->
+            <div class="relative z-10 mx-auto w-full max-w-[400px] lg:ml-auto">
+                <div class="relative rounded-3xl bg-white/95 p-5 sm:p-6 shadow-2xl backdrop-blur-md border border-white/90 ring-1 ring-slate-900/5">
+                    <!-- Subtle Corner Ambient Light -->
+                    <div class="pointer-events-none absolute -top-10 -right-10 size-32 rounded-full bg-blue-500/10 blur-2xl" aria-hidden="true"></div>
+
+                    <!-- Card Header -->
+                    <div class="relative flex items-start justify-between pb-3 border-b border-slate-100">
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="relative flex size-2">
+                                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+                                    <span class="relative inline-flex size-2 rounded-full bg-blue-600"></span>
+                                </span>
+                                <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#2563EB]">Alur penanganan</p>
+                            </div>
+                            <h2 class="mt-0.5 text-sm sm:text-base font-black text-navy-950">Laporan Anda terus bergerak</h2>
+                        </div>
+                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-[#2E9B68] border border-emerald-200/80 shadow-2xs">
+                            <svg class="size-3 text-[#2E9B68]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            <span>Terlindungi</span>
+                        </span>
+                    </div>
+
+                    <!-- Mini Progress Summary -->
+                    <div class="mt-3 rounded-xl bg-slate-50/90 p-2.5 border border-slate-100/90">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="font-medium text-slate-500">Transparansi Penanganan</span>
+                            <span class="font-bold text-blue-600">Tahap 2 dari 6 Selesai</span>
+                        </div>
+                        <div class="mt-1.5 h-1.5 w-full bg-slate-200/80 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 rounded-full w-2/6"></div>
+                        </div>
+                    </div>
+
+                    <!-- Steps Micro-Tiles Grid/List -->
+                    <div class="relative mt-3 space-y-2">
+                        @php
+                            $timelineSteps = [
+                                [
+                                    'step' => 1,
+                                    'title' => 'Laporan dikirim',
+                                    'desc' => 'Data tersimpan dengan aman',
+                                    'status' => 'completed',
+                                    'statusLabel' => 'Selesai',
+                                ],
+                                [
+                                    'step' => 2,
+                                    'title' => 'Laporan diterima',
+                                    'desc' => 'Pemeriksaan awal oleh petugas',
+                                    'status' => 'completed',
+                                    'statusLabel' => 'Selesai',
+                                ],
+                                [
+                                    'step' => 3,
+                                    'title' => 'Koordinasi dengan APH',
+                                    'desc' => 'Koordinasi penanganan',
+                                    'status' => 'active',
+                                    'statusLabel' => 'Proses',
+                                ],
+                                [
+                                    'step' => 4,
+                                    'title' => 'Kunjungan lapangan',
+                                    'desc' => 'Verifikasi atau penertiban',
+                                    'status' => 'upcoming',
+                                    'statusLabel' => 'Tahap 4',
+                                ],
+                                [
+                                    'step' => 5,
+                                    'title' => 'Laporan hasil',
+                                    'desc' => 'Hasil penanganan tersedia',
+                                    'status' => 'upcoming',
+                                    'statusLabel' => 'Tahap 5',
+                                ],
+                                [
+                                    'step' => 6,
+                                    'title' => 'Selesai',
+                                    'desc' => 'Proses telah dituntaskan',
+                                    'status' => 'upcoming',
+                                    'statusLabel' => 'Tahap 6',
+                                ],
+                            ];
+                        @endphp
+
+                        @foreach ($timelineSteps as $step)
+                            @if ($step['status'] === 'completed')
+                                <div class="group relative flex items-center justify-between gap-3 rounded-xl border border-emerald-100 bg-emerald-50/40 p-2 sm:p-2.5 transition-all duration-200 hover:bg-emerald-50/70 hover:shadow-2xs">
+                                    <div class="flex items-center gap-2.5 min-w-0">
+                                        <span class="flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white shadow-xs">
+                                            <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                        <div class="min-w-0">
+                                            <p class="text-xs sm:text-[13px] font-bold text-slate-800 leading-snug">{{ $step['title'] }}</p>
+                                            <p class="text-[10px] sm:text-[11px] text-slate-500 leading-tight truncate">{{ $step['desc'] }}</p>
+                                        </div>
+                                    </div>
+                                    <span class="shrink-0 rounded-md bg-emerald-100/90 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                                        {{ $step['statusLabel'] }}
+                                    </span>
+                                </div>
+                            @elseif ($step['status'] === 'active')
+                                <div class="group relative flex items-center justify-between gap-3 rounded-xl border border-blue-200 bg-blue-50/60 p-2 sm:p-2.5 shadow-2xs ring-1 ring-blue-500/20 transition-all duration-200 hover:bg-blue-50/90">
+                                    <div class="flex items-center gap-2.5 min-w-0">
+                                        <span class="relative flex size-7 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white font-extrabold text-xs shadow-xs shadow-blue-500/30">
+                                            <span class="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-amber-400 ring-2 ring-white animate-pulse"></span>
+                                            {{ $step['step'] }}
+                                        </span>
+                                        <div class="min-w-0">
+                                            <p class="text-xs sm:text-[13px] font-extrabold text-navy-950 leading-snug">{{ $step['title'] }}</p>
+                                            <p class="text-[10px] sm:text-[11px] text-blue-700/80 leading-tight truncate">{{ $step['desc'] }}</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex shrink-0 items-center gap-1 rounded-md bg-blue-600 px-2 py-0.5 text-[10px] font-extrabold text-white shadow-2xs">
+                                        <span class="size-1 rounded-full bg-white animate-ping"></span>
+                                        {{ $step['statusLabel'] }}
+                                    </span>
+                                </div>
+                            @else
+                                <div class="group relative flex items-center justify-between gap-3 rounded-xl border border-transparent p-2 sm:p-2.5 transition-all duration-200 hover:border-slate-100 hover:bg-slate-50/70">
+                                    <div class="flex items-center gap-2.5 min-w-0">
+                                        <span class="flex size-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500 font-bold text-xs border border-slate-200/60">
+                                            {{ $step['step'] }}
+                                        </span>
+                                        <div class="min-w-0">
+                                            <p class="text-xs sm:text-[13px] font-semibold text-slate-600 leading-snug">{{ $step['title'] }}</p>
+                                            <p class="text-[10px] sm:text-[11px] text-slate-400 leading-tight truncate">{{ $step['desc'] }}</p>
+                                        </div>
+                                    </div>
+                                    <span class="shrink-0 text-[10px] font-medium text-slate-400">
+                                        {{ $step['statusLabel'] }}
+                                    </span>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    <!-- Trust Seal Footer Inside Card -->
+                    <div class="mt-3.5 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+                        <span class="inline-flex items-center gap-1.5 font-semibold text-slate-600">
+                            <svg class="size-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            Kanal Resmi BI NTB
+                        </span>
+                        <span class="inline-flex items-center gap-1 font-medium text-slate-400">
+                            <svg class="size-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                <line x1="1" y1="1" x2="23" y2="23"/>
+                            </svg>
+                            100% Bebas Identitas
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-white py-10 sm:py-12">
-        <div class="public-container flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
-            <div>
-                <p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Sudah pernah melapor?</p>
-                <h2 class="mt-2 text-xl font-bold tracking-tight text-[#0B2342] sm:text-2xl">Lihat perkembangan laporan Anda.</h2>
-                <p class="mt-1 text-sm text-slate-500">Gunakan QR akses atau masukkan kode laporan dan PIN.</p>
+    <section id="cara-kerja" class="relative overflow-hidden scroll-mt-20 bg-gradient-to-b from-[#eef6ff] via-[#f4f9ff] to-[#e8f2fe] py-8 sm:py-16">
+        <!-- Mountain Silhouette Background at Bottom (TAMBORA Atmosphere) -->
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 sm:h-36 overflow-hidden opacity-30" aria-hidden="true">
+            <svg class="h-full w-full object-cover" viewBox="0 0 1440 220" fill="none" preserveAspectRatio="none">
+                <path d="M0 220L0 130L110 115L230 165L390 90L530 145L680 45L820 135L960 75L1120 125L1270 65L1440 105L1440 220Z" fill="url(#mountains-soft-grad)" />
+                <defs>
+                    <linearGradient id="mountains-soft-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#93c5fd" stop-opacity="0.6"/>
+                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.85"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <!-- Subtle Dot Grid Patterns on Sides -->
+        <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+            <div class="absolute top-10 right-8 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute bottom-10 left-8 size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+        </div>
+
+        <div class="public-container">
+            <!-- Header Section (Sesuai Referensi & Minimalis) -->
+            <div class="mx-auto max-w-2xl text-center">
+                <h2 class="text-2xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
+                    Cara lapor di TAMBORA
+                </h2>
+                <p class="mt-1.5 text-xs sm:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
+                    Gampang, kok. Cukup ikuti 4 langkah sederhana berikut tanpa perlu login atau registrasi akun.
+                </p>
             </div>
-            <a href="{{ route('reports.track') }}" class="button-secondary shrink-0">Cek status laporan</a>
+
+            <!-- 4-Step Cards Grid: 2x2 on Mobile, 4 Columns on Desktop (Minimal Scroll) -->
+            <div class="mt-6 sm:mt-10">
+                <div class="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
+
+                    <!-- STEP 01: Buka TAMBORA -->
+                    <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div>
+                            <!-- Number Badge -->
+                            <div class="flex justify-center">
+                                <span class="flex size-7 sm:size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-[11px] sm:text-xs font-black text-white shadow-sm sm:shadow-md shadow-blue-600/30">
+                                    01
+                                </span>
+                            </div>
+
+                            <!-- Illustration: Laptop / Web Browser -->
+                            <div class="my-2 sm:my-3 flex h-14 sm:h-20 lg:h-24 items-center justify-center">
+                                <svg class="h-full w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                                    <!-- Laptop Base -->
+                                    <path d="M 14 80 L 106 80 L 114 86 L 6 86 Z" fill="#94a3b8"/>
+                                    <!-- Laptop Screen -->
+                                    <rect x="20" y="20" width="80" height="60" rx="5" fill="#1e293b"/>
+                                    <!-- Screen Interior -->
+                                    <rect x="23" y="24" width="74" height="52" rx="3" fill="#f8fafc"/>
+                                    <!-- Browser Header Bar -->
+                                    <rect x="23" y="24" width="74" height="12" fill="#e2e8f0"/>
+                                    <!-- Browser Action Dots -->
+                                    <circle cx="29" cy="30" r="1.5" fill="#ef4444"/>
+                                    <circle cx="34" cy="30" r="1.5" fill="#f59e0b"/>
+                                    <circle cx="39" cy="30" r="1.5" fill="#10b981"/>
+                                    <!-- URL Address Bar -->
+                                    <rect x="45" y="27" width="46" height="6" rx="3" fill="#ffffff"/>
+                                    <!-- Web Content Banner -->
+                                    <rect x="28" y="41" width="64" height="30" rx="3" fill="#dbeafe"/>
+                                    <!-- TAMBORA Shield Mark -->
+                                    <path d="M 60 46 C 66 46, 69 44, 69 44 C 69 55, 60 62, 60 62 C 60 62, 51 55, 51 44 C 51 44, 54 46, 60 46 Z" fill="#2563eb"/>
+                                    <path d="M 57 53 L 59 55 L 64 50" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </svg>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                                Buka TAMBORA
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
+                                Buka <a href="https://laporkupva.ikydev.com/" target="_blank" rel="noopener noreferrer" class="font-bold text-blue-700 underline decoration-blue-300 hover:text-blue-900 transition-colors">TAMBORA</a> tanpa perlu login.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- STEP 02: Ceritakan -->
+                    <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div>
+                            <!-- Number Badge -->
+                            <div class="flex justify-center">
+                                <span class="flex size-7 sm:size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-[11px] sm:text-xs font-black text-white shadow-sm sm:shadow-md shadow-blue-600/30">
+                                    02
+                                </span>
+                            </div>
+
+                            <!-- Illustration: Character with Phone & Speech Bubble -->
+                            <div class="my-2 sm:my-3 flex h-14 sm:h-20 lg:h-24 items-center justify-center">
+                                <svg class="h-full w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                                    <!-- Speech Bubble -->
+                                    <g>
+                                        <rect x="52" y="12" width="56" height="38" rx="8" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.2"/>
+                                        <path d="M60 50 L56 58 L68 50 Z" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.2"/>
+                                        <rect x="60" y="20" width="34" height="3" rx="1.5" fill="#38bdf8"/>
+                                        <rect x="60" y="27" width="40" height="3" rx="1.5" fill="#93c5fd"/>
+                                        <rect x="60" y="34" width="24" height="3" rx="1.5" fill="#93c5fd"/>
+                                    </g>
+
+                                    <!-- Character -->
+                                    <g>
+                                        <path d="M 18 48 C 14 30, 38 16, 50 24 C 62 32, 64 50, 60 68 C 56 78, 44 78, 40 70 C 32 78, 20 70, 18 48 Z" fill="#1e293b"/>
+                                        <circle cx="38" cy="42" r="13" fill="#fed7aa"/>
+                                        <path d="M 28 36 C 32 28, 48 28, 52 36 C 46 32, 36 32, 28 36 Z" fill="#0f172a"/>
+                                        <circle cx="44" cy="42" r="1.2" fill="#0f172a"/>
+                                        <path d="M 44 46 Q 46 48 48 46" stroke="#0f172a" stroke-width="1" fill="none" stroke-linecap="round"/>
+                                        <path d="M 24 74 C 24 62, 54 62, 54 74 L 54 86 L 24 86 Z" fill="#2563eb"/>
+                                        <!-- Phone -->
+                                        <rect x="52" y="46" width="16" height="28" rx="3" fill="#0f172a"/>
+                                        <rect x="54" y="48" width="12" height="22" rx="1.5" fill="#38bdf8"/>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                                Ceritakan
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
+                                Ceritakan apa yang terjadi.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- STEP 03: Tentukan lokasi -->
+                    <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div>
+                            <!-- Number Badge -->
+                            <div class="flex justify-center">
+                                <span class="flex size-7 sm:size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-[11px] sm:text-xs font-black text-white shadow-sm sm:shadow-md shadow-blue-600/30">
+                                    03
+                                </span>
+                            </div>
+
+                            <!-- Illustration: Folded Map & Blue Pin -->
+                            <div class="my-2 sm:my-3 flex h-14 sm:h-20 lg:h-24 items-center justify-center">
+                                <svg class="h-full w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                                    <!-- Map panels -->
+                                    <polygon points="15,40 45,30 45,82 15,92" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+                                    <path d="M 18 68 Q 28 60 36 72 L 45 64 L 45 82 L 15 92 Z" fill="#dcfce7" opacity="0.8"/>
+                                    <polygon points="45,30 75,40 75,92 45,82" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1.2"/>
+                                    <polygon points="75,40 105,30 105,82 75,92" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+                                    <path d="M 75 70 Q 85 54 96 62 L 105 56 L 105 82 L 75 92 Z" fill="#dcfce7" opacity="0.8"/>
+
+                                    <!-- Pin Shadow -->
+                                    <ellipse cx="60" cy="78" rx="11" ry="3.5" fill="#64748b" opacity="0.25"/>
+
+                                    <!-- Location Pin -->
+                                    <path d="M 60 20 C 47 20, 37 30, 37 42 C 37 57, 60 78, 60 78 C 60 78, 83 57, 83 42 C 83 30, 73 20, 60 20 Z" fill="#2563eb" filter="drop-shadow(0 3px 5px rgb(37 99 235 / 0.35))"/>
+                                    <circle cx="60" cy="40" r="7" fill="white"/>
+                                </svg>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                                Tentukan lokasi
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
+                                Tunjukkan di mana kejadiannya.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- STEP 04: Pantau laporan -->
+                    <article class="group flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm text-center transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                        <div>
+                            <!-- Number Badge -->
+                            <div class="flex justify-center">
+                                <span class="flex size-7 sm:size-9 items-center justify-center rounded-full bg-blue-600 font-sans text-[11px] sm:text-xs font-black text-white shadow-sm sm:shadow-md shadow-blue-600/30">
+                                    04
+                                </span>
+                            </div>
+
+                            <!-- Illustration: Smartphone with Shield, Lock & Checkmark -->
+                            <div class="my-2 sm:my-3 flex h-14 sm:h-20 lg:h-24 items-center justify-center">
+                                <svg class="h-full w-auto overflow-visible" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                                    <!-- Phone Body -->
+                                    <rect x="36" y="14" width="48" height="76" rx="8" fill="#1e293b" filter="drop-shadow(0 4px 8px rgb(0 0 0 / 0.1))"/>
+                                    <rect x="39" y="18" width="42" height="68" rx="5" fill="#f8fafc"/>
+                                    <rect x="53" y="16" width="14" height="1.5" rx="0.75" fill="#64748b"/>
+
+                                    <!-- Blue Shield -->
+                                    <path d="M 60 30 C 69 30, 73 27, 73 27 C 73 45, 60 57, 60 57 C 60 57, 47 45, 47 27 C 47 27, 51 30, 60 30 Z" fill="#2563eb" filter="drop-shadow(0 2px 4px rgb(37 99 235 / 0.3))"/>
+
+                                    <!-- Padlock -->
+                                    <rect x="56" y="39" width="8" height="7" rx="1.5" fill="white"/>
+                                    <path d="M 57.5 39 V 36 A 2.5 2.5 0 0 1 62.5 36 V 39" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+
+                                    <!-- Checkmark Badge -->
+                                    <circle cx="88" cy="62" r="11" fill="#22c55e" stroke="white" stroke-width="2" filter="drop-shadow(0 2px 5px rgb(34 197 94 / 0.4))"/>
+                                    <path d="M 83 62 L 87 66 L 93 58" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </svg>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                                Pantau laporan
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
+                                Simpan kode untuk melihat perkembangan laporan.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="keamanan" class="relative overflow-hidden scroll-mt-20 bg-gradient-to-b from-[#eaf4fe] via-[#f3f8fe] to-[#e4f0fd] py-6 sm:py-16">
+        <!-- Mountain Silhouette Background at Bottom (TAMBORA Atmosphere) -->
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-20 sm:h-36 overflow-hidden opacity-30" aria-hidden="true">
+            <svg class="h-full w-full object-cover" viewBox="0 0 1440 240" fill="none" preserveAspectRatio="none">
+                <path d="M0 240 L0 150 L140 130 L280 180 L440 100 L590 160 L740 60 L890 150 L1040 85 L1190 140 L1340 75 L1440 120 L1440 240 Z" fill="url(#keamanan-mountains-grad)" />
+                <defs>
+                    <linearGradient id="keamanan-mountains-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#93c5fd" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#2563eb" stop-opacity="0.8"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <!-- Subtle Dot Grid Patterns on Sides -->
+        <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+            <div class="absolute top-8 left-6 size-24 sm:size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+            <div class="absolute top-8 right-6 size-24 sm:size-32 bg-[radial-gradient(#93c5fd_1.5px,transparent_1.5px)] [background-size:16px_16px] opacity-40 hidden sm:block"></div>
+        </div>
+
+        <div class="public-container">
+            <div class="grid items-center gap-6 sm:gap-10 lg:grid-cols-12 lg:gap-12">
+                <!-- Left Column: Grid Kartu (Compact di Mobile, 2 Kolom di Desktop/Tablet) -->
+                <div class="order-2 lg:order-1 lg:col-span-7 w-full max-w-md sm:max-w-none mx-auto lg:mx-0">
+                    <div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-4">
+                        <!-- Card 1: 100% Anonim & Tanpa Akun -->
+                        <article class="group flex flex-col justify-between rounded-xl sm:rounded-3xl border border-slate-100 bg-white p-3 sm:p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
+                            <div class="flex items-start sm:flex-col sm:items-center gap-3 sm:gap-0 text-left sm:text-center">
+                                <!-- Icon: Identitas / Profil Tersembunyi (Anonim) -->
+                                <div class="flex size-9 sm:size-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white sm:mx-auto sm:mb-3">
+                                    <svg class="size-4.5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <line x1="2" y1="2" x2="22" y2="22" />
+                                    </svg>
+                                </div>
+
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                        100% Anonim & Tanpa Akun
+                                    </h3>
+                                    <p class="mt-0.5 sm:mt-1.5 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
+                                        Tidak perlu daftar akun. Kami sama sekali tidak meminta nama, KTP, nomor HP, maupun email Anda.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Card 2: Pantau Pakai Kode Rahasia -->
+                        <article class="group flex flex-col justify-between rounded-xl sm:rounded-3xl border border-slate-100 bg-white p-3 sm:p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
+                            <div class="flex items-start sm:flex-col sm:items-center gap-3 sm:gap-0 text-left sm:text-center">
+                                <!-- Icon: Kunci Akses / PIN Pelacakan Rahasia -->
+                                <div class="flex size-9 sm:size-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white sm:mx-auto sm:mb-3">
+                                    <svg class="size-4.5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="7.5" cy="15.5" r="4.5" />
+                                        <path d="m21 3-9.5 9.5" />
+                                        <path d="m15.5 7.5 3 3" />
+                                        <path d="m18 5 2 2" />
+                                    </svg>
+                                </div>
+
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                        Pantau Pakai Kode Rahasia
+                                    </h3>
+                                    <p class="mt-0.5 sm:mt-1.5 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
+                                        Anda mendapatkan kode acak dan PIN untuk mengecek status tindak lanjut tanpa meninggalkan jejak.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Card 3: Hanya Dibaca Petugas Resmi -->
+                        <article class="group flex flex-col justify-between rounded-xl sm:rounded-3xl border border-slate-100 bg-white p-3 sm:p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
+                            <div class="flex items-start sm:flex-col sm:items-center gap-3 sm:gap-0 text-left sm:text-center">
+                                <!-- Icon: Perisai Verifikasi / Otoritas Resmi BI -->
+                                <div class="flex size-9 sm:size-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white sm:mx-auto sm:mb-3">
+                                    <svg class="size-4.5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
+                                </div>
+
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                        Hanya Dibaca Petugas Resmi
+                                    </h3>
+                                    <p class="mt-0.5 sm:mt-1.5 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
+                                        Laporan Anda dijaga ketat dan hanya dibuka oleh petugas resmi Bank Indonesia, tidak ke umum.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Card 4: Mulai Membuat Laporan (Teman Grip 03) -->
+                        <article class="group flex flex-col justify-between rounded-xl sm:rounded-3xl border border-blue-200/80 bg-gradient-to-b from-blue-50/60 via-white to-blue-50/30 p-3 sm:p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-md">
+                            <div class="flex items-start sm:flex-col sm:items-center gap-3 sm:gap-0 text-left sm:text-center">
+                                <!-- Icon: Pesawat Kertas Kirim Laporan -->
+                                <div class="flex size-9 sm:size-12 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-transform group-hover:scale-105 sm:mx-auto sm:mb-3">
+                                    <svg class="size-4.5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m22 2-7 20-4-9-9-4Z" />
+                                        <path d="M22 2 11 13" />
+                                    </svg>
+                                </div>
+
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                        Mulai Buat Laporan
+                                    </h3>
+                                    <p class="mt-0.5 sm:mt-1.5 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
+                                        Sampaikan laporan KUPVA sekarang secara anonim, cepat, dan terlindungi.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Button Teman Grip 03 -->
+                            <div class="mt-2.5 sm:mt-4 w-full">
+                                <a href="{{ route('reports.create') }}" class="button-primary w-full inline-flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-3 text-xs sm:text-sm font-bold shadow-sm">
+                                    Mulai membuat laporan <span aria-hidden="true">→</span>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Right Column: Gambar di Atas & Judul di Bawah Gambar -->
+                <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <!-- Gambar Ilustrasi Keamanan (Kompak di Mobile) -->
+                    <div class="relative mx-auto lg:mx-0 flex w-full max-w-[140px] sm:max-w-[240px] lg:max-w-[320px] items-center justify-center">
+                        <!-- Glow Accent Behind Image -->
+                        <div class="absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-blue-300/25 via-sky-200/30 to-blue-100/20 blur-xl sm:blur-2xl"></div>
+                        <img
+                            src="{{ asset('images/illustrations/security-shield.webp') }}"
+                            alt="Ilustrasi Keamanan dan Privasi Pelapor TAMBORA"
+                            class="h-auto w-full object-contain drop-shadow-md transition-transform duration-500 hover:scale-[1.02]"
+                            width="680"
+                            height="382"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <!-- Teks di Bawah Gambar -->
+                    <div class="mt-2.5 sm:mt-5">
+                        <h2 class="text-xl font-extrabold tracking-tight text-navy-950 sm:text-3xl lg:text-[2.25rem] lg:leading-tight">
+                            Lapor dengan tenang,<br class="hidden sm:inline"> identitas tetap aman.
+                        </h2>
+                        <p class="mt-1.5 sm:mt-2.5 text-xs sm:text-base text-slate-600 leading-relaxed max-w-md mx-auto lg:mx-0">
+                            TAMBORA dirancang agar masyarakat dapat berpartisipasi mengawasi KUPVA tidak berizin di NTB tanpa rasa khawatir. Sistem hanya mengumpulkan data kejadian yang diperlukan tanpa melacak identitas pelapor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA Banner: Cek Status Laporan -->
+    <section class="relative overflow-hidden bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 py-12 sm:py-16 text-white shadow-inner">
+        <!-- Ambient Decorative Glows -->
+        <div class="pointer-events-none absolute -right-16 -top-16 size-72 rounded-full bg-white/10 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -left-16 -bottom-16 size-72 rounded-full bg-blue-400/20 blur-3xl" aria-hidden="true"></div>
+
+        <div class="public-container relative z-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+            <div class="max-w-xl">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-blue-100 border border-white/15 backdrop-blur-xs">
+                    <span class="size-1.5 rounded-full bg-emerald-400"></span>
+                    Sudah pernah melapor?
+                </span>
+                <h2 class="mt-2.5 text-2xl font-black sm:text-3xl lg:text-[2rem] leading-tight text-white tracking-tight">
+                    Lihat progres penanganan laporan Anda.
+                </h2>
+                <p class="mt-1.5 text-xs sm:text-sm text-blue-100/90 leading-relaxed">
+                    Cukup masukkan kode tiket dan PIN rahasia untuk memantau status tindak lanjut secara real-time.
+                </p>
+            </div>
+
+            <!-- Upgraded "Cek Status Sekarang" Button -->
+            <a href="{{ route('reports.track') }}"
+               class="group inline-flex shrink-0 items-center justify-center gap-3 rounded-2xl bg-white px-6 py-3.5 sm:px-7 sm:py-4 text-sm sm:text-base font-extrabold text-blue-700 shadow-xl shadow-blue-950/25 transition-all duration-300 hover:-translate-y-1 hover:bg-blue-50/95 hover:text-blue-800 hover:shadow-2xl hover:shadow-blue-950/35 active:translate-y-0 active:scale-[0.98] ring-4 ring-white/20">
+                <svg class="size-5 text-blue-600 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+                <span>Cek status sekarang</span>
+                <span class="flex size-7 items-center justify-center rounded-xl bg-blue-100/80 text-blue-700 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:translate-x-0.5 shadow-2xs">
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                </span>
+            </a>
         </div>
     </section>
 </x-layouts.public>

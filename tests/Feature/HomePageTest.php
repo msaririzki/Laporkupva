@@ -10,9 +10,8 @@ class HomePageTest extends TestCase
     {
         $this->get(route('home'))
             ->assertOk()
-            ->assertSee('Laporkan KUPVA tidak berizin dengan aman')
-            ->assertSee('Tanpa nama, NIK, email, atau nomor telepon')
-            ->assertSee('Contoh alur penanganan')
+            ->assertSee('Berani melapor')
+            ->assertSee('Tanpa nama &amp; NIK', false)
             ->assertSee(route('reports.create'))
             ->assertSee(route('reports.track'))
             ->assertSee(route('filament.admin.auth.login'))

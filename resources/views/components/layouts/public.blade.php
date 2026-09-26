@@ -19,20 +19,20 @@
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-white focus:px-4 focus:py-2 focus:text-[#0B2342] focus:shadow-lg focus:ring-2 focus:ring-[#2563EB]">Lewati ke konten utama</a>
 
     <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl">
-        <div class="public-container flex h-16 items-center justify-between gap-5 sm:h-18">
+        <div class="public-container flex h-19 sm:h-20 items-center justify-between gap-6">
             <a href="{{ route('home') }}" class="group flex shrink-0 items-center" aria-label="TAMBORA - Beranda">
-                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-9 w-auto object-contain sm:h-10" width="720" height="316">
+                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-11 w-auto object-contain sm:h-13 lg:h-14" width="720" height="316">
             </a>
 
-            <nav class="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
-                <a class="nav-link" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
-                <a class="nav-link" href="{{ route('home') }}#keamanan">Keamanan</a>
-                <a class="nav-link {{ request()->routeIs('guide') ? 'is-active' : '' }}" href="{{ route('guide') }}">Panduan</a>
-                <a class="nav-link {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'is-active' : '' }}" href="{{ route('reports.track') }}">Cek status</a>
+            <nav class="hidden items-center gap-1 sm:gap-2 lg:gap-3 md:flex" aria-label="Navigasi utama">
+                <a class="nav-link !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
+                <a class="nav-link !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#keamanan">Keamanan</a>
+                <a class="nav-link !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('guide') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('guide') }}">Panduan</a>
+                <a class="nav-link !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('reports.track') }}">Cek status</a>
             </nav>
 
-            <div class="flex items-center gap-2">
-                <a href="{{ route('reports.create') }}" class="button-primary hidden min-h-10 px-4 py-2 sm:inline-flex">Buat laporan</a>
+            <div class="flex items-center gap-2 sm:gap-2.5">
+                <a href="{{ route('reports.create') }}" class="button-primary hidden sm:inline-flex min-h-11 px-5 sm:px-6 py-2.5 text-sm sm:text-[15px] font-bold rounded-xl shadow-sm">Buat laporan <svg class="size-4.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a>
 
                 <a
                     href="{{ route('filament.admin.auth.login') }}"
@@ -78,7 +78,8 @@
     <!-- Main Content Slot -->
     <main id="main-content" class="flex-1">{{ $slot }}</main>
 
-    <footer class="border-t border-[#E2E8F0] bg-white">
+    <!-- Public Service Footer (Compact, Secondary, Perfectly Balanced) -->
+    <footer class="mt-16 sm:mt-20 border-t border-[#E2E8F0] bg-white">
         <div class="public-container py-8 sm:py-10">
             <div class="grid gap-6 sm:gap-8 md:grid-cols-12 md:items-start">
                 <!-- Brand & Short Description -->
