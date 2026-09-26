@@ -233,6 +233,60 @@
     transform: translateY(-1px);
 }
 
+.admin-login-home-link {
+    margin-top: 1.35rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5ebf2;
+}
+
+.admin-login-home-link a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid transparent;
+    border-radius: 0.8rem;
+    color: #475c76;
+    transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.admin-login-home-link a:hover {
+    border-color: #d7e5f4;
+    color: #234d7e;
+    background: #f2f7fc;
+    transform: translateX(-2px);
+}
+
+.admin-login-home-icon {
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid #dce6f0;
+    border-radius: 0.7rem;
+    color: #315b8e;
+    background: #ffffff;
+    box-shadow: 0 8px 18px -14px rgb(37 74 120 / 62%);
+}
+
+.admin-login-home-link strong,
+.admin-login-home-link small {
+    display: block;
+}
+
+.admin-login-home-link strong {
+    font-size: 0.78rem;
+    font-weight: 750;
+}
+
+.admin-login-home-link small {
+    margin-top: 0.1rem;
+    color: #8493a6;
+    font-size: 0.67rem;
+}
+
 @media (min-width: 56rem) {
     .fi-panel-admin .fi-simple-layout {
         display: grid;

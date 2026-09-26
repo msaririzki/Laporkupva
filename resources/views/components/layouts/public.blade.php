@@ -18,10 +18,10 @@
 <body class="min-h-full flex flex-col bg-[#F7F9FC] text-[#0B2342] antialiased">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-white focus:px-4 focus:py-2 focus:text-[#0B2342] focus:shadow-lg focus:ring-2 focus:ring-[#2563EB]">Lewati ke konten utama</a>
 
-    <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl">
-        <div class="public-container flex h-16 items-center justify-between gap-5 sm:h-18 sm:gap-6">
+    <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/88 shadow-[0_8px_30px_-24px_rgba(11,35,66,0.45)] backdrop-blur-xl">
+        <div class="public-container flex h-14 items-center justify-between gap-4 sm:h-16 sm:gap-6">
             <a href="{{ route('home') }}" class="group flex shrink-0 items-center" aria-label="TAMBORA - Beranda">
-                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-9 w-auto object-contain sm:h-10 lg:h-11" width="720" height="316">
+                <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-8 w-auto object-contain sm:h-9 lg:h-10" width="720" height="316">
             </a>
 
             <nav class="hidden items-center gap-1 sm:gap-2 lg:gap-3 md:flex" aria-label="Navigasi utama">
@@ -32,6 +32,7 @@
             </nav>
 
             <div class="flex items-center gap-2 sm:gap-2.5">
+                <a href="{{ route('reports.create') }}" class="inline-flex min-h-9 items-center justify-center rounded-lg bg-[#2563EB] px-3 text-xs font-bold text-white shadow-sm transition hover:bg-[#1D4ED8] sm:hidden">Lapor</a>
                 <a href="{{ route('reports.create') }}" class="button-primary hidden min-h-10 rounded-xl px-4 py-2 text-sm font-bold shadow-sm sm:inline-flex sm:px-5">Buat laporan <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L10.22 5.03a.75.75 0 0 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a>
 
                 <a
@@ -71,6 +72,18 @@
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0B2342] hover:bg-slate-50" href="{{ route('home') }}#keamanan">Keamanan</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('guide') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0B2342] hover:bg-slate-50' }}" href="{{ route('guide') }}">Panduan</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0B2342] hover:bg-slate-50' }}" href="{{ route('reports.track') }}">Cek status</a>
+            <a class="mt-2 flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[#0B2342] transition hover:border-blue-200 hover:bg-blue-50/70" href="{{ route('filament.admin.auth.login') }}">
+                <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-white text-[#2563EB] shadow-xs ring-1 ring-slate-200">
+                    <svg class="size-4.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 1.75A4.25 4.25 0 0 0 5.75 6v1.1A2.75 2.75 0 0 0 3.5 9.8v5.7a2.75 2.75 0 0 0 2.75 2.75h7.5a2.75 2.75 0 0 0 2.75-2.75V9.8a2.75 2.75 0 0 0-2.25-2.7V6A4.25 4.25 0 0 0 10 1.75ZM7.25 6a2.75 2.75 0 1 1 5.5 0v1.05h-5.5V6Z" clip-rule="evenodd"/>
+                    </svg>
+                </span>
+                <span class="min-w-0">
+                    <strong class="block text-sm font-bold">Login admin</strong>
+                    <small class="mt-0.5 block text-[11px] text-slate-500">Khusus petugas TAMBORA</small>
+                </span>
+                <span class="ml-auto text-slate-400" aria-hidden="true">→</span>
+            </a>
             <a class="mt-2 block text-center rounded-xl bg-[#2563EB] px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-[#1D4ED8]" href="{{ route('reports.create') }}">Buat laporan</a>
         </div>
     </header>
@@ -79,7 +92,7 @@
     <main id="main-content" class="flex-1">{{ $slot }}</main>
 
     <!-- Public Service Footer (Compact, Secondary, Perfectly Balanced) -->
-    <footer class="mt-16 sm:mt-20 border-t border-[#E2E8F0] bg-white">
+    <footer class="{{ request()->routeIs('home') ? 'mt-0' : 'mt-12 sm:mt-16' }} border-t border-[#E2E8F0] bg-white">
         <div class="public-container py-8 sm:py-10">
             <div class="grid gap-6 sm:gap-8 md:grid-cols-12 md:items-start">
                 <!-- Brand & Short Description -->

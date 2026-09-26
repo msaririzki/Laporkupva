@@ -56,6 +56,8 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Akses terlindungi')
             ->assertSee('Email admin')
             ->assertSee('Masuk')
+            ->assertSee('Kembali ke beranda')
+            ->assertSee(route('home'), false)
             ->assertDontSee('Ruang kerja');
     }
 
