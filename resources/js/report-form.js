@@ -188,6 +188,9 @@ const initCustomSelect = (selectElement) => {
         [...selectElement.options].forEach((option, index) => {
             const item = document.createElement('div');
             item.className = 'tambora-select-option';
+            if (selectElement.id === 'incident_type') {
+                item.classList.add('uppercase');
+            }
             item.setAttribute('role', 'option');
             item.setAttribute('tabindex', '0');
             item.dataset.value = option.value;

@@ -122,12 +122,12 @@
                             <div>
                                 <label class="form-label" for="incident_type">Jenis kejadian <span class="text-[#DC2626]">*</span></label>
                                 <select class="form-control @error('incident_type') is-invalid @enderror" id="incident_type" name="incident_type" required>
-                                    <option value="">Pilih jenis kejadian</option>
-                                    <option value="kupva_tanpa_izin" @selected(old('incident_type') === 'kupva_tanpa_izin')>Dugaan KUPVA tanpa izin</option>
-                                    <option value="transaksi_mencurigakan" @selected(old('incident_type') === 'transaksi_mencurigakan')>Transaksi penukaran mencurigakan</option>
-                                    <option value="pelanggaran_kurs" @selected(old('incident_type') === 'pelanggaran_kurs')>Informasi kurs tidak wajar/tidak transparan</option>
-                                    <option value="penolakan_rupiah" @selected(old('incident_type') === 'penolakan_rupiah')>Penolakan penggunaan Rupiah</option>
-                                    <option value="lainnya" @selected(old('incident_type') === 'lainnya')>Lainnya terkait penukaran valuta asing</option>
+                                    <option value="">PILIH JENIS KEJADIAN</option>
+                                    <option value="kupva_tanpa_izin" @selected(old('incident_type') === 'kupva_tanpa_izin')>DUGAAN KUPVA TANPA IZIN</option>
+                                    <option value="transaksi_mencurigakan" @selected(old('incident_type') === 'transaksi_mencurigakan')>TRANSAKSI PENUKARAN MENCURIGAKAN</option>
+                                    <option value="pelanggaran_kurs" @selected(old('incident_type') === 'pelanggaran_kurs')>INFORMASI KURS TIDAK WAJAR/TIDAK TRANSPARAN</option>
+                                    <option value="penolakan_rupiah" @selected(old('incident_type') === 'penolakan_rupiah')>PENOLAKAN PENGGUNAAN RUPIAH</option>
+                                    <option value="lainnya" @selected(old('incident_type') === 'lainnya')>LAINNYA TERKAIT PENUKARAN VALUTA ASING</option>
                                 </select>
                                 @error('incident_type')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
@@ -144,7 +144,7 @@
                             </div>
                         </div>
 
-                        <!-- Desktop 2-Column Row 2: Nama Tempat & Perkiraan Waktu -->
+                        <!-- Desktop 2-Column Row 2: Nama Tempat & Nomor HP -->
                         <div class="grid gap-3.5 lg:grid-cols-2 lg:gap-5">
                             <!-- Nama atau Ciri Tempat -->
                             <div>
@@ -156,6 +156,19 @@
                                 @error('business_name')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
 
+                            <!-- No HP Pelapor -->
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <label class="form-label" for="phone_number">No HP pelapor</label>
+                                    <span class="text-xs text-slate-400">Opsional</span>
+                                </div>
+                                <input class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" name="phone_number" type="tel" value="{{ old('phone_number') }}" maxlength="20" autocomplete="tel" placeholder="Contoh: 081234567890">
+                                @error('phone_number')<p class="form-error">{{ $message }}</p>@enderror
+                            </div>
+                        </div>
+
+                        <!-- Desktop 2-Column Row 3: Perkiraan Waktu -->
+                        <div class="grid gap-3.5 lg:grid-cols-2 lg:gap-5">
                             <!-- Perkiraan Waktu -->
                             <div>
                                 <div class="flex items-center justify-between">
