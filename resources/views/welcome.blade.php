@@ -1,41 +1,41 @@
 <x-layouts.public title="Lapor KUPVA secara aman">
     <section class="relative overflow-hidden bg-[#04285b] text-white bg-cover bg-center" style="background-image: url('{{ asset('images/hero-bg.jpg') }}');">
         <!-- Angled & Gradual Dark Blue Overlay Matching Mockup -->
-        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(112deg,#032c69_0%,#053982_32%,rgba(5,57,130,0.82)_44%,rgba(5,57,130,0.15)_60%,transparent_72%)] hidden lg:block" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(112deg,#032c69_0%,#053982_30%,rgba(5,57,130,0.8)_42%,rgba(5,57,130,0.12)_58%,transparent_70%)] hidden lg:block" aria-hidden="true"></div>
         <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#032c69]/95 via-[#053982]/85 to-[#032c69]/90 lg:hidden" aria-hidden="true"></div>
 
-        <div class="public-container relative grid min-h-[640px] items-center gap-10 py-16 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-24">
+        <div class="public-container relative grid min-h-[520px] lg:min-h-[560px] items-center gap-8 py-12 sm:py-16 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10 lg:py-16">
             <!-- Left Column Content -->
             <div class="relative z-10">
                 <!-- Eyebrow Badge -->
-                <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-slate-900/40 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-xs backdrop-blur-md">
-                    <span class="size-2 rounded-full bg-emerald-400"></span>
+                <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-slate-900/35 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-xs backdrop-blur-md">
+                    <span class="size-1.5 rounded-full bg-emerald-400"></span>
                     <span>KANAL PELAPORAN RESMI WILAYAH NTB</span>
                 </div>
 
-                <!-- Headline -->
-                <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.12]">
+                <!-- Headline (Refined Minimalist Size) -->
+                <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-[2.75rem] lg:leading-[1.14]">
                     Berani melapor,<br>
                     <span class="text-[#2dd4bf]">untuk NTB yang<br>lebih baik.</span>
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="mt-5 max-w-xl text-sm leading-relaxed text-blue-50/90 sm:text-base font-normal">
+                <p class="mt-3.5 max-w-lg text-xs leading-relaxed text-blue-50/85 sm:text-sm lg:text-[14.5px] font-normal">
                     Laporkan dugaan kegiatan penukaran valuta asing (money changer) yang tidak sesuai ketentuan. Identitas Anda tidak diminta dan proses penanganannya dapat dipantau secara aman.
                 </p>
 
-                <!-- CTA Buttons -->
-                <div class="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
-                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2.5 rounded-2xl bg-blue-600 px-6 py-3.5 text-sm sm:text-base font-bold text-white shadow-lg shadow-blue-900/30 hover:bg-blue-500 transition-all">
-                        <svg class="size-4 sm:size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- CTA Buttons (Compact & Sleek) -->
+                <div class="mt-6 flex flex-wrap items-center gap-2.5 sm:gap-3.5">
+                    <a href="{{ route('reports.create') }}" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-900/25 hover:bg-blue-500 transition-all">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m22 2-7 20-4-9-9-4Z"/>
                             <path d="M22 2 11 13"/>
                         </svg>
                         <span>Buat laporan anonim</span>
-                        <span aria-hidden="true" class="text-base sm:text-lg">→</span>
+                        <span aria-hidden="true" class="text-sm sm:text-base">→</span>
                     </a>
-                    <a href="{{ route('reports.track') }}" class="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm sm:text-base font-bold text-navy-950 shadow-md hover:bg-slate-50 transition-all">
-                        <svg class="size-4 sm:size-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <a href="{{ route('reports.track') }}" class="inline-flex items-center gap-1.5 rounded-xl bg-white px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-navy-950 shadow-sm hover:bg-slate-50 transition-all">
+                        <svg class="size-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="7"/>
                             <path d="m21 21-4.3-4.3"/>
                         </svg>
@@ -43,64 +43,64 @@
                     </a>
                 </div>
 
-                <!-- 3 Key Features Row -->
-                <div class="mt-10 sm:mt-12 flex flex-wrap items-center gap-6 sm:gap-8 lg:gap-9">
+                <!-- 3 Key Features Row (Minimalist Scale) -->
+                <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-5 sm:gap-7 lg:gap-8">
                     <!-- Feature 1 -->
-                    <div class="flex items-center gap-3">
-                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white shadow-xs">
-                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="flex items-center gap-2.5">
+                        <div class="flex size-8 sm:size-9 shrink-0 items-center justify-center rounded-full bg-blue-600/90 text-white shadow-xs">
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
                                 <path d="m9 12 2 2 4-4"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-sm font-bold text-white">Tanpa nama &amp; NIK</p>
-                            <p class="text-[11px] sm:text-xs text-blue-100/75 mt-0.5">Identitas Anda terlindungi</p>
+                            <p class="text-xs sm:text-[13px] font-bold text-white">Tanpa nama &amp; NIK</p>
+                            <p class="text-[10px] sm:text-[11px] text-blue-100/70 mt-0.5">Identitas Anda terlindungi</p>
                         </div>
                     </div>
 
                     <!-- Feature 2 -->
-                    <div class="flex items-center gap-3">
-                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white shadow-xs">
-                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="flex items-center gap-2.5">
+                        <div class="flex size-8 sm:size-9 shrink-0 items-center justify-center rounded-full bg-blue-600/90 text-white shadow-xs">
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
                                 <circle cx="12" cy="10" r="3"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-sm font-bold text-white">Lokasi akurat</p>
-                            <p class="text-[11px] sm:text-xs text-blue-100/75 mt-0.5">Gunakan GPS atau cari lokasi</p>
+                            <p class="text-xs sm:text-[13px] font-bold text-white">Lokasi akurat</p>
+                            <p class="text-[10px] sm:text-[11px] text-blue-100/70 mt-0.5">Gunakan GPS atau cari lokasi</p>
                         </div>
                     </div>
 
                     <!-- Feature 3 -->
-                    <div class="flex items-center gap-3">
-                        <div class="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white shadow-xs">
-                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="flex items-center gap-2.5">
+                        <div class="flex size-8 sm:size-9 shrink-0 items-center justify-center rounded-full bg-blue-600/90 text-white shadow-xs">
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 20V10"/>
                                 <path d="M12 20V4"/>
                                 <path d="M6 20v-6"/>
                             </svg>
                         </div>
                         <div class="leading-tight">
-                            <p class="text-xs sm:text-sm font-bold text-white">Proses transparan</p>
-                            <p class="text-[11px] sm:text-xs text-blue-100/75 mt-0.5">Pantau perkembangan laporan</p>
+                            <p class="text-xs sm:text-[13px] font-bold text-white">Proses transparan</p>
+                            <p class="text-[10px] sm:text-[11px] text-blue-100/70 mt-0.5">Pantau perkembangan laporan</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Alur Penanganan Floating Card -->
-            <div class="relative z-10 mx-auto w-full max-w-md lg:ml-auto">
-                <div class="rounded-3xl bg-white/95 p-6 sm:p-7 shadow-2xl backdrop-blur-md border border-white/60">
+            <!-- Right Column: Alur Penanganan Floating Card (Compact & Minimalist) -->
+            <div class="relative z-10 mx-auto w-full max-w-[390px] lg:ml-auto">
+                <div class="rounded-2xl sm:rounded-3xl bg-white/95 p-5 sm:p-6 shadow-xl backdrop-blur-md border border-white/70">
                     <!-- Card Header -->
-                    <div class="flex items-start justify-between">
+                    <div class="flex items-start justify-between pb-1">
                         <div>
-                            <p class="text-[11px] font-extrabold uppercase tracking-wider text-blue-600">Alur penanganan</p>
-                            <h2 class="mt-0.5 text-base sm:text-lg font-black text-navy-950">Laporan Anda terus bergerak</h2>
+                            <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-blue-600">Alur penanganan</p>
+                            <h2 class="mt-0.5 text-sm sm:text-base font-black text-navy-950">Laporan Anda terus bergerak</h2>
                         </div>
-                        <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700 border border-emerald-200/70">
-                            <svg class="size-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 border border-emerald-200/70">
+                            <svg class="size-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="20 6 9 17 4 12"/>
                             </svg>
                             <span>Terlindungi</span>
@@ -108,8 +108,8 @@
                     </div>
 
                     <!-- Steps Timeline -->
-                    <div class="relative mt-6 space-y-4">
-                        <div class="absolute left-3.5 sm:left-4 top-3 bottom-4 w-0.5 bg-slate-200" aria-hidden="true"></div>
+                    <div class="relative mt-4 space-y-3">
+                        <div class="absolute left-3 top-2.5 bottom-3.5 w-0.5 bg-slate-100" aria-hidden="true"></div>
 
                         @php
                             $timelineSteps = [
@@ -123,22 +123,22 @@
                         @endphp
 
                         @foreach ($timelineSteps as $index => $step)
-                            <div class="relative flex items-start gap-3.5">
+                            <div class="relative flex items-start gap-3">
                                 @if ($step['completed'])
-                                    <span class="relative z-10 flex size-7 sm:size-8 shrink-0 items-center justify-center rounded-full bg-[#06b6d4] text-white shadow-xs">
-                                        <svg class="size-4" viewBox="0 0 20 20" fill="currentColor">
+                                    <span class="relative z-10 flex size-6 sm:size-6.5 shrink-0 items-center justify-center rounded-full bg-[#06b6d4] text-white shadow-2xs">
+                                        <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
                                         </svg>
                                     </span>
                                 @else
-                                    <span class="relative z-10 flex size-7 sm:size-8 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-900 font-extrabold text-xs">
+                                    <span class="relative z-10 flex size-6 sm:size-6.5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-900 font-extrabold text-[11px]">
                                         {{ $step['step'] }}
                                     </span>
                                 @endif
 
                                 <div class="min-w-0 pt-0.5">
-                                    <p class="text-xs sm:text-sm font-bold text-slate-900 leading-snug">{{ $step['title'] }}</p>
-                                    <p class="text-[11px] sm:text-xs text-slate-500 leading-normal">{{ $step['desc'] }}</p>
+                                    <p class="text-xs sm:text-[13px] font-bold text-slate-800 leading-snug">{{ $step['title'] }}</p>
+                                    <p class="text-[10px] sm:text-[11px] text-slate-500 leading-tight mt-0.5">{{ $step['desc'] }}</p>
                                 </div>
                             </div>
                         @endforeach
