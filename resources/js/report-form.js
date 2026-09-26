@@ -156,7 +156,7 @@ const initCustomSelect = (selectElement) => {
     trigger.setAttribute('aria-expanded', 'false');
 
     const triggerText = document.createElement('span');
-    triggerText.className = 'truncate text-left text-sm';
+    triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm';
 
     const triggerIcon = document.createElement('span');
     triggerIcon.className = 'tambora-select-arrow shrink-0 ml-2';
@@ -174,10 +174,10 @@ const initCustomSelect = (selectElement) => {
         const selectedOption = selectElement.selectedOptions[0];
         if (selectedOption && selectedOption.value) {
             triggerText.textContent = selectedOption.textContent;
-            triggerText.className = 'truncate text-left text-sm text-[#0B2342] font-medium';
+            triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm text-[#0B2342] font-medium';
         } else {
             triggerText.textContent = selectElement.options[0]?.textContent || 'Pilih opsi';
-            triggerText.className = 'truncate text-left text-sm text-[#64748B]';
+            triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm text-[#64748B]';
         }
     };
 

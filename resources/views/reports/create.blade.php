@@ -124,10 +124,10 @@
                                 <select class="form-control @error('incident_type') is-invalid @enderror" id="incident_type" name="incident_type" required>
                                     <option value="">PILIH JENIS KEJADIAN</option>
                                     <option value="kupva_tanpa_izin" @selected(old('incident_type') === 'kupva_tanpa_izin')>DUGAAN KUPVA TANPA IZIN</option>
-                                    <option value="transaksi_mencurigakan" @selected(old('incident_type') === 'transaksi_mencurigakan')>TRANSAKSI PENUKARAN MENCURIGAKAN</option>
-                                    <option value="pelanggaran_kurs" @selected(old('incident_type') === 'pelanggaran_kurs')>INFORMASI KURS TIDAK WAJAR/TIDAK TRANSPARAN</option>
-                                    <option value="penolakan_rupiah" @selected(old('incident_type') === 'penolakan_rupiah')>PENOLAKAN PENGGUNAAN RUPIAH</option>
-                                    <option value="lainnya" @selected(old('incident_type') === 'lainnya')>LAINNYA TERKAIT PENUKARAN VALUTA ASING</option>
+                                    <option value="transaksi_mencurigakan" @selected(old('incident_type') === 'transaksi_mencurigakan')>TRANSAKSI MENCURIGAKAN</option>
+                                    <option value="pelanggaran_kurs" @selected(old('incident_type') === 'pelanggaran_kurs')>PELANGGARAN KURS</option>
+                                    <option value="penolakan_rupiah" @selected(old('incident_type') === 'penolakan_rupiah')>PENOLAKAN RUPIAH</option>
+                                    <option value="lainnya" @selected(old('incident_type') === 'lainnya')>LAINNYA TERKAIT VALAS</option>
                                 </select>
                                 @error('incident_type')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
