@@ -12,20 +12,20 @@
 
         <div class="public-container relative grid items-center gap-8 lg:grid-cols-2 lg:gap-10 max-w-6xl mx-auto">
             <!-- Left Column: Typography & Actions -->
-            <div class="relative z-10 flex flex-col items-center text-center">
+            <div class="relative z-10 flex flex-col items-start text-left">
                 <!-- Headline with Harmonious Navy and Blue Accents -->
-                <h1 class="text-2xl sm:text-3xl lg:text-[2.65rem] font-black tracking-tight text-navy-950 leading-tight lg:leading-[1.15]">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl xl:text-[2.65rem] font-black tracking-tight text-navy-950 leading-[1.18]">
                     Berani melapor,<br>
-                    <span class="text-blue-600">untuk NTB</span> yang lebih baik.
+                    <span class="text-blue-600">untuk NTB yang lebih baik.</span>
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="mt-2.5 sm:mt-3 max-w-md text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-normal">
+                <p class="mt-3 sm:mt-3.5 max-w-xl text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-normal">
                     Bantu menjaga aktivitas penukaran valuta asing di NTB tetap aman dan sesuai aturan. Sampaikan laporan Anda tanpa mengungkap identitas.
                 </p>
 
-                <!-- CTA Buttons (Centered) -->
-                <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                <!-- CTA Buttons -->
+                <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                     <a href="{{ route('reports.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m22 2-7 20-4-9-9-4Z"/>
@@ -167,24 +167,6 @@
                                 </div>
                             @endif
                         @endforeach
-                    </div>
-
-                    <!-- Trust Seal Footer Inside Card -->
-                    <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
-                        <span class="inline-flex items-center gap-1 font-semibold text-slate-600">
-                            <svg class="size-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                            Kanal Resmi BI NTB
-                        </span>
-                        <span class="inline-flex items-center gap-1 font-medium text-slate-400">
-                            <svg class="size-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                                <line x1="1" y1="1" x2="23" y2="23"/>
-                            </svg>
-                            100% Bebas Identitas
-                        </span>
                     </div>
                 </div>
             </div>
