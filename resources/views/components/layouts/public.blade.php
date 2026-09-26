@@ -73,7 +73,7 @@
                 <button
                     type="button"
                     id="mobile-menu-button"
-                    class="inline-flex size-10 items-center justify-center rounded-xl border border-[#E2E8F0] bg-white text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50 focus:ring-2 focus:ring-[#2563EB]"
+                    class="md:hidden inline-flex size-10 items-center justify-center rounded-xl border border-[#E2E8F0] bg-white text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50 focus:ring-2 focus:ring-[#2563EB]"
                     aria-expanded="false"
                     aria-controls="mobile-nav"
                     aria-label="Buka menu navigasi"

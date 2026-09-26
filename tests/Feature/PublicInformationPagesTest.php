@@ -40,6 +40,10 @@ class PublicInformationPagesTest extends TestCase
             ->assertOk()
             ->assertSee('Anonim sejak awal')
             ->assertSee('Data yang tidak diminta')
-            ->assertSee('Alamat IP tidak disimpan sebagai bagian dari data laporan.');
+            ->assertSee('Penyimpanan bukti terlindungi')
+            ->assertSee('Alamat IP tidak disimpan sebagai bagian dari data laporan.')
+            ->assertSee('Log keamanan server dapat mencatat akses teknis untuk waktu terbatas')
+            ->assertDontSee('Penyimpanan bukti terenkripsi')
+            ->assertDontSee('Tanpa jejak pelapor');
     }
 }

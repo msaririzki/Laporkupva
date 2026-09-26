@@ -43,13 +43,13 @@
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
-                        <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Penyimpanan bukti terenkripsi</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Berkas foto atau dokumen bukti tersimpan dalam repositori terisolasi dan hanya bisa dibuka petugas resmi berwenang.</p>
+                        <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Penyimpanan bukti terlindungi</h2>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Berkas foto atau dokumen bukti disimpan di ruang penyimpanan privat dan hanya dapat diakses oleh petugas yang berwenang.</p>
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
-                        <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Tanpa jejak pelapor</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Sistem tidak menyimpan identitas pribadi. Alamat IP tidak disimpan sebagai bagian dari data laporan.</p>
+                        <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Catatan teknis</h2>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Alamat IP tidak disimpan sebagai bagian dari data laporan. Log keamanan server dapat mencatat akses teknis untuk waktu terbatas sesuai kebijakan pengamanan sistem.</p>
                     </article>
                 </div>
 
