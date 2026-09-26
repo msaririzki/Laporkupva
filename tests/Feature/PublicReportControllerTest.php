@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Enums\ReportStatus;
 use App\Models\Report;
+use App\Models\User;
+use App\Notifications\Admin\NewReportSubmitted;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -73,6 +75,26 @@ class PublicReportControllerTest extends TestCase
 
         $this->assertCount(2, $report->evidence);
         Storage::disk('local')->assertExists($report->evidence->pluck('path')->all());
+    }
+
+    public function test_new_report_notifies_each_active_admin(): void
+    {
+        $admin = User::factory()->create();
+        $superAdmin = User::factory()->superAdmin()->create();
+        $inactiveAdmin = User::factory()->create(['is_active' => false]);
+
+        $this->post(route('reports.store'), $this->validPayload())
+            ->assertRedirect(route('reports.success'));
+
+        $report = Report::query()->sole();
+        $adminNotification = $admin->notifications()->sole();
+
+        $this->assertSame(NewReportSubmitted::class, $adminNotification->type);
+        $this->assertSame('Laporan baru masuk', $adminNotification->data['title']);
+        $this->assertStringContainsString($report->public_code, $adminNotification->data['body']);
+        $this->assertStringContainsString("/admin/laporan/{$report->getRouteKey()}", $adminNotification->data['actions'][0]['url']);
+        $this->assertSame(1, $superAdmin->notifications()->count());
+        $this->assertSame(0, $inactiveAdmin->notifications()->count());
     }
 
     public function test_at_least_one_evidence_file_is_required(): void

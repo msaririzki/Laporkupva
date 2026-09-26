@@ -84,6 +84,7 @@ class ReportResource extends Resource
             ->modalDescription(fn (Report $record): string => "{$record->status->label()} → {$record->status->next()?->label()}")
             ->modalSubmitActionLabel('Lanjutkan tahap')
             ->modalWidth(Width::ThreeExtraLarge)
+            ->stickyModalHeader()
             ->stickyModalFooter()
             ->extraModalWindowAttributes(['class' => 'tambora-action-modal tambora-action-modal--progress'])
             ->extraModalOverlayAttributes(['class' => 'tambora-action-modal-overlay'])

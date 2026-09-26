@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\AnonymousMessage;
 use App\Models\Report;
+use App\Models\User;
+use App\Notifications\Admin\NewReporterMessage;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Tests\TestCase;
 
@@ -28,6 +30,30 @@ class PublicReportMessageControllerTest extends TestCase
             'sender_type' => 'reporter',
             'body' => 'Lokasinya berada di sebelah timur pasar.',
         ]);
+    }
+
+    public function test_new_reporter_message_notifies_each_active_admin(): void
+    {
+        $admin = User::factory()->create();
+        $superAdmin = User::factory()->superAdmin()->create();
+        $inactiveAdmin = User::factory()->create(['is_active' => false]);
+        $report = Report::factory()->create(['public_code' => 'LKP-AB12-CD34']);
+
+        $this->withSession($this->trackingSessionFor($report))
+            ->post(route('reports.messages.store', ['report' => $report->public_code]), [
+                'body' => 'Lokasi tepatnya berada di samping pintu timur pasar.',
+            ])
+            ->assertRedirect(route('reports.status', ['report' => $report->public_code]));
+
+        $adminNotification = $admin->notifications()->sole();
+
+        $this->assertSame(NewReporterMessage::class, $adminNotification->type);
+        $this->assertSame('Pesan baru dari pelapor', $adminNotification->data['title']);
+        $this->assertStringContainsString($report->public_code, $adminNotification->data['body']);
+        $this->assertStringContainsString('samping pintu timur pasar', $adminNotification->data['body']);
+        $this->assertStringContainsString("/admin/laporan/{$report->getRouteKey()}", $adminNotification->data['actions'][0]['url']);
+        $this->assertSame(1, $superAdmin->notifications()->count());
+        $this->assertSame(0, $inactiveAdmin->notifications()->count());
     }
 
     public function test_message_requires_an_active_verified_tracking_session(): void

@@ -47,6 +47,8 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('images/brand/bank-indonesia-mark.webp'))
             ->darkMode(false)
             ->globalSearch(false)
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('15s')
             ->colors([
                 'primary' => Color::Blue,
             ])

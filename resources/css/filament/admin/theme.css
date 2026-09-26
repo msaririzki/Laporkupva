@@ -647,6 +647,85 @@
     background: #fbfcfe;
 }
 
+.fi-body-has-navigation .fi-topbar-database-notifications-btn {
+    width: 2.55rem;
+    height: 2.55rem;
+    border: 1px solid #dce4ee;
+    border-radius: 0.8rem;
+    color: #526a88;
+    background: #ffffff;
+    box-shadow: 0 8px 20px -16px rgb(15 23 42 / 60%);
+    transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.fi-body-has-navigation .fi-topbar-database-notifications-btn:hover {
+    border-color: #bfdbfe;
+    color: #2563eb;
+    background: #eff6ff;
+    transform: translateY(-1px);
+}
+
+.fi-no-database.fi-modal .fi-modal-window {
+    border-left: 1px solid #dce5f0;
+    background: #f8fafc;
+    box-shadow: -24px 0 70px -42px rgb(15 23 42 / 55%);
+}
+
+.fi-no-database.fi-modal .fi-modal-header {
+    border-bottom: 1px solid #e5eaf1;
+    background:
+        radial-gradient(circle at 90% 5%, rgb(191 219 254 / 50%), transparent 8rem),
+        linear-gradient(145deg, #f8fbff 0%, #ffffff 70%);
+}
+
+.fi-no-database.fi-modal .fi-modal-heading {
+    color: #17294a;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.fi-no-database .fi-no-notification-unread-ctn {
+    background: linear-gradient(90deg, #eff6ff 0%, #ffffff 38%);
+}
+
+.fi-no-database .fi-no-notification-read-ctn {
+    background: #ffffff;
+}
+
+.fi-no-database .fi-no-notification-read-ctn,
+.fi-no-database .fi-no-notification-unread-ctn {
+    transition: background-color 160ms ease;
+}
+
+.fi-no-database .fi-no-notification-read-ctn:hover,
+.fi-no-database .fi-no-notification-unread-ctn:hover {
+    background: #f8fbff;
+}
+
+.fi-no-database .fi-no-notification {
+    gap: 0.9rem;
+    padding: 1.15rem;
+}
+
+.fi-no-database .fi-no-notification-icon {
+    width: 2.6rem;
+    height: 2.6rem;
+    padding: 0.62rem;
+    border: 1px solid currentColor;
+    border-radius: 0.85rem;
+    background: rgb(255 255 255 / 82%);
+}
+
+.fi-no-database .fi-no-notification-title {
+    color: #17294a;
+    font-weight: 750;
+}
+
+.fi-no-database .fi-no-notification-body {
+    color: #64748b;
+    line-height: 1.55;
+}
+
 .fi-resource-create-record-page.fi-resource-users .fi-breadcrumbs {
     display: none;
 }
@@ -1743,13 +1822,15 @@
     }
 }
 
-/* Dialog operasional dibuat ringan agar konteks laporan tetap terasa tanpa menggelapkan layar. */
+/* Dialog operasional memakai overlay biasa agar konteks halaman tetap tenang dan mudah dibaca. */
 .tambora-action-modal-overlay.fi-modal-close-overlay {
-    background: rgb(30 64 108 / 24%);
-    backdrop-filter: blur(5px) saturate(115%);
+    background: rgb(15 23 42 / 42%);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
 }
 
 .tambora-action-modal.fi-modal-window {
+    max-height: calc(100dvh - 2rem);
     overflow: hidden;
     border: 1px solid rgb(203 216 232 / 92%);
     border-radius: 1.35rem;
@@ -1758,6 +1839,7 @@
 }
 
 .tambora-action-modal .fi-modal-header {
+    flex-shrink: 0;
     gap: 0.9rem;
     padding: 1.2rem 1.4rem 1rem;
     border-bottom: 1px solid #e8eef6;
@@ -1792,8 +1874,13 @@
 }
 
 .tambora-action-modal .fi-modal-content {
+    min-height: 0;
+    flex: 1 1 auto;
     gap: 1rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 1.15rem 1.4rem;
+    scrollbar-gutter: stable;
 }
 
 .tambora-action-modal .fi-sc-form,
@@ -1826,6 +1913,7 @@
 }
 
 .tambora-action-modal .fi-modal-footer {
+    flex-shrink: 0;
     padding: 0.9rem 1.4rem;
     border-top: 1px solid #e8eef6;
     background: #f8fbff;
@@ -1867,6 +1955,7 @@ body:has(.fi-modal-open) .admin-detail-floating-back {
 
 @media (max-width: 40rem) {
     .tambora-action-modal.fi-modal-window {
+        max-height: calc(100dvh - 1rem);
         border-radius: 1.1rem;
     }
 
