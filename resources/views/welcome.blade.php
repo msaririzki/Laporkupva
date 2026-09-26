@@ -91,69 +91,161 @@
             </div>
 
             <!-- Right Column: Alur Penanganan Floating Card -->
-            <div class="relative z-10 mx-auto w-full max-w-[390px] lg:ml-auto">
-                <div class="rounded-3xl bg-white/95 p-5 sm:p-6 shadow-2xl backdrop-blur-md border border-white/80">
+            <div class="relative z-10 mx-auto w-full max-w-[400px] lg:ml-auto">
+                <div class="relative rounded-3xl bg-white/95 p-5 sm:p-6 shadow-2xl backdrop-blur-md border border-white/90 ring-1 ring-slate-900/5">
+                    <!-- Subtle Corner Ambient Light -->
+                    <div class="pointer-events-none absolute -top-10 -right-10 size-32 rounded-full bg-blue-500/10 blur-2xl" aria-hidden="true"></div>
+
                     <!-- Card Header -->
-                    <div class="flex items-start justify-between pb-2 border-b border-slate-100">
+                    <div class="relative flex items-start justify-between pb-3 border-b border-slate-100">
                         <div>
-                            <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#2563EB]">Alur penanganan</p>
+                            <div class="flex items-center gap-1.5">
+                                <span class="relative flex size-2">
+                                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+                                    <span class="relative inline-flex size-2 rounded-full bg-blue-600"></span>
+                                </span>
+                                <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#2563EB]">Alur penanganan</p>
+                            </div>
                             <h2 class="mt-0.5 text-sm sm:text-base font-black text-navy-950">Laporan Anda terus bergerak</h2>
                         </div>
-                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-[#2E9B68] border border-emerald-200/70">
+                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-[#2E9B68] border border-emerald-200/80 shadow-2xs">
                             <svg class="size-3 text-[#2E9B68]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="20 6 9 17 4 12"/>
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                             </svg>
                             <span>Terlindungi</span>
                         </span>
                     </div>
 
-                    <!-- Steps Timeline -->
-                    <div class="relative mt-4 space-y-3">
-                        <div class="absolute left-3 top-2.5 bottom-3.5 w-0.5 bg-slate-200" aria-hidden="true"></div>
+                    <!-- Mini Progress Summary -->
+                    <div class="mt-3 rounded-xl bg-slate-50/90 p-2.5 border border-slate-100/90">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="font-medium text-slate-500">Transparansi Penanganan</span>
+                            <span class="font-bold text-blue-600">Tahap 2 dari 6 Selesai</span>
+                        </div>
+                        <div class="mt-1.5 h-1.5 w-full bg-slate-200/80 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 rounded-full w-2/6"></div>
+                        </div>
+                    </div>
 
+                    <!-- Steps Micro-Tiles Grid/List -->
+                    <div class="relative mt-3 space-y-2">
                         @php
                             $timelineSteps = [
-                                ['title' => 'Laporan dikirim', 'desc' => 'Data tersimpan dengan aman', 'completed' => true, 'step' => 1],
-                                ['title' => 'Laporan diterima', 'desc' => 'Pemeriksaan awal oleh petugas', 'completed' => true, 'step' => 2],
-                                ['title' => 'Koordinasi dengan APH', 'desc' => 'Koordinasi penanganan', 'completed' => false, 'step' => 3],
-                                ['title' => 'Kunjungan lapangan', 'desc' => 'Verifikasi atau penertiban', 'completed' => false, 'step' => 4],
-                                ['title' => 'Laporan hasil', 'desc' => 'Hasil penanganan tersedia', 'completed' => false, 'step' => 5],
-                                ['title' => 'Selesai', 'desc' => 'Proses telah dituntaskan', 'completed' => false, 'step' => 6],
+                                [
+                                    'step' => 1,
+                                    'title' => 'Laporan dikirim',
+                                    'desc' => 'Data tersimpan dengan aman',
+                                    'status' => 'completed',
+                                    'statusLabel' => 'Selesai',
+                                ],
+                                [
+                                    'step' => 2,
+                                    'title' => 'Laporan diterima',
+                                    'desc' => 'Pemeriksaan awal oleh petugas',
+                                    'status' => 'completed',
+                                    'statusLabel' => 'Selesai',
+                                ],
+                                [
+                                    'step' => 3,
+                                    'title' => 'Koordinasi dengan APH',
+                                    'desc' => 'Koordinasi penanganan',
+                                    'status' => 'active',
+                                    'statusLabel' => 'Proses',
+                                ],
+                                [
+                                    'step' => 4,
+                                    'title' => 'Kunjungan lapangan',
+                                    'desc' => 'Verifikasi atau penertiban',
+                                    'status' => 'upcoming',
+                                    'statusLabel' => 'Tahap 4',
+                                ],
+                                [
+                                    'step' => 5,
+                                    'title' => 'Laporan hasil',
+                                    'desc' => 'Hasil penanganan tersedia',
+                                    'status' => 'upcoming',
+                                    'statusLabel' => 'Tahap 5',
+                                ],
+                                [
+                                    'step' => 6,
+                                    'title' => 'Selesai',
+                                    'desc' => 'Proses telah dituntaskan',
+                                    'status' => 'upcoming',
+                                    'statusLabel' => 'Tahap 6',
+                                ],
                             ];
                         @endphp
 
-                        @foreach ($timelineSteps as $index => $step)
-                            <div class="relative flex items-start gap-3">
-                                @if ($step['completed'])
-                                    <span class="relative z-10 flex size-6 sm:size-6.5 shrink-0 items-center justify-center rounded-full bg-[#0D9488] text-white shadow-xs">
-                                        <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
-                                        </svg>
+                        @foreach ($timelineSteps as $step)
+                            @if ($step['status'] === 'completed')
+                                <div class="group relative flex items-center justify-between gap-3 rounded-xl border border-emerald-100 bg-emerald-50/40 p-2 sm:p-2.5 transition-all duration-200 hover:bg-emerald-50/70 hover:shadow-2xs">
+                                    <div class="flex items-center gap-2.5 min-w-0">
+                                        <span class="flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white shadow-xs">
+                                            <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                        <div class="min-w-0">
+                                            <p class="text-xs sm:text-[13px] font-bold text-slate-800 leading-snug">{{ $step['title'] }}</p>
+                                            <p class="text-[10px] sm:text-[11px] text-slate-500 leading-tight truncate">{{ $step['desc'] }}</p>
+                                        </div>
+                                    </div>
+                                    <span class="shrink-0 rounded-md bg-emerald-100/90 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                                        {{ $step['statusLabel'] }}
                                     </span>
-                                @else
-                                    <span class="relative z-10 flex size-6 sm:size-6.5 shrink-0 items-center justify-center rounded-full bg-slate-100 text-[#0B2342] font-extrabold text-[11px]">
-                                        {{ $step['step'] }}
-                                    </span>
-                                @endif
-
-                                <div class="min-w-0 pt-0.5">
-                                    <p class="text-xs sm:text-[13px] font-bold text-slate-800 leading-snug">{{ $step['title'] }}</p>
-                                    <p class="text-[10px] sm:text-[11px] text-slate-500 leading-tight mt-0.5">{{ $step['desc'] }}</p>
                                 </div>
-                            </div>
+                            @elseif ($step['status'] === 'active')
+                                <div class="group relative flex items-center justify-between gap-3 rounded-xl border border-blue-200 bg-blue-50/60 p-2 sm:p-2.5 shadow-2xs ring-1 ring-blue-500/20 transition-all duration-200 hover:bg-blue-50/90">
+                                    <div class="flex items-center gap-2.5 min-w-0">
+                                        <span class="relative flex size-7 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white font-extrabold text-xs shadow-xs shadow-blue-500/30">
+                                            <span class="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-amber-400 ring-2 ring-white animate-pulse"></span>
+                                            {{ $step['step'] }}
+                                        </span>
+                                        <div class="min-w-0">
+                                            <p class="text-xs sm:text-[13px] font-extrabold text-navy-950 leading-snug">{{ $step['title'] }}</p>
+                                            <p class="text-[10px] sm:text-[11px] text-blue-700/80 leading-tight truncate">{{ $step['desc'] }}</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex shrink-0 items-center gap-1 rounded-md bg-blue-600 px-2 py-0.5 text-[10px] font-extrabold text-white shadow-2xs">
+                                        <span class="size-1 rounded-full bg-white animate-ping"></span>
+                                        {{ $step['statusLabel'] }}
+                                    </span>
+                                </div>
+                            @else
+                                <div class="group relative flex items-center justify-between gap-3 rounded-xl border border-transparent p-2 sm:p-2.5 transition-all duration-200 hover:border-slate-100 hover:bg-slate-50/70">
+                                    <div class="flex items-center gap-2.5 min-w-0">
+                                        <span class="flex size-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500 font-bold text-xs border border-slate-200/60">
+                                            {{ $step['step'] }}
+                                        </span>
+                                        <div class="min-w-0">
+                                            <p class="text-xs sm:text-[13px] font-semibold text-slate-600 leading-snug">{{ $step['title'] }}</p>
+                                            <p class="text-[10px] sm:text-[11px] text-slate-400 leading-tight truncate">{{ $step['desc'] }}</p>
+                                        </div>
+                                    </div>
+                                    <span class="shrink-0 text-[10px] font-medium text-slate-400">
+                                        {{ $step['statusLabel'] }}
+                                    </span>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
 
                     <!-- Trust Seal Footer Inside Card -->
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-                        <span class="inline-flex items-center gap-1 font-semibold text-slate-500">
-                            <svg class="size-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="mt-3.5 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+                        <span class="inline-flex items-center gap-1.5 font-semibold text-slate-600">
+                            <svg class="size-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
                             Kanal Resmi BI NTB
                         </span>
-                        <span>100% Bebas Identitas</span>
+                        <span class="inline-flex items-center gap-1 font-medium text-slate-400">
+                            <svg class="size-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                <line x1="1" y1="1" x2="23" y2="23"/>
+                            </svg>
+                            100% Bebas Identitas
+                        </span>
                     </div>
                 </div>
             </div>
