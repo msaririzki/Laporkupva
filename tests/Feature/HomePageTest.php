@@ -15,6 +15,7 @@ class HomePageTest extends TestCase
             ->assertSee(route('reports.create'))
             ->assertSee(route('reports.track'))
             ->assertSee(route('filament.admin.auth.login'))
+            ->assertSee('Login admin')
             ->assertSee('aria-label="Masuk ke portal admin"', false);
     }
 }

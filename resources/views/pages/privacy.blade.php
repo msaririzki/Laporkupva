@@ -38,8 +38,8 @@
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
-                        <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Akses laporan privat</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Perkembangan laporan hanya dapat dibuka memakai kombinasi Kode Laporan dan PIN acak 6 digit yang tersimpan terenkripsi.</p>
+                        <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Akses laporan</h2>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Progres dan komunikasi dibuka menggunakan nomor laporan atau gambar QR. Simpan akses tersebut dan bagikan hanya kepada pihak yang dipercaya.</p>
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">

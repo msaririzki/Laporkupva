@@ -25,14 +25,14 @@ class PublicReportController extends Controller
 
     public function store(StorePublicReportRequest $request): RedirectResponse
     {
-        $pin = (string) random_int(100000, 999999);
+        $trackingSecret = Str::random(32);
         $validated = $request->safe()->except(['evidence', 'good_faith']);
 
-        $report = DB::transaction(function () use ($request, $validated, $pin): Report {
+        $report = DB::transaction(function () use ($request, $validated, $trackingSecret): Report {
             $report = Report::query()->create([
                 ...$validated,
                 'public_code' => $this->generatePublicCode(),
-                'tracking_pin_hash' => Hash::make($pin),
+                'tracking_pin_hash' => Hash::make($trackingSecret),
                 'status' => ReportStatus::Submitted,
                 'province' => 'Nusa Tenggara Barat',
             ]);
@@ -59,7 +59,6 @@ class PublicReportController extends Controller
 
         return to_route('reports.success')->with('submitted_report', [
             'code' => $report->public_code,
-            'pin' => $pin,
             'submitted_at' => $report->created_at->toIso8601String(),
         ]);
     }
@@ -73,9 +72,8 @@ class PublicReportController extends Controller
         }
 
         $trackingAccessToken = Crypt::encryptString(json_encode([
-            'version' => 1,
+            'version' => 2,
             'code' => $submittedReport['code'],
-            'pin' => $submittedReport['pin'],
         ], JSON_THROW_ON_ERROR));
         $trackingUrl = route('reports.track').'#access='.rawurlencode($trackingAccessToken);
         $trackingQrCode = (new QRCode(new QROptions([

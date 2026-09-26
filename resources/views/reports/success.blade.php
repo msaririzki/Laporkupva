@@ -19,21 +19,14 @@
                         class="rounded-xl border border-blue-100 bg-[#EAF2FF]/50 p-4 sm:p-5"
                         data-access-card
                         data-code="{{ $submittedReport['code'] }}"
-                        data-pin="{{ $submittedReport['pin'] }}"
                         data-submitted-at="{{ \Illuminate\Support\Carbon::parse($submittedReport['submitted_at'])->translatedFormat('d F Y, H:i') }} WITA"
                         data-logo-url="{{ asset('images/brand/tambora.webp') }}"
                     >
-                        <p class="text-center text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">Simpan akses rahasia Anda</p>
+                        <p class="text-center text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">Simpan nomor laporan Anda</p>
 
-                        <div class="mt-3 grid gap-3 sm:grid-cols-2">
-                            <div class="rounded-lg bg-white border border-[#CBD5E1] p-3 text-center">
-                                <span class="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Kode laporan</span>
-                                <strong id="report-code" class="mt-1 block font-mono text-base sm:text-lg font-bold tracking-wider text-[#0F172A]">{{ $submittedReport['code'] }}</strong>
-                            </div>
-                            <div class="rounded-lg bg-white border border-[#CBD5E1] p-3 text-center">
-                                <span class="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">PIN pelacakan</span>
-                                <strong id="report-pin" class="mt-1 block font-mono text-base sm:text-lg font-bold tracking-wider text-[#0F172A]">{{ $submittedReport['pin'] }}</strong>
-                            </div>
+                        <div class="mt-3 rounded-lg border border-[#E2E8F0] bg-white p-4 text-center">
+                            <span class="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Nomor laporan</span>
+                            <strong id="report-code" class="mt-1.5 block font-mono text-lg font-bold tracking-wider text-[#0B2342] sm:text-xl">{{ $submittedReport['code'] }}</strong>
                         </div>
 
                         <p class="mt-3 text-center text-[11px] text-[#64748B]">
@@ -45,12 +38,12 @@
                             <img id="tracking-qr" class="size-40 shrink-0 rounded-md border border-slate-200 sm:size-44" src="{{ $trackingQrCode }}" alt="QR akses rahasia laporan {{ $submittedReport['code'] }}">
                             <div>
                                 <p class="text-xs sm:text-sm font-semibold text-[#0B2342]">Pindai untuk membuka status langsung</p>
-                                <p class="mt-0.5 text-[11px] leading-relaxed text-[#64748B]">QR ini menyimpan akses laporan secara aman. Pindai dengan kamera atau unggah gambarnya di halaman cek status tanpa mengetik kode dan PIN.</p>
+                                <p class="mt-0.5 text-[11px] leading-relaxed text-[#64748B]">Pindai dengan kamera atau unggah gambar QR ini di halaman cek status untuk membuka laporan tanpa mengetik nomor.</p>
                             </div>
                         </div>
 
-                        <p class="mt-3 text-center text-[11px] leading-relaxed text-[#DC2626] font-medium">
-                            PERHATIAN: PIN rahasia hanya ditampilkan satu kali pada layar ini. Segera salin atau simpan sebelum menutup halaman.
+                        <p class="mt-3 text-center text-[11px] leading-relaxed text-[#DC4C4C] font-medium">
+                            Simpan nomor laporan atau unduh gambar QR sebelum menutup halaman ini.
                         </p>
                     </div>
 
@@ -60,7 +53,7 @@
                             <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"/>
                             </svg>
-                            <span>Salin kode & PIN</span>
+                            <span>Salin nomor laporan</span>
                         </button>
                         <button type="button" class="button-secondary flex-1 text-xs font-semibold py-2" data-download-access>
                             <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

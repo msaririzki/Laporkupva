@@ -204,7 +204,7 @@
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">03</span>
                             <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950">Simpan kode akses</h3>
-                            <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Simpan kode dan PIN rahasiamu untuk mengecek hasil laporan kapan saja.</p>
+                            <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Simpan nomor laporan atau gambar QR untuk mengecek perkembangan kapan saja.</p>
                         </div>
                     </div>
                 </article>
@@ -302,7 +302,7 @@
                                 </span>
                             </summary>
                             <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6 pt-3 border-t border-slate-100 pl-12.5">
-                                Buka halaman Cek status, lalu masukkan kode laporan dan PIN enam digit yang ditampilkan setelah laporan dikirim.
+                                Buka halaman Cek status, lalu masukkan nomor laporan yang ditampilkan setelah laporan dikirim. Anda juga dapat mengunggah gambar QR yang telah disimpan.
                             </div>
                         </details>
 
@@ -326,7 +326,7 @@
                             </div>
                         </details>
 
-                        <!-- Q6: Keamanan & PIN (Pink Lock Icon) -->
+                        <!-- Q6: Keamanan akses (Pink Lock Icon) -->
                         <details class="group rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-4.5 shadow-xs transition-all duration-200 hover:border-blue-200 open:border-blue-200">
                             <summary class="flex cursor-pointer list-none items-center gap-3.5 sm:gap-4 select-none">
                                 <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-pink-100 text-pink-600">
@@ -334,7 +334,7 @@
                                         <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
                                     </svg>
                                 </span>
-                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Apa yang harus dilakukan jika kode atau PIN hilang?</span>
+                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Bagaimana jika nomor laporan atau QR hilang?</span>
                                 <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
                                     <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m6 9 6 6 6-6"/>
@@ -342,7 +342,7 @@
                                 </span>
                             </summary>
                             <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6 pt-3 border-t border-slate-100 pl-12.5">
-                                Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan kode dan PIN di tempat yang aman.
+                                Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan nomor laporan atau gambar QR di tempat yang aman.
                             </div>
                         </details>
                     </div>

@@ -70,6 +70,11 @@ class AdminPanelProvider extends PanelProvider
                 scopes: Login::class,
             )
             ->renderHook(
+                PanelsRenderHook::SIMPLE_PAGE_END,
+                fn (): View => view('filament.auth.login-home-link'),
+                scopes: Login::class,
+            )
+            ->renderHook(
                 PanelsRenderHook::BODY_END,
                 fn (): View => view('filament.shared.floating-back-button', [
                     'url' => ReportResource::getUrl('index'),

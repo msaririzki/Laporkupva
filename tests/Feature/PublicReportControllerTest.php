@@ -6,7 +6,6 @@ use App\Enums\ReportStatus;
 use App\Models\Report;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -45,7 +44,7 @@ class PublicReportControllerTest extends TestCase
             ->assertDontSee('NIK');
     }
 
-    public function test_valid_anonymous_report_is_stored_with_private_tracking_pin_and_evidence(): void
+    public function test_valid_anonymous_report_is_stored_with_a_report_number_and_evidence(): void
     {
         $response = $this->post(route('reports.store'), $this->validPayload([
             'evidence' => [
@@ -63,8 +62,8 @@ class PublicReportControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/^LKP-[A-Z0-9]{4}-[A-Z0-9]{4}$/', $report->public_code);
         $this->assertSame($report->public_code, $access['code']);
         $this->assertArrayHasKey('submitted_at', $access);
-        $this->assertTrue(Hash::check($access['pin'], $report->tracking_pin_hash));
-        $this->assertNotSame($access['pin'], $report->tracking_pin_hash);
+        $this->assertArrayNotHasKey('pin', $access);
+        $this->assertNotEmpty($report->tracking_pin_hash);
         $this->assertSame(ReportStatus::Submitted, $report->status);
         $this->assertDatabaseHas('report_status_histories', [
             'report_id' => $report->getKey(),
@@ -234,7 +233,6 @@ class PublicReportControllerTest extends TestCase
     {
         $submittedReport = [
             'code' => 'LKP-AB12-CD34',
-            'pin' => '654321',
             'submitted_at' => now()->toIso8601String(),
         ];
 
@@ -245,10 +243,12 @@ class PublicReportControllerTest extends TestCase
             ->assertOk()
             ->assertSee('Pindai untuk membuka status langsung')
             ->assertSee('Unduh gambar akses')
+            ->assertSee('Simpan nomor laporan Anda')
+            ->assertDontSee('PIN pelacakan')
             ->assertSee('data:image/svg+xml;base64,', false)
             ->assertViewHas('trackingUrl', function (string $trackingUrl): bool {
                 return str_starts_with($trackingUrl, route('reports.track').'#access=')
-                    && ! str_contains($trackingUrl, '654321');
+                    && ! str_contains($trackingUrl, 'LKP-AB12-CD34');
             });
     }
 
