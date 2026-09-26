@@ -21,10 +21,13 @@ class ReportTrackingControllerTest extends TestCase
     {
         $this->get(route('reports.track'))
             ->assertOk()
-            ->assertSee('Cek status laporan')
-            ->assertSee('Pilih gambar QR')
+            ->assertSee('Lihat perkembangan laporan')
+            ->assertSee('Gunakan gambar QR')
+            ->assertSee('Pilih gambar dari perangkat')
+            ->assertSee('Gambar hanya dibaca di perangkat ini dan tidak diunggah.')
             ->assertSee('data-qr-upload', false)
-            ->assertSee('PIN 6 digit');
+            ->assertSee('PIN 6 digit')
+            ->assertDontSee('Browser ini belum mendukung pembacaan QR');
     }
 
     public function test_tracking_form_prefills_the_report_code_from_a_qr_link(): void
