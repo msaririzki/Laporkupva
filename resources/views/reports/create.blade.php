@@ -371,28 +371,30 @@
                         </div>
                     </div>
 
-                    <!-- Evidence Upload Dropzone (Proportional desktop width, centered) -->
-                    <div class="mt-6 space-y-6">
-                        <div>
+                    <!-- Layout Bukti Pendukung: Vertikal Bersih & Proporsional -->
+                    <div class="bukti-pendukung mt-6">
+                        <!-- 1. Area Upload Bukti Pendukung -->
+                        <div class="w-full">
                             <div class="flex items-center justify-between mb-2">
                                 <label class="form-label mb-0" for="evidence">Bukti pendukung <span class="text-[#DC2626] font-bold">*</span></label>
                                 <span class="text-xs font-semibold text-rose-600 bg-rose-50 border border-rose-100 px-2.5 py-0.5 rounded-full"><span class="sr-only">Bukti pendukung </span>Wajib</span>
                             </div>
-                            <label class="upload-zone group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl border-2 border-dashed border-[#CBD5E1] bg-[#F8FAFC] hover:border-[#2563EB] hover:bg-blue-50/30 transition-all cursor-pointer text-center" for="evidence">
-                                <div class="grid size-10 sm:size-12 place-items-center rounded-xl bg-blue-50 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-all shadow-xs">
-                                    <svg class="size-5 sm:size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <label class="upload-zone group" for="evidence">
+                                <div class="grid size-12 sm:size-14 place-items-center rounded-2xl bg-blue-50 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-all shadow-xs shrink-0">
+                                    <svg class="size-6 sm:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                                         <polyline points="17 8 12 3 7 8"/>
                                         <line x1="12" y1="3" x2="12" y2="15"/>
                                     </svg>
-<strong class="mt-2 sm:mt-2.5 block text-xs sm:text-[13px] font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
-                                    Pilih foto atau dokumen
+                                </div>
+                                <strong class="mt-2.5 sm:mt-3 block text-sm sm:text-base font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
+                                    Foto atau dokumen
                                 </strong>
-                                <span class="mt-0.5 sm:mt-1 block text-[10px] sm:text-xs text-[#64748B]">
+                                <span class="mt-0.5 sm:mt-1 block text-xs sm:text-[13px] text-[#64748B] text-center max-w-md">
                                     1–5 berkas sekaligus · Format: JPG, PNG, WEBP, atau PDF · Maks. 10 MB per berkas
                                 </span>
-                                <span class="mt-2 sm:mt-2.5 inline-flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-semibold text-[#0F172A] shadow-2xs group-hover:border-[#2563EB] group-hover:text-[#2563EB]">
-                                    <svg class="size-3 sm:size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <span class="mt-2.5 sm:mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#0F172A] shadow-2xs group-hover:border-[#2563EB] group-hover:text-[#2563EB] transition-colors">
+                                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
                                         <circle cx="9" cy="9" r="2"/>
                                         <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
@@ -407,32 +409,48 @@
                             @error('evidence.*')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
 
-                        <!-- Post-Submission Information Callout -->
-                        <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-3 sm:p-5 text-xs sm:text-sm leading-relaxed text-[#0F172A] shadow-xs">
-                            <div class="flex items-center gap-2 sm:gap-2.5">
-                                <div class="grid size-6 sm:size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
-                                    <svg class="size-3.5 sm:size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- 2. Section/Card Terpisah: Setelah laporan terkirim -->
+                        <div class="rounded-2xl border border-blue-100 bg-blue-50/70 p-4 sm:p-5 text-[#0F172A] shadow-xs">
+                            <div class="flex items-center gap-2.5">
+                                <div class="grid size-7 sm:size-8 shrink-0 place-items-center rounded-lg bg-blue-100 text-[#2563EB]">
+                                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                                     </svg>
                                 </div>
-                                <strong class="font-bold text-[#0F172A] text-xs sm:text-sm">Setelah laporan terkirim:</strong>
+                                <strong class="font-bold text-xs sm:text-sm text-[#0F172A]">Setelah laporan terkirim:</strong>
                             </div>
-                            <p class="mt-1.5 sm:mt-2 text-[11px] sm:text-sm text-[#475569] leading-normal sm:leading-relaxed">
-                                <span class="sm:hidden">Anda akan mendapat <strong class="text-[#0F172A]">Kode Laporan</strong> & <strong class="text-[#0F172A]">PIN 6 digit</strong> untuk cek status tanpa akun.</span>
-                                <span class="hidden sm:inline">Anda akan memperoleh <strong class="text-[#0F172A]">Kode Laporan</strong> dan <strong class="text-[#0F172A]">PIN Rahasia 6 digit</strong>. Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.</span>
+
+                            <div class="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                                <div class="rounded-xl border border-blue-200/60 bg-white/95 p-3 sm:p-3.5 shadow-2xs">
+                                    <span class="block text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">Kode Laporan</span>
+                                    <div class="mt-1 flex items-center justify-between">
+                                        <code class="font-mono text-sm sm:text-base font-extrabold tracking-wider text-[#0F172A]">XXXXXX</code>
+                                        <span class="text-[10px] font-medium text-[#64748B] bg-slate-100 px-2 py-0.5 rounded">Dibuat otomatis</span>
+                                    </div>
+                                </div>
+                                <div class="rounded-xl border border-blue-200/60 bg-white/95 p-3 sm:p-3.5 shadow-2xs">
+                                    <span class="block text-[11px] font-bold uppercase tracking-wider text-[#2563EB]">PIN Rahasia 6 digit</span>
+                                    <div class="mt-1 flex items-center justify-between">
+                                        <code class="font-mono text-sm sm:text-base font-extrabold tracking-wider text-[#0F172A]">XXXXXX</code>
+                                        <span class="text-[10px] font-medium text-amber-700 bg-amber-50 border border-amber-200/60 px-2 py-0.5 rounded">Tampil 1 kali</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="mt-3 text-xs sm:text-[13px] text-[#475569] leading-relaxed">
+                                Keduanya digunakan untuk melihat perkembangan tindak lanjut tanpa perlu membuat akun.
                             </p>
                         </div>
 
-                        <!-- Good Faith Confirmation (Compact, muted when checked) -->
-                        <label class="group flex cursor-pointer items-start gap-2 sm:gap-2.5 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 sm:p-3.5 shadow-xs transition-colors hover:border-[#2563EB]/40 hover:bg-blue-50/20 has-[:checked]:bg-slate-50/80 has-[:checked]:border-slate-200">
-                            <input class="peer mt-0.5 size-3.5 sm:size-4 shrink-0 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
-                            <span class="text-[10px] sm:text-xs leading-normal sm:leading-relaxed text-[#0F172A] font-medium peer-checked:text-[#64748B] peer-checked:font-normal transition-colors">
-                                <span class="sm:hidden">Laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata. <span class="text-[#DC2626] font-bold">*</span></span>
-                                <span class="hidden sm:inline">Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span></span>
+                        <!-- 3. Checkbox Pernyataan (Di bawah card, wrap bersih, padding aman) -->
+                        <label class="group flex cursor-pointer items-start gap-2.5 sm:gap-3 rounded-xl border border-[#CBD5E1] bg-white p-3.5 sm:p-4 shadow-xs transition-colors hover:border-[#2563EB]/50 hover:bg-blue-50/20 has-[:checked]:bg-slate-50/90 has-[:checked]:border-slate-200">
+                            <input class="peer mt-0.5 size-4 sm:size-4.5 shrink-0 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" id="confirmation" name="good_faith" value="1" @checked(old('good_faith')) required>
+                            <span class="text-xs sm:text-sm leading-relaxed text-[#0F172A] font-medium peer-checked:text-[#64748B] peer-checked:font-normal transition-colors select-none">
+                                Saya menyatakan bahwa laporan ini disampaikan dengan itikad baik berdasarkan kejadian nyata yang saya ketahui. <span class="text-[#DC2626] font-bold">*</span>
                             </span>
                         </label>
-                        @error('good_faith')<p class="form-error mt-2">{{ $message }}</p>@enderror
+                        @error('good_faith')<p class="form-error mt-1">{{ $message }}</p>@enderror
                     </div>
                 </section>
 

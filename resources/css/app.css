@@ -299,15 +299,29 @@
         @apply bg-[#FFF4D6] outline-none;
     }
 
-    /* Upload Dropzone */
+    /* Upload Dropzone: Pure vertical layout, centered, responsive */
     .upload-zone {
-        @apply flex cursor-pointer flex-col items-center justify-center gap-3.5 rounded-2xl border border-dashed border-[#CBD5E1] bg-[#F8FAFC] px-5 py-6 text-center transition-all duration-200 hover:border-[#2563EB] hover:bg-[#EEF4FF] sm:flex-row sm:text-left;
+        @apply flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[#CBD5E1] bg-[#F8FAFC] p-5 sm:p-7 text-center transition-all duration-200 hover:border-[#2563EB] hover:bg-blue-50/40;
     }
     .upload-zone strong {
-        @apply block text-sm font-bold text-[#0F172A];
+        @apply block text-sm sm:text-base font-bold text-[#0F172A];
     }
     .upload-zone small {
-        @apply block mt-0.5 text-xs text-[#64748B];
+        @apply block mt-0.5 text-xs sm:text-[13px] text-[#64748B];
+    }
+
+    /* Bukti Pendukung Step 3 Container: Clean flex column layout with responsive gap */
+    .bukti-pendukung {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    @media (max-width: 768px) {
+        .bukti-pendukung {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
     }
 
     /* Review cards on Step 3 */
