@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ReportStatus;
+use App\Enums\UserRole;
 use App\Http\Requests\StorePublicReportRequest;
 use App\Models\Report;
+use App\Models\User;
+use App\Notifications\Admin\NewReportSubmitted;
 use chillerlan\QRCode\Common\EccLevel;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
@@ -13,6 +16,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -63,6 +67,14 @@ class PublicReportController extends Controller
 
             return $report;
         });
+
+        Notification::send(
+            User::query()
+                ->where('is_active', true)
+                ->whereIn('role', [UserRole::Admin->value, UserRole::SuperAdmin->value])
+                ->get(),
+            new NewReportSubmitted($report),
+        );
 
         return to_route('reports.success')->with('submitted_report', [
             'code' => $report->public_code,

@@ -1,7 +1,12 @@
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
 
 @source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/components/admin/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+html {
+    scrollbar-gutter: stable;
+}
 
 .fi-panel-admin {
     background:
@@ -645,6 +650,85 @@
 .fi-body-has-navigation .fi-pagination {
     border-top-color: #e8edf4;
     background: #fbfcfe;
+}
+
+.fi-body-has-navigation .fi-topbar-database-notifications-btn {
+    width: 2.55rem;
+    height: 2.55rem;
+    border: 1px solid #dce4ee;
+    border-radius: 0.8rem;
+    color: #526a88;
+    background: #ffffff;
+    box-shadow: 0 8px 20px -16px rgb(15 23 42 / 60%);
+    transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.fi-body-has-navigation .fi-topbar-database-notifications-btn:hover {
+    border-color: #bfdbfe;
+    color: #2563eb;
+    background: #eff6ff;
+    transform: translateY(-1px);
+}
+
+.fi-no-database.fi-modal .fi-modal-window {
+    border-left: 1px solid #dce5f0;
+    background: #f8fafc;
+    box-shadow: -24px 0 70px -42px rgb(15 23 42 / 55%);
+}
+
+.fi-no-database.fi-modal .fi-modal-header {
+    border-bottom: 1px solid #e5eaf1;
+    background:
+        radial-gradient(circle at 90% 5%, rgb(191 219 254 / 50%), transparent 8rem),
+        linear-gradient(145deg, #f8fbff 0%, #ffffff 70%);
+}
+
+.fi-no-database.fi-modal .fi-modal-heading {
+    color: #17294a;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.fi-no-database .fi-no-notification-unread-ctn {
+    background: linear-gradient(90deg, #eff6ff 0%, #ffffff 38%);
+}
+
+.fi-no-database .fi-no-notification-read-ctn {
+    background: #ffffff;
+}
+
+.fi-no-database .fi-no-notification-read-ctn,
+.fi-no-database .fi-no-notification-unread-ctn {
+    transition: background-color 160ms ease;
+}
+
+.fi-no-database .fi-no-notification-read-ctn:hover,
+.fi-no-database .fi-no-notification-unread-ctn:hover {
+    background: #f8fbff;
+}
+
+.fi-no-database .fi-no-notification {
+    gap: 0.9rem;
+    padding: 1.15rem;
+}
+
+.fi-no-database .fi-no-notification-icon {
+    width: 2.6rem;
+    height: 2.6rem;
+    padding: 0.62rem;
+    border: 1px solid currentColor;
+    border-radius: 0.85rem;
+    background: rgb(255 255 255 / 82%);
+}
+
+.fi-no-database .fi-no-notification-title {
+    color: #17294a;
+    font-weight: 750;
+}
+
+.fi-no-database .fi-no-notification-body {
+    color: #64748b;
+    line-height: 1.55;
 }
 
 .fi-resource-create-record-page.fi-resource-users .fi-breadcrumbs {
@@ -1602,6 +1686,56 @@
     box-shadow: 0 10px 28px -20px rgb(37 99 235 / 30%);
 }
 
+.dashboard-collapsible-chart > .fi-section {
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.dashboard-collapsible-chart > .fi-section.fi-collapsed {
+    border-color: rgb(218 226 237 / 92%);
+    box-shadow: 0 10px 26px -22px rgb(15 23 42 / 42%);
+}
+
+.dashboard-collapsible-chart > .fi-section.fi-collapsed > .fi-section-header {
+    min-height: 4.75rem;
+    align-items: center;
+    border-bottom: 0;
+    background: linear-gradient(135deg, rgb(255 255 255 / 98%), rgb(246 249 253 / 94%));
+}
+
+.dashboard-collapsible-chart .fi-section-collapse-btn {
+    border: 1px solid #dbe5f1;
+    border-radius: 0.7rem;
+    color: #476486;
+    background: #ffffff;
+    box-shadow: 0 8px 18px -15px rgb(15 23 42 / 55%);
+}
+
+.dashboard-collapsible-chart .dashboard-chart-filter {
+    min-width: min(13rem, 42vw);
+}
+
+.dashboard-collapsible-chart .dashboard-chart-filter select {
+    font-size: 0.78rem;
+    font-weight: 650;
+}
+
+@media (max-width: 40rem) {
+    .dashboard-collapsible-chart > .fi-section > .fi-section-header {
+        flex-wrap: wrap;
+        padding: 1rem;
+    }
+
+    .dashboard-collapsible-chart .fi-section-header-after-ctn {
+        width: calc(100% - 3rem);
+        order: 3;
+    }
+
+    .dashboard-collapsible-chart .dashboard-chart-filter {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
 .dashboard-recent-report .fi-ta-cell {
     padding-block: 1rem;
 }
@@ -1626,7 +1760,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .dashboard-stat-card {
+    .dashboard-stat-card,
+    .dashboard-collapsible-chart > .fi-section {
         transition: none;
     }
 }
@@ -1743,14 +1878,18 @@
     }
 }
 
-/* Dialog operasional dibuat ringan agar konteks laporan tetap terasa tanpa menggelapkan layar. */
+/* Dialog operasional tetap menampilkan konteks halaman tanpa lapisan gelap. */
 .tambora-action-modal-overlay.fi-modal-close-overlay {
-    background: rgb(30 64 108 / 24%);
-    backdrop-filter: blur(5px) saturate(115%);
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+.fi-modal:has(> .tambora-action-modal-overlay) > .fi-modal-window-ctn {
+    overscroll-behavior: contain;
 }
 
 .tambora-action-modal.fi-modal-window {
-    overflow: hidden;
     border: 1px solid rgb(203 216 232 / 92%);
     border-radius: 1.35rem;
     background: rgb(255 255 255 / 98%);
@@ -1851,7 +1990,7 @@ body:has(.fi-modal-open) .admin-detail-floating-back {
 }
 
 .dark .tambora-action-modal-overlay.fi-modal-close-overlay {
-    background: rgb(4 15 31 / 52%);
+    background: transparent;
 }
 
 .dark .tambora-action-modal.fi-modal-window {

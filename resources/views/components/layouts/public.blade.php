@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="id" class="h-full scroll-smooth">
 <head>
+    @php
+        $pageTitle = isset($title) ? $title.' — TAMBORA' : 'TAMBORA · Bank Indonesia NTB';
+        $pageDescription = 'TAMBORA - Kanal pengawasan dan pelaporan masyarakat untuk kegiatan usaha penukaran valuta asing (KUPVA) di wilayah Nusa Tenggara Barat.';
+        $shareImage = asset('images/brand/tambora.webp');
+    @endphp
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="TAMBORA - Kanal pengawasan dan pelaporan masyarakat untuk kegiatan usaha penukaran valuta asing (KUPVA) di wilayah Nusa Tenggara Barat. Resmi dari Kantor Perwakilan Bank Indonesia Provinsi NTB.">
-    <meta name="theme-color" content="#2563EB">
-    <link rel="icon" type="image/webp" href="{{ asset('images/brand/bank-indonesia-mark.webp') }}">
-    <title>{{ isset($title) ? $title.' — ' : '' }}TAMBORA · Bank Indonesia NTB</title>
+    <meta name="description" content="{{ $pageDescription }}">
+    <meta name="theme-color" content="#0B2342">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TAMBORA">
+    <meta property="og:title" content="{{ $pageTitle }}">
+    <meta property="og:description" content="{{ $pageDescription }}">
+    <meta property="og:image" content="{{ $shareImage }}">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:width" content="720">
+    <meta property="og:image:height" content="316">
+    <meta property="og:image:alt" content="Logo TAMBORA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $pageTitle }}">
+    <meta name="twitter:description" content="{{ $pageDescription }}">
+    <meta name="twitter:image" content="{{ $shareImage }}">
+    <link rel="icon" type="image/webp" href="{{ asset('images/brand/tambora.webp') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/brand/tambora.webp') }}">
+    <title>{{ $pageTitle }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,11 +127,7 @@
             <div class="grid gap-6 sm:gap-8 md:grid-cols-12 md:items-start">
                 <!-- Brand & Short Description -->
                 <div class="md:col-span-6 lg:col-span-5">
-                    <div class="flex items-center gap-3 sm:gap-4">
-                        <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-7 sm:h-8 w-auto object-contain" width="720" height="316" loading="lazy">
-                        <span class="h-5 w-px bg-[#E2E8F0]" aria-hidden="true"></span>
-                        <img src="{{ asset('images/brand/bank-indonesia-full.webp') }}" alt="Bank Indonesia" class="h-6 sm:h-7 w-auto object-contain" width="880" height="158" loading="lazy">
-                    </div>
+                    <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-8 w-auto object-contain sm:h-9" width="720" height="316" loading="lazy">
                     <p class="mt-2.5 max-w-sm text-xs sm:text-[13px] leading-relaxed text-[#64748B]">Kanal pengawasan dan partisipasi masyarakat untuk pengawasan kegiatan usaha penukaran valuta asing (KUPVA) di wilayah Provinsi Nusa Tenggara Barat.</p>
                 </div>
 
