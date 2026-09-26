@@ -104,9 +104,9 @@
                                     <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
                                     <span class="relative inline-flex size-2 rounded-full bg-blue-600"></span>
                                 </span>
-                                <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#2563EB]">Alur penanganan</p>
+                                <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#2563EB]">Contoh alur penanganan</p>
                             </div>
-                            <h2 class="mt-0.5 text-sm sm:text-base font-black text-navy-950">Laporan Anda terus bergerak</h2>
+                            <h2 class="mt-0.5 text-sm sm:text-base font-black text-navy-950">Gambaran progres laporan</h2>
                         </div>
                         <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-[#2E9B68] border border-emerald-200/80 shadow-2xs">
                             <svg class="size-3 text-[#2E9B68]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -120,7 +120,7 @@
                     <div class="mt-3 rounded-xl bg-slate-50/90 p-2.5 border border-slate-100/90">
                         <div class="flex items-center justify-between text-[11px]">
                             <span class="font-medium text-slate-500">Transparansi Penanganan</span>
-                            <span class="font-bold text-blue-600">Tahap 2 dari 6 Selesai</span>
+                            <span class="font-bold text-blue-600">Contoh: tahap 2 dari 6 selesai</span>
                         </div>
                         <div class="mt-1.5 h-1.5 w-full bg-slate-200/80 rounded-full overflow-hidden">
                             <div class="h-full bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 rounded-full w-2/6"></div>
@@ -329,7 +329,7 @@
 
                             <!-- Description -->
                             <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug sm:leading-relaxed">
-                                Buka <a href="https://laporkupva.ikydev.com/" target="_blank" rel="noopener noreferrer" class="font-bold text-blue-700 underline decoration-blue-300 hover:text-blue-900 transition-colors">TAMBORA</a> tanpa perlu login.
+                                Buka <a href="{{ route('home') }}" class="font-bold text-blue-700 underline decoration-blue-300 hover:text-blue-900 transition-colors">TAMBORA</a> tanpa perlu login.
                             </p>
                         </div>
                     </article>
@@ -643,7 +643,7 @@
                     Lihat progres penanganan laporan Anda.
                 </h2>
                 <p class="mt-1.5 text-xs sm:text-sm text-blue-100/90 leading-relaxed">
-                    Cukup masukkan kode tiket dan PIN rahasia untuk memantau status tindak lanjut secara real-time.
+                    Cukup masukkan kode tiket dan PIN rahasia untuk melihat status tindak lanjut terbaru.
                 </p>
             </div>
 

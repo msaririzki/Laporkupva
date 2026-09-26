@@ -274,7 +274,7 @@
                                         <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
                                     </svg>
                                 </span>
-                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Apakah foto wajib dilampirkan?</span>
+                                <span class="flex-1 font-extrabold text-navy-950 text-sm sm:text-base">Apakah bukti wajib dilampirkan?</span>
                                 <span class="grid size-7 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 transition-colors">
                                     <svg class="size-4.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m6 9 6 6 6-6"/>
@@ -282,7 +282,7 @@
                                 </span>
                             </summary>
                             <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6 pt-3 border-t border-slate-100 pl-12.5">
-                                Tidak. Bukti foto atau PDF bersifat opsional. Utamakan keselamatan dan jangan mengambil bukti jika situasinya berisiko.
+                                Ya. Setiap laporan wajib menyertakan minimal satu foto atau PDF sebagai dasar verifikasi. Utamakan keselamatan dan jangan mengambil bukti langsung jika situasinya berisiko.
                             </div>
                         </details>
 
