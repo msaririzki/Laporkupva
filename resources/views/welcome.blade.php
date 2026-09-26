@@ -21,7 +21,7 @@
 
                 <!-- Subtitle -->
                 <p class="mt-2.5 sm:mt-3 max-w-xl text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-normal">
-                    Kanal pengawasan resmi dari Kantor Perwakilan Bank Indonesia Provinsi NTB untuk melaporkan dugaan kegiatan usaha penukaran valuta asing (money changer) yang tidak berizin. Identitas Anda tidak diminta dan proses penanganan dipantau secara mandiri.
+                    Bantu menjaga aktivitas penukaran valuta asing di NTB tetap aman dan sesuai aturan. Sampaikan laporan Anda tanpa mengungkap identitas.
                 </p>
 
                 <!-- CTA Buttons -->
