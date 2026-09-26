@@ -19,13 +19,16 @@ RUN apt-get update \
         intl \
         mbstring \
         opcache \
-        pcntl \
         pdo_sqlite \
         xml \
         zip \
     && a2enmod expires headers proxy proxy_http proxy_wstunnel rewrite \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && rm -rf /var/lib/apt/lists/*
+
+# Keep Reverb's process-control extension in its own layer so production
+# rebuilds can reuse the heavier PHP extension cache above.
+RUN docker-php-ext-install -j"$(nproc)" pcntl
 
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
