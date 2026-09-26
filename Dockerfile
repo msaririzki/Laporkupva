@@ -19,6 +19,7 @@ RUN apt-get update \
         intl \
         mbstring \
         opcache \
+        pcntl \
         pdo_sqlite \
         xml \
         zip \
