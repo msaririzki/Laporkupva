@@ -142,7 +142,7 @@ class ReportInfolist
                                                 ->alt(fn (ReportEvidence $record): string => 'Pratinjau '.$record->original_name)
                                                 ->imageHeight('220px')
                                                 ->extraImgAttributes([
-                                                    'class' => 'w-full rounded-xl bg-gray-950 object-contain p-2',
+                                                    'class' => 'w-full rounded-xl border border-slate-200 bg-slate-50 object-contain p-2 shadow-inner',
                                                     'loading' => 'lazy',
                                                 ])
                                                 ->columnSpanFull(),
@@ -194,7 +194,7 @@ class ReportInfolist
                                                 ->alt(fn (ReportEvidence $record): string => 'Pratinjau '.$record->original_name)
                                                 ->imageHeight('180px')
                                                 ->extraImgAttributes([
-                                                    'class' => 'w-full rounded-xl object-cover',
+                                                    'class' => 'w-full rounded-xl border border-slate-200 bg-slate-50 object-contain p-2 shadow-inner',
                                                     'loading' => 'lazy',
                                                 ])
                                                 ->columnSpanFull(),
