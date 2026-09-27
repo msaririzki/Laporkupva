@@ -21,13 +21,39 @@
             </p>
         </div>
 
-        <x-filament::button
-            tag="a"
-            :href="route('admin.report-evidence.download', $reportEvidence)"
-            color="gray"
-            icon="heroicon-m-arrow-down-tray"
-        >
-            Unduh gambar
-        </x-filament::button>
+        <div x-data="{ downloading: false }">
+            <x-filament::button
+                tag="a"
+                :href="route('admin.report-evidence.download', $reportEvidence)"
+                :spa-mode="false"
+                color="gray"
+                class="min-w-40 justify-center"
+                download
+                x-bind:aria-disabled="downloading.toString()"
+                x-bind:class="{ 'pointer-events-none opacity-70': downloading }"
+                x-on:click="
+                    if (downloading) {
+                        $event.preventDefault()
+                        return
+                    }
+
+                    downloading = true
+                    window.setTimeout(() => downloading = false, 4000)
+                "
+            >
+                <span x-show="! downloading" class="inline-flex items-center gap-2">
+                    <x-filament::icon icon="heroicon-m-arrow-down-tray" class="size-4" />
+                    <span>Unduh gambar</span>
+                </span>
+
+                <span x-cloak x-show="downloading" class="inline-flex items-center gap-2">
+                    <svg class="size-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle class="opacity-25" cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3"></circle>
+                        <path class="opacity-90" fill="currentColor" d="M21 12a9 9 0 0 0-9-9v3a6 6 0 0 1 6 6h3Z"></path>
+                    </svg>
+                    <span>Mengunduh…</span>
+                </span>
+            </x-filament::button>
+        </div>
     </div>
 </div>
