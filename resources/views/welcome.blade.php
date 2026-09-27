@@ -26,7 +26,7 @@
 
                 <!-- CTA Buttons -->
                 <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-                    <a href="{{ route('reports.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
+                    <a href="{{ route('reports.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white shadow-md shadow-blue-600/25 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m22 2-7 20-4-9-9-4Z"/>
                             <path d="M22 2 11 13"/>
@@ -34,7 +34,7 @@
                         <span>Buat laporan</span>
                         <span aria-hidden="true" class="text-base sm:text-lg">→</span>
                     </a>
-                    <a href="{{ route('reports.track') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs sm:text-sm font-bold text-navy-950 shadow-2xs hover:bg-blue-50/70 hover:border-blue-300 hover:text-blue-700 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
+                    <a href="{{ route('reports.track') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-navy-950 shadow-2xs hover:bg-blue-50/70 hover:border-blue-300 hover:text-blue-700 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
                         <svg class="size-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="7"/>
                             <path d="m21 21-4.3-4.3"/>
@@ -246,7 +246,7 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                 Ceritakan
                             </h3>
 
@@ -287,7 +287,7 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                 Tentukan lokasi
                             </h3>
 
@@ -338,7 +338,7 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                 Masukkan gambar
                             </h3>
 
@@ -381,7 +381,7 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                 Pantau laporan
                             </h3>
 
@@ -440,7 +440,7 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                    <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                         Tidak Perlu Membuat Akun
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
@@ -469,7 +469,7 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                    <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                         Pantau dengan Nomor Laporan
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
@@ -496,7 +496,7 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                    <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                         Diakses Petugas Berwenang
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
@@ -523,7 +523,7 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                    <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                         Sampaikan dengan Mudah
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
@@ -534,7 +534,7 @@
 
                             <!-- Button Teman Grip 03 -->
                             <div class="mt-3 sm:mt-4 w-full">
-                                <a href="{{ route('reports.create') }}" class="button-primary w-full inline-flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-3 text-xs sm:text-sm font-bold shadow-sm">
+                                <a href="{{ route('reports.create') }}" class="button-primary w-full inline-flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider shadow-sm">
                                     Mulai membuat laporan <span aria-hidden="true">→</span>
                                 </a>
                             </div>
