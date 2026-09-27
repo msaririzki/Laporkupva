@@ -156,7 +156,7 @@ const initCustomSelect = (selectElement) => {
     trigger.setAttribute('aria-expanded', 'false');
 
     const triggerText = document.createElement('span');
-    triggerText.className = 'truncate text-left text-sm';
+    triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm';
 
     const triggerIcon = document.createElement('span');
     triggerIcon.className = 'tambora-select-arrow shrink-0 ml-2';
@@ -174,10 +174,10 @@ const initCustomSelect = (selectElement) => {
         const selectedOption = selectElement.selectedOptions[0];
         if (selectedOption && selectedOption.value) {
             triggerText.textContent = selectedOption.textContent;
-            triggerText.className = 'truncate text-left text-sm text-[#0B2342] font-medium';
+            triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm text-[#0B2342] font-medium';
         } else {
             triggerText.textContent = selectElement.options[0]?.textContent || 'Pilih opsi';
-            triggerText.className = 'truncate text-left text-sm text-[#64748B]';
+            triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm text-[#64748B]';
         }
     };
 
@@ -188,6 +188,9 @@ const initCustomSelect = (selectElement) => {
         [...selectElement.options].forEach((option, index) => {
             const item = document.createElement('div');
             item.className = 'tambora-select-option';
+            if (selectElement.id === 'incident_type') {
+                item.classList.add('uppercase');
+            }
             item.setAttribute('role', 'option');
             item.setAttribute('tabindex', '0');
             item.dataset.value = option.value;
@@ -711,7 +714,7 @@ if (form) {
 
                 const previewButton = document.createElement('button');
                 previewButton.type = 'button';
-                previewButton.className = 'group relative block aspect-[4/3] w-full overflow-hidden bg-slate-950 focus:outline-none focus:ring-4 focus:ring-inset focus:ring-blue-500/40';
+                previewButton.className = 'group relative block aspect-[4/3] w-full overflow-hidden border-b border-slate-100 bg-white focus:outline-none focus:ring-4 focus:ring-inset focus:ring-blue-500/40';
                 previewButton.setAttribute('aria-label', `Perbesar pratinjau ${file.name}`);
 
                 const previewImage = document.createElement('img');
