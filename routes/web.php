@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PublicKupvaController;
 use App\Http\Controllers\PublicReportController;
 use App\Http\Controllers\PublicReportMessageController;
 use App\Http\Controllers\ReportEvidenceController;
@@ -13,6 +14,7 @@ Route::get('/', function () {
 
 Route::view('/panduan', 'pages.guide')->name('guide');
 Route::view('/privasi', 'pages.privacy')->name('privacy');
+Route::get('/kupva-berizin', PublicKupvaController::class)->name('kupvas.index');
 
 Route::controller(PublicReportController::class)->group(function (): void {
     Route::get('/lapor', 'create')->name('reports.create');

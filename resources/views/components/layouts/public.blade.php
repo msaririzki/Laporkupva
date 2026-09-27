@@ -47,6 +47,7 @@
             <nav class="hidden items-center gap-1 sm:gap-2 lg:gap-3 md:flex" aria-label="Navigasi utama">
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#keamanan">Keamanan</a>
+                <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('kupvas.*') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('kupvas.index') }}">KUPVA berizin</a>
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('guide') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('guide') }}">Panduan</a>
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('reports.track') }}">Cek status</a>
             </nav>
@@ -92,6 +93,7 @@
         <div id="mobile-nav" class="hidden md:hidden border-t border-[#E2E8F0] bg-white px-4 py-3.5 space-y-1 shadow-md">
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0B2342] hover:bg-slate-50" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0B2342] hover:bg-slate-50" href="{{ route('home') }}#keamanan">Keamanan</a>
+            <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('kupvas.*') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0B2342] hover:bg-slate-50' }}" href="{{ route('kupvas.index') }}">KUPVA berizin</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('guide') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0B2342] hover:bg-slate-50' }}" href="{{ route('guide') }}">Panduan</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0B2342] hover:bg-slate-50' }}" href="{{ route('reports.track') }}">Cek status</a>
             <a class="mt-2 flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[#0B2342] transition hover:border-blue-200 hover:bg-blue-50/70" href="{{ route('filament.admin.auth.login') }}">
@@ -118,7 +120,7 @@
     @if (request()->routeIs('reports.create'))
     <!-- Minimalist Bottom Line for Report Creation Flow -->
     <footer class="py-3 sm:py-4 text-center text-[10px] sm:text-[11px] text-slate-400 border-t border-[#E2E8F0] bg-white">
-        © {{ date('Y') }} Kantor Perwakilan Bank Indonesia Provinsi NTB · TAMBORA (laporkupva.id)
+        © {{ date('Y') }} TAMBORA (laporkupva.id)
     </footer>
     @else
     <!-- Public Service Footer (Compact, Secondary, Perfectly Balanced) -->
@@ -137,6 +139,7 @@
                     <nav class="mt-2.5 grid grid-cols-2 sm:grid-cols-1 gap-1.5 sm:gap-2 text-xs sm:text-[13px]" aria-label="Menu layanan footer">
                         <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('reports.create') }}">Buat laporan anonim</a>
                         <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('reports.track') }}">Cek status laporan</a>
+                        <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('kupvas.index') }}">Daftar KUPVA berizin</a>
                         <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('guide') }}">Panduan penggunaan</a>
                         <a class="text-[#64748B] hover:text-[#2563EB] transition-colors" href="{{ route('privacy') }}">Informasi privasi</a>
                     </nav>
@@ -152,7 +155,7 @@
 
         <!-- Copyright Line -->
         <div class="border-t border-[#E2E8F0] py-3.5 text-center text-[11px] sm:text-xs text-slate-400">
-            © {{ date('Y') }} Kantor Perwakilan Bank Indonesia Provinsi NTB · TAMBORA (laporkupva.id)
+            © {{ date('Y') }} TAMBORA (laporkupva.id)
         </div>
     </footer>
     @endif

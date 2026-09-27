@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Notifications\Admin\NewReportSubmitted;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -31,6 +32,8 @@ class PublicReportControllerTest extends TestCase
             ->assertSee('Bukti pendukung wajib')
             ->assertSee('1–5 berkas sekaligus')
             ->assertSee('Foto besar otomatis diperkecil di perangkat Anda')
+            ->assertSee('Nomor HP')
+            ->assertSee('Hanya digunakan petugas bila perlu menghubungi Anda.')
             ->assertSee('evidence-preview-modal', false)
             ->assertSee('Foto ditampilkan utuh sesuai orientasi aslinya')
             ->assertSeeInOrder([
@@ -77,6 +80,32 @@ class PublicReportControllerTest extends TestCase
 
         $this->assertCount(2, $report->evidence);
         Storage::disk('local')->assertExists($report->evidence->pluck('path')->all());
+    }
+
+    public function test_optional_phone_number_is_normalized_and_encrypted_at_rest(): void
+    {
+        $this->post(route('reports.store'), $this->validPayload([
+            'reporter_phone' => '0812 3456-7890',
+        ]))->assertRedirect(route('reports.success'));
+
+        $report = Report::query()->sole();
+        $rawPhoneNumber = DB::table('reports')->where('id', $report->getKey())->value('reporter_phone');
+
+        $this->assertSame('+6281234567890', $report->reporter_phone);
+        $this->assertNotSame('+6281234567890', $rawPhoneNumber);
+        $this->assertStringNotContainsString('081234567890', (string) $rawPhoneNumber);
+    }
+
+    public function test_invalid_optional_phone_number_is_rejected(): void
+    {
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload([
+                'reporter_phone' => 'nomor-rahasia',
+            ]))
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('reporter_phone');
+
+        $this->assertDatabaseCount('reports', 0);
     }
 
     public function test_report_ignores_an_unexpected_initial_message_field(): void

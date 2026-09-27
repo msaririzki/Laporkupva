@@ -34,6 +34,7 @@ class StorePublicReportRequest extends FormRequest
                 'lainnya',
             ])],
             'business_name' => ['nullable', 'string', 'max:255', new NoHtml],
+            'reporter_phone' => ['nullable', 'string', 'max:20', 'regex:/^\+628[1-9][0-9]{6,11}$/'],
             'incident_date' => ['required', 'date', 'before_or_equal:today'],
             'incident_time' => ['nullable', 'date_format:H:i'],
             'description' => ['required', 'string', 'min:20', 'max:5000', new NoHtml],
@@ -58,6 +59,7 @@ class StorePublicReportRequest extends FormRequest
         return [
             'incident_type' => 'jenis laporan',
             'business_name' => 'nama tempat/usaha',
+            'reporter_phone' => 'nomor HP',
             'incident_date' => 'tanggal kejadian',
             'incident_time' => 'waktu kejadian',
             'description' => 'kronologi',
@@ -73,15 +75,47 @@ class StorePublicReportRequest extends FormRequest
         ];
     }
 
+    /** @return array<string, string> */
+    public function messages(): array
+    {
+        return [
+            'reporter_phone.regex' => 'Masukkan nomor HP Indonesia yang valid, misalnya 0812 3456 7890.',
+        ];
+    }
+
     protected function prepareForValidation(): void
     {
         $this->merge([
             'is_ongoing' => $this->boolean('is_ongoing'),
             'business_name' => $this->filled('business_name') ? trim((string) $this->input('business_name')) : null,
+            'reporter_phone' => $this->normalizePhoneNumber(),
             'district' => $this->filled('district') ? trim((string) $this->input('district')) : null,
             'village' => $this->filled('village') ? trim((string) $this->input('village')) : null,
             'address' => $this->filled('address') ? trim((string) $this->input('address')) : null,
             'description' => trim((string) $this->input('description')),
         ]);
+    }
+
+    private function normalizePhoneNumber(): ?string
+    {
+        if (! $this->filled('reporter_phone')) {
+            return null;
+        }
+
+        $phoneNumber = preg_replace('/[\s().-]+/', '', trim((string) $this->input('reporter_phone'))) ?? '';
+
+        if (str_starts_with($phoneNumber, '08')) {
+            return '+62'.substr($phoneNumber, 1);
+        }
+
+        if (str_starts_with($phoneNumber, '8')) {
+            return '+62'.$phoneNumber;
+        }
+
+        if (str_starts_with($phoneNumber, '628')) {
+            return '+'.$phoneNumber;
+        }
+
+        return $phoneNumber;
     }
 }

@@ -6,6 +6,7 @@ use App\Enums\ReportStatus;
 use App\Enums\UserRole;
 use App\Filament\Auth\EditProfile;
 use App\Filament\Resources\Kupvas\KupvaResource;
+use App\Filament\Resources\Kupvas\Pages\CreateKupva;
 use App\Filament\Resources\Reports\Pages\ViewReport;
 use App\Filament\Resources\Reports\ReportResource;
 use App\Filament\Resources\Users\Pages\CreateUser;
@@ -146,6 +147,7 @@ class AdminDashboardTest extends TestCase
         $admin = User::factory()->create(['role' => UserRole::Admin]);
         $report = Report::factory()->create([
             'status' => ReportStatus::Received,
+            'reporter_phone' => '+6281234567890',
             'latitude' => -8.5830695,
             'longitude' => 116.1161800,
         ]);
@@ -197,6 +199,7 @@ class AdminDashboardTest extends TestCase
             ->get(ReportResource::getUrl('view', ['record' => $report]))
             ->assertOk()
             ->assertSee($report->public_code)
+            ->assertSee('+6281234567890')
             ->assertSee('Status penanganan')
             ->assertSee('Kembali ke daftar')
             ->assertSee(ReportResource::getUrl('index'), false)
@@ -247,6 +250,55 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Tren Agustus 2026')
             ->set('filter', 'month_2026-99')
             ->assertSee('Tren 6 bulan');
+    }
+
+    public function test_admin_sees_the_streamlined_create_kupva_form(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+
+        $this->actingAs($admin)
+            ->get(KupvaResource::getUrl('create'))
+            ->assertOk()
+            ->assertSee('Tambah data KUPVA')
+            ->assertSee('Identitas dan perizinan')
+            ->assertSee('Lokasi operasional')
+            ->assertSee('Koordinat peta (opsional)')
+            ->assertSee('Simpan KUPVA')
+            ->assertSee('Simpan &amp; tambah lagi', false)
+            ->assertSee('kupva-form-section', false);
+    }
+
+    public function test_admin_can_create_a_non_operational_kupva(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+
+        $this->actingAs($admin);
+
+        Livewire::test(CreateKupva::class)
+            ->fillForm([
+                'name' => 'KUPVA Test Mataram',
+                'license_number' => 'KUPVA-TEST-2026',
+                'license_status' => 'suspended',
+                'license_expires_at' => '2027-12-31',
+                'is_active' => 0,
+                'regency' => 'Kota Mataram',
+                'district' => 'Selaparang',
+                'village' => 'Rembiga',
+                'address' => 'Jalan Adi Sucipto Nomor 10',
+                'latitude' => -8.5830695,
+                'longitude' => 116.1161800,
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors()
+            ->assertNotified();
+
+        $this->assertDatabaseHas(Kupva::class, [
+            'name' => 'KUPVA Test Mataram',
+            'license_number' => 'KUPVA-TEST-2026',
+            'license_status' => 'suspended',
+            'regency' => 'Kota Mataram',
+            'is_active' => false,
+        ]);
     }
 
     public function test_regular_admin_cannot_manage_other_admin_accounts(): void

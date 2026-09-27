@@ -24,6 +24,8 @@ class SecurityHeadersTest extends TestCase
         $this->assertStringContainsString("object-src 'none'", $contentSecurityPolicy);
         $this->assertStringContainsString("form-action 'self'", $contentSecurityPolicy);
         $this->assertStringContainsString("frame-ancestors 'self'", $contentSecurityPolicy);
+        $this->assertStringContainsString('ws://localhost:*', $contentSecurityPolicy);
+        $this->assertStringContainsString('wss://localhost:*', $contentSecurityPolicy);
     }
 
     public function test_secure_responses_enable_hsts(): void

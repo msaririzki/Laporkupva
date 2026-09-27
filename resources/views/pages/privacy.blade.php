@@ -12,7 +12,7 @@
             </h1>
 
             <p class="mt-2.5 max-w-[760px] mx-auto text-xs sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B]">
-                TAMBORA hanya mengumpulkan data kejadian yang diperlukan untuk proses pengawasan, tanpa pernah meminta data identitas pribadi masyarakat.
+                TAMBORA mengutamakan laporan tanpa identitas. Nomor HP hanya dapat diberikan secara sukarela jika Anda ingin dihubungi petugas.
             </p>
         </div>
     </section>
@@ -24,12 +24,12 @@
                 <div class="grid gap-5 md:grid-cols-2">
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Data yang tidak diminta</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Nama, NIK, alamat email, nomor HP, dan pendaftaran akun sama sekali tidak diperlukan untuk membuat laporan.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Nama, NIK, alamat email, dan pendaftaran akun tidak diperlukan. Nomor HP bersifat opsional dan laporan tetap dapat dikirim tanpa mengisinya.</p>
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Data yang digunakan</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Jenis dan kronologi kejadian, titik lokasi pihak yang dilaporkan, waktu kejadian, serta lampiran bukti digunakan secara khusus untuk verifikasi laporan dan tindak lanjut lapangan.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Jenis dan kronologi kejadian, titik lokasi, waktu, serta lampiran bukti digunakan untuk verifikasi. Nomor HP opsional disimpan terlindungi dan hanya digunakan petugas untuk tindak lanjut laporan.</p>
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">

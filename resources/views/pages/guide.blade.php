@@ -241,7 +241,7 @@
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Tidak. TAMBORA tidak meminta akun, nama, NIK, email, atau nomor telepon pelapor.
+                                Tidak. TAMBORA tidak meminta akun, nama, NIK, atau email. Nomor HP tersedia sebagai pilihan dan boleh dikosongkan; laporan tetap dapat dikirim tanpa nomor HP.
                             </div>
                         </details>
 
@@ -341,7 +341,7 @@
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan nomor laporan atau gambar QR di tempat yang aman.
+                                Akses laporan tetap menggunakan nomor laporan atau gambar QR. Nomor HP opsional tidak digunakan sebagai pengganti akses, jadi simpan nomor laporan atau gambar QR di tempat yang aman.
                             </div>
                         </details>
                     </div>

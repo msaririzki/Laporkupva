@@ -44,7 +44,7 @@ class ReportInfolist
                     ->schema([
                         Group::make([
                             Section::make('Ringkasan laporan')
-                                ->description('Informasi utama dan kronologi yang dikirim oleh pelapor anonim.')
+                                ->description('Informasi utama, kontak opsional, dan kronologi yang dikirim pelapor.')
                                 ->icon(Heroicon::OutlinedDocumentText)
                                 ->columns([
                                     'default' => 1,
@@ -64,6 +64,10 @@ class ReportInfolist
                                     TextEntry::make('business_name')
                                         ->label('Nama tempat/usaha')
                                         ->placeholder('Tidak disebutkan'),
+                                    TextEntry::make('reporter_phone')
+                                        ->label('Nomor HP pelapor')
+                                        ->placeholder('Tidak diberikan')
+                                        ->copyable(),
                                     IconEntry::make('is_ongoing')
                                         ->label('Masih berlangsung')
                                         ->boolean(),

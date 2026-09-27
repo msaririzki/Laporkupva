@@ -7,6 +7,7 @@ use App\Events\ReportRealtimeUpdated;
 use Database\Factories\ReportFactory;
 use DomainException;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\DB;
     'status',
     'incident_type',
     'business_name',
+    'reporter_phone',
     'incident_date',
     'incident_time',
     'description',
@@ -38,6 +40,7 @@ use Illuminate\Support\Facades\DB;
     'result_reported_at',
     'completed_at',
 ])]
+#[Hidden(['reporter_phone'])]
 class Report extends Model
 {
     /** @use HasFactory<ReportFactory> */
@@ -178,6 +181,7 @@ class Report extends Model
     {
         return [
             'status' => ReportStatus::class,
+            'reporter_phone' => 'encrypted',
             'incident_date' => 'date',
             'incident_time' => 'datetime:H:i',
             'is_ongoing' => 'boolean',

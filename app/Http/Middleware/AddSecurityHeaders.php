@@ -16,11 +16,12 @@ class AddSecurityHeaders
     public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
+        $applicationHost = $request->getHost();
 
         $contentSecurityPolicy = [
             "default-src 'self'",
             "base-uri 'self'",
-            "connect-src 'self' https://api.mapbox.com https://events.mapbox.com https://nominatim.openstreetmap.org",
+            "connect-src 'self' ws://{$applicationHost}:* wss://{$applicationHost}:* https://api.mapbox.com https://events.mapbox.com https://nominatim.openstreetmap.org",
             "font-src 'self' data:",
             "form-action 'self'",
             "frame-ancestors 'self'",
