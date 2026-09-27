@@ -32,6 +32,27 @@ class PublicReportMessageControllerTest extends TestCase
         ]);
     }
 
+    public function test_verified_reporter_can_send_a_message_without_a_page_reload(): void
+    {
+        $report = Report::factory()->create();
+
+        $this->withSession($this->trackingSessionFor($report))
+            ->postJson(route('reports.messages.store', ['report' => $report->public_code]), [
+                'body' => '  Informasi tambahan dari lokasi kejadian.  ',
+            ])
+            ->assertCreated()
+            ->assertHeader('Cache-Control', 'no-store, private')
+            ->assertExactJson([
+                'message' => 'Pesan Anda berhasil dikirim kepada petugas TAMBORA.',
+            ]);
+
+        $this->assertDatabaseHas(AnonymousMessage::class, [
+            'report_id' => $report->getKey(),
+            'sender_type' => 'reporter',
+            'body' => 'Informasi tambahan dari lokasi kejadian.',
+        ]);
+    }
+
     public function test_new_reporter_message_notifies_each_active_admin(): void
     {
         $admin = User::factory()->create();
@@ -82,6 +103,20 @@ class PublicReportMessageControllerTest extends TestCase
             ])
             ->assertRedirect(route('reports.status', ['report' => $report->public_code]))
             ->assertSessionHasErrors('body');
+
+        $this->assertDatabaseCount(AnonymousMessage::class, 0);
+    }
+
+    public function test_message_validation_is_returned_as_json_without_a_redirect(): void
+    {
+        $report = Report::factory()->create();
+
+        $this->withSession($this->trackingSessionFor($report))
+            ->postJson(route('reports.messages.store', ['report' => $report->public_code]), [
+                'body' => ' ',
+            ])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors('body');
 
         $this->assertDatabaseCount(AnonymousMessage::class, 0);
     }

@@ -8,12 +8,13 @@ use App\Models\Report;
 use App\Models\User;
 use App\Notifications\Admin\NewReporterMessage;
 use Filament\Notifications\Events\DatabaseNotificationsSent;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Notification;
 
 class PublicReportMessageController extends Controller
 {
-    public function __invoke(StoreAnonymousMessageRequest $request, Report $report): RedirectResponse
+    public function __invoke(StoreAnonymousMessageRequest $request, Report $report): JsonResponse|RedirectResponse
     {
         $messageBody = $request->string('body')->value();
 
@@ -30,6 +31,14 @@ class PublicReportMessageController extends Controller
 
         Notification::send($admins, new NewReporterMessage($report, $messageBody));
         $admins->each(fn (User $admin) => DatabaseNotificationsSent::dispatch($admin));
+
+        if ($request->expectsJson()) {
+            return response()
+                ->json([
+                    'message' => 'Pesan Anda berhasil dikirim kepada petugas TAMBORA.',
+                ], 201)
+                ->header('Cache-Control', 'no-store, private');
+        }
 
         return redirect()
             ->route('reports.status', ['report' => $report->public_code])

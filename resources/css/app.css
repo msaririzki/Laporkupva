@@ -398,6 +398,27 @@
     font-size: 10px;
 }
 
+@keyframes report-message-arrived {
+    from {
+        opacity: 0;
+        transform: translateY(0.4rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.report-message-arrived {
+    animation: report-message-arrived 240ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .report-message-arrived {
+        animation: none;
+    }
+}
+
 @media print {
     header, footer, [data-copy-access], button {
         display: none !important;
