@@ -413,6 +413,11 @@
     animation: report-message-arrived 240ms ease-out both;
 }
 
+.report-conversation {
+    overflow-anchor: none;
+    scrollbar-gutter: stable;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .report-message-arrived {
         animation: none;

@@ -72,7 +72,7 @@ if (liveRefresh) {
     let failedChecks = 0;
     let isChecking = false;
     let checkAgain = false;
-    let messageFormAnchorTop = null;
+    let shouldFollowLatestMessage = false;
 
     const setLiveRefreshState = (label, state = 'active') => {
         liveRefreshLabel.textContent = label;
@@ -138,18 +138,18 @@ if (liveRefresh) {
                 }
 
                 if (conversation) {
+                    const wasNearLatest = (conversation.scrollHeight - conversation.scrollTop - conversation.clientHeight) < 80;
+                    const previousScrollTop = conversation.scrollTop;
                     conversation.innerHTML = update.messages_html;
                     conversation.lastElementChild?.classList.add('report-message-arrived');
 
-                    if (messageForm && messageFormAnchorTop !== null) {
-                        const scrollAdjustment = messageForm.getBoundingClientRect().top - messageFormAnchorTop;
-
-                        if (scrollAdjustment !== 0) {
-                            window.scrollBy({ top: scrollAdjustment, left: 0, behavior: 'auto' });
-                        }
-
-                        messageFormAnchorTop = null;
+                    if (wasNearLatest || shouldFollowLatestMessage) {
+                        conversation.scrollTop = conversation.scrollHeight;
+                    } else {
+                        conversation.scrollTop = previousScrollTop;
                     }
+
+                    shouldFollowLatestMessage = false;
                 }
             }
 
@@ -178,7 +178,7 @@ if (liveRefresh) {
         }
 
         messageFeedback.textContent = message;
-        messageFeedback.classList.remove('hidden');
+        messageFeedback.classList.remove('invisible');
     };
 
     const showMessageError = (message) => {
@@ -187,13 +187,13 @@ if (liveRefresh) {
         }
 
         messageError.textContent = message;
-        messageError.classList.remove('hidden');
+        messageError.classList.remove('invisible');
         messageBody?.classList.add('is-invalid');
     };
 
     const clearMessageState = () => {
-        messageFeedback?.classList.add('hidden');
-        messageError?.classList.add('hidden');
+        messageFeedback?.classList.add('invisible');
+        messageError?.classList.add('invisible');
         messageBody?.classList.remove('is-invalid');
     };
 
@@ -205,7 +205,7 @@ if (liveRefresh) {
         }
 
         clearMessageState();
-        messageFormAnchorTop = messageForm.getBoundingClientRect().top;
+        shouldFollowLatestMessage = true;
         messageSubmit.disabled = true;
         messageSubmitLabel.textContent = 'Mengirim…';
         messageSpinner?.classList.remove('hidden');
@@ -224,14 +224,14 @@ if (liveRefresh) {
             const result = await response.json().catch(() => ({}));
 
             if (response.status === 422) {
-                messageFormAnchorTop = null;
+                shouldFollowLatestMessage = false;
                 showMessageError(result.errors?.body?.[0] ?? 'Periksa kembali pesan Anda.');
 
                 return;
             }
 
             if (response.status === 404 || response.status === 419) {
-                messageFormAnchorTop = null;
+                shouldFollowLatestMessage = false;
                 showMessageError('Akses laporan telah berakhir. Masukkan kembali nomor laporan untuk melanjutkan.');
 
                 return;
@@ -246,7 +246,7 @@ if (liveRefresh) {
             await checkForUpdates(true);
             messageBody.focus({ preventScroll: true });
         } catch {
-            messageFormAnchorTop = null;
+            shouldFollowLatestMessage = false;
             showMessageError('Pesan belum terkirim. Periksa koneksi internet, lalu coba lagi.');
         } finally {
             messageSubmit.disabled = false;
@@ -284,4 +284,8 @@ if (liveRefresh) {
     }
 
     scheduleRefreshCheck();
+
+    if (conversation) {
+        conversation.scrollTop = conversation.scrollHeight;
+    }
 }

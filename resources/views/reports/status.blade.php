@@ -70,7 +70,7 @@
 
                     <div
                         data-report-message-feedback
-                        class="mt-3.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-2.5 text-xs font-semibold text-[#2E9B68] sm:text-sm {{ session('message_sent') ? '' : 'hidden' }}"
+                        class="mt-3 min-h-10 text-xs font-semibold leading-5 text-[#168A7A] sm:min-h-5 sm:text-sm {{ session('message_sent') ? '' : 'invisible' }}"
                         role="status"
                         aria-live="polite"
                     >
@@ -78,7 +78,13 @@
                     </div>
 
                     <!-- Message history thread -->
-                    <div data-report-conversation class="mt-4 space-y-3" aria-live="polite">
+                    <div
+                        data-report-conversation
+                        class="report-conversation mt-2 h-64 space-y-3 overflow-y-auto overscroll-contain rounded-xl border border-slate-100 bg-slate-50/60 p-3 sm:h-72 sm:p-4"
+                        aria-live="polite"
+                        aria-label="Percakapan dengan petugas TAMBORA"
+                        tabindex="0"
+                    >
                         @include('reports.partials.conversation-messages', ['report' => $report])
                     </div>
 
@@ -100,7 +106,7 @@
                             class="form-control text-xs sm:text-sm {{ $errors->has('body') ? 'is-invalid' : '' }}"
                             placeholder="Tuliskan informasi tambahan atau klarifikasi untuk petugas..."
                         >{{ old('body') }}</textarea>
-                        <p data-report-message-error class="form-error {{ $errors->has('body') ? '' : 'hidden' }}" role="alert">
+                        <p data-report-message-error class="form-error min-h-5 {{ $errors->has('body') ? '' : 'invisible' }}" role="alert">
                             @error('body'){{ $message }}@enderror
                         </p>
 
