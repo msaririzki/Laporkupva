@@ -78,6 +78,7 @@ class ReportsTable
                 SelectFilter::make('status')
                     ->label('Status')
                     ->native(false)
+                    ->multiple()
                     ->options(ReportStatus::class),
                 SelectFilter::make('incident_type')
                     ->label('Jenis laporan')

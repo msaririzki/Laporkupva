@@ -35,7 +35,7 @@ class DemoDataSeederTest extends TestCase
         ]);
         $this->assertDatabaseHas('reports', [
             'public_code' => 'LKP-DEMO-0001',
-            'business_name' => 'Demo Valas Cakranegara 01',
+            'business_name' => 'Gerai Valuta Cakranegara (Data Demo)',
             'incident_type' => 'kupva_tanpa_izin',
             'description' => 'Terlihat aktivitas penukaran valuta asing pada tempat usaha yang tidak menampilkan papan izin secara jelas.',
             'regency' => 'Kota Mataram',
@@ -50,6 +50,8 @@ class DemoDataSeederTest extends TestCase
             ->firstOrFail();
 
         $this->assertSame(ReportStatus::Completed, $completedReport->status);
+        $this->assertFalse($completedReport->is_ongoing);
+        $this->assertNotNull($completedReport->completed_at);
         $this->assertCount(6, $completedReport->statusHistories);
         $this->assertTrue(Hash::check(DemoDataSeeder::TRACKING_PIN, $completedReport->tracking_pin_hash));
     }

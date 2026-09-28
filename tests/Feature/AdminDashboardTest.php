@@ -339,6 +339,37 @@ class AdminDashboardTest extends TestCase
             ->assertDontSee('Kondisi laporan masyarakat yang diperbarui secara berkala.');
     }
 
+    public function test_dashboard_status_cards_link_to_filtered_report_lists(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+
+        $this->actingAs($admin)
+            ->get('/admin')
+            ->assertSee('filters%5Bstatus%5D%5Bvalues%5D%5B0%5D=submitted', false)
+            ->assertSee('filters%5Bstatus%5D%5Bvalues%5D%5B0%5D=completed', false);
+    }
+
+    public function test_report_list_accepts_multiple_statuses_from_dashboard_links(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        Report::factory()->create([
+            'public_code' => 'LKP-NEW1-DEMO',
+            'status' => ReportStatus::Submitted,
+        ]);
+        Report::factory()->received()->create([
+            'public_code' => 'LKP-WORK-DEMO',
+        ]);
+        Report::factory()->completed()->create([
+            'public_code' => 'LKP-DONE-DEMO',
+        ]);
+
+        $this->actingAs($admin)
+            ->get('/admin/laporan?filters[status][values][0]=received&filters[status][values][1]=completed')
+            ->assertSee('LKP-WORK-DEMO')
+            ->assertSee('LKP-DONE-DEMO')
+            ->assertDontSee('LKP-NEW1-DEMO');
+    }
+
     public function test_admin_can_send_an_anonymous_message_from_report_detail(): void
     {
         $admin = User::factory()->create(['role' => UserRole::Admin]);

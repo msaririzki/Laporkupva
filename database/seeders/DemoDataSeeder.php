@@ -63,7 +63,8 @@ class DemoDataSeeder extends Seeder
         $statuses = ReportStatus::cases();
         $locations = NtbDemoLocation::cases();
         $incidentTypes = $this->incidentTypes();
-        $descriptions = $this->descriptions();
+        $businessNames = $this->businessNames();
+        $descriptions = $this->descriptionsByIncidentType();
 
         for ($number = 1; $number <= 28; $number++) {
             $publicCode = sprintf('LKP-DEMO-%04d', $number);
@@ -73,18 +74,19 @@ class DemoDataSeeder extends Seeder
             $location = $locations[($number - 1) % count($locations)];
             $createdAt = now()->subDays($number * 3)->startOfDay()->addHours(9);
             $statusTimestamps = $this->statusTimestamps($statusPosition, $createdAt);
+            $incidentType = $incidentTypes[($number - 1) % count($incidentTypes)];
 
             $report = Report::query()->updateOrCreate([
                 'public_code' => $publicCode,
             ], [
                 'tracking_pin_hash' => $trackingPinHash,
                 'status' => $status,
-                'incident_type' => $incidentTypes[($number - 1) % count($incidentTypes)],
-                'business_name' => sprintf('Demo Valas %s %02d', $location->areaName(), $number),
+                'incident_type' => $incidentType,
+                'business_name' => $businessNames[$number - 1],
                 'incident_date' => $createdAt->toDateString(),
                 'incident_time' => sprintf('%02d:%02d:00', 8 + ($number % 10), ($number * 7) % 60),
-                'description' => $descriptions[($number - 1) % count($descriptions)],
-                'is_ongoing' => $number % 3 !== 0,
+                'description' => $descriptions[$incidentType][($number - 1) % count($descriptions[$incidentType])],
+                'is_ongoing' => $status !== ReportStatus::Completed && $number % 3 !== 0,
                 'province' => 'Nusa Tenggara Barat',
                 ...$location->attributes(),
                 'location_accuracy' => 15 + $number,
@@ -168,14 +170,64 @@ class DemoDataSeeder extends Seeder
     }
 
     /** @return list<string> */
-    private function descriptions(): array
+    private function businessNames(): array
     {
         return [
-            'Terlihat aktivitas penukaran valuta asing pada tempat usaha yang tidak menampilkan papan izin secara jelas.',
-            'Pelapor menemukan layanan penukaran uang dengan informasi kurs yang tidak ditampilkan secara transparan.',
-            'Tempat usaha diduga melayani transaksi valuta asing secara rutin tanpa identitas KUPVA yang mudah dilihat.',
-            'Terdapat penawaran penukaran valuta asing kepada wisatawan tanpa keterangan izin resmi di lokasi usaha.',
-            'Petugas usaha tidak memberikan bukti transaksi maupun informasi nilai tukar secara terbuka kepada pelanggan.',
+            'Gerai Valuta Cakranegara (Data Demo)',
+            'Nusa Tenggara Exchange Pejanggik (Data Demo)',
+            'Ampenan Money Changer (Data Demo)',
+            'Senggigi Valuta Mandiri (Data Demo)',
+            'Gerai Penukaran Uang Gerung (Data Demo)',
+            'Praya Exchange Center (Data Demo)',
+            'Mandalika Money Changer (Data Demo)',
+            'Selong Valuta Sejahtera (Data Demo)',
+            'Masbagik Exchange (Data Demo)',
+            'Tanjung Lombok Money Changer (Data Demo)',
+            'Samawa Valuta Mandiri (Data Demo)',
+            'Alas Exchange Center (Data Demo)',
+            'Taliwang Money Changer (Data Demo)',
+            'Dompu Valuta Nusantara (Data Demo)',
+            'Bima Exchange Center (Data Demo)',
+            'Raba Money Changer (Data Demo)',
+            'Tente Valuta Mandiri (Data Demo)',
+            'Cakranegara Exchange Point (Data Demo)',
+            'Pejanggik Valuta Nusantara (Data Demo)',
+            'Gerai Valuta Ampenan (Data Demo)',
+            'Senggigi Exchange Point (Data Demo)',
+            'Gerung Money Changer (Data Demo)',
+            'Praya Valuta Mandiri (Data Demo)',
+            'Kuta Mandalika Exchange (Data Demo)',
+            'Selong Money Changer (Data Demo)',
+            'Masbagik Valuta Nusantara (Data Demo)',
+            'Tanjung Exchange Center (Data Demo)',
+            'Samawa Money Changer (Data Demo)',
+        ];
+    }
+
+    /** @return array<string, list<string>> */
+    private function descriptionsByIncidentType(): array
+    {
+        return [
+            'kupva_tanpa_izin' => [
+                'Terlihat aktivitas penukaran valuta asing pada tempat usaha yang tidak menampilkan papan izin secara jelas.',
+                'Tempat usaha diduga melayani penukaran valuta asing secara rutin tanpa identitas izin KUPVA yang mudah dilihat.',
+            ],
+            'transaksi_mencurigakan' => [
+                'Petugas menawarkan transaksi tunai dalam jumlah besar tanpa meminta data transaksi atau memberikan penjelasan prosedur.',
+                'Pelapor melihat transaksi valuta asing berulang dengan pencatatan yang tidak jelas dan tanpa bukti transaksi.',
+            ],
+            'pelanggaran_kurs' => [
+                'Nilai tukar pada papan kurs berbeda dengan nilai yang digunakan saat transaksi tanpa penjelasan kepada pelanggan.',
+                'Biaya tambahan baru disampaikan setelah transaksi dilakukan dan tidak tercantum pada informasi kurs di lokasi.',
+            ],
+            'penolakan_rupiah' => [
+                'Tempat usaha menolak pembayaran menggunakan Rupiah dan meminta pelanggan membayar dengan mata uang asing.',
+                'Pelapor diminta menggunakan valuta asing untuk transaksi di dalam negeri meskipun telah menawarkan pembayaran Rupiah.',
+            ],
+            'lainnya' => [
+                'Petugas usaha tidak memberikan bukti transaksi maupun informasi nilai tukar secara terbuka kepada pelanggan.',
+                'Informasi layanan, biaya, dan mekanisme pengaduan tidak tersedia dengan jelas di lokasi usaha.',
+            ],
         ];
     }
 
