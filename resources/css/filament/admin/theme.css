@@ -1283,6 +1283,215 @@ html {
     }
 }
 
+.fi-resource-list-records-page.fi-resource-users .fi-page-content {
+    gap: 1rem;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-breadcrumbs {
+    display: none;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-ctn {
+    border-color: #dce4ee;
+    border-radius: 1.25rem;
+    box-shadow: 0 24px 56px -42px rgb(15 23 42 / 50%);
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-header-ctn {
+    border-bottom: 1px solid #e4eaf2;
+    background: #ffffff;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-header-toolbar {
+    gap: 0.65rem;
+    padding: 0.9rem;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-header-toolbar > div:last-child {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    grid-template-columns: minmax(16rem, 1fr) auto;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-search-field {
+    width: 100%;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-search-field .fi-input-wrp {
+    min-height: 2.75rem;
+    border-color: #c8d5e5;
+    border-radius: 0.8rem;
+    background: #f8fafc;
+    box-shadow: none;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-search-field .fi-input-wrp-prefix {
+    color: #2563eb;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-search-field input {
+    color: #17294a;
+    font-weight: 500;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-search-field input::placeholder {
+    color: #6b7f9b;
+    font-weight: 500;
+    opacity: 1;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-search-field .fi-input-wrp:focus-within {
+    border-color: #3b82f6;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgb(59 130 246 / 10%);
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-col-manager-dropdown > .fi-btn {
+    min-height: 2.75rem;
+    border-color: #d7e0eb;
+    border-radius: 0.8rem;
+    background: #ffffff;
+    color: #334e73;
+    box-shadow: none;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-col-manager-dropdown > .fi-btn:hover {
+    border-color: #b8cbe3;
+    background: #f3f7fc;
+    color: #1d4ed8;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-header-cell {
+    padding-block: 0.78rem;
+    background: #f8fafc;
+    color: #53657e;
+    font-size: 0.68rem;
+    letter-spacing: 0.07em;
+}
+
+.fi-resource-list-records-page.fi-resource-users .admin-user-row .fi-ta-cell {
+    padding-block: 0.95rem;
+}
+
+.fi-resource-list-records-page.fi-resource-users .admin-user-row .fi-ta-cell-name .fi-ta-text-item {
+    color: #17294a;
+    font-weight: 750;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-empty-state {
+    min-height: 17rem;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(circle at 50% 25%, rgb(219 234 254 / 40%), transparent 11rem),
+        #ffffff;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-empty-state-icon-bg {
+    color: #2563eb;
+    background: #eff6ff;
+    box-shadow: 0 0 0 0.45rem rgb(239 246 255 / 55%);
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-empty-state-heading {
+    color: #17294a;
+    font-weight: 750;
+}
+
+.fi-resource-list-records-page.fi-resource-users .fi-ta-empty-state-description {
+    color: #718096;
+}
+
+@media (max-width: 40rem) {
+    .fi-body-has-navigation .fi-ta-table-stacked-header-cell {
+        padding: 0.7rem 0.75rem;
+        background: #f7f9fc;
+    }
+
+    .fi-body-has-navigation .fi-ta-table-stacked-sorting {
+        display: grid;
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .fi-body-has-navigation .fi-ta-table-stacked-sorting > label {
+        min-width: 0;
+    }
+
+    .fi-body-has-navigation .fi-ta-table-stacked-sorting > label:last-child {
+        width: 7rem;
+    }
+
+    .fi-body-has-navigation .fi-ta-table-stacked-sorting .fi-input-wrp {
+        position: relative;
+        min-height: 2.65rem;
+        overflow: hidden;
+        border-color: #ced9e7;
+        border-radius: 0.75rem;
+        background: #ffffff;
+        box-shadow: 0 8px 22px -20px rgb(15 23 42 / 55%);
+    }
+
+    .fi-body-has-navigation .fi-ta-table-stacked-sorting .fi-input-wrp::after {
+        position: absolute;
+        top: 50%;
+        right: 0.85rem;
+        width: 0.42rem;
+        height: 0.42rem;
+        border-right: 1.5px solid #64748b;
+        border-bottom: 1.5px solid #64748b;
+        content: '';
+        pointer-events: none;
+        transform: translateY(-70%) rotate(45deg);
+    }
+
+    .fi-body-has-navigation .fi-ta-table-stacked-sorting .fi-input-wrp-prefix {
+        padding-inline-start: 0.85rem;
+        color: #64748b;
+        font-size: 0.72rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .fi-body-has-navigation .fi-ta-table-stacked-sorting .fi-select-input {
+        min-width: 0;
+        appearance: none;
+        padding-inline: 0.65rem 2.2rem;
+        color: #17294a;
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .fi-resource-list-records-page.fi-resource-users .fi-ta-ctn {
+        border-radius: 1rem;
+    }
+
+    .fi-resource-list-records-page.fi-resource-users .fi-ta-header-toolbar {
+        padding: 0.75rem;
+    }
+
+    .fi-resource-list-records-page.fi-resource-users .fi-ta-header-toolbar > div:last-child {
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .fi-resource-list-records-page.fi-resource-users .fi-ta-col-manager-dropdown > .fi-btn {
+        min-height: 2.55rem;
+        justify-content: center;
+    }
+
+    .fi-resource-list-records-page.fi-resource-users .fi-ta-empty-state {
+        min-height: 15rem;
+        padding: 2.5rem 1.25rem;
+    }
+}
+
 .fi-resource-list-records-page.fi-resource-laporan .fi-page-content {
     gap: 1rem;
 }
@@ -2176,7 +2385,6 @@ html {
     }
 
     .dashboard-stat-card--total {
-        grid-column: 1 / -1;
         min-height: 6.75rem;
         padding: 1rem;
     }

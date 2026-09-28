@@ -174,6 +174,7 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Tindakan lapangan')
             ->assertSee('Peta laporan')
             ->assertSee('dashboard-stat-card--total', false)
+            ->assertSee('--col-span-default: span 2 / span 2; --col-span-sm: span 1 / span 1;', false)
             ->assertSee('dashboard-report-map-section', false)
             ->assertSee('Tren 6 bulan')
             ->assertSee('data-dashboard-chart="monthly-report-trend"', false)
@@ -540,12 +541,22 @@ class AdminDashboardTest extends TestCase
     public function test_super_admin_can_open_admin_account_management(): void
     {
         $superAdmin = User::factory()->superAdmin()->create();
+        $managedAdmin = User::factory()->create([
+            'name' => 'Admin Operasional',
+            'email' => 'operasional@example.test',
+        ]);
 
         $this->actingAs($superAdmin)
             ->get(UserResource::getUrl('index'))
             ->assertOk()
             ->assertSee('Manajemen admin')
             ->assertSee('Atur akun dan akses admin yang membantu proses pengawasan.')
+            ->assertSee('Cari nama atau email admin…')
+            ->assertSee('Tambah admin')
+            ->assertSee('Atur')
+            ->assertSee('Urutkan menurut')
+            ->assertSee('1 hasil')
+            ->assertSee($managedAdmin->name)
             ->assertSee('fi-ta-table-stacked-on-mobile', false);
     }
 
