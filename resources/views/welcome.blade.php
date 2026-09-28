@@ -27,24 +27,29 @@
                 <!-- CTA Buttons -->
                 <div class="mt-5 sm:mt-6 flex w-full flex-col items-stretch gap-2.5 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
                     <a href="{{ route('reports.create') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs font-extrabold text-white shadow-md shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 active:translate-y-0 active:scale-[0.99] sm:w-auto sm:text-sm">
-                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m22 2-7 20-4-9-9-4Z"/>
-                            <path d="M22 2 11 13"/>
-                        </svg>
+                        <span class="flex size-5 shrink-0 items-center justify-center" aria-hidden="true">
+                            <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m22 2-7 20-4-9-9-4Z"/>
+                                <path d="M22 2 11 13"/>
+                            </svg>
+                        </span>
                         <span>Buat laporan</span>
-                        <span aria-hidden="true" class="text-base sm:text-lg">→</span>
                     </a>
                     <a href="{{ route('reports.track') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs font-extrabold text-navy-950 shadow-2xs transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50/70 hover:text-blue-700 active:translate-y-0 active:scale-[0.99] sm:w-auto sm:text-sm">
-                        <svg class="size-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="7"/>
-                            <path d="m21 21-4.3-4.3"/>
-                        </svg>
+                        <span class="flex size-5 shrink-0 items-center justify-center text-blue-600" aria-hidden="true">
+                            <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="m21 21-4.3-4.3"/>
+                            </svg>
+                        </span>
                         <span>Cek status laporan</span>
                     </a>
                     <a href="{{ route('kupvas.index') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-xs font-extrabold text-emerald-800 shadow-2xs transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100/80 hover:text-emerald-900 active:translate-y-0 active:scale-[0.99] sm:w-auto sm:text-sm">
-                        <svg class="size-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15v18h-15V3Zm3.75 4.5h.008v.008H8.25V7.5Zm0 4.5h.008v.008H8.25V12Zm0 4.5h.008v.008H8.25V16.5Zm4.5-9h3m-3 4.5h3m-3 4.5h3" />
-                        </svg>
+                        <span class="flex size-5 shrink-0 items-center justify-center text-emerald-600" aria-hidden="true">
+                            <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3.75 21h16.5M4.5 3h15v18h-15V3Zm3.75 4.5h.008v.008H8.25V7.5Zm0 4.5h.008v.008H8.25V12Zm0 4.5h.008v.008H8.25V16.5Zm4.5-9h3m-3 4.5h3m-3 4.5h3" />
+                            </svg>
+                        </span>
                         <span>Money Changer berizin</span>
                     </a>
                 </div>
