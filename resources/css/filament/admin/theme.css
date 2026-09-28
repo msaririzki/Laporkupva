@@ -571,9 +571,25 @@ html {
     }
 
     .fi-body-has-navigation .fi-topbar {
+        position: relative;
         min-height: 3.75rem;
         gap: 0.5rem;
         padding-inline: 0.75rem;
+    }
+
+    .fi-body-has-navigation .fi-topbar::before {
+        position: absolute;
+        left: 50%;
+        max-width: 7rem;
+        overflow: hidden;
+        color: #183b67;
+        content: 'TAMBORA';
+        font-size: 0.72rem;
+        font-weight: 850;
+        letter-spacing: 0.12em;
+        text-overflow: ellipsis;
+        transform: translateX(-50%);
+        white-space: nowrap;
     }
 
     .fi-body-has-navigation .fi-topbar-open-sidebar-btn,
@@ -1639,29 +1655,40 @@ html {
     }
 
     .fi-resource-list-records-page.fi-resource-laporan .fi-ta-header-toolbar {
-        flex-direction: column-reverse;
-        align-items: stretch;
-        gap: 0.55rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: center;
+        gap: 0.5rem;
         padding: 0.75rem;
     }
 
     .fi-resource-list-records-page.fi-resource-laporan .fi-ta-header-toolbar > div:last-child {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        display: contents;
     }
 
     .fi-resource-list-records-page.fi-resource-laporan .fi-ta-search-field {
         grid-column: 1 / -1;
     }
 
+    .fi-resource-list-records-page.fi-resource-laporan .fi-ta-header-toolbar > .fi-ta-actions {
+        display: contents;
+    }
+
     .fi-resource-list-records-page.fi-resource-laporan .fi-ta-filters-dropdown > .fi-btn,
     .fi-resource-list-records-page.fi-resource-laporan .fi-ta-col-manager-dropdown > .fi-btn,
     .fi-resource-list-records-page.fi-resource-laporan .fi-ta-header-toolbar > .fi-ta-actions > .fi-btn {
+        min-width: 0;
+        min-height: 2.55rem;
         width: 100%;
         justify-content: center;
+        gap: 0.35rem;
+        padding-inline: 0.5rem;
+        font-size: 0.75rem;
     }
 
-    .fi-resource-list-records-page.fi-resource-laporan .fi-ta-actions {
-        width: 100%;
+    .fi-resource-list-records-page.fi-resource-laporan .fi-ta-filters-dropdown,
+    .fi-resource-list-records-page.fi-resource-laporan .fi-ta-col-manager-dropdown {
+        min-width: 0;
     }
 
     .fi-resource-list-records-page.fi-resource-laporan .report-list-row .fi-ta-cell {
@@ -1690,6 +1717,7 @@ html {
         grid-template-areas:
             "code"
             "status"
+            "business"
             "actions";
         overflow: hidden;
         border: 1px solid #e0e7f0;
@@ -1733,6 +1761,18 @@ html {
         text-align: left;
     }
 
+    .fi-resource-list-records-page.fi-resource-laporan .report-list-row .fi-ta-cell-business-name {
+        display: block;
+        grid-area: business;
+        padding: 0.7rem 0.85rem;
+        border-top: 1px solid #edf1f6;
+        background: #fbfcfe;
+    }
+
+    .fi-resource-list-records-page.fi-resource-laporan .report-list-row .fi-ta-cell-business-name .fi-ta-text {
+        padding: 0;
+    }
+
     .fi-resource-list-records-page.fi-resource-laporan .report-list-row .fi-ta-cell-public-code .fi-ta-text,
     .fi-resource-list-records-page.fi-resource-laporan .report-list-row .fi-ta-cell-status .fi-ta-text {
         padding: 0;
@@ -1749,12 +1789,18 @@ html {
     }
 
     .fi-resource-list-records-page.fi-resource-laporan .report-list-row .fi-ta-actions {
-        justify-content: flex-end;
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0.35rem;
     }
 
     .fi-resource-list-records-page.fi-resource-laporan .report-list-row .fi-ta-actions .fi-btn {
         min-height: 2.2rem;
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
+        padding-inline: 0.55rem;
     }
 
     .fi-resource-view-record-page.fi-resource-laporan,
@@ -2043,6 +2089,46 @@ html {
 .dashboard-stat-card:hover {
     border-color: rgb(191 219 254 / 90%);
     box-shadow: 0 10px 28px -20px rgb(37 99 235 / 30%);
+}
+
+@media (max-width: 40rem) {
+    .dashboard-stat-card {
+        min-height: 6.25rem;
+        padding: 0.85rem;
+    }
+
+    .dashboard-stat-card--total {
+        grid-column: 1 / -1;
+        min-height: 6.75rem;
+        padding: 1rem;
+    }
+
+    .dashboard-stat-card .fi-wi-stats-overview-stat-content {
+        gap: 0.35rem;
+    }
+
+    .dashboard-stat-card .fi-wi-stats-overview-stat-label {
+        font-size: 0.72rem;
+        line-height: 1rem;
+        overflow-wrap: anywhere;
+    }
+
+    .dashboard-stat-card .fi-wi-stats-overview-stat-value {
+        font-size: 1.6rem;
+        line-height: 1.85rem;
+    }
+
+    .dashboard-report-map-section > .fi-section-content-ctn > .fi-section-content {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .dashboard-report-map-section [id^='admin-report-map-'] {
+        border-radius: 0.75rem;
+    }
+
+    .dashboard-report-map-section .tambora-map-zoom-hint--inline {
+        flex-basis: 100%;
+    }
 }
 
 .dashboard-collapsible-chart > .fi-section {

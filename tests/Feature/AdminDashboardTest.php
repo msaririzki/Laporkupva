@@ -173,6 +173,8 @@ class AdminDashboardTest extends TestCase
             ->assertDontSee('Ringkasan pengawasan')
             ->assertSee('Tindakan lapangan')
             ->assertSee('Peta laporan')
+            ->assertSee('dashboard-stat-card--total', false)
+            ->assertSee('dashboard-report-map-section', false)
             ->assertSee('Tren 6 bulan')
             ->assertSee('data-dashboard-chart="monthly-report-trend"', false)
             ->assertSee('data-dashboard-chart="regional-report-chart"', false)
@@ -192,6 +194,7 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Saring')
             ->assertSee('Atur kolom')
             ->assertSee('Unduh CSV')
+            ->assertSee('fi-ta-cell-business-name', false)
             ->assertSee('Buka')
             ->assertSee('Lanjutkan');
 
@@ -222,7 +225,8 @@ class AdminDashboardTest extends TestCase
             ->get(KupvaResource::getUrl('index'))
             ->assertOk()
             ->assertSee('Data KUPVA')
-            ->assertSee('Kelola referensi penyelenggara KUPVA dan pantau status izin operasionalnya.');
+            ->assertSee('Kelola referensi penyelenggara KUPVA dan pantau status izin operasionalnya.')
+            ->assertSee('fi-ta-table-stacked-on-mobile', false);
 
         $this->actingAs($admin)
             ->get(KupvaResource::getUrl('view', ['record' => $kupva]))
@@ -535,7 +539,8 @@ class AdminDashboardTest extends TestCase
             ->get(UserResource::getUrl('index'))
             ->assertOk()
             ->assertSee('Manajemen admin')
-            ->assertSee('Atur akun dan akses admin yang membantu proses pengawasan.');
+            ->assertSee('Atur akun dan akses admin yang membantu proses pengawasan.')
+            ->assertSee('fi-ta-table-stacked-on-mobile', false);
     }
 
     public function test_super_admin_cannot_create_an_admin_with_a_weak_password(): void

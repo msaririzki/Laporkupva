@@ -56,7 +56,6 @@ class ReportsTable
                     ->searchable()
                     ->limit(36)
                     ->wrap()
-                    ->visibleFrom('md')
                     ->description(fn (Report $record): string => self::INCIDENT_TYPES[$record->incident_type] ?? $record->incident_type),
                 TextColumn::make('regency')
                     ->label('Wilayah')

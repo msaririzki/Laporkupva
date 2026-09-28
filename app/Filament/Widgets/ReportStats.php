@@ -22,6 +22,7 @@ class ReportStats extends StatsOverviewWidget
     ];
 
     protected int|array|null $columns = [
+        'default' => 2,
         'sm' => 2,
         'lg' => 3,
         'xl' => 5,
@@ -54,7 +55,7 @@ class ReportStats extends StatsOverviewWidget
             Stat::make('Total laporan', number_format($total, 0, ',', '.'))
                 ->chart($this->sevenDayChart())
                 ->color('primary')
-                ->extraAttributes(['class' => 'dashboard-stat-card'])
+                ->extraAttributes(['class' => 'dashboard-stat-card dashboard-stat-card--total'])
                 ->url(ReportResource::getUrl('index')),
             Stat::make('Laporan baru', number_format($new, 0, ',', '.'))
                 ->color($new > 0 ? 'warning' : 'gray')

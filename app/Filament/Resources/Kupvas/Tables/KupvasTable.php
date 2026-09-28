@@ -17,6 +17,7 @@ class KupvasTable
     {
         return $table
             ->defaultSort('name')
+            ->stackedOnMobile()
             ->columns([
                 TextColumn::make('name')
                     ->label('Nama usaha')

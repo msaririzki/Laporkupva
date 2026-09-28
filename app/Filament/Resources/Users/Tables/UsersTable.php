@@ -14,6 +14,7 @@ class UsersTable
     {
         return $table
             ->defaultSort('name')
+            ->stackedOnMobile()
             ->columns([
                 TextColumn::make('name')
                     ->label('Nama admin')
