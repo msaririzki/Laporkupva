@@ -1296,9 +1296,17 @@ html {
     align-items: flex-start;
 }
 
+.fi-resource-list-records-page.fi-resource-kupva .fi-page-header-main-ctn {
+    justify-content: space-between;
+}
+
 .fi-resource-list-records-page.fi-resource-kupva .fi-page-header-actions {
+    align-self: flex-start;
     gap: 0.6rem;
-    padding-top: 0.15rem;
+    margin-left: auto;
+    margin-right: -0.15rem;
+    padding-top: 0;
+    transform: translateY(-0.2rem);
 }
 
 .fi-resource-list-records-page.fi-resource-kupva .fi-page-header-actions .fi-btn {
@@ -1345,7 +1353,9 @@ html {
         display: grid;
         width: 100%;
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-right: 0;
         padding-top: 0;
+        transform: none;
     }
 
     .fi-resource-list-records-page.fi-resource-kupva .fi-page-header-actions > *,
