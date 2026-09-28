@@ -233,6 +233,8 @@ class AdminDashboardTest extends TestCase
             ->assertOk()
             ->assertSee('Data KUPVA')
             ->assertSee('Kelola referensi penyelenggara KUPVA dan pantau status izin operasionalnya.')
+            ->assertSee('Filter')
+            ->assertDontSee('Urutkan menurut')
             ->assertSee('fi-ta-table-stacked-on-mobile', false);
 
         $this->actingAs($admin)
@@ -554,7 +556,7 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Cari nama atau email admin…')
             ->assertSee('Tambah admin')
             ->assertSee('Atur')
-            ->assertSee('Urutkan menurut')
+            ->assertDontSee('Urutkan menurut')
             ->assertSee('1 hasil')
             ->assertSee($managedAdmin->name)
             ->assertSee('fi-ta-table-stacked-on-mobile', false);

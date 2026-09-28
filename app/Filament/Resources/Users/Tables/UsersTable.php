@@ -25,13 +25,12 @@ class UsersTable
                 TextColumn::make('name')
                     ->label('Nama admin')
                     ->searchable()
-                    ->sortable()
                     ->weight('bold')
                     ->description(fn (User $record): string => $record->email),
                 TextColumn::make('email')->label('Alamat email')->searchable()->copyable()->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('role')->label('Peran')->badge()->visibleFrom('md'),
                 IconColumn::make('is_active')->label('Akses aktif')->boolean()->visibleFrom('md'),
-                TextColumn::make('created_at')->label('Dibuat')->dateTime('d M Y, H:i')->sortable()->visibleFrom('lg'),
+                TextColumn::make('created_at')->label('Dibuat')->dateTime('d M Y, H:i')->visibleFrom('lg'),
             ])
             ->columnManagerTriggerAction(
                 fn (Action $action): Action => $action

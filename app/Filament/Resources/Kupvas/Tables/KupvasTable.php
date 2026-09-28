@@ -4,8 +4,10 @@ namespace App\Filament\Resources\Kupvas\Tables;
 
 use App\Enums\NtbRegency;
 use App\Models\Kupva;
+use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -22,7 +24,6 @@ class KupvasTable
                 TextColumn::make('name')
                     ->label('Nama usaha')
                     ->searchable()
-                    ->sortable()
                     ->weight('bold')
                     ->limit(42)
                     ->wrap()
@@ -44,18 +45,31 @@ class KupvasTable
                     'suspended' => 'warning',
                     default => 'gray',
                 }),
-                TextColumn::make('regency')->label('Wilayah')->searchable()->sortable()->wrap()->visibleFrom('md'),
-                TextColumn::make('license_expires_at')->label('Berlaku sampai')->date('d M Y')->placeholder('-')->sortable()->visibleFrom('lg'),
+                TextColumn::make('regency')->label('Wilayah')->searchable()->wrap()->visibleFrom('md'),
+                TextColumn::make('license_expires_at')->label('Berlaku sampai')->date('d M Y')->placeholder('-')->visibleFrom('lg'),
                 IconColumn::make('is_active')->label('Beroperasi')->boolean()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('license_status')->label('Status izin')->options([
-                    'active' => 'Aktif',
-                    'expired' => 'Kedaluwarsa',
-                    'suspended' => 'Dibekukan',
-                ]),
-                SelectFilter::make('regency')->label('Wilayah')->options(NtbRegency::class),
+                SelectFilter::make('license_status')
+                    ->label('Status izin')
+                    ->native(false)
+                    ->options([
+                        'active' => 'Aktif',
+                        'expired' => 'Kedaluwarsa',
+                        'suspended' => 'Dibekukan',
+                    ]),
+                SelectFilter::make('regency')
+                    ->label('Wilayah')
+                    ->native(false)
+                    ->options(NtbRegency::class),
             ])
+            ->filtersTriggerAction(
+                fn (Action $action): Action => $action
+                    ->button()
+                    ->label('Filter')
+                    ->icon(Heroicon::OutlinedAdjustmentsHorizontal)
+                    ->color('gray'),
+            )
             ->recordActions([
                 ViewAction::make()->iconButton()->tooltip('Lihat detail KUPVA'),
                 EditAction::make()->iconButton()->tooltip('Ubah data KUPVA'),
