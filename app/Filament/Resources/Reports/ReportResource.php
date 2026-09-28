@@ -78,6 +78,7 @@ class ReportResource extends Resource
             ->label('Update progres')
             ->icon(Heroicon::OutlinedArrowRightCircle)
             ->color('primary')
+            ->extraAttributes(['data-advance-report' => 'true'])
             ->visible(fn (Report $record): bool => $record->status->next() !== null)
             ->modalIcon(Heroicon::OutlinedArrowRightCircle)
             ->modalHeading('Update progres')

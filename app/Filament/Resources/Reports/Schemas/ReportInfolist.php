@@ -89,6 +89,7 @@ class ReportInfolist
                             Section::make('Lokasi terlapor')
                                 ->description('Pastikan titik peta sesuai dengan petunjuk lokasi sebelum koordinasi lapangan.')
                                 ->icon(Heroicon::OutlinedMapPin)
+                                ->extraAttributes(['class' => 'report-location-section'])
                                 ->headerActions([
                                     Action::make('openGoogleMaps')
                                         ->label('Buka di Google Maps')

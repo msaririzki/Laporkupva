@@ -227,41 +227,6 @@ new class extends Component
     x-on:report-message-sent.window="scrollToLatest(true)"
     class="overflow-hidden rounded-[1.35rem] border border-slate-200/90 bg-white shadow-[0_18px_50px_-38px_rgba(15,23,42,0.55)] dark:border-white/10 dark:bg-slate-900"
 >
-    <div class="flex flex-col gap-3 border-b border-slate-200/80 bg-gradient-to-r from-slate-50 to-white px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:px-5 dark:border-white/10 dark:from-slate-900 dark:to-slate-900">
-        <div class="flex min-w-0 items-center gap-3">
-            <div class="flex size-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 dark:bg-blue-500/10 dark:text-blue-300 dark:ring-blue-400/20">
-                <x-filament::icon icon="heroicon-m-shield-check" class="size-5" />
-            </div>
-
-            <div class="min-w-0">
-                <p class="text-sm font-semibold text-slate-900 dark:text-white">Identitas pelapor terlindungi</p>
-                <p class="truncate text-xs text-slate-500 dark:text-slate-400">Percakapan hanya dapat diakses petugas terkait.</p>
-            </div>
-        </div>
-
-        <div
-            class="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-colors duration-300"
-            x-bind:class="{
-                'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-400/20 dark:bg-emerald-500/10 dark:text-emerald-300': connectionState === 'live',
-                'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-400/20 dark:bg-amber-500/10 dark:text-amber-300': connectionState === 'connecting',
-                'border-slate-200 bg-slate-50 text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300': connectionState === 'fallback',
-            }"
-        >
-            <span class="relative flex size-2">
-                <span x-show="connectionState === 'live'" class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-50"></span>
-                <span
-                    class="relative inline-flex size-2 rounded-full transition-colors duration-300"
-                    x-bind:class="{
-                        'bg-emerald-500': connectionState === 'live',
-                        'animate-pulse bg-amber-400': connectionState === 'connecting',
-                        'bg-slate-400': connectionState === 'fallback',
-                    }"
-                ></span>
-            </span>
-            <span x-text="connectionState === 'live' ? 'Terhubung langsung' : connectionState === 'connecting' ? 'Menghubungkan…' : 'Sinkronisasi otomatis'"></span>
-        </div>
-    </div>
-
     <div class="relative">
         <div
             x-show="isRefreshing"

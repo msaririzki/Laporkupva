@@ -91,14 +91,14 @@ class ReportsTable
             ->filtersTriggerAction(
                 fn (Action $action): Action => $action
                     ->button()
-                    ->label('Saring')
+                    ->label('Filter')
                     ->icon(Heroicon::OutlinedAdjustmentsHorizontal)
                     ->color('gray'),
             )
             ->columnManagerTriggerAction(
                 fn (Action $action): Action => $action
                     ->button()
-                    ->label('Atur kolom')
+                    ->label('Atur')
                     ->icon(Heroicon::OutlinedViewColumns)
                     ->color('gray'),
             )
