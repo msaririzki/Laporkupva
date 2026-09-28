@@ -50,7 +50,7 @@
                                 <path d="M3.75 21h16.5M4.5 3h15v18h-15V3Zm3.75 4.5h.008v.008H8.25V7.5Zm0 4.5h.008v.008H8.25V12Zm0 4.5h.008v.008H8.25V16.5Zm4.5-9h3m-3 4.5h3m-3 4.5h3" />
                             </svg>
                         </span>
-                        <span>Money Changer berizin</span>
+                        <span>Money Changer Resmi</span>
                     </a>
                 </div>
 
