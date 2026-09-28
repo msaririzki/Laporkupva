@@ -49,6 +49,6 @@ Route::get('/admin/ekspor/laporan.csv', ReportExportController::class)
 Route::controller(KupvaCsvController::class)
     ->middleware('auth')
     ->group(function (): void {
-        Route::get('/admin/ekspor/kupva.csv', 'export')->name('admin.kupvas.export');
-        Route::get('/admin/template/kupva.csv', 'template')->name('admin.kupvas.template');
+        Route::get('/admin/ekspor/kupva.xlsx', 'export')->name('admin.kupvas.export');
+        Route::get('/admin/template/kupva.xlsx', 'template')->name('admin.kupvas.template');
     });

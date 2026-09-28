@@ -233,7 +233,7 @@ class AdminDashboardTest extends TestCase
             ->assertOk()
             ->assertSee('Data KUPVA')
             ->assertSee('Kelola referensi penyelenggara KUPVA dan pantau status izin operasionalnya.')
-            ->assertSee('Impor / ekspor')
+            ->assertSee('Kelola data')
             ->assertSee('Tambah KUPVA')
             ->assertSee('Filter')
             ->assertDontSee('Urutkan menurut')
