@@ -15,11 +15,20 @@ class CreateKupva extends CreateRecord
 
     protected ?string $heading = 'Tambah data KUPVA';
 
-    protected ?string $subheading = 'Lengkapi identitas, izin, dan lokasi usaha. Data dapat diperbarui kembali setelah disimpan.';
+    protected ?string $subheading = 'Isi nama, nomor izin, dan lokasi. Status awal otomatis aktif dan beroperasi.';
 
     protected Width|string|null $maxContentWidth = Width::SevenExtraLarge;
 
     public static string|Alignment $formActionsAlignment = Alignment::End;
+
+    /** @param array<string, mixed> $data */
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['license_status'] = 'active';
+        $data['is_active'] = true;
+
+        return $data;
+    }
 
     protected function getCreateFormAction(): Action
     {

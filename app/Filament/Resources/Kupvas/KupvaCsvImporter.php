@@ -22,18 +22,9 @@ final class KupvaCsvImporter
 {
     /** @var list<string> */
     private const REQUIRED_HEADERS = [
-        'id',
         'nama_usaha',
         'nomor_izin',
-        'status_izin',
         'kabupaten_kota',
-        'kecamatan',
-        'desa_kelurahan',
-        'alamat',
-        'latitude',
-        'longitude',
-        'berlaku_sampai',
-        'beroperasi',
     ];
 
     /** @var array<string, string> */
@@ -104,16 +95,12 @@ final class KupvaCsvImporter
                 break;
             }
 
-            $validator = Validator::make($row, $this->rulesFor($row), [
-                'id.exists' => 'ID KUPVA tidak ditemukan',
-                'license_number.required_without' => 'nomor izin wajib diisi untuk data baru',
-                'license_number.unique' => 'nomor izin telah digunakan oleh KUPVA lain',
+            $validator = Validator::make($row, $this->rulesFor(), [
                 'license_status.in' => 'status izin harus Aktif, Kedaluwarsa, atau Dibekukan',
                 'regency.enum' => 'kabupaten/kota tidak termasuk wilayah NTB yang didukung',
                 'license_expires_at.date_format' => 'tanggal berlaku harus memakai format YYYY-MM-DD',
                 'is_active.boolean' => 'status beroperasi harus Ya atau Tidak',
             ], [
-                'id' => 'ID',
                 'name' => 'nama usaha',
                 'license_number' => 'nomor izin',
                 'license_status' => 'status izin',
@@ -135,9 +122,13 @@ final class KupvaCsvImporter
             }
 
             $validated = $validator->validated();
-            $existing = filled($validated['id'])
-                ? Kupva::query()->find((int) $validated['id'])
-                : Kupva::query()->where('license_number', $validated['license_number'])->first();
+            $existing = Kupva::query()->where('license_number', $validated['license_number'])->first();
+
+            if (! $existing) {
+                $validated['license_status'] ??= 'active';
+                $validated['is_active'] ??= true;
+            }
+
             $rowKey = $existing
                 ? 'model:'.$existing->getKey()
                 : 'license:'.Str::lower($validated['license_number']);
@@ -146,7 +137,7 @@ final class KupvaCsvImporter
                 $isIdentical = $this->rowsAreEqual($seenRows[$rowKey]['values'], $validated);
                 $message = $isIdentical
                     ? "Sama dengan baris {$seenRows[$rowKey]['row']} dan akan dilewati."
-                    : "Nomor izin atau ID juga digunakan pada baris {$seenRows[$rowKey]['row']} dengan isi berbeda.";
+                    : "Nomor izin juga digunakan pada baris {$seenRows[$rowKey]['row']} dengan isi berbeda.";
 
                 $analysis['summary']['duplicates']++;
                 $analysis['items'][] = $this->previewItem($rowNumber, 'duplicate', $validated, [], $message, ! $isIdentical);
@@ -222,7 +213,6 @@ final class KupvaCsvImporter
                 }
 
                 $values = $row['values'];
-                unset($values['id']);
 
                 $kupva = $row['model_id']
                     ? Kupva::query()->findOrFail($row['model_id'])
@@ -320,28 +310,21 @@ final class KupvaCsvImporter
         return ['headers' => $headers, 'rows' => $rows];
     }
 
-    /** @param array<string, mixed> $row */
-    private function rulesFor(array $row): array
+    /** @return array<string, list<mixed>> */
+    private function rulesFor(): array
     {
-        $licenseRules = ['nullable', 'required_without:id', 'string', 'max:255', new NoHtml];
-
-        if (filled($row['id'])) {
-            $licenseRules[] = Rule::unique('kupvas', 'license_number')->ignore((int) $row['id']);
-        }
-
         return [
-            'id' => ['nullable', 'integer', 'exists:kupvas,id'],
             'name' => ['required', 'string', 'max:255', new NoHtml],
-            'license_number' => $licenseRules,
-            'license_status' => ['required', Rule::in(['active', 'expired', 'suspended'])],
+            'license_number' => ['required', 'string', 'max:255', new NoHtml],
+            'license_status' => ['sometimes', Rule::in(['active', 'expired', 'suspended'])],
             'regency' => ['required', Rule::enum(NtbRegency::class)],
-            'district' => ['nullable', 'string', 'max:120', new NoHtml],
-            'village' => ['nullable', 'string', 'max:120', new NoHtml],
-            'address' => ['nullable', 'string', 'max:2000', new NoHtml],
-            'latitude' => ['nullable', 'numeric', 'between:-11,-8'],
-            'longitude' => ['nullable', 'numeric', 'between:115,120'],
-            'license_expires_at' => ['nullable', 'date_format:Y-m-d'],
-            'is_active' => ['required', 'boolean'],
+            'district' => ['sometimes', 'nullable', 'string', 'max:120', new NoHtml],
+            'village' => ['sometimes', 'nullable', 'string', 'max:120', new NoHtml],
+            'address' => ['sometimes', 'nullable', 'string', 'max:2000', new NoHtml],
+            'latitude' => ['sometimes', 'nullable', 'numeric', 'between:-11,-8'],
+            'longitude' => ['sometimes', 'nullable', 'numeric', 'between:115,120'],
+            'license_expires_at' => ['sometimes', 'nullable', 'date_format:Y-m-d'],
+            'is_active' => ['sometimes', 'boolean'],
         ];
     }
 
@@ -377,22 +360,46 @@ final class KupvaCsvImporter
      */
     private function normalizeRow(array $record, array $headerMap): array
     {
-        $value = fn (string $header): string => $this->normalizeCellValue($record[$headerMap[$header]] ?? null);
+        $hasHeader = fn (string $header): bool => array_key_exists($header, $headerMap);
+        $value = fn (string $header): string => $this->normalizeCellValue(
+            $hasHeader($header) ? ($record[$headerMap[$header]] ?? null) : null,
+        );
 
-        return [
-            'id' => $value('id') ?: null,
+        $row = [
             'name' => $value('nama_usaha'),
             'license_number' => $value('nomor_izin'),
-            'license_status' => $this->normalizeLicenseStatus($value('status_izin')),
             'regency' => $value('kabupaten_kota'),
+        ];
+
+        $optionalValues = [
+            'license_status' => $hasHeader('status_izin') ? $this->normalizeLicenseStatus($value('status_izin')) : null,
             'district' => $value('kecamatan') ?: null,
             'village' => $value('desa_kelurahan') ?: null,
             'address' => $value('alamat') ?: null,
             'latitude' => $value('latitude') ?: null,
             'longitude' => $value('longitude') ?: null,
             'license_expires_at' => $value('berlaku_sampai') ?: null,
-            'is_active' => $this->normalizeOperationalStatus($value('beroperasi')),
+            'is_active' => $hasHeader('beroperasi') ? $this->normalizeOperationalStatus($value('beroperasi')) : null,
         ];
+
+        foreach ($optionalValues as $field => $optionalValue) {
+            $header = match ($field) {
+                'license_status' => 'status_izin',
+                'district' => 'kecamatan',
+                'village' => 'desa_kelurahan',
+                'address' => 'alamat',
+                'latitude' => 'latitude',
+                'longitude' => 'longitude',
+                'license_expires_at' => 'berlaku_sampai',
+                'is_active' => 'beroperasi',
+            };
+
+            if ($hasHeader($header)) {
+                $row[$field] = $optionalValue;
+            }
+        }
+
+        return $row;
     }
 
     private function normalizeCellValue(mixed $value): string
@@ -430,10 +437,7 @@ final class KupvaCsvImporter
     /** @param array<string, mixed> $row */
     private function isEmptyRow(array $row): bool
     {
-        return collect($row)
-            ->except(['license_status', 'is_active'])
-            ->filter(fn (mixed $value): bool => filled($value))
-            ->isEmpty();
+        return collect($row)->filter(fn (mixed $value): bool => filled($value))->isEmpty();
     }
 
     /**
@@ -442,7 +446,11 @@ final class KupvaCsvImporter
      */
     private function rowsAreEqual(array $first, array $second): bool
     {
-        foreach (array_keys(self::FIELD_LABELS) as $field) {
+        foreach (array_keys($second) as $field) {
+            if (! array_key_exists($field, self::FIELD_LABELS)) {
+                continue;
+            }
+
             if ($this->comparableValue($field, $first[$field] ?? null) !== $this->comparableValue($field, $second[$field] ?? null)) {
                 return false;
             }
@@ -460,6 +468,10 @@ final class KupvaCsvImporter
         $changes = [];
 
         foreach (self::FIELD_LABELS as $field => $label) {
+            if (! array_key_exists($field, $values)) {
+                continue;
+            }
+
             $before = $kupva->getAttribute($field);
             $after = $values[$field] ?? null;
 

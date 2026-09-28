@@ -35,9 +35,10 @@ class KupvaCsvControllerTest extends TestCase
         $this->assertStringStartsWith('PK', $content);
         $this->assertSame(['Data KUPVA', 'Petunjuk'], array_keys($workbook));
         $this->assertSame(
-            ['ID', 'Nama Usaha', 'Nomor Izin', 'Status Izin', 'Kabupaten/Kota'],
+            ['Nama Usaha', 'Nomor Izin', 'Kabupaten/Kota', 'Kecamatan', 'Desa/Kelurahan'],
             array_slice($workbook['Data KUPVA'][0], 0, 5),
         );
+        $this->assertNotContains('ID', $workbook['Data KUPVA'][0]);
         $this->assertSame('Petunjuk pengisian template KUPVA', $workbook['Petunjuk'][0][0]);
     }
 
@@ -65,12 +66,11 @@ class KupvaCsvControllerTest extends TestCase
         $rows = $this->readXlsx($response->streamedContent())['Data KUPVA'];
         $dataRow = $rows[1];
 
-        $this->assertSame((string) $kupva->id, $dataRow[0]);
-        $this->assertSame('=KUPVA Berbahaya', $dataRow[1]);
-        $this->assertSame($kupva->license_number, $dataRow[2]);
-        $this->assertSame('Kota Mataram', $dataRow[4]);
-        $this->assertSame('2027-12-31', $dataRow[10]);
-        $this->assertSame('Ya', $dataRow[11]);
+        $this->assertSame('=KUPVA Berbahaya', $dataRow[0]);
+        $this->assertSame($kupva->license_number, $dataRow[1]);
+        $this->assertSame('Kota Mataram', $dataRow[3]);
+        $this->assertSame('2027-12-31', $dataRow[9]);
+        $this->assertSame('Ya', $dataRow[10]);
     }
 
     public function test_guest_must_login_before_downloading_kupva_csv_files(): void
@@ -83,8 +83,8 @@ class KupvaCsvControllerTest extends TestCase
     {
         $admin = User::factory()->create();
         $file = UploadedFile::fake()->createWithContent('kupva.csv', implode("\n", [
-            'ID,Nama Usaha,Nomor Izin,Status Izin,Kabupaten/Kota,Kecamatan,Desa/Kelurahan,Alamat,Latitude,Longitude,Berlaku Sampai,Beroperasi',
-            ',PT Lombok Valas,KUPVA-NTB-7777,Aktif,Kabupaten Lombok Barat,Batulayar,Senggigi,Jalan Raya Senggigi,-8.4919000,116.0456000,2027-12-31,Ya',
+            'Nama Usaha,Nomor Izin,Kabupaten/Kota,Kecamatan,Desa/Kelurahan,Alamat,Berlaku Sampai',
+            'PT Lombok Valas,KUPVA-NTB-7777,Kabupaten Lombok Barat,Batulayar,Senggigi,Jalan Raya Senggigi,2027-12-31',
         ]));
 
         $this->actingAs($admin);
@@ -97,6 +97,8 @@ class KupvaCsvControllerTest extends TestCase
         $this->assertDatabaseHas('kupvas', [
             'name' => 'PT Lombok Valas',
             'license_number' => 'KUPVA-NTB-7777',
+            'license_status' => 'active',
+            'is_active' => true,
         ]);
     }
 
@@ -124,9 +126,9 @@ class KupvaCsvControllerTest extends TestCase
         ]);
 
         $file = UploadedFile::fake()->createWithContent('kupva.csv', implode("\n", [
-            'ID,Nama Usaha,Nomor Izin,Status Izin,Kabupaten/Kota,Kecamatan,Desa/Kelurahan,Alamat,Latitude,Longitude,Berlaku Sampai,Beroperasi',
-            ',PT Nusa Valas,KUPVA-NTB-1001,Aktif,Kota Mataram,Selaparang,Rembiga,Jalan Adi Sucipto,-8.5830695,116.1161800,2027-12-31,Ya',
-            ',PT Samawa Valuta,KUPVA-NTB-1002,Dibekukan,Kabupaten Sumbawa,Sumbawa,Brang Biji,Jalan Garuda,-8.4932000,117.4202000,2027-06-30,Tidak',
+            'Nama Usaha,Nomor Izin,Status Izin,Kabupaten/Kota,Kecamatan,Desa/Kelurahan,Alamat,Latitude,Longitude,Berlaku Sampai,Beroperasi',
+            'PT Nusa Valas,KUPVA-NTB-1001,Aktif,Kota Mataram,Selaparang,Rembiga,Jalan Adi Sucipto,-8.5830695,116.1161800,2027-12-31,Ya',
+            'PT Samawa Valuta,KUPVA-NTB-1002,Dibekukan,Kabupaten Sumbawa,Sumbawa,Brang Biji,Jalan Garuda,-8.4932000,117.4202000,2027-06-30,Tidak',
         ]));
 
         $result = app(KupvaCsvImporter::class)->import($file);
@@ -155,9 +157,9 @@ class KupvaCsvControllerTest extends TestCase
     public function test_importer_rejects_the_whole_file_when_one_row_is_invalid(): void
     {
         $file = UploadedFile::fake()->createWithContent('kupva.csv', implode("\n", [
-            'ID,Nama Usaha,Nomor Izin,Status Izin,Kabupaten/Kota,Kecamatan,Desa/Kelurahan,Alamat,Latitude,Longitude,Berlaku Sampai,Beroperasi',
-            ',PT Nusa Valas,KUPVA-NTB-1001,Aktif,Kota Mataram,Selaparang,Rembiga,Jalan Adi Sucipto,-8.5830695,116.1161800,2027-12-31,Ya',
-            ',PT Salah Wilayah,KUPVA-NTB-1002,Aktif,Kota Denpasar,Denpasar Barat,Dauh Puri,Jalan Teuku Umar,-8.6500000,115.2100000,2027-12-31,Ya',
+            'Nama Usaha,Nomor Izin,Kabupaten/Kota',
+            'PT Nusa Valas,KUPVA-NTB-1001,Kota Mataram',
+            'PT Salah Wilayah,KUPVA-NTB-1002,Kota Denpasar',
         ]));
 
         try {
@@ -187,7 +189,6 @@ class KupvaCsvControllerTest extends TestCase
 
         $file = $this->makeXlsxUpload([
             [
-                $kupva->id,
                 'Nama Baru',
                 'KUPVA-NTB-2001',
                 'Aktif',
@@ -201,7 +202,6 @@ class KupvaCsvControllerTest extends TestCase
                 'Ya',
             ],
             [
-                $kupva->id,
                 'Nama Baru',
                 'KUPVA-NTB-2001',
                 'Aktif',
@@ -240,9 +240,9 @@ class KupvaCsvControllerTest extends TestCase
     public function test_importer_blocks_conflicting_duplicate_rows(): void
     {
         $file = UploadedFile::fake()->createWithContent('kupva.csv', implode("\n", [
-            'ID,Nama Usaha,Nomor Izin,Status Izin,Kabupaten/Kota,Kecamatan,Desa/Kelurahan,Alamat,Latitude,Longitude,Berlaku Sampai,Beroperasi',
-            ',PT Nusa Valas,KUPVA-NTB-3001,Aktif,Kota Mataram,Selaparang,Rembiga,Jalan A,-8.5830695,116.1161800,2027-12-31,Ya',
-            ',PT Nusa Valas,KUPVA-NTB-3001,Aktif,Kota Mataram,Selaparang,Rembiga,Jalan B,-8.5830695,116.1161800,2027-12-31,Ya',
+            'Nama Usaha,Nomor Izin,Kabupaten/Kota,Alamat',
+            'PT Nusa Valas,KUPVA-NTB-3001,Kota Mataram,Jalan A',
+            'PT Nusa Valas,KUPVA-NTB-3001,Kota Mataram,Jalan B',
         ]));
 
         $analysis = app(KupvaCsvImporter::class)->analyze($file);
@@ -268,7 +268,6 @@ class KupvaCsvControllerTest extends TestCase
         $writer = new Writer;
         $writer->openToFile($path);
         $writer->addRow(Row::fromValues([
-            'ID',
             'Nama Usaha',
             'Nomor Izin',
             'Status Izin',
@@ -295,6 +294,35 @@ class KupvaCsvControllerTest extends TestCase
             null,
             true,
         );
+    }
+
+    public function test_simple_import_updates_only_supplied_fields_and_preserves_existing_status(): void
+    {
+        Kupva::factory()->create([
+            'name' => 'Nama Lama',
+            'license_number' => 'KUPVA-NTB-4001',
+            'license_status' => 'suspended',
+            'regency' => 'Kota Mataram',
+            'district' => 'Selaparang',
+            'address' => 'Alamat lama',
+            'is_active' => false,
+        ]);
+        $file = UploadedFile::fake()->createWithContent('kupva.csv', implode("\n", [
+            'Nama Usaha,Nomor Izin,Kabupaten/Kota',
+            'Nama Baru,KUPVA-NTB-4001,Kota Mataram',
+        ]));
+
+        $result = app(KupvaCsvImporter::class)->import($file);
+
+        $this->assertSame(1, $result['updated']);
+        $this->assertDatabaseHas('kupvas', [
+            'name' => 'Nama Baru',
+            'license_number' => 'KUPVA-NTB-4001',
+            'license_status' => 'suspended',
+            'district' => 'Selaparang',
+            'address' => 'Alamat lama',
+            'is_active' => false,
+        ]);
     }
 
     /** @return array<string, list<list<mixed>>> */

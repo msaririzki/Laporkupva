@@ -2,7 +2,7 @@
     <div class="min-w-0">
         <p class="text-sm font-semibold text-slate-900">Gunakan format yang sudah disiapkan</p>
         <p class="mt-1 text-xs leading-5 text-slate-600">
-            Template berisi kolom yang benar dan petunjuk pengisian pada lembar terpisah.
+            Cukup isi nama usaha, nomor izin, dan kabupaten/kota. ID tidak diperlukan; kolom lokasi lainnya boleh dikosongkan.
         </p>
     </div>
 

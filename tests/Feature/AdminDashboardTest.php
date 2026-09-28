@@ -282,15 +282,16 @@ class AdminDashboardTest extends TestCase
             ->get(KupvaResource::getUrl('create'))
             ->assertOk()
             ->assertSee('Tambah data KUPVA')
-            ->assertSee('Identitas dan perizinan')
-            ->assertSee('Lokasi operasional')
-            ->assertSee('Koordinat peta (opsional)')
+            ->assertSee('Data KUPVA')
+            ->assertSee('Status awal otomatis aktif dan beroperasi.')
+            ->assertDontSee('Status dan masa berlaku')
+            ->assertDontSee('Koordinat peta (opsional)')
             ->assertSee('Simpan KUPVA')
             ->assertSee('Simpan &amp; tambah lagi', false)
             ->assertSee('kupva-form-section', false);
     }
 
-    public function test_admin_can_create_a_non_operational_kupva(): void
+    public function test_admin_can_create_a_kupva_without_entering_status_or_coordinates(): void
     {
         $admin = User::factory()->create(['role' => UserRole::Admin]);
 
@@ -300,15 +301,10 @@ class AdminDashboardTest extends TestCase
             ->fillForm([
                 'name' => 'KUPVA Test Mataram',
                 'license_number' => 'KUPVA-TEST-2026',
-                'license_status' => 'suspended',
-                'license_expires_at' => '2027-12-31',
-                'is_active' => 0,
                 'regency' => 'Kota Mataram',
                 'district' => 'Selaparang',
                 'village' => 'Rembiga',
                 'address' => 'Jalan Adi Sucipto Nomor 10',
-                'latitude' => -8.5830695,
-                'longitude' => 116.1161800,
             ])
             ->call('create')
             ->assertHasNoFormErrors()
@@ -317,9 +313,11 @@ class AdminDashboardTest extends TestCase
         $this->assertDatabaseHas(Kupva::class, [
             'name' => 'KUPVA Test Mataram',
             'license_number' => 'KUPVA-TEST-2026',
-            'license_status' => 'suspended',
+            'license_status' => 'active',
             'regency' => 'Kota Mataram',
-            'is_active' => false,
+            'is_active' => true,
+            'latitude' => null,
+            'longitude' => null,
         ]);
     }
 

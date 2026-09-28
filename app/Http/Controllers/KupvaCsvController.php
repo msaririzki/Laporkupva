@@ -18,8 +18,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class KupvaCsvController extends Controller
 {
     /** @var list<string> */
-    private const HEADERS = [
-        'ID',
+    private const EXPORT_HEADERS = [
         'Nama Usaha',
         'Nomor Izin',
         'Status Izin',
@@ -33,6 +32,17 @@ class KupvaCsvController extends Controller
         'Beroperasi',
     ];
 
+    /** @var list<string> */
+    private const TEMPLATE_HEADERS = [
+        'Nama Usaha',
+        'Nomor Izin',
+        'Kabupaten/Kota',
+        'Kecamatan',
+        'Desa/Kelurahan',
+        'Alamat',
+        'Berlaku Sampai',
+    ];
+
     public function export(Request $request): StreamedResponse
     {
         $this->authorizeAdmin($request);
@@ -42,15 +52,14 @@ class KupvaCsvController extends Controller
             $writer->openToFile('php://output');
             $sheet = $writer->getCurrentSheet();
             $sheet->setName('Data KUPVA');
-            $this->configureDataSheet($sheet);
-            $writer->addRow($this->textRow(self::HEADERS, $this->headerStyle()));
+            $this->configureDataSheet($sheet, self::EXPORT_HEADERS);
+            $writer->addRow($this->textRow(self::EXPORT_HEADERS, $this->headerStyle()));
 
             Kupva::query()
                 ->orderBy('name')
                 ->lazy(500)
                 ->each(function (Kupva $kupva) use ($writer): void {
                     $writer->addRow($this->textRow([
-                        (string) $kupva->id,
                         $kupva->name,
                         $kupva->license_number,
                         match ($kupva->license_status) {
@@ -84,8 +93,8 @@ class KupvaCsvController extends Controller
 
             $dataSheet = $writer->getCurrentSheet();
             $dataSheet->setName('Data KUPVA');
-            $this->configureDataSheet($dataSheet);
-            $writer->addRow($this->textRow(self::HEADERS, $this->headerStyle()));
+            $this->configureDataSheet($dataSheet, self::TEMPLATE_HEADERS);
+            $writer->addRow($this->textRow(self::TEMPLATE_HEADERS, $this->headerStyle()));
 
             $guideSheet = $writer->addNewSheetAndMakeItCurrent();
             $guideSheet->setName('Petunjuk');
@@ -115,18 +124,26 @@ class KupvaCsvController extends Controller
         return $writer;
     }
 
-    private function configureDataSheet(Sheet $sheet): void
+    /** @param list<string> $headers */
+    private function configureDataSheet(Sheet $sheet, array $headers): void
     {
-        $sheet->setColumnWidth(10, 1);
-        $sheet->setColumnWidth(30, 2);
-        $sheet->setColumnWidth(24, 3);
-        $sheet->setColumnWidth(18, 4);
-        $sheet->setColumnWidth(28, 5);
-        $sheet->setColumnWidth(22, 6);
-        $sheet->setColumnWidth(24, 7);
-        $sheet->setColumnWidth(42, 8);
-        $sheet->setColumnWidth(16, 9, 10);
-        $sheet->setColumnWidth(18, 11, 12);
+        $columnWidths = [
+            'Nama Usaha' => 30,
+            'Nomor Izin' => 24,
+            'Status Izin' => 18,
+            'Kabupaten/Kota' => 28,
+            'Kecamatan' => 22,
+            'Desa/Kelurahan' => 24,
+            'Alamat' => 42,
+            'Latitude' => 16,
+            'Longitude' => 16,
+            'Berlaku Sampai' => 18,
+            'Beroperasi' => 18,
+        ];
+
+        foreach ($headers as $columnIndex => $header) {
+            $sheet->setColumnWidth($columnWidths[$header], $columnIndex + 1);
+        }
     }
 
     private function headerStyle(): Style
@@ -172,15 +189,13 @@ class KupvaCsvController extends Controller
     private function templateInstructions(): array
     {
         return [
-            ['ID', 'Kosongkan untuk data baru. Isi ID dari hasil ekspor jika ingin memperbarui data tertentu.'],
             ['Nama Usaha', 'Wajib. Tulis nama resmi penyelenggara KUPVA.'],
-            ['Nomor Izin', 'Wajib untuk data baru dan harus unik. Data dengan nomor izin yang sama akan diperbarui, bukan dibuat ganda.'],
-            ['Status Izin', 'Isi salah satu: Aktif, Kedaluwarsa, atau Dibekukan.'],
+            ['Nomor Izin', 'Wajib dan harus unik. Sistem memakai nomor ini untuk mengenali data baru atau pembaruan, jadi ID tidak perlu diisi.'],
             ['Kabupaten/Kota', 'Wajib. Gunakan nama lengkap salah satu dari 10 kabupaten/kota di NTB.'],
             ['Kecamatan & Desa/Kelurahan', 'Isi sesuai alamat resmi agar data mudah ditemukan masyarakat.'],
-            ['Latitude & Longitude', 'Opsional. Gunakan koordinat wilayah NTB; latitude -11 sampai -8 dan longitude 115 sampai 120.'],
+            ['Alamat', 'Opsional. Tulis alamat atau patokan lokasi yang mudah dikenali.'],
             ['Berlaku Sampai', 'Opsional. Gunakan format YYYY-MM-DD, contoh 2027-12-31.'],
-            ['Beroperasi', 'Wajib. Isi Ya atau Tidak.'],
+            ['Status otomatis', 'Data baru otomatis disimpan dengan status izin Aktif dan Beroperasi. Status dapat diubah dari halaman edit.'],
             ['Sebelum impor', 'Sistem akan menampilkan data baru, perubahan, data yang sama, dan duplikat untuk diperiksa sebelum disimpan.'],
         ];
     }

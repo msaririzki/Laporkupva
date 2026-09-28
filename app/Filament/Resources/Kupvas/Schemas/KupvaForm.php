@@ -19,8 +19,8 @@ class KupvaForm
     {
         return $schema
             ->components([
-                Section::make('Identitas dan perizinan')
-                    ->description('Lengkapi data utama usaha dan status izinnya.')
+                Section::make('Data KUPVA')
+                    ->description('Isi identitas dan lokasi utama. Status awal otomatis aktif dan beroperasi.')
                     ->icon(Heroicon::OutlinedBuildingOffice2)
                     ->iconColor('primary')
                     ->extraAttributes(['class' => 'kupva-form-section kupva-identity-section'])
@@ -42,75 +42,10 @@ class KupvaForm
                             ->label('Nomor izin')
                             ->placeholder('Contoh: KEP-123/BI/2026')
                             ->prefixIcon(Heroicon::OutlinedIdentification)
-                            ->helperText('Kosongkan jika nomor izin belum tersedia.')
+                            ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
                             ->rule(new NoHtml),
-                        ToggleButtons::make('license_status')
-                            ->label('Status izin')
-                            ->options([
-                                'active' => 'Aktif',
-                                'expired' => 'Kedaluwarsa',
-                                'suspended' => 'Dibekukan',
-                            ])
-                            ->colors([
-                                'active' => 'success',
-                                'expired' => 'warning',
-                                'suspended' => 'danger',
-                            ])
-                            ->icons([
-                                'active' => Heroicon::OutlinedCheckBadge,
-                                'expired' => Heroicon::OutlinedCalendarDays,
-                                'suspended' => Heroicon::OutlinedShieldExclamation,
-                            ])
-                            ->columns([
-                                'default' => 1,
-                                'sm' => 3,
-                            ])
-                            ->default('active')
-                            ->required(),
-                        DatePicker::make('license_expires_at')
-                            ->label('Berlaku sampai')
-                            ->placeholder('Pilih tanggal')
-                            ->prefixIcon(Heroicon::OutlinedCalendarDays)
-                            ->displayFormat('d M Y')
-                            ->native(false)
-                            ->closeOnDateSelection()
-                            ->helperText('Isi sesuai masa berlaku pada dokumen izin.'),
-                        ToggleButtons::make('is_active')
-                            ->label('Status operasional')
-                            ->options([
-                                1 => 'Beroperasi',
-                                0 => 'Tidak beroperasi',
-                            ])
-                            ->colors([
-                                1 => 'success',
-                                0 => 'danger',
-                            ])
-                            ->icons([
-                                1 => Heroicon::OutlinedCheckCircle,
-                                0 => Heroicon::OutlinedXCircle,
-                            ])
-                            ->columns([
-                                'default' => 1,
-                                'sm' => 2,
-                            ])
-                            ->default(1)
-                            ->helperText('Status ini dapat diubah kapan saja dari halaman edit.')
-                            ->extraFieldWrapperAttributes(['class' => 'kupva-operational-status'])
-                            ->columnSpanFull(),
-                    ]),
-                Section::make('Lokasi operasional')
-                    ->description('Masukkan alamat yang mudah dikenali dan ditemukan.')
-                    ->icon(Heroicon::OutlinedMapPin)
-                    ->iconColor('primary')
-                    ->extraAttributes(['class' => 'kupva-form-section kupva-location-section'])
-                    ->columnSpanFull()
-                    ->columns([
-                        'default' => 1,
-                        'md' => 2,
-                    ])
-                    ->schema([
                         Select::make('regency')
                             ->label('Kabupaten/kota')
                             ->placeholder('Pilih wilayah')
@@ -137,12 +72,76 @@ class KupvaForm
                             ->rule(new NoHtml)
                             ->columnSpanFull(),
                     ]),
+                Section::make('Status dan masa berlaku')
+                    ->description('Ubah bagian ini hanya jika status KUPVA perlu diperbarui.')
+                    ->icon(Heroicon::OutlinedCheckBadge)
+                    ->iconColor('primary')
+                    ->extraAttributes(['class' => 'kupva-form-section kupva-status-section'])
+                    ->columnSpanFull()
+                    ->hiddenOn('create')
+                    ->columns([
+                        'default' => 1,
+                        'md' => 2,
+                    ])
+                    ->schema([
+                        ToggleButtons::make('license_status')
+                            ->label('Status izin')
+                            ->options([
+                                'active' => 'Aktif',
+                                'expired' => 'Kedaluwarsa',
+                                'suspended' => 'Dibekukan',
+                            ])
+                            ->colors([
+                                'active' => 'success',
+                                'expired' => 'warning',
+                                'suspended' => 'danger',
+                            ])
+                            ->icons([
+                                'active' => Heroicon::OutlinedCheckBadge,
+                                'expired' => Heroicon::OutlinedCalendarDays,
+                                'suspended' => Heroicon::OutlinedShieldExclamation,
+                            ])
+                            ->columns([
+                                'default' => 1,
+                                'sm' => 3,
+                            ])
+                            ->required(),
+                        DatePicker::make('license_expires_at')
+                            ->label('Berlaku sampai')
+                            ->placeholder('Pilih tanggal')
+                            ->prefixIcon(Heroicon::OutlinedCalendarDays)
+                            ->displayFormat('d M Y')
+                            ->native(false)
+                            ->closeOnDateSelection(),
+                        ToggleButtons::make('is_active')
+                            ->label('Status operasional')
+                            ->options([
+                                1 => 'Beroperasi',
+                                0 => 'Tidak beroperasi',
+                            ])
+                            ->colors([
+                                1 => 'success',
+                                0 => 'danger',
+                            ])
+                            ->icons([
+                                1 => Heroicon::OutlinedCheckCircle,
+                                0 => Heroicon::OutlinedXCircle,
+                            ])
+                            ->columns([
+                                'default' => 1,
+                                'sm' => 2,
+                            ])
+                            ->required()
+                            ->extraFieldWrapperAttributes(['class' => 'kupva-operational-status'])
+                            ->columnSpanFull(),
+                    ]),
                 Section::make('Koordinat peta (opsional)')
                     ->description('Buka bagian ini jika titik lokasi sudah diketahui.')
                     ->icon(Heroicon::OutlinedMap)
                     ->iconColor('gray')
                     ->extraAttributes(['class' => 'kupva-form-section kupva-coordinate-section'])
                     ->columnSpanFull()
+                    ->hiddenOn('create')
                     ->collapsible()
                     ->collapsed()
                     ->columns([
