@@ -67,7 +67,8 @@ class PublicInformationPagesTest extends TestCase
             'regency' => 'Kota Mataram',
         ]))
             ->assertOk()
-            ->assertSee('Daftar KUPVA berizin')
+            ->assertSee('Daftar Money Changer Berizin')
+            ->assertSee('KUPVA BB adalah istilah resmi')
             ->assertSee($mataram->name)
             ->assertSee($mataram->license_number)
             ->assertDontSee('PT Samawa Valas')

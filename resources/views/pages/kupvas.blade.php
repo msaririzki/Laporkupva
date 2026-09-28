@@ -1,4 +1,4 @@
-<x-layouts.public title="KUPVA berizin di NTB">
+<x-layouts.public title="Money Changer berizin di NTB">
     <section class="border-b border-slate-200 bg-white py-8 sm:py-11">
         <div class="public-container max-w-[1180px] px-4 sm:px-6 lg:px-10">
             <div class="max-w-3xl">
@@ -7,10 +7,10 @@
                     Referensi resmi masyarakat
                 </div>
                 <h1 class="mt-3 text-2xl font-extrabold tracking-tight text-[#0F172A] sm:text-3xl lg:text-[34px]">
-                    Daftar KUPVA berizin
+                    Daftar Money Changer Berizin
                 </h1>
                 <p class="mt-2 max-w-2xl text-xs leading-relaxed text-[#64748B] sm:text-sm lg:text-[15px]">
-                    Periksa nama usaha dan nomor izinnya sebelum melakukan penukaran valuta asing di wilayah Nusa Tenggara Barat.
+                    Periksa nama usaha dan nomor izinnya sebelum menukar uang asing di wilayah Nusa Tenggara Barat. KUPVA BB adalah istilah resmi untuk usaha Money Changer bukan bank.
                 </p>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <form action="{{ route('kupvas.index') }}" method="GET" class="rounded-2xl border border-slate-200 bg-white p-3 shadow-xs sm:p-4" role="search">
                 <div class="grid gap-2.5 md:grid-cols-[minmax(0,1fr)_minmax(14rem,0.42fr)_auto] md:items-end">
                     <div>
-                        <label for="kupva-search" class="form-label">Cari KUPVA</label>
+                        <label for="kupva-search" class="form-label">Cari Money Changer</label>
                         <div class="relative">
                             <svg class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 3.473 9.767l3.63 3.63a.75.75 0 1 0 1.06-1.06l-3.63-3.63A5.5 5.5 0 0 0 9 3.5ZM5 9a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clip-rule="evenodd" />
@@ -63,7 +63,7 @@
 
             <div class="mt-5 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <p class="text-sm font-bold text-[#0B2342]">
-                    {{ number_format($kupvas->total(), 0, ',', '.') }} KUPVA ditemukan
+                    {{ number_format($kupvas->total(), 0, ',', '.') }} Money Changer ditemukan
                 </p>
                 <p class="text-xs text-[#64748B]">Hanya menampilkan izin aktif dan usaha yang masih beroperasi.</p>
             </div>
@@ -146,8 +146,8 @@
 
             <div class="mt-6 flex flex-col gap-3 rounded-2xl border border-blue-100 bg-blue-50/70 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
                 <div>
-                    <h2 class="text-sm font-bold text-[#0B2342]">Menemukan usaha yang tidak tercantum?</h2>
-                    <p class="mt-1 text-xs leading-relaxed text-[#64748B]">Laporkan dugaan kegiatan penukaran valuta asing tanpa izin agar dapat diperiksa petugas.</p>
+                    <h2 class="text-sm font-bold text-[#0B2342]">Money Changer tidak tercantum dalam daftar?</h2>
+                    <p class="mt-1 text-xs leading-relaxed text-[#64748B]">Laporkan dugaan Money Changer tanpa izin agar dapat diperiksa oleh petugas.</p>
                 </div>
                 <a href="{{ route('reports.create') }}" class="button-primary shrink-0 justify-center rounded-xl px-4 py-2.5 text-xs font-bold sm:text-sm">
                     Buat laporan
