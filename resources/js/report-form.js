@@ -141,7 +141,7 @@ const optimizeEvidenceImage = async (file) => {
  * - Text remains Navy #0B2342.
  * - Two-way sync with native select.
  */
-const initCustomSelect = (selectElement) => {
+export const initCustomSelect = (selectElement) => {
     if (!selectElement || selectElement.dataset.customized === 'true') return;
     selectElement.dataset.customized = 'true';
 
@@ -152,6 +152,7 @@ const initCustomSelect = (selectElement) => {
     const trigger = document.createElement('button');
     trigger.type = 'button';
     trigger.className = 'tambora-select-trigger';
+    trigger.id = `${selectElement.id}-trigger`;
     trigger.setAttribute('aria-haspopup', 'listbox');
     trigger.setAttribute('aria-expanded', 'false');
 
@@ -172,6 +173,7 @@ const initCustomSelect = (selectElement) => {
 
     const updateTriggerText = () => {
         const selectedOption = selectElement.selectedOptions[0];
+        const fieldLabel = document.querySelector(`label[for="${selectElement.id}"]`)?.textContent?.trim();
         if (selectedOption && selectedOption.value) {
             triggerText.textContent = selectedOption.textContent;
             triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm text-[#0B2342] font-medium';
@@ -179,6 +181,8 @@ const initCustomSelect = (selectElement) => {
             triggerText.textContent = selectElement.options[0]?.textContent || 'Pilih opsi';
             triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm text-[#64748B]';
         }
+
+        trigger.setAttribute('aria-label', [fieldLabel, triggerText.textContent].filter(Boolean).join(': '));
     };
 
     const renderOptions = () => {
@@ -247,13 +251,23 @@ const initCustomSelect = (selectElement) => {
         trigger.setAttribute('aria-expanded', 'false');
     };
 
-    trigger.addEventListener('click', () => {
-        const isOpen = !menu.classList.contains('hidden');
-        if (isOpen) {
-            closeMenu();
-        } else {
+    const toggleMenu = () => {
+        if (menu.classList.contains('hidden')) {
             openMenu();
+        } else {
+            closeMenu();
         }
+    };
+
+    trigger.addEventListener('pointerup', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleMenu();
+    });
+
+    trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
     });
 
     trigger.addEventListener('keydown', (e) => {

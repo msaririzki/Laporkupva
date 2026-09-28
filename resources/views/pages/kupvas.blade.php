@@ -18,7 +18,7 @@
 
     <section class="bg-[#F4F7FB] py-7 sm:py-10">
         <div class="public-container max-w-[1180px] px-4 sm:px-6 lg:px-10">
-            <form action="{{ route('kupvas.index') }}" method="GET" class="rounded-2xl border border-slate-200 bg-white p-3 shadow-xs sm:p-4" role="search">
+            <form action="{{ route('kupvas.index') }}" method="GET" class="rounded-2xl border border-slate-200 bg-white p-3 shadow-xs sm:p-4" role="search" data-kupva-filters>
                 <div class="grid gap-2.5 md:grid-cols-[minmax(0,1fr)_minmax(14rem,0.42fr)_auto] md:items-end">
                     <div>
                         <label for="kupva-search" class="form-label">Cari Money Changer</label>
@@ -40,7 +40,7 @@
 
                     <div>
                         <label for="kupva-regency" class="form-label">Kabupaten/kota</label>
-                        <select id="kupva-regency" name="regency" class="form-control">
+                        <select id="kupva-regency" name="regency" class="form-control" data-custom-select data-auto-submit>
                             <option value="">Semua wilayah</option>
                             @foreach ($regencies as $regency)
                                 <option value="{{ $regency->value }}" @selected($selectedRegency === $regency->value)>{{ $regency->getLabel() }}</option>
@@ -48,12 +48,15 @@
                         </select>
                     </div>
 
-                    <div class="flex gap-2">
-                        <button type="submit" class="button-primary min-h-10 flex-1 justify-center rounded-xl px-5 text-sm font-bold md:flex-none">
-                            Cari
+                    <div class="flex items-stretch gap-2 md:self-end" data-kupva-filter-actions>
+                        <button type="submit" class="button-primary h-11 flex-1 justify-center rounded-xl px-5 text-sm font-bold sm:h-12 md:flex-none">
+                            <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 3.473 9.767l3.63 3.63a.75.75 0 1 0 1.06-1.06l-3.63-3.63A5.5 5.5 0 0 0 9 3.5ZM5 9a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Cari nama</span>
                         </button>
                         @if (filled($search) || $selectedRegency !== null)
-                            <a href="{{ route('kupvas.index') }}" class="inline-flex min-h-10 items-center justify-center rounded-xl border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-600 transition hover:border-blue-300 hover:text-blue-700">
+                            <a href="{{ route('kupvas.index') }}" class="inline-flex h-11 items-center justify-center rounded-xl border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-600 transition hover:border-blue-300 hover:text-blue-700 sm:h-12">
                                 Reset
                             </a>
                         @endif

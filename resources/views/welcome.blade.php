@@ -50,7 +50,7 @@
                                 <path d="M3.75 21h16.5M4.5 3h15v18h-15V3Zm3.75 4.5h.008v.008H8.25V7.5Zm0 4.5h.008v.008H8.25V12Zm0 4.5h.008v.008H8.25V16.5Zm4.5-9h3m-3 4.5h3m-3 4.5h3" />
                             </svg>
                         </span>
-                        <span>Money Changer Resmi</span>
+                        <span>Daftar Money Changer Resmi</span>
                     </a>
                 </div>
 
@@ -526,7 +526,7 @@
                             <div>
                                 <div class="flex items-center justify-between">
                                     <!-- Icon: Pesawat Kertas Kirim Laporan -->
-                                    <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-transform group-hover:scale-105">
+                                    <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
                                         <svg class="size-4.5 sm:size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="m22 2-7 20-4-9-9-4Z" />
                                             <path d="M22 2 11 13" />

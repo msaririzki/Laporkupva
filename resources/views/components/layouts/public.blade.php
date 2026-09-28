@@ -44,7 +44,7 @@
                 <img src="{{ asset('images/brand/tambora.webp') }}" alt="TAMBORA" class="h-8 w-auto object-contain sm:h-9 lg:h-10" width="720" height="316">
             </a>
 
-            <nav class="hidden items-center gap-1 sm:gap-2 lg:gap-3 md:flex" aria-label="Navigasi utama">
+            <nav class="hidden items-center gap-1 sm:gap-2 lg:flex lg:gap-3" aria-label="Navigasi utama">
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#keamanan">Keamanan</a>
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('kupvas.*') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('kupvas.index') }}">Money Changer berizin</a>
@@ -81,15 +81,15 @@
                             <path stroke-linecap="round" d="M4.75 16.25c.45-3.1 2.25-4.65 5.25-4.65s4.8 1.55 5.25 4.65"/>
                         </svg>
                     </span>
-                    <span class="hidden lg:inline">Login admin</span>
-                    <span class="sr-only lg:hidden">Login admin</span>
+                    <span class="hidden min-[1180px]:inline">Login admin</span>
+                    <span class="sr-only min-[1180px]:hidden">Login admin</span>
                 </a>
 
                 <!-- Mobile Menu Button -->
                 <button
                     type="button"
                     id="mobile-menu-button"
-                    class="md:hidden inline-flex size-10 items-center justify-center rounded-xl border border-[#E2E8F0] bg-white text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50 focus:ring-2 focus:ring-[#2563EB]"
+                    class="inline-flex size-10 items-center justify-center rounded-xl border border-[#E2E8F0] bg-white text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] focus:ring-2 focus:ring-[#2563EB] lg:hidden"
                     aria-expanded="false"
                     aria-controls="mobile-nav"
                     aria-label="Buka menu navigasi"
@@ -105,7 +105,7 @@
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <div id="mobile-nav" class="hidden md:hidden border-t border-[#E2E8F0] bg-white px-4 py-3.5 space-y-1 shadow-md">
+        <div id="mobile-nav" class="hidden space-y-1 border-t border-[#E2E8F0] bg-white px-4 py-3.5 shadow-md lg:hidden">
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0B2342] hover:bg-slate-50" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0B2342] hover:bg-slate-50" href="{{ route('home') }}#keamanan">Keamanan</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('kupvas.*') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0B2342] hover:bg-slate-50' }}" href="{{ route('kupvas.index') }}">Money Changer berizin</a>

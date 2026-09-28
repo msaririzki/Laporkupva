@@ -1,7 +1,15 @@
 import './realtime';
 import './map-layers';
-import './report-form';
+import { initCustomSelect } from './report-form';
 import './report-access';
+
+document.querySelectorAll('[data-custom-select]').forEach(initCustomSelect);
+
+document.querySelectorAll('[data-auto-submit]').forEach((field) => {
+    field.addEventListener('change', () => {
+        field.form?.requestSubmit();
+    });
+});
 
 // Mobile navigation toggle
 const mobileMenuButton = document.querySelector('#mobile-menu-button');

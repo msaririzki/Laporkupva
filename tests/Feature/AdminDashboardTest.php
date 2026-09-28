@@ -241,6 +241,8 @@ class AdminDashboardTest extends TestCase
         Livewire::test(MonthlyReportTrend::class)
             ->assertSet('filter', 'last_6_months')
             ->assertSee('Tren 6 bulan')
+            ->assertSee('Pilih periode tren laporan')
+            ->assertDontSee('<select', false)
             ->assertSee('Bulan ini')
             ->assertSee('Bulan tertentu · Agustus 2026')
             ->set('filter', 'this_month')

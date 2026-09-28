@@ -218,6 +218,18 @@ html {
     transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 
+.fi-panel-admin .fi-simple-main .fi-input-wrp .fi-input {
+    height: 3.2rem;
+    padding-block: 0;
+    line-height: 1.5rem;
+}
+
+.fi-panel-admin .fi-simple-main .fi-input-wrp-prefix,
+.fi-panel-admin .fi-simple-main .fi-input-wrp-suffix {
+    min-height: 3.2rem;
+    align-items: center;
+}
+
 .fi-panel-admin .fi-simple-main .fi-input-wrp:focus-within {
     border-color: #6487b4;
     background: #ffffff;
@@ -1878,37 +1890,95 @@ html {
     box-shadow: 0 8px 18px -15px rgb(15 23 42 / 55%);
 }
 
-.dashboard-collapsible-chart .dashboard-chart-filter {
+.dashboard-collapsible-chart .dashboard-chart-filter-dropdown {
     min-width: min(13rem, 42vw);
+}
+
+.dashboard-collapsible-chart .dashboard-chart-filter-trigger {
+    display: flex;
+    width: 100%;
     min-height: 2.6rem;
-    overflow: hidden;
+    align-items: center;
+    gap: 0.55rem;
     border: 1px solid #d7e1ed;
     border-radius: 0.78rem;
+    padding: 0.55rem 0.7rem;
     color: #263b5d;
     background: #ffffff;
     box-shadow: 0 8px 20px -18px rgb(15 23 42 / 55%);
-    transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+    cursor: pointer;
+    transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
-.dashboard-collapsible-chart .dashboard-chart-filter:hover {
+.dashboard-collapsible-chart .dashboard-chart-filter-trigger:hover {
     border-color: #b9c9dc;
     background: #f8fafc;
+    transform: translateY(-1px);
 }
 
-.dashboard-collapsible-chart .dashboard-chart-filter:focus-within {
+.dashboard-collapsible-chart .dashboard-chart-filter-trigger:focus-visible {
+    outline: none;
     border-color: #60a5fa;
     background: #ffffff;
     box-shadow: 0 0 0 3px rgb(59 130 246 / 10%);
 }
 
-.dashboard-collapsible-chart .dashboard-chart-filter select {
-    min-height: 2.6rem;
-    padding-inline: 0.85rem 2.25rem;
+.dashboard-collapsible-chart .dashboard-chart-filter-calendar,
+.dashboard-collapsible-chart .dashboard-chart-filter-chevron {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+    color: #64748b;
+}
+
+.dashboard-collapsible-chart .dashboard-chart-filter-calendar {
+    color: #2563eb;
+}
+
+.dashboard-collapsible-chart .dashboard-chart-filter-chevron {
+    margin-inline-start: auto;
+    transition: transform 150ms ease;
+}
+
+.dashboard-collapsible-chart .dashboard-chart-filter-dropdown.fi-dropdown-open .dashboard-chart-filter-chevron {
+    transform: rotate(180deg);
+}
+
+.dashboard-collapsible-chart .dashboard-chart-filter-label {
+    overflow: hidden;
     color: #263b5d;
-    background-color: transparent;
-    cursor: pointer;
     font-size: 0.8rem;
     font-weight: 700;
+    line-height: 1.25rem;
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dashboard-chart-filter-dropdown .fi-dropdown-panel {
+    width: min(19rem, calc(100vw - 2rem));
+    overflow: hidden;
+    border: 1px solid #d8e2ee;
+    border-radius: 0.9rem;
+    background: #ffffff;
+    box-shadow: 0 22px 52px -24px rgb(15 23 42 / 50%);
+}
+
+.dashboard-chart-filter-dropdown .fi-dropdown-list {
+    padding: 0.45rem;
+}
+
+.dashboard-chart-filter-dropdown .fi-dropdown-list-item {
+    border-radius: 0.62rem;
+    color: #425673;
+    font-size: 0.8rem;
+    font-weight: 650;
+}
+
+.dashboard-chart-filter-dropdown .fi-dropdown-list-item:hover,
+.dashboard-chart-filter-dropdown .fi-dropdown-list-item.fi-active {
+    color: #1d4ed8;
+    background: #eef5ff;
 }
 
 @media (max-width: 40rem) {
@@ -1922,7 +1992,7 @@ html {
         order: 3;
     }
 
-    .dashboard-collapsible-chart .dashboard-chart-filter {
+    .dashboard-collapsible-chart .dashboard-chart-filter-dropdown {
         width: 100%;
         min-width: 0;
     }

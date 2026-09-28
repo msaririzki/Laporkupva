@@ -24,7 +24,7 @@ class HomePageTest extends TestCase
             ->assertSee('data-nav-icon="create-report"', false)
             ->assertSee('data-nav-action="admin-login"', false)
             ->assertSee('data-nav-icon="admin-login"', false)
-            ->assertSee('class="md:hidden inline-flex size-10', false)
+            ->assertSee('focus:ring-[#2563EB] lg:hidden', false)
             ->assertSee('property="og:site_name" content="TAMBORA"', false)
             ->assertSee('property="og:image" content="'.asset('images/brand/tambora.webp').'"', false)
             ->assertSee('name="twitter:card" content="summary_large_image"', false)

@@ -64,7 +64,10 @@
         @apply mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-10;
     }
     .admin-access-link {
-        @apply grid size-10 shrink-0 place-items-center rounded-xl border border-slate-200 bg-white text-slate-500 shadow-xs transition-all duration-200 hover:border-blue-200 hover:bg-blue-50 hover:text-[#2563EB];
+        @apply min-h-10 shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-2.5 text-xs font-bold text-slate-600 shadow-xs transition-all duration-200 hover:border-blue-200 hover:bg-blue-50 hover:text-[#2563EB];
+    }
+    .admin-access-icon {
+        @apply grid size-6 shrink-0 place-items-center rounded-full bg-blue-50 text-[#2563EB] ring-1 ring-blue-100;
     }
 
     /* Navigation with Refined Active Underline Indicator */
