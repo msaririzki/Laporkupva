@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KupvaCsvController;
 use App\Http\Controllers\PublicKupvaController;
 use App\Http\Controllers\PublicReportController;
 use App\Http\Controllers\PublicReportMessageController;
@@ -44,3 +45,10 @@ Route::get('/admin/lampiran-laporan/{reportEvidence}/lihat', [ReportEvidenceCont
 Route::get('/admin/ekspor/laporan.csv', ReportExportController::class)
     ->middleware('auth')
     ->name('admin.reports.export');
+
+Route::controller(KupvaCsvController::class)
+    ->middleware('auth')
+    ->group(function (): void {
+        Route::get('/admin/ekspor/kupva.csv', 'export')->name('admin.kupvas.export');
+        Route::get('/admin/template/kupva.csv', 'template')->name('admin.kupvas.template');
+    });

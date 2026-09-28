@@ -1283,6 +1283,93 @@ html {
     }
 }
 
+.fi-resource-list-records-page.fi-resource-kupva .fi-breadcrumbs {
+    display: none;
+}
+
+.fi-resource-list-records-page.fi-resource-kupva .fi-page-content {
+    gap: 1rem;
+}
+
+.fi-resource-list-records-page.fi-resource-kupva .fi-page-header-main-ctn,
+.fi-resource-list-records-page.fi-resource-kupva .fi-page-header-actions {
+    align-items: center;
+}
+
+.fi-resource-list-records-page.fi-resource-kupva .fi-page-header-actions {
+    gap: 0.6rem;
+}
+
+.fi-resource-list-records-page.fi-resource-kupva .fi-page-header-actions .fi-btn {
+    min-height: 2.75rem;
+    justify-content: center;
+}
+
+.fi-resource-list-records-page.fi-resource-kupva .fi-ta-ctn {
+    border-color: #dce4ee;
+    border-radius: 1.25rem;
+    box-shadow: 0 24px 56px -42px rgb(15 23 42 / 50%);
+}
+
+.fi-resource-list-records-page.fi-resource-kupva .fi-ta-header-toolbar {
+    gap: 0.65rem;
+    padding: 0.9rem;
+}
+
+.fi-resource-list-records-page.fi-resource-kupva .kupva-list-row .kupva-list-cell,
+.fi-resource-list-records-page.fi-resource-kupva .kupva-list-row > .fi-ta-cell:last-child {
+    vertical-align: middle;
+}
+
+.fi-resource-list-records-page.fi-resource-kupva .kupva-list-cell-name .fi-ta-text-item {
+    color: #17294a;
+    font-weight: 750;
+}
+
+.fi-resource-list-records-page.fi-resource-kupva .fi-ta-cell-regency .fi-ta-text,
+.fi-resource-list-records-page.fi-resource-kupva .fi-ta-cell-district .fi-ta-text,
+.fi-resource-list-records-page.fi-resource-kupva .fi-ta-cell-village .fi-ta-text,
+.fi-resource-list-records-page.fi-resource-kupva .fi-ta-cell-license-expires-at .fi-ta-text {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+@media (max-width: 40rem) {
+    .fi-resource-list-records-page.fi-resource-kupva .fi-page-header-main-ctn {
+        align-items: stretch;
+    }
+
+    .fi-resource-list-records-page.fi-resource-kupva .fi-page-header-actions {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fi-resource-list-records-page.fi-resource-kupva .fi-page-header-actions > *,
+    .fi-resource-list-records-page.fi-resource-kupva .fi-page-header-actions .fi-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .fi-resource-list-records-page.fi-resource-kupva .fi-ta-ctn {
+        border-radius: 1rem;
+    }
+
+    .fi-resource-list-records-page.fi-resource-kupva .fi-ta-header-toolbar {
+        padding: 0.75rem;
+    }
+
+    .fi-resource-list-records-page.fi-resource-kupva .kupva-list-row .kupva-list-cell {
+        padding-block: 0.72rem;
+    }
+
+    .fi-resource-list-records-page.fi-resource-kupva .kupva-list-row .fi-ta-cell-license-status .fi-ta-text {
+        justify-content: flex-start;
+        text-align: left;
+    }
+}
+
 .fi-resource-list-records-page.fi-resource-users .fi-page-content {
     gap: 1rem;
 }
@@ -2418,7 +2505,12 @@ html {
 }
 
 .dashboard-collapsible-chart > .fi-section {
+    height: 100%;
     transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.dashboard-collapsible-chart .fi-wi-chart-frame-no-aspect-ratio {
+    height: clamp(15.5rem, 30vw, 19.375rem);
 }
 
 .dashboard-collapsible-chart > .fi-section.fi-collapsed {
@@ -2546,6 +2638,10 @@ html {
     .dashboard-collapsible-chart .dashboard-chart-filter-dropdown {
         width: 100%;
         min-width: 0;
+    }
+
+    .dashboard-collapsible-chart .fi-wi-chart-frame-no-aspect-ratio {
+        height: 16rem;
     }
 }
 
