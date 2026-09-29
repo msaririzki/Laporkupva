@@ -21,7 +21,7 @@ class MonthlyReportTrend extends ChartWidget
     protected int|string|array $columnSpan = [
         'default' => 1,
         'md' => 1,
-        'xl' => 7,
+        'xl' => 6,
     ];
 
     public ?string $filter = 'last_6_months';
@@ -40,6 +40,12 @@ class MonthlyReportTrend extends ChartWidget
             ],
             'x' => [
                 'grid' => ['display' => false],
+                'ticks' => [
+                    'autoSkip' => true,
+                    'maxRotation' => 0,
+                    'maxTicksLimit' => 12,
+                    'minRotation' => 0,
+                ],
             ],
         ],
     ];
@@ -110,9 +116,9 @@ class MonthlyReportTrend extends ChartWidget
             'last_12_months' => '12 bulan terakhir',
         ];
 
-        foreach (range(1, 24) as $monthOffset) {
+        foreach (range(1, 11) as $monthOffset) {
             $month = CarbonImmutable::now()->startOfMonth()->subMonths($monthOffset);
-            $filters['month_'.$month->format('Y-m')] = 'Bulan tertentu · '.$month->translatedFormat('F Y');
+            $filters['month_'.$month->format('Y-m')] = $month->translatedFormat('F Y');
         }
 
         return $filters;
@@ -172,7 +178,7 @@ class MonthlyReportTrend extends ChartWidget
             'granularity' => 'month',
             'pointCount' => $monthCount,
             'keyFormat' => 'Y-m',
-            'labelFormat' => 'M Y',
+            'labelFormat' => 'M y',
         ];
     }
 

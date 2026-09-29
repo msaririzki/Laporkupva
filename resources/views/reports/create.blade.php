@@ -144,8 +144,8 @@
                             </div>
                         </div>
 
-                        <!-- Desktop 2-Column Row 2: Nama Tempat & Nomor HP -->
-                        <div class="grid gap-3.5 lg:grid-cols-2 lg:gap-5">
+                        <!-- Informasi tambahan yang membantu verifikasi -->
+                        <div class="grid gap-3.5 lg:grid-cols-3 lg:gap-4">
                             <!-- Nama atau Ciri Tempat -->
                             <div>
                                 <div class="flex items-center justify-between">
@@ -156,19 +156,6 @@
                                 @error('business_name')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
 
-                            <!-- No HP Pelapor -->
-                            <div>
-                                <div class="flex items-center justify-between">
-                                    <label class="form-label" for="phone_number">No HP pelapor</label>
-                                    <span class="text-xs text-slate-400">Opsional</span>
-                                </div>
-                                <input class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" name="phone_number" type="tel" value="{{ old('phone_number') }}" maxlength="20" autocomplete="tel" placeholder="Contoh: 081234567890">
-                                @error('phone_number')<p class="form-error">{{ $message }}</p>@enderror
-                            </div>
-                        </div>
-
-                        <!-- Desktop 2-Column Row 3: Perkiraan Waktu -->
-                        <div class="grid gap-3.5 lg:grid-cols-2 lg:gap-5">
                             <!-- Perkiraan Waktu -->
                             <div>
                                 <div class="flex items-center justify-between">
@@ -177,6 +164,27 @@
                                 </div>
                                 <input class="form-control @error('incident_time') is-invalid @enderror" id="incident_time" name="incident_time" type="time" value="{{ old('incident_time') }}">
                                 @error('incident_time')<p class="form-error">{{ $message }}</p>@enderror
+                            </div>
+
+                            <!-- Nomor HP Opsional -->
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <label class="form-label" for="reporter_phone">Nomor HP</label>
+                                    <span class="text-xs text-slate-400">Opsional</span>
+                                </div>
+                                <input
+                                    class="form-control @error('reporter_phone') is-invalid @enderror"
+                                    id="reporter_phone"
+                                    name="reporter_phone"
+                                    type="tel"
+                                    value="{{ old('reporter_phone') }}"
+                                    maxlength="20"
+                                    inputmode="tel"
+                                    autocomplete="tel"
+                                    placeholder="Contoh: 0812 3456 7890"
+                                >
+                                <p class="form-helper">Hanya digunakan petugas bila perlu menghubungi Anda.</p>
+                                @error('reporter_phone')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
                         </div>
 

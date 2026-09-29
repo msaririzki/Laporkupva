@@ -1,4 +1,4 @@
-<x-layouts.public title="Lapor KUPVA secara aman">
+<x-layouts.public title="Lapor Money Changer secara aman">
     <section class="relative overflow-hidden bg-gradient-to-b from-[#f0f7ff] via-[#f8fbff] to-[#eaf4fe] pt-4 pb-8 sm:pt-6 sm:pb-12 lg:pt-6 lg:pb-12 text-navy-950">
         <!-- Ambient Decorative Glows & Dot Patterns (Consistent with Cara Lapor & Keamanan) -->
         <div class="pointer-events-none absolute -top-24 -left-20 size-96 rounded-full bg-blue-400/15 blur-3xl" aria-hidden="true"></div>
@@ -21,27 +21,42 @@
 
                 <!-- Subtitle -->
                 <p class="mt-3 sm:mt-3.5 max-w-xl text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-normal">
-                    Bantu menjaga aktivitas penukaran valuta asing di NTB tetap aman dan sesuai aturan. Sampaikan laporan Anda tanpa mengungkap identitas.
+                    Tukar uang asing dengan lebih aman. Periksa Money Changer berizin di NTB atau laporkan tempat yang diduga belum memiliki izin. Laporan dapat dikirim tanpa nama.
                 </p>
 
                 <!-- CTA Buttons -->
-                <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-                    <a href="{{ route('reports.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
-                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m22 2-7 20-4-9-9-4Z"/>
-                            <path d="M22 2 11 13"/>
-                        </svg>
+                <div class="mt-5 sm:mt-6 flex w-full flex-col items-stretch gap-2.5 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+                    <a href="{{ route('reports.create') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs font-extrabold text-white shadow-md shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 active:translate-y-0 active:scale-[0.99] sm:w-auto sm:text-sm">
+                        <span class="flex size-5 shrink-0 items-center justify-center" aria-hidden="true">
+                            <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m22 2-7 20-4-9-9-4Z"/>
+                                <path d="M22 2 11 13"/>
+                            </svg>
+                        </span>
                         <span>Buat laporan</span>
-                        <span aria-hidden="true" class="text-base sm:text-lg">→</span>
                     </a>
-                    <a href="{{ route('reports.track') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs sm:text-sm font-bold text-navy-950 shadow-2xs hover:bg-blue-50/70 hover:border-blue-300 hover:text-blue-700 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all">
-                        <svg class="size-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="7"/>
-                            <path d="m21 21-4.3-4.3"/>
-                        </svg>
+                    <a href="{{ route('reports.track') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs font-extrabold text-navy-950 shadow-2xs transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50/70 hover:text-blue-700 active:translate-y-0 active:scale-[0.99] sm:w-auto sm:text-sm">
+                        <span class="flex size-5 shrink-0 items-center justify-center text-blue-600" aria-hidden="true">
+                            <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="m21 21-4.3-4.3"/>
+                            </svg>
+                        </span>
                         <span>Cek status laporan</span>
                     </a>
+                    <a href="{{ route('kupvas.index') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-xs font-extrabold text-emerald-800 shadow-2xs transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100/80 hover:text-emerald-900 active:translate-y-0 active:scale-[0.99] sm:w-auto sm:text-sm">
+                        <span class="flex size-5 shrink-0 items-center justify-center text-emerald-600" aria-hidden="true">
+                            <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3.75 21h16.5M4.5 3h15v18h-15V3Zm3.75 4.5h.008v.008H8.25V7.5Zm0 4.5h.008v.008H8.25V12Zm0 4.5h.008v.008H8.25V16.5Zm4.5-9h3m-3 4.5h3m-3 4.5h3" />
+                            </svg>
+                        </span>
+                        <span>Daftar Money Changer Resmi</span>
+                    </a>
                 </div>
+
+                <p class="mt-3 max-w-xl text-[11px] leading-relaxed text-slate-500 sm:text-xs">
+                    <strong class="font-extrabold text-navy-950">KUPVA BB</strong> adalah istilah resmi untuk usaha penukaran valuta asing bukan bank, yang lebih dikenal sebagai Money Changer.
+                </p>
             </div>
 
             <!-- Right Column: Alur Penanganan Floating Card -->
@@ -246,7 +261,7 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                 Ceritakan
                             </h3>
 
@@ -287,7 +302,7 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                 Tentukan lokasi
                             </h3>
 
@@ -338,7 +353,7 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                 Masukkan gambar
                             </h3>
 
@@ -381,7 +396,7 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold text-navy-950">
+                            <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                 Pantau laporan
                             </h3>
 
@@ -440,7 +455,7 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                    <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                         Tidak Perlu Membuat Akun
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
@@ -469,7 +484,7 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                    <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                         Pantau dengan Nomor Laporan
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
@@ -496,7 +511,7 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                    <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                         Diakses Petugas Berwenang
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
@@ -511,7 +526,7 @@
                             <div>
                                 <div class="flex items-center justify-between">
                                     <!-- Icon: Pesawat Kertas Kirim Laporan -->
-                                    <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-transform group-hover:scale-105">
+                                    <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
                                         <svg class="size-4.5 sm:size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="m22 2-7 20-4-9-9-4Z" />
                                             <path d="M22 2 11 13" />
@@ -523,7 +538,7 @@
                                 </div>
 
                                 <div class="mt-2.5 sm:mt-3">
-                                    <h3 class="text-xs sm:text-base font-extrabold text-navy-950">
+                                    <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
                                         Sampaikan dengan Mudah
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
@@ -534,7 +549,7 @@
 
                             <!-- Button Teman Grip 03 -->
                             <div class="mt-3 sm:mt-4 w-full">
-                                <a href="{{ route('reports.create') }}" class="button-primary w-full inline-flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-3 text-xs sm:text-sm font-bold shadow-sm">
+                                <a href="{{ route('reports.create') }}" class="button-primary w-full inline-flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider shadow-sm">
                                     Mulai membuat laporan <span aria-hidden="true">→</span>
                                 </a>
                             </div>
@@ -564,7 +579,7 @@
                             Laporkan dengan tenang,<br class="hidden sm:inline"> privasi tetap terjaga.
                         </h2>
                         <p class="mt-1.5 sm:mt-2.5 text-xs sm:text-base text-slate-600 leading-relaxed max-w-md mx-auto lg:mx-0">
-                            TAMBORA membantu masyarakat menyampaikan informasi mengenai dugaan KUPVA tidak berizin di NTB tanpa perlu memberikan data pribadi.
+                            TAMBORA membantu masyarakat melaporkan dugaan Money Changer (KUPVA BB) tidak berizin di NTB tanpa perlu memberikan data pribadi.
                         </p>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ class ReportStats extends StatsOverviewWidget
     ];
 
     protected int|array|null $columns = [
+        'default' => 2,
         'sm' => 2,
         'lg' => 3,
         'xl' => 5,
@@ -54,25 +55,47 @@ class ReportStats extends StatsOverviewWidget
             Stat::make('Total laporan', number_format($total, 0, ',', '.'))
                 ->chart($this->sevenDayChart())
                 ->color('primary')
-                ->extraAttributes(['class' => 'dashboard-stat-card'])
+                ->columnSpan([
+                    'default' => 2,
+                    'sm' => 1,
+                ])
+                ->extraAttributes(['class' => 'dashboard-stat-card dashboard-stat-card--total'])
                 ->url(ReportResource::getUrl('index')),
             Stat::make('Laporan baru', number_format($new, 0, ',', '.'))
                 ->color($new > 0 ? 'warning' : 'gray')
                 ->extraAttributes(['class' => 'dashboard-stat-card'])
-                ->url(ReportResource::getUrl('index')),
+                ->url($this->reportIndexUrl(ReportStatus::Submitted)),
             Stat::make('Sedang ditangani', number_format($inProgress, 0, ',', '.'))
                 ->color('info')
                 ->extraAttributes(['class' => 'dashboard-stat-card'])
-                ->url(ReportResource::getUrl('index')),
+                ->url($this->reportIndexUrl(
+                    ReportStatus::Received,
+                    ReportStatus::Coordination,
+                    ReportStatus::ResultReport,
+                )),
             Stat::make('Ke lapangan', number_format($fieldAction, 0, ',', '.'))
                 ->color('warning')
                 ->extraAttributes(['class' => 'dashboard-stat-card'])
-                ->url(ReportResource::getUrl('index')),
+                ->url($this->reportIndexUrl(ReportStatus::FieldAction)),
             Stat::make('Selesai', number_format($completed, 0, ',', '.'))
                 ->color('success')
                 ->extraAttributes(['class' => 'dashboard-stat-card'])
-                ->url(ReportResource::getUrl('index')),
+                ->url($this->reportIndexUrl(ReportStatus::Completed)),
         ];
+    }
+
+    private function reportIndexUrl(ReportStatus ...$statuses): string
+    {
+        return ReportResource::getUrl('index', [
+            'filters' => [
+                'status' => [
+                    'values' => array_map(
+                        fn (ReportStatus $status): string => $status->value,
+                        $statuses,
+                    ),
+                ],
+            ],
+        ]);
     }
 
     /** @return array<int, int> */

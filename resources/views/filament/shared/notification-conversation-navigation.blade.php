@@ -1,6 +1,9 @@
 <script data-notification-conversation-navigation>
     (() => {
-        if (window.tamboraNotificationConversationNavigationInitialized) {
+        if (
+            window.tamboraNotificationConversationNavigationInitialized
+            && typeof window.tamboraFocusConversationReply === 'function'
+        ) {
             return
         }
 
@@ -9,12 +12,17 @@
         const conversationHash = '#komunikasi-anonim'
         const databaseNotificationsModalId = 'database-notifications'
 
-        const focusConversationReply = () => {
-            if (window.location.hash !== conversationHash) {
+        const focusConversationReply = (force = false) => {
+            if (! force && window.location.hash !== conversationHash) {
                 return
             }
 
+            if (force && window.location.hash !== conversationHash) {
+                window.history.replaceState(null, '', conversationHash)
+            }
+
             const conversation = document.querySelector(conversationHash)
+                ?? document.getElementById('infolist.komunikasi-anonim::section')
             const replyField = conversation?.querySelector('#admin-report-reply')
             const focusTarget = replyField ?? conversation
 
@@ -34,6 +42,8 @@
             }, prefersReducedMotion ? 0 : 350)
         }
 
+        window.tamboraFocusConversationReply = focusConversationReply
+
         document.addEventListener('click', (event) => {
             const conversationLink = event.target.closest(
                 '.fi-no-database a[href*="#komunikasi-anonim"]',
@@ -47,11 +57,11 @@
                 detail: { id: databaseNotificationsModalId },
             }))
 
-            window.setTimeout(focusConversationReply, 350)
+            window.setTimeout(() => focusConversationReply(true), 350)
         }, true)
 
-        document.addEventListener('livewire:navigated', focusConversationReply)
-        window.addEventListener('hashchange', focusConversationReply)
-        window.requestAnimationFrame(focusConversationReply)
+        document.addEventListener('livewire:navigated', () => focusConversationReply())
+        window.addEventListener('hashchange', () => focusConversationReply())
+        window.requestAnimationFrame(() => focusConversationReply())
     })()
 </script>

@@ -111,60 +111,147 @@ new class extends Component
 
 <div
     x-data="{
-        scrollToLatest() {
-            this.$nextTick(() => {
-                this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
+        channelName: @js($this->record->realtimeChannelName()),
+        connectionState: 'connecting',
+        echoHandler: null,
+        echoLoadedHandler: null,
+        connectionStateHandler: null,
+        fallbackTimer: null,
+        hasNewMessage: false,
+        isRefreshing: false,
+
+        init() {
+            this.scrollToLatest(false)
+
+            this.echoLoadedHandler = () => this.subscribeRealtime()
+
+            if (window.Echo) {
+                this.subscribeRealtime()
+            } else {
+                window.addEventListener('TamboraEchoLoaded', this.echoLoadedHandler, { once: true })
+            }
+
+            this.fallbackTimer = window.setInterval(() => {
+                if (this.connectionState !== 'live' && ! document.hidden) {
+                    this.refreshConversation(false)
+                }
+            }, 25000)
+        },
+
+        subscribeRealtime() {
+            if (! window.Echo || this.echoHandler) return
+
+            this.echoHandler = (event) => {
+                if (! event?.kind || event.kind === 'message') {
+                    this.refreshConversation(true)
+                }
+            }
+
+            window.Echo.channel(this.channelName)
+                .listen('.report.updated', this.echoHandler)
+
+            const connection = window.Echo.connector?.pusher?.connection
+
+            if (! connection) {
+                this.connectionState = 'live'
+                return
+            }
+
+            const syncConnectionState = (state = connection.state) => {
+                this.connectionState = state === 'connected'
+                    ? 'live'
+                    : ['unavailable', 'failed', 'disconnected'].includes(state)
+                        ? 'fallback'
+                        : 'connecting'
+            }
+
+            this.connectionStateHandler = ({ current }) => syncConnectionState(current)
+            connection.bind('state_change', this.connectionStateHandler)
+            syncConnectionState()
+        },
+
+        isNearLatest() {
+            const messages = this.$refs.messages
+
+            return (messages.scrollHeight - messages.scrollTop - messages.clientHeight) < 96
+        },
+
+        refreshConversation(fromRealtime = false) {
+            if (this.isRefreshing) return
+
+            const shouldFollowLatest = this.isNearLatest()
+            const previousLatestMessage = this.$refs.messages.dataset.latestMessageId
+            this.isRefreshing = true
+
+            $wire.refreshConversation().then(() => {
+                const hasChanged = previousLatestMessage !== this.$refs.messages.dataset.latestMessageId
+
+                if (hasChanged && (shouldFollowLatest || ! fromRealtime)) {
+                    this.scrollToLatest(true)
+                } else if (hasChanged) {
+                    this.hasNewMessage = true
+                }
+            }).finally(() => {
+                this.isRefreshing = false
             })
         },
-    }"
-    x-init="
-        scrollToLatest()
 
-        const subscribe = () => {
-            if (! window.Echo || $el.dataset.realtimeSubscribed === 'true') return
-
-            $el.dataset.realtimeSubscribed = 'true'
-            window.Echo.channel(@js($this->record->realtimeChannelName()))
-                .listen('.report.updated', () => {
-                    $wire.refreshConversation().then(() => scrollToLatest())
+        scrollToLatest(smooth = true) {
+            this.$nextTick(() => {
+                this.$refs.messages.scrollTo({
+                    top: this.$refs.messages.scrollHeight,
+                    behavior: smooth && ! window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                        ? 'smooth'
+                        : 'auto',
                 })
-        }
+                this.hasNewMessage = false
+            })
+        },
 
-        if (window.Echo) subscribe()
-        else window.addEventListener('EchoLoaded', subscribe, { once: true })
-    "
-    x-on:report-message-sent.window="scrollToLatest()"
+        destroy() {
+            window.clearInterval(this.fallbackTimer)
+            window.removeEventListener('TamboraEchoLoaded', this.echoLoadedHandler)
+
+            if (window.Echo && this.echoHandler) {
+                window.Echo.channel(this.channelName)
+                    .stopListening('.report.updated', this.echoHandler)
+            }
+
+            const connection = window.Echo?.connector?.pusher?.connection
+
+            if (connection && this.connectionStateHandler) {
+                connection.unbind('state_change', this.connectionStateHandler)
+            }
+        },
+    }"
+    x-on:report-message-sent.window="scrollToLatest(true)"
     class="overflow-hidden rounded-[1.35rem] border border-slate-200/90 bg-white shadow-[0_18px_50px_-38px_rgba(15,23,42,0.55)] dark:border-white/10 dark:bg-slate-900"
 >
-    <div class="flex flex-col gap-3 border-b border-slate-200/80 bg-gradient-to-r from-slate-50 to-white px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:px-5 dark:border-white/10 dark:from-slate-900 dark:to-slate-900">
-        <div class="flex min-w-0 items-center gap-3">
-            <div class="flex size-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 dark:bg-blue-500/10 dark:text-blue-300 dark:ring-blue-400/20">
-                <x-filament::icon icon="heroicon-m-shield-check" class="size-5" />
-            </div>
-
-            <div class="min-w-0">
-                <p class="text-sm font-semibold text-slate-900 dark:text-white">Identitas pelapor terlindungi</p>
-                <p class="truncate text-xs text-slate-500 dark:text-slate-400">Percakapan hanya dapat diakses petugas terkait.</p>
-            </div>
+    <div class="relative">
+        <div
+            x-show="isRefreshing"
+            x-transition.opacity.duration.150ms
+            class="pointer-events-none absolute inset-x-0 top-0 z-10 h-0.5 overflow-hidden bg-blue-100"
+            aria-hidden="true"
+        >
+            <span class="block h-full w-1/3 animate-[tambora-chat-sync_1s_ease-in-out_infinite] rounded-full bg-blue-500"></span>
         </div>
 
-        <div class="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[11px] font-semibold text-emerald-700 dark:border-emerald-400/20 dark:bg-emerald-500/10 dark:text-emerald-300">
-            <span class="relative flex size-2">
-                <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-50"></span>
-                <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
-            </span>
-            Percakapan real-time
-        </div>
-    </div>
-
-    <div x-ref="messages" class="min-h-48 max-h-[26rem] space-y-3 overflow-y-auto bg-slate-50/70 px-3 py-4 sm:px-5 sm:py-5 dark:bg-slate-950/30">
+        <div
+            x-ref="messages"
+            data-latest-message-id="{{ $this->conversationMessages->last()?->getKey() }}"
+            x-on:scroll.passive="if (isNearLatest()) hasNewMessage = false"
+            class="min-h-48 max-h-[26rem] space-y-3 overflow-y-auto bg-slate-50/70 px-3 py-4 scroll-smooth sm:px-5 sm:py-5 dark:bg-slate-950/30"
+            aria-live="polite"
+            aria-label="Percakapan dengan pelapor"
+        >
         @forelse ($this->conversationMessages as $message)
             @php($isAdmin = $message->sender_type === 'admin')
 
             <article
                 wire:key="conversation-message-{{ $message->getKey() }}"
                 @class([
-                    'flex items-start gap-2.5',
+                    'report-chat-message flex items-start gap-2.5',
                     'flex-row-reverse' => $isAdmin,
                 ])
             >
@@ -209,6 +296,24 @@ new class extends Component
                 </div>
             </div>
         @endforelse
+        </div>
+
+        <button
+            x-cloak
+            x-show="hasNewMessage"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="translate-y-2 opacity-0"
+            x-transition:enter-end="translate-y-0 opacity-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="translate-y-0 opacity-100"
+            x-transition:leave-end="translate-y-2 opacity-0"
+            x-on:click="scrollToLatest(true)"
+            type="button"
+            class="absolute bottom-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-blue-200 bg-white px-3.5 py-2 text-xs font-semibold text-blue-700 shadow-lg shadow-slate-900/10 transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500/15 dark:border-blue-400/20 dark:bg-slate-800 dark:text-blue-300"
+        >
+            <x-filament::icon icon="heroicon-m-arrow-down" class="size-3.5" />
+            Pesan baru
+        </button>
     </div>
 
     <form wire:submit="send" class="border-t border-slate-200/80 bg-white p-3 sm:p-4 dark:border-white/10 dark:bg-slate-900">

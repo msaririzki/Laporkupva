@@ -77,6 +77,11 @@ class AdminPanelProvider extends PanelProvider
                 scopes: Login::class,
             )
             ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): View => view('filament.shared.realtime'),
+                scopes: ViewReport::class,
+            )
+            ->renderHook(
                 PanelsRenderHook::BODY_END,
                 fn (): View => view('filament.shared.notification-conversation-navigation'),
             )

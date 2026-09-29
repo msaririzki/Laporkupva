@@ -1,7 +1,15 @@
 import './realtime';
 import './map-layers';
-import './report-form';
+import { initCustomSelect } from './report-form';
 import './report-access';
+
+document.querySelectorAll('[data-custom-select]').forEach(initCustomSelect);
+
+document.querySelectorAll('[data-auto-submit]').forEach((field) => {
+    field.addEventListener('change', () => {
+        field.form?.requestSubmit();
+    });
+});
 
 // Mobile navigation toggle
 const mobileMenuButton = document.querySelector('#mobile-menu-button');
@@ -60,10 +68,19 @@ if (liveRefresh) {
     const statusLabel = document.querySelector('[data-report-status-label]');
     const timeline = document.querySelector('[data-report-timeline]');
     const conversation = document.querySelector('[data-report-conversation]');
+    const messageForm = document.querySelector('[data-report-message-form]');
+    const messageBody = messageForm?.querySelector('[name="body"]');
+    const messageSubmit = messageForm?.querySelector('[data-report-message-submit]');
+    const messageSubmitLabel = messageForm?.querySelector('[data-report-message-submit-label]');
+    const messageSpinner = messageForm?.querySelector('[data-report-message-spinner]');
+    const messageFeedback = document.querySelector('[data-report-message-feedback]');
+    const messageError = messageForm?.querySelector('[data-report-message-error]');
     let currentVersion = liveRefresh.dataset.version;
     let refreshTimer;
     let failedChecks = 0;
     let isChecking = false;
+    let checkAgain = false;
+    let shouldFollowLatestMessage = false;
 
     const setLiveRefreshState = (label, state = 'active') => {
         liveRefreshLabel.textContent = label;
@@ -90,6 +107,8 @@ if (liveRefresh) {
 
     const checkForUpdates = async (fromRealtime = false) => {
         if (isChecking || (!fromRealtime && document.hidden)) {
+            checkAgain ||= fromRealtime;
+
             return;
         }
 
@@ -127,7 +146,18 @@ if (liveRefresh) {
                 }
 
                 if (conversation) {
+                    const wasNearLatest = (conversation.scrollHeight - conversation.scrollTop - conversation.clientHeight) < 80;
+                    const previousScrollTop = conversation.scrollTop;
                     conversation.innerHTML = update.messages_html;
+                    conversation.lastElementChild?.classList.add('report-message-arrived');
+
+                    if (wasNearLatest || shouldFollowLatestMessage) {
+                        conversation.scrollTop = conversation.scrollHeight;
+                    } else {
+                        conversation.scrollTop = previousScrollTop;
+                    }
+
+                    shouldFollowLatestMessage = false;
                 }
             }
 
@@ -137,9 +167,101 @@ if (liveRefresh) {
             setLiveRefreshState('Mencoba menghubungkan kembali…', 'offline');
         } finally {
             isChecking = false;
+
+            if (checkAgain) {
+                checkAgain = false;
+                window.clearTimeout(refreshTimer);
+                void checkForUpdates(true);
+
+                return;
+            }
+
             scheduleRefreshCheck(Math.min(60000, 30000 * (2 ** failedChecks)));
         }
     };
+
+    const showMessageFeedback = (message) => {
+        if (!messageFeedback) {
+            return;
+        }
+
+        messageFeedback.textContent = message;
+        messageFeedback.classList.remove('invisible');
+    };
+
+    const showMessageError = (message) => {
+        if (!messageError) {
+            return;
+        }
+
+        messageError.textContent = message;
+        messageError.classList.remove('invisible');
+        messageBody?.classList.add('is-invalid');
+    };
+
+    const clearMessageState = () => {
+        messageFeedback?.classList.add('invisible');
+        messageError?.classList.add('invisible');
+        messageBody?.classList.remove('is-invalid');
+    };
+
+    messageForm?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!messageBody || !messageSubmit || messageSubmit.disabled) {
+            return;
+        }
+
+        clearMessageState();
+        shouldFollowLatestMessage = true;
+        messageSubmit.disabled = true;
+        messageSubmitLabel.textContent = 'Mengirim…';
+        messageSpinner?.classList.remove('hidden');
+
+        try {
+            const response = await fetch(messageForm.action, {
+                method: 'POST',
+                body: new FormData(messageForm),
+                credentials: 'same-origin',
+                headers: {
+                    Accept: 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            });
+
+            const result = await response.json().catch(() => ({}));
+
+            if (response.status === 422) {
+                shouldFollowLatestMessage = false;
+                showMessageError(result.errors?.body?.[0] ?? 'Periksa kembali pesan Anda.');
+
+                return;
+            }
+
+            if (response.status === 404 || response.status === 419) {
+                shouldFollowLatestMessage = false;
+                showMessageError('Akses laporan telah berakhir. Masukkan kembali nomor laporan untuk melanjutkan.');
+
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error('Message submission failed.');
+            }
+
+            messageBody.value = '';
+            showMessageFeedback(result.message ?? 'Pesan berhasil dikirim kepada petugas.');
+            await checkForUpdates(true);
+            messageBody.focus({ preventScroll: true });
+        } catch {
+            shouldFollowLatestMessage = false;
+            showMessageError('Pesan belum terkirim. Periksa koneksi internet, lalu coba lagi.');
+        } finally {
+            messageSubmit.disabled = false;
+            messageSubmitLabel.textContent = 'Kirim pesan';
+            messageSpinner?.classList.add('hidden');
+        }
+    });
 
     liveRefresh.addEventListener('click', () => {
         window.clearTimeout(refreshTimer);
@@ -170,4 +292,8 @@ if (liveRefresh) {
     }
 
     scheduleRefreshCheck();
+
+    if (conversation) {
+        conversation.scrollTop = conversation.scrollHeight;
+    }
 }

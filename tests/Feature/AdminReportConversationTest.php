@@ -24,11 +24,34 @@ class AdminReportConversationTest extends TestCase
             ->assertOk()
             ->assertSeeLivewire('admin.report-conversation')
             ->assertSee('Balas pelapor')
-            ->assertSee('Identitas pelapor terlindungi')
-            ->assertSee('Percakapan real-time')
+            ->assertDontSee('Identitas pelapor terlindungi')
+            ->assertDontSee('Percakapan hanya dapat diakses petugas terkait.')
+            ->assertDontSee('Terhubung langsung')
+            ->assertSee('TamboraEchoLoaded', false)
+            ->assertSee(".listen('.report.updated'", false)
             ->assertDontSee('wire:poll.15s', false)
             ->assertSee('Tulis balasan untuk pelapor')
             ->assertSee('data-notification-conversation-navigation', false);
+    }
+
+    public function test_admin_conversation_refresh_retrieves_a_new_reporter_message(): void
+    {
+        $admin = User::factory()->create();
+        $report = Report::factory()->create();
+        $component = Livewire::actingAs($admin)
+            ->test('admin.report-conversation', ['record' => $report])
+            ->assertDontSee('Pesan tambahan dari pelapor.');
+
+        AnonymousMessage::factory()->create([
+            'report_id' => $report->getKey(),
+            'sender_type' => 'reporter',
+            'body' => 'Pesan tambahan dari pelapor.',
+            'read_at' => null,
+        ]);
+
+        $component
+            ->call('refreshConversation')
+            ->assertSee('Pesan tambahan dari pelapor.');
     }
 
     public function test_active_admin_can_reply_directly_and_opening_conversation_marks_it_as_read(): void

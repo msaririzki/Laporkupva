@@ -44,7 +44,7 @@ class ReportInfolist
                     ->schema([
                         Group::make([
                             Section::make('Ringkasan laporan')
-                                ->description('Informasi utama dan kronologi yang dikirim oleh pelapor anonim.')
+                                ->description('Informasi utama, kontak opsional, dan kronologi yang dikirim pelapor.')
                                 ->icon(Heroicon::OutlinedDocumentText)
                                 ->columns([
                                     'default' => 1,
@@ -64,6 +64,10 @@ class ReportInfolist
                                     TextEntry::make('business_name')
                                         ->label('Nama tempat/usaha')
                                         ->placeholder('Tidak disebutkan'),
+                                    TextEntry::make('reporter_phone')
+                                        ->label('Nomor HP pelapor')
+                                        ->placeholder('Tidak diberikan')
+                                        ->copyable(),
                                     IconEntry::make('is_ongoing')
                                         ->label('Masih berlangsung')
                                         ->boolean(),
@@ -85,6 +89,7 @@ class ReportInfolist
                             Section::make('Lokasi terlapor')
                                 ->description('Pastikan titik peta sesuai dengan petunjuk lokasi sebelum koordinasi lapangan.')
                                 ->icon(Heroicon::OutlinedMapPin)
+                                ->extraAttributes(['class' => 'report-location-section'])
                                 ->headerActions([
                                     Action::make('openGoogleMaps')
                                         ->label('Buka di Google Maps')
@@ -138,7 +143,7 @@ class ReportInfolist
                                                 ->alt(fn (ReportEvidence $record): string => 'Pratinjau '.$record->original_name)
                                                 ->imageHeight('220px')
                                                 ->extraImgAttributes([
-                                                    'class' => 'w-full rounded-xl bg-gray-950 object-contain p-2',
+                                                    'class' => 'w-full rounded-xl border border-slate-200 bg-slate-50 object-contain p-2 shadow-inner',
                                                     'loading' => 'lazy',
                                                 ])
                                                 ->columnSpanFull(),
@@ -190,7 +195,7 @@ class ReportInfolist
                                                 ->alt(fn (ReportEvidence $record): string => 'Pratinjau '.$record->original_name)
                                                 ->imageHeight('180px')
                                                 ->extraImgAttributes([
-                                                    'class' => 'w-full rounded-xl object-cover',
+                                                    'class' => 'w-full rounded-xl border border-slate-200 bg-slate-50 object-contain p-2 shadow-inner',
                                                     'loading' => 'lazy',
                                                 ])
                                                 ->columnSpanFull(),

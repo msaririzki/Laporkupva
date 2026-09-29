@@ -9,6 +9,7 @@ use App\Models\Report;
 use App\Models\User;
 use App\Notifications\Admin\NewReporterMessage;
 use App\Notifications\Admin\NewReportSubmitted;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
@@ -25,6 +26,13 @@ class RealtimeBroadcastingTest extends TestCase
         $this->assertStringStartsWith('reports.', $report->realtimeChannelName());
         $this->assertStringNotContainsString($report->public_code, $report->realtimeChannelName());
         $this->assertSame(72, strlen($report->realtimeChannelName()));
+    }
+
+    public function test_report_updates_broadcast_immediately_without_waiting_for_a_queue_worker(): void
+    {
+        $event = new ReportRealtimeUpdated(Report::factory()->create(), 'message');
+
+        $this->assertInstanceOf(ShouldBroadcastNow::class, $event);
     }
 
     public function test_status_changes_dispatch_a_realtime_report_update_after_persistence(): void

@@ -6,6 +6,7 @@ use App\Enums\ReportStatus;
 use App\Enums\UserRole;
 use App\Filament\Auth\EditProfile;
 use App\Filament\Resources\Kupvas\KupvaResource;
+use App\Filament\Resources\Kupvas\Pages\CreateKupva;
 use App\Filament\Resources\Reports\Pages\ViewReport;
 use App\Filament\Resources\Reports\ReportResource;
 use App\Filament\Resources\Users\Pages\CreateUser;
@@ -146,6 +147,7 @@ class AdminDashboardTest extends TestCase
         $admin = User::factory()->create(['role' => UserRole::Admin]);
         $report = Report::factory()->create([
             'status' => ReportStatus::Received,
+            'reporter_phone' => '+6281234567890',
             'latitude' => -8.5830695,
             'longitude' => 116.1161800,
         ]);
@@ -171,6 +173,9 @@ class AdminDashboardTest extends TestCase
             ->assertDontSee('Ringkasan pengawasan')
             ->assertSee('Tindakan lapangan')
             ->assertSee('Peta laporan')
+            ->assertSee('dashboard-stat-card--total', false)
+            ->assertSee('--col-span-default: span 2 / span 2; --col-span-sm: span 1 / span 1;', false)
+            ->assertSee('dashboard-report-map-section', false)
             ->assertSee('Tren 6 bulan')
             ->assertSee('data-dashboard-chart="monthly-report-trend"', false)
             ->assertSee('data-dashboard-chart="regional-report-chart"', false)
@@ -187,9 +192,12 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Laporan masyarakat')
             ->assertSee('Temukan dan tindak lanjuti laporan masyarakat di seluruh NTB.')
             ->assertSee('Cari laporan…')
-            ->assertSee('Saring')
-            ->assertSee('Atur kolom')
+            ->assertSee('Filter')
+            ->assertDontSee('Saring')
+            ->assertSee('Atur')
+            ->assertDontSee('Atur kolom')
             ->assertSee('Unduh CSV')
+            ->assertSee('fi-ta-cell-business-name', false)
             ->assertSee('Buka')
             ->assertSee('Lanjutkan');
 
@@ -197,10 +205,14 @@ class AdminDashboardTest extends TestCase
             ->get(ReportResource::getUrl('view', ['record' => $report]))
             ->assertOk()
             ->assertSee($report->public_code)
+            ->assertSee('+6281234567890')
             ->assertSee('Status penanganan')
             ->assertSee('Kembali ke daftar')
             ->assertSee(ReportResource::getUrl('index'), false)
             ->assertSee('Update progres')
+            ->assertSee('data-advance-report="true"', false)
+            ->assertSee('Buka percakapan')
+            ->assertSee('data-open-conversation="true"', false)
             ->assertSee('Tambah dokumentasi')
             ->assertSee('Sudah dikerjakan')
             ->assertSee('Sedang dikerjakan')
@@ -212,6 +224,7 @@ class AdminDashboardTest extends TestCase
             ->assertSee('aria-current="step"', false)
             ->assertSee('bukti-lokasi.jpg')
             ->assertSee('Lokasi berada dekat pasar.')
+            ->assertDontSee('Sinkronisasi otomatis')
             ->assertSee('Buka di Google Maps')
             ->assertSee('https://www.google.com/maps/dir/?api=1&destination=-8.5830695%2C116.1161800&travelmode=driving');
 
@@ -219,7 +232,15 @@ class AdminDashboardTest extends TestCase
             ->get(KupvaResource::getUrl('index'))
             ->assertOk()
             ->assertSee('Data KUPVA')
-            ->assertSee('Kelola referensi penyelenggara KUPVA dan pantau status izin operasionalnya.');
+            ->assertSee('Kelola referensi penyelenggara KUPVA dan pantau status izin operasionalnya.')
+            ->assertSee('Kelola data')
+            ->assertSee('Tambah KUPVA')
+            ->assertSee('Filter')
+            ->assertDontSee('Urutkan menurut')
+            ->assertSee('Kecamatan')
+            ->assertSee('Desa/kelurahan')
+            ->assertSee('kupva-list-row', false)
+            ->assertSee('fi-ta-table-stacked-on-mobile', false);
 
         $this->actingAs($admin)
             ->get(KupvaResource::getUrl('view', ['record' => $kupva]))
@@ -238,8 +259,12 @@ class AdminDashboardTest extends TestCase
         Livewire::test(MonthlyReportTrend::class)
             ->assertSet('filter', 'last_6_months')
             ->assertSee('Tren 6 bulan')
+            ->assertSee('Pilih periode tren laporan')
+            ->assertDontSee('<select', false)
             ->assertSee('Bulan ini')
-            ->assertSee('Bulan tertentu · Agustus 2026')
+            ->assertSee('Agustus 2026')
+            ->assertSee('Oktober 2025')
+            ->assertDontSee('September 2025')
             ->set('filter', 'this_month')
             ->assertSee('Tren bulan ini')
             ->assertSee('Jumlah laporan masuk per hari.')
@@ -247,6 +272,53 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Tren Agustus 2026')
             ->set('filter', 'month_2026-99')
             ->assertSee('Tren 6 bulan');
+    }
+
+    public function test_admin_sees_the_streamlined_create_kupva_form(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+
+        $this->actingAs($admin)
+            ->get(KupvaResource::getUrl('create'))
+            ->assertOk()
+            ->assertSee('Tambah data KUPVA')
+            ->assertSee('Data KUPVA')
+            ->assertSee('Status awal otomatis aktif dan beroperasi.')
+            ->assertDontSee('Status dan masa berlaku')
+            ->assertDontSee('Koordinat peta (opsional)')
+            ->assertSee('Simpan KUPVA')
+            ->assertSee('Simpan &amp; tambah lagi', false)
+            ->assertSee('kupva-form-section', false);
+    }
+
+    public function test_admin_can_create_a_kupva_without_entering_status_or_coordinates(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+
+        $this->actingAs($admin);
+
+        Livewire::test(CreateKupva::class)
+            ->fillForm([
+                'name' => 'KUPVA Test Mataram',
+                'license_number' => 'KUPVA-TEST-2026',
+                'regency' => 'Kota Mataram',
+                'district' => 'Selaparang',
+                'village' => 'Rembiga',
+                'address' => 'Jalan Adi Sucipto Nomor 10',
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors()
+            ->assertNotified();
+
+        $this->assertDatabaseHas(Kupva::class, [
+            'name' => 'KUPVA Test Mataram',
+            'license_number' => 'KUPVA-TEST-2026',
+            'license_status' => 'active',
+            'regency' => 'Kota Mataram',
+            'is_active' => true,
+            'latitude' => null,
+            'longitude' => null,
+        ]);
     }
 
     public function test_regular_admin_cannot_manage_other_admin_accounts(): void
@@ -270,6 +342,37 @@ class AdminDashboardTest extends TestCase
             ->assertSee('75,0%')
             ->assertSee('data-status-percentage="75,0%"', false)
             ->assertDontSee('Kondisi laporan masyarakat yang diperbarui secara berkala.');
+    }
+
+    public function test_dashboard_status_cards_link_to_filtered_report_lists(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+
+        $this->actingAs($admin)
+            ->get('/admin')
+            ->assertSee('filters%5Bstatus%5D%5Bvalues%5D%5B0%5D=submitted', false)
+            ->assertSee('filters%5Bstatus%5D%5Bvalues%5D%5B0%5D=completed', false);
+    }
+
+    public function test_report_list_accepts_multiple_statuses_from_dashboard_links(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        Report::factory()->create([
+            'public_code' => 'LKP-NEW1-DEMO',
+            'status' => ReportStatus::Submitted,
+        ]);
+        Report::factory()->received()->create([
+            'public_code' => 'LKP-WORK-DEMO',
+        ]);
+        Report::factory()->completed()->create([
+            'public_code' => 'LKP-DONE-DEMO',
+        ]);
+
+        $this->actingAs($admin)
+            ->get('/admin/laporan?filters[status][values][0]=received&filters[status][values][1]=completed')
+            ->assertSee('LKP-WORK-DEMO')
+            ->assertSee('LKP-DONE-DEMO')
+            ->assertDontSee('LKP-NEW1-DEMO');
     }
 
     public function test_admin_can_send_an_anonymous_message_from_report_detail(): void
@@ -476,12 +579,23 @@ class AdminDashboardTest extends TestCase
     public function test_super_admin_can_open_admin_account_management(): void
     {
         $superAdmin = User::factory()->superAdmin()->create();
+        $managedAdmin = User::factory()->create([
+            'name' => 'Admin Operasional',
+            'email' => 'operasional@example.test',
+        ]);
 
         $this->actingAs($superAdmin)
             ->get(UserResource::getUrl('index'))
             ->assertOk()
             ->assertSee('Manajemen admin')
-            ->assertSee('Atur akun dan akses admin yang membantu proses pengawasan.');
+            ->assertSee('Atur akun dan akses admin yang membantu proses pengawasan.')
+            ->assertSee('Cari nama atau email admin…')
+            ->assertSee('Tambah admin')
+            ->assertSee('Atur')
+            ->assertDontSee('Urutkan menurut')
+            ->assertSee('1 hasil')
+            ->assertSee($managedAdmin->name)
+            ->assertSee('fi-ta-table-stacked-on-mobile', false);
     }
 
     public function test_super_admin_cannot_create_an_admin_with_a_weak_password(): void

@@ -1,5 +1,5 @@
 <x-filament-widgets::widget class="h-full">
-    <x-filament::section class="h-full">
+    <x-filament::section class="dashboard-report-map-section h-full">
         <x-slot name="heading">Peta laporan</x-slot>
         <x-slot name="description">Lokasi yang dilaporkan, bukan lokasi pelapor.</x-slot>
 

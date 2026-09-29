@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Models\Kupva;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Tests\TestCase;
 
 class PublicInformationPagesTest extends TestCase
 {
+    use LazilyRefreshDatabase;
+
     public function test_guide_page_explains_the_anonymous_reporting_flow(): void
     {
         $this->get(route('guide'))
@@ -31,7 +35,49 @@ class PublicInformationPagesTest extends TestCase
             ->assertSee('Laporan Anda terus bergerak')
             ->assertSee('Simpan nomor laporan atau QR')
             ->assertDontSee('secara real-time')
+            ->assertDontSee('Kantor Perwakilan Bank Indonesia Provinsi NTB ·')
             ->assertDontSee('https://laporkupva.ikydev.com/');
+    }
+
+    public function test_public_can_browse_and_filter_active_licensed_kupvas(): void
+    {
+        $mataram = Kupva::factory()->create([
+            'name' => 'PT Nusa Valas Mataram',
+            'license_number' => 'KUPVA-NTB-1001',
+            'regency' => 'Kota Mataram',
+            'license_expires_at' => now()->addYear(),
+        ]);
+        Kupva::factory()->create([
+            'name' => 'PT Samawa Valas',
+            'license_number' => 'KUPVA-NTB-1002',
+            'regency' => 'Kabupaten Sumbawa',
+            'license_expires_at' => now()->addYear(),
+        ]);
+        Kupva::factory()->create([
+            'name' => 'KUPVA Izin Kedaluwarsa',
+            'license_status' => 'expired',
+        ]);
+        Kupva::factory()->create([
+            'name' => 'KUPVA Tidak Beroperasi',
+            'is_active' => false,
+        ]);
+
+        $this->get(route('kupvas.index', [
+            'q' => 'Nusa Valas',
+            'regency' => 'Kota Mataram',
+        ]))
+            ->assertOk()
+            ->assertSee('Daftar Money Changer Berizin')
+            ->assertSee('KUPVA BB adalah istilah resmi')
+            ->assertSee('data-kupva-filters', false)
+            ->assertSee('data-custom-select', false)
+            ->assertSee('data-auto-submit', false)
+            ->assertSee('data-kupva-filter-actions', false)
+            ->assertSee($mataram->name)
+            ->assertSee($mataram->license_number)
+            ->assertDontSee('PT Samawa Valas')
+            ->assertDontSee('KUPVA Izin Kedaluwarsa')
+            ->assertDontSee('KUPVA Tidak Beroperasi');
     }
 
     public function test_privacy_page_explains_which_information_is_and_is_not_collected(): void
@@ -43,6 +89,7 @@ class PublicInformationPagesTest extends TestCase
             ->assertSee('Penyimpanan bukti terlindungi')
             ->assertSee('Alamat IP tidak disimpan sebagai bagian dari data laporan.')
             ->assertSee('Log keamanan server dapat mencatat akses teknis untuk waktu terbatas')
+            ->assertSee('Nomor HP bersifat opsional')
             ->assertDontSee('Penyimpanan bukti terenkripsi')
             ->assertDontSee('Tanpa jejak pelapor');
     }

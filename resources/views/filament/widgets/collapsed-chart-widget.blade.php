@@ -1,8 +1,10 @@
 @php
     use Filament\Support\Facades\FilamentAsset;
+    use Filament\Support\Icons\Heroicon;
     use Filament\Support\View\ComponentAttributeBag as FilamentComponentAttributeBag;
     use Filament\Widgets\View\Components\ChartWidgetComponent;
     use Illuminate\Contracts\Support\Htmlable;
+    use Illuminate\Support\Js;
 
     $color = $this->getColor();
     $heading = $this->getHeading();
@@ -18,6 +20,10 @@
         $heading instanceof Htmlable ? strip_tags($heading->toHtml()) : $heading,
         $description instanceof Htmlable ? strip_tags($description->toHtml()) : $description,
     ], fn ($value): bool => filled($value))));
+    $activeFilter = $filters && array_key_exists($this->filter, $filters)
+        ? $this->filter
+        : ($filters ? array_key_first($filters) : null);
+    $activeFilterLabel = $activeFilter ? $filters[$activeFilter] : null;
 @endphp
 
 <x-filament-widgets::widget
@@ -34,21 +40,51 @@
         @if ($filters || method_exists($this, 'getFiltersSchema'))
             <x-slot name="afterHeader">
                 @if ($filters)
-                    <x-filament::input.wrapper
-                        inline-prefix
-                        wire:target="filter"
-                        class="fi-wi-chart-filter dashboard-chart-filter"
+                    <x-filament::dropdown
+                        placement="bottom-end"
+                        shift
+                        width="sm"
+                        max-height="20rem"
+                        class="dashboard-chart-filter-dropdown"
                     >
-                        <x-filament::input.select
-                            :aria-label="__('filament-widgets::chart.filter.label')"
-                            inline-prefix
-                            wire:model.live="filter"
-                        >
+                        <x-slot name="trigger">
+                            <button
+                                type="button"
+                                class="dashboard-chart-filter-trigger"
+                                aria-label="Pilih periode tren laporan"
+                                wire:loading.attr="disabled"
+                                wire:target="filter"
+                            >
+                                <svg class="dashboard-chart-filter-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M8 2v4M16 2v4M3 10h18" />
+                                    <rect x="3" y="4" width="18" height="17" rx="3" />
+                                </svg>
+                                <span class="dashboard-chart-filter-label">{{ $activeFilterLabel }}</span>
+                                <svg class="dashboard-chart-filter-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5.22 7.22a.75.75 0 0 1 1.06 0L10 10.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 8.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </x-slot>
+
+                        <x-filament::dropdown.list>
                             @foreach ($filters as $value => $label)
-                                <option value="{{ $value }}">{{ $label }}</option>
+                                @php
+                                    $isSelectedFilter = $activeFilter === $value;
+                                    $wireClickAction = '$set(' . Js::from('filter') . ', ' . Js::from($value) . ')';
+                                @endphp
+
+                                <x-filament::dropdown.list.item
+                                    :icon="$isSelectedFilter ? Heroicon::Check : null"
+                                    x-on:click="close"
+                                    :wire:click="$wireClickAction"
+                                    wire:key="dashboard-chart-filter-{{ $chartKey }}-{{ $value }}"
+                                    class="{{ $isSelectedFilter ? 'fi-active' : '' }}"
+                                >
+                                    {{ $label }}
+                                </x-filament::dropdown.list.item>
                             @endforeach
-                        </x-filament::input.select>
-                    </x-filament::input.wrapper>
+                        </x-filament::dropdown.list>
+                    </x-filament::dropdown>
                 @endif
 
                 @if (method_exists($this, 'getFiltersSchema'))
