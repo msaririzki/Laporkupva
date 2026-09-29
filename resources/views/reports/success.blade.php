@@ -38,7 +38,7 @@
                             <img id="tracking-qr" class="size-40 shrink-0 rounded-md border border-slate-200 sm:size-44" src="{{ $trackingQrCode }}" alt="QR akses rahasia laporan {{ $submittedReport['code'] }}">
                             <div>
                                 <p class="text-xs sm:text-sm font-semibold text-[#0B2342]">Pindai untuk membuka status langsung</p>
-                                <p class="mt-0.5 text-[11px] leading-relaxed text-[#64748B]">Pindai dengan kamera atau unggah gambar QR ini di halaman cek status untuk membuka laporan tanpa mengetik nomor.</p>
+                                <p class="mt-0.5 text-[11px] leading-relaxed text-[#64748B]">Pindai dengan kamera atau unggah gambar QR ini di halaman cek status laporan untuk membuka laporan tanpa mengetik nomor.</p>
                             </div>
                         </div>
 
@@ -66,7 +66,7 @@
                     <p class="mt-3 text-center text-[11px] text-[#64748B]" aria-live="polite" data-access-download-status></p>
 
                     <a href="{{ $trackingUrl }}" class="button-primary mt-2.5 w-full text-xs sm:text-sm font-semibold py-2.5 shadow-2xs">
-                        <span>Cek status</span>
+                        <span>Cek status laporan</span>
                     </a>
                 </div>
             </div>

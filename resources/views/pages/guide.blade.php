@@ -301,7 +301,7 @@
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Buka halaman Cek status, lalu masukkan nomor laporan yang ditampilkan setelah laporan dikirim. Anda juga dapat mengunggah gambar QR yang telah disimpan.
+                                Buka halaman Cek status laporan, lalu masukkan nomor laporan yang ditampilkan setelah laporan dikirim. Anda juga dapat mengunggah gambar QR yang telah disimpan.
                             </div>
                         </details>
 
