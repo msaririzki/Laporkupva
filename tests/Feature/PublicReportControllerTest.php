@@ -32,8 +32,10 @@ class PublicReportControllerTest extends TestCase
             ->assertSee('Bukti pendukung wajib')
             ->assertSee('1–5 berkas sekaligus')
             ->assertSee('Foto besar otomatis diperkecil di perangkat Anda')
-            ->assertSee('Nomor HP')
+            ->assertSee('Nomor HP Pelapor')
             ->assertSee('Hanya digunakan petugas bila perlu menghubungi Anda.')
+            ->assertSee('>Lokasi Kejadian</h2>', false)
+            ->assertDontSee('Tentukan lokasinya')
             ->assertSee('evidence-preview-modal', false)
             ->assertSee('Foto ditampilkan utuh sesuai orientasi aslinya')
             ->assertSeeInOrder([

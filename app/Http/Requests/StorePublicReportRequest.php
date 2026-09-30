@@ -59,7 +59,7 @@ class StorePublicReportRequest extends FormRequest
         return [
             'incident_type' => 'jenis laporan',
             'business_name' => 'nama tempat/usaha',
-            'reporter_phone' => 'nomor HP',
+            'reporter_phone' => 'nomor HP pelapor',
             'incident_date' => 'tanggal kejadian',
             'incident_time' => 'waktu kejadian',
             'description' => 'kronologi',
@@ -79,7 +79,7 @@ class StorePublicReportRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'reporter_phone.regex' => 'Masukkan nomor HP Indonesia yang valid, misalnya 0812 3456 7890.',
+            'reporter_phone.regex' => 'Masukkan nomor HP pelapor yang valid, misalnya 0812 3456 7890.',
         ];
     }
 

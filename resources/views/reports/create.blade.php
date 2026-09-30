@@ -169,7 +169,7 @@
                             <!-- Nomor HP Opsional -->
                             <div>
                                 <div class="flex items-center justify-between">
-                                    <label class="form-label" for="reporter_phone">Nomor HP</label>
+                                    <label class="form-label" for="reporter_phone">Nomor HP Pelapor</label>
                                     <span class="text-xs text-slate-400">Opsional</span>
                                 </div>
                                 <input
@@ -219,7 +219,7 @@
                             </div>
                             <span class="text-[10px] sm:text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-0.5 sm:py-1 rounded-full">Khusus Wilayah NTB</span>
                         </div>
-                        <h2 class="mt-1 sm:mt-2 text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-[#0F172A]">Tentukan lokasinya</h2>
+                        <h2 class="mt-1 sm:mt-2 text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-[#0F172A]">Lokasi Kejadian</h2>
                         <p class="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#64748B]">Pilih kabupaten/kota dan tandai titik lokasi kejadian pada peta interaktif.</p>
                     </div>
 
