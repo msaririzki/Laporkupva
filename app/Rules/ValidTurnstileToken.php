@@ -5,8 +5,10 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Translation\PotentiallyTranslatedString;
+use Throwable;
 
 class ValidTurnstileToken implements ValidationRule
 {
@@ -29,8 +31,13 @@ class ValidTurnstileToken implements ValidationRule
         try {
             $response = Http::asForm()
                 ->acceptJson()
-                ->connectTimeout(3)
-                ->timeout(5)
+                ->connectTimeout(5)
+                ->timeout(8)
+                ->retry(
+                    [250, 750],
+                    fn (Throwable $exception, PendingRequest $request): bool => $exception instanceof ConnectionException,
+                    throw: false,
+                )
                 ->post($verificationUrl, [
                     'secret' => $secretKey,
                     'response' => (string) $value,

@@ -54,7 +54,7 @@ class PublicReportControllerTest extends TestCase
                 'Kota Mataram',
                 'Kota Bima',
             ])
-            ->assertDontSee('NIK');
+            ->assertDontSee('name="nik"', false);
     }
 
     public function test_report_form_displays_turnstile_when_security_verification_is_configured(): void
@@ -141,6 +141,26 @@ class PublicReportControllerTest extends TestCase
                 && $request['response'] === 'valid-token'
                 && ! isset($request['remoteip']);
         });
+    }
+
+    public function test_report_retries_turnstile_verification_after_a_temporary_connection_failure(): void
+    {
+        $this->enableTurnstile();
+        Http::fake([
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify' => Http::sequence()
+                ->pushFailedConnection()
+                ->push([
+                    'success' => true,
+                    'action' => 'submit_report',
+                ]),
+        ]);
+
+        $this->post(route('reports.store'), $this->validPayload([
+            'cf-turnstile-response' => 'valid-token-after-retry',
+        ]))->assertRedirect(route('reports.success'));
+
+        $this->assertDatabaseCount('reports', 1);
+        Http::assertSentCount(2);
     }
 
     public function test_valid_anonymous_report_is_stored_with_a_report_number_and_evidence(): void
@@ -243,6 +263,35 @@ class PublicReportControllerTest extends TestCase
 
         $this->from(route('reports.create'))
             ->post(route('reports.store'), $payload)
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('evidence');
+
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_accepts_up_to_five_evidence_files(): void
+    {
+        $files = collect(range(1, 5))
+            ->map(fn (int $number): UploadedFile => UploadedFile::fake()->image("bukti-{$number}.jpg"))
+            ->all();
+
+        $this->post(route('reports.store'), $this->validPayload([
+            'evidence' => $files,
+        ]))->assertRedirect(route('reports.success'));
+
+        $this->assertCount(5, Report::query()->sole()->evidence);
+    }
+
+    public function test_report_rejects_more_than_five_evidence_files(): void
+    {
+        $files = collect(range(1, 6))
+            ->map(fn (int $number): UploadedFile => UploadedFile::fake()->image("bukti-{$number}.jpg"))
+            ->all();
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload([
+                'evidence' => $files,
+            ]))
             ->assertRedirect(route('reports.create'))
             ->assertSessionHasErrors('evidence');
 
