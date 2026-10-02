@@ -449,7 +449,7 @@ class PublicReportControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSee('Pindai untuk membuka status langsung')
+            ->assertSee('Buka status lewat QR')
             ->assertSee('Unduh gambar akses')
             ->assertSee('Simpan nomor laporan Anda')
             ->assertDontSee('PIN pelacakan')
