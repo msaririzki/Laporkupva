@@ -2,6 +2,7 @@ import L from 'leaflet';
 import markerIconUrl from 'leaflet/dist/images/marker-icon.png';
 import markerIconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadowUrl from 'leaflet/dist/images/marker-shadow.png';
+import { initReportSubmission } from './report-submission';
 
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: markerIconRetinaUrl,
@@ -351,10 +352,23 @@ if (form) {
     let map;
     let marker;
     let reverseTimer;
-    let isOptimizingEvidence = false;
     let evidencePreviewUrls = [];
     let evidencePreviewTrigger = null;
     let turnstileWidgetId = null;
+
+    const submission = initReportSubmission({
+        form,
+        button: submitButton,
+        controls: [previousButton, nextButton, ...progressItems],
+        canSubmit: () => {
+            if (!validateStep() || !form.checkValidity()) {
+                form.reportValidity();
+                return false;
+            }
+
+            return true;
+        },
+    });
 
     // Enhance dropdowns
     document.querySelectorAll('#incident_type, #regency').forEach(initCustomSelect);
@@ -796,10 +810,8 @@ if (form) {
             return;
         }
 
-        isOptimizingEvidence = true;
         evidence.disabled = true;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Menyiapkan berkas…';
+        submission.setPreparing(true);
         uploadZone.setAttribute('aria-busy', 'true');
 
         const optimizedFiles = [];
@@ -834,29 +846,10 @@ if (form) {
             evidence.files = dataTransfer.files;
             renderEvidenceFiles(optimizedFiles);
         } finally {
-            isOptimizingEvidence = false;
             evidence.disabled = false;
-            submitButton.disabled = false;
-            submitButton.textContent = 'Kirim laporan';
+            submission.setPreparing(false);
             uploadZone.removeAttribute('aria-busy');
         }
-    });
-
-    form.addEventListener('submit', (event) => {
-        if (isOptimizingEvidence) {
-            event.preventDefault();
-            showEvidenceMessage('Tunggu sebentar, berkas sedang disiapkan sebelum dikirim.');
-            return;
-        }
-
-        if (!validateStep() || !form.checkValidity()) {
-            event.preventDefault();
-            form.reportValidity();
-            return;
-        }
-
-        submitButton.disabled = true;
-        submitButton.textContent = 'Mengirim laporan…';
     });
 
     setStep(currentStep, Boolean(firstInvalidStep));
