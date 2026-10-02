@@ -21,15 +21,15 @@ class AddSecurityHeaders
         $contentSecurityPolicy = [
             "default-src 'self'",
             "base-uri 'self'",
-            "connect-src 'self' ws://{$applicationHost}:* wss://{$applicationHost}:* https://api.mapbox.com https://events.mapbox.com https://nominatim.openstreetmap.org",
+            "connect-src 'self' ws://{$applicationHost}:* wss://{$applicationHost}:* https://api.mapbox.com https://events.mapbox.com https://nominatim.openstreetmap.org https://challenges.cloudflare.com",
             "font-src 'self' data:",
             "form-action 'self'",
             "frame-ancestors 'self'",
-            "frame-src 'self' blob:",
+            "frame-src 'self' blob: https://challenges.cloudflare.com",
             "img-src 'self' data: blob: https://api.mapbox.com https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://*.tiles.mapbox.com",
             "media-src 'self' blob:",
             "object-src 'none'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://challenges.cloudflare.com",
             "style-src 'self' 'unsafe-inline' https://unpkg.com",
             "worker-src 'self' blob:",
         ];

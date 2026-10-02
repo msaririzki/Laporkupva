@@ -349,6 +349,7 @@ if (form) {
     const reviewDate = document.querySelector('#review-date');
     const reviewLocation = document.querySelector('#review-location');
     const locationDetailsSummary = document.querySelector('#location-details-summary');
+    const turnstileElement = form.querySelector('[data-turnstile-widget]');
     let currentStep = 1;
     let map;
     let marker;
@@ -356,6 +357,7 @@ if (form) {
     let isOptimizingEvidence = false;
     let evidencePreviewUrls = [];
     let evidencePreviewTrigger = null;
+    let turnstileWidgetId = null;
 
     // Enhance dropdowns
     document.querySelectorAll('#incident_type, #regency').forEach(initCustomSelect);
@@ -381,6 +383,23 @@ if (form) {
             : 'Belum dipilih';
         reviewLocation.textContent = [village, district, regency].filter(Boolean).join(', ') || 'Belum dipilih';
     };
+
+    const renderTurnstile = () => {
+        if (!turnstileElement || turnstileWidgetId !== null || !window.turnstile) return;
+
+        turnstileElement.querySelector('[data-turnstile-loading]')?.remove();
+        turnstileWidgetId = window.turnstile.render(turnstileElement, {
+            action: 'submit_report',
+            language: 'id',
+            sitekey: turnstileElement.dataset.sitekey,
+            size: turnstileElement.getBoundingClientRect().width < 300 ? 'compact' : 'flexible',
+            theme: 'light',
+        });
+    };
+
+    window.addEventListener('tambora:turnstile-ready', () => {
+        if (currentStep === 3) renderTurnstile();
+    });
 
     const setStep = (step, shouldScroll = true) => {
         currentStep = Math.min(Math.max(step, 1), steps.length);
@@ -417,6 +436,7 @@ if (form) {
 
         if (currentStep === 3) {
             updateReview();
+            renderTurnstile();
         }
 
         if (shouldScroll) {

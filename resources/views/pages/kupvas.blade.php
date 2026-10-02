@@ -18,7 +18,43 @@
 
     <section class="bg-[#F4F7FB] py-7 sm:py-10">
         <div class="public-container max-w-[1180px] px-4 sm:px-6 lg:px-10">
-            <form action="{{ route('kupvas.index') }}" method="GET" class="rounded-2xl border border-slate-200 bg-white p-3 shadow-xs sm:p-4" role="search" data-kupva-filters>
+            <section class="overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-xs" aria-labelledby="official-kupva-title">
+                <div class="grid lg:grid-cols-[0.72fr_1.28fr]">
+                    <div class="bg-[#0B2342] p-5 text-white sm:p-6 lg:p-7">
+                        <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-blue-200">Cek sebelum menukar uang</p>
+                        <h2 id="official-kupva-title" class="mt-2 text-xl font-extrabold tracking-tight sm:text-2xl">Kenali Money Changer Resmi</h2>
+                        <p class="mt-2 text-xs leading-relaxed text-slate-300 sm:text-sm">Jangan hanya percaya pada tulisan “Money Changer”. Cocokkan identitas usaha dan nomor izinnya sebelum bertransaksi.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <a href="#daftar-kupva" class="inline-flex items-center justify-center rounded-xl bg-white px-3.5 py-2 text-xs font-bold text-[#0B2342] transition hover:bg-blue-50">Cari dalam daftar</a>
+                            <a href="https://www.bi.go.id/id/edukasi/Pages/Penjualan-Valuta-Asing.aspx" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-xl border border-white/25 px-3.5 py-2 text-xs font-bold text-white transition hover:bg-white/10">
+                                Informasi resmi BI
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-px bg-slate-200 sm:grid-cols-2">
+                        @foreach ([
+                            ['number' => '01', 'title' => 'Logo KUPVA Berizin', 'description' => 'Memasang logo resmi yang diterbitkan Bank Indonesia. Logo terbaru dapat dilengkapi QR untuk membantu pengecekan.'],
+                            ['number' => '02', 'title' => 'Sertifikat izin usaha', 'description' => 'Izin usaha dari Bank Indonesia dipasang pada tempat yang mudah terlihat oleh konsumen.'],
+                            ['number' => '03', 'title' => 'Papan nama yang jelas', 'description' => 'Menampilkan tulisan “Authorized Money Changer” beserta nama usaha dan informasi izinnya.'],
+                            ['number' => '04', 'title' => 'Kurs ditampilkan terbuka', 'description' => 'Nilai tukar disampaikan secara jelas sebelum transaksi dan layanan pengaduan tersedia.'],
+                        ] as $indicator)
+                            <article class="bg-white p-4 sm:p-5">
+                                <div class="flex items-start gap-3">
+                                    <span class="grid size-8 shrink-0 place-items-center rounded-lg bg-blue-50 text-[11px] font-extrabold text-[#2563EB] ring-1 ring-blue-100">{{ $indicator['number'] }}</span>
+                                    <div>
+                                        <h3 class="text-sm font-extrabold text-[#0F172A]">{{ $indicator['title'] }}</h3>
+                                        <p class="mt-1 text-xs leading-relaxed text-[#64748B]">{{ $indicator['description'] }}</p>
+                                    </div>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+
+            <form id="daftar-kupva" action="{{ route('kupvas.index') }}" method="GET" class="mt-5 scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-3 shadow-xs sm:p-4" role="search" data-kupva-filters>
                 <div class="grid gap-2.5 md:grid-cols-[minmax(0,1fr)_minmax(14rem,0.42fr)_auto] md:items-end">
                     <div>
                         <label for="kupva-search" class="form-label">Cari Money Changer</label>

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Enums\NtbRegency;
 use App\Rules\NoHtml;
+use App\Rules\ValidTurnstileToken;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -23,9 +24,9 @@ class StorePublicReportRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules(ValidTurnstileToken $turnstileToken): array
     {
-        return [
+        $rules = [
             'incident_type' => ['required', Rule::in([
                 'kupva_tanpa_izin',
                 'transaksi_mencurigakan',
@@ -51,6 +52,12 @@ class StorePublicReportRequest extends FormRequest
             'good_faith' => ['accepted'],
             'website' => ['prohibited'],
         ];
+
+        $rules['cf-turnstile-response'] = $this->turnstileIsEnabled()
+            ? ['required', 'string', 'max:2048', $turnstileToken]
+            : ['exclude'];
+
+        return $rules;
     }
 
     /** @return array<string, string> */
@@ -72,6 +79,7 @@ class StorePublicReportRequest extends FormRequest
             'evidence' => 'bukti pendukung',
             'evidence.*' => 'berkas bukti',
             'good_faith' => 'pernyataan itikad baik',
+            'cf-turnstile-response' => 'verifikasi keamanan',
         ];
     }
 
@@ -80,6 +88,7 @@ class StorePublicReportRequest extends FormRequest
     {
         return [
             'reporter_phone.regex' => 'Masukkan nomor HP pelapor yang valid, misalnya 0812 3456 7890.',
+            'cf-turnstile-response.required' => 'Selesaikan verifikasi keamanan sebelum mengirim laporan.',
         ];
     }
 
@@ -117,5 +126,11 @@ class StorePublicReportRequest extends FormRequest
         }
 
         return $phoneNumber;
+    }
+
+    private function turnstileIsEnabled(): bool
+    {
+        return filled(config('services.turnstile.site_key'))
+            && filled(config('services.turnstile.secret_key'));
     }
 }

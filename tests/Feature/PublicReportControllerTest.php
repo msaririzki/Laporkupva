@@ -7,8 +7,10 @@ use App\Models\Report;
 use App\Models\User;
 use App\Notifications\Admin\NewReportSubmitted;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Http\Client\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -21,6 +23,8 @@ class PublicReportControllerTest extends TestCase
         parent::setUp();
 
         Storage::fake('local');
+        config()->set('services.turnstile.site_key');
+        config()->set('services.turnstile.secret_key');
     }
 
     public function test_anonymous_report_form_is_accessible(): void
@@ -51,6 +55,92 @@ class PublicReportControllerTest extends TestCase
                 'Kota Bima',
             ])
             ->assertDontSee('NIK');
+    }
+
+    public function test_report_form_displays_turnstile_when_security_verification_is_configured(): void
+    {
+        config()->set('services.turnstile.site_key', 'test-site-key');
+        config()->set('services.turnstile.secret_key', 'test-secret-key');
+
+        $this->get(route('reports.create'))
+            ->assertOk()
+            ->assertSee('Verifikasi keamanan')
+            ->assertSee('https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit', false)
+            ->assertSee('data-sitekey="test-site-key"', false);
+    }
+
+    public function test_report_requires_turnstile_token_when_security_verification_is_configured(): void
+    {
+        $this->enableTurnstile();
+        Http::preventStrayRequests();
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload())
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('cf-turnstile-response');
+
+        $this->assertDatabaseCount('reports', 0);
+        Http::assertNothingSent();
+    }
+
+    public function test_report_rejects_an_invalid_turnstile_token(): void
+    {
+        $this->enableTurnstile();
+        Http::fake([
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify' => Http::response(['success' => false]),
+        ]);
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload([
+                'cf-turnstile-response' => 'invalid-token',
+            ]))
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('cf-turnstile-response');
+
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_rejects_a_turnstile_token_created_for_another_action(): void
+    {
+        $this->enableTurnstile();
+        Http::fake([
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify' => Http::response([
+                'success' => true,
+                'action' => 'admin_login',
+            ]),
+        ]);
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload([
+                'cf-turnstile-response' => 'valid-token-for-another-action',
+            ]))
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('cf-turnstile-response');
+
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_accepts_a_valid_turnstile_token(): void
+    {
+        $this->enableTurnstile();
+        Http::fake([
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify' => Http::response([
+                'success' => true,
+                'action' => 'submit_report',
+            ]),
+        ]);
+
+        $this->post(route('reports.store'), $this->validPayload([
+            'cf-turnstile-response' => 'valid-token',
+        ]))->assertRedirect(route('reports.success'));
+
+        $this->assertDatabaseCount('reports', 1);
+        Http::assertSent(function (Request $request): bool {
+            return $request->url() === 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+                && $request['secret'] === 'test-secret-key'
+                && $request['response'] === 'valid-token'
+                && ! isset($request['remoteip']);
+        });
     }
 
     public function test_valid_anonymous_report_is_stored_with_a_report_number_and_evidence(): void
@@ -346,5 +436,11 @@ class PublicReportControllerTest extends TestCase
             'good_faith' => '1',
             ...$overrides,
         ];
+    }
+
+    private function enableTurnstile(): void
+    {
+        config()->set('services.turnstile.site_key', 'test-site-key');
+        config()->set('services.turnstile.secret_key', 'test-secret-key');
     }
 }

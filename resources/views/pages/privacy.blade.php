@@ -49,7 +49,7 @@
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Catatan teknis</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Alamat IP tidak disimpan sebagai bagian dari data laporan. Log keamanan server dapat mencatat akses teknis untuk waktu terbatas sesuai kebijakan pengamanan sistem.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Alamat IP tidak disimpan sebagai bagian dari data laporan. Log keamanan server dan layanan verifikasi anti-bot dapat memproses data teknis akses secara terbatas untuk melindungi formulir dari spam.</p>
                     </article>
                 </div>
 

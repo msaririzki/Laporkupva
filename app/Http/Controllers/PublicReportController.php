@@ -31,7 +31,7 @@ class PublicReportController extends Controller
     public function store(StorePublicReportRequest $request): RedirectResponse
     {
         $trackingSecret = Str::random(32);
-        $validated = $request->safe()->except(['evidence', 'good_faith']);
+        $validated = $request->safe()->except(['evidence', 'good_faith', 'cf-turnstile-response']);
 
         $report = DB::transaction(function () use ($request, $validated, $trackingSecret): Report {
             $report = Report::query()->create([

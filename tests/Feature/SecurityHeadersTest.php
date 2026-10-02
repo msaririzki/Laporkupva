@@ -26,6 +26,8 @@ class SecurityHeadersTest extends TestCase
         $this->assertStringContainsString("frame-ancestors 'self'", $contentSecurityPolicy);
         $this->assertStringContainsString('ws://localhost:*', $contentSecurityPolicy);
         $this->assertStringContainsString('wss://localhost:*', $contentSecurityPolicy);
+        $this->assertStringContainsString("script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://challenges.cloudflare.com", $contentSecurityPolicy);
+        $this->assertStringContainsString("frame-src 'self' blob: https://challenges.cloudflare.com", $contentSecurityPolicy);
     }
 
     public function test_secure_responses_enable_hsts(): void

@@ -1,3 +1,14 @@
+@if (filled(config('services.turnstile.site_key')) && filled(config('services.turnstile.secret_key')))
+    @pushOnce('head')
+        <script>
+            window.onTamboraTurnstileReady = () => {
+                window.dispatchEvent(new CustomEvent('tambora:turnstile-ready'));
+            };
+        </script>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTamboraTurnstileReady" async defer></script>
+    @endPushOnce
+@endif
+
 <x-layouts.public title="Buat laporan anonim">
     <!-- Hero Header (Clean Light Canvas, Elegant Reassurance) -->
     <section class="relative bg-white py-3 sm:py-5 lg:py-6 border-b border-[#E2E8F0]">
@@ -439,6 +450,27 @@
                             </span>
                         </label>
                         @error('good_faith')<p class="form-error mt-1">{{ $message }}</p>@enderror
+
+                        @if (filled(config('services.turnstile.site_key')) && filled(config('services.turnstile.secret_key')))
+                            <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 sm:p-4 @error('cf-turnstile-response') border-red-300 bg-red-50/50 @enderror">
+                                <div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(300px,0.9fr)] lg:items-center">
+                                    <div>
+                                        <p class="text-xs font-bold text-[#0F172A] sm:text-sm">Verifikasi keamanan</p>
+                                        <p class="mt-0.5 text-[11px] leading-relaxed text-[#64748B] sm:text-xs">Selesaikan pemeriksaan singkat ini untuk mencegah laporan otomatis dan spam.</p>
+                                    </div>
+                                    <div class="w-full max-w-full overflow-hidden">
+                                        <div
+                                            class="min-h-[65px] w-full"
+                                            data-turnstile-widget
+                                            data-sitekey="{{ config('services.turnstile.site_key') }}"
+                                        >
+                                            <span data-turnstile-loading class="inline-flex h-[65px] items-center text-[11px] font-medium text-slate-500">Memuat verifikasi…</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @error('cf-turnstile-response')<p class="form-error mt-2">{{ $message }}</p>@enderror
+                            </div>
+                        @endif
                     </div>
                 </section>
 
