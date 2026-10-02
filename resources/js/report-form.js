@@ -18,8 +18,6 @@ const IMAGE_TARGET_BYTES = 1.25 * BYTES_PER_MEGABYTE;
 const IMAGE_MAX_EDGE = 2048;
 const COMPRESSIBLE_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 
-const formatFileSize = (bytes) => `${(bytes / BYTES_PER_MEGABYTE).toFixed(bytes >= BYTES_PER_MEGABYTE ? 1 : 2)} MB`;
-
 const canvasToBlob = (canvas, type, quality) => new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
         if (blob) {
@@ -338,7 +336,6 @@ if (form) {
     const evidencePreviewModal = document.querySelector('#evidence-preview-modal');
     const evidencePreviewImage = document.querySelector('#evidence-preview-image');
     const evidencePreviewTitle = document.querySelector('#evidence-preview-title');
-    const evidencePreviewMeta = document.querySelector('#evidence-preview-meta');
     const evidencePreviewCloseButton = document.querySelector('#evidence-preview-close');
     const latitude = document.querySelector('#latitude');
     const longitude = document.querySelector('#longitude');
@@ -711,12 +708,11 @@ if (form) {
         evidencePreviewTrigger = null;
     };
 
-    const openEvidencePreview = ({ name, size, url }, trigger) => {
+    const openEvidencePreview = ({ name, url }, trigger) => {
         if (!evidencePreviewModal || !evidencePreviewImage) return;
 
         evidencePreviewTrigger = trigger;
         evidencePreviewTitle.textContent = name;
-        evidencePreviewMeta.textContent = `${formatFileSize(size)} · siap dilampirkan`;
         evidencePreviewImage.src = url;
         evidencePreviewImage.alt = `Pratinjau ${name}`;
         evidencePreviewModal.classList.remove('hidden');
@@ -738,7 +734,7 @@ if (form) {
         evidencePreviewUrls = [];
         fileList.replaceChildren();
 
-        files.forEach(({ file, originalSize, optimized }) => {
+        files.forEach(({ file }) => {
             const item = document.createElement('div');
             item.className = 'overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white text-xs shadow-sm';
 
@@ -763,7 +759,6 @@ if (form) {
                 previewButton.append(previewImage, previewLabel);
                 previewButton.addEventListener('click', () => openEvidencePreview({
                     name: file.name,
-                    size: file.size,
                     url: previewUrl,
                 }, previewButton));
                 item.append(previewButton);
@@ -775,29 +770,13 @@ if (form) {
             }
 
             const footer = document.createElement('div');
-            footer.className = 'flex items-center justify-between gap-3 px-3.5 py-3';
-
-            const details = document.createElement('span');
-            details.className = 'min-w-0';
+            footer.className = 'px-3.5 py-3';
 
             const name = document.createElement('strong');
             name.className = 'block truncate font-semibold text-[#0B2342]';
             name.textContent = file.name;
-
-            const result = document.createElement('span');
-            result.className = optimized ? 'mt-1 block text-[#2E9B68] font-medium' : 'mt-1 block text-[#64748B]';
-            result.textContent = optimized
-                ? `${formatFileSize(originalSize)} menjadi ${formatFileSize(file.size)} · dioptimalkan`
-                : `${formatFileSize(file.size)} · ukuran asli`;
-
-            const badge = document.createElement('span');
-            badge.className = optimized
-                ? 'shrink-0 rounded-lg bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-[#2E9B68]'
-                : 'shrink-0 rounded-lg bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-[#64748B]';
-            badge.textContent = optimized ? 'Siap kirim' : 'Asli';
-
-            details.append(name, result);
-            footer.append(details, badge);
+            name.title = file.name;
+            footer.append(name);
             item.append(footer);
             fileList.append(item);
         });

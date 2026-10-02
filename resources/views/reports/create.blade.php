@@ -436,7 +436,6 @@
                             </label>
                             <input class="sr-only" id="evidence" name="evidence[]" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf" multiple required>
                             <div id="file-list" class="mt-2.5 grid gap-2 sm:grid-cols-2"></div>
-                            <p class="mt-1.5 text-[11px] sm:text-xs text-[#64748B]">Foto besar otomatis diperkecil di perangkat Anda. Foto yang sudah kecil tetap dikirim dalam kualitas asli.</p>
                             @error('evidence')<p class="form-error">{{ $message }}</p>@enderror
                             @error('evidence.*')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
@@ -535,10 +534,6 @@
                 >
             </div>
 
-            <div class="flex flex-col gap-1 border-t border-slate-200 bg-slate-50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-                <p id="evidence-preview-meta" class="text-xs text-slate-600"></p>
-                <p class="text-[11px] text-slate-400">Foto ditampilkan utuh sesuai orientasi aslinya.</p>
-            </div>
         </div>
     </div>
 </x-layouts.public>

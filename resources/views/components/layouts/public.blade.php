@@ -46,7 +46,6 @@
 
             <nav class="hidden items-center gap-1 sm:gap-2 lg:flex lg:gap-3" aria-label="Navigasi utama">
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
-                <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold" href="{{ route('home') }}#keamanan">Keamanan</a>
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('kupvas.*') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('kupvas.index') }}">Money Changer berizin</a>
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('guide') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('guide') }}">Panduan</a>
                 <a class="nav-link !py-1.5 !text-sm sm:!text-[15px] font-bold {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'text-[#2563EB] font-bold' : '' }}" href="{{ route('reports.track') }}">Cek status laporan</a>
@@ -107,7 +106,6 @@
         <!-- Mobile Navigation Menu -->
         <div id="mobile-nav" class="hidden space-y-1 border-t border-[#E2E8F0] bg-white px-4 py-3.5 shadow-md lg:hidden">
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0B2342] hover:bg-slate-50" href="{{ route('home') }}#cara-kerja">Cara lapor</a>
-            <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-[#0B2342] hover:bg-slate-50" href="{{ route('home') }}#keamanan">Keamanan</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('kupvas.*') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0B2342] hover:bg-slate-50' }}" href="{{ route('kupvas.index') }}">Money Changer berizin</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('guide') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0B2342] hover:bg-slate-50' }}" href="{{ route('guide') }}">Panduan</a>
             <a class="block rounded-lg px-3.5 py-2.5 text-sm font-semibold {{ request()->routeIs('reports.track*') || request()->routeIs('reports.status*') ? 'text-[#2563EB] bg-blue-50/80 font-bold border-l-4 border-[#2563EB]' : 'text-[#0B2342] hover:bg-slate-50' }}" href="{{ route('reports.track') }}">Cek status laporan</a>

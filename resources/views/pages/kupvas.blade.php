@@ -1,38 +1,20 @@
 <x-layouts.public title="Money Changer berizin di NTB">
-    <section class="border-b border-slate-200 bg-white py-7 sm:py-9">
-        <div class="public-container max-w-[1180px] px-4 sm:px-6 lg:px-10">
-            <div class="max-w-3xl">
-                <p class="text-xs font-bold uppercase tracking-[0.14em] text-[#2563EB]">Data resmi wilayah NTB</p>
-                <h1 class="mt-2 text-2xl font-extrabold tracking-tight text-[#0F172A] sm:text-3xl lg:text-[34px]">
-                    Daftar Money Changer Berizin
-                </h1>
-                <p class="mt-2 max-w-2xl text-sm leading-relaxed text-[#64748B] sm:text-[15px]">
-                    Temukan Money Changer berizin Bank Indonesia di Nusa Tenggara Barat, lalu cocokkan nama usaha dan nomor izinnya sebelum bertransaksi.
-                </p>
-                <p class="mt-2 text-xs text-slate-500">KUPVA BB adalah istilah resmi untuk usaha Money Changer bukan bank.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-[#F4F7FB] py-6 sm:py-8">
+    <section class="bg-[#F4F7FB] py-5 sm:py-6">
         <div class="public-container max-w-[1180px] px-4 sm:px-6 lg:px-10">
             <section class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs" aria-labelledby="official-kupva-title">
-                <div class="flex flex-col gap-4 border-b border-slate-200 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5 lg:px-6">
-                    <div class="flex items-start gap-3">
-                        <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-blue-50 text-[#2563EB] ring-1 ring-blue-100" aria-hidden="true">
-                            <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-                                <path d="m9 12 2 2 4-4" />
-                            </svg>
-                        </span>
-                        <div>
-                            <h2 id="official-kupva-title" class="text-base font-extrabold tracking-tight text-[#0F172A] sm:text-lg">Kenali Money Changer Resmi</h2>
-                            <p class="mt-0.5 text-xs leading-relaxed text-[#64748B] sm:text-sm">Periksa empat hal berikut sebelum menukar uang.</p>
-                        </div>
+                <div class="flex flex-col gap-4 px-4 py-5 sm:px-6 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
+                    <div class="min-w-0 max-w-3xl">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-[#2563EB] sm:text-xs">Data resmi wilayah NTB</p>
+                        <h1 class="mt-1.5 text-xl font-extrabold leading-tight tracking-tight text-[#0F172A] sm:text-2xl lg:text-[28px]">
+                            Daftar Money Changer Berizin
+                        </h1>
+                        <p class="mt-2 max-w-2xl text-xs leading-relaxed text-[#64748B] sm:text-sm">
+                            Temukan Money Changer berizin Bank Indonesia di Nusa Tenggara Barat, lalu cocokkan nama usaha dan nomor izinnya sebelum bertransaksi.
+                        </p>
+                        <p class="mt-1.5 text-[11px] leading-relaxed text-slate-500">KUPVA BB adalah istilah resmi untuk usaha Money Changer bukan bank.</p>
                     </div>
-                    <div class="flex shrink-0 items-center gap-3 text-xs font-bold">
-                        <a href="#daftar-kupva" class="text-[#2563EB] transition hover:text-[#1D4ED8]">Lihat daftar ↓</a>
-                        <span class="h-4 w-px bg-slate-200" aria-hidden="true"></span>
+                    <div class="flex shrink-0 items-center gap-4 text-xs font-semibold lg:pt-1">
+                        <a href="#daftar-kupva" class="inline-flex min-h-9 items-center gap-2 rounded-lg bg-blue-50 px-3 text-[#2563EB] transition hover:bg-blue-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Lihat daftar <span aria-hidden="true">↓</span></a>
                         <a href="https://www.bi.go.id/id/edukasi/Pages/Penjualan-Valuta-Asing.aspx" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-slate-600 transition hover:text-[#2563EB]">
                             Sumber BI
                             <span aria-hidden="true">↗</span>
@@ -40,21 +22,26 @@
                     </div>
                 </div>
 
-                <div class="grid divide-y divide-slate-200 sm:grid-cols-2 sm:divide-x sm:[&>*:nth-child(3)]:border-l-0 lg:grid-cols-4 lg:divide-y-0 lg:[&>*:nth-child(3)]:border-l">
-                    @foreach ([
-                        ['number' => '01', 'title' => 'Logo resmi', 'description' => 'Terdapat logo KUPVA Berizin dari Bank Indonesia.'],
-                        ['number' => '02', 'title' => 'Izin terlihat', 'description' => 'Sertifikat izin dipasang di lokasi usaha.'],
-                        ['number' => '03', 'title' => 'Identitas jelas', 'description' => 'Nama usaha dan papan “Authorized Money Changer” terlihat jelas.'],
-                        ['number' => '04', 'title' => 'Kurs transparan', 'description' => 'Nilai tukar disampaikan sebelum transaksi.'],
-                    ] as $indicator)
-                        <article class="flex gap-3 px-4 py-4 sm:min-h-28 sm:px-5 lg:min-h-32 lg:flex-col lg:gap-2.5 lg:px-5">
-                            <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-slate-100 text-[10px] font-extrabold text-[#2563EB]">{{ $indicator['number'] }}</span>
-                            <div>
-                                <h3 class="text-sm font-extrabold text-[#0F172A]">{{ $indicator['title'] }}</h3>
-                                <p class="mt-1 text-xs leading-relaxed text-[#64748B]">{{ $indicator['description'] }}</p>
-                            </div>
-                        </article>
-                    @endforeach
+                <div class="border-t border-slate-200 bg-slate-50/60 px-4 py-4 sm:px-6">
+                    <h2 id="official-kupva-title" class="text-sm font-bold text-[#0F172A]">Kenali Money Changer Resmi</h2>
+                    <div class="mt-3 grid grid-cols-2 gap-x-4 gap-y-4 lg:grid-cols-4 lg:gap-5">
+                        @foreach ([
+                            ['title' => 'Logo resmi', 'description' => 'Terdapat logo KUPVA Berizin dari Bank Indonesia.'],
+                            ['title' => 'Izin terlihat', 'description' => 'Sertifikat izin dipasang di lokasi usaha.'],
+                            ['title' => 'Identitas jelas', 'description' => 'Nama usaha dan papan “Authorized Money Changer” terlihat jelas.'],
+                            ['title' => 'Kurs transparan', 'description' => 'Nilai tukar disampaikan sebelum transaksi.'],
+                        ] as $indicator)
+                            <article class="flex items-start gap-2">
+                                <svg class="mt-0.5 size-4 shrink-0 text-[#2563EB]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4 10 4 4 8-8" />
+                                </svg>
+                                <div class="min-w-0">
+                                    <h3 class="text-xs font-bold text-[#0F172A] sm:text-sm">{{ $indicator['title'] }}</h3>
+                                    <p class="mt-1 text-[11px] leading-relaxed text-[#64748B] sm:text-xs">{{ $indicator['description'] }}</p>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
                 </div>
             </section>
 
