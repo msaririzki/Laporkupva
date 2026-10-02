@@ -482,7 +482,7 @@
                         <button type="button" id="next-step" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
                             <span>Lanjut ke lokasi</span>
                         </button>
-                        <button type="submit" id="submit-report" aria-busy="false" class="inline-flex w-auto min-h-9 sm:min-h-10 items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] disabled:cursor-wait disabled:bg-[#2563EB]/80 transition-colors shadow-xs hidden">
+                        <button type="submit" id="submit-report" aria-busy="false" class="w-auto min-h-9 sm:min-h-10 items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] disabled:cursor-wait disabled:bg-[#2563EB]/80 transition-colors shadow-xs hidden">
                             <svg data-submit-spinner class="hidden size-4 shrink-0 animate-spin motion-reduce:animate-none" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <circle class="opacity-25" cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3" />
                                 <path d="M12 3a9 9 0 0 1 9 9" stroke="currentColor" stroke-width="3" stroke-linecap="round" />

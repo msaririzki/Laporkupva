@@ -437,6 +437,7 @@ if (form) {
         previousButton.classList.toggle('hidden', currentStep === 1);
         nextButton.classList.toggle('hidden', currentStep === steps.length);
         submitButton.classList.toggle('hidden', currentStep !== steps.length);
+        submitButton.classList.toggle('inline-flex', currentStep === steps.length);
         stepStatus.textContent = `Langkah ${currentStep} dari ${steps.length}`;
         nextButton.textContent = currentStep === 1 ? 'Lanjut ke lokasi' : 'Lanjut ke bukti';
 
