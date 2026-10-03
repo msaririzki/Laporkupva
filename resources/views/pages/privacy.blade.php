@@ -1,57 +1,74 @@
 <x-layouts.public title="Informasi privasi">
-    <!-- Hero Section -->
-    <section class="bg-[#0B2342] py-12 text-white sm:py-16">
-        <div class="public-container max-w-4xl">
-            <div class="eyebrow-dark">
-                <span class="size-2 rounded-full bg-[#F2B84B]"></span>
+    <!-- Hero Section (Clean Light Palette) -->
+    <section class="relative bg-white py-8 sm:py-10 lg:py-12 border-b border-[#E2E8F0]">
+        <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10 text-center">
+            <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/80 px-3.5 py-1 text-xs font-semibold text-[#2563EB]">
+                <span class="size-1.5 rounded-full bg-[#2563EB]"></span>
                 <span>Privasi & Perlindungan Pelapor</span>
             </div>
-            <h1 class="mt-3.5 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl text-white">Anonim sejak awal</h1>
-            <p class="mt-2.5 max-w-2xl text-xs sm:text-sm leading-6 text-slate-300">TAMBORA hanya mengumpulkan data kejadian yang diperlukan untuk proses pengawasan, tanpa pernah meminta data identitas pribadi masyarakat.</p>
+
+            <h1 class="mt-4 text-2xl font-extrabold tracking-tight text-[#0F172A] sm:text-3xl lg:text-[34px] lg:leading-tight">
+                Anonim sejak awal
+            </h1>
+
+            <p class="mt-2.5 max-w-[760px] mx-auto text-xs sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B]">
+                TAMBORA mengutamakan laporan tanpa identitas. Nomor HP hanya dapat diberikan secara sukarela jika Anda ingin dihubungi petugas.
+            </p>
         </div>
     </section>
 
     <!-- Main Content -->
-    <section class="py-10 sm:py-16 bg-[#F7F9FC]">
+    <section class="py-10 sm:py-16 bg-[#F4F7FB]">
         <div class="public-container max-w-4xl">
-            <div class="rounded-2xl sm:rounded-3xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-10">
-                <div class="grid gap-6 md:grid-cols-2">
-                    <article class="p-4 rounded-xl border border-[#E2E8F0] bg-[#F7F9FC]">
+            <div class="rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-10 shadow-xs">
+                <div class="grid gap-5 md:grid-cols-2">
+                    <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Data yang tidak diminta</h2>
-                        <p class="mt-2 text-xs leading-5 text-[#64748B]">Nama, NIK, alamat email, nomor telepon, dan pembuatan akun tidak diperlukan sama sekali untuk menyampaikan laporan.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Nama, NIK, alamat email, dan pendaftaran akun tidak diperlukan. Nomor HP bersifat opsional dan laporan tetap dapat dikirim tanpa mengisinya.</p>
                     </article>
 
-                    <article class="p-4 rounded-xl border border-[#E2E8F0] bg-[#F7F9FC]">
+                    <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Data yang digunakan</h2>
-                        <p class="mt-2 text-xs leading-5 text-[#64748B]">Jenis dan kronologi kejadian, titik lokasi pihak yang dilaporkan, waktu kejadian, serta lampiran bukti digunakan secara khusus untuk verifikasi laporan dan tindak lanjut lapangan.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Jenis dan kronologi kejadian, titik lokasi, waktu, serta lampiran bukti digunakan untuk verifikasi. Nomor HP opsional disimpan terlindungi dan hanya digunakan petugas untuk tindak lanjut laporan.</p>
                     </article>
 
-                    <article class="p-4 rounded-xl border border-[#E2E8F0] bg-[#F7F9FC]">
+                    <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Lokasi perangkat</h2>
-                        <p class="mt-2 text-xs leading-5 text-[#64748B]">GPS perangkat hanya diakses setelah Anda memberikan persetujuan izin di peramban. Sebelum dikirim, Anda dapat menyesuaikan penanda agar titik koordinat merefleksikan lokasi tempat kejadian, bukan domisili Anda.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">GPS hanya aktif dengan izin Anda. Anda bebas menggeser pin peta agar titik sesuai lokasi kejadian, bukan posisi Anda.</p>
                     </article>
 
-                    <article class="p-4 rounded-xl border border-[#E2E8F0] bg-[#F7F9FC]">
+                    <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Akses laporan</h2>
-                        <p class="mt-2 text-xs leading-5 text-[#64748B]">Progres dan komunikasi hanya dapat dibuka menggunakan kombinasi Kode Laporan dan PIN rahasia. PIN disimpan dalam bentuk hash kriptografis searah.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Progres dan komunikasi dibuka menggunakan nomor laporan atau gambar QR. Simpan akses tersebut dan bagikan hanya kepada pihak yang dipercaya.</p>
                     </article>
 
-                    <article class="p-4 rounded-xl border border-[#E2E8F0] bg-[#F7F9FC]">
-                        <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Lampiran bukti</h2>
-                        <p class="mt-2 text-xs leading-5 text-[#64748B]">Foto atau dokumen yang dilampirkan disimpan di ruang penyimpanan terisolasi dan hanya dapat diakses oleh petugas pemeriksa yang berwenang.</p>
+                    <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
+                        <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Penyimpanan bukti terlindungi</h2>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Berkas foto atau dokumen bukti disimpan di ruang penyimpanan privat dan hanya dapat diakses oleh petugas yang berwenang.</p>
                     </article>
 
-                    <article class="p-4 rounded-xl border border-[#E2E8F0] bg-[#F7F9FC]">
+                    <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Catatan teknis</h2>
-                        <p class="mt-2 text-xs leading-5 text-[#64748B]">Alamat IP tidak disimpan sebagai bagian dari data laporan. Log keamanan server dapat mencatat akses teknis untuk waktu terbatas sesuai kebijakan operasional pengamanan sistem informasi Bank Indonesia.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Alamat IP tidak disimpan sebagai bagian dari data laporan. Log keamanan server dan layanan verifikasi anti-bot dapat memproses data teknis akses secara terbatas untuk melindungi formulir dari spam.</p>
                     </article>
                 </div>
 
                 <!-- Protective Notice Box -->
-                <div class="mt-8 rounded-xl border border-blue-200 bg-blue-50/70 p-4 sm:p-5 text-xs sm:text-sm leading-6 text-[#0B2342]">
-                    <strong class="block font-bold">Lindungi kerahasiaan Anda</strong>
-                    <span class="mt-1 block text-[#64748B]">Jangan menuliskan nama, NIK, alamat rumah, atau nomor telepon pribadi di dalam teks kronologi, pesan tambahan, maupun nama berkas bukti yang Anda unggah.</span>
+                <div class="mt-8 rounded-2xl border border-blue-100 bg-blue-50/60 p-5 text-xs sm:text-sm leading-relaxed text-[#0B2342]">
+                    <strong class="block font-bold text-[#0B2342]">Tips Menjaga Kerahasiaan</strong>
+                    <span class="mt-1 block text-[#475569]">Jangan mencantumkan nama, nomor telepon, atau data diri pribadi di dalam uraian kronologi maupun nama file berkas yang Anda unggah.</span>
                 </div>
+            </div>
+
+            <!-- Bottom CTA Banner (Clean Card Style) -->
+            <div class="mt-8 flex flex-col items-center justify-between gap-5 rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-8 shadow-xs text-center sm:flex-row sm:text-left">
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold text-[#0B2342]">Siap menyampaikan laporan?</h2>
+                    <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Sampaikan laporan KUPVA sekarang secara anonim, cepat, dan terlindungi.</p>
+                </div>
+                <a href="{{ route('reports.create') }}" class="button-primary shrink-0 text-xs sm:text-sm font-semibold rounded-xl bg-[#2563EB] px-5 py-2.5 text-white hover:bg-[#1D4ED8] transition-colors shadow-2xs">
+                    <span>Buat laporan</span>
+                </a>
             </div>
         </div>
     </section>

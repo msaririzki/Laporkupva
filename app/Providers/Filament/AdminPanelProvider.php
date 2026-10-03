@@ -44,9 +44,11 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('TAMBORA · BI NTB')
             ->brandLogo(asset('images/brand/tambora.webp'))
             ->brandLogoHeight('3rem')
-            ->favicon(asset('images/brand/bank-indonesia-mark.webp'))
+            ->favicon(asset('images/brand/tambora.webp'))
             ->darkMode(false)
             ->globalSearch(false)
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('60s')
             ->colors([
                 'primary' => Color::Blue,
             ])
@@ -68,6 +70,20 @@ class AdminPanelProvider extends PanelProvider
                 PanelsRenderHook::SIMPLE_LAYOUT_START,
                 fn (): View => view('filament.auth.login-intro'),
                 scopes: Login::class,
+            )
+            ->renderHook(
+                PanelsRenderHook::SIMPLE_PAGE_END,
+                fn (): View => view('filament.auth.login-home-link'),
+                scopes: Login::class,
+            )
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): View => view('filament.shared.realtime'),
+                scopes: ViewReport::class,
+            )
+            ->renderHook(
+                PanelsRenderHook::BODY_END,
+                fn (): View => view('filament.shared.notification-conversation-navigation'),
             )
             ->renderHook(
                 PanelsRenderHook::BODY_END,

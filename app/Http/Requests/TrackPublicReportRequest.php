@@ -27,7 +27,6 @@ class TrackPublicReportRequest extends FormRequest
     {
         return [
             'tracking_code' => ['required', 'string', 'max:20', 'regex:/^LKP-[A-Z0-9]{4}-[A-Z0-9]{4}$/'],
-            'tracking_pin' => ['required', 'digits:6'],
             'access_token' => ['nullable', 'string', 'max:4096'],
         ];
     }
@@ -36,8 +35,7 @@ class TrackPublicReportRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'tracking_code' => 'kode laporan',
-            'tracking_pin' => 'PIN pelacakan',
+            'tracking_code' => 'nomor laporan',
         ];
     }
 
@@ -47,11 +45,10 @@ class TrackPublicReportRequest extends FormRequest
 
         $this->merge([
             'tracking_code' => strtoupper(trim((string) ($credentials['code'] ?? $this->input('tracking_code')))),
-            'tracking_pin' => trim((string) ($credentials['pin'] ?? $this->input('tracking_pin'))),
         ]);
     }
 
-    /** @return array{code: string, pin: string}|null */
+    /** @return array{code: string}|null */
     private function credentialsFromAccessToken(): ?array
     {
         $accessToken = trim((string) $this->input('access_token'));
@@ -66,17 +63,16 @@ class TrackPublicReportRequest extends FormRequest
             return null;
         }
 
-        if (! is_array($credentials) || ($credentials['version'] ?? null) !== 1) {
+        if (! is_array($credentials) || ! in_array($credentials['version'] ?? null, [1, 2], true)) {
             return null;
         }
 
         $code = $credentials['code'] ?? null;
-        $pin = $credentials['pin'] ?? null;
 
-        if (! is_string($code) || ! is_string($pin)) {
+        if (! is_string($code)) {
             return null;
         }
 
-        return ['code' => $code, 'pin' => $pin];
+        return ['code' => $code];
     }
 }

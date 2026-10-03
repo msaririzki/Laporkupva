@@ -4,9 +4,13 @@ namespace Tests\Feature;
 
 use App\Enums\ReportStatus;
 use App\Models\Report;
+use App\Models\User;
+use App\Notifications\Admin\NewReportSubmitted;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Http\Client\Request;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -19,6 +23,8 @@ class PublicReportControllerTest extends TestCase
         parent::setUp();
 
         Storage::fake('local');
+        config()->set('services.turnstile.site_key');
+        config()->set('services.turnstile.secret_key');
     }
 
     public function test_anonymous_report_form_is_accessible(): void
@@ -29,7 +35,11 @@ class PublicReportControllerTest extends TestCase
             ->assertSee('Gunakan lokasi saya')
             ->assertSee('Bukti pendukung wajib')
             ->assertSee('1–5 berkas sekaligus')
-            ->assertSee('Foto besar otomatis diperkecil di perangkat Anda')
+            ->assertSee('Nomor HP Pelapor')
+            ->assertSee('Hanya digunakan petugas bila perlu menghubungi Anda.')
+            ->assertSee('>Lokasi Kejadian</h2>', false)
+            ->assertDontSee('Tentukan lokasinya')
+            ->assertSee('evidence-preview-modal', false)
             ->assertSeeInOrder([
                 'Kabupaten Lombok Barat',
                 'Kabupaten Lombok Tengah',
@@ -42,10 +52,116 @@ class PublicReportControllerTest extends TestCase
                 'Kota Mataram',
                 'Kota Bima',
             ])
-            ->assertDontSee('NIK');
+            ->assertDontSee('name="nik"', false);
     }
 
-    public function test_valid_anonymous_report_is_stored_with_private_tracking_pin_and_evidence(): void
+    public function test_report_form_displays_turnstile_when_security_verification_is_configured(): void
+    {
+        config()->set('services.turnstile.site_key', 'test-site-key');
+        config()->set('services.turnstile.secret_key', 'test-secret-key');
+
+        $this->get(route('reports.create'))
+            ->assertOk()
+            ->assertSee('Verifikasi keamanan')
+            ->assertSee('https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit', false)
+            ->assertSee('data-sitekey="test-site-key"', false);
+    }
+
+    public function test_report_requires_turnstile_token_when_security_verification_is_configured(): void
+    {
+        $this->enableTurnstile();
+        Http::preventStrayRequests();
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload())
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('cf-turnstile-response');
+
+        $this->assertDatabaseCount('reports', 0);
+        Http::assertNothingSent();
+    }
+
+    public function test_report_rejects_an_invalid_turnstile_token(): void
+    {
+        $this->enableTurnstile();
+        Http::fake([
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify' => Http::response(['success' => false]),
+        ]);
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload([
+                'cf-turnstile-response' => 'invalid-token',
+            ]))
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('cf-turnstile-response');
+
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_rejects_a_turnstile_token_created_for_another_action(): void
+    {
+        $this->enableTurnstile();
+        Http::fake([
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify' => Http::response([
+                'success' => true,
+                'action' => 'admin_login',
+            ]),
+        ]);
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload([
+                'cf-turnstile-response' => 'valid-token-for-another-action',
+            ]))
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('cf-turnstile-response');
+
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_accepts_a_valid_turnstile_token(): void
+    {
+        $this->enableTurnstile();
+        Http::fake([
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify' => Http::response([
+                'success' => true,
+                'action' => 'submit_report',
+            ]),
+        ]);
+
+        $this->post(route('reports.store'), $this->validPayload([
+            'cf-turnstile-response' => 'valid-token',
+        ]))->assertRedirect(route('reports.success'));
+
+        $this->assertDatabaseCount('reports', 1);
+        Http::assertSent(function (Request $request): bool {
+            return $request->url() === 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+                && $request['secret'] === 'test-secret-key'
+                && $request['response'] === 'valid-token'
+                && ! isset($request['remoteip']);
+        });
+    }
+
+    public function test_report_retries_turnstile_verification_after_a_temporary_connection_failure(): void
+    {
+        $this->enableTurnstile();
+        Http::fake([
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify' => Http::sequence()
+                ->pushFailedConnection()
+                ->push([
+                    'success' => true,
+                    'action' => 'submit_report',
+                ]),
+        ]);
+
+        $this->post(route('reports.store'), $this->validPayload([
+            'cf-turnstile-response' => 'valid-token-after-retry',
+        ]))->assertRedirect(route('reports.success'));
+
+        $this->assertDatabaseCount('reports', 1);
+        Http::assertSentCount(2);
+    }
+
+    public function test_valid_anonymous_report_is_stored_with_a_report_number_and_evidence(): void
     {
         $response = $this->post(route('reports.store'), $this->validPayload([
             'evidence' => [
@@ -63,8 +179,8 @@ class PublicReportControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/^LKP-[A-Z0-9]{4}-[A-Z0-9]{4}$/', $report->public_code);
         $this->assertSame($report->public_code, $access['code']);
         $this->assertArrayHasKey('submitted_at', $access);
-        $this->assertTrue(Hash::check($access['pin'], $report->tracking_pin_hash));
-        $this->assertNotSame($access['pin'], $report->tracking_pin_hash);
+        $this->assertArrayNotHasKey('pin', $access);
+        $this->assertNotEmpty($report->tracking_pin_hash);
         $this->assertSame(ReportStatus::Submitted, $report->status);
         $this->assertDatabaseHas('report_status_histories', [
             'report_id' => $report->getKey(),
@@ -76,6 +192,68 @@ class PublicReportControllerTest extends TestCase
         Storage::disk('local')->assertExists($report->evidence->pluck('path')->all());
     }
 
+    public function test_optional_phone_number_is_normalized_and_encrypted_at_rest(): void
+    {
+        $this->post(route('reports.store'), $this->validPayload([
+            'reporter_phone' => '0812 3456-7890',
+        ]))->assertRedirect(route('reports.success'));
+
+        $report = Report::query()->sole();
+        $rawPhoneNumber = DB::table('reports')->where('id', $report->getKey())->value('reporter_phone');
+
+        $this->assertSame('+6281234567890', $report->reporter_phone);
+        $this->assertNotSame('+6281234567890', $rawPhoneNumber);
+        $this->assertStringNotContainsString('081234567890', (string) $rawPhoneNumber);
+    }
+
+    public function test_invalid_optional_phone_number_is_rejected(): void
+    {
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload([
+                'reporter_phone' => 'nomor-rahasia',
+            ]))
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('reporter_phone');
+
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_ignores_an_unexpected_initial_message_field(): void
+    {
+        $response = $this->post(route('reports.store'), $this->validPayload([
+            'user_message' => 'Catatan khusus untuk petugas verifikator.',
+        ]));
+
+        $response->assertRedirect(route('reports.success'));
+
+        $report = Report::query()->sole();
+        $this->assertCount(0, $report->anonymousMessages);
+    }
+
+    public function test_new_report_notifies_each_active_admin(): void
+    {
+        $admin = User::factory()->create();
+        $superAdmin = User::factory()->superAdmin()->create();
+        $inactiveAdmin = User::factory()->create(['is_active' => false]);
+
+        $this->post(route('reports.store'), $this->validPayload())
+            ->assertRedirect(route('reports.success'));
+
+        $report = Report::query()->sole();
+        $adminNotification = $admin->notifications()->sole();
+
+        $this->assertSame(NewReportSubmitted::class, $adminNotification->type);
+        $this->assertSame('Laporan baru masuk', $adminNotification->data['title']);
+        $this->assertSame($report->getKey(), $adminNotification->data['report_id']);
+        $this->assertStringContainsString($report->public_code, $adminNotification->data['body']);
+        $this->assertStringContainsString("/admin/laporan/{$report->getRouteKey()}", $adminNotification->data['actions'][0]['url']);
+        $this->assertStringEndsWith('#komunikasi-anonim', $adminNotification->data['actions'][0]['url']);
+        $this->assertNull($adminNotification->data['actions'][0]['alpineClickHandler']);
+        $this->assertTrue($adminNotification->data['actions'][0]['shouldMarkAsRead']);
+        $this->assertSame(1, $superAdmin->notifications()->count());
+        $this->assertSame(0, $inactiveAdmin->notifications()->count());
+    }
+
     public function test_at_least_one_evidence_file_is_required(): void
     {
         $payload = $this->validPayload();
@@ -83,6 +261,35 @@ class PublicReportControllerTest extends TestCase
 
         $this->from(route('reports.create'))
             ->post(route('reports.store'), $payload)
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('evidence');
+
+        $this->assertDatabaseCount('reports', 0);
+    }
+
+    public function test_report_accepts_up_to_five_evidence_files(): void
+    {
+        $files = collect(range(1, 5))
+            ->map(fn (int $number): UploadedFile => UploadedFile::fake()->image("bukti-{$number}.jpg"))
+            ->all();
+
+        $this->post(route('reports.store'), $this->validPayload([
+            'evidence' => $files,
+        ]))->assertRedirect(route('reports.success'));
+
+        $this->assertCount(5, Report::query()->sole()->evidence);
+    }
+
+    public function test_report_rejects_more_than_five_evidence_files(): void
+    {
+        $files = collect(range(1, 6))
+            ->map(fn (int $number): UploadedFile => UploadedFile::fake()->image("bukti-{$number}.jpg"))
+            ->all();
+
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload([
+                'evidence' => $files,
+            ]))
             ->assertRedirect(route('reports.create'))
             ->assertSessionHasErrors('evidence');
 
@@ -234,7 +441,6 @@ class PublicReportControllerTest extends TestCase
     {
         $submittedReport = [
             'code' => 'LKP-AB12-CD34',
-            'pin' => '654321',
             'submitted_at' => now()->toIso8601String(),
         ];
 
@@ -243,12 +449,14 @@ class PublicReportControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSee('Pindai untuk membuka status langsung')
+            ->assertSee('Buka status lewat QR')
             ->assertSee('Unduh gambar akses')
+            ->assertSee('Simpan nomor laporan Anda')
+            ->assertDontSee('PIN pelacakan')
             ->assertSee('data:image/svg+xml;base64,', false)
             ->assertViewHas('trackingUrl', function (string $trackingUrl): bool {
                 return str_starts_with($trackingUrl, route('reports.track').'#access=')
-                    && ! str_contains($trackingUrl, '654321');
+                    && ! str_contains($trackingUrl, 'LKP-AB12-CD34');
             });
     }
 
@@ -275,5 +483,11 @@ class PublicReportControllerTest extends TestCase
             'good_faith' => '1',
             ...$overrides,
         ];
+    }
+
+    private function enableTurnstile(): void
+    {
+        config()->set('services.turnstile.site_key', 'test-site-key');
+        config()->set('services.turnstile.secret_key', 'test-secret-key');
     }
 }

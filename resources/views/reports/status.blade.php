@@ -1,7 +1,5 @@
 <x-layouts.public title="Progres laporan">
     @php
-        $statuses = \App\Enums\ReportStatus::cases();
-        $currentIndex = array_search($report->status, $statuses, true);
         $incidentTypes = [
             'kupva_tanpa_izin' => 'Dugaan KUPVA tanpa izin',
             'transaksi_mencurigakan' => 'Transaksi penukaran mencurigakan',
@@ -24,15 +22,15 @@
                 </div>
                 <div class="inline-flex items-center gap-2 self-start rounded-lg border border-white/15 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm sm:self-auto">
                     <span class="text-xs text-slate-300">Status:</span>
-                    <strong class="text-xs sm:text-sm font-semibold text-[#F2B84B]">{{ $report->status->label() }}</strong>
+                    <strong data-report-status-label class="text-xs sm:text-sm font-semibold text-[#F2B84B]">{{ $report->status->label() }}</strong>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Main Content Area -->
-    <section class="py-6 sm:py-8 lg:py-10 bg-[#F7F9FC]">
-        <div class="public-container grid max-w-4xl lg:max-w-5xl gap-6 lg:grid-cols-[1fr_320px]">
+    <section class="py-6 sm:py-8 lg:py-10 bg-[#F4F7FB]">
+        <div class="public-container grid max-w-[1240px] gap-6 lg:grid-cols-[1fr_340px]">
             <div class="space-y-5">
                 <!-- Status Timeline Card -->
                 <div class="rounded-xl sm:rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
@@ -46,6 +44,7 @@
                             data-report-live-refresh
                             data-update-url="{{ route('reports.status.updates', ['report' => $report->public_code]) }}"
                             data-version="{{ $statusVersion }}"
+                            data-channel="{{ $report->realtimeChannelName() }}"
                             class="inline-flex min-h-8 shrink-0 items-center gap-2 self-start rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-semibold text-emerald-700 transition-colors hover:border-emerald-300 hover:bg-emerald-100"
                             title="Periksa pembaruan sekarang"
                         >
@@ -57,40 +56,8 @@
                         </button>
                     </div>
 
-                    <div class="mt-5">
-                        @foreach ($statuses as $index => $status)
-                            @php
-                                $history = $report->statusHistories->where('to_status', $status)->last();
-                                $isDone = $index < $currentIndex;
-                                $isCurrent = $index === $currentIndex;
-                            @endphp
-                            <div class="status-item {{ $isDone ? 'is-done' : '' }} {{ $isCurrent ? 'is-current' : '' }}">
-                                <div class="status-marker">
-                                    @if ($isDone)
-                                        <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z" clip-rule="evenodd"/>
-                                        </svg>
-                                    @else
-                                        <span>{{ $index + 1 }}</span>
-                                    @endif
-                                </div>
-                                <div class="status-content">
-                                    <div class="flex flex-wrap items-center justify-between gap-2">
-                                        <h3 class="text-xs sm:text-sm font-semibold text-[#0B2342]">{{ $status->label() }}</h3>
-                                        @if ($history)
-                                            <time class="text-[11px] text-[#64748B]">{{ $history->created_at->translatedFormat('d M Y, H:i') }}</time>
-                                        @endif
-                                    </div>
-                                    <p class="mt-0.5 text-xs text-[#64748B] leading-relaxed">{{ $history?->public_note ?: $status->description() }}</p>
-                                    @if ($isCurrent)
-                                        <span class="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-300/80 bg-[#FFF4D6] px-2.5 py-0.5 text-[11px] font-semibold text-[#B45309]">
-                                            <span class="size-1.5 rounded-full bg-[#B45309]"></span>
-                                            Tahap sekarang
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
+                    <div data-report-timeline class="mt-5">
+                        @include('reports.partials.status-timeline', ['report' => $report])
                     </div>
                 </div>
 
@@ -101,34 +68,33 @@
                         <p class="mt-0.5 text-xs text-[#64748B]">Sampaikan informasi tambahan tanpa membuka identitas pribadi Anda.</p>
                     </div>
 
-                    @if (session('message_sent'))
-                        <div class="mt-3.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-[#2E9B68]">
-                            {{ session('message_sent') }}
-                        </div>
-                    @endif
+                    <div
+                        data-report-message-feedback
+                        class="mt-3 min-h-10 text-xs font-semibold leading-5 text-[#168A7A] sm:min-h-5 sm:text-sm {{ session('message_sent') ? '' : 'invisible' }}"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        {{ session('message_sent') }}
+                    </div>
 
                     <!-- Message history thread -->
-                    <div class="mt-4 space-y-3">
-                        @forelse ($report->anonymousMessages as $message)
-                            <article class="flex {{ $message->sender_type === 'reporter' ? 'justify-end' : 'justify-start' }}">
-                                <div class="max-w-[85%] rounded-xl px-3.5 py-2.5 {{ $message->sender_type === 'reporter' ? 'rounded-br-sm bg-[#2563EB] text-white' : 'rounded-bl-sm bg-slate-100 text-[#0B2342]' }}">
-                                    <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-wider {{ $message->sender_type === 'reporter' ? 'text-blue-100' : 'text-[#64748B]' }}">
-                                        <span>{{ $message->sender_type === 'reporter' ? 'Anda (Pelapor)' : 'Petugas TAMBORA' }}</span>
-                                        <span>·</span>
-                                        <time>{{ $message->created_at->translatedFormat('d M Y, H:i') }}</time>
-                                    </div>
-                                    <p class="mt-1 whitespace-pre-line text-xs sm:text-sm leading-relaxed">{{ $message->body }}</p>
-                                </div>
-                            </article>
-                        @empty
-                            <div class="rounded-lg border border-dashed border-slate-200 bg-slate-50/50 px-4 py-5 text-center text-xs text-[#64748B] leading-relaxed">
-                                Belum ada percakapan. Jika ada informasi atau klarifikasi baru yang ingin disampaikan, kirimkan melalui formulir di bawah ini.
-                            </div>
-                        @endforelse
+                    <div
+                        data-report-conversation
+                        class="report-conversation mt-2 h-64 space-y-3 overflow-y-auto overscroll-contain rounded-xl border border-slate-100 bg-slate-50/60 p-3 sm:h-72 sm:p-4"
+                        aria-live="polite"
+                        aria-label="Percakapan dengan petugas TAMBORA"
+                        tabindex="0"
+                    >
+                        @include('reports.partials.conversation-messages', ['report' => $report])
                     </div>
 
                     <!-- Reply Form -->
-                    <form method="POST" action="{{ route('reports.messages.store', ['report' => $report->public_code]) }}" class="mt-4 border-t border-slate-100 pt-4">
+                    <form
+                        method="POST"
+                        action="{{ route('reports.messages.store', ['report' => $report->public_code]) }}"
+                        class="mt-4 border-t border-slate-100 pt-4"
+                        data-report-message-form
+                    >
                         @csrf
                         <label for="body" class="form-label text-xs sm:text-sm font-semibold">Pesan tambahan <span>*</span></label>
                         <textarea
@@ -140,12 +106,18 @@
                             class="form-control text-xs sm:text-sm {{ $errors->has('body') ? 'is-invalid' : '' }}"
                             placeholder="Tuliskan informasi tambahan atau klarifikasi untuk petugas..."
                         >{{ old('body') }}</textarea>
-                        @error('body')<p class="form-error">{{ $message }}</p>@enderror
+                        <p data-report-message-error class="form-error min-h-5 {{ $errors->has('body') ? '' : 'invisible' }}" role="alert">
+                            @error('body'){{ $message }}@enderror
+                        </p>
 
                         <div class="mt-3 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
                             <p class="text-[11px] leading-relaxed text-[#64748B]">Jangan menuliskan nama, NIK, nomor telepon, atau data sensitif pelapor.</p>
-                            <button type="submit" class="button-primary shrink-0 text-xs sm:text-sm font-semibold py-2">
-                                <span>Kirim pesan</span>
+                            <button type="submit" class="button-primary shrink-0 py-2 text-xs font-semibold sm:text-sm" data-report-message-submit>
+                                <svg data-report-message-spinner class="hidden size-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <circle class="opacity-25" cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3"></circle>
+                                    <path class="opacity-90" fill="currentColor" d="M21 12a9 9 0 0 0-9-9v3a6 6 0 0 1 6 6h3Z"></path>
+                                </svg>
+                                <span data-report-message-submit-label>Kirim pesan</span>
                             </button>
                         </div>
                     </form>
@@ -179,8 +151,8 @@
 
                 <!-- Security Box -->
                 <div class="rounded-xl bg-blue-50/60 border border-blue-100 p-3.5 text-xs leading-relaxed text-[#0B2342]">
-                    <strong class="block font-semibold">Jaga kerahasiaan PIN</strong>
-                    <span class="mt-0.5 block text-[11px] text-[#64748B]">Hanya pihak yang memegang kode dan PIN yang dapat mengakses linimasa ini. Jangan membagikan akses kepada siapapun.</span>
+                    <strong class="block font-semibold">Simpan nomor laporan</strong>
+                    <span class="mt-0.5 block text-[11px] text-[#64748B]">Siapa pun yang mengetahui nomor laporan dapat melihat perkembangan dan percakapan ini. Bagikan hanya kepada pihak yang dipercaya.</span>
                 </div>
 
                 <a href="{{ route('reports.track') }}" class="button-secondary w-full text-xs font-medium py-2">

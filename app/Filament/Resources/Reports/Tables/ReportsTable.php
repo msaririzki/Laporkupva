@@ -56,7 +56,6 @@ class ReportsTable
                     ->searchable()
                     ->limit(36)
                     ->wrap()
-                    ->visibleFrom('md')
                     ->description(fn (Report $record): string => self::INCIDENT_TYPES[$record->incident_type] ?? $record->incident_type),
                 TextColumn::make('regency')
                     ->label('Wilayah')
@@ -79,6 +78,7 @@ class ReportsTable
                 SelectFilter::make('status')
                     ->label('Status')
                     ->native(false)
+                    ->multiple()
                     ->options(ReportStatus::class),
                 SelectFilter::make('incident_type')
                     ->label('Jenis laporan')
@@ -92,14 +92,14 @@ class ReportsTable
             ->filtersTriggerAction(
                 fn (Action $action): Action => $action
                     ->button()
-                    ->label('Saring')
+                    ->label('Filter')
                     ->icon(Heroicon::OutlinedAdjustmentsHorizontal)
                     ->color('gray'),
             )
             ->columnManagerTriggerAction(
                 fn (Action $action): Action => $action
                     ->button()
-                    ->label('Atur kolom')
+                    ->label('Atur')
                     ->icon(Heroicon::OutlinedViewColumns)
                     ->color('gray'),
             )

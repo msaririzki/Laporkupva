@@ -32,6 +32,52 @@ services:
         max-size: "20m"
         max-file: "3"
 
+  reverb:
+    image: laporkupva-app:latest
+    container_name: laporkupva-reverb
+    restart: unless-stopped
+    cpus: 0.35
+    mem_limit: 192m
+    mem_reservation: 48m
+    pids_limit: 128
+    env_file:
+      - .env.production
+    command: php artisan reverb:start --host=0.0.0.0 --port=8080 --no-interaction
+    volumes:
+      - laporkupva-data:/var/lib/laporkupva
+      - laporkupva-storage:/var/www/html/storage
+    depends_on:
+      web:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "2"
+
+  queue:
+    image: laporkupva-app:latest
+    container_name: laporkupva-queue
+    restart: unless-stopped
+    cpus: 0.25
+    mem_limit: 192m
+    mem_reservation: 48m
+    pids_limit: 128
+    env_file:
+      - .env.production
+    command: php artisan queue:work --sleep=1 --tries=3 --timeout=60 --max-time=3600 --no-interaction
+    volumes:
+      - laporkupva-data:/var/lib/laporkupva
+      - laporkupva-storage:/var/www/html/storage
+    depends_on:
+      web:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "2"
+
 volumes:
   laporkupva-data:
   laporkupva-storage:

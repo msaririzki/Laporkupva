@@ -91,13 +91,9 @@ const initializeAccessCardDownload = () => {
             context.font = '500 22px "Plus Jakarta Sans", Arial, sans-serif';
             context.fillText('Simpan gambar ini di tempat yang aman.', 460, 205);
 
-            drawCenteredText(context, 'KODE LAPORAN', 330, 385, '700 22px "Plus Jakarta Sans", Arial, sans-serif', '#64748B');
-            drawRoundedRectangle(context, 70, 415, 520, 170, 28, '#FFFFFF', '#DCE5F0');
-            drawCenteredText(context, accessCard.dataset.code, 330, 515, '800 42px "Plus Jakarta Sans", Arial, sans-serif', '#0B2342');
-
-            drawCenteredText(context, 'PIN PELACAKAN', 870, 385, '700 22px "Plus Jakarta Sans", Arial, sans-serif', '#64748B');
-            drawRoundedRectangle(context, 610, 415, 520, 170, 28, '#FFFFFF', '#DCE5F0');
-            drawCenteredText(context, accessCard.dataset.pin, 870, 515, '800 52px "Plus Jakarta Sans", Arial, sans-serif', '#2563EB');
+            drawCenteredText(context, 'NOMOR LAPORAN', 600, 385, '700 22px "Plus Jakarta Sans", Arial, sans-serif', '#64748B');
+            drawRoundedRectangle(context, 70, 415, 1060, 170, 28, '#FFFFFF', '#DCE5F0');
+            drawCenteredText(context, accessCard.dataset.code, 600, 515, '800 50px "Plus Jakarta Sans", Arial, sans-serif', '#0B2342');
 
             drawCenteredText(context, 'PINDAI UNTUK MEMBUKA STATUS', 600, 665, '800 24px "Plus Jakarta Sans", Arial, sans-serif', '#0B2342');
             drawRoundedRectangle(context, 350, 700, 500, 500, 32, '#FFFFFF', '#DCE5F0');
@@ -185,8 +181,8 @@ const initializeQrAccess = () => {
         if (details?.trackingCode) {
             trackingCodeInput.value = details.trackingCode;
             trackingCodeInput.dispatchEvent(new Event('input', { bubbles: true }));
-            showStatus('Kode laporan ditemukan. Masukkan PIN untuk melanjutkan.');
-            form.querySelector('#tracking_pin').focus();
+            showStatus('Nomor laporan ditemukan. Membuka status laporan…');
+            window.setTimeout(() => HTMLFormElement.prototype.submit.call(form), 250);
 
             return true;
         }
@@ -229,7 +225,7 @@ const initializeQrAccess = () => {
                 showStatus('Gambar ini bukan QR akses TAMBORA. Pilih gambar akses yang Anda simpan setelah melapor.', true);
             }
         } catch {
-            showStatus('QR belum terbaca. Pilih gambar yang lebih jelas atau masukkan kode dan PIN.', true);
+            showStatus('QR belum terbaca. Pilih gambar yang lebih jelas atau masukkan nomor laporan.', true);
         } finally {
             qrUpload.value = '';
         }

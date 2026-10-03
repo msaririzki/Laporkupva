@@ -4,8 +4,10 @@ namespace App\Filament\Resources\Kupvas\Tables;
 
 use App\Enums\NtbRegency;
 use App\Models\Kupva;
+use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -17,20 +19,24 @@ class KupvasTable
     {
         return $table
             ->defaultSort('name')
+            ->stackedOnMobile()
+            ->recordClasses('kupva-list-row')
             ->columns([
                 TextColumn::make('name')
                     ->label('Nama usaha')
                     ->searchable()
-                    ->sortable()
                     ->weight('bold')
                     ->limit(42)
                     ->wrap()
+                    ->extraCellAttributes(['class' => 'kupva-list-cell kupva-list-cell-name'])
                     ->description(fn (Kupva $record): string => $record->license_number ?: 'Nomor izin belum tersedia'),
                 TextColumn::make('license_number')
                     ->label('Nomor izin')
                     ->placeholder('-')
                     ->searchable()
                     ->copyable()
+                    ->alignCenter()
+                    ->extraCellAttributes(['class' => 'kupva-list-cell'])
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('license_status')->label('Status izin')->badge()->formatStateUsing(fn (string $state): string => match ($state) {
                     'active' => 'Aktif',
@@ -42,19 +48,67 @@ class KupvasTable
                     'expired' => 'danger',
                     'suspended' => 'warning',
                     default => 'gray',
-                }),
-                TextColumn::make('regency')->label('Wilayah')->searchable()->sortable()->wrap()->visibleFrom('md'),
-                TextColumn::make('license_expires_at')->label('Berlaku sampai')->date('d M Y')->placeholder('-')->sortable()->visibleFrom('lg'),
-                IconColumn::make('is_active')->label('Beroperasi')->boolean()->toggleable(isToggledHiddenByDefault: true),
+                })->extraCellAttributes(['class' => 'kupva-list-cell']),
+                TextColumn::make('regency')
+                    ->label('Kabupaten/kota')
+                    ->searchable()
+                    ->wrap()
+                    ->alignCenter()
+                    ->visibleFrom('md')
+                    ->extraCellAttributes(['class' => 'kupva-list-cell']),
+                TextColumn::make('district')
+                    ->label('Kecamatan')
+                    ->placeholder('-')
+                    ->searchable()
+                    ->wrap()
+                    ->alignCenter()
+                    ->visibleFrom('lg')
+                    ->toggleable()
+                    ->extraCellAttributes(['class' => 'kupva-list-cell']),
+                TextColumn::make('village')
+                    ->label('Desa/kelurahan')
+                    ->placeholder('-')
+                    ->searchable()
+                    ->wrap()
+                    ->alignCenter()
+                    ->visibleFrom('xl')
+                    ->toggleable()
+                    ->extraCellAttributes(['class' => 'kupva-list-cell']),
+                TextColumn::make('license_expires_at')
+                    ->label('Berlaku sampai')
+                    ->date('d M Y')
+                    ->placeholder('-')
+                    ->alignCenter()
+                    ->visibleFrom('xl')
+                    ->extraCellAttributes(['class' => 'kupva-list-cell']),
+                IconColumn::make('is_active')
+                    ->label('Beroperasi')
+                    ->boolean()
+                    ->alignCenter()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->extraCellAttributes(['class' => 'kupva-list-cell']),
             ])
             ->filters([
-                SelectFilter::make('license_status')->label('Status izin')->options([
-                    'active' => 'Aktif',
-                    'expired' => 'Kedaluwarsa',
-                    'suspended' => 'Dibekukan',
-                ]),
-                SelectFilter::make('regency')->label('Wilayah')->options(NtbRegency::class),
+                SelectFilter::make('license_status')
+                    ->label('Status izin')
+                    ->native(false)
+                    ->options([
+                        'active' => 'Aktif',
+                        'expired' => 'Kedaluwarsa',
+                        'suspended' => 'Dibekukan',
+                    ]),
+                SelectFilter::make('regency')
+                    ->label('Wilayah')
+                    ->native(false)
+                    ->options(NtbRegency::class),
             ])
+            ->filtersTriggerAction(
+                fn (Action $action): Action => $action
+                    ->button()
+                    ->label('Filter')
+                    ->icon(Heroicon::OutlinedAdjustmentsHorizontal)
+                    ->color('gray'),
+            )
             ->recordActions([
                 ViewAction::make()->iconButton()->tooltip('Lihat detail KUPVA'),
                 EditAction::make()->iconButton()->tooltip('Ubah data KUPVA'),

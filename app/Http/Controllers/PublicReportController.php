@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ReportStatus;
+use App\Enums\UserRole;
 use App\Http\Requests\StorePublicReportRequest;
 use App\Models\Report;
+use App\Models\User;
+use App\Notifications\Admin\NewReportSubmitted;
 use chillerlan\QRCode\Common\EccLevel;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
+use Filament\Notifications\Events\DatabaseNotificationsSent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -25,14 +30,14 @@ class PublicReportController extends Controller
 
     public function store(StorePublicReportRequest $request): RedirectResponse
     {
-        $pin = (string) random_int(100000, 999999);
-        $validated = $request->safe()->except(['evidence', 'good_faith']);
+        $trackingSecret = Str::random(32);
+        $validated = $request->safe()->except(['evidence', 'good_faith', 'cf-turnstile-response']);
 
-        $report = DB::transaction(function () use ($request, $validated, $pin): Report {
+        $report = DB::transaction(function () use ($request, $validated, $trackingSecret): Report {
             $report = Report::query()->create([
                 ...$validated,
                 'public_code' => $this->generatePublicCode(),
-                'tracking_pin_hash' => Hash::make($pin),
+                'tracking_pin_hash' => Hash::make($trackingSecret),
                 'status' => ReportStatus::Submitted,
                 'province' => 'Nusa Tenggara Barat',
             ]);
@@ -57,9 +62,16 @@ class PublicReportController extends Controller
             return $report;
         });
 
+        $admins = User::query()
+            ->where('is_active', true)
+            ->whereIn('role', [UserRole::Admin->value, UserRole::SuperAdmin->value])
+            ->get();
+
+        Notification::send($admins, new NewReportSubmitted($report));
+        $admins->each(fn (User $admin) => DatabaseNotificationsSent::dispatch($admin));
+
         return to_route('reports.success')->with('submitted_report', [
             'code' => $report->public_code,
-            'pin' => $pin,
             'submitted_at' => $report->created_at->toIso8601String(),
         ]);
     }
@@ -73,9 +85,8 @@ class PublicReportController extends Controller
         }
 
         $trackingAccessToken = Crypt::encryptString(json_encode([
-            'version' => 1,
+            'version' => 2,
             'code' => $submittedReport['code'],
-            'pin' => $submittedReport['pin'],
         ], JSON_THROW_ON_ERROR));
         $trackingUrl = route('reports.track').'#access='.rawurlencode($trackingAccessToken);
         $trackingQrCode = (new QRCode(new QROptions([

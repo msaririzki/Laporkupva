@@ -8,7 +8,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -25,9 +24,9 @@ class ReportTrackingController extends Controller
             ->where('public_code', $request->string('tracking_code')->value())
             ->first();
 
-        if (! $report || ! Hash::check($request->string('tracking_pin')->value(), $report->tracking_pin_hash)) {
+        if (! $report) {
             throw ValidationException::withMessages([
-                'tracking_code' => 'Kode laporan atau PIN tidak cocok. Periksa kembali data Anda.',
+                'tracking_code' => 'Nomor laporan tidak ditemukan. Periksa kembali nomor yang Anda masukkan.',
             ]);
         }
 
@@ -64,8 +63,16 @@ class ReportTrackingController extends Controller
     {
         $this->ensureTrackingSessionIsValid($request, $report);
 
+        $report->load([
+            'statusHistories' => fn ($query) => $query->oldest(),
+            'anonymousMessages' => fn ($query) => $query->oldest(),
+        ]);
+
         return response()->json([
             'version' => $this->statusVersion($report),
+            'status_label' => $report->status->label(),
+            'timeline_html' => view('reports.partials.status-timeline', ['report' => $report])->render(),
+            'messages_html' => view('reports.partials.conversation-messages', ['report' => $report])->render(),
         ], headers: [
             'Cache-Control' => 'private, no-store, max-age=0',
             'Pragma' => 'no-cache',

@@ -11,10 +11,16 @@ class RegionalReportChart extends ChartWidget
 
     protected static ?int $sort = 5;
 
+    protected string $view = 'filament.widgets.collapsed-chart-widget';
+
+    protected bool $isCollapsible = true;
+
+    protected ?string $pollingInterval = null;
+
     protected int|string|array $columnSpan = [
         'default' => 1,
-        'md' => 2,
-        'xl' => 5,
+        'md' => 1,
+        'xl' => 6,
     ];
 
     protected ?string $heading = 'Laporan per wilayah';

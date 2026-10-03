@@ -30,6 +30,24 @@ class ReportEvidenceControllerTest extends TestCase
             ->assertDownload('bukti-lokasi.jpg');
     }
 
+    public function test_image_preview_download_button_bypasses_spa_navigation(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $evidence = ReportEvidence::factory()->create([
+            'original_name' => 'bukti-lokasi.webp',
+            'mime_type' => 'image/webp',
+        ]);
+
+        $this->actingAs($admin)
+            ->view('filament.reports.evidence-preview', [
+                'reportEvidence' => $evidence,
+            ])
+            ->assertSee('download', false)
+            ->assertSee('downloading: false', false)
+            ->assertSee('Mengunduh…')
+            ->assertDontSee('wire:navigate', false);
+    }
+
     public function test_admin_can_preview_private_report_evidence_inline(): void
     {
         Storage::fake('local');

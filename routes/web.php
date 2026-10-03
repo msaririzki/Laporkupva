@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\KupvaCsvController;
+use App\Http\Controllers\PublicKupvaController;
 use App\Http\Controllers\PublicReportController;
 use App\Http\Controllers\PublicReportMessageController;
 use App\Http\Controllers\ReportEvidenceController;
@@ -13,6 +15,7 @@ Route::get('/', function () {
 
 Route::view('/panduan', 'pages.guide')->name('guide');
 Route::view('/privasi', 'pages.privacy')->name('privacy');
+Route::get('/kupva-berizin', PublicKupvaController::class)->name('kupvas.index');
 
 Route::controller(PublicReportController::class)->group(function (): void {
     Route::get('/lapor', 'create')->name('reports.create');
@@ -42,3 +45,10 @@ Route::get('/admin/lampiran-laporan/{reportEvidence}/lihat', [ReportEvidenceCont
 Route::get('/admin/ekspor/laporan.csv', ReportExportController::class)
     ->middleware('auth')
     ->name('admin.reports.export');
+
+Route::controller(KupvaCsvController::class)
+    ->middleware('auth')
+    ->group(function (): void {
+        Route::get('/admin/ekspor/kupva.xlsx', 'export')->name('admin.kupvas.export');
+        Route::get('/admin/template/kupva.xlsx', 'template')->name('admin.kupvas.template');
+    });

@@ -11,10 +11,25 @@ class HomePageTest extends TestCase
         $this->get(route('home'))
             ->assertOk()
             ->assertSee('Berani melapor')
-            ->assertSee('tanpa mengungkap identitas')
+            ->assertSee('Laporan dapat dikirim tanpa nama')
             ->assertSee(route('reports.create'))
             ->assertSee(route('reports.track'))
+            ->assertSee(route('kupvas.index'))
+            ->assertSee('Money Changer berizin')
+            ->assertSee('KUPVA BB')
             ->assertSee(route('filament.admin.auth.login'))
-            ->assertSee('aria-label="Masuk ke portal admin"', false);
+            ->assertSee('Login admin')
+            ->assertSee('aria-label="Masuk ke portal admin"', false)
+            ->assertSee('data-nav-action="create-report"', false)
+            ->assertSee('data-nav-icon="create-report"', false)
+            ->assertSee('data-nav-action="admin-login"', false)
+            ->assertSee('data-nav-icon="admin-login"', false)
+            ->assertSee('focus:ring-[#2563EB] lg:hidden', false)
+            ->assertSee('property="og:site_name" content="TAMBORA"', false)
+            ->assertSee('property="og:image" content="'.asset('images/brand/tambora.webp').'"', false)
+            ->assertSee('name="twitter:card" content="summary_large_image"', false)
+            ->assertSee('rel="icon" type="image/webp" href="'.asset('images/brand/tambora.webp').'"', false)
+            ->assertDontSee('images/brand/bank-indonesia-full.webp', false)
+            ->assertDontSee('images/brand/bank-indonesia-mark.webp', false);
     }
 }

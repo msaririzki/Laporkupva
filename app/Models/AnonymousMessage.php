@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\ReportRealtimeUpdated;
 use Database\Factories\AnonymousMessageFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,13 @@ class AnonymousMessage extends Model
 {
     /** @use HasFactory<AnonymousMessageFactory> */
     use HasFactory;
+
+    protected static function booted(): void
+    {
+        static::created(function (AnonymousMessage $message): void {
+            ReportRealtimeUpdated::dispatch($message->report, 'message');
+        });
+    }
 
     /** @return BelongsTo<Report, $this> */
     public function report(): BelongsTo

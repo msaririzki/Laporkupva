@@ -4,7 +4,7 @@
             <div class="mx-auto max-w-2xl text-center">
                 <p class="eyebrow">Akses laporan</p>
                 <h1 class="mt-3 text-3xl font-bold tracking-tight text-[#0B2342] sm:text-4xl">Lihat perkembangan laporan</h1>
-                <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base">Pilih gambar QR atau masukkan kode dan PIN laporan Anda.</p>
+                <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base">Masukkan nomor laporan atau pilih gambar QR yang Anda simpan.</p>
             </div>
 
             <form id="tracking-form" action="{{ route('reports.track.show') }}" method="POST" class="mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
@@ -38,11 +38,11 @@
                     </div>
 
                     <div class="border-t border-slate-200 p-5 sm:p-7 lg:border-l lg:border-t-0 lg:p-8">
-                        <h2 class="text-base font-bold text-[#0B2342]">Masukkan kode dan PIN</h2>
-                        <p class="mt-1 text-xs leading-5 text-slate-500">Keduanya tersedia pada halaman selesai melapor dan gambar akses.</p>
+                        <h2 class="text-base font-bold text-[#0B2342]">Masukkan nomor laporan</h2>
+                        <p class="mt-1 text-xs leading-5 text-slate-500">Nomor tersedia pada halaman selesai melapor dan gambar akses.</p>
 
                         <div class="mt-6">
-                            <label class="form-label" for="tracking_code">Kode laporan <span>*</span></label>
+                            <label class="form-label" for="tracking_code">Nomor laporan <span>*</span></label>
                             <input
                                 class="form-control font-mono uppercase tracking-wider @error('tracking_code') is-invalid @enderror"
                                 id="tracking_code"
@@ -55,23 +55,6 @@
                             @error('tracking_code')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
 
-                        <div class="mt-5">
-                            <label class="form-label" for="tracking_pin">PIN 6 digit <span>*</span></label>
-                            <input
-                                class="form-control font-mono tracking-[0.28em] @error('tracking_pin') is-invalid @enderror"
-                                id="tracking_pin"
-                                name="tracking_pin"
-                                type="password"
-                                inputmode="numeric"
-                                pattern="[0-9]{6}"
-                                maxlength="6"
-                                autocomplete="off"
-                                placeholder="••••••"
-                                required
-                            >
-                            @error('tracking_pin')<p class="form-error">{{ $message }}</p>@enderror
-                        </div>
-
                         <button class="button-primary mt-6 w-full" type="submit">Lihat perkembangan laporan</button>
                     </div>
                 </div>
@@ -80,7 +63,7 @@
                     <svg class="mt-0.5 size-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M10 1.75A4.25 4.25 0 0 0 5.75 6v1.1A2.75 2.75 0 0 0 3.5 9.8v5.7a2.75 2.75 0 0 0 2.75 2.75h7.5a2.75 2.75 0 0 0 2.75-2.75V9.8a2.75 2.75 0 0 0-2.25-2.7V6A4.25 4.25 0 0 0 10 1.75ZM7.25 6a2.75 2.75 0 1 1 5.5 0v1.05h-5.5V6Z" clip-rule="evenodd"/>
                     </svg>
-                    <p>Jaga kode dan PIN tetap rahasia karena keduanya digunakan untuk membuka laporan Anda.</p>
+                    <p>Simpan nomor laporan atau gambar QR Anda. Siapa pun yang memilikinya dapat membuka perkembangan laporan.</p>
                 </div>
             </form>
         </div>

@@ -1,5 +1,6 @@
 const streetAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 const satelliteAttribution = '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+const esriAttribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
 
 const createBaseLayers = (Leaflet, mapboxPublicToken = '') => {
     const street = Leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -7,7 +8,7 @@ const createBaseLayers = (Leaflet, mapboxPublicToken = '') => {
         attribution: streetAttribution,
     });
 
-    const satellite = mapboxPublicToken
+    const satellite = (mapboxPublicToken && typeof mapboxPublicToken === 'string' && mapboxPublicToken.trim() !== '')
         ? Leaflet.tileLayer(
             `https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/tiles/512/{z}/{x}/{y}@2x?access_token=${encodeURIComponent(mapboxPublicToken)}`,
             {
@@ -17,7 +18,13 @@ const createBaseLayers = (Leaflet, mapboxPublicToken = '') => {
                 attribution: satelliteAttribution,
             },
         )
-        : null;
+        : Leaflet.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            {
+                maxZoom: 19,
+                attribution: esriAttribution,
+            },
+        );
 
     return { street, satellite };
 };

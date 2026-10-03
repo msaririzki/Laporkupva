@@ -2,6 +2,7 @@ import L from 'leaflet';
 import markerIconUrl from 'leaflet/dist/images/marker-icon.png';
 import markerIconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadowUrl from 'leaflet/dist/images/marker-shadow.png';
+import { initReportSubmission } from './report-submission';
 
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: markerIconRetinaUrl,
@@ -17,8 +18,6 @@ const IMAGE_PRESERVE_BYTES = 1 * BYTES_PER_MEGABYTE;
 const IMAGE_TARGET_BYTES = 1.25 * BYTES_PER_MEGABYTE;
 const IMAGE_MAX_EDGE = 2048;
 const COMPRESSIBLE_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
-
-const formatFileSize = (bytes) => `${(bytes / BYTES_PER_MEGABYTE).toFixed(bytes >= BYTES_PER_MEGABYTE ? 1 : 2)} MB`;
 
 const canvasToBlob = (canvas, type, quality) => new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
@@ -141,7 +140,7 @@ const optimizeEvidenceImage = async (file) => {
  * - Text remains Navy #0B2342.
  * - Two-way sync with native select.
  */
-const initCustomSelect = (selectElement) => {
+export const initCustomSelect = (selectElement) => {
     if (!selectElement || selectElement.dataset.customized === 'true') return;
     selectElement.dataset.customized = 'true';
 
@@ -152,11 +151,12 @@ const initCustomSelect = (selectElement) => {
     const trigger = document.createElement('button');
     trigger.type = 'button';
     trigger.className = 'tambora-select-trigger';
+    trigger.id = `${selectElement.id}-trigger`;
     trigger.setAttribute('aria-haspopup', 'listbox');
     trigger.setAttribute('aria-expanded', 'false');
 
     const triggerText = document.createElement('span');
-    triggerText.className = 'truncate text-left text-sm';
+    triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm';
 
     const triggerIcon = document.createElement('span');
     triggerIcon.className = 'tambora-select-arrow shrink-0 ml-2';
@@ -172,13 +172,16 @@ const initCustomSelect = (selectElement) => {
 
     const updateTriggerText = () => {
         const selectedOption = selectElement.selectedOptions[0];
+        const fieldLabel = document.querySelector(`label[for="${selectElement.id}"]`)?.textContent?.trim();
         if (selectedOption && selectedOption.value) {
             triggerText.textContent = selectedOption.textContent;
-            triggerText.className = 'truncate text-left text-sm text-[#0B2342] font-medium';
+            triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm text-[#0B2342] font-medium';
         } else {
             triggerText.textContent = selectElement.options[0]?.textContent || 'Pilih opsi';
-            triggerText.className = 'truncate text-left text-sm text-[#64748B]';
+            triggerText.className = 'min-w-0 flex-1 truncate text-left text-sm text-[#64748B]';
         }
+
+        trigger.setAttribute('aria-label', [fieldLabel, triggerText.textContent].filter(Boolean).join(': '));
     };
 
     const renderOptions = () => {
@@ -188,6 +191,9 @@ const initCustomSelect = (selectElement) => {
         [...selectElement.options].forEach((option, index) => {
             const item = document.createElement('div');
             item.className = 'tambora-select-option';
+            if (selectElement.id === 'incident_type') {
+                item.classList.add('uppercase');
+            }
             item.setAttribute('role', 'option');
             item.setAttribute('tabindex', '0');
             item.dataset.value = option.value;
@@ -244,13 +250,23 @@ const initCustomSelect = (selectElement) => {
         trigger.setAttribute('aria-expanded', 'false');
     };
 
-    trigger.addEventListener('click', () => {
-        const isOpen = !menu.classList.contains('hidden');
-        if (isOpen) {
-            closeMenu();
-        } else {
+    const toggleMenu = () => {
+        if (menu.classList.contains('hidden')) {
             openMenu();
+        } else {
+            closeMenu();
         }
+    };
+
+    trigger.addEventListener('pointerup', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleMenu();
+    });
+
+    trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
     });
 
     trigger.addEventListener('keydown', (e) => {
@@ -318,6 +334,10 @@ if (form) {
     const evidence = document.querySelector('#evidence');
     const fileList = document.querySelector('#file-list');
     const uploadZone = document.querySelector('.upload-zone');
+    const evidencePreviewModal = document.querySelector('#evidence-preview-modal');
+    const evidencePreviewImage = document.querySelector('#evidence-preview-image');
+    const evidencePreviewTitle = document.querySelector('#evidence-preview-title');
+    const evidencePreviewCloseButton = document.querySelector('#evidence-preview-close');
     const latitude = document.querySelector('#latitude');
     const longitude = document.querySelector('#longitude');
     const accuracy = document.querySelector('#location_accuracy');
@@ -327,18 +347,38 @@ if (form) {
     const reviewDate = document.querySelector('#review-date');
     const reviewLocation = document.querySelector('#review-location');
     const locationDetailsSummary = document.querySelector('#location-details-summary');
+    const turnstileElement = form.querySelector('[data-turnstile-widget]');
     let currentStep = 1;
     let map;
     let marker;
     let reverseTimer;
-    let isOptimizingEvidence = false;
+    let evidencePreviewUrls = [];
+    let evidencePreviewTrigger = null;
+    let turnstileWidgetId = null;
+
+    const submission = initReportSubmission({
+        form,
+        button: submitButton,
+        controls: [previousButton, nextButton, ...progressItems],
+        canSubmit: () => {
+            if (!validateStep() || !form.checkValidity()) {
+                form.reportValidity();
+                return false;
+            }
+
+            return true;
+        },
+    });
 
     // Enhance dropdowns
     document.querySelectorAll('#incident_type, #regency').forEach(initCustomSelect);
 
     const firstInvalidStep = form.querySelector('.is-invalid, .form-error')?.closest('.form-step');
+    const urlStep = new URLSearchParams(window.location.search).get('step');
     if (firstInvalidStep) {
         currentStep = Number(firstInvalidStep.dataset.step);
+    } else if (urlStep && [1, 2, 3].includes(Number(urlStep))) {
+        currentStep = Number(urlStep);
     }
 
     const updateReview = () => {
@@ -354,6 +394,23 @@ if (form) {
             : 'Belum dipilih';
         reviewLocation.textContent = [village, district, regency].filter(Boolean).join(', ') || 'Belum dipilih';
     };
+
+    const renderTurnstile = () => {
+        if (!turnstileElement || turnstileWidgetId !== null || !window.turnstile) return;
+
+        turnstileElement.querySelector('[data-turnstile-loading]')?.remove();
+        turnstileWidgetId = window.turnstile.render(turnstileElement, {
+            action: 'submit_report',
+            language: 'id',
+            sitekey: turnstileElement.dataset.sitekey,
+            size: turnstileElement.getBoundingClientRect().width < 300 ? 'compact' : 'flexible',
+            theme: 'light',
+        });
+    };
+
+    window.addEventListener('tambora:turnstile-ready', () => {
+        if (currentStep === 3) renderTurnstile();
+    });
 
     const setStep = (step, shouldScroll = true) => {
         currentStep = Math.min(Math.max(step, 1), steps.length);
@@ -380,6 +437,7 @@ if (form) {
         previousButton.classList.toggle('hidden', currentStep === 1);
         nextButton.classList.toggle('hidden', currentStep === steps.length);
         submitButton.classList.toggle('hidden', currentStep !== steps.length);
+        submitButton.classList.toggle('inline-flex', currentStep === steps.length);
         stepStatus.textContent = `Langkah ${currentStep} dari ${steps.length}`;
         nextButton.textContent = currentStep === 1 ? 'Lanjut ke lokasi' : 'Lanjut ke bukti';
 
@@ -390,6 +448,7 @@ if (form) {
 
         if (currentStep === 3) {
             updateReview();
+            renderTurnstile();
         }
 
         if (shouldScroll) {
@@ -644,6 +703,8 @@ if (form) {
     });
 
     const showEvidenceMessage = (message, isError = false) => {
+        evidencePreviewUrls.forEach((url) => URL.revokeObjectURL(url));
+        evidencePreviewUrls = [];
         fileList.replaceChildren();
         const notice = document.createElement('p');
         notice.className = isError ? 'form-error' : 'rounded-xl bg-blue-50/70 border border-blue-100 px-4 py-3 text-xs font-semibold text-[#0B2342]';
@@ -651,34 +712,87 @@ if (form) {
         fileList.append(notice);
     };
 
+    const closeEvidencePreview = () => {
+        if (!evidencePreviewModal || evidencePreviewModal.classList.contains('hidden')) return;
+
+        evidencePreviewModal.classList.add('hidden');
+        evidencePreviewModal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+        evidencePreviewImage.removeAttribute('src');
+        evidencePreviewTrigger?.focus();
+        evidencePreviewTrigger = null;
+    };
+
+    const openEvidencePreview = ({ name, url }, trigger) => {
+        if (!evidencePreviewModal || !evidencePreviewImage) return;
+
+        evidencePreviewTrigger = trigger;
+        evidencePreviewTitle.textContent = name;
+        evidencePreviewImage.src = url;
+        evidencePreviewImage.alt = `Pratinjau ${name}`;
+        evidencePreviewModal.classList.remove('hidden');
+        evidencePreviewModal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+        evidencePreviewCloseButton?.focus();
+    };
+
+    evidencePreviewModal?.querySelectorAll('[data-evidence-preview-close]').forEach((button) => {
+        button.addEventListener('click', closeEvidencePreview);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeEvidencePreview();
+    });
+
     const renderEvidenceFiles = (files) => {
+        evidencePreviewUrls.forEach((url) => URL.revokeObjectURL(url));
+        evidencePreviewUrls = [];
         fileList.replaceChildren();
 
-        files.forEach(({ file, originalSize, optimized }) => {
+        files.forEach(({ file }) => {
             const item = document.createElement('div');
-            item.className = 'flex items-center justify-between gap-3 rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 text-xs shadow-sm';
+            item.className = 'overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white text-xs shadow-sm';
 
-            const details = document.createElement('span');
-            details.className = 'min-w-0';
+            if (file.type.startsWith('image/')) {
+                const previewUrl = URL.createObjectURL(file);
+                evidencePreviewUrls.push(previewUrl);
+
+                const previewButton = document.createElement('button');
+                previewButton.type = 'button';
+                previewButton.className = 'group relative block aspect-[4/3] w-full overflow-hidden border-b border-slate-100 bg-white focus:outline-none focus:ring-4 focus:ring-inset focus:ring-blue-500/40';
+                previewButton.setAttribute('aria-label', `Perbesar pratinjau ${file.name}`);
+
+                const previewImage = document.createElement('img');
+                previewImage.src = previewUrl;
+                previewImage.alt = `Pratinjau ${file.name}`;
+                previewImage.className = 'size-full object-contain transition duration-300 group-hover:scale-[1.02]';
+
+                const previewLabel = document.createElement('span');
+                previewLabel.className = 'absolute inset-x-3 bottom-3 flex items-center justify-center gap-1.5 rounded-full bg-slate-950/75 px-3 py-2 text-[11px] font-semibold text-white opacity-100 shadow-lg backdrop-blur-sm transition sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100';
+                previewLabel.innerHTML = '<svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12s3-5.25 8.25-5.25S20.25 12 20.25 12 17.25 17.25 12 17.25 3.75 12 3.75 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 12a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg><span>Perbesar foto</span>';
+
+                previewButton.append(previewImage, previewLabel);
+                previewButton.addEventListener('click', () => openEvidencePreview({
+                    name: file.name,
+                    url: previewUrl,
+                }, previewButton));
+                item.append(previewButton);
+            } else {
+                const documentPreview = document.createElement('div');
+                documentPreview.className = 'grid aspect-[4/3] place-items-center bg-slate-50 text-slate-400';
+                documentPreview.innerHTML = '<div class="flex flex-col items-center gap-2"><svg class="size-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5A3.375 3.375 0 0 0 10.125 2.25H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg><span class="text-[11px] font-semibold uppercase tracking-wider">Dokumen PDF</span></div>';
+                item.append(documentPreview);
+            }
+
+            const footer = document.createElement('div');
+            footer.className = 'px-3.5 py-3';
 
             const name = document.createElement('strong');
             name.className = 'block truncate font-semibold text-[#0B2342]';
             name.textContent = file.name;
-
-            const result = document.createElement('span');
-            result.className = optimized ? 'mt-1 block text-[#2E9B68] font-medium' : 'mt-1 block text-[#64748B]';
-            result.textContent = optimized
-                ? `${formatFileSize(originalSize)} menjadi ${formatFileSize(file.size)} · dioptimalkan`
-                : `${formatFileSize(file.size)} · ukuran asli`;
-
-            const badge = document.createElement('span');
-            badge.className = optimized
-                ? 'shrink-0 rounded-lg bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-[#2E9B68]'
-                : 'shrink-0 rounded-lg bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-[#64748B]';
-            badge.textContent = optimized ? 'Siap kirim' : 'Asli';
-
-            details.append(name, result);
-            item.append(details, badge);
+            name.title = file.name;
+            footer.append(name);
+            item.append(footer);
             fileList.append(item);
         });
     };
@@ -697,10 +811,8 @@ if (form) {
             return;
         }
 
-        isOptimizingEvidence = true;
         evidence.disabled = true;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Menyiapkan berkas…';
+        submission.setPreparing(true);
         uploadZone.setAttribute('aria-busy', 'true');
 
         const optimizedFiles = [];
@@ -735,29 +847,10 @@ if (form) {
             evidence.files = dataTransfer.files;
             renderEvidenceFiles(optimizedFiles);
         } finally {
-            isOptimizingEvidence = false;
             evidence.disabled = false;
-            submitButton.disabled = false;
-            submitButton.textContent = 'Kirim laporan';
+            submission.setPreparing(false);
             uploadZone.removeAttribute('aria-busy');
         }
-    });
-
-    form.addEventListener('submit', (event) => {
-        if (isOptimizingEvidence) {
-            event.preventDefault();
-            showEvidenceMessage('Tunggu sebentar, berkas sedang disiapkan sebelum dikirim.');
-            return;
-        }
-
-        if (!validateStep() || !form.checkValidity()) {
-            event.preventDefault();
-            form.reportValidity();
-            return;
-        }
-
-        submitButton.disabled = true;
-        submitButton.textContent = 'Mengirim laporan…';
     });
 
     setStep(currentStep, Boolean(firstInvalidStep));

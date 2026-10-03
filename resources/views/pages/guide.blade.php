@@ -108,7 +108,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">01</span>
-                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">SIAPKAN INFORMASI</h3>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">SIAPKAN INFORMASI</h3>
                             <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Ceritakan apa yang terjadi, waktu kejadian, dan nama tempat jika tahu.</p>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">02</span>
-                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">TENTUKAN TITIK LOKASI</h3>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">TENTUKAN TITIK LOKASI</h3>
                             <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Tunjukkan lokasi tempatnya di peta atau gunakan titik lokasi HP kamu.</p>
                         </div>
                     </div>
@@ -172,7 +172,7 @@
                     </svg>
                 </div>
 
-                <!-- Card 03: Simpan kode akses -->
+                <!-- Card 03: Simpan akses laporan -->
                 <article class="flex-1 flex flex-col justify-center rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-4.5 shadow-xs hover:border-blue-200 hover:shadow-sm transition-all duration-200">
                     <div class="flex items-center gap-3.5 sm:gap-4">
                         <div class="relative shrink-0 flex items-center justify-center size-13 sm:size-14 rounded-2xl bg-gradient-to-br from-amber-50/80 to-blue-50/40 p-1 border border-amber-100/60">
@@ -202,8 +202,8 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">03</span>
-                            <h3 class="mt-1 text-sm sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">SIMPAN KODE AKSES</h3>
-                            <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Simpan kode dan PIN rahasiamu untuk mengecek hasil laporan kapan saja.</p>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">SIMPAN NOMOR LAPORAN</h3>
+                            <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Simpan nomor laporan atau gambar QR untuk mengecek perkembangan kapan saja.</p>
                         </div>
                     </div>
                 </article>
@@ -234,14 +234,14 @@
                                     </svg>
                                 </span>
                                 <span class="flex-1 font-bold text-navy-950 text-xs sm:text-sm group-open:text-blue-700 transition-colors">Apakah saya harus membuat akun?</span>
-                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 group-open:text-blue-600 transition-colors">
+                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 transition-colors group-hover:text-blue-600 group-open:text-blue-600">
                                     <svg class="size-4 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m6 9 6 6 6-6"/>
                                     </svg>
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Tidak. TAMBORA tidak meminta akun, nama, NIK, email, atau nomor telepon pelapor.
+                                Tidak. TAMBORA tidak meminta akun, nama, NIK, atau email. Nomor HP tersedia sebagai pilihan dan boleh dikosongkan; laporan tetap dapat dikirim tanpa nomor HP.
                             </div>
                         </details>
 
@@ -254,7 +254,7 @@
                                     </svg>
                                 </span>
                                 <span class="flex-1 font-bold text-navy-950 text-xs sm:text-sm group-open:text-blue-700 transition-colors">Bagaimana jika saya sudah meninggalkan lokasi?</span>
-                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 group-open:text-blue-600 transition-colors">
+                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 transition-colors group-hover:text-blue-600 group-open:text-blue-600">
                                     <svg class="size-4 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m6 9 6 6 6-6"/>
                                     </svg>
@@ -274,7 +274,7 @@
                                     </svg>
                                 </span>
                                 <span class="flex-1 font-bold text-navy-950 text-xs sm:text-sm group-open:text-blue-700 transition-colors">Apakah bukti wajib dilampirkan?</span>
-                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 group-open:text-blue-600 transition-colors">
+                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 transition-colors group-hover:text-blue-600 group-open:text-blue-600">
                                     <svg class="size-4 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m6 9 6 6 6-6"/>
                                     </svg>
@@ -294,14 +294,14 @@
                                     </svg>
                                 </span>
                                 <span class="flex-1 font-bold text-navy-950 text-xs sm:text-sm group-open:text-blue-700 transition-colors">Bagaimana saya mengetahui perkembangan laporan?</span>
-                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 group-open:text-blue-600 transition-colors">
+                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 transition-colors group-hover:text-blue-600 group-open:text-blue-600">
                                     <svg class="size-4 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m6 9 6 6 6-6"/>
                                     </svg>
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Buka halaman Cek status, lalu masukkan kode laporan dan PIN enam digit yang ditampilkan setelah laporan dikirim.
+                                Buka halaman Cek status laporan, lalu masukkan nomor laporan yang ditampilkan setelah laporan dikirim. Anda juga dapat mengunggah gambar QR yang telah disimpan.
                             </div>
                         </details>
 
@@ -314,7 +314,7 @@
                                     </svg>
                                 </span>
                                 <span class="flex-1 font-bold text-navy-950 text-xs sm:text-sm group-open:text-blue-700 transition-colors">Bisakah saya menjawab pertanyaan petugas?</span>
-                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 group-open:text-blue-600 transition-colors">
+                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 transition-colors group-hover:text-blue-600 group-open:text-blue-600">
                                     <svg class="size-4 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m6 9 6 6 6-6"/>
                                     </svg>
@@ -325,7 +325,7 @@
                             </div>
                         </details>
 
-                        <!-- Q6: Keamanan & PIN -->
+                        <!-- Q6: Keamanan akses -->
                         <details class="faq-item group rounded-xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-2xs transition-all duration-200 hover:border-blue-200 hover:shadow-xs open:border-blue-200 open:shadow-xs open:bg-blue-50/15">
                             <summary class="flex cursor-pointer list-none items-center gap-3 sm:gap-3.5 select-none">
                                 <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!bg-blue-600 group-open:!text-white group-open:!border-blue-600 transition-colors">
@@ -333,15 +333,15 @@
                                         <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
                                     </svg>
                                 </span>
-                                <span class="flex-1 font-bold text-navy-950 text-xs sm:text-sm group-open:text-blue-700 transition-colors">Apa yang harus dilakukan jika kode atau PIN hilang?</span>
-                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 group-hover:text-blue-600 group-open:text-blue-600 transition-colors">
+                                <span class="flex-1 font-bold text-navy-950 text-xs sm:text-sm group-open:text-blue-700 transition-colors">Bagaimana jika nomor laporan atau QR hilang?</span>
+                                <span class="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 transition-colors group-hover:text-blue-600 group-open:text-blue-600">
                                     <svg class="size-4 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m6 9 6 6 6-6"/>
                                     </svg>
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Akses tidak dapat dipulihkan karena sistem tidak menyimpan identitas atau kontak pelapor. Simpan kode dan PIN di tempat yang aman.
+                                Akses laporan tetap menggunakan nomor laporan atau gambar QR. Nomor HP opsional tidak digunakan sebagai pengganti akses, jadi simpan nomor laporan atau gambar QR di tempat yang aman.
                             </div>
                         </details>
                     </div>
@@ -354,14 +354,14 @@
                         <div class="flex items-center gap-2.5">
                             <div class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/80">
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                     <circle cx="11" cy="11" r="8"/>
-                                     <path d="m21 21-4.3-4.3"/>
-                                 </svg>
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.3-4.3"/>
+                                </svg>
                             </div>
-                            <h3 class="text-sm sm:text-base font-extrabold text-navy-950 uppercase tracking-wide">SUDAH PERNAH MELAPOR?</h3>
+                            <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">SUDAH PERNAH MELAPOR?</h3>
                         </div>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-500">
-                            Gunakan kode tiket dan PIN rahasia untuk memantau perkembangan tindak lanjut laporan Anda.
+                            Gunakan nomor laporan atau QR untuk memantau perkembangan tindak lanjut laporan Anda.
                         </p>
                         <div class="mt-4">
                             <a href="{{ route('reports.track') }}" class="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200/90 bg-blue-50/70 py-2.5 px-4 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-blue-700 shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-200">
@@ -384,7 +384,7 @@
                                     <path d="M22 2 11 13"/>
                                 </svg>
                             </div>
-                            <h3 class="text-sm sm:text-base font-extrabold text-white uppercase tracking-wide">SIAP MENYAMPAIKAN LAPORAN?</h3>
+                            <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-white">SIAP MENYAMPAIKAN LAPORAN?</h3>
                         </div>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-blue-100/90">
                             Sampaikan dugaan pelanggaran secara aman tanpa mencantumkan identitas pribadi Anda.
