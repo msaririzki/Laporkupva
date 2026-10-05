@@ -26,31 +26,31 @@
 
                 <!-- CTA Buttons -->
                 <div class="mt-5 sm:mt-6 flex w-full flex-col items-stretch gap-2.5 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
-                    <a href="{{ route('reports.create') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs font-extrabold text-white shadow-md shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 active:translate-y-0 active:scale-[0.99] sm:w-auto sm:text-sm">
+                    <a href="{{ route('reports.create') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white shadow-md shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-600/35 active:translate-y-0 active:scale-[0.99] sm:w-auto">
                         <span class="flex size-5 shrink-0 items-center justify-center" aria-hidden="true">
                             <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="m22 2-7 20-4-9-9-4Z"/>
                                 <path d="M22 2 11 13"/>
                             </svg>
                         </span>
-                        <span>Buat laporan</span>
+                        <span>BUAT LAPORAN</span>
                     </a>
-                    <a href="{{ route('reports.track') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs font-extrabold text-navy-950 shadow-2xs transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50/70 hover:text-blue-700 active:translate-y-0 active:scale-[0.99] sm:w-auto sm:text-sm">
+                    <a href="{{ route('reports.track') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-5 py-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-navy-950 shadow-2xs transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50/70 hover:text-blue-700 active:translate-y-0 active:scale-[0.99] sm:w-auto">
                         <span class="flex size-5 shrink-0 items-center justify-center text-blue-600" aria-hidden="true">
                             <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="11" cy="11" r="7"/>
                                 <path d="m21 21-4.3-4.3"/>
                             </svg>
                         </span>
-                        <span>Cek status laporan</span>
+                        <span>CEK STATUS LAPORAN</span>
                     </a>
-                    <a href="{{ route('kupvas.index') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-xs font-extrabold text-emerald-800 shadow-2xs transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100/80 hover:text-emerald-900 active:translate-y-0 active:scale-[0.99] sm:w-auto sm:text-sm">
+                    <a href="{{ route('kupvas.index') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-emerald-800 shadow-2xs transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100/80 hover:text-emerald-900 active:translate-y-0 active:scale-[0.99] sm:w-auto">
                         <span class="flex size-5 shrink-0 items-center justify-center text-emerald-600" aria-hidden="true">
                             <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M3.75 21h16.5M4.5 3h15v18h-15V3Zm3.75 4.5h.008v.008H8.25V7.5Zm0 4.5h.008v.008H8.25V12Zm0 4.5h.008v.008H8.25V16.5Zm4.5-9h3m-3 4.5h3m-3 4.5h3" />
                             </svg>
                         </span>
-                        <span>Daftar Money Changer Resmi</span>
+                        <span>DAFTAR MONEY CHANGER RESMI</span>
                     </a>
                 </div>
 
@@ -262,7 +262,7 @@
 
                             <!-- Title -->
                             <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
-                                Ceritakan
+                                CERITAKAN
                             </h3>
 
                             <!-- Description -->
@@ -303,7 +303,7 @@
 
                             <!-- Title -->
                             <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
-                                Tentukan lokasi
+                                TENTUKAN LOKASI
                             </h3>
 
                             <!-- Description -->
@@ -354,7 +354,7 @@
 
                             <!-- Title -->
                             <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
-                                Masukkan gambar
+                                MASUKKAN GAMBAR
                             </h3>
 
                             <!-- Description -->
@@ -397,7 +397,7 @@
 
                             <!-- Title -->
                             <h3 class="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wide text-navy-950">
-                                Pantau laporan
+                                PANTAU LAPORAN
                             </h3>
 
                             <!-- Description -->
@@ -441,7 +441,7 @@
                         <article class="group flex flex-col justify-between rounded-xl sm:rounded-3xl border border-slate-100 bg-white p-3.5 sm:p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
                             <div>
                                 <div class="flex items-center justify-between">
-                                    <!-- Icon: Identitas / Profil Tersembunyi (Anonim) -->
+                                    <!-- Icon: Identitas / Profil Tersembunyi -->
                                     <div class="flex size-9 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                                         <svg class="size-4.5 sm:size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -456,7 +456,7 @@
 
                                 <div class="mt-2.5 sm:mt-3">
                                     <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
-                                        Tidak Perlu Membuat Akun
+                                        TIDAK PERLU MEMBUAT AKUN
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
                                         Sampaikan informasi tanpa mendaftar atau mengisi data pribadi.
@@ -485,7 +485,7 @@
 
                                 <div class="mt-2.5 sm:mt-3">
                                     <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
-                                        Pantau dengan Nomor Laporan
+                                        PANTAU DENGAN NOMOR LAPORAN
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
                                         Gunakan nomor laporan atau QR untuk melihat perkembangan penanganan.
@@ -512,7 +512,7 @@
 
                                 <div class="mt-2.5 sm:mt-3">
                                     <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
-                                        Diakses Petugas Berwenang
+                                        DIAKSES PETUGAS BERWENANG
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
                                         Informasi hanya dapat dilihat oleh petugas yang memiliki kewenangan.
@@ -539,7 +539,7 @@
 
                                 <div class="mt-2.5 sm:mt-3">
                                     <h3 class="text-xs sm:text-base font-extrabold uppercase tracking-wide text-navy-950">
-                                        Sampaikan dengan Mudah
+                                        SAMPAIKAN DENGAN MUDAH
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
                                         Ceritakan kejadian, lokasi, dan informasi pendukung yang Anda ketahui.
@@ -550,7 +550,7 @@
                             <!-- Button Teman Grip 03 -->
                             <div class="mt-3 sm:mt-4 w-full">
                                 <a href="{{ route('reports.create') }}" class="button-primary w-full inline-flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider shadow-sm">
-                                    Mulai membuat laporan <span aria-hidden="true">→</span>
+                                    MULAI MEMBUAT LAPORAN <span aria-hidden="true">→</span>
                                 </a>
                             </div>
                         </article>

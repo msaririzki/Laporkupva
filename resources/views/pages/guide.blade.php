@@ -108,7 +108,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">01</span>
-                            <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">Siapkan informasi</h3>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">SIAPKAN INFORMASI</h3>
                             <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Ceritakan apa yang terjadi, waktu kejadian, dan nama tempat jika tahu.</p>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">02</span>
-                            <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">Tentukan titik lokasi</h3>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">TENTUKAN TITIK LOKASI</h3>
                             <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Tunjukkan lokasi tempatnya di peta atau gunakan titik lokasi HP kamu.</p>
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">03</span>
-                            <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">Simpan nomor laporan</h3>
+                            <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">SIMPAN NOMOR LAPORAN</h3>
                             <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Simpan nomor laporan atau gambar QR untuk mengecek perkembangan kapan saja.</p>
                         </div>
                     </div>
@@ -228,7 +228,7 @@
                         <!-- Q1: Akun & Identitas -->
                         <details class="faq-item group rounded-xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-2xs transition-all duration-200 hover:border-blue-200 hover:shadow-xs open:border-blue-200 open:shadow-xs open:bg-blue-50/15">
                             <summary class="flex cursor-pointer list-none items-center gap-3 sm:gap-3.5 select-none">
-                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!border-blue-600 group-open:!bg-blue-600 group-open:!text-white transition-colors">
+                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!bg-blue-600 group-open:!text-white group-open:!border-blue-600 transition-colors">
                                     <svg class="size-4" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                                     </svg>
@@ -248,7 +248,7 @@
                         <!-- Q2: Lokasi & Peta -->
                         <details class="faq-item group rounded-xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-2xs transition-all duration-200 hover:border-blue-200 hover:shadow-xs open:border-blue-200 open:shadow-xs open:bg-blue-50/15">
                             <summary class="flex cursor-pointer list-none items-center gap-3 sm:gap-3.5 select-none">
-                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!border-blue-600 group-open:!bg-blue-600 group-open:!text-white transition-colors">
+                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!bg-blue-600 group-open:!text-white group-open:!border-blue-600 transition-colors">
                                     <svg class="size-4" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                     </svg>
@@ -268,7 +268,7 @@
                         <!-- Q3: Bukti Laporan -->
                         <details class="faq-item group rounded-xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-2xs transition-all duration-200 hover:border-blue-200 hover:shadow-xs open:border-blue-200 open:shadow-xs open:bg-blue-50/15">
                             <summary class="flex cursor-pointer list-none items-center gap-3 sm:gap-3.5 select-none">
-                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!border-blue-600 group-open:!bg-blue-600 group-open:!text-white transition-colors">
+                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!bg-blue-600 group-open:!text-white group-open:!border-blue-600 transition-colors">
                                     <svg class="size-4" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
                                     </svg>
@@ -288,7 +288,7 @@
                         <!-- Q4: Cek Status -->
                         <details class="faq-item group rounded-xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-2xs transition-all duration-200 hover:border-blue-200 hover:shadow-xs open:border-blue-200 open:shadow-xs open:bg-blue-50/15">
                             <summary class="flex cursor-pointer list-none items-center gap-3 sm:gap-3.5 select-none">
-                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!border-blue-600 group-open:!bg-blue-600 group-open:!text-white transition-colors">
+                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!bg-blue-600 group-open:!text-white group-open:!border-blue-600 transition-colors">
                                     <svg class="size-4" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M4 9h4v11H4zm6-5h4v16h-4zm6 8h4v8h-4z"/>
                                     </svg>
@@ -308,7 +308,7 @@
                         <!-- Q5: Tanya Jawab Petugas -->
                         <details class="faq-item group rounded-xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-2xs transition-all duration-200 hover:border-blue-200 hover:shadow-xs open:border-blue-200 open:shadow-xs open:bg-blue-50/15">
                             <summary class="flex cursor-pointer list-none items-center gap-3 sm:gap-3.5 select-none">
-                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!border-blue-600 group-open:!bg-blue-600 group-open:!text-white transition-colors">
+                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!bg-blue-600 group-open:!text-white group-open:!border-blue-600 transition-colors">
                                     <svg class="size-4" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
                                     </svg>
@@ -321,14 +321,14 @@
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Bisa. Setelah membuka progres laporan, gunakan kotak komunikasi anonim untuk membaca dan membalas pesan petugas.
+                                Bisa. Setelah membuka progres laporan, gunakan kotak komunikasi untuk membaca dan membalas pesan petugas.
                             </div>
                         </details>
 
                         <!-- Q6: Keamanan akses -->
                         <details class="faq-item group rounded-xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-2xs transition-all duration-200 hover:border-blue-200 hover:shadow-xs open:border-blue-200 open:shadow-xs open:bg-blue-50/15">
                             <summary class="flex cursor-pointer list-none items-center gap-3 sm:gap-3.5 select-none">
-                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!border-blue-600 group-open:!bg-blue-600 group-open:!text-white transition-colors">
+                                <span class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/70 group-hover:bg-blue-100/80 group-open:!bg-blue-600 group-open:!text-white group-open:!border-blue-600 transition-colors">
                                     <svg class="size-4" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
                                     </svg>
@@ -358,7 +358,7 @@
                                     <path d="m21 21-4.3-4.3"/>
                                 </svg>
                             </div>
-                            <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">Sudah pernah melapor?</h3>
+                            <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">SUDAH PERNAH MELAPOR?</h3>
                         </div>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-500">
                             Gunakan nomor laporan atau QR untuk memantau perkembangan tindak lanjut laporan Anda.
@@ -369,7 +369,7 @@
                                     <circle cx="11" cy="11" r="8"/>
                                     <path d="m21 21-4.3-4.3"/>
                                 </svg>
-                                <span>Cek status sekarang</span>
+                                <span>CEK STATUS SEKARANG</span>
                                 <span aria-hidden="true">→</span>
                             </a>
                         </div>
@@ -384,7 +384,7 @@
                                     <path d="M22 2 11 13"/>
                                 </svg>
                             </div>
-                            <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-white">Siap menyampaikan laporan?</h3>
+                            <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-white">SIAP MENYAMPAIKAN LAPORAN?</h3>
                         </div>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-blue-100/90">
                             Sampaikan dugaan pelanggaran secara aman tanpa mencantumkan identitas pribadi Anda.
@@ -395,7 +395,7 @@
                                     <path d="m22 2-7 20-4-9-9-4Z"/>
                                     <path d="M22 2 11 13"/>
                                 </svg>
-                                <span>Buat laporan anonim</span>
+                                <span>BUAT LAPORAN</span>
                                 <span aria-hidden="true">→</span>
                             </a>
                         </div>

@@ -9,7 +9,7 @@
     @endPushOnce
 @endif
 
-<x-layouts.public title="Buat laporan anonim">
+<x-layouts.public title="Buat laporan">
     <!-- Hero Header (Clean Light Canvas, Elegant Reassurance) -->
     <section class="relative bg-white py-3 sm:py-5 lg:py-6 border-b border-[#E2E8F0]">
         <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10">
@@ -20,16 +20,16 @@
                 </h1>
 
                 <p class="mt-1 text-[11px] sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B] max-w-[720px] mx-auto">
-                    Ceritakan kejadian, tentukan lokasi, lalu kirim laporan secara anonim.
+                    Ceritakan kejadian, tentukan lokasi, lalu kirim laporan tanpa mengungkap identitas.
                 </p>
 
-                <!-- Badges Row: Laporan Anonim, Identitas Anda terlindungi, ±3 menit in neutral soft gray, single line on mobile -->
+                <!-- Badges Row: Laporan Terlindungi, Identitas Anda terlindungi, ±3 menit in neutral soft gray, single line on mobile -->
                 <div class="mt-2 flex items-center justify-center gap-1.5 sm:gap-2.5 overflow-x-auto">
                     <span class="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-slate-200/60 bg-slate-100/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-[#64748B] whitespace-nowrap shrink-0">
                         <svg class="size-3 sm:size-3.5 text-slate-400 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
                         </svg>
-                        <span>Laporan Anonim</span>
+                        <span>Laporan Terlindungi</span>
                     </span>
 
                     <span class="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-slate-200/60 bg-slate-100/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-[#64748B] whitespace-nowrap shrink-0">
