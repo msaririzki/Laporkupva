@@ -66,7 +66,8 @@ COPY docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/php-production.ini /usr/local/etc/php/conf.d/zz-laporkupva.ini
 COPY docker/entrypoint.sh /usr/local/bin/laporkupva-entrypoint
 
-RUN composer dump-autoload --no-dev --classmap-authoritative --no-interaction \
+RUN chmod -R a+rX app bootstrap config database docker public resources routes \
+    && composer dump-autoload --no-dev --classmap-authoritative --no-interaction \
     && sed -i 's/\r$//' /usr/local/bin/laporkupva-entrypoint \
     && chmod 0755 /usr/local/bin/laporkupva-entrypoint \
     && mkdir -p /var/lib/laporkupva \
