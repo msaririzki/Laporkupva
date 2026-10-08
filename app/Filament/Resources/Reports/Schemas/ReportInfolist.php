@@ -23,7 +23,7 @@ class ReportInfolist
     /** @var array<string, string> */
     private const INCIDENT_TYPES = [
         'kupva_tanpa_izin' => 'Dugaan KUPVA tanpa izin',
-        'transaksi_mencurigakan' => 'Transaksi penukaran mencurigakan',
+        'transaksi_mencurigakan' => 'Kecurangan transaksi',
         'pelanggaran_kurs' => 'Informasi kurs tidak wajar/tidak transparan',
         'penolakan_rupiah' => 'Penolakan penggunaan Rupiah',
         'lainnya' => 'Lainnya terkait penukaran valuta asing',
@@ -33,6 +33,9 @@ class ReportInfolist
     {
         return $schema
             ->components([
+                SchemaView::make('filament.schemas.components.report-progress-approval')
+                    ->visible(fn (): bool => auth()->user()?->canManageApplication() === true)
+                    ->columnSpanFull(),
                 SchemaView::make('filament.schemas.components.report-status-progress')
                     ->columnSpanFull(),
                 Grid::make([
@@ -43,7 +46,9 @@ class ReportInfolist
                     ->schema([
                         Group::make([
                             Section::make('Ringkasan laporan')
-                                ->description('Rincian kejadian dan kontak pelapor. Data pelapor hanya untuk petugas.')
+                                ->description(fn (): string => auth()->user()?->canViewReporterIdentity() === true
+                                    ? 'Rincian kejadian dan kontak pelapor. Data pelapor hanya untuk Administrator dan Operator.'
+                                    : 'Rincian kejadian. Identitas dan informasi kontak pelapor dirahasiakan.')
                                 ->icon(Heroicon::OutlinedDocumentText)
                                 ->columns([
                                     'default' => 1,
@@ -64,13 +69,16 @@ class ReportInfolist
                                         ->label('Nama tempat/usaha')
                                         ->placeholder('Tidak disebutkan'),
                                     TextEntry::make('reporter_phone')
+                                        ->visible(fn (): bool => auth()->user()?->canViewReporterIdentity() === true)
                                         ->label('Nomor HP pelapor')
                                         ->placeholder('Tidak diberikan')
                                         ->copyable(),
                                     TextEntry::make('reporter_name')
+                                        ->visible(fn (): bool => auth()->user()?->canViewReporterIdentity() === true)
                                         ->label('Nama pelapor')
                                         ->placeholder('Tidak diberikan'),
                                     TextEntry::make('reporter_email')
+                                        ->visible(fn (): bool => auth()->user()?->canViewReporterIdentity() === true)
                                         ->label('Email pelapor')
                                         ->placeholder('Laporan lama, belum tersedia')
                                         ->copyable(),
@@ -121,7 +129,7 @@ class ReportInfolist
                                         ->columnSpanFull(),
                                 ]),
                             Section::make('Lampiran dari pelapor')
-                                ->description('Berkas awal yang dikirim masyarakat. Tersimpan privat dan hanya dapat diakses Admin TAMBORA.')
+                                ->description('Berkas awal yang dikirim masyarakat. Tersimpan privat dan hanya dapat diakses petugas TAMBORA.')
                                 ->icon(Heroicon::OutlinedPaperClip)
                                 ->visible(fn (Report $record): bool => $record->submissionEvidence()->exists())
                                 ->collapsible()
@@ -210,7 +218,7 @@ class ReportInfolist
                                                 ->dateTime('d M Y, H:i'),
                                             TextEntry::make('uploadedBy.name')
                                                 ->label('Petugas')
-                                                ->placeholder('Admin TAMBORA'),
+                                                ->placeholder('petugas TAMBORA'),
                                             TextEntry::make('original_name')
                                                 ->label('Nama foto')
                                                 ->limit(32),
@@ -271,7 +279,9 @@ class ReportInfolist
                                         ]),
                                 ]),
                             Section::make('Komunikasi anonim')
-                                ->description('Tanggapi informasi tambahan dari pelapor.')
+                                ->description(fn (): string => auth()->user()?->canManageApplication() === true
+                                    ? 'Tanggapi informasi tambahan dari pelapor.'
+                                    : 'Percakapan hanya dapat dibaca. Akun Polisi tidak dapat mengirim balasan.')
                                 ->icon(Heroicon::OutlinedChatBubbleLeftRight)
                                 ->extraAttributes(['id' => 'komunikasi-anonim'])
                                 ->schema([

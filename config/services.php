@@ -26,6 +26,11 @@ return [
         'public_token' => env('MAPBOX_PUBLIC_TOKEN'),
     ],
 
+    'geocoding' => [
+        'search_url' => env('GEOCODING_SEARCH_URL', 'https://nominatim.openstreetmap.org/search'),
+        'user_agent' => env('GEOCODING_USER_AGENT', 'TAMBORA KUPVA locator (+https://laporkupva.ikydev.com)'),
+    ],
+
     'turnstile' => [
         'site_key' => env('TURNSTILE_SITE_KEY'),
         'secret_key' => env('TURNSTILE_SECRET_KEY'),

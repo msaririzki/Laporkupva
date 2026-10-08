@@ -24,6 +24,11 @@ enum ReportStatus: string implements HasColor, HasLabel
         };
     }
 
+    public function requiresApproval(): bool
+    {
+        return in_array($this, [self::Coordination, self::FieldAction, self::Completed], true);
+    }
+
     public function getLabel(): ?string
     {
         return $this->label();

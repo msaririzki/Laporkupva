@@ -22,11 +22,11 @@ class UserResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
-    protected static ?string $modelLabel = 'admin';
+    protected static ?string $modelLabel = 'akun';
 
-    protected static ?string $pluralModelLabel = 'Manajemen admin';
+    protected static ?string $pluralModelLabel = 'Manajemen akun';
 
-    protected static ?string $navigationLabel = 'Manajemen Admin';
+    protected static ?string $navigationLabel = 'Manajemen Akun';
 
     protected static ?int $navigationSort = 3;
 
@@ -34,17 +34,17 @@ class UserResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return auth()->user()?->isSuperAdmin() === true;
+        return auth()->user()?->isSuperAdmin() === true && auth()->user()?->is_active === true;
     }
 
     public static function canCreate(): bool
     {
-        return auth()->user()?->isSuperAdmin() === true;
+        return auth()->user()?->isSuperAdmin() === true && auth()->user()?->is_active === true;
     }
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('role', UserRole::Admin);
+        return parent::getEloquentQuery()->whereIn('role', [UserRole::Admin, UserRole::Police]);
     }
 
     public static function form(Schema $schema): Schema

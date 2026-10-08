@@ -14,7 +14,7 @@
                         <p class="mt-1.5 text-[11px] leading-relaxed text-slate-500">KUPVA BB adalah istilah resmi untuk usaha Money Changer bukan bank.</p>
                     </div>
                     <div class="flex shrink-0 items-center gap-4 text-xs font-semibold lg:pt-1">
-                        <a href="#daftar-kupva" class="inline-flex min-h-9 items-center gap-2 rounded-lg bg-blue-50 px-3 text-[#2563EB] transition hover:bg-blue-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Lihat daftar <span aria-hidden="true">↓</span></a>
+                        <a href="#daftar-kupva" class="inline-flex min-h-9 items-center gap-2 rounded-lg bg-blue-50 px-3 text-[#2563EB] transition hover:bg-blue-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Temukan lokasi <span aria-hidden="true">↓</span></a>
                         <a href="https://www.bi.go.id/id/edukasi/Pages/Penjualan-Valuta-Asing.aspx" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-slate-600 transition hover:text-[#2563EB]">
                             Sumber informasi BI
                             <span aria-hidden="true">↗</span>
@@ -22,8 +22,8 @@
                     </div>
                 </div>
 
-                <div class="border-t border-slate-200 bg-slate-50/60 px-4 py-4 sm:px-6">
-                    <h2 id="official-kupva-title" class="text-sm font-bold text-[#0F172A]">Kenali Money Changer Resmi</h2>
+                <details class="border-t border-slate-200 bg-slate-50/60 px-4 py-3 sm:px-6">
+                    <summary id="official-kupva-title" class="cursor-pointer text-sm font-bold text-[#0F172A]">Kenali Money Changer Resmi</summary>
                     <div class="mt-3 grid grid-cols-2 gap-x-4 gap-y-4 lg:grid-cols-4 lg:gap-5">
                         @foreach ([
                             ['title' => 'Logo resmi', 'description' => 'Terdapat logo KUPVA Berizin dari Bank Indonesia.'],
@@ -42,10 +42,11 @@
                             </article>
                         @endforeach
                     </div>
-                </div>
+                </details>
             </section>
 
             <form id="daftar-kupva" action="{{ route('kupvas.index') }}" method="GET" class="mt-4 scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-3 shadow-xs sm:p-4" role="search" data-kupva-filters>
+                <input type="hidden" name="view" value="{{ $displayMode }}">
                 <div class="grid gap-2.5 md:grid-cols-[minmax(0,1fr)_minmax(14rem,0.42fr)_auto] md:items-end">
                     <div>
                         <label for="kupva-search" class="form-label">Cari Money Changer</label>
@@ -60,7 +61,7 @@
                                 value="{{ $search }}"
                                 maxlength="100"
                                 class="form-control pl-10"
-                                placeholder="Nama usaha atau alamat"
+                                placeholder="Nama usaha, alamat, atau wilayah, misalnya Mataram"
                             >
                         </div>
                     </div>
@@ -80,10 +81,10 @@
                             <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 3.473 9.767l3.63 3.63a.75.75 0 1 0 1.06-1.06l-3.63-3.63A5.5 5.5 0 0 0 9 3.5ZM5 9a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clip-rule="evenodd" />
                             </svg>
-                            <span>Cari nama</span>
+                            <span>Cari</span>
                         </button>
                         @if (filled($search) || $selectedRegency !== null)
-                            <a href="{{ route('kupvas.index') }}" class="inline-flex h-11 items-center justify-center rounded-xl border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-600 transition hover:border-blue-300 hover:text-blue-700 sm:h-12">
+                            <a href="{{ route('kupvas.index', ['view' => $displayMode]) }}" class="inline-flex h-11 items-center justify-center rounded-xl border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-600 transition hover:border-blue-300 hover:text-blue-700 sm:h-12">
                                 Reset
                             </a>
                         @endif
@@ -91,14 +92,32 @@
                 </div>
             </form>
 
-            <div class="mt-5 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                <p class="text-sm font-bold text-[#0B2342]">
-                    {{ number_format($kupvas->total(), 0, ',', '.') }} Money Changer ditemukan
-                </p>
-                <p class="text-xs text-[#64748B]">Hanya menampilkan izin aktif dan usaha yang masih beroperasi.</p>
+            <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm font-bold text-[#0B2342]">{{ number_format($kupvas->total(), 0, ',', '.') }} Money Changer ditemukan</p>
+                    <p class="mt-1 text-xs text-[#64748B]">Hanya menampilkan izin aktif dan usaha yang masih beroperasi.</p>
+                </div>
+                <nav aria-label="Tampilan Money Changer" class="inline-flex self-start rounded-xl border border-slate-200 bg-white p-1 shadow-xs">
+                    @foreach (['map' => 'Peta', 'cards' => 'Kartu'] as $mode => $label)
+                        <a href="{{ route('kupvas.index', array_filter(['q' => $search, 'regency' => $selectedRegency, 'view' => $mode])) }}"
+                            @if ($displayMode === $mode) aria-current="page" @endif
+                            @class(['inline-flex min-h-10 items-center gap-2 rounded-lg px-4 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600', 'bg-blue-600 text-white' => $displayMode === $mode, 'text-slate-600 hover:bg-slate-50' => $displayMode !== $mode])>
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                @if ($mode === 'map')
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m9 4-6 3v14l6-3 6 3 6-3V4l-6 3-6-3Zm0 0v14m6-11v14" />
+                                @else
+                                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+                                @endif
+                            </svg>
+                            {{ $label }}
+                        </a>
+                    @endforeach
+                </nav>
             </div>
 
-            @if ($kupvas->isEmpty())
+            @if ($displayMode === 'map')
+                @include('pages.partials.kupva-map')
+            @elseif ($kupvas->isEmpty())
                 <div class="mt-4 rounded-2xl border border-dashed border-slate-300 bg-white px-5 py-12 text-center">
                     <div class="mx-auto grid size-12 place-items-center rounded-2xl bg-slate-100 text-slate-500">
                         <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">

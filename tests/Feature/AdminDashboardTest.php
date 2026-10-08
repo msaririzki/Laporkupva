@@ -54,11 +54,11 @@ class AdminDashboardTest extends TestCase
         $this->get('/admin/login')
             ->assertOk()
             ->assertSee('Masuk ke TAMBORA')
-            ->assertSee('Gunakan akun admin Anda.')
+            ->assertSee('Gunakan akun pengguna Anda.')
             ->assertSee('Portal internal')
             ->assertSee('Kelola laporan dengan lebih terarah.')
             ->assertSee('Akses terlindungi')
-            ->assertSee('Email admin')
+            ->assertSee('Email akun')
             ->assertSee('Masuk')
             ->assertSee('Kembali ke beranda')
             ->assertSee(route('home'), false)
@@ -86,7 +86,7 @@ class AdminDashboardTest extends TestCase
             ->assertSee('hingga 10 MB')
             ->assertSee('tambora-profile-photo-panel', false)
             ->assertSee('Keamanan akun')
-            ->assertSee('Akun admin TAMBORA')
+            ->assertSee('Akun pengguna TAMBORA')
             ->assertSee('data:image/svg+xml;base64,', false)
             ->assertSee('fi-sidebar', false);
     }
@@ -212,7 +212,7 @@ class AdminDashboardTest extends TestCase
             ->assertDontSee('Laporan hasil')
             ->assertSee('Kembali ke daftar')
             ->assertSee(ReportResource::getUrl('index'), false)
-            ->assertSee('Update progres')
+            ->assertSee('Ajukan progres')
             ->assertSee('data-advance-report="true"', false)
             ->assertSee('Buka percakapan')
             ->assertSee('data-open-conversation="true"', false)
@@ -459,6 +459,12 @@ class AdminDashboardTest extends TestCase
         $this->assertStringContainsString($activity, $template);
         $component->fillForm(['public_note' => $message])->callMountedAction()->assertHasNoFormErrors()->assertNotified();
 
+        if ($nextStatus !== 'received') {
+            $this->actingAs(User::factory()->superAdmin()->create());
+            Livewire::test(ViewReport::class, ['record' => $report->id])
+                ->callAction('approveProgress')->assertHasNoFormErrors()->assertNotified();
+        }
+
         $this->assertDatabaseHas('reports', [
             'id' => $report->id,
             'status' => $nextStatus,
@@ -493,6 +499,11 @@ class AdminDashboardTest extends TestCase
                 ],
             ])
             ->assertNotified();
+
+        $this->assertDatabaseCount('report_evidence', 0);
+        $this->actingAs(User::factory()->superAdmin()->create());
+        Livewire::test(ViewReport::class, ['record' => $report->id])
+            ->callAction('approveProgress')->assertHasNoFormErrors()->assertNotified();
 
         $evidence = ReportEvidence::query()
             ->where('report_id', $report->getKey())
@@ -642,10 +653,10 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($superAdmin)
             ->get(UserResource::getUrl('index'))
             ->assertOk()
-            ->assertSee('Manajemen admin')
-            ->assertSee('Atur akun dan akses admin yang membantu proses pengawasan.')
-            ->assertSee('Cari nama atau email admin…')
-            ->assertSee('Tambah admin')
+            ->assertSee('Manajemen akun')
+            ->assertSee('Atur akun dan akses pengguna yang membantu proses pengawasan.')
+            ->assertSee('Cari nama atau email pengguna…')
+            ->assertSee('Tambah akun')
             ->assertSee('Atur')
             ->assertDontSee('Urutkan menurut')
             ->assertSee('1 hasil')
@@ -681,9 +692,9 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($superAdmin)
             ->get(UserResource::getUrl('create'))
             ->assertOk()
-            ->assertSee('Tambah admin')
-            ->assertSee('Informasi admin')
-            ->assertSee('Simpan admin')
+            ->assertSee('Tambah akun')
+            ->assertSee('Informasi akun')
+            ->assertSee('Simpan akun')
             ->assertDontSee('Buat &amp; buat lainnya', false);
     }
 

@@ -41,6 +41,9 @@ class KupvaInfolist
                         TextEntry::make('address')->label('Alamat')->placeholder('-')->columnSpanFull(),
                         TextEntry::make('latitude')->label('Latitude')->placeholder('-'),
                         TextEntry::make('longitude')->label('Longitude')->placeholder('-'),
+                        TextEntry::make('location_source')->label('Ketepatan titik')->placeholder('-')
+                            ->formatStateUsing(fn (string $state): string => $state === 'nominatim' ? 'Perkiraan dari alamat' : 'Titik telah diperiksa petugas'),
+                        TextEntry::make('location_match_address')->label('Alamat hasil pencarian peta')->placeholder('-')->columnSpanFull(),
                     ]),
             ]);
     }

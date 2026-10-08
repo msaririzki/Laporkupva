@@ -7,6 +7,7 @@ use App\Notifications\Admin\NewReporterMessage;
 use App\Notifications\Admin\NewReportSubmitted;
 use App\Rules\NoHtml;
 use Filament\Notifications\Notification;
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -20,7 +21,7 @@ new class extends Component
     public function mount(Report $record): void
     {
         $this->record = $record;
-        $this->authorizeAdmin();
+        $this->authorizeViewer();
         $this->markConversationAsRead();
     }
 
@@ -28,6 +29,8 @@ new class extends Component
     #[Computed]
     public function conversationMessages(): Collection
     {
+        $this->authorizeViewer();
+
         return $this->record
             ->anonymousMessages()
             ->with('user:id,name')
@@ -36,7 +39,7 @@ new class extends Component
 
     public function refreshConversation(): void
     {
-        $this->authorizeAdmin();
+        $this->authorizeViewer();
         $this->markConversationAsRead();
     }
 
@@ -94,7 +97,11 @@ new class extends Component
 
     private function markConversationAsRead(): void
     {
-        $user = $this->authorizeAdmin();
+        $user = $this->authorizeViewer();
+
+        if (! $user->canManageApplication()) {
+            return;
+        }
 
         $this->record->anonymousMessages()
             ->where('sender_type', 'reporter')
@@ -105,6 +112,15 @@ new class extends Component
             ->whereIn('type', [NewReportSubmitted::class, NewReporterMessage::class])
             ->where('data->report_id', $this->record->getKey())
             ->update(['read_at' => now()]);
+    }
+
+    private function authorizeViewer(): User
+    {
+        $user = auth()->user();
+
+        abort_unless($user instanceof User && $user->canAccessPanel(Filament::getPanel('admin')), 403);
+
+        return $user;
     }
 };
 ?>
@@ -316,6 +332,7 @@ new class extends Component
         </button>
     </div>
 
+    @if (auth()->user()?->canManageApplication() === true)
     <form wire:submit="send" class="border-t border-slate-200/80 bg-white p-3 sm:p-4 dark:border-white/10 dark:bg-slate-900">
         <label for="admin-report-reply" class="sr-only">Balas pelapor</label>
 
@@ -354,4 +371,7 @@ new class extends Component
             <p class="mt-2 px-1 text-xs font-medium text-red-600 dark:text-red-400">{{ $message }}</p>
         @enderror
     </form>
+    @else
+        <p class="border-t border-slate-200/80 p-4 text-xs text-slate-500 dark:border-white/10 dark:text-slate-400">Akses hanya baca. Balasan hanya dapat dikirim oleh Administrator dan Operator.</p>
+    @endif
 </div>

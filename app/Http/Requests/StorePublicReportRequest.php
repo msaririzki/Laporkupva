@@ -31,7 +31,6 @@ class StorePublicReportRequest extends PublicReporterRequest
             'incident_type' => ['required', Rule::in([
                 'kupva_tanpa_izin',
                 'transaksi_mencurigakan',
-                'pelanggaran_kurs',
                 'penolakan_rupiah',
                 'lainnya',
             ])],

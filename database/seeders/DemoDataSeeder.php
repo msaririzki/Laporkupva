@@ -162,7 +162,6 @@ class DemoDataSeeder extends Seeder
         return [
             'kupva_tanpa_izin',
             'transaksi_mencurigakan',
-            'pelanggaran_kurs',
             'penolakan_rupiah',
             'lainnya',
         ];
@@ -214,10 +213,6 @@ class DemoDataSeeder extends Seeder
             'transaksi_mencurigakan' => [
                 'Petugas menawarkan transaksi tunai dalam jumlah besar tanpa meminta data transaksi atau memberikan penjelasan prosedur.',
                 'Pelapor melihat transaksi valuta asing berulang dengan pencatatan yang tidak jelas dan tanpa bukti transaksi.',
-            ],
-            'pelanggaran_kurs' => [
-                'Nilai tukar pada papan kurs berbeda dengan nilai yang digunakan saat transaksi tanpa penjelasan kepada pelanggan.',
-                'Biaya tambahan baru disampaikan setelah transaksi dilakukan dan tidak tercantum pada informasi kurs di lokasi.',
             ],
             'penolakan_rupiah' => [
                 'Tempat usaha menolak pembayaran menggunakan Rupiah dan meminta pelanggan membayar dengan mata uang asing.',

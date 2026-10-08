@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Kupvas\Pages;
 
 use App\Filament\Resources\Kupvas\KupvaCsvImporter;
 use App\Filament\Resources\Kupvas\KupvaResource;
+use App\Models\Kupva;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\CreateAction;
@@ -16,6 +17,7 @@ use Filament\Schemas\Components\Wizard\Step;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 
 class ListKupvas extends ListRecords
@@ -37,6 +39,7 @@ class ListKupvas extends ListRecords
                     ->url(fn (): string => route('admin.kupvas.template'))
                     ->extraAttributes(['download' => 'template-impor-kupva.xlsx']),
                 Action::make('importSpreadsheet')
+                    ->authorize(fn (): bool => Gate::allows('create', Kupva::class))
                     ->label('Impor data')
                     ->icon(Heroicon::OutlinedArrowUpTray)
                     ->modalHeading('Impor data KUPVA')
@@ -87,6 +90,7 @@ class ListKupvas extends ListRecords
                             ]),
                     ])
                     ->action(function (Action $action, array $data): void {
+                        Gate::authorize('create', Kupva::class);
                         $file = $data['file'] ?? null;
 
                         if (! $file instanceof UploadedFile) {

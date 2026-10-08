@@ -36,7 +36,10 @@ class PublicReportControllerTest extends TestCase
             ->assertSee('Bukti pendukung wajib')
             ->assertSee('1–5 berkas sekaligus')
             ->assertSee('Nomor HP Pelapor')
-            ->assertSee('Hanya digunakan petugas bila perlu menghubungi Anda.')
+            ->assertSee('Nomor HP membantu petugas Bank Indonesia menghubungi Anda jika diperlukan.')
+            ->assertSee('KECURANGAN TRANSAKSI')
+            ->assertDontSee('TRANSAKSI MENCURIGAKAN')
+            ->assertDontSee('PELANGGARAN KURS')
             ->assertSee('>Lokasi Kejadian</h2>', false)
             ->assertDontSee('Tentukan lokasinya')
             ->assertSee('evidence-preview-modal', false)
@@ -53,6 +56,28 @@ class PublicReportControllerTest extends TestCase
                 'Kota Bima',
             ])
             ->assertDontSee('name="nik"', false);
+    }
+
+    public function test_report_accepts_the_transaction_fraud_option(): void
+    {
+        $this->post(route('reports.store'), $this->validPayload([
+            'incident_type' => 'transaksi_mencurigakan',
+        ]))->assertRedirect(route('reports.success'));
+
+        $this->assertDatabaseHas('reports', ['incident_type' => 'transaksi_mencurigakan']);
+    }
+
+    public function test_report_rejects_the_removed_exchange_rate_option(): void
+    {
+        $this->from(route('reports.create'))
+            ->post(route('reports.store'), $this->validPayload([
+                'incident_type' => 'pelanggaran_kurs',
+            ]))
+            ->assertRedirect(route('reports.create'))
+            ->assertSessionHasErrors('incident_type');
+
+        $this->assertDatabaseCount('reports', 0);
+        Storage::disk('local')->assertDirectoryEmpty('report-evidence');
     }
 
     public function test_report_form_displays_turnstile_when_security_verification_is_configured(): void
@@ -376,7 +401,7 @@ class PublicReportControllerTest extends TestCase
             'status' => ReportStatus::Completed->value,
             'public_code' => 'LKP-EVIL-0000',
             'tracking_pin_hash' => 'attacker-controlled',
-            'internal_notes' => 'Jangan terlihat oleh admin.',
+            'internal_notes' => 'Jangan terlihat oleh Administrator dan Operator.',
         ]))->assertRedirect(route('reports.success'));
 
         $report = Report::query()->sole();

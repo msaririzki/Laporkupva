@@ -30,7 +30,6 @@ class ReportFactory extends Factory
             'incident_type' => fake()->randomElement([
                 'kupva_tanpa_izin',
                 'transaksi_mencurigakan',
-                'pelanggaran_kurs',
                 'penolakan_rupiah',
                 'lainnya',
             ]),

@@ -52,4 +52,11 @@ class UserFactory extends Factory
             'role' => UserRole::SuperAdmin,
         ]);
     }
+
+    public function police(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'role' => UserRole::Police,
+        ]);
+    }
 }

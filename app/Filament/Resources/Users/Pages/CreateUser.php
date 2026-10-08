@@ -15,7 +15,7 @@ class CreateUser extends CreateRecord
 
     protected static bool $canCreateAnother = false;
 
-    protected ?string $heading = 'Tambah admin';
+    protected ?string $heading = 'Tambah akun';
 
     protected ?string $subheading = 'Buat akun baru untuk membantu mengelola laporan dan data KUPVA.';
 
@@ -26,7 +26,7 @@ class CreateUser extends CreateRecord
     protected function getCreateFormAction(): Action
     {
         return parent::getCreateFormAction()
-            ->label('Simpan admin')
+            ->label('Simpan akun')
             ->icon(Heroicon::OutlinedUserPlus);
     }
 
@@ -39,6 +39,6 @@ class CreateUser extends CreateRecord
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Akun admin berhasil dibuat';
+        return 'Akun pengguna berhasil dibuat';
     }
 }

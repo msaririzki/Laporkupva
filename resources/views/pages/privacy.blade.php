@@ -12,7 +12,7 @@
             </h1>
 
             <p class="mt-2.5 max-w-[760px] mx-auto text-xs sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B]">
-                Data pelapor hanya digunakan petugas untuk verifikasi dan tindak lanjut laporan, bukan untuk ditampilkan kepada masyarakat.
+                Nama, email, dan nomor HP Anda terlindungi. Hanya petugas Bank Indonesia yang menggunakannya untuk verifikasi dan tindak lanjut laporan Anda.
             </p>
         </div>
     </section>
@@ -24,12 +24,12 @@
                 <div class="grid gap-5 md:grid-cols-2">
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Data yang tidak diminta</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Anda tidak perlu membuat akun atau memberikan NIK. Nama dan email pelapor wajib diisi. Nomor HP bersifat opsional.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Anda tidak perlu membuat akun atau memberikan NIK. Nama dan email pelapor wajib diisi. Nomor HP dapat Anda isi agar petugas Bank Indonesia lebih mudah menghubungi Anda.</p>
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Data yang digunakan</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Kronologi, lokasi, waktu, dan bukti digunakan untuk menindaklanjuti laporan. Nama, email, dan nomor HP disimpan terenkripsi serta hanya ditampilkan kepada petugas yang berwenang.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Kronologi, lokasi, waktu, dan bukti digunakan untuk menindaklanjuti laporan. Nama, email, dan nomor HP disimpan terenkripsi dan hanya dapat diakses oleh petugas Bank Indonesia.</p>
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">

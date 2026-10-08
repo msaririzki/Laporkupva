@@ -102,7 +102,7 @@ class PublicInformationPagesTest extends TestCase
             ->assertSee('Penyimpanan bukti terlindungi')
             ->assertSee('Alamat IP tidak disimpan sebagai bagian dari data laporan.')
             ->assertSee('layanan verifikasi anti-bot dapat memproses data teknis akses secara terbatas')
-            ->assertSee('Nomor HP bersifat opsional')
+            ->assertSee('Nomor HP dapat Anda isi agar petugas Bank Indonesia lebih mudah menghubungi Anda.')
             ->assertSee('Nama dan email pelapor wajib diisi')
             ->assertDontSee('Penyimpanan bukti terenkripsi')
             ->assertDontSee('Tanpa jejak pelapor');

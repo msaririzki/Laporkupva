@@ -30,7 +30,7 @@ class EditProfile extends BaseEditProfile
 
     public function getSubheading(): string|Htmlable|null
     {
-        return 'Kelola identitas dan keamanan akun admin TAMBORA.';
+        return 'Kelola identitas dan keamanan akun pengguna TAMBORA.';
     }
 
     public function defaultForm(Schema $schema): Schema
@@ -44,7 +44,7 @@ class EditProfile extends BaseEditProfile
         return $schema
             ->components([
                 Section::make('Informasi profil')
-                    ->description('Perbarui foto dan identitas yang tampil pada akun admin.')
+                    ->description('Perbarui foto dan identitas yang tampil pada akun pengguna.')
                     ->icon('heroicon-o-identification')
                     ->schema([
                         Grid::make([
@@ -84,7 +84,7 @@ class EditProfile extends BaseEditProfile
                                 Group::make([
                                     $this->getNameFormComponent()
                                         ->label('Nama lengkap')
-                                        ->placeholder('Nama admin')
+                                        ->placeholder('Nama pengguna')
                                         ->prefixIcon('heroicon-m-user'),
                                     $this->getEmailFormComponent()
                                         ->label('Alamat email')

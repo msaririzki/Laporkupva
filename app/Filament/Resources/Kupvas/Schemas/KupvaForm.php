@@ -169,6 +169,18 @@ class KupvaForm
                             ->minValue(115)
                             ->maxValue(120)
                             ->helperText('Rentang wilayah NTB: 115 sampai 120.'),
+                        Select::make('location_source')
+                            ->label('Ketepatan titik lokasi')
+                            ->options(['nominatim' => 'Perkiraan dari alamat', 'manual' => 'Titik telah diperiksa petugas'])
+                            ->in(['nominatim', 'manual'])
+                            ->helperText('Pilih titik telah diperiksa setelah memastikan koordinat sesuai lokasi usaha.')
+                            ->columnSpanFull(),
+                        Textarea::make('location_match_address')
+                            ->label('Alamat hasil pencarian peta')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->rows(2)
+                            ->columnSpanFull(),
                     ]),
             ]);
     }

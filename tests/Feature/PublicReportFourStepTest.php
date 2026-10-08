@@ -27,7 +27,12 @@ class PublicReportFourStepTest extends TestCase
         $response = $this->get(route('reports.create'));
 
         $response->assertSeeInOrder(['data-step="1"', 'Nama pelapor', 'Email pelapor', 'Nomor HP Pelapor', 'Verifikasi keamanan', 'data-step="2"', 'Ceritakan kejadian', 'data-step="3"', 'Lokasi Kejadian', 'data-step="4"', 'Tambahkan foto &amp; bukti'], false)
-            ->assertSee('Identitas Anda dirahasiakan')->assertSee('Nama, email, dan nomor HP tidak ditampilkan kepada masyarakat.')
+            ->assertSee('Data Anda dilindungi Bank Indonesia')
+            ->assertSee('Nama, email, dan nomor HP Anda terlindungi.')
+            ->assertSee('Hanya petugas Bank Indonesia yang menggunakannya')
+            ->assertSee('Lengkapi nama dan email agar petugas Bank Indonesia dapat membantu menindaklanjuti laporan Anda.')
+            ->assertDontSee('Nomor HP boleh dikosongkan.')
+            ->assertDontSee('Nomor HP Pelapor <span', false)
             ->assertSee('placeholder="Nama Anda" required', false)
             ->assertSee('Data pelapor dirahasiakan')->assertDontSee('Kegiatan masih berlangsung');
         $this->assertSame(1, substr_count($response->getContent(), 'id="reporter_phone"'));

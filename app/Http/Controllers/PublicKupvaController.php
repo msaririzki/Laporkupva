@@ -17,6 +17,7 @@ class PublicKupvaController extends Controller
     {
         $search = $request->string('q')->trim()->limit(100)->toString();
         $selectedRegency = NtbRegency::tryFrom($request->string('regency')->toString())?->value;
+        $displayMode = $request->string('view')->toString() === 'cards' ? 'cards' : 'map';
 
         $query = Kupva::query()
             ->where('license_status', 'active')
@@ -32,7 +33,9 @@ class PublicKupvaController extends Controller
                 $query
                     ->where('name', 'like', "%{$search}%")
                     ->orWhere('address', 'like', "%{$search}%")
-                    ->orWhere('district', 'like', "%{$search}%");
+                    ->orWhere('district', 'like', "%{$search}%")
+                    ->orWhere('village', 'like', "%{$search}%")
+                    ->orWhere('regency', 'like', "%{$search}%");
             });
         }
 
@@ -40,8 +43,24 @@ class PublicKupvaController extends Controller
             $query->where('regency', $selectedRegency);
         }
 
+        $query->orderBy('name')->orderBy('id');
+
+        $mapKupvas = $displayMode === 'map'
+            ? (clone $query)->get(['id', 'name', 'address', 'village', 'district', 'regency', 'latitude', 'longitude', 'location_source'])
+                ->map(fn (Kupva $kupva): array => [
+                    'id' => $kupva->id,
+                    'name' => $kupva->name,
+                    'address' => $kupva->address ?: collect([$kupva->village, $kupva->district, $kupva->regency])->filter()->join(', '),
+                    'latitude' => $kupva->latitude === null ? null : (float) $kupva->latitude,
+                    'longitude' => $kupva->longitude === null ? null : (float) $kupva->longitude,
+                    'approximate' => $kupva->location_source === 'nominatim',
+                ])
+            : collect();
+
         return view('pages.kupvas', [
-            'kupvas' => $query->orderBy('name')->orderBy('id')->paginate(12)->withQueryString(),
+            'kupvas' => (clone $query)->paginate(12)->withQueryString(),
+            'mapKupvas' => $mapKupvas,
+            'displayMode' => $displayMode,
             'regencies' => NtbRegency::cases(),
             'search' => $search,
             'selectedRegency' => $selectedRegency,

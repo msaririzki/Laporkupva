@@ -43,7 +43,7 @@
                 @if ($canManageAdmins)
                     <a href="{{ $usersUrl }}" class="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                         <x-filament::icon icon="heroicon-m-user-group" class="size-5 text-blue-100" />
-                        Kelola admin
+                        Kelola akun
                     </a>
                 @endif
             </div>

@@ -11,12 +11,12 @@ class ReportEvidencePolicy
 {
     public function viewAny(User $user): bool
     {
-        return $this->isAdmin($user);
+        return $user->canAccessPanel(Filament::getPanel('admin'));
     }
 
     public function view(User $user, ReportEvidence $reportEvidence): bool
     {
-        return $this->isAdmin($user);
+        return $user->canAccessPanel(Filament::getPanel('admin'));
     }
 
     /**

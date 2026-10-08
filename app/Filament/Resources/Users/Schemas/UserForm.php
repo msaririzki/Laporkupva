@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Users\Schemas;
 
 use App\Enums\UserRole;
 use App\Rules\NoHtml;
-use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
@@ -18,7 +18,7 @@ class UserForm
     {
         return $schema
             ->components([
-                Section::make('Informasi admin')
+                Section::make('Informasi akun')
                     ->description('Lengkapi identitas dan akses akun dengan data yang benar.')
                     ->icon(Heroicon::OutlinedUserCircle)
                     ->iconColor('primary')
@@ -28,7 +28,7 @@ class UserForm
                     ->schema([
                         TextInput::make('name')
                             ->label('Nama lengkap')
-                            ->placeholder('Nama admin')
+                            ->placeholder('Nama pengguna')
                             ->prefixIcon(Heroicon::OutlinedUser)
                             ->autocomplete('name')
                             ->required()
@@ -58,12 +58,22 @@ class UserForm
                             ->columnSpanFull(),
                         Toggle::make('is_active')
                             ->label('Akun aktif')
-                            ->helperText(fn (string $operation): string => $operation === 'edit' ? 'Nonaktifkan untuk mencabut akses tanpa menghapus riwayat aktivitas.' : 'Admin dapat langsung masuk dan mulai bekerja setelah akun disimpan.')
+                            ->helperText(fn (string $operation): string => $operation === 'edit' ? 'Nonaktifkan untuk mencabut akses tanpa menghapus riwayat aktivitas.' : 'Pengguna dapat masuk setelah akun disimpan, sesuai peran yang dipilih.')
                             ->extraFieldWrapperAttributes(['class' => 'admin-account-status'])
                             ->columnSpanFull()
                             ->default(true)
                             ->required(),
-                        Hidden::make('role')->default(UserRole::Admin->value),
+                        Select::make('role')
+                            ->label('Peran akun')
+                            ->options([
+                                UserRole::Admin->value => UserRole::Admin->label(),
+                                UserRole::Police->value => UserRole::Police->label(),
+                            ])
+                            ->default(UserRole::Admin->value)
+                            ->required()
+                            ->in([UserRole::Admin->value, UserRole::Police->value])
+                            ->helperText('Operator dapat mengelola laporan dan data KUPVA. Polisi hanya dapat melihat data tanpa nama dan kontak pelapor.')
+                            ->columnSpanFull(),
                     ]),
             ]);
     }

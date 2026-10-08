@@ -11,15 +11,17 @@ use Filament\Actions\ViewAction;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class ReportsTable
 {
     /** @var array<string, string> */
     private const INCIDENT_TYPES = [
         'kupva_tanpa_izin' => 'KUPVA tanpa izin',
-        'transaksi_mencurigakan' => 'Transaksi mencurigakan',
+        'transaksi_mencurigakan' => 'Kecurangan transaksi',
         'pelanggaran_kurs' => 'Pelanggaran kurs',
         'penolakan_rupiah' => 'Penolakan Rupiah',
         'lainnya' => 'Lainnya',
@@ -45,6 +47,12 @@ class ReportsTable
                     ->badge()
                     ->wrap()
                     ->sortable(),
+                TextColumn::make('approval_status')
+                    ->label('Persetujuan')
+                    ->state(fn (Report $record): ?string => $record->pendingProgressRequest ? 'Menunggu persetujuan' : ($record->latestProgressRequest?->status === 'rejected' ? 'Pengajuan ditolak' : null))
+                    ->description(fn (Report $record): ?string => $record->pendingProgressRequest?->to_status->label())
+                    ->badge()->color('warning')->wrap()
+                    ->visible(fn (): bool => auth()->user()?->canManageApplication() === true),
                 TextColumn::make('incident_type')
                     ->label('Jenis laporan')
                     ->formatStateUsing(fn (string $state): string => self::INCIDENT_TYPES[$state] ?? $state)
@@ -75,6 +83,9 @@ class ReportsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                Filter::make('pending_approval')->label('Menunggu persetujuan Administrator')
+                    ->query(fn (Builder $query): Builder => $query->whereHas('pendingProgressRequest'))
+                    ->visible(fn (): bool => auth()->user()?->canManageApplication() === true),
                 SelectFilter::make('status')
                     ->label('Status')
                     ->native(false)
@@ -83,7 +94,7 @@ class ReportsTable
                 SelectFilter::make('incident_type')
                     ->label('Jenis laporan')
                     ->native(false)
-                    ->options(self::INCIDENT_TYPES),
+                    ->options(array_diff_key(self::INCIDENT_TYPES, ['pelanggaran_kurs' => true])),
                 SelectFilter::make('regency')
                     ->label('Wilayah')
                     ->native(false)
@@ -117,10 +128,11 @@ class ReportsTable
                     ->size('sm')
                     ->color('gray'),
                 ReportResource::advanceStatusAction()
-                    ->label('Lanjutkan')
+                    ->label(fn (Report $record): string => $record->status->next()?->requiresApproval() ? 'Ajukan progres' : 'Lanjutkan')
                     ->button()
                     ->size('sm')
-                    ->tooltip('Lanjutkan ke tahap berikutnya'),
+                    ->tooltip(fn (Report $record): string => $record->status->next()?->requiresApproval() ? 'Ajukan tahap berikutnya kepada Administrator' : 'Lanjutkan ke tahap berikutnya'),
+                ReportResource::reviewProgressAction()->button()->size('sm'),
             ])
             ->recordActionsColumnLabel('Aksi')
             ->recordClasses(fn (Report $record): string => match ($record->status) {

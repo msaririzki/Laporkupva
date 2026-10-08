@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $password = config('tambora.seed_super_admin_password');
 
         if (! is_string($email) || ! is_string($password) || $email === '' || $password === '') {
-            $this->command?->warn('Akun Super Admin tidak dibuat. Isi SEED_SUPER_ADMIN_EMAIL dan SEED_SUPER_ADMIN_PASSWORD terlebih dahulu.');
+            $this->command?->warn('Akun Administrator tidak dibuat. Isi SEED_SUPER_ADMIN_EMAIL dan SEED_SUPER_ADMIN_PASSWORD terlebih dahulu.');
 
             return;
         }
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $superAdmin = User::query()->updateOrCreate(
             ['email' => $email],
             [
-                'name' => 'Super Admin TAMBORA',
+                'name' => 'Administrator TAMBORA',
                 'password' => $password,
                 'role' => UserRole::SuperAdmin,
                 'email_verified_at' => now(),

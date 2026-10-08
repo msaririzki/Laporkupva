@@ -109,13 +109,13 @@
                     <div class="border-b border-slate-100 pb-3 sm:pb-3.5">
                         <span class="inline-flex rounded-full border border-blue-200/60 bg-blue-50 px-3 py-1 text-xs font-bold text-[#2563EB]">Langkah 01</span>
                         <h2 class="mt-2 text-base font-extrabold tracking-tight text-[#0F172A] sm:text-xl lg:text-2xl">Data pelapor</h2>
-                        <p class="mt-1 text-xs leading-relaxed text-[#64748B] sm:text-sm">Isi nama dan email Anda. Nomor HP boleh dikosongkan.</p>
+                        <p class="mt-1 text-xs leading-relaxed text-[#64748B] sm:text-sm">Lengkapi nama dan email agar petugas Bank Indonesia dapat membantu menindaklanjuti laporan Anda.</p>
                     </div>
                     <div class="mt-3 flex items-start gap-2.5 rounded-xl border border-blue-100 bg-blue-50/60 px-3 py-2.5" id="reporter-privacy-hint">
                         <svg class="mt-0.5 h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4"/></svg>
                         <div class="min-w-0 text-xs leading-relaxed sm:text-sm">
-                            <p class="font-semibold text-[#0F172A]">Identitas Anda dirahasiakan</p>
-                            <p class="mt-0.5 text-[#64748B]">Nama, email, dan nomor HP tidak ditampilkan kepada masyarakat. Hanya petugas berwenang yang dapat mengaksesnya untuk verifikasi dan tindak lanjut laporan.</p>
+                            <p class="font-semibold text-[#0F172A]">Data Anda dilindungi Bank Indonesia</p>
+                            <p class="mt-0.5 text-[#64748B]">Nama, email, dan nomor HP Anda terlindungi. Hanya petugas Bank Indonesia yang menggunakannya untuk verifikasi dan tindak lanjut laporan Anda.</p>
                         </div>
                     </div>
                     <div class="mt-4 grid gap-4 sm:grid-cols-2">
@@ -131,9 +131,9 @@
                             @error('reporter_email')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
                         <div>
-                            <label class="form-label" for="reporter_phone">Nomor HP Pelapor <span class="text-xs font-normal text-slate-400">(opsional)</span></label>
+                            <label class="form-label" for="reporter_phone">Nomor HP Pelapor</label>
                             <input class="form-control @error('reporter_phone') is-invalid @enderror" id="reporter_phone" name="reporter_phone" type="tel" value="{{ old('reporter_phone') }}" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="Contoh: 0812 3456 7890">
-                            <p class="form-helper">Hanya digunakan petugas bila perlu menghubungi Anda.</p>
+                            <p class="form-helper">Nomor HP membantu petugas Bank Indonesia menghubungi Anda jika diperlukan.</p>
                             @error('reporter_phone')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
                     </div>
@@ -175,8 +175,7 @@
                                 <select class="form-control @error('incident_type') is-invalid @enderror" id="incident_type" name="incident_type" required>
                                     <option value="">PILIH JENIS KEJADIAN</option>
                                     <option value="kupva_tanpa_izin" @selected(old('incident_type') === 'kupva_tanpa_izin')>DUGAAN KUPVA TANPA IZIN</option>
-                                    <option value="transaksi_mencurigakan" @selected(old('incident_type') === 'transaksi_mencurigakan')>TRANSAKSI MENCURIGAKAN</option>
-                                    <option value="pelanggaran_kurs" @selected(old('incident_type') === 'pelanggaran_kurs')>PELANGGARAN KURS</option>
+                                    <option value="transaksi_mencurigakan" @selected(old('incident_type') === 'transaksi_mencurigakan')>KECURANGAN TRANSAKSI</option>
                                     <option value="penolakan_rupiah" @selected(old('incident_type') === 'penolakan_rupiah')>PENOLAKAN RUPIAH</option>
                                     <option value="lainnya" @selected(old('incident_type') === 'lainnya')>LAINNYA TERKAIT VALAS</option>
                                 </select>

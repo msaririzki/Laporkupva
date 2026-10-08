@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Reports;
 
 use App\Enums\ReportStatus;
+use App\Filament\Resources\ReportProgressRequests\ReportProgressRequestResource;
 use App\Filament\Resources\Reports\Pages\EditReport;
 use App\Filament\Resources\Reports\Pages\ListReports;
 use App\Filament\Resources\Reports\Pages\ViewReport;
@@ -11,12 +12,13 @@ use App\Filament\Resources\Reports\Schemas\ReportInfolist;
 use App\Filament\Resources\Reports\Tables\ReportsTable;
 use App\Models\Report;
 use App\Models\ReportEvidence;
-use App\Models\ReportStatusHistory;
+use App\Models\ReportProgressRequest;
 use App\Models\User;
 use App\Rules\NoHtml;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
@@ -26,10 +28,11 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use RuntimeException;
 
 class ReportResource extends Resource
@@ -49,6 +52,27 @@ class ReportResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'public_code';
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        if (auth()->user()?->canManageApplication() === true) {
+            $query->with(['pendingProgressRequest.requester', 'latestProgressRequest.reviewer']);
+        }
+
+        if (auth()->user()?->canViewReporterIdentity() !== true) {
+            $query->select([
+                'id', 'public_code', 'status', 'incident_type', 'business_name',
+                'incident_date', 'incident_time', 'description', 'is_ongoing',
+                'province', 'regency', 'district', 'village', 'address',
+                'latitude', 'longitude', 'location_accuracy', 'public_update',
+                'internal_notes', 'received_at', 'coordinated_at', 'field_action_at',
+                'completed_at', 'created_at', 'updated_at',
+            ]);
+        }
+
+        return $query;
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -75,19 +99,21 @@ class ReportResource extends Resource
     public static function advanceStatusAction(): Action
     {
         return Action::make('advanceStatus')
-            ->label('Update progres')
+            ->label(fn (Report $record): string => $record->status->next()?->requiresApproval() ? 'Ajukan progres' : 'Update progres')
             ->icon(Heroicon::OutlinedArrowRightCircle)
             ->color('primary')
             ->extraAttributes(['data-advance-report' => 'true'])
-            ->visible(fn (Report $record): bool => $record->status->next() !== null)
+            ->authorize('update')
+            ->visible(fn (Report $record): bool => auth()->user()?->canManageApplication() === true && $record->status->next() !== null && $record->pendingProgressRequest === null)
             ->modalIcon(Heroicon::OutlinedArrowRightCircle)
-            ->modalHeading('Update progres')
-            ->modalDescription(fn (Report $record): string => "{$record->status->label()} → {$record->status->next()?->label()}")
-            ->modalSubmitActionLabel('Lanjutkan tahap')
+            ->modalHeading(fn (Report $record): string => $record->status->next()?->requiresApproval() ? 'Ajukan progres kepada Administrator' : 'Update progres')
+            ->modalDescription(fn (Report $record): string => "{$record->status->label()} → {$record->status->next()?->label()}".($record->status->next()?->requiresApproval() ? '. Progres dan pesan masyarakat baru berubah setelah Administrator menyetujui pengajuan.' : ''))
+            ->modalSubmitActionLabel(fn (Report $record): string => $record->status->next()?->requiresApproval() ? 'Kirim pengajuan' : 'Lanjutkan tahap')
             ->modalWidth(Width::TwoExtraLarge)
             ->extraModalWindowAttributes(['class' => 'tambora-action-modal tambora-action-modal--progress'])
             ->extraModalOverlayAttributes(['class' => 'tambora-action-modal-overlay'])
             ->schema([
+                Hidden::make('expected_from_status')->default(fn (Report $record): string => $record->status->value)->required(),
                 Grid::make([
                     'default' => 1,
                     'sm' => 2,
@@ -102,20 +128,37 @@ class ReportResource extends Resource
                         ->rows(8)
                         ->columnSpanFull(),
                     Textarea::make('internal_note')
-                        ->label('Catatan admin')
+                        ->label('Catatan Operator')
                         ->placeholder('Contoh: Hasil pemeriksaan atau koordinasi petugas.')
-                        ->helperText('Hanya dapat dilihat admin.')
+                        ->helperText('Hanya dapat dilihat Administrator dan Operator.')
                         ->maxLength(2000)
                         ->rule(new NoHtml)
-                        ->rows(2),
+                        ->rows(8)
+                        ->columnSpanFull(),
                 ]),
                 self::activityPhotoUpload(),
             ])
             ->action(function (Report $record, array $data): void {
+                Gate::authorize('update', $record);
                 Gate::authorize('create', ReportEvidence::class);
+
+                if (($data['expected_from_status'] ?? null) !== $record->status->value) {
+                    throw ValidationException::withMessages(['public_note' => 'Tahap laporan sudah berubah. Tutup formulir dan muat ulang laporan sebelum mengajukan progres.']);
+                }
 
                 /** @var User $user */
                 $user = auth()->user();
+
+                if ($record->status->next()?->requiresApproval()) {
+                    ReportProgressRequest::submit($record, $user, $data);
+                    $record->unsetRelation('pendingProgressRequest');
+                    $record->unsetRelation('latestProgressRequest');
+                    Notification::make()->title('Pengajuan progres dikirim')
+                        ->body("{$record->public_code} menunggu persetujuan Administrator. Status masyarakat tetap pada tahap {$record->status->label()}.")
+                        ->warning()->send();
+
+                    return;
+                }
 
                 DB::transaction(function () use ($data, $record, $user): void {
                     $advanced = $record->advanceStatus(
@@ -134,8 +177,7 @@ class ReportResource extends Resource
                         ->latest('id')
                         ->firstOrFail();
 
-                    self::storeActivityEvidence(
-                        $record,
+                    $record->storeActivityEvidence(
                         $history,
                         $user,
                         $data['activity_photos'] ?? [],
@@ -159,12 +201,14 @@ class ReportResource extends Resource
     public static function addActivityEvidenceAction(): Action
     {
         return Action::make('addActivityEvidence')
+            ->authorize('update')
+            ->visible(fn (): bool => auth()->user()?->canManageApplication() === true)
             ->label('Tambah dokumentasi')
             ->icon(Heroicon::OutlinedPhoto)
             ->color('gray')
             ->modalIcon(Heroicon::OutlinedPhoto)
             ->modalHeading('Tambah dokumentasi')
-            ->modalDescription(fn (Report $record): string => "Tahap: {$record->status->label()} · hanya untuk admin.")
+            ->modalDescription(fn (Report $record): string => "Tahap: {$record->status->label()} · hanya untuk Administrator dan Operator.")
             ->modalSubmitActionLabel('Simpan')
             ->modalWidth(Width::TwoExtraLarge)
             ->schema([
@@ -187,8 +231,7 @@ class ReportResource extends Resource
                     ->firstOrFail();
 
                 DB::transaction(function () use ($data, $history, $record, $user): void {
-                    self::storeActivityEvidence(
-                        $record,
+                    $record->storeActivityEvidence(
                         $history,
                         $user,
                         $data['activity_photos'] ?? [],
@@ -206,6 +249,72 @@ class ReportResource extends Resource
                     ->body('Foto tersimpan pada tahap '.$record->status->label().'.')
                     ->success()
                     ->send();
+            });
+    }
+
+    public static function approveProgressAction(): Action
+    {
+        return Action::make('approveProgress')
+            ->label('Tinjau dan setujui')
+            ->icon(Heroicon::OutlinedCheckBadge)
+            ->color('success')
+            ->authorize(fn (): bool => auth()->user()?->isSuperAdmin() === true && auth()->user()?->is_active === true)
+            ->visible(fn (Report $record): bool => auth()->user()?->isSuperAdmin() === true && $record->pendingProgressRequest !== null)
+            ->modalHeading('Tinjau pengajuan progres')
+            ->modalDescription(fn (Report $record): string => "{$record->public_code}: {$record->status->label()} → {$record->pendingProgressRequest?->to_status->label()}. Persetujuan akan memperbarui status dan pesan yang dilihat masyarakat.")
+            ->modalSubmitActionLabel('Setujui dan perbarui progres')
+            ->modalWidth(Width::TwoExtraLarge)
+            ->fillForm(fn (Report $record): array => [
+                'progress_request_id' => $record->pendingProgressRequest?->id,
+                'public_note' => $record->pendingProgressRequest?->public_note,
+                'internal_note' => $record->pendingProgressRequest?->internal_note,
+                'activity_photos' => $record->pendingProgressRequest?->activity_photos ?? [],
+                'activity_photo_names' => $record->pendingProgressRequest?->activity_photo_names ?? [],
+            ])
+            ->schema([
+                Hidden::make('progress_request_id')->required()->rule('integer'),
+                Textarea::make('public_note')->label('Pesan untuk masyarakat')->required()->maxLength(1000)->rule(new NoHtml)->rows(8)
+                    ->helperText('Periksa dan sesuaikan pesan sebelum menyetujui. Pesan ini akan ditampilkan kepada pelapor.'),
+                Textarea::make('internal_note')->label('Catatan internal')->maxLength(2000)->rule(new NoHtml)->rows(3),
+                self::activityPhotoUpload()->disabled()->dehydrated(false)->preventFilePathTampering(false)
+                    ->helperText('Dokumentasi yang dilampirkan pengaju. Foto dicatat pada tahap laporan setelah disetujui.'),
+            ])
+            ->action(function (Report $record, array $data): void {
+                $request = $record->progressRequests()->findOrFail($data['progress_request_id']);
+                $request->approve(auth()->user(), $data['public_note'], $data['internal_note'] ?? null);
+                $record->refresh();
+                Notification::make()->title('Pengajuan progres disetujui')->body("{$record->public_code} kini berada pada tahap {$record->status->label()}.")->success()->send();
+            });
+    }
+
+    public static function reviewProgressAction(): Action
+    {
+        return Action::make('reviewProgress')
+            ->label('Tinjau pengajuan')->icon(Heroicon::OutlinedCheckBadge)->color('warning')
+            ->visible(fn (Report $record): bool => auth()->user()?->isSuperAdmin() === true && $record->pendingProgressRequest !== null)
+            ->url(fn (Report $record): string => ReportProgressRequestResource::getUrl('view', ['record' => $record->pendingProgressRequest]));
+    }
+
+    public static function rejectProgressAction(): Action
+    {
+        return Action::make('rejectProgress')
+            ->label('Tolak pengajuan')
+            ->icon(Heroicon::OutlinedXCircle)
+            ->color('danger')
+            ->authorize(fn (): bool => auth()->user()?->isSuperAdmin() === true && auth()->user()?->is_active === true)
+            ->visible(fn (Report $record): bool => auth()->user()?->isSuperAdmin() === true && $record->pendingProgressRequest !== null)
+            ->modalHeading('Tolak pengajuan progres')
+            ->modalDescription('Status laporan masyarakat tetap pada tahap terakhir yang disetujui. Alasan penolakan dikirim kepada pengaju untuk diperbaiki.')
+            ->modalSubmitActionLabel('Tolak dan kirim alasan')
+            ->fillForm(fn (Report $record): array => ['progress_request_id' => $record->pendingProgressRequest?->id])
+            ->schema([
+                Hidden::make('progress_request_id')->required()->rule('integer'),
+                Textarea::make('reason')->label('Alasan penolakan')->required()->minLength(10)->maxLength(1000)->rule(new NoHtml)->rows(4),
+            ])
+            ->action(function (Report $record, array $data): void {
+                $record->progressRequests()->findOrFail($data['progress_request_id'])->reject(auth()->user(), $data['reason']);
+                $record->refresh();
+                Notification::make()->title('Pengajuan progres ditolak')->body('Alasan penolakan telah dikirim kepada pengaju. Status masyarakat tetap.')->warning()->send();
             });
     }
 
@@ -239,48 +348,15 @@ class ReportResource extends Resource
             ->uploadingMessage('Mengoptimalkan dan mengunggah foto…');
     }
 
-    /**
-     * @param  array<array-key, string>  $paths
-     * @param  array<string, string>  $originalNames
-     */
-    private static function storeActivityEvidence(
-        Report $report,
-        ReportStatusHistory $history,
-        User $user,
-        array $paths,
-        array $originalNames,
-        ?string $caption,
-    ): void {
-        $disk = Storage::disk('local');
-        $directory = "report-activity/{$report->getKey()}/";
-
-        foreach ($paths as $path) {
-            if (! is_string($path) || ! str_starts_with($path, $directory) || ! $disk->exists($path)) {
-                throw new RuntimeException('Lokasi foto kegiatan tidak valid.');
-            }
-
-            $report->evidence()->create([
-                'report_status_history_id' => $history->getKey(),
-                'uploaded_by_user_id' => $user->getKey(),
-                'source' => 'admin_activity',
-                'path' => $path,
-                'original_name' => $originalNames[$path] ?? basename($path),
-                'mime_type' => $disk->mimeType($path) ?: 'application/octet-stream',
-                'size' => $disk->size($path),
-                'caption' => filled($caption) ? trim($caption) : null,
-            ]);
-        }
-    }
-
     public static function correctStatusAction(): Action
     {
         return Action::make('correctStatus')
             ->label('Koreksi status')
             ->icon(Heroicon::OutlinedArrowUturnLeft)
             ->color('warning')
-            ->visible(fn (Report $record): bool => auth()->user()?->isSuperAdmin() === true && $record->status !== ReportStatus::Submitted)
+            ->visible(fn (Report $record): bool => auth()->user()?->isSuperAdmin() === true && $record->status !== ReportStatus::Submitted && $record->pendingProgressRequest === null)
             ->modalHeading('Koreksi tahap penanganan')
-            ->modalDescription('Khusus Super Admin. Riwayat status lama tetap tersimpan dan alasan koreksi dicatat sebagai catatan internal.')
+            ->modalDescription('Khusus Administrator. Riwayat status lama tetap tersimpan dan alasan koreksi dicatat sebagai catatan internal.')
             ->modalSubmitActionLabel('Simpan koreksi')
             ->schema([
                 Select::make('status')
@@ -302,6 +378,7 @@ class ReportResource extends Resource
                     ->rows(3),
             ])
             ->action(function (Report $record, array $data): void {
+                Gate::authorize('update', $record);
                 $record->correctStatus(
                     auth()->user(),
                     ReportStatus::from($data['status']),

@@ -24,6 +24,7 @@ class ViewReport extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            ReportResource::reviewProgressAction(),
             ReportResource::advanceStatusAction(),
             Action::make('openConversation')
                 ->label('Buka percakapan')
@@ -45,6 +46,8 @@ class ViewReport extends ViewRecord
                     }
                     JS),
             ActionGroup::make([
+                ReportResource::approveProgressAction(),
+                ReportResource::rejectProgressAction(),
                 ReportResource::addActivityEvidenceAction(),
                 EditAction::make()
                     ->label('Edit catatan internal')

@@ -27,7 +27,7 @@ class WelcomeOverview extends Widget
     protected function getViewData(): array
     {
         return [
-            'adminName' => auth()->user()?->name ?? 'Admin',
+            'adminName' => auth()->user()?->name ?? 'Pengguna',
             'currentDate' => now()->translatedFormat('l, d F Y'),
             'reportsUrl' => ReportResource::getUrl('index'),
             'kupvasUrl' => KupvaResource::getUrl('index'),

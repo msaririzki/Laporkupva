@@ -28,12 +28,22 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_active && in_array($this->role, [UserRole::SuperAdmin, UserRole::Admin], true);
+        return $this->is_active && in_array($this->role, [UserRole::SuperAdmin, UserRole::Admin, UserRole::Police], true);
     }
 
     public function isSuperAdmin(): bool
     {
         return $this->role === UserRole::SuperAdmin;
+    }
+
+    public function canManageApplication(): bool
+    {
+        return $this->is_active && in_array($this->role, [UserRole::SuperAdmin, UserRole::Admin], true);
+    }
+
+    public function canViewReporterIdentity(): bool
+    {
+        return $this->canManageApplication();
     }
 
     public function getFilamentAvatarUrl(): ?string

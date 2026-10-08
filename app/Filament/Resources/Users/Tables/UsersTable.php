@@ -18,12 +18,12 @@ class UsersTable
             ->defaultSort('name')
             ->paginated([10, 25, 50])
             ->defaultPaginationPageOption(10)
-            ->searchPlaceholder('Cari nama atau email admin…')
+            ->searchPlaceholder('Cari nama atau email pengguna…')
             ->searchDebounce('350ms')
             ->stackedOnMobile()
             ->columns([
                 TextColumn::make('name')
-                    ->label('Nama admin')
+                    ->label('Nama pengguna')
                     ->searchable()
                     ->weight('bold')
                     ->description(fn (User $record): string => $record->email),
@@ -40,11 +40,11 @@ class UsersTable
                     ->color('gray'),
             )
             ->recordActions([
-                EditAction::make()->iconButton()->tooltip('Ubah akun admin'),
+                EditAction::make()->iconButton()->tooltip('Ubah akun pengguna'),
             ])
             ->recordClasses('admin-user-row')
-            ->emptyStateHeading('Belum ada akun admin')
-            ->emptyStateDescription('Buat akun admin untuk membantu mengelola laporan.')
+            ->emptyStateHeading('Belum ada akun pengguna')
+            ->emptyStateDescription('Buat akun pengguna untuk membantu mengelola laporan.')
             ->emptyStateIcon('heroicon-o-user-group');
     }
 }

@@ -1,4 +1,4 @@
-<aside class="admin-login-intro" aria-label="Tentang portal admin TAMBORA">
+<aside class="admin-login-intro" aria-label="Tentang portal internal TAMBORA">
     <div class="admin-login-brand">
         <div class="admin-login-logo-shell">
             <img

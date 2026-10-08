@@ -2,7 +2,7 @@
     @php
         $incidentTypes = [
             'kupva_tanpa_izin' => 'Dugaan KUPVA tanpa izin',
-            'transaksi_mencurigakan' => 'Transaksi penukaran mencurigakan',
+            'transaksi_mencurigakan' => 'Kecurangan transaksi',
             'pelanggaran_kurs' => 'Informasi kurs tidak wajar/tidak transparan',
             'penolakan_rupiah' => 'Penolakan penggunaan Rupiah',
             'lainnya' => 'Lainnya terkait penukaran valuta asing',

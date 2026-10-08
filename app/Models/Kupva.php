@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
     'village',
     'latitude',
     'longitude',
+    'location_source',
+    'location_match_address',
     'license_expires_at',
     'is_active',
 ])]

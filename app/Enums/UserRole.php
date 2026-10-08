@@ -8,12 +8,14 @@ enum UserRole: string implements HasLabel
 {
     case SuperAdmin = 'super_admin';
     case Admin = 'admin';
+    case Police = 'police';
 
     public function label(): string
     {
         return match ($this) {
-            self::SuperAdmin => 'Super Admin',
-            self::Admin => 'Admin',
+            self::SuperAdmin => 'Administrator',
+            self::Admin => 'Operator',
+            self::Police => 'Polisi',
         };
     }
 

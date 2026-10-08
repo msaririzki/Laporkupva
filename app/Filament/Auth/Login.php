@@ -11,7 +11,7 @@ class Login extends BaseLogin
 {
     public function getTitle(): string|Htmlable
     {
-        return 'Masuk Admin';
+        return 'Masuk portal internal';
     }
 
     public function getHeading(): string|Htmlable|null
@@ -21,7 +21,7 @@ class Login extends BaseLogin
 
     public function getSubheading(): string|Htmlable|null
     {
-        return 'Gunakan akun admin Anda.';
+        return 'Gunakan akun pengguna Anda.';
     }
 
     public function hasLogo(): bool
@@ -32,7 +32,7 @@ class Login extends BaseLogin
     protected function getEmailFormComponent(): Component
     {
         return parent::getEmailFormComponent()
-            ->label('Email admin')
+            ->label('Email akun')
             ->placeholder('nama@domain.com')
             ->prefixIcon('heroicon-m-envelope');
     }

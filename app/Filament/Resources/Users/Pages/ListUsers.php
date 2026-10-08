@@ -13,14 +13,14 @@ class ListUsers extends ListRecords
 
     public function getSubheading(): ?string
     {
-        return 'Atur akun dan akses admin yang membantu proses pengawasan.';
+        return 'Atur akun dan akses pengguna yang membantu proses pengawasan.';
     }
 
     protected function getHeaderActions(): array
     {
         return [
             CreateAction::make()
-                ->label('Tambah admin')
+                ->label('Tambah akun')
                 ->icon(Heroicon::OutlinedUserPlus),
         ];
     }

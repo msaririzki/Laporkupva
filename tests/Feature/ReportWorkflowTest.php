@@ -43,7 +43,7 @@ class ReportWorkflowTest extends TestCase
     public function test_field_action_advances_directly_to_completed(): void
     {
         $report = Report::factory()->create(['status' => ReportStatus::FieldAction]);
-        $admin = User::factory()->create();
+        $admin = User::factory()->superAdmin()->create();
 
         $this->assertTrue($report->advanceStatus($admin));
 
@@ -73,7 +73,7 @@ class ReportWorkflowTest extends TestCase
 
         $this->assertSame(ReportStatus::FieldAction, $report->fresh()->status);
         $this->assertSame(ReportStatus::FieldAction, $report->statusHistories()->first()->from_status);
-        $this->assertTrue($report->fresh()->advanceStatus(null));
+        $this->assertTrue($report->fresh()->advanceStatus(User::factory()->superAdmin()->create()));
     }
 
     public function test_only_super_admin_can_manage_admin_accounts(): void

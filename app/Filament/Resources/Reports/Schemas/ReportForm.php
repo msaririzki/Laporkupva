@@ -14,7 +14,7 @@ class ReportForm
         return $schema
             ->components([
                 Section::make('Catatan penanganan internal')
-                    ->description('Catatan ini hanya terlihat oleh admin dan tidak ditampilkan kepada pelapor.')
+                    ->description('Catatan ini hanya terlihat oleh Administrator dan Operator dan tidak ditampilkan kepada pelapor.')
                     ->schema([
                         Textarea::make('internal_notes')
                             ->label('Catatan internal')

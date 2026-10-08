@@ -3,6 +3,12 @@ import './map-layers';
 import { initCustomSelect } from './report-form';
 import './report-access';
 
+if (document.querySelector('[data-public-kupva-map]')) {
+    import('./kupva-map').then(({ initPublicKupvaMap }) => initPublicKupvaMap()).catch(() => {
+        document.querySelector('[data-kupva-map-status]').textContent = 'Peta belum dapat dimuat. Pilih tampilan Kartu untuk melihat nama dan alamat usaha.';
+    });
+}
+
 document.querySelectorAll('[data-custom-select]').forEach(initCustomSelect);
 
 document.querySelectorAll('[data-auto-submit]').forEach((field) => {
