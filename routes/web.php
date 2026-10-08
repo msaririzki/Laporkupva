@@ -19,7 +19,8 @@ Route::get('/kupva-berizin', PublicKupvaController::class)->name('kupvas.index')
 
 Route::controller(PublicReportController::class)->group(function (): void {
     Route::get('/lapor', 'create')->name('reports.create');
-    Route::post('/lapor', 'store')->middleware('throttle:report-submissions')->name('reports.store');
+    Route::post('/lapor/verifikasi', 'verify')->middleware('throttle:10,1')->block(60, 10)->name('reports.verify');
+    Route::post('/lapor', 'store')->middleware('throttle:report-submissions')->block(60, 10)->name('reports.store');
     Route::get('/lapor/berhasil', 'success')->name('reports.success');
 });
 

@@ -9,14 +9,14 @@
                             Daftar Money Changer Berizin
                         </h1>
                         <p class="mt-2 max-w-2xl text-xs leading-relaxed text-[#64748B] sm:text-sm">
-                            Temukan Money Changer berizin Bank Indonesia di Nusa Tenggara Barat, lalu cocokkan nama usaha dan nomor izinnya sebelum bertransaksi.
+                            Temukan Money Changer berizin Bank Indonesia di Nusa Tenggara Barat berdasarkan nama usaha dan alamatnya.
                         </p>
                         <p class="mt-1.5 text-[11px] leading-relaxed text-slate-500">KUPVA BB adalah istilah resmi untuk usaha Money Changer bukan bank.</p>
                     </div>
                     <div class="flex shrink-0 items-center gap-4 text-xs font-semibold lg:pt-1">
                         <a href="#daftar-kupva" class="inline-flex min-h-9 items-center gap-2 rounded-lg bg-blue-50 px-3 text-[#2563EB] transition hover:bg-blue-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Lihat daftar <span aria-hidden="true">↓</span></a>
                         <a href="https://www.bi.go.id/id/edukasi/Pages/Penjualan-Valuta-Asing.aspx" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-slate-600 transition hover:text-[#2563EB]">
-                            Sumber BI
+                            Sumber informasi BI
                             <span aria-hidden="true">↗</span>
                         </a>
                     </div>
@@ -60,7 +60,7 @@
                                 value="{{ $search }}"
                                 maxlength="100"
                                 class="form-control pl-10"
-                                placeholder="Nama usaha, nomor izin, atau alamat"
+                                placeholder="Nama usaha atau alamat"
                             >
                         </div>
                     </div>
@@ -118,51 +118,20 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15v18h-15V3Zm3.75 4.5h.008v.008H8.25V7.5Zm0 4.5h.008v.008H8.25V12Zm0 4.5h.008v.008H8.25V16.5Zm4.5-9h3m-3 4.5h3m-3 4.5h3" />
                                     </svg>
                                 </div>
-                                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700 ring-1 ring-emerald-200/80">
-                                    <span class="size-1.5 rounded-full bg-emerald-500"></span>
-                                    Izin aktif
-                                </span>
                             </div>
 
                             <h2 class="mt-3 text-sm font-extrabold leading-snug text-[#0F172A] sm:text-base">{{ $kupva->name }}</h2>
-                            <div class="mt-2 rounded-xl bg-slate-50 px-3 py-2.5 ring-1 ring-slate-200/80">
-                                <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">Nomor izin</p>
-                                <p class="mt-0.5 break-all text-xs font-bold text-[#1E3A5F] sm:text-sm">{{ $kupva->license_number }}</p>
-                            </div>
 
                             <dl class="mt-3 grid gap-2 text-xs leading-relaxed text-[#64748B]">
                                 <div class="flex items-start gap-2">
                                     <svg class="mt-0.5 size-4 shrink-0 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.549l.04.018.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clip-rule="evenodd" /></svg>
                                     <div>
-                                        <dt class="sr-only">Lokasi</dt>
-                                        <dd class="font-semibold text-slate-700">{{ $kupva->regency }}</dd>
-                                        @if (filled($kupva->address) || filled($kupva->district))
-                                            <dd>{{ collect([$kupva->address, $kupva->district])->filter()->join(', ') }}</dd>
-                                        @endif
+                                        <dt class="sr-only">Alamat</dt>
+                                        <dd>{{ $kupva->address ?: collect([$kupva->village, $kupva->district, $kupva->regency])->filter()->join(', ') }}</dd>
                                     </div>
                                 </div>
-                                @if ($kupva->license_expires_at !== null)
-                                    <div class="flex items-center gap-2">
-                                        <svg class="size-4 shrink-0 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M6.75 2a.75.75 0 0 1 .75.75V4h5V2.75a.75.75 0 0 1 1.5 0V4h.75A2.25 2.25 0 0 1 17 6.25v8.5A2.25 2.25 0 0 1 14.75 17h-9.5A2.25 2.25 0 0 1 3 14.75v-8.5A2.25 2.25 0 0 1 5.25 4H6V2.75A.75.75 0 0 1 6.75 2ZM4.5 8.5v6.25c0 .414.336.75.75.75h9.5a.75.75 0 0 0 .75-.75V8.5h-11Z" clip-rule="evenodd" /></svg>
-                                        <div>
-                                            <dt class="sr-only">Masa berlaku</dt>
-                                            <dd>Berlaku sampai <strong class="text-slate-700">{{ $kupva->license_expires_at->translatedFormat('d F Y') }}</strong></dd>
-                                        </div>
-                                    </div>
-                                @endif
                             </dl>
 
-                            @if ($kupva->latitude !== null && $kupva->longitude !== null)
-                                <a
-                                    href="https://www.google.com/maps/search/?api=1&query={{ rawurlencode($kupva->latitude.','.$kupva->longitude) }}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="mt-auto inline-flex items-center gap-1.5 pt-4 text-xs font-bold text-[#2563EB] transition group-hover:text-[#1D4ED8]"
-                                >
-                                    Lihat lokasi
-                                    <span aria-hidden="true">↗</span>
-                                </a>
-                            @endif
                         </article>
                     @endforeach
                 </div>

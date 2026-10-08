@@ -42,10 +42,14 @@ class KupvaForm
                             ->label('Nomor izin')
                             ->placeholder('Contoh: KEP-123/BI/2026')
                             ->prefixIcon(Heroicon::OutlinedIdentification)
-                            ->required()
+                            ->helperText('Boleh kosong jika nomor izin belum tersedia pada data BI.')
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
                             ->rule(new NoHtml),
+                        Select::make('office_type')
+                            ->label('Jenis kantor')
+                            ->options(['KP' => 'Kantor pusat (KP)', 'KC' => 'Kantor cabang (KC)'])
+                            ->in(['KP', 'KC']),
                         Select::make('regency')
                             ->label('Kabupaten/kota')
                             ->placeholder('Pilih wilayah')

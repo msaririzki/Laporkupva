@@ -21,8 +21,6 @@ class PublicKupvaController extends Controller
         $query = Kupva::query()
             ->where('license_status', 'active')
             ->where('is_active', true)
-            ->whereNotNull('license_number')
-            ->where('license_number', '!=', '')
             ->where(function (Builder $query): void {
                 $query
                     ->whereNull('license_expires_at')
@@ -33,7 +31,6 @@ class PublicKupvaController extends Controller
             $query->where(function (Builder $query) use ($search): void {
                 $query
                     ->where('name', 'like', "%{$search}%")
-                    ->orWhere('license_number', 'like', "%{$search}%")
                     ->orWhere('address', 'like', "%{$search}%")
                     ->orWhere('district', 'like', "%{$search}%");
             });
@@ -44,7 +41,7 @@ class PublicKupvaController extends Controller
         }
 
         return view('pages.kupvas', [
-            'kupvas' => $query->orderBy('name')->paginate(12)->withQueryString(),
+            'kupvas' => $query->orderBy('name')->orderBy('id')->paginate(12)->withQueryString(),
             'regencies' => NtbRegency::cases(),
             'search' => $search,
             'selectedRegency' => $selectedRegency,

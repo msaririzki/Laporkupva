@@ -23,7 +23,7 @@ class DemoDataSeederTest extends TestCase
 
         $this->assertDatabaseCount('kupvas', 12);
         $this->assertDatabaseCount('reports', 28);
-        $this->assertDatabaseCount('report_status_histories', 94);
+        $this->assertDatabaseCount('report_status_histories', 81);
         $this->assertDatabaseHas('kupvas', [
             'license_number' => 'DEMO-NTB-0001',
             'name' => 'KUPVA Demo Cakranegara 01',
@@ -46,13 +46,13 @@ class DemoDataSeederTest extends TestCase
         ]);
 
         $completedReport = Report::query()
-            ->where('public_code', 'LKP-DEMO-0006')
+            ->where('public_code', 'LKP-DEMO-0005')
             ->firstOrFail();
 
         $this->assertSame(ReportStatus::Completed, $completedReport->status);
         $this->assertFalse($completedReport->is_ongoing);
         $this->assertNotNull($completedReport->completed_at);
-        $this->assertCount(6, $completedReport->statusHistories);
+        $this->assertCount(5, $completedReport->statusHistories);
         $this->assertTrue(Hash::check(DemoDataSeeder::TRACKING_PIN, $completedReport->tracking_pin_hash));
     }
 
@@ -71,7 +71,7 @@ class DemoDataSeederTest extends TestCase
 
         $this->assertDatabaseCount('kupvas', 12);
         $this->assertDatabaseCount('reports', 28);
-        $this->assertDatabaseCount('report_status_histories', 94);
+        $this->assertDatabaseCount('report_status_histories', 81);
         $this->assertDatabaseHas('reports', [
             'public_code' => 'LKP-DEMO-0001',
             'regency' => 'Kota Mataram',

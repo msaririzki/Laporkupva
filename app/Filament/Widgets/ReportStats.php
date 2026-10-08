@@ -36,10 +36,9 @@ class ReportStats extends StatsOverviewWidget
             ->toBase()
             ->selectRaw('COUNT(*) as total')
             ->selectRaw('SUM(CASE WHEN status = ? THEN 1 ELSE 0 END) as submitted', [ReportStatus::Submitted->value])
-            ->selectRaw('SUM(CASE WHEN status IN (?, ?, ?) THEN 1 ELSE 0 END) as in_progress', [
+            ->selectRaw('SUM(CASE WHEN status IN (?, ?) THEN 1 ELSE 0 END) as in_progress', [
                 ReportStatus::Received->value,
                 ReportStatus::Coordination->value,
-                ReportStatus::ResultReport->value,
             ])
             ->selectRaw('SUM(CASE WHEN status = ? THEN 1 ELSE 0 END) as field_action', [ReportStatus::FieldAction->value])
             ->selectRaw('SUM(CASE WHEN status = ? THEN 1 ELSE 0 END) as completed', [ReportStatus::Completed->value])
@@ -71,7 +70,6 @@ class ReportStats extends StatsOverviewWidget
                 ->url($this->reportIndexUrl(
                     ReportStatus::Received,
                     ReportStatus::Coordination,
-                    ReportStatus::ResultReport,
                 )),
             Stat::make('Ke lapangan', number_format($fieldAction, 0, ',', '.'))
                 ->color('warning')

@@ -16,6 +16,8 @@ class PublicInformationPagesTest extends TestCase
             ->assertOk()
             ->assertSee('Melapor dengan aman dan mudah')
             ->assertSee('Apakah saya harus membuat akun?')
+            ->assertSee('Nama dan email pelapor wajib diisi')
+            ->assertDontSee('Nama dan nomor HP boleh dikosongkan')
             ->assertSee('Apakah bukti wajib dilampirkan?')
             ->assertSee('minimal satu foto atau PDF')
             ->assertSee('Sudah pernah melapor?')
@@ -35,6 +37,7 @@ class PublicInformationPagesTest extends TestCase
             ->assertSee('Laporan Anda terus bergerak')
             ->assertSee('Simpan nomor laporan atau QR')
             ->assertDontSee('secara real-time')
+            ->assertDontSee('Laporan dapat dikirim tanpa nama')
             ->assertDontSee('Kantor Perwakilan Bank Indonesia Provinsi NTB ·')
             ->assertDontSee('https://laporkupva.ikydev.com/');
     }
@@ -81,7 +84,10 @@ class PublicInformationPagesTest extends TestCase
             ->assertSee('data-auto-submit', false)
             ->assertSee('data-kupva-filter-actions', false)
             ->assertSee($mataram->name)
-            ->assertSee($mataram->license_number)
+            ->assertSee($mataram->address)
+            ->assertDontSee($mataram->license_number)
+            ->assertDontSee('Berlaku sampai')
+            ->assertDontSee('Masa berlaku')
             ->assertDontSee('PT Samawa Valas')
             ->assertDontSee('KUPVA Izin Kedaluwarsa')
             ->assertDontSee('KUPVA Tidak Beroperasi');
@@ -91,12 +97,13 @@ class PublicInformationPagesTest extends TestCase
     {
         $this->get(route('privacy'))
             ->assertOk()
-            ->assertSee('Anonim sejak awal')
+            ->assertSee('Identitas pelapor dirahasiakan')
             ->assertSee('Data yang tidak diminta')
             ->assertSee('Penyimpanan bukti terlindungi')
             ->assertSee('Alamat IP tidak disimpan sebagai bagian dari data laporan.')
             ->assertSee('layanan verifikasi anti-bot dapat memproses data teknis akses secara terbatas')
             ->assertSee('Nomor HP bersifat opsional')
+            ->assertSee('Nama dan email pelapor wajib diisi')
             ->assertDontSee('Penyimpanan bukti terenkripsi')
             ->assertDontSee('Tanpa jejak pelapor');
     }

@@ -30,6 +30,7 @@ class KupvaCsvController extends Controller
         'Longitude',
         'Berlaku Sampai',
         'Beroperasi',
+        'Jenis Kantor',
     ];
 
     /** @var list<string> */
@@ -41,6 +42,7 @@ class KupvaCsvController extends Controller
         'Desa/Kelurahan',
         'Alamat',
         'Berlaku Sampai',
+        'Jenis Kantor',
     ];
 
     public function export(Request $request): StreamedResponse
@@ -76,6 +78,7 @@ class KupvaCsvController extends Controller
                         $kupva->longitude,
                         $kupva->license_expires_at?->format('Y-m-d'),
                         $kupva->is_active ? 'Ya' : 'Tidak',
+                        $kupva->office_type,
                     ]));
                 });
 
@@ -139,6 +142,7 @@ class KupvaCsvController extends Controller
             'Longitude' => 16,
             'Berlaku Sampai' => 18,
             'Beroperasi' => 18,
+            'Jenis Kantor' => 18,
         ];
 
         foreach ($headers as $columnIndex => $header) {
@@ -190,13 +194,15 @@ class KupvaCsvController extends Controller
     {
         return [
             ['Nama Usaha', 'Wajib. Tulis nama resmi penyelenggara KUPVA.'],
-            ['Nomor Izin', 'Wajib dan harus unik. Sistem memakai nomor ini untuk mengenali data baru atau pembaruan, jadi ID tidak perlu diisi.'],
+            ['Nomor Izin', 'Isi jika tersedia dan harus unik. Jika kosong, alamat wajib diisi; data dicocokkan berdasarkan nama, alamat, dan jenis kantor.'],
             ['Kabupaten/Kota', 'Wajib. Gunakan nama lengkap salah satu dari 10 kabupaten/kota di NTB.'],
             ['Kecamatan & Desa/Kelurahan', 'Isi sesuai alamat resmi agar data mudah ditemukan masyarakat.'],
-            ['Alamat', 'Opsional. Tulis alamat atau patokan lokasi yang mudah dikenali.'],
+            ['Alamat', 'Wajib jika nomor izin kosong. Tulis alamat atau patokan lokasi yang mudah dikenali.'],
+            ['Jenis Kantor', 'Opsional. Isi KP untuk kantor pusat atau KC untuk kantor cabang.'],
             ['Berlaku Sampai', 'Opsional. Gunakan format YYYY-MM-DD, contoh 2027-12-31.'],
             ['Status otomatis', 'Data baru otomatis disimpan dengan status izin Aktif dan Beroperasi. Status dapat diubah dari halaman edit.'],
             ['Sebelum impor', 'Sistem akan menampilkan data baru, perubahan, data yang sama, dan duplikat untuk diperiksa sebelum disimpan.'],
+            ['Berkas BI', 'Data KUPVA BB di NTB dari BI dapat diunggah langsung. Kabupaten/kota dikenali dari alamat. Tanggal teks BI menggunakan MM/DD/YYYY. Nomor telepon tidak diimpor.'],
         ];
     }
 

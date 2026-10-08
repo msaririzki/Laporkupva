@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ReportStatus;
 use App\Enums\UserRole;
 use App\Http\Requests\StorePublicReportRequest;
+use App\Http\Requests\VerifyPublicReporterRequest;
 use App\Models\Report;
 use App\Models\User;
 use App\Notifications\Admin\NewReportSubmitted;
@@ -12,7 +13,9 @@ use chillerlan\QRCode\Common\EccLevel;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 use Filament\Notifications\Events\DatabaseNotificationsSent;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -23,15 +26,36 @@ use Illuminate\View\View;
 
 class PublicReportController extends Controller
 {
-    public function create(): View
+    public function create(): Response
     {
-        return view('reports.create');
+        return response()->view('reports.create', headers: ['Cache-Control' => 'private, no-store']);
+    }
+
+    public function verify(VerifyPublicReporterRequest $request): JsonResponse
+    {
+        $verificationId = (string) Str::uuid();
+        $expiresAt = now()->addMinutes(45)->getTimestamp();
+        $verifications = array_filter(
+            $request->session()->get('report_verifications', []),
+            fn (array $verification): bool => $verification['expires_at'] > now()->getTimestamp(),
+        );
+        $verifications = array_slice($verifications, -4, preserve_keys: true);
+        $verifications[$verificationId] = [
+            'identity' => $request->identityFingerprint(),
+            'expires_at' => $expiresAt,
+        ];
+        $request->session()->put('report_verifications', $verifications);
+
+        return response()->json([
+            'verification_id' => $verificationId,
+            'expires_at' => $expiresAt,
+        ], headers: ['Cache-Control' => 'private, no-store']);
     }
 
     public function store(StorePublicReportRequest $request): RedirectResponse
     {
         $trackingSecret = Str::random(32);
-        $validated = $request->safe()->except(['evidence', 'good_faith', 'cf-turnstile-response']);
+        $validated = $request->safe()->except(['evidence', 'good_faith', 'verification_id', 'location_confirmed']);
 
         $report = DB::transaction(function () use ($request, $validated, $trackingSecret): Report {
             $report = Report::query()->create([
@@ -45,7 +69,7 @@ class PublicReportController extends Controller
             $report->statusHistories()->create([
                 'from_status' => null,
                 'to_status' => ReportStatus::Submitted,
-                'public_note' => ReportStatus::Submitted->description(),
+                'public_note' => ReportStatus::Submitted->publicMessage($report->public_code),
             ]);
 
             foreach ($request->file('evidence', []) as $file) {
@@ -61,6 +85,8 @@ class PublicReportController extends Controller
 
             return $report;
         });
+
+        $request->session()->forget('report_verifications.'.$request->input('verification_id'));
 
         $admins = User::query()
             ->where('is_active', true)

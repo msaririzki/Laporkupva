@@ -70,6 +70,12 @@
                             </div>
                             <p class="mt-2 truncate text-sm font-semibold text-slate-900">{{ $item['name'] }}</p>
                             <p class="mt-0.5 text-xs text-slate-500">{{ $item['license_number'] }}</p>
+                            @if (filled($item['office_type'] ?? null))
+                                <p class="mt-0.5 text-xs font-semibold text-slate-600">{{ $item['office_type'] === 'KP' ? 'Kantor pusat (KP)' : 'Kantor cabang (KC)' }}</p>
+                            @endif
+                            @if (filled($item['address'] ?? null))
+                                <p class="mt-1 text-xs leading-5 text-slate-500">{{ $item['address'] }}</p>
+                            @endif
                         </div>
                     </div>
 

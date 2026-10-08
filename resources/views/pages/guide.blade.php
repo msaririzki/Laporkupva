@@ -109,7 +109,7 @@
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center justify-center rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-extrabold text-blue-600">01</span>
                             <h3 class="mt-1 text-sm sm:text-base font-extrabold uppercase tracking-wide text-navy-950">Siapkan informasi</h3>
-                            <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Ceritakan apa yang terjadi, waktu kejadian, dan nama tempat jika tahu.</p>
+                            <p class="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-600">Isi nama dan email pelapor, lalu selesaikan verifikasi. Ceritakan kejadian, waktu, serta nama atau ciri tempatnya.</p>
                         </div>
                     </div>
                 </article>
@@ -241,7 +241,7 @@
                                 </span>
                             </summary>
                             <div class="mt-2.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed pr-2 pt-2.5 border-t border-slate-100 pl-11">
-                                Tidak. TAMBORA tidak meminta akun, nama, NIK, atau email. Nomor HP tersedia sebagai pilihan dan boleh dikosongkan; laporan tetap dapat dikirim tanpa nomor HP.
+                                Tidak perlu membuat akun atau memberikan NIK. Nama dan email pelapor wajib diisi di tahap pertama, lalu selesaikan verifikasi keamanan. Nomor HP boleh dikosongkan. Identitas pelapor tidak ditampilkan kepada masyarakat dan hanya dapat diakses petugas berwenang untuk verifikasi serta tindak lanjut laporan.
                             </div>
                         </details>
 
@@ -387,7 +387,7 @@
                             <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-white">Siap menyampaikan laporan?</h3>
                         </div>
                         <p class="mt-2 text-xs sm:text-[13px] leading-relaxed text-blue-100/90">
-                            Sampaikan dugaan pelanggaran secara aman tanpa mencantumkan identitas pribadi Anda.
+                            Sampaikan dugaan pelanggaran dengan aman. Data pelapor hanya digunakan petugas untuk verifikasi dan tindak lanjut.
                         </p>
                         <div class="mt-4">
                             <a href="{{ route('reports.create') }}" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-white py-2.5 px-4 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-blue-700 shadow-xs hover:bg-blue-50 transition-all duration-200">
@@ -395,7 +395,7 @@
                                     <path d="m22 2-7 20-4-9-9-4Z"/>
                                     <path d="M22 2 11 13"/>
                                 </svg>
-                                <span>Buat laporan anonim</span>
+                                <span>Buat laporan</span>
                                 <span aria-hidden="true">→</span>
                             </a>
                         </div>

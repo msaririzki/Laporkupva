@@ -24,6 +24,7 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\TestWith;
 use Tests\TestCase;
 
 class AdminDashboardTest extends TestCase
@@ -207,6 +208,8 @@ class AdminDashboardTest extends TestCase
             ->assertSee($report->public_code)
             ->assertSee('+6281234567890')
             ->assertSee('Status penanganan')
+            ->assertSee('dari 5')
+            ->assertDontSee('Laporan hasil')
             ->assertSee('Kembali ke daftar')
             ->assertSee(ReportResource::getUrl('index'), false)
             ->assertSee('Update progres')
@@ -419,6 +422,58 @@ class AdminDashboardTest extends TestCase
             'from_status' => ReportStatus::Submitted->value,
             'to_status' => ReportStatus::Received->value,
         ]);
+    }
+
+    public function test_completed_report_shows_all_admin_progress_steps_as_completed(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $report = Report::factory()->completed()->create();
+
+        $response = $this->actingAs($admin)->get(ReportResource::getUrl('view', ['record' => $report]));
+
+        $response->assertOk()
+            ->assertSee('Selesai ·')
+            ->assertDontSee('data-progress-state="current"', false)
+            ->assertDontSee('Sedang dikerjakan')
+            ->assertDontSee('Belum dikerjakan');
+        $this->assertSame(5, substr_count($response->getContent(), 'data-progress-state="completed"'));
+    }
+
+    #[TestWith(['submitted', 'received', 'pemeriksaan awal'])]
+    #[TestWith(['received', 'coordination', 'Aparat Penegak Hukum (APH)'])]
+    #[TestWith(['coordination', 'field_action', 'kunjungan ke lokasi'])]
+    #[TestWith(['field_action', 'completed', 'dinyatakan selesai'])]
+    public function test_progress_template_is_prefilled_editable_and_visible_to_reporter(string $currentStatus, string $nextStatus, string $activity): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::Admin]);
+        $report = Report::factory()->create(['status' => $currentStatus]);
+        $template = ReportStatus::from($nextStatus)->publicMessage($report->public_code);
+        $message = $template."\n\nKeterangan petugas: pemeriksaan dilakukan bersama tim pengawasan.";
+        $this->actingAs($admin);
+
+        $component = Livewire::test(ViewReport::class, ['record' => $report->getRouteKey()])
+            ->mountAction('advanceStatus')
+            ->assertSchemaStateSet(['public_note' => $template]);
+
+        $this->assertStringContainsString($report->public_code, $template);
+        $this->assertStringContainsString($activity, $template);
+        $component->fillForm(['public_note' => $message])->callMountedAction()->assertHasNoFormErrors()->assertNotified();
+
+        $this->assertDatabaseHas('reports', [
+            'id' => $report->id,
+            'status' => $nextStatus,
+            'public_update' => $message,
+        ]);
+        $this->assertDatabaseHas('report_status_histories', [
+            'report_id' => $report->id,
+            'to_status' => $nextStatus,
+            'public_note' => $message,
+        ]);
+        $this->post(route('reports.track.show'), ['tracking_code' => $report->public_code])
+            ->assertRedirect(route('reports.status', ['report' => $report->public_code]));
+        $this->get(route('reports.status', ['report' => $report->public_code]))
+            ->assertOk()
+            ->assertSee($message);
     }
 
     public function test_admin_can_attach_private_activity_photos_when_updating_progress(): void

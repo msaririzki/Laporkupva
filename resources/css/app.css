@@ -211,10 +211,10 @@
         @apply relative mb-4 sm:mb-6 lg:mb-7 w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4;
     }
     .stepper-list {
-        @apply relative grid grid-cols-3 items-start;
+        @apply relative grid grid-cols-4 items-start;
     }
     .stepper-track {
-        @apply absolute left-[16.666%] right-[16.666%] top-[18px] sm:top-5.5 -translate-y-1/2 h-[2px] bg-[#CBD5E1] z-0;
+        @apply absolute left-[12.5%] right-[12.5%] top-[18px] sm:top-5.5 -translate-y-1/2 h-[2px] bg-[#CBD5E1] z-0;
     }
     .stepper-track-progress {
         @apply h-full bg-[#2563EB] transition-all duration-300 ease-out;
@@ -232,7 +232,7 @@
         @apply mt-2 text-[11px] sm:text-[13px] font-bold tracking-tight text-[#64748B] transition-colors duration-200 bg-transparent border-0 p-0 leading-tight text-center;
     }
     .stepper-desc {
-        @apply mt-0.5 text-[10px] sm:text-xs leading-tight text-slate-400 font-normal transition-colors duration-200 bg-transparent border-0 p-0 block text-center;
+        @apply mt-0.5 text-[10px] sm:text-xs leading-tight text-slate-400 font-normal transition-colors duration-200 bg-transparent border-0 p-0 hidden sm:block text-center;
     }
 
     /* Active step */

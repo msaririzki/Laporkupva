@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\DB;
     'status',
     'incident_type',
     'business_name',
+    'reporter_name',
+    'reporter_email',
     'reporter_phone',
     'incident_date',
     'incident_time',
@@ -40,7 +42,7 @@ use Illuminate\Support\Facades\DB;
     'result_reported_at',
     'completed_at',
 ])]
-#[Hidden(['reporter_phone'])]
+#[Hidden(['reporter_name', 'reporter_email', 'reporter_phone'])]
 class Report extends Model
 {
     /** @use HasFactory<ReportFactory> */
@@ -105,14 +107,13 @@ class Report extends Model
         DB::transaction(function () use ($fromStatus, $internalNote, $publicNote, $toStatus, $user): void {
             $attributes = [
                 'status' => $toStatus,
-                'public_update' => $publicNote ?: $toStatus->description(),
+                'public_update' => filled($publicNote) ? trim($publicNote) : $toStatus->publicMessage($this->public_code),
             ];
 
             $timestampColumn = match ($toStatus) {
                 ReportStatus::Received => 'received_at',
                 ReportStatus::Coordination => 'coordinated_at',
                 ReportStatus::FieldAction => 'field_action_at',
-                ReportStatus::ResultReport => 'result_reported_at',
                 ReportStatus::Completed => 'completed_at',
                 ReportStatus::Submitted => null,
             };
@@ -155,7 +156,6 @@ class Report extends Model
                 ReportStatus::Received->value => 'received_at',
                 ReportStatus::Coordination->value => 'coordinated_at',
                 ReportStatus::FieldAction->value => 'field_action_at',
-                ReportStatus::ResultReport->value => 'result_reported_at',
                 ReportStatus::Completed->value => 'completed_at',
             ];
 
@@ -182,6 +182,8 @@ class Report extends Model
         return [
             'status' => ReportStatus::class,
             'reporter_phone' => 'encrypted',
+            'reporter_name' => 'encrypted',
+            'reporter_email' => 'encrypted',
             'incident_date' => 'date',
             'incident_time' => 'datetime:H:i',
             'is_ongoing' => 'boolean',

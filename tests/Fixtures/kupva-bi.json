@@ -1,0 +1,264 @@
+{
+  "headers": [
+    "No",
+    "Nama Perusahaan",
+    "Jenis",
+    " Alamat Lengkap Kantor Pusat/Cabang",
+    "KP/KC",
+    "KPw",
+    " Website",
+    "Nomor Telp",
+    " Tanggal Batas Waktu Izin\n(hanya diisi pada izin dgn batasan waktu)"
+  ],
+  "rows": [
+    [
+      1,
+      "PT Dikky Valuta Asing",
+      "KUPVA BB",
+      "Jl. Bangsal Baru, Desa Pemenang Barat Kecamatan Pemenang Kabupaten Lombok Utara Provinsi Nusa Tenggara Barat",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "03/03/2030"
+    ],
+    [
+      2,
+      "PT Duta Rinjani Valasindo",
+      "KUPVA BB",
+      "Jl Koperasi No. 9, Aikmel Kab Lombok Timur",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "01/09/2028"
+    ],
+    [
+      3,
+      "PT Echa Creative Mandiri",
+      "KUPVA BB",
+      "Gili Trawangan, Lombok Utara",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      {
+        "excel_date": "2028-04-16"
+      }
+    ],
+    [
+      4,
+      "PT Echa Creative Mandiri",
+      "KUPVA BB",
+      "Gili Trawangan, Lombok Utara",
+      "KC",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      {
+        "excel_date": "2028-04-16"
+      }
+    ],
+    [
+      5,
+      "PT Hidayah Prima Valasindo",
+      "KUPVA BB",
+      "Jalan Pariwisata, Kuta, Kec. Pujut Kab. Lombok Tengah",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      {
+        "excel_date": "2027-12-31"
+      }
+    ],
+    [
+      6,
+      "PT Makdwi Szwar Jalall Palasindo",
+      "KUPVA BB",
+      "Jl. Raya Damarata, Paokmotong Masbagik - Lombok Timur",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "06/14/2029"
+    ],
+    [
+      7,
+      "PT Makkah Mubarok Valuta",
+      "KUPVA BB",
+      "Jl. Pendidikan No. 5A, Aikmel, Lombok Timur",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "01/30/2028"
+    ],
+    [
+      8,
+      "PT Maulana Gili Air",
+      "KUPVA BB",
+      "Dusun Gili Air RT. 03 Desa Gili Indah Kecamatan Pemenang, Kabupaten Loinbok Utara Provinsi Nusa Tenggara Baret",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "08/06/2030"
+    ],
+    [
+      9,
+      "PT Multigraha Kelola Valas",
+      "KUPVA BB",
+      "Jalan Raya Senggigi Km. 8, Batu Layar, Kab. Lombok Barat",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      {
+        "excel_date": "2027-12-31"
+      }
+    ],
+    [
+      10,
+      "PT Multigraha Kelola Valas",
+      "KUPVA BB",
+      "Jl. Pejanggik No.32 Cakranegara Kota Mataram",
+      "KC",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      {
+        "excel_date": "2027-12-31"
+      }
+    ],
+    [
+      11,
+      "PT Multigraha Kelola Valas",
+      "KUPVA BB",
+      "Jl. Gajah Mada Jempong Kota Mataram",
+      "KC",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      {
+        "excel_date": "2027-12-31"
+      }
+    ],
+    [
+      12,
+      "PT Ning Karunia Valasindo",
+      "KUPVA BB",
+      "Komp. Pertokoan Terara Blok B No. 1, Jl. Raya Terara, Lombok Timur",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "01/30/2028"
+    ],
+    [
+      13,
+      "PT Nusapera Vipraka Persada",
+      "KUPVA BB",
+      "Dusun Gili Trawangan, Desa Gili Indah, Kecamatan Pemenang, Kab. Lombok Utara",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "03/24/2030"
+    ],
+    [
+      14,
+      "PT Omi Mulia Jaya",
+      "KUPVA BB",
+      "Jl. Gajah Mada No. 25, Pancor, Kecamatan Selong, Kabupaten Lombok Timur",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "03/13/2029"
+    ],
+    [
+      15,
+      "PT Putra Madani Valasindo",
+      "KUPVA BB",
+      "Jl. TGH. Lopan No.32 Dusun Mispalah Kelurahan Prapen Kecamatan Praya, Kab. Lombok Tengah Provinsi Nusa Tenggara Barat",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "08/04/2027"
+    ],
+    [
+      16,
+      "PT Rhifa Valasindo Sentosa",
+      "KUPVA BB",
+      "Jl. TGKH. M. Zainuddin Abdul Madjid, Lingkungan Muhajirin, Kel. Pancor, Kec. Selong, Lombok Timur",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "01/30/2028"
+    ],
+    [
+      17,
+      "PT Ringgit Reyal Valasindo",
+      "KUPVA BB",
+      "Lingkungan Batu Belek Timur, Kelurahan Rakam, Lombok Timur",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "03/25/2029"
+    ],
+    [
+      18,
+      "PT Shaka Mulia Valasindo",
+      "KUPVA BB",
+      "Jl. Pejanggik No. 7 Lingkungan Yasekambang, Cilinaya, Cakranegara, Kota Mataram",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      "02/10/2029\t"
+    ],
+    [
+      19,
+      "PT Tri Putra Darma Valuta",
+      "KUPVA BB",
+      "Jl.  Raya Senggigi Km.8 Batulayar, Kabupaten Lombok Barat, Provinsi NTB ",
+      "KC",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      {
+        "excel_date": "2027-12-31"
+      }
+    ],
+    [
+      20,
+      "PT Tri Putra Darma Valuta",
+      "KUPVA BB",
+      "Jalan Langko No. 84 Dasan Agung Mataram",
+      "KP",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      {
+        "excel_date": "2027-12-31"
+      }
+    ],
+    [
+      21,
+      "PT Tri Putra Darma Valuta",
+      "KUPVA BB",
+      "Jl. Raya Pemenang-Tanjung, Kabupaten Lombok Utara, Provinsi NTB",
+      "KC",
+      "KPwBI Provinsi Nusa Tenggara Barat",
+      "Tidak ada",
+      "000000000000",
+      {
+        "excel_date": "2027-12-31"
+      }
+    ]
+  ]
+}

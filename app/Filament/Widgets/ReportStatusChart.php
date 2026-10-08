@@ -85,7 +85,6 @@ class ReportStatusChart extends Widget
             ReportStatus::Received => 'Diterima',
             ReportStatus::Coordination => 'Koordinasi',
             ReportStatus::FieldAction => 'Tindakan lapangan',
-            ReportStatus::ResultReport => 'Hasil',
             ReportStatus::Completed => 'Selesai',
         };
     }
@@ -100,7 +99,6 @@ class ReportStatusChart extends Widget
             ReportStatus::Received => ['hex' => '#1d4ed8', 'dotClass' => 'bg-blue-700', 'barClass' => 'bg-blue-700'],
             ReportStatus::Coordination => ['hex' => '#8b5cf6', 'dotClass' => 'bg-violet-500', 'barClass' => 'bg-violet-500'],
             ReportStatus::FieldAction => ['hex' => '#f97316', 'dotClass' => 'bg-orange-500', 'barClass' => 'bg-orange-500'],
-            ReportStatus::ResultReport => ['hex' => '#14b8a6', 'dotClass' => 'bg-teal-500', 'barClass' => 'bg-teal-500'],
             ReportStatus::Completed => ['hex' => '#10b981', 'dotClass' => 'bg-emerald-500', 'barClass' => 'bg-emerald-500'],
         };
     }

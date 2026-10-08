@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Reports\Schemas;
 use App\Models\Report;
 use App\Models\ReportEvidence;
 use Filament\Actions\Action;
-use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
@@ -44,7 +43,7 @@ class ReportInfolist
                     ->schema([
                         Group::make([
                             Section::make('Ringkasan laporan')
-                                ->description('Informasi utama, kontak opsional, dan kronologi yang dikirim pelapor.')
+                                ->description('Rincian kejadian dan kontak pelapor. Data pelapor hanya untuk petugas.')
                                 ->icon(Heroicon::OutlinedDocumentText)
                                 ->columns([
                                     'default' => 1,
@@ -68,9 +67,13 @@ class ReportInfolist
                                         ->label('Nomor HP pelapor')
                                         ->placeholder('Tidak diberikan')
                                         ->copyable(),
-                                    IconEntry::make('is_ongoing')
-                                        ->label('Masih berlangsung')
-                                        ->boolean(),
+                                    TextEntry::make('reporter_name')
+                                        ->label('Nama pelapor')
+                                        ->placeholder('Tidak diberikan'),
+                                    TextEntry::make('reporter_email')
+                                        ->label('Email pelapor')
+                                        ->placeholder('Laporan lama, belum tersedia')
+                                        ->copyable(),
                                     TextEntry::make('incident_date')
                                         ->label('Tanggal kejadian')
                                         ->date('d F Y'),

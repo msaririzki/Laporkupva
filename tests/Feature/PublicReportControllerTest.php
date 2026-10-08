@@ -75,7 +75,7 @@ class PublicReportControllerTest extends TestCase
         $this->from(route('reports.create'))
             ->post(route('reports.store'), $this->validPayload())
             ->assertRedirect(route('reports.create'))
-            ->assertSessionHasErrors('cf-turnstile-response');
+            ->assertSessionHasErrors('verification_id');
 
         $this->assertDatabaseCount('reports', 0);
         Http::assertNothingSent();
@@ -89,9 +89,10 @@ class PublicReportControllerTest extends TestCase
         ]);
 
         $this->from(route('reports.create'))
-            ->post(route('reports.store'), $this->validPayload([
+            ->post(route('reports.verify'), [
+                'reporter_email' => 'pelapor@example.com',
                 'cf-turnstile-response' => 'invalid-token',
-            ]))
+            ])
             ->assertRedirect(route('reports.create'))
             ->assertSessionHasErrors('cf-turnstile-response');
 
@@ -109,9 +110,10 @@ class PublicReportControllerTest extends TestCase
         ]);
 
         $this->from(route('reports.create'))
-            ->post(route('reports.store'), $this->validPayload([
+            ->post(route('reports.verify'), [
+                'reporter_email' => 'pelapor@example.com',
                 'cf-turnstile-response' => 'valid-token-for-another-action',
-            ]))
+            ])
             ->assertRedirect(route('reports.create'))
             ->assertSessionHasErrors('cf-turnstile-response');
 
@@ -182,6 +184,8 @@ class PublicReportControllerTest extends TestCase
         $this->assertArrayNotHasKey('pin', $access);
         $this->assertNotEmpty($report->tracking_pin_hash);
         $this->assertSame(ReportStatus::Submitted, $report->status);
+        $this->assertStringContainsString($report->public_code, $report->statusHistories()->sole()->public_note);
+        $this->assertStringContainsString('akan diperiksa oleh petugas', $report->statusHistories()->sole()->public_note);
         $this->assertDatabaseHas('report_status_histories', [
             'report_id' => $report->getKey(),
             'from_status' => null,
@@ -465,7 +469,9 @@ class PublicReportControllerTest extends TestCase
      */
     private function validPayload(array $overrides = []): array
     {
-        return [
+        $payload = [
+            'reporter_name' => 'Pelapor Uji',
+            'reporter_email' => 'pelapor@example.com',
             'incident_type' => 'kupva_tanpa_izin',
             'business_name' => 'Money Changer Contoh',
             'incident_date' => now()->subDay()->toDateString(),
@@ -479,10 +485,20 @@ class PublicReportControllerTest extends TestCase
             'latitude' => -8.5830695,
             'longitude' => 116.1161800,
             'location_accuracy' => 12.5,
+            'location_confirmed' => '1',
             'evidence' => [UploadedFile::fake()->create('bukti.pdf', 128, 'application/pdf')],
             'good_faith' => '1',
             ...$overrides,
         ];
+
+        $verification = $this->postJson(route('reports.verify'), [
+            'reporter_email' => $payload['reporter_email'],
+            'reporter_name' => $payload['reporter_name'] ?? null,
+            'reporter_phone' => $payload['reporter_phone'] ?? null,
+            'cf-turnstile-response' => $payload['cf-turnstile-response'] ?? null,
+        ]);
+
+        return [...$payload, 'verification_id' => $verification->json('verification_id')];
     }
 
     private function enableTurnstile(): void

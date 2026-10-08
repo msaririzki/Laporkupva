@@ -9,7 +9,7 @@
     @endPushOnce
 @endif
 
-<x-layouts.public title="Buat laporan anonim">
+<x-layouts.public title="Buat laporan">
     <!-- Hero Header (Clean Light Canvas, Elegant Reassurance) -->
     <section class="relative bg-white py-3 sm:py-5 lg:py-6 border-b border-[#E2E8F0]">
         <div class="public-container max-w-[1240px] px-4 sm:px-6 lg:px-10">
@@ -20,33 +20,18 @@
                 </h1>
 
                 <p class="mt-1 text-[11px] sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B] max-w-[720px] mx-auto">
-                    Ceritakan kejadian, tentukan lokasi, lalu kirim laporan secara anonim.
+                    Isi data pelapor, ceritakan kejadian, lalu sertakan lokasi dan bukti.
                 </p>
 
-                <!-- Badges Row: Laporan Anonim, Identitas Anda terlindungi, ±3 menit in neutral soft gray, single line on mobile -->
-                <div class="mt-2 flex items-center justify-center gap-1.5 sm:gap-2.5 overflow-x-auto">
+                <div class="mt-2 flex flex-wrap items-center justify-center gap-2">
                     <span class="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-slate-200/60 bg-slate-100/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-[#64748B] whitespace-nowrap shrink-0">
                         <svg class="size-3 sm:size-3.5 text-slate-400 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
                         </svg>
-                        <span>Laporan Anonim</span>
+                        <span>Data pelapor dirahasiakan</span>
                     </span>
 
-                    <span class="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-slate-200/60 bg-slate-100/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-[#64748B] whitespace-nowrap shrink-0">
-                        <svg class="size-3 sm:size-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                        </svg>
-                        <span>Identitas Anda terlindungi</span>
-                    </span>
-
-                    <span class="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-slate-200/60 bg-slate-100/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-slate-500 whitespace-nowrap shrink-0">
-                        <svg class="size-3 sm:size-3.5 text-slate-400 shrink-0" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd"/>
-                        </svg>
-                        <span>±3 menit</span>
-                    </span>
                     <span class="sr-only">Bukti pendukung wajib</span>
-                    <span class="sr-only">Tanpa identitas</span>
                 </div>
             </div>
         </div>
@@ -76,9 +61,10 @@
                     </div>
 
                     @foreach ([
-                        ['step' => 1, 'num' => '01', 'name' => 'Rincian Laporan', 'desc' => 'Ceritakan kejadian'],
-                        ['step' => 2, 'num' => '02', 'name' => 'Lokasi Kejadian', 'desc' => 'Tentukan lokasi'],
-                        ['step' => 3, 'num' => '03', 'name' => 'Bukti Pendukung', 'desc' => 'Tambahkan foto'],
+                        ['step' => 1, 'num' => '01', 'name' => 'Data pelapor', 'desc' => 'Isi kontak Anda'],
+                        ['step' => 2, 'num' => '02', 'name' => 'Kejadian', 'desc' => 'Ceritakan kejadian'],
+                        ['step' => 3, 'num' => '03', 'name' => 'Lokasi', 'desc' => 'Pastikan titik peta'],
+                        ['step' => 4, 'num' => '04', 'name' => 'Bukti & kirim', 'desc' => 'Lampirkan bukti'],
                     ] as $item)
                         <button
                             type="button"
@@ -97,7 +83,7 @@
             </nav>
 
             <!-- Subtle Live Accessibility Step Status -->
-            <p id="form-step-status" class="sr-only" aria-live="polite">Langkah 1 dari 3</p>
+            <p id="form-step-status" class="sr-only" aria-live="polite">Langkah 1 dari 4</p>
 
             <!-- Service Flow Form (Single Clean Card Container) -->
             <form
@@ -105,10 +91,12 @@
                 method="POST"
                 enctype="multipart/form-data"
                 id="report-form"
+                data-verification-url="{{ route('reports.verify') }}"
                 class="bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 lg:p-7 shadow-xs"
                 novalidate
             >
                 @csrf
+                <input type="hidden" name="verification_id" id="verification_id" value="">
 
                 <!-- Honeypot -->
                 <div class="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
@@ -116,11 +104,63 @@
                     <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
                 </div>
 
-                <!-- STEP 1: KEJADIAN -->
+                <!-- STEP 1: DATA PELAPOR -->
                 <section class="form-step max-w-3xl mx-auto" data-step="1">
                     <div class="border-b border-slate-100 pb-3 sm:pb-3.5">
+                        <span class="inline-flex rounded-full border border-blue-200/60 bg-blue-50 px-3 py-1 text-xs font-bold text-[#2563EB]">Langkah 01</span>
+                        <h2 class="mt-2 text-base font-extrabold tracking-tight text-[#0F172A] sm:text-xl lg:text-2xl">Data pelapor</h2>
+                        <p class="mt-1 text-xs leading-relaxed text-[#64748B] sm:text-sm">Isi nama dan email Anda. Nomor HP boleh dikosongkan.</p>
+                    </div>
+                    <div class="mt-3 flex items-start gap-2.5 rounded-xl border border-blue-100 bg-blue-50/60 px-3 py-2.5" id="reporter-privacy-hint">
+                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4"/></svg>
+                        <div class="min-w-0 text-xs leading-relaxed sm:text-sm">
+                            <p class="font-semibold text-[#0F172A]">Identitas Anda dirahasiakan</p>
+                            <p class="mt-0.5 text-[#64748B]">Nama, email, dan nomor HP tidak ditampilkan kepada masyarakat. Hanya petugas berwenang yang dapat mengaksesnya untuk verifikasi dan tindak lanjut laporan.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+                        <div class="sm:col-span-2">
+                            <label class="form-label" for="reporter_name">Nama pelapor <span class="text-red-600">*</span></label>
+                            <input class="form-control @error('reporter_name') is-invalid @enderror" id="reporter_name" name="reporter_name" value="{{ old('reporter_name') }}" maxlength="120" autocomplete="name" placeholder="Nama Anda" required aria-describedby="reporter-privacy-hint">
+                            @error('reporter_name')<p class="form-error">{{ $message }}</p>@enderror
+                        </div>
+                        <div>
+                            <label class="form-label" for="reporter_email">Email pelapor <span class="text-red-600">*</span></label>
+                            <input class="form-control @error('reporter_email') is-invalid @enderror" id="reporter_email" name="reporter_email" type="email" value="{{ old('reporter_email') }}" maxlength="254" autocomplete="email" inputmode="email" placeholder="Contoh: nama@gmail.com" required aria-describedby="reporter-email-hint">
+                            <p id="reporter-email-hint" class="form-helper">Gunakan alamat email Anda yang aktif.</p>
+                            @error('reporter_email')<p class="form-error">{{ $message }}</p>@enderror
+                        </div>
+                        <div>
+                            <label class="form-label" for="reporter_phone">Nomor HP Pelapor <span class="text-xs font-normal text-slate-400">(opsional)</span></label>
+                            <input class="form-control @error('reporter_phone') is-invalid @enderror" id="reporter_phone" name="reporter_phone" type="tel" value="{{ old('reporter_phone') }}" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="Contoh: 0812 3456 7890">
+                            <p class="form-helper">Hanya digunakan petugas bila perlu menghubungi Anda.</p>
+                            @error('reporter_phone')<p class="form-error">{{ $message }}</p>@enderror
+                        </div>
+                    </div>
+                    @if (filled(config('services.turnstile.site_key')) && filled(config('services.turnstile.secret_key')))
+                        <div class="mt-4 rounded-xl border border-slate-200 bg-slate-50/80 p-3 sm:p-4">
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <div>
+                                    <p class="text-sm font-bold text-[#0F172A]">Verifikasi keamanan</p>
+                                    <p class="mt-1 text-xs text-[#64748B]">Tekan tombol untuk memulai pemeriksaan, lalu ikuti petunjuk yang muncul.</p>
+                                </div>
+                                <button type="button" id="start-verification" class="rounded-xl border border-blue-200 bg-white px-4 py-2.5 text-xs font-semibold text-blue-700 transition hover:bg-blue-50 disabled:opacity-60">Mulai verifikasi</button>
+                            </div>
+                            <div class="mt-3 hidden min-h-[65px] w-full" data-turnstile-widget data-sitekey="{{ config('services.turnstile.site_key') }}"></div>
+                            @error('cf-turnstile-response')<p class="form-error">{{ $message }}</p>@enderror
+                        </div>
+                    @elseif (app()->isProduction())
+                        <p class="form-error mt-4" role="alert">Verifikasi keamanan sementara belum tersedia. Silakan coba lagi nanti.</p>
+                    @endif
+                    <p id="verification-message" class="mt-3 text-xs text-slate-600" role="status" aria-live="polite"></p>
+                    @error('verification_id')<p class="form-error">{{ $message }}</p>@enderror
+                </section>
+
+                <!-- STEP 2: KEJADIAN -->
+                <section class="form-step hidden max-w-3xl mx-auto" data-step="2">
+                    <div class="border-b border-slate-100 pb-3 sm:pb-3.5">
                         <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-bold text-[#2563EB] mb-2">
-                            <span>Langkah 01</span>
+                            <span>Langkah 02</span>
                         </div>
                         <h2 class="text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-[#0F172A]">Ceritakan kejadian</h2>
                         <p class="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#64748B]">Pilih masalahnya dan ceritakan apa yang terjadi secara santai dan jujur.</p>
@@ -156,47 +196,25 @@
                         </div>
 
                         <!-- Informasi tambahan yang membantu verifikasi -->
-                        <div class="grid gap-3.5 lg:grid-cols-3 lg:gap-4">
+                        <div class="grid gap-3.5 lg:grid-cols-2 lg:gap-4">
                             <!-- Nama atau Ciri Tempat -->
                             <div>
                                 <div class="flex items-center justify-between">
-                                    <label class="form-label" for="business_name">Nama atau ciri tempat</label>
-                                    <span class="text-xs text-slate-400">Opsional</span>
+                                    <label class="form-label" for="business_name">Nama atau ciri tempat <span class="text-red-600">*</span></label>
                                 </div>
-                                <input class="form-control @error('business_name') is-invalid @enderror" id="business_name" name="business_name" value="{{ old('business_name') }}" maxlength="255" autocomplete="off" placeholder="Nama toko, usaha, atau ciri fisik tempat">
+                                <input class="form-control @error('business_name') is-invalid @enderror" id="business_name" name="business_name" value="{{ old('business_name') }}" maxlength="255" autocomplete="off" placeholder="Nama toko, usaha, atau ciri fisik tempat" required>
                                 @error('business_name')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
 
                             <!-- Perkiraan Waktu -->
                             <div>
                                 <div class="flex items-center justify-between">
-                                    <label class="form-label" for="incident_time">Perkiraan waktu</label>
-                                    <span class="text-xs text-slate-400">Opsional</span>
+                                    <label class="form-label" for="incident_time">Perkiraan waktu <span class="text-red-600">*</span></label>
                                 </div>
-                                <input class="form-control @error('incident_time') is-invalid @enderror" id="incident_time" name="incident_time" type="time" value="{{ old('incident_time') }}">
+                                <input class="form-control @error('incident_time') is-invalid @enderror" id="incident_time" name="incident_time" type="time" value="{{ old('incident_time') }}" required>
                                 @error('incident_time')<p class="form-error">{{ $message }}</p>@enderror
                             </div>
 
-                            <!-- Nomor HP Opsional -->
-                            <div>
-                                <div class="flex items-center justify-between">
-                                    <label class="form-label" for="reporter_phone">Nomor HP Pelapor</label>
-                                    <span class="text-xs text-slate-400">Opsional</span>
-                                </div>
-                                <input
-                                    class="form-control @error('reporter_phone') is-invalid @enderror"
-                                    id="reporter_phone"
-                                    name="reporter_phone"
-                                    type="tel"
-                                    value="{{ old('reporter_phone') }}"
-                                    maxlength="20"
-                                    inputmode="tel"
-                                    autocomplete="tel"
-                                    placeholder="Contoh: 0812 3456 7890"
-                                >
-                                <p class="form-helper">Hanya digunakan petugas bila perlu menghubungi Anda.</p>
-                                @error('reporter_phone')<p class="form-error">{{ $message }}</p>@enderror
-                            </div>
                         </div>
 
                         <!-- Kronologi Kejadian -->
@@ -210,28 +228,20 @@
                             @error('description')<p class="form-error">{{ $message }}</p>@enderror
                         </div>
 
-                        <!-- Kegiatan Masih Berlangsung -->
-                        <label class="flex cursor-pointer items-start gap-3 rounded-xl sm:rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 sm:p-3.5 transition-all hover:border-[#2563EB]/40 hover:bg-blue-50/20 shadow-xs">
-                            <input class="mt-0.5 size-4 sm:size-4.5 rounded border-slate-300 text-[#2563EB] focus:ring-[#2563EB]" type="checkbox" name="is_ongoing" value="1" @checked(old('is_ongoing'))>
-                            <div>
-                                <strong class="block text-xs sm:text-sm font-bold text-[#0F172A]">Kegiatan masih berlangsung</strong>
-                                <span class="mt-0.5 block text-[11px] sm:text-xs leading-relaxed text-[#64748B]">Centang jika aktivitas masih beroperasi atau rutin dilakukan di lokasi tersebut.</span>
-                            </div>
-                        </label>
                     </div>
                 </section>
 
-                <!-- STEP 2: LOKASI -->
-                <section class="form-step hidden" data-step="2">
+                <!-- STEP 3: LOKASI -->
+                <section class="form-step hidden" data-step="3">
                     <div class="border-b border-slate-100 pb-3 sm:pb-3.5">
                         <div class="flex items-center justify-between">
                             <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-bold text-[#2563EB]">
-                                <span>Langkah 02</span>
+                                <span>Langkah 03</span>
                             </div>
                             <span class="text-[10px] sm:text-xs font-medium text-[#64748B] bg-slate-100 px-2.5 py-0.5 sm:py-1 rounded-full">Khusus Wilayah NTB</span>
                         </div>
                         <h2 class="mt-1 sm:mt-2 text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-[#0F172A]">Lokasi Kejadian</h2>
-                        <p class="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#64748B]">Pilih kabupaten/kota dan tandai titik lokasi kejadian pada peta interaktif.</p>
+                        <p class="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#64748B]">Tandai tempat kejadian, bukan posisi Anda saat ini jika sudah meninggalkan lokasi. Perbesar peta agar titiknya tepat.</p>
                     </div>
 
                     <!-- Desktop 2-Column Split: Form (42%) vs Map (58%) -->
@@ -357,13 +367,18 @@
                     <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}" required>
                     <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude') }}" required>
                     <input type="hidden" id="location_accuracy" name="location_accuracy" value="{{ old('location_accuracy') }}">
+                    <label class="mt-4 flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs leading-relaxed text-slate-700 sm:text-sm">
+                        <input class="mt-0.5 size-4 shrink-0 rounded border-slate-300 text-blue-600" id="location_confirmed" name="location_confirmed" type="checkbox" value="1" required>
+                        <span>Saya sudah memeriksa penanda peta dan memastikan titiknya sesuai lokasi kejadian. <span class="text-red-600">*</span></span>
+                    </label>
+                    @error('location_confirmed')<p class="form-error">{{ $message }}</p>@enderror
                 </section>
 
-                <!-- STEP 3: BUKTI -->
-                <section class="form-step hidden max-w-3xl mx-auto" data-step="3">
+                <!-- STEP 4: BUKTI -->
+                <section class="form-step hidden max-w-3xl mx-auto" data-step="4">
                     <div class="border-b border-slate-100 pb-3 sm:pb-3.5">
                         <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/60 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-bold text-[#2563EB]">
-                            <span>Langkah 03</span>
+                            <span>Langkah 04</span>
                         </div>
                         <h2 class="mt-1 sm:mt-2 text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-[#0F172A]">Tambahkan foto & bukti</h2>
                         <p class="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#64748B]">Lampirkan minimal satu foto atau dokumen sebagai dasar verifikasi.</p>
@@ -450,26 +465,6 @@
                         </label>
                         @error('good_faith')<p class="form-error mt-1">{{ $message }}</p>@enderror
 
-                        @if (filled(config('services.turnstile.site_key')) && filled(config('services.turnstile.secret_key')))
-                            <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 sm:p-4 @error('cf-turnstile-response') border-red-300 bg-red-50/50 @enderror">
-                                <div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(300px,0.9fr)] lg:items-center">
-                                    <div>
-                                        <p class="text-xs font-bold text-[#0F172A] sm:text-sm">Verifikasi keamanan</p>
-                                        <p class="mt-0.5 text-[11px] leading-relaxed text-[#64748B] sm:text-xs">Selesaikan pemeriksaan singkat ini untuk mencegah laporan otomatis dan spam.</p>
-                                    </div>
-                                    <div class="w-full max-w-full overflow-hidden">
-                                        <div
-                                            class="min-h-[65px] w-full"
-                                            data-turnstile-widget
-                                            data-sitekey="{{ config('services.turnstile.site_key') }}"
-                                        >
-                                            <span data-turnstile-loading class="inline-flex h-[65px] items-center text-[11px] font-medium text-slate-500">Memuat verifikasi…</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                @error('cf-turnstile-response')<p class="form-error mt-2">{{ $message }}</p>@enderror
-                            </div>
-                        @endif
                     </div>
                 </section>
 
@@ -480,7 +475,7 @@
                             <span>Kembali</span>
                         </button>
                         <button type="button" id="next-step" class="w-auto min-h-9 sm:min-h-10 items-center justify-center rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs">
-                            <span>Lanjut ke lokasi</span>
+                            <span>Lanjut ke kejadian</span>
                         </button>
                         <button type="submit" id="submit-report" aria-busy="false" class="w-auto min-h-9 sm:min-h-10 items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 sm:px-5 py-2 text-center text-xs sm:text-sm font-semibold text-white hover:bg-[#1D4ED8] disabled:cursor-wait disabled:bg-[#2563EB]/80 transition-colors shadow-xs hidden">
                             <svg data-submit-spinner class="hidden size-4 shrink-0 animate-spin motion-reduce:animate-none" viewBox="0 0 24 24" fill="none" aria-hidden="true">

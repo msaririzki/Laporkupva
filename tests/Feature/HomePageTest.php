@@ -6,12 +6,13 @@ use Tests\TestCase;
 
 class HomePageTest extends TestCase
 {
-    public function test_home_page_explains_the_anonymous_reporting_flow(): void
+    public function test_home_page_explains_the_confidential_reporting_flow(): void
     {
         $this->get(route('home'))
             ->assertOk()
             ->assertSee('Berani melapor')
-            ->assertSee('Laporan dapat dikirim tanpa nama')
+            ->assertSee('Identitas pelapor dirahasiakan')
+            ->assertDontSee('Laporan dapat dikirim tanpa nama')
             ->assertSee(route('reports.create'))
             ->assertSee(route('reports.track'))
             ->assertSee(route('kupvas.index'))

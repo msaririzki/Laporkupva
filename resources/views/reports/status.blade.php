@@ -22,7 +22,11 @@
                 </div>
                 <div class="inline-flex items-center gap-2 self-start rounded-lg border border-white/15 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm sm:self-auto">
                     <span class="text-xs text-slate-300">Status:</span>
-                    <strong data-report-status-label class="text-xs sm:text-sm font-semibold text-[#F2B84B]">{{ $report->status->label() }}</strong>
+                    <strong data-report-status-label @class([
+                        'text-xs sm:text-sm font-semibold',
+                        'text-emerald-300' => $report->status === \App\Enums\ReportStatus::Completed,
+                        'text-[#F2B84B]' => $report->status !== \App\Enums\ReportStatus::Completed,
+                    ])>{{ $report->status->label() }}</strong>
                 </div>
             </div>
         </div>

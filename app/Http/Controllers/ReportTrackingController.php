@@ -71,6 +71,7 @@ class ReportTrackingController extends Controller
         return response()->json([
             'version' => $this->statusVersion($report),
             'status_label' => $report->status->label(),
+            'status' => $report->status->value,
             'timeline_html' => view('reports.partials.status-timeline', ['report' => $report])->render(),
             'messages_html' => view('reports.partials.conversation-messages', ['report' => $report])->render(),
         ], headers: [

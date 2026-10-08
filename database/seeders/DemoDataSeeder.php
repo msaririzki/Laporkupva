@@ -143,7 +143,6 @@ class DemoDataSeeder extends Seeder
             'received_at',
             'coordinated_at',
             'field_action_at',
-            'result_reported_at',
             'completed_at',
         ];
         $timestamps = [];

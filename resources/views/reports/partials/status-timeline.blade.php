@@ -1,13 +1,14 @@
 @php
     $statuses = \App\Enums\ReportStatus::cases();
     $currentIndex = array_search($report->status, $statuses, true);
+    $isReportCompleted = $report->status === \App\Enums\ReportStatus::Completed;
 @endphp
 
 @foreach ($statuses as $index => $status)
     @php
         $history = $report->statusHistories->where('to_status', $status)->last();
-        $isDone = $index < $currentIndex;
-        $isCurrent = $index === $currentIndex;
+        $isDone = $isReportCompleted || $index < $currentIndex;
+        $isCurrent = ! $isReportCompleted && $index === $currentIndex;
     @endphp
     <div class="status-item {{ $isDone ? 'is-done' : '' }} {{ $isCurrent ? 'is-current' : '' }}">
         <div class="status-marker">
@@ -21,13 +22,18 @@
         </div>
         <div class="status-content">
             <div class="flex flex-wrap items-center justify-between gap-2">
-                <h3 class="text-xs font-semibold text-[#0B2342] sm:text-sm">{{ $status->label() }}</h3>
+                <h3 @class(['text-xs font-semibold sm:text-sm', 'text-emerald-700' => $isDone, 'text-[#0B2342]' => ! $isDone])>{{ $status->label() }}</h3>
                 @if ($history)
                     <time class="text-[11px] text-[#64748B]">{{ $history->created_at->translatedFormat('d M Y, H:i') }}</time>
                 @endif
             </div>
-            <p class="mt-0.5 text-xs leading-relaxed text-[#64748B]">{{ $history?->public_note ?: $status->description() }}</p>
-            @if ($isCurrent)
+            <p class="mt-0.5 whitespace-pre-line text-xs leading-relaxed text-[#64748B]">{{ $history?->public_note ?: $status->description() }}</p>
+            @if ($isReportCompleted && $loop->last)
+                <span class="mt-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700">
+                    <span class="size-1.5 rounded-full bg-emerald-600"></span>
+                    Penanganan selesai
+                </span>
+            @elseif ($isCurrent)
                 <span class="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-300/80 bg-[#FFF4D6] px-2.5 py-0.5 text-[11px] font-semibold text-[#B45309]">
                     <span class="size-1.5 rounded-full bg-[#B45309]"></span>
                     Tahap sekarang

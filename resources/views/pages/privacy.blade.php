@@ -8,11 +8,11 @@
             </div>
 
             <h1 class="mt-4 text-2xl font-extrabold tracking-tight text-[#0F172A] sm:text-3xl lg:text-[34px] lg:leading-tight">
-                Anonim sejak awal
+                Identitas pelapor dirahasiakan
             </h1>
 
             <p class="mt-2.5 max-w-[760px] mx-auto text-xs sm:text-sm lg:text-[15px] leading-relaxed text-[#64748B]">
-                TAMBORA mengutamakan laporan tanpa identitas. Nomor HP hanya dapat diberikan secara sukarela jika Anda ingin dihubungi petugas.
+                Data pelapor hanya digunakan petugas untuk verifikasi dan tindak lanjut laporan, bukan untuk ditampilkan kepada masyarakat.
             </p>
         </div>
     </section>
@@ -24,12 +24,12 @@
                 <div class="grid gap-5 md:grid-cols-2">
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Data yang tidak diminta</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Nama, NIK, alamat email, dan pendaftaran akun tidak diperlukan. Nomor HP bersifat opsional dan laporan tetap dapat dikirim tanpa mengisinya.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Anda tidak perlu membuat akun atau memberikan NIK. Nama dan email pelapor wajib diisi. Nomor HP bersifat opsional.</p>
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
                         <h2 class="text-sm sm:text-base font-bold text-[#0B2342]">Data yang digunakan</h2>
-                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Jenis dan kronologi kejadian, titik lokasi, waktu, serta lampiran bukti digunakan untuk verifikasi. Nomor HP opsional disimpan terlindungi dan hanya digunakan petugas untuk tindak lanjut laporan.</p>
+                        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#64748B]">Kronologi, lokasi, waktu, dan bukti digunakan untuk menindaklanjuti laporan. Nama, email, dan nomor HP disimpan terenkripsi serta hanya ditampilkan kepada petugas yang berwenang.</p>
                     </article>
 
                     <article class="p-5 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] transition-colors hover:border-[#2563EB]/40">
@@ -64,7 +64,7 @@
             <div class="mt-8 flex flex-col items-center justify-between gap-5 rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-8 shadow-xs text-center sm:flex-row sm:text-left">
                 <div>
                     <h2 class="text-base sm:text-lg font-bold text-[#0B2342]">Siap menyampaikan laporan?</h2>
-                    <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Sampaikan laporan KUPVA sekarang secara anonim, cepat, dan terlindungi.</p>
+                    <p class="mt-1 text-xs sm:text-sm text-[#64748B]">Sampaikan laporan dengan cepat dan aman. Data pelapor tetap dirahasiakan.</p>
                 </div>
                 <a href="{{ route('reports.create') }}" class="button-primary shrink-0 text-xs sm:text-sm font-semibold rounded-xl bg-[#2563EB] px-5 py-2.5 text-white hover:bg-[#1D4ED8] transition-colors shadow-2xs">
                     <span>Buat laporan</span>

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 #[Fillable([
     'name',
+    'office_type',
     'license_number',
     'license_status',
     'address',

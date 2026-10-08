@@ -2,7 +2,9 @@
     <div class="min-w-0">
         <p class="text-sm font-semibold text-slate-900">Gunakan format yang sudah disiapkan</p>
         <p class="mt-1 text-xs leading-5 text-slate-600">
-            Cukup isi nama usaha, nomor izin, dan kabupaten/kota. ID tidak diperlukan; kolom lokasi lainnya boleh dikosongkan.
+            Unggah langsung file Data KUPVA BB di NTB dari BI atau gunakan template Excel. Nomor telepon tidak diimpor.
+            Pada format BI, wilayah dikenali dari alamat dan KP/KC disimpan terpisah. Tanggal teks BI menggunakan MM/DD/YYYY.
+            Nomor izin boleh kosong jika alamat tersedia.
         </p>
     </div>
 

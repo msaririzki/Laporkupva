@@ -348,6 +348,15 @@ if (form) {
     const reviewLocation = document.querySelector('#review-location');
     const locationDetailsSummary = document.querySelector('#location-details-summary');
     const turnstileElement = form.querySelector('[data-turnstile-widget]');
+    const startVerification = form.querySelector('#start-verification');
+    const verificationId = form.querySelector('#verification_id');
+    const verificationMessage = form.querySelector('#verification-message');
+    const identityFields = [...form.querySelectorAll('#reporter_name, #reporter_email, #reporter_phone')];
+    const locationConfirmed = form.querySelector('#location_confirmed');
+    let verificationToken = '';
+    let verificationExpiresAt = 0;
+    let verifyingIdentity = false;
+    let identityRevision = 0;
     let currentStep = 1;
     let map;
     let marker;
@@ -361,11 +370,17 @@ if (form) {
         button: submitButton,
         controls: [previousButton, nextButton, ...progressItems],
         canSubmit: () => {
-            if (!validateStep() || !form.checkValidity()) {
-                form.reportValidity();
+            if (!verificationId.value || Date.now() >= verificationExpiresAt) {
+                setStep(1);
+                invalidateVerification('Verifikasi perlu diulang. Data laporan Anda tetap tersimpan di formulir ini.');
                 return false;
             }
-
+            for (const step of steps) {
+                if (!validateStep(Number(step.dataset.step))) {
+                    setStep(Number(step.dataset.step));
+                    return false;
+                }
+            }
             return true;
         },
     });
@@ -374,12 +389,7 @@ if (form) {
     document.querySelectorAll('#incident_type, #regency').forEach(initCustomSelect);
 
     const firstInvalidStep = form.querySelector('.is-invalid, .form-error')?.closest('.form-step');
-    const urlStep = new URLSearchParams(window.location.search).get('step');
-    if (firstInvalidStep) {
-        currentStep = Number(firstInvalidStep.dataset.step);
-    } else if (urlStep && [1, 2, 3].includes(Number(urlStep))) {
-        currentStep = Number(urlStep);
-    }
+    // A fresh form always starts with a new verification, including validation redirects.
 
     const updateReview = () => {
         const incidentType = document.querySelector('#incident_type');
@@ -395,21 +405,77 @@ if (form) {
         reviewLocation.textContent = [village, district, regency].filter(Boolean).join(', ') || 'Belum dipilih';
     };
 
-    const renderTurnstile = () => {
-        if (!turnstileElement || turnstileWidgetId !== null || !window.turnstile) return;
+    const showVerificationMessage = (message, isError = false) => {
+        verificationMessage.textContent = message;
+        verificationMessage.classList.toggle('text-red-600', isError);
+        verificationMessage.classList.toggle('text-emerald-700', !isError);
+    };
 
-        turnstileElement.querySelector('[data-turnstile-loading]')?.remove();
+    const invalidateVerification = (message = '') => {
+        identityRevision += 1;
+        verificationToken = '';
+        verificationId.value = '';
+        verificationExpiresAt = 0;
+        if (turnstileWidgetId !== null) window.turnstile?.reset(turnstileWidgetId);
+        if (startVerification) {
+            startVerification.disabled = false;
+            startVerification.textContent = 'Mulai verifikasi';
+        }
+        showVerificationMessage(message, Boolean(message));
+    };
+
+    identityFields.forEach((field) => field.addEventListener('input', () => {
+        if (verificationToken || verificationId.value || verifyingIdentity || startVerification?.disabled) {
+            invalidateVerification('Data pelapor berubah. Silakan ulangi verifikasi.');
+        }
+    }));
+
+    const renderTurnstile = () => {
+        if (!turnstileElement || !window.turnstile) return false;
+        turnstileElement.classList.remove('hidden');
+        if (turnstileWidgetId !== null) return true;
+
         turnstileWidgetId = window.turnstile.render(turnstileElement, {
             action: 'submit_report',
+            execution: 'execute',
+            retry: 'never',
+            'refresh-expired': 'manual',
+            'refresh-timeout': 'manual',
+            'response-field': false,
             language: 'id',
             sitekey: turnstileElement.dataset.sitekey,
             size: turnstileElement.getBoundingClientRect().width < 300 ? 'compact' : 'flexible',
             theme: 'light',
+            callback: (token) => {
+                verificationToken = token;
+                startVerification.disabled = false;
+                startVerification.textContent = 'Ulangi verifikasi';
+                showVerificationMessage('Pemeriksaan selesai. Tekan Lanjut ke kejadian.');
+            },
+            'error-callback': () => {
+                if (!verificationId.value) invalidateVerification('Verifikasi belum berhasil. Tekan Mulai verifikasi untuk mencoba lagi.');
+            },
+            'expired-callback': () => {
+                if (!verificationId.value) invalidateVerification('Verifikasi kedaluwarsa. Silakan ulangi.');
+            },
+            'timeout-callback': () => {
+                if (!verificationId.value) invalidateVerification('Waktu pemeriksaan habis. Silakan ulangi.');
+            },
         });
+        return true;
     };
 
-    window.addEventListener('tambora:turnstile-ready', () => {
-        if (currentStep === 3) renderTurnstile();
+    startVerification?.addEventListener('click', () => {
+        if (!validateStep(1)) return;
+        if (!renderTurnstile()) {
+            showVerificationMessage('Verifikasi belum termuat. Periksa koneksi, lalu coba lagi.', true);
+            return;
+        }
+        invalidateVerification();
+        startVerification.disabled = true;
+        startVerification.textContent = 'Memeriksa…';
+        showVerificationMessage('Ikuti petunjuk pada pemeriksaan di bawah.');
+        window.turnstile.execute(turnstileWidgetId);
     });
 
     const setStep = (step, shouldScroll = true) => {
@@ -439,16 +505,15 @@ if (form) {
         submitButton.classList.toggle('hidden', currentStep !== steps.length);
         submitButton.classList.toggle('inline-flex', currentStep === steps.length);
         stepStatus.textContent = `Langkah ${currentStep} dari ${steps.length}`;
-        nextButton.textContent = currentStep === 1 ? 'Lanjut ke lokasi' : 'Lanjut ke bukti';
+        nextButton.textContent = ['Lanjut ke kejadian', 'Lanjut ke lokasi', 'Lanjut ke bukti'][currentStep - 1] ?? 'Lanjut';
 
-        if (currentStep === 2) {
+        if (currentStep === 3) {
             initializeMap();
             window.setTimeout(() => map?.invalidateSize(), 50);
         }
 
-        if (currentStep === 3) {
+        if (currentStep === 4) {
             updateReview();
-            renderTurnstile();
         }
 
         if (shouldScroll) {
@@ -456,17 +521,19 @@ if (form) {
         }
     };
 
-    const validateStep = () => {
-        const step = steps[currentStep - 1];
-        const requiredFields = [...step.querySelectorAll('[required]')];
+    const validateStep = (stepNumber = currentStep) => {
+        const step = steps[stepNumber - 1];
+        const requiredFields = [...step.querySelectorAll('input, select, textarea')];
 
-        if (currentStep === 2 && (!latitude.value || !longitude.value)) {
+        if (stepNumber === 3 && (!latitude.value || !longitude.value)) {
+            setStep(3);
             showMapMessage('Pilih titik lokasi kejadian pada peta terlebih dahulu.', true);
             return false;
         }
 
         for (const field of requiredFields) {
             if (!field.checkValidity()) {
+                if (currentStep !== stepNumber) setStep(stepNumber);
                 field.reportValidity();
                 field.focus({ preventScroll: false });
                 return false;
@@ -484,6 +551,7 @@ if (form) {
     const withinNtb = (lat, lng) => lat >= -11 && lat <= -8 && lng >= 115 && lng <= 120;
 
     const updatePoint = (lat, lng, locationAccuracy = '') => {
+        locationConfirmed.checked = false;
         if (!withinNtb(lat, lng)) {
             showMapMessage('Titik berada di luar wilayah Nusa Tenggara Barat.', true);
             return false;
@@ -505,7 +573,9 @@ if (form) {
         }
 
         map.panTo([lat, lng]);
-        showMapMessage('Titik lokasi sudah dipilih. Anda dapat menggeser penanda jika perlu.');
+        showMapMessage(locationAccuracy > 100
+            ? 'Lokasi perangkat belum cukup akurat. Perbesar peta dan geser penanda ke tempat kejadian sebelum mengonfirmasi.'
+            : 'Periksa posisi penanda, lalu centang konfirmasi lokasi di bawah peta.');
         return true;
     };
 
@@ -550,7 +620,10 @@ if (form) {
     const reverseGeocode = async (lat, lng) => {
         try {
             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lng)}&addressdetails=1&accept-language=id`);
-            if (response.ok) fillAddress(await response.json());
+            if (response.ok) {
+                const result = await response.json();
+                if (latitude.value === Number(lat).toFixed(7) && longitude.value === Number(lng).toFixed(7)) fillAddress(result);
+            }
         } catch {
             showMapMessage('Titik sudah dipilih. Detail alamat dapat Anda lengkapi secara manual.');
         }
@@ -638,8 +711,73 @@ if (form) {
         }
     };
 
-    nextButton.addEventListener('click', () => {
-        if (validateStep()) setStep(currentStep + 1);
+    nextButton.addEventListener('click', async () => {
+        if (verifyingIdentity || !validateStep()) return;
+        if (currentStep !== 1) {
+            setStep(currentStep + 1);
+            return;
+        }
+        if (verificationId.value && Date.now() < verificationExpiresAt) {
+            setStep(2);
+            return;
+        }
+        if (turnstileElement && !verificationToken) {
+            showVerificationMessage('Tekan Mulai verifikasi dan selesaikan pemeriksaan sebelum melanjutkan.', true);
+            startVerification?.focus();
+            return;
+        }
+        const revision = identityRevision;
+        const payload = new URLSearchParams({
+            _token: form.querySelector('[name="_token"]').value,
+            website: form.querySelector('#website').value,
+            'cf-turnstile-response': verificationToken,
+        });
+        identityFields.forEach((field) => payload.set(field.name, field.value));
+        verifyingIdentity = true;
+        nextButton.disabled = true;
+        nextButton.setAttribute('aria-busy', 'true');
+        nextButton.textContent = 'Memeriksa…';
+        showVerificationMessage('Memeriksa data pelapor…');
+        const timeout = new AbortController();
+        const timeoutId = window.setTimeout(() => timeout.abort(), 35000);
+        try {
+            const response = await fetch(form.dataset.verificationUrl, {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                credentials: 'same-origin',
+                body: payload,
+                signal: timeout.signal,
+            });
+            const result = await response.json();
+            if (revision !== identityRevision) return;
+            if (!response.ok || !result.verification_id) {
+                invalidateVerification(Object.values(result.errors ?? {}).flat()[0] ?? 'Pemeriksaan belum berhasil. Silakan coba lagi.');
+                return;
+            }
+            verificationId.value = result.verification_id;
+            verificationExpiresAt = result.expires_at * 1000;
+            verificationToken = '';
+            showVerificationMessage('Data pelapor sudah diperiksa.');
+            setStep(2);
+        } catch {
+            invalidateVerification('Pemeriksaan belum berhasil. Periksa koneksi Anda dan coba lagi.');
+        } finally {
+            window.clearTimeout(timeoutId);
+            verifyingIdentity = false;
+            nextButton.disabled = false;
+            nextButton.removeAttribute('aria-busy');
+            nextButton.textContent = ['Lanjut ke kejadian', 'Lanjut ke lokasi', 'Lanjut ke bukti'][currentStep - 1] ?? 'Lanjut';
+        }
+    });
+    document.querySelector('#regency').addEventListener('change', () => { locationConfirmed.checked = false; });
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            verifyingIdentity = false;
+            nextButton.disabled = false;
+            nextButton.removeAttribute('aria-busy');
+            invalidateVerification();
+            setStep(1, false);
+        }
     });
     previousButton.addEventListener('click', () => setStep(currentStep - 1));
     progressItems.forEach((item) => {
@@ -656,6 +794,12 @@ if (form) {
 
         return `${year}-${month}-${day}`;
     };
+    identityFields.forEach((field) => field.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && currentStep === 1) {
+            event.preventDefault();
+            nextButton.click();
+        }
+    }));
 
     document.querySelectorAll('[data-date-offset]').forEach((button) => {
         button.addEventListener('click', () => {

@@ -139,6 +139,8 @@ if (liveRefresh) {
 
                 if (statusLabel) {
                     statusLabel.textContent = update.status_label;
+                    statusLabel.classList.toggle('text-emerald-300', update.status === 'completed');
+                    statusLabel.classList.toggle('text-[#F2B84B]', update.status !== 'completed');
                 }
 
                 if (timeline) {

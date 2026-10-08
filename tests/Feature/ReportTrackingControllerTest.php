@@ -30,6 +30,23 @@ class ReportTrackingControllerTest extends TestCase
             ->assertDontSee('Browser ini belum mendukung pembacaan QR');
     }
 
+    public function test_completed_report_shows_finished_timeline_on_page_and_live_updates(): void
+    {
+        $report = Report::factory()->completed()->create();
+        $this->post(route('reports.track.show'), ['tracking_code' => $report->public_code])
+            ->assertRedirect(route('reports.status', ['report' => $report->public_code]));
+
+        $response = $this->get(route('reports.status', ['report' => $report->public_code]));
+
+        $response->assertOk()->assertSee('Penanganan selesai')->assertDontSee('Tahap sekarang')
+            ->assertDontSee('is-current', false)->assertSee('text-emerald-300', false);
+        $this->assertSame(5, substr_count($response->getContent(), 'status-item is-done'));
+        $updates = $this->getJson(route('reports.status.updates', ['report' => $report->public_code]));
+        $updates->assertOk()->assertJsonPath('status', 'completed')->assertJsonPath('status_label', 'Selesai');
+        $this->assertStringContainsString('Penanganan selesai', $updates->json('timeline_html'));
+        $this->assertStringNotContainsString('is-current', $updates->json('timeline_html'));
+    }
+
     public function test_tracking_form_prefills_the_report_code_from_a_qr_link(): void
     {
         $this->get(route('reports.track', ['code' => 'LKP-AB12-CD34']))
@@ -67,7 +84,9 @@ class ReportTrackingControllerTest extends TestCase
             ->assertSee('data-report-live-refresh', false)
             ->assertSee('data-channel=', false)
             ->assertSee('Pembaruan otomatis aktif')
-            ->assertSee('Tahap sekarang');
+            ->assertSee('Tahap sekarang')
+            ->assertSeeInOrder(['Laporan dikirim', 'Laporan diterima', 'Koordinasi dengan APH', 'Kunjungan lapangan / penertiban', 'Selesai'])
+            ->assertDontSee('Laporan hasil');
     }
 
     public function test_report_can_be_tracked_with_an_encrypted_qr_access_token(): void
@@ -189,6 +208,7 @@ class ReportTrackingControllerTest extends TestCase
             ->assertExactJsonStructure([
                 'version',
                 'status_label',
+                'status',
                 'timeline_html',
                 'messages_html',
             ]);
@@ -201,6 +221,7 @@ class ReportTrackingControllerTest extends TestCase
             ->assertExactJsonStructure([
                 'version',
                 'status_label',
+                'status',
                 'timeline_html',
                 'messages_html',
             ]);
@@ -221,6 +242,7 @@ class ReportTrackingControllerTest extends TestCase
             ->assertExactJsonStructure([
                 'version',
                 'status_label',
+                'status',
                 'timeline_html',
                 'messages_html',
             ]);

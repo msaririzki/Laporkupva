@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Kupvas;
 use App\Enums\NtbRegency;
 use App\Models\Kupva;
 use App\Rules\NoHtml;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -27,9 +28,17 @@ final class KupvaCsvImporter
         'kabupaten_kota',
     ];
 
+    /** @var list<string> */
+    private const BI_REQUIRED_HEADERS = [
+        'nama_perusahaan',
+        'alamat_lengkap_kantor_pusat_cabang',
+        'kp_kc',
+    ];
+
     /** @var array<string, string> */
     private const FIELD_LABELS = [
         'name' => 'Nama usaha',
+        'office_type' => 'Jenis kantor',
         'license_number' => 'Nomor izin',
         'license_status' => 'Status izin',
         'regency' => 'Kabupaten/kota',
@@ -68,7 +77,11 @@ final class KupvaCsvImporter
             ->mapWithKeys(fn (mixed $header, int $index): array => [$this->normalizeHeader((string) $header) => $index])
             ->all();
 
-        $missingHeaders = array_values(array_diff(self::REQUIRED_HEADERS, array_keys($headerMap)));
+        $isBiFormat = array_key_exists('nama_perusahaan', $headerMap);
+        $missingHeaders = array_values(array_diff(
+            $isBiFormat ? self::BI_REQUIRED_HEADERS : self::REQUIRED_HEADERS,
+            array_keys($headerMap),
+        ));
 
         if ($missingHeaders !== []) {
             $analysis['errors'][] = 'Kolom template tidak lengkap: '.implode(', ', $missingHeaders).'. Unduh dan gunakan template Excel terbaru.';
@@ -82,7 +95,9 @@ final class KupvaCsvImporter
 
         foreach ($spreadsheet['rows'] as $spreadsheetRow) {
             $rowNumber = $spreadsheetRow['number'];
-            $row = $this->normalizeRow($spreadsheetRow['values'], $headerMap);
+            $row = $isBiFormat
+                ? $this->normalizeBiRow($spreadsheetRow['values'], $headerMap)
+                : $this->normalizeRow($spreadsheetRow['values'], $headerMap);
 
             if ($this->isEmptyRow($row)) {
                 continue;
@@ -95,11 +110,19 @@ final class KupvaCsvImporter
                 break;
             }
 
-            $validator = Validator::make($row, $this->rulesFor(), [
+            $validator = Validator::make($row, $this->rulesFor($isBiFormat), [
                 'license_status.in' => 'status izin harus Aktif, Kedaluwarsa, atau Dibekukan',
                 'regency.enum' => 'kabupaten/kota tidak termasuk wilayah NTB yang didukung',
-                'license_expires_at.date_format' => 'tanggal berlaku harus memakai format YYYY-MM-DD',
+                'regency.required' => $isBiFormat
+                    ? 'kabupaten/kota tidak dapat dikenali dari alamat; periksa nama wilayah NTB pada alamat'
+                    : 'kabupaten/kota wajib diisi',
+                'license_expires_at.date_format' => $isBiFormat
+                    ? 'tanggal batas izin tidak valid; gunakan tanggal Excel atau format MM/DD/YYYY'
+                    : 'tanggal berlaku harus memakai format YYYY-MM-DD',
                 'is_active.boolean' => 'status beroperasi harus Ya atau Tidak',
+                'office_type.in' => 'jenis kantor harus KP atau KC',
+                'office_type.required' => 'jenis kantor wajib diisi dengan KP atau KC',
+                'address.required_without' => 'alamat wajib diisi jika nomor izin tidak tersedia',
             ], [
                 'name' => 'nama usaha',
                 'license_number' => 'nomor izin',
@@ -110,6 +133,7 @@ final class KupvaCsvImporter
                 'address' => 'alamat',
                 'license_expires_at' => 'berlaku sampai',
                 'is_active' => 'beroperasi',
+                'office_type' => 'jenis kantor',
             ]);
 
             if ($validator->fails()) {
@@ -122,7 +146,11 @@ final class KupvaCsvImporter
             }
 
             $validated = $validator->validated();
-            $existing = Kupva::query()->where('license_number', $validated['license_number'])->first();
+            $existing = $this->findExistingKupva($validated);
+
+            if ($existing && empty($validated['license_number'])) {
+                unset($validated['license_number']);
+            }
 
             if (! $existing) {
                 $validated['license_status'] ??= 'active';
@@ -131,13 +159,19 @@ final class KupvaCsvImporter
 
             $rowKey = $existing
                 ? 'model:'.$existing->getKey()
-                : 'license:'.Str::lower($validated['license_number']);
+                : (filled($validated['license_number'] ?? null)
+                    ? 'license:'.Str::lower($validated['license_number'])
+                    : 'office:'.hash('sha256', json_encode([
+                        Str::lower($validated['name']),
+                        Str::lower($validated['address']),
+                        $validated['office_type'] ?? null,
+                    ], JSON_THROW_ON_ERROR)));
 
             if (isset($seenRows[$rowKey])) {
                 $isIdentical = $this->rowsAreEqual($seenRows[$rowKey]['values'], $validated);
                 $message = $isIdentical
                     ? "Sama dengan baris {$seenRows[$rowKey]['row']} dan akan dilewati."
-                    : "Nomor izin juga digunakan pada baris {$seenRows[$rowKey]['row']} dengan isi berbeda.";
+                    : "Identitas KUPVA juga digunakan pada baris {$seenRows[$rowKey]['row']} dengan isi berbeda.";
 
                 $analysis['summary']['duplicates']++;
                 $analysis['items'][] = $this->previewItem($rowNumber, 'duplicate', $validated, [], $message, ! $isIdentical);
@@ -311,16 +345,17 @@ final class KupvaCsvImporter
     }
 
     /** @return array<string, list<mixed>> */
-    private function rulesFor(): array
+    private function rulesFor(bool $isBiFormat): array
     {
         return [
             'name' => ['required', 'string', 'max:255', new NoHtml],
-            'license_number' => ['required', 'string', 'max:255', new NoHtml],
+            'license_number' => ['sometimes', 'nullable', 'string', 'max:255', new NoHtml],
+            'office_type' => [$isBiFormat ? 'required' : 'sometimes', 'nullable', Rule::in(['KP', 'KC'])],
             'license_status' => ['sometimes', Rule::in(['active', 'expired', 'suspended'])],
             'regency' => ['required', Rule::enum(NtbRegency::class)],
             'district' => ['sometimes', 'nullable', 'string', 'max:120', new NoHtml],
             'village' => ['sometimes', 'nullable', 'string', 'max:120', new NoHtml],
-            'address' => ['sometimes', 'nullable', 'string', 'max:2000', new NoHtml],
+            'address' => ['required_without:license_number', 'nullable', 'string', 'max:2000', new NoHtml],
             'latitude' => ['sometimes', 'nullable', 'numeric', 'between:-11,-8'],
             'longitude' => ['sometimes', 'nullable', 'numeric', 'between:115,120'],
             'license_expires_at' => ['sometimes', 'nullable', 'date_format:Y-m-d'],
@@ -367,11 +402,12 @@ final class KupvaCsvImporter
 
         $row = [
             'name' => $value('nama_usaha'),
-            'license_number' => $value('nomor_izin'),
+            'license_number' => $value('nomor_izin') ?: null,
             'regency' => $value('kabupaten_kota'),
         ];
 
         $optionalValues = [
+            'office_type' => Str::upper($value('jenis_kantor')) ?: null,
             'license_status' => $hasHeader('status_izin') ? $this->normalizeLicenseStatus($value('status_izin')) : null,
             'district' => $value('kecamatan') ?: null,
             'village' => $value('desa_kelurahan') ?: null,
@@ -384,6 +420,7 @@ final class KupvaCsvImporter
 
         foreach ($optionalValues as $field => $optionalValue) {
             $header = match ($field) {
+                'office_type' => 'jenis_kantor',
                 'license_status' => 'status_izin',
                 'district' => 'kecamatan',
                 'village' => 'desa_kelurahan',
@@ -400,6 +437,93 @@ final class KupvaCsvImporter
         }
 
         return $row;
+    }
+
+    /**
+     * @param  list<mixed>  $record
+     * @param  array<string, int>  $headerMap
+     * @return array<string, mixed>
+     */
+    private function normalizeBiRow(array $record, array $headerMap): array
+    {
+        $value = fn (string $header): string => $this->normalizeCellValue(
+            $record[$headerMap[$header] ?? -1] ?? null,
+        );
+        $address = $value('alamat_lengkap_kantor_pusat_cabang');
+        $row = [
+            'name' => $value('nama_perusahaan'),
+            'address' => $address ?: null,
+            'office_type' => Str::upper($value('kp_kc')),
+        ];
+
+        if ($this->isEmptyRow($row)) {
+            return [];
+        }
+
+        $row['regency'] = $this->regencyFromAddress($address);
+
+        foreach (array_keys($headerMap) as $header) {
+            if (Str::startsWith($header, 'tanggal_batas_waktu_izin')) {
+                $row['license_expires_at'] = $this->normalizeBiDate($value($header));
+            }
+        }
+
+        return $row;
+    }
+
+    private function regencyFromAddress(string $address): string
+    {
+        $address = Str::lower($address);
+        $address = str_replace('loinbok', 'lombok', $address);
+
+        foreach ([
+            'sumbawa barat' => NtbRegency::KabupatenSumbawaBarat,
+            'lombok barat' => NtbRegency::KabupatenLombokBarat,
+            'lombok tengah' => NtbRegency::KabupatenLombokTengah,
+            'lombok timur' => NtbRegency::KabupatenLombokTimur,
+            'lombok utara' => NtbRegency::KabupatenLombokUtara,
+            'mataram' => NtbRegency::KotaMataram,
+            'kota bima' => NtbRegency::KotaBima,
+            'kabupaten bima' => NtbRegency::KabupatenBima,
+            'kab. bima' => NtbRegency::KabupatenBima,
+            'kab bima' => NtbRegency::KabupatenBima,
+            'sumbawa' => NtbRegency::KabupatenSumbawa,
+            'dompu' => NtbRegency::KabupatenDompu,
+        ] as $location => $regency) {
+            if (Str::contains($address, $location)) {
+                return $regency->value;
+            }
+        }
+
+        return '';
+    }
+
+    /** Dates stored as text in the BI workbook use MM/DD/YYYY. */
+    private function normalizeBiDate(string $value): ?string
+    {
+        if ($value === '') {
+            return null;
+        }
+
+        $date = DateTimeImmutable::createFromFormat('!m/d/Y', $value);
+
+        return $date && $date->format('m/d/Y') === $value
+            ? $date->format('Y-m-d')
+            : $value;
+    }
+
+    /** @param array<string, mixed> $values */
+    private function findExistingKupva(array $values): ?Kupva
+    {
+        if (filled($values['license_number'] ?? null)) {
+            return Kupva::query()->where('license_number', $values['license_number'])->first();
+        }
+
+        return Kupva::query()
+            ->where('name', $values['name'])
+            ->where('address', $values['address'])
+            ->where('office_type', $values['office_type'] ?? null)
+            ->first();
     }
 
     private function normalizeCellValue(mixed $value): string
@@ -546,6 +670,8 @@ final class KupvaCsvImporter
             'name' => filled($values['name'] ?? null) ? (string) $values['name'] : 'Nama belum tersedia',
             'license_number' => filled($values['license_number'] ?? null) ? (string) $values['license_number'] : 'Nomor izin belum tersedia',
             'changes' => $changes,
+            'office_type' => (string) ($values['office_type'] ?? ''),
+            'address' => (string) ($values['address'] ?? ''),
             'message' => $message,
             'is_conflict' => $isConflict,
         ];

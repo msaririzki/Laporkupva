@@ -58,7 +58,6 @@
                         received: '#2563eb',
                         coordination: '#f59e0b',
                         field_action: '#f97316',
-                        result_report: '#14b8a6',
                         completed: '#10b981',
                     };
                     const bounds = [];

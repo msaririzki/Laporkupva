@@ -79,7 +79,6 @@ class RecentReports extends TableWidget
             ReportStatus::Received => 'Diterima',
             ReportStatus::Coordination => 'Koordinasi',
             ReportStatus::FieldAction => 'Ke lapangan',
-            ReportStatus::ResultReport => 'Hasil',
             ReportStatus::Completed => 'Selesai',
         };
     }

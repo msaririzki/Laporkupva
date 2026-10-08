@@ -94,11 +94,13 @@ class ReportResource extends Resource
                 ])->schema([
                     Textarea::make('public_note')
                         ->label('Informasi untuk pelapor')
+                        ->default(fn (Report $record): ?string => $record->status->next()?->publicMessage($record->public_code))
                         ->placeholder('Tulis perkembangan yang dapat dibaca pelapor.')
-                        ->helperText('Dapat dilihat pelapor.')
+                        ->helperText('Template sudah disesuaikan dengan nomor laporan dan tahap berikutnya. Periksa dan sesuaikan dengan kegiatan yang dilakukan; Anda dapat menambahkan keterangan sebelum menyimpan. Pesan ini akan tampil kepada pelapor.')
                         ->maxLength(1000)
                         ->rule(new NoHtml)
-                        ->rows(2),
+                        ->rows(8)
+                        ->columnSpanFull(),
                     Textarea::make('internal_note')
                         ->label('Catatan admin')
                         ->placeholder('Contoh: Hasil pemeriksaan atau koordinasi petugas.')

@@ -17,6 +17,11 @@ class KupvaInfolist
                     ->columns(3)
                     ->schema([
                         TextEntry::make('name')->label('Nama usaha')->weight('bold'),
+                        TextEntry::make('office_type')->label('Jenis kantor')->placeholder('-')->formatStateUsing(fn (string $state): string => match ($state) {
+                            'KP' => 'Kantor pusat (KP)',
+                            'KC' => 'Kantor cabang (KC)',
+                            default => $state,
+                        }),
                         TextEntry::make('license_number')->label('Nomor izin')->placeholder('-')->copyable(),
                         TextEntry::make('license_status')->label('Status izin')->badge()->formatStateUsing(fn (string $state): string => match ($state) {
                             'active' => 'Aktif',

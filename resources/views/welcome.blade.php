@@ -21,7 +21,7 @@
 
                 <!-- Subtitle -->
                 <p class="mt-3 sm:mt-3.5 max-w-xl text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-normal">
-                    Tukar uang asing dengan lebih aman. Periksa Money Changer berizin di NTB atau laporkan tempat yang diduga belum memiliki izin. Laporan dapat dikirim tanpa nama.
+                    Tukar uang asing dengan lebih aman. Periksa Money Changer berizin di NTB atau laporkan tempat yang diduga belum memiliki izin. Identitas pelapor dirahasiakan.
                 </p>
 
                 <!-- CTA Buttons -->
@@ -126,15 +126,9 @@
                                 ],
                                 [
                                     'step' => 5,
-                                    'title' => 'Laporan hasil',
-                                    'status' => 'upcoming',
-                                    'statusLabel' => 'Tahap 5',
-                                ],
-                                [
-                                    'step' => 6,
                                     'title' => 'Selesai',
                                     'status' => 'upcoming',
-                                    'statusLabel' => 'Tahap 6',
+                                    'statusLabel' => 'Tahap 5',
                                 ],
                             ];
                         @endphp
@@ -459,7 +453,7 @@
                                         Tidak Perlu Membuat Akun
                                     </h3>
                                     <p class="mt-1 text-[11px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed">
-                                        Sampaikan informasi tanpa mendaftar atau mengisi data pribadi.
+                                        Isi nama dan email pelapor tanpa membuat akun. Identitas Anda dirahasiakan.
                                     </p>
                                 </div>
                             </div>
@@ -579,7 +573,7 @@
                             Laporkan dengan tenang,<br class="hidden sm:inline"> privasi tetap terjaga.
                         </h2>
                         <p class="mt-1.5 sm:mt-2.5 text-xs sm:text-base text-slate-600 leading-relaxed max-w-md mx-auto lg:mx-0">
-                            TAMBORA membantu masyarakat melaporkan dugaan Money Changer (KUPVA BB) tidak berizin di NTB tanpa perlu memberikan data pribadi.
+                            TAMBORA membantu masyarakat melaporkan dugaan Money Changer (KUPVA BB) tidak berizin di NTB dengan menjaga kerahasiaan data pelapor.
                         </p>
                     </div>
                 </div>

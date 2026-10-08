@@ -57,7 +57,7 @@ class ListKupvas extends ListRecords
                                     ]),
                                 FileUpload::make('file')
                                     ->label('Berkas data KUPVA')
-                                    ->helperText('Maksimal 5 MB dan 1.000 baris. Berkas lama berformat CSV tetap dapat digunakan.')
+                                    ->helperText('Maksimal 5 MB dan 1.000 baris. Mendukung file BI, template Excel, dan CSV.')
                                     ->acceptedFileTypes([
                                         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                                         'text/csv',

@@ -30,6 +30,10 @@ class KupvasTable
                     ->wrap()
                     ->extraCellAttributes(['class' => 'kupva-list-cell kupva-list-cell-name'])
                     ->description(fn (Kupva $record): string => $record->license_number ?: 'Nomor izin belum tersedia'),
+                TextColumn::make('office_type')
+                    ->label('KP/KC')
+                    ->placeholder('-')
+                    ->badge(),
                 TextColumn::make('license_number')
                     ->label('Nomor izin')
                     ->placeholder('-')

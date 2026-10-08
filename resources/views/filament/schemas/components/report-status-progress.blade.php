@@ -4,13 +4,19 @@
     $statuses = ReportStatus::cases();
     $currentPosition = array_search($record->status, $statuses, true);
     $currentPosition = $currentPosition === false ? 0 : $currentPosition;
+    $isReportCompleted = $record->status === ReportStatus::Completed;
 @endphp
 
 <section class="@container/report-progress overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900 sm:rounded-2xl">
     <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 px-4 py-3.5 dark:border-gray-800 sm:px-6 sm:py-4">
         <div class="flex flex-wrap items-center gap-2.5">
             <h2 class="text-base font-bold text-gray-950 dark:text-white">Status penanganan</h2>
-            <span class="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100 dark:bg-blue-950/60 dark:text-blue-200 dark:ring-blue-900">
+            <span @class([
+                'rounded-full px-2.5 py-1 text-xs font-bold ring-1',
+                'bg-emerald-50 text-emerald-700 ring-emerald-100 dark:bg-emerald-950/60 dark:text-emerald-200 dark:ring-emerald-900' => $isReportCompleted,
+                'bg-blue-50 text-blue-700 ring-blue-100 dark:bg-blue-950/60 dark:text-blue-200 dark:ring-blue-900' => ! $isReportCompleted,
+            ])>
+                @if ($isReportCompleted) Selesai · @endif
                 Tahap {{ $currentPosition + 1 }} dari {{ count($statuses) }}
             </span>
         </div>
@@ -20,6 +26,7 @@
                 <span aria-hidden="true" class="size-2.5 rounded-full bg-emerald-500"></span>
                 Sudah dikerjakan
             </span>
+            @if (! $isReportCompleted)
             <span class="flex items-center gap-1.5">
                 <span class="relative flex size-2.5" aria-hidden="true">
                     <span class="absolute inline-flex size-full animate-ping rounded-full bg-blue-400 opacity-60 motion-reduce:hidden"></span>
@@ -31,15 +38,16 @@
                 <span aria-hidden="true" class="size-2.5 rounded-full border-2 border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-900"></span>
                 Belum dikerjakan
             </span>
+            @endif
         </div>
     </div>
 
     <div class="px-4 py-4 sm:px-6 sm:py-5">
-        <ol class="grid gap-0 @2xl/report-progress:grid-cols-6" aria-label="Tahapan penanganan laporan">
+        <ol class="grid gap-0 @2xl/report-progress:grid-cols-5" aria-label="Tahapan penanganan laporan">
             @foreach ($statuses as $position => $status)
                 @php
-                    $isCompleted = $position < $currentPosition;
-                    $isCurrent = $position === $currentPosition;
+                    $isCompleted = $isReportCompleted || $position < $currentPosition;
+                    $isCurrent = ! $isReportCompleted && $position === $currentPosition;
                     $connectorState = $isCompleted ? 'completed' : ($isCurrent ? 'current' : 'pending');
                 @endphp
 
