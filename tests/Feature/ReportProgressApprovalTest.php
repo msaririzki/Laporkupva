@@ -247,7 +247,7 @@ class ReportProgressApprovalTest extends TestCase
         $this->assertSame('Pengajuan progres menunggu persetujuan', $notification->data['title']);
         $this->assertSame($request->id, $notification->data['progress_request_id']);
         $this->assertSame(ReportProgressRequestResource::getUrl('view', ['record' => $request], isAbsolute: false), $notification->data['actions'][0]['url']);
-        $this->assertSame(['database', 'broadcast'], (new ReportProgressApprovalRequested($request))->via($administrator));
+        $this->assertSame(['database', 'broadcast', 'mail'], (new ReportProgressApprovalRequested($request))->via($administrator));
         $this->assertSame('filament', (new ReportProgressApprovalRequested($request))->toBroadcast($administrator)->data['format']);
         $request->reject($administrator, 'Lengkapi dokumentasi koordinasi yang dilakukan oleh petugas.');
         $this->assertNotNull($notification->fresh()->read_at);

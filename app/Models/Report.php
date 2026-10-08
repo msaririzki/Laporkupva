@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Enums\ReportStatus;
 use App\Events\ReportRealtimeUpdated;
+use App\Notifications\MailNotification;
+use App\Notifications\ReportStatusUpdated;
 use Database\Factories\ReportFactory;
 use DomainException;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -14,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
@@ -57,8 +60,16 @@ class Report extends Model
         static::updated(function (Report $report): void {
             if ($report->wasChanged(['status', 'public_update'])) {
                 ReportRealtimeUpdated::dispatch($report, 'status');
+                $report->notifyReporter(new ReportStatusUpdated($report->public_code, $report->status));
             }
         });
+    }
+
+    public function notifyReporter(MailNotification $notification): void
+    {
+        if (filled($this->reporter_email) && filter_var($this->reporter_email, FILTER_VALIDATE_EMAIL) !== false) {
+            Notification::route('mail', $this->reporter_email)->notify($notification);
+        }
     }
 
     /** @return HasMany<ReportEvidence, $this> */

@@ -9,6 +9,7 @@ use App\Http\Requests\VerifyPublicReporterRequest;
 use App\Models\Report;
 use App\Models\User;
 use App\Notifications\Admin\NewReportSubmitted;
+use App\Notifications\ReportSubmitted;
 use chillerlan\QRCode\Common\EccLevel;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
@@ -95,6 +96,7 @@ class PublicReportController extends Controller
 
         Notification::send($admins, new NewReportSubmitted($report));
         $admins->each(fn (User $admin) => DatabaseNotificationsSent::dispatch($admin));
+        $report->notifyReporter(new ReportSubmitted($report->public_code));
 
         return to_route('reports.success')->with('submitted_report', [
             'code' => $report->public_code,

@@ -19,12 +19,15 @@ class UserForm
         return $schema
             ->components([
                 Section::make('Informasi akun')
-                    ->description('Lengkapi identitas dan akses akun dengan data yang benar.')
+                    ->description('Lengkapi identitas dan kata sandi pengguna.')
                     ->icon(Heroicon::OutlinedUserCircle)
                     ->iconColor('primary')
                     ->extraAttributes(['class' => 'admin-account-section'])
                     ->columnSpanFull()
-                    ->columns(2)
+                    ->columns([
+                        'default' => 1,
+                        'md' => 2,
+                    ])
                     ->schema([
                         TextInput::make('name')
                             ->label('Nama lengkap')
@@ -56,15 +59,19 @@ class UserForm
                             ->rule(Password::min(12)->mixedCase()->numbers()->symbols())
                             ->helperText(fn (string $operation): string => $operation === 'edit' ? 'Kosongkan jika tidak ingin mengubah kata sandi.' : 'Minimal 12 karakter dengan huruf besar, huruf kecil, angka, dan simbol.')
                             ->columnSpanFull(),
-                        Toggle::make('is_active')
-                            ->label('Akun aktif')
-                            ->helperText(fn (string $operation): string => $operation === 'edit' ? 'Nonaktifkan untuk mencabut akses tanpa menghapus riwayat aktivitas.' : 'Pengguna dapat masuk setelah akun disimpan, sesuai peran yang dipilih.')
-                            ->extraFieldWrapperAttributes(['class' => 'admin-account-status'])
-                            ->columnSpanFull()
-                            ->default(true)
-                            ->required(),
+                    ]),
+                Section::make('Peran dan akses')
+                    ->description('Tentukan kewenangan dan status akses pengguna.')
+                    ->icon(Heroicon::OutlinedShieldCheck)
+                    ->iconColor('primary')
+                    ->extraAttributes(['class' => 'admin-account-section'])
+                    ->columnSpanFull()
+                    ->schema([
                         Select::make('role')
                             ->label('Peran akun')
+                            ->prefixIcon(Heroicon::OutlinedUserGroup)
+                            ->native(false)
+                            ->selectablePlaceholder(false)
                             ->options([
                                 UserRole::Admin->value => UserRole::Admin->label(),
                                 UserRole::Police->value => UserRole::Police->label(),
@@ -72,8 +79,15 @@ class UserForm
                             ->default(UserRole::Admin->value)
                             ->required()
                             ->in([UserRole::Admin->value, UserRole::Police->value])
-                            ->helperText('Operator dapat mengelola laporan dan data KUPVA. Polisi hanya dapat melihat data tanpa nama dan kontak pelapor.')
+                            ->helperText('Operator dapat mengelola laporan dan data KUPVA. APH (Aparat Penegak Hukum) hanya dapat melihat data tanpa nama dan kontak pelapor.')
                             ->columnSpanFull(),
+                        Toggle::make('is_active')
+                            ->label('Akun aktif')
+                            ->helperText(fn (string $operation): string => $operation === 'edit' ? 'Nonaktifkan untuk mencabut akses tanpa menghapus riwayat aktivitas.' : 'Pengguna dapat masuk setelah akun disimpan, sesuai peran yang dipilih.')
+                            ->extraFieldWrapperAttributes(['class' => 'admin-account-status'])
+                            ->columnSpanFull()
+                            ->default(true)
+                            ->required(),
                     ]),
             ]);
     }

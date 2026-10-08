@@ -74,7 +74,7 @@ class RealtimeBroadcastingTest extends TestCase
         ];
 
         foreach ($notifications as $notification) {
-            $this->assertSame(['database', 'broadcast'], $notification->via($admin));
+            $this->assertSame(['database', 'broadcast', 'mail'], $notification->via($admin));
             $this->assertSame('filament', $notification->toBroadcast($admin)->data['format']);
         }
     }

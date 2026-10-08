@@ -53,7 +53,8 @@ class PublicKupvaController extends Controller
                     'address' => $kupva->address ?: collect([$kupva->village, $kupva->district, $kupva->regency])->filter()->join(', '),
                     'latitude' => $kupva->latitude === null ? null : (float) $kupva->latitude,
                     'longitude' => $kupva->longitude === null ? null : (float) $kupva->longitude,
-                    'approximate' => $kupva->location_source === 'nominatim',
+                    'approximate' => in_array($kupva->location_source, ['nominatim', 'nominatim_area'], true),
+                    'area' => $kupva->location_source === 'nominatim_area',
                 ])
             : collect();
 

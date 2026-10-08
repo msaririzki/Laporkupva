@@ -5,11 +5,13 @@ namespace Tests\Feature;
 use App\Filament\Resources\Kupvas\KupvaCsvImporter;
 use App\Filament\Resources\Kupvas\Pages\EditKupva;
 use App\Filament\Resources\Kupvas\Pages\ListKupvas;
+use App\Jobs\ResolveKupvaLocation;
 use App\Models\Kupva;
 use App\Models\User;
 use DateTimeImmutable;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Validation\ValidationException;
 use Livewire\Livewire;
 use OpenSpout\Common\Entity\Row;
@@ -23,6 +25,7 @@ class KupvaBiImportTest extends TestCase
 
     public function test_admin_can_import_all_21_bi_offices_without_phone_numbers_or_license_numbers(): void
     {
+        Queue::fake([ResolveKupvaLocation::class]);
         $this->actingAs(User::factory()->create());
         $file = $this->makeBiUpload();
 
@@ -37,6 +40,7 @@ class KupvaBiImportTest extends TestCase
             'office_type' => 'KP',
             'license_number' => null,
         ]);
+        Queue::assertPushed(ResolveKupvaLocation::class, 21);
         $this->assertSame(2, Kupva::query()->where('name', 'PT Echa Creative Mandiri')->count());
         $this->assertSame(3, Kupva::query()->where('name', 'PT Multigraha Kelola Valas')->count());
         $this->assertSame(0, Kupva::query()->whereNotNull('license_number')->count());

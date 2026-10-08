@@ -42,8 +42,7 @@ class KupvaForm
                             ->label('Nomor izin')
                             ->placeholder('Contoh: KEP-123/BI/2026')
                             ->prefixIcon(Heroicon::OutlinedIdentification)
-                            ->helperText('Boleh kosong jika nomor izin belum tersedia pada data BI.')
-                            ->unique(ignoreRecord: true)
+                            ->helperText('Diisi sesuai data BI. Nomor izin dapat sama untuk beberapa kantor; boleh kosong jika belum tersedia.')
                             ->maxLength(255)
                             ->rule(new NoHtml),
                         Select::make('office_type')
@@ -140,7 +139,7 @@ class KupvaForm
                             ->columnSpanFull(),
                     ]),
                 Section::make('Koordinat peta (opsional)')
-                    ->description('Buka bagian ini jika titik lokasi sudah diketahui.')
+                    ->description('Gunakan tombol Koreksi lokasi untuk menempel koordinat atau tautan Google Maps dan memeriksa penanda di peta.')
                     ->icon(Heroicon::OutlinedMap)
                     ->iconColor('gray')
                     ->extraAttributes(['class' => 'kupva-form-section kupva-coordinate-section'])
@@ -154,6 +153,7 @@ class KupvaForm
                     ])
                     ->schema([
                         TextInput::make('latitude')
+                            ->requiredWith('longitude')
                             ->label('Latitude')
                             ->placeholder('-8.5830695')
                             ->inputMode('decimal')
@@ -162,6 +162,7 @@ class KupvaForm
                             ->maxValue(-8)
                             ->helperText('Rentang wilayah NTB: -11 sampai -8.'),
                         TextInput::make('longitude')
+                            ->requiredWith('latitude')
                             ->label('Longitude')
                             ->placeholder('116.1161800')
                             ->inputMode('decimal')
@@ -171,8 +172,8 @@ class KupvaForm
                             ->helperText('Rentang wilayah NTB: 115 sampai 120.'),
                         Select::make('location_source')
                             ->label('Ketepatan titik lokasi')
-                            ->options(['nominatim' => 'Perkiraan dari alamat', 'manual' => 'Titik telah diperiksa petugas'])
-                            ->in(['nominatim', 'manual'])
+                            ->options(['nominatim' => 'Perkiraan dari alamat', 'nominatim_area' => 'Perkiraan area alamat', 'manual' => 'Titik telah diperiksa petugas'])
+                            ->in(['nominatim', 'nominatim_area', 'manual'])
                             ->helperText('Pilih titik telah diperiksa setelah memastikan koordinat sesuai lokasi usaha.')
                             ->columnSpanFull(),
                         Textarea::make('location_match_address')

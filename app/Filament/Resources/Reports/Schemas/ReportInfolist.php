@@ -281,7 +281,7 @@ class ReportInfolist
                             Section::make('Komunikasi anonim')
                                 ->description(fn (): string => auth()->user()?->canManageApplication() === true
                                     ? 'Tanggapi informasi tambahan dari pelapor.'
-                                    : 'Percakapan hanya dapat dibaca. Akun Polisi tidak dapat mengirim balasan.')
+                                    : 'Percakapan hanya dapat dibaca. Akun APH tidak dapat mengirim balasan.')
                                 ->icon(Heroicon::OutlinedChatBubbleLeftRight)
                                 ->extraAttributes(['id' => 'komunikasi-anonim'])
                                 ->schema([

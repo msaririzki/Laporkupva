@@ -4,7 +4,8 @@
         <p class="mt-1 text-xs leading-5 text-slate-600">
             Unggah langsung file Data KUPVA BB di NTB dari BI atau gunakan template Excel. Nomor telepon tidak diimpor.
             Pada format BI, wilayah dikenali dari alamat dan KP/KC disimpan terpisah. Tanggal teks BI menggunakan MM/DD/YYYY.
-            Nomor izin boleh kosong jika alamat tersedia.
+            Kolom Nomor izin pada file BI ikut disimpan. Nomor izin yang sama tidak menggabungkan kantor dengan nama, alamat, atau jenis kantor berbeda.
+            Nomor izin kosong atau tanda strip tidak menghapus nomor izin yang sudah tersimpan.
         </p>
     </div>
 

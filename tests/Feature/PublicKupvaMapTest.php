@@ -38,6 +38,7 @@ class PublicKupvaMapTest extends TestCase
                 'id' => $kupva->id, 'name' => 'PT Valas BI', 'address' => 'Jalan Pejanggik 32',
                 'latitude' => null, 'longitude' => null,
                 'approximate' => false,
+                'area' => false,
             ]])
             ->assertSee('PT Valas BI')
             ->assertSee('Jalan Pejanggik 32')
@@ -111,13 +112,14 @@ class PublicKupvaMapTest extends TestCase
             ->assertSee('\\u003C', false);
     }
 
-    public function test_automatically_found_points_are_labeled_until_verified_in_admin(): void
+    public function test_public_map_keeps_location_accuracy_details_for_staff(): void
     {
         $kupva = Kupva::factory()->create(['location_source' => 'nominatim', 'location_match_address' => 'Detail internal pencarian alamat']);
 
         $this->get(route('kupvas.index'))
             ->assertOk()
-            ->assertSee('Perkiraan lokasi dari alamat')
+            ->assertDontSee('Perkiraan lokasi dari alamat')
+            ->assertDontSee('Penanda oranye')
             ->assertDontSee('Detail internal pencarian alamat')
             ->assertViewHas('mapKupvas', fn (Collection $kupvas): bool => $kupvas->first()['approximate'] === true);
 

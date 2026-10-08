@@ -102,7 +102,7 @@ class PoliceAccessTest extends TestCase
         ])->call('create')->assertHasNoFormErrors()->assertNotified();
 
         $this->assertDatabaseHas('users', ['email' => 'polisi@example.test', 'role' => 'police']);
-        $this->get(UserResource::getUrl('index'))->assertOk()->assertSee('Petugas Polisi')->assertSee('Polisi');
+        $this->get(UserResource::getUrl('index'))->assertOk()->assertSee('Petugas Polisi')->assertSee('APH');
     }
 
     public function test_account_form_rejects_a_role_outside_operator_and_police(): void

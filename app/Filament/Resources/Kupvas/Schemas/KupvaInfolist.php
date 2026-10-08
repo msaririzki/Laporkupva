@@ -42,7 +42,12 @@ class KupvaInfolist
                         TextEntry::make('latitude')->label('Latitude')->placeholder('-'),
                         TextEntry::make('longitude')->label('Longitude')->placeholder('-'),
                         TextEntry::make('location_source')->label('Ketepatan titik')->placeholder('-')
-                            ->formatStateUsing(fn (string $state): string => $state === 'nominatim' ? 'Perkiraan dari alamat' : 'Titik telah diperiksa petugas'),
+                            ->formatStateUsing(fn (string $state): string => match ($state) {
+                                'nominatim_area' => 'Perkiraan area alamat — lokasi usaha perlu diperiksa',
+                                'nominatim' => 'Perkiraan dari alamat',
+                                'manual' => 'Titik telah diperiksa petugas',
+                                default => 'Belum diperiksa petugas',
+                            }),
                         TextEntry::make('location_match_address')->label('Alamat hasil pencarian peta')->placeholder('-')->columnSpanFull(),
                     ]),
             ]);

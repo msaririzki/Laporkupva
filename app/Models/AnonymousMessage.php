@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\ReportRealtimeUpdated;
+use App\Notifications\NewStaffMessage;
 use Database\Factories\AnonymousMessageFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,10 @@ class AnonymousMessage extends Model
     {
         static::created(function (AnonymousMessage $message): void {
             ReportRealtimeUpdated::dispatch($message->report, 'message');
+
+            if ($message->sender_type === 'admin') {
+                $message->report->notifyReporter(new NewStaffMessage($message->report->public_code));
+            }
         });
     }
 

@@ -2,21 +2,37 @@
 
 namespace App\Notifications\Admin;
 
+use App\Enums\UserRole;
 use App\Filament\Resources\ReportProgressRequests\ReportProgressRequestResource;
 use App\Models\ReportProgressRequest;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification as FilamentNotification;
 use Illuminate\Notifications\Messages\BroadcastMessage;
-use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
 
-class ReportProgressApprovalRequested extends Notification
+class ReportProgressApprovalRequested extends AccountNotification
 {
     public function __construct(public ReportProgressRequest $request) {}
 
-    /** @return array<int, string> */
-    public function via(object $notifiable): array
+    protected function mailRecipientRole(): UserRole
     {
-        return ['database', 'broadcast'];
+        return UserRole::SuperAdmin;
+    }
+
+    public function shouldSend(object $notifiable, string $channel): bool
+    {
+        return parent::shouldSend($notifiable, $channel)
+            && ($channel !== 'mail' || $this->request->status === 'pending');
+    }
+
+    public function toMail(object $notifiable): MailMessage
+    {
+        return $this->mailMessage('Pengajuan progres menunggu persetujuan · '.$this->request->report->public_code, 'Yth. Administrator,')
+            ->line('Ada pengajuan pembaruan progres untuk laporan '.$this->request->report->public_code.'.')
+            ->line('Tahap yang diajukan: '.$this->request->to_status->label().'.')
+            ->action('Tinjau pengajuan', ReportProgressRequestResource::getUrl('view', ['record' => $this->request], panel: 'admin'))
+            ->line('Periksa pesan dan dokumentasi di portal internal sebelum menyetujui pengajuan.')
+            ->line('Email ini merupakan notifikasi otomatis (no-reply). Mohon tidak membalas email ini.');
     }
 
     /** @return array<string, mixed> */

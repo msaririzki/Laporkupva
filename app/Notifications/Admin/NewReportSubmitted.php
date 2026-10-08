@@ -2,29 +2,31 @@
 
 namespace App\Notifications\Admin;
 
+use App\Enums\UserRole;
 use App\Filament\Resources\Reports\ReportResource;
 use App\Models\Report;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification as FilamentNotification;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\BroadcastMessage;
-use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
 
-class NewReportSubmitted extends Notification
+class NewReportSubmitted extends AccountNotification
 {
-    use Queueable;
-
     public function __construct(public Report $report) {}
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @return array<int, string>
-     */
-    public function via(object $notifiable): array
+    protected function mailRecipientRole(): UserRole
     {
-        return ['database', 'broadcast'];
+        return UserRole::Admin;
+    }
+
+    public function toMail(object $notifiable): MailMessage
+    {
+        return $this->mailMessage('Laporan baru masuk · '.$this->report->public_code, 'Yth. Operator,')
+            ->line('Laporan '.$this->report->public_code.' dari '.$this->report->regency.' telah masuk dan menunggu pemeriksaan.')
+            ->action('Tinjau laporan', ReportResource::getUrl('view', ['record' => $this->report], panel: 'admin'))
+            ->line('Buka portal internal untuk melihat rincian laporan dan bukti pendukung.')
+            ->line('Email ini merupakan notifikasi otomatis (no-reply). Mohon tidak membalas email ini.');
     }
 
     /**

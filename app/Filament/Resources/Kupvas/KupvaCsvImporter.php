@@ -136,17 +136,18 @@ final class KupvaCsvImporter
                 'office_type' => 'jenis kantor',
             ]);
 
-            if ($validator->fails()) {
-                $messages = $validator->errors()->all();
+            try {
+                $validated = $validator->validate();
+                $usesOfficeIdentity = $isBiFormat || filled($validated['office_type'] ?? null);
+                $existing = $this->findExistingKupva($validated, $usesOfficeIdentity);
+            } catch (ValidationException $exception) {
+                $messages = collect($exception->errors())->flatten()->all();
                 $analysis['summary']['invalid']++;
                 $analysis['errors'][] = "Baris {$rowNumber}: ".implode('; ', $messages).'.';
                 $analysis['items'][] = $this->previewItem($rowNumber, 'invalid', $row, [], implode('; ', $messages));
 
                 continue;
             }
-
-            $validated = $validator->validated();
-            $existing = $this->findExistingKupva($validated);
 
             if ($existing && empty($validated['license_number'])) {
                 unset($validated['license_number']);
@@ -159,13 +160,13 @@ final class KupvaCsvImporter
 
             $rowKey = $existing
                 ? 'model:'.$existing->getKey()
-                : (filled($validated['license_number'] ?? null)
-                    ? 'license:'.Str::lower($validated['license_number'])
-                    : 'office:'.hash('sha256', json_encode([
+                : ($usesOfficeIdentity || blank($validated['license_number'] ?? null)
+                    ? 'office:'.hash('sha256', json_encode([
                         Str::lower($validated['name']),
-                        Str::lower($validated['address']),
+                        Str::lower($validated['address'] ?? ''),
                         $validated['office_type'] ?? null,
-                    ], JSON_THROW_ON_ERROR)));
+                    ], JSON_THROW_ON_ERROR))
+                    : 'license:'.Str::lower($validated['license_number']));
 
             if (isset($seenRows[$rowKey])) {
                 $isIdentical = $this->rowsAreEqual($seenRows[$rowKey]['values'], $validated);
@@ -402,7 +403,7 @@ final class KupvaCsvImporter
 
         $row = [
             'name' => $value('nama_usaha'),
-            'license_number' => $value('nomor_izin') ?: null,
+            'license_number' => $this->normalizeLicenseNumber($value('nomor_izin')),
             'regency' => $value('kabupaten_kota'),
         ];
 
@@ -462,6 +463,10 @@ final class KupvaCsvImporter
 
         $row['regency'] = $this->regencyFromAddress($address);
 
+        if (array_key_exists('nomor_izin', $headerMap)) {
+            $row['license_number'] = $this->normalizeLicenseNumber($value('nomor_izin'));
+        }
+
         foreach (array_keys($headerMap) as $header) {
             if (Str::startsWith($header, 'tanggal_batas_waktu_izin')) {
                 $row['license_expires_at'] = $this->normalizeBiDate($value($header));
@@ -513,17 +518,30 @@ final class KupvaCsvImporter
     }
 
     /** @param array<string, mixed> $values */
-    private function findExistingKupva(array $values): ?Kupva
+    private function findExistingKupva(array $values, bool $usesOfficeIdentity): ?Kupva
     {
-        if (filled($values['license_number'] ?? null)) {
-            return Kupva::query()->where('license_number', $values['license_number'])->first();
+        if ($usesOfficeIdentity || blank($values['license_number'] ?? null)) {
+            return Kupva::query()
+                ->where('name', $values['name'])
+                ->where('address', $values['address'] ?? null)
+                ->where('office_type', $values['office_type'] ?? null)
+                ->first();
         }
 
-        return Kupva::query()
-            ->where('name', $values['name'])
-            ->where('address', $values['address'])
-            ->where('office_type', $values['office_type'] ?? null)
-            ->first();
+        $matches = Kupva::query()->where('license_number', $values['license_number'])->limit(2)->get();
+
+        if ($matches->count() > 1) {
+            throw ValidationException::withMessages([
+                'license_number' => 'Nomor izin digunakan oleh beberapa kantor. Gunakan format BI atau lengkapi jenis_kantor, nama_usaha, dan alamat agar kantor dapat dikenali.',
+            ]);
+        }
+
+        return $matches->first();
+    }
+
+    private function normalizeLicenseNumber(string $value): ?string
+    {
+        return in_array($value, ['', '-', '–', '—'], true) ? null : $value;
     }
 
     private function normalizeCellValue(mixed $value): string

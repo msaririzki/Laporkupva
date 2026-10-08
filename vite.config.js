@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/css/leaflet.css',
                 'resources/js/app.js',
                 'resources/js/map-layers.js',
+                'resources/js/kupva-location-editor.js',
                 'resources/js/realtime.js',
                 'resources/css/filament/admin/theme.css',
             ],

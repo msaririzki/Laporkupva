@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Kupvas\Pages;
 
 use App\Filament\Resources\Kupvas\KupvaCsvImporter;
 use App\Filament\Resources\Kupvas\KupvaResource;
+use App\Jobs\ResolveKupvaLocation;
 use App\Models\Kupva;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -113,6 +114,9 @@ class ListKupvas extends ListRecords
 
                             $action->halt();
                         }
+
+                        Kupva::query()->whereNull('latitude')->whereNull('longitude')->whereNotNull('address')
+                            ->pluck('id')->each(fn (int $id) => ResolveKupvaLocation::dispatch($id)->afterCommit());
 
                         $details = [
                             "{$result['created']} data baru",

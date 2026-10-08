@@ -19,6 +19,10 @@
     transform: rotate(45deg);
 }
 
+.kupva-map-marker--area .kupva-map-marker__pin {
+    background: #d97706;
+}
+
 .kupva-map-popup section + section {
     margin-top: 12px;
     padding-top: 12px;

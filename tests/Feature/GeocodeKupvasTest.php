@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Kupva;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
 use Tests\TestCase;
@@ -59,8 +60,8 @@ class GeocodeKupvasTest extends TestCase
 
         $this->assertNull($kupva->fresh()->latitude);
         $this->assertNull($kupva->fresh()->location_source);
-        Http::assertSentCount(3);
-        Sleep::assertSleptTimes(3);
+        Http::assertSent(fn (Request $request): bool => $request['countrycodes'] === 'id' && $request['bounded'] === 1);
+        Sleep::assertSleptTimes(Http::recorded()->count());
     }
 
     public function test_same_named_street_in_another_locality_is_rejected(): void
@@ -77,8 +78,8 @@ class GeocodeKupvasTest extends TestCase
         $this->artisan('kupvas:geocode', ['--save' => true])->assertSuccessful();
 
         $this->assertNull($kupva->fresh()->latitude);
-        Http::assertSentCount(3);
-        Sleep::assertSleptTimes(3);
+        Http::assertSent(fn (Request $request): bool => $request['countrycodes'] === 'id' && $request['bounded'] === 1);
+        Sleep::assertSleptTimes(Http::recorded()->count());
     }
 
     public function test_coordinates_outside_ntb_or_in_the_wrong_regency_are_rejected(): void
@@ -96,8 +97,8 @@ class GeocodeKupvasTest extends TestCase
         $this->artisan('kupvas:geocode', ['--save' => true])->assertSuccessful();
 
         $this->assertNull($kupva->fresh()->latitude);
-        Http::assertSentCount(3);
-        Sleep::assertSleptTimes(3);
+        Http::assertSent(fn (Request $request): bool => $request['countrycodes'] === 'id' && $request['bounded'] === 1);
+        Sleep::assertSleptTimes(Http::recorded()->count());
     }
 
     public function test_a_long_road_is_rejected_because_its_center_is_not_specific_enough(): void
@@ -112,8 +113,8 @@ class GeocodeKupvasTest extends TestCase
         $this->artisan('kupvas:geocode', ['--save' => true])->assertSuccessful();
 
         $this->assertNull($kupva->fresh()->latitude);
-        Http::assertSentCount(3);
-        Sleep::assertSleptTimes(3);
+        Http::assertSent(fn (Request $request): bool => $request['countrycodes'] === 'id' && $request['bounded'] === 1);
+        Sleep::assertSleptTimes(Http::recorded()->count());
     }
 
     public function test_provider_failure_keeps_the_record_unlocated(): void

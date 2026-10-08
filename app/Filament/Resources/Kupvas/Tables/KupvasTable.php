@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Kupvas\Tables;
 
 use App\Enums\NtbRegency;
+use App\Filament\Resources\Kupvas\KupvaLocationAction;
 use App\Models\Kupva;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
@@ -34,6 +35,23 @@ class KupvasTable
                     ->label('KP/KC')
                     ->placeholder('-')
                     ->badge(),
+                TextColumn::make('location_source')
+                    ->label('Titik peta')
+                    ->state(fn (Kupva $record): string => $record->latitude === null || $record->longitude === null ? 'missing' : ($record->location_source ?? 'unknown'))
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'manual' => 'Sudah diperiksa',
+                        'nominatim_area' => 'Perkiraan area',
+                        'nominatim' => 'Perkiraan titik',
+                        'missing' => 'Belum ada titik',
+                        default => 'Belum diperiksa',
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'manual' => 'success',
+                        'nominatim_area' => 'warning',
+                        'nominatim' => 'info',
+                        default => 'gray',
+                    }),
                 TextColumn::make('license_number')
                     ->label('Nomor izin')
                     ->placeholder('-')
@@ -114,6 +132,7 @@ class KupvasTable
                     ->color('gray'),
             )
             ->recordActions([
+                KupvaLocationAction::make()->iconButton()->tooltip('Koreksi lokasi di peta'),
                 ViewAction::make()->iconButton()->tooltip('Lihat detail KUPVA'),
                 EditAction::make()->iconButton()->tooltip('Ubah data KUPVA'),
             ])

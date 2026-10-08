@@ -14,7 +14,7 @@
     </div>
     <p class="border-b border-slate-100 bg-blue-50/50 px-4 py-2.5 text-xs leading-relaxed text-slate-600" role="status" aria-live="polite" data-kupva-map-status>Menyiapkan peta lokasi…</p>
     <div class="grid lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <div id="public-kupva-map" class="h-[400px] bg-slate-100 sm:h-[520px]" role="region" aria-label="Peta Money Changer di Nusa Tenggara Barat" tabindex="0" data-kupva-map-canvas></div>
+        <div id="public-kupva-map" class="h-[400px] scroll-mt-20 bg-slate-100 sm:h-[520px]" role="region" aria-label="Peta Money Changer di Nusa Tenggara Barat" tabindex="0" data-kupva-map-canvas></div>
         <aside class="border-t border-slate-200 lg:border-l lg:border-t-0" aria-label="Hasil pencarian Money Changer">
             <div class="flex items-center justify-between border-b border-slate-100 px-4 py-3">
                 <h3 class="text-xs font-bold uppercase tracking-wide text-slate-600">Hasil pencarian</h3>
@@ -25,9 +25,6 @@
                     <li data-kupva-result="{{ $kupva['id'] }}" class="px-4 py-3">
                         <h4 class="text-sm font-bold leading-snug text-slate-900">{{ $kupva['name'] }}</h4>
                         <p class="mt-1.5 text-xs leading-relaxed text-slate-500">{{ $kupva['address'] }}</p>
-                        @if ($kupva['approximate'])
-                            <p class="mt-1.5 text-[11px] font-semibold text-amber-700">Perkiraan lokasi dari alamat</p>
-                        @endif
                         <div class="mt-2 flex flex-wrap items-center justify-between gap-2">
                             <button type="button" data-kupva-focus="{{ $kupva['id'] }}" disabled class="min-h-8 text-xs font-bold text-blue-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:cursor-default disabled:text-slate-400 disabled:no-underline">Lihat di peta</button>
                             <span class="text-xs text-slate-500" data-kupva-distance></span>
@@ -43,7 +40,8 @@
         </aside>
     </div>
     <div class="border-t border-slate-200 px-4 py-3 text-xs leading-relaxed text-slate-500">
-        Lokasi Anda digunakan untuk mencari titik terdekat pada peta ini.
+        Penanda menunjukkan lokasi Money Changer. Pastikan alamat tujuan sebelum berkunjung.
+        Lokasi Anda digunakan untuk mencari perkiraan KUPVA terdekat pada peta ini.
         <noscript>Aktifkan JavaScript untuk melihat peta, atau pilih tampilan Kartu.</noscript>
     </div>
     <script type="application/json" data-kupva-map-data>{!! json_encode(['kupvas' => $mapKupvas->values(), 'focusResults' => filled($search) || $selectedRegency !== null, 'mapboxPublicToken' => config('services.mapbox.public_token', '')], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_THROW_ON_ERROR) !!}</script>

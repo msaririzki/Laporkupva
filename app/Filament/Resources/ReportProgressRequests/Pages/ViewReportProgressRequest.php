@@ -12,6 +12,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Contracts\View\View;
 
 class ViewReportProgressRequest extends ViewRecord
 {
@@ -32,6 +33,28 @@ class ViewReportProgressRequest extends ViewRecord
         };
 
         return "{$decision} · {$request->from_status->label()} → {$request->to_status->label()} · Diajukan oleh ".($request->requester?->name ?? 'Petugas').' pada '.$request->created_at->translatedFormat('d M Y, H:i');
+    }
+
+    public function previewPhotoAction(): Action
+    {
+        return Action::make('previewPhoto')
+            ->authorize('view')
+            ->modalHeading('Pratinjau foto dokumentasi')
+            ->modalDescription('Foto ditampilkan langsung tanpa meninggalkan halaman persetujuan.')
+            ->modalContent(function (ReportProgressRequest $record, array $arguments): View {
+                $paths = array_values($record->activity_photos ?? []);
+                $index = filter_var($arguments['photo'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]);
+                abort_unless($index !== false && array_key_exists($index, $paths), 404);
+
+                return view('filament.reports.progress-photo-preview', [
+                    'photoUrl' => route('admin.report-progress-photos.preview', ['reportProgressRequest' => $record, 'photo' => $index]),
+                    'photoName' => $record->activity_photo_names[$paths[$index]] ?? 'Dokumentasi '.($index + 1),
+                ]);
+            })
+            ->modalWidth(Width::ScreenTwoExtraLarge)
+            ->extraModalWindowAttributes(['class' => 'tambora-image-preview-modal'])
+            ->modalSubmitAction(false)
+            ->modalCancelActionLabel('Tutup');
     }
 
     protected function getHeaderActions(): array

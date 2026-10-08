@@ -177,6 +177,45 @@ class ReportProgressReviewPageTest extends TestCase
         $this->get(route('admin.report-progress-photos.preview', ['reportProgressRequest' => $request, 'photo' => 1]))->assertNotFound();
     }
 
+    public function test_photo_preview_opens_selected_documentation_in_a_modal(): void
+    {
+        $administrator = User::factory()->superAdmin()->create();
+        $request = ReportProgressRequest::factory()->create();
+        $firstPath = "report-activity/{$request->report_id}/pertama.png";
+        $secondPath = "report-activity/{$request->report_id}/kedua.png";
+        $request->update([
+            'activity_photos' => [$firstPath, $secondPath],
+            'activity_photo_names' => [$secondPath => '<script>alert("foto")</script>'],
+        ]);
+        $this->actingAs($administrator);
+
+        $page = Livewire::test(ViewReportProgressRequest::class, ['record' => $request->id])
+            ->mountAction('previewPhoto', ['photo' => 1, 'photoUrl' => 'https://example.com/unrelated.png'])
+            ->assertActionMounted('previewPhoto');
+
+        $modal = $page->instance()->getMountedAction()->getModalContent()->render();
+        $this->assertStringContainsString(route('admin.report-progress-photos.preview', ['reportProgressRequest' => $request, 'photo' => 1]), $modal);
+        $this->assertStringNotContainsString(route('admin.report-progress-photos.preview', ['reportProgressRequest' => $request, 'photo' => 0]), $modal);
+        $this->assertStringNotContainsString('https://example.com/unrelated.png', $modal);
+        $this->assertStringNotContainsString('<script>alert("foto")</script>', $modal);
+        $this->assertStringContainsString('&lt;script&gt;', $modal);
+        $this->assertSame('pending', $request->fresh()->status);
+    }
+
+    #[TestWith([-1])]
+    #[TestWith([99])]
+    #[TestWith(['../photo.png'])]
+    #[TestWith([null])]
+    public function test_preview_modal_rejects_invalid_photo_selection(int|string|null $photo): void
+    {
+        $administrator = User::factory()->superAdmin()->create();
+        $request = ReportProgressRequest::factory()->create(['activity_photos' => ['report-activity/photo.png']]);
+        $this->actingAs($administrator);
+
+        Livewire::test(ViewReportProgressRequest::class, ['record' => $request->id])
+            ->mountAction('previewPhoto', ['photo' => $photo])->assertNotFound();
+    }
+
     #[TestWith(['report-activity/other-report/photo.png'])]
     #[TestWith(['report-activity/{report}/../photo.png'])]
     #[TestWith(['report-activity/{report}/missing.png'])]

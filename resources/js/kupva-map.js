@@ -25,7 +25,7 @@ export const initPublicKupvaMap = async () => {
             return 'Tidak ada hasil pencarian. Coba nama atau wilayah lain.';
         }
 
-        const shown = `${mappedKupvas.length} Money Changer memiliki titik lokasi pada peta.`;
+        const shown = `${mappedKupvas.length} Money Changer tampil pada peta.`;
 
         return missingCount ? `${shown} ${missingCount} lainnya dapat dilihat di daftar; titik lokasinya belum tersedia.` : shown;
     };
@@ -76,11 +76,6 @@ export const initPublicKupvaMap = async () => {
                 const address = document.createElement('p');
                 address.textContent = kupva.address;
                 office.append(name, address);
-                if (kupva.approximate) {
-                    const accuracy = document.createElement('p');
-                    accuracy.textContent = 'Perkiraan lokasi dari alamat';
-                    office.append(accuracy);
-                }
                 popup.append(office);
             });
             const marker = L.marker([first.latitude, first.longitude], {
@@ -96,7 +91,7 @@ export const initPublicKupvaMap = async () => {
         const fitResults = () => {
             if (groups.size === 1) {
                 const kupva = mappedKupvas[0];
-                map.setView([kupva.latitude, kupva.longitude], 15);
+                map.setView([kupva.latitude, kupva.longitude], kupva.area ? 13 : 15);
             } else if (groups.size > 1) {
                 map.fitBounds(mappedKupvas.map((kupva) => [kupva.latitude, kupva.longitude]), { padding: [40, 40], maxZoom: 15 });
             } else {
@@ -111,9 +106,11 @@ export const initPublicKupvaMap = async () => {
                 return;
             }
 
-            map.setView(marker.getLatLng(), 16);
+            const kupva = mappedKupvas.find((office) => office.id === id);
+            map.setView(marker.getLatLng(), kupva.area ? 13 : 16);
             marker.openPopup();
             highlightResult(id);
+            canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
 
         root.querySelectorAll('[data-kupva-focus]').forEach((button) => {
@@ -166,7 +163,7 @@ export const initPublicKupvaMap = async () => {
                 configuration.kupvas.filter((kupva) => !hasMapCoordinates(kupva)).forEach((kupva) => resultList.append(resultElements.get(kupva.id)));
                 focusOffice(nearest.id);
                 const accuracyMessage = position.coords.accuracy > 1000 ? ' Lokasi perangkat masih kurang akurat; Anda dapat mencari wilayah secara langsung.' : '';
-                status.textContent = `Terdekat${configuration.focusResults ? ' dari hasil pencarian' : ''}: ${nearest.name}, sekitar ${formatDistance(nearest.distance)} dalam garis lurus.${nearest.approximate ? ' Titik usaha ini masih berupa perkiraan dari alamat.' : ''}${accuracyMessage}`;
+                status.textContent = `Perkiraan terdekat${configuration.focusResults ? ' dari hasil pencarian' : ''}: ${nearest.name}, sekitar ${formatDistance(nearest.distance)} dalam garis lurus.${accuracyMessage}`;
             }, (error) => {
                 locateButton.disabled = false;
                 status.textContent = error.code === 1
