@@ -27,8 +27,10 @@
                         <p class="mt-1.5 text-xs leading-relaxed text-slate-500">{{ $kupva['address'] }}</p>
                         <div class="mt-2 flex flex-wrap items-center justify-between gap-2">
                             <button type="button" data-kupva-focus="{{ $kupva['id'] }}" disabled class="min-h-8 text-xs font-bold text-blue-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:cursor-default disabled:text-slate-400 disabled:no-underline">Lihat di peta</button>
-                            <span class="text-xs text-slate-500" data-kupva-distance></span>
+                            <x-kupva-google-maps-link :name="$kupva['name']" :address="$kupva['address']"
+                                :latitude="$kupva['latitude']" :longitude="$kupva['longitude']" :approximate="$kupva['approximate']" />
                         </div>
+                        <span class="mt-1 block text-xs text-slate-500" data-kupva-distance></span>
                     </li>
                 @empty
                     <li class="px-4 py-8 text-center">

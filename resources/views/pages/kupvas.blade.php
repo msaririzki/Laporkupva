@@ -150,7 +150,12 @@
                                     </div>
                                 </div>
                             </dl>
-
+                            <div class="mt-4 flex justify-end border-t border-slate-100 pt-3">
+                                <x-kupva-google-maps-link :name="$kupva->name"
+                                    :address="$kupva->address ?: collect([$kupva->village, $kupva->district, $kupva->regency])->filter()->join(', ')"
+                                    :latitude="$kupva->latitude" :longitude="$kupva->longitude"
+                                    :approximate="in_array($kupva->location_source, ['nominatim', 'nominatim_area'], true)" />
+                            </div>
                         </article>
                     @endforeach
                 </div>

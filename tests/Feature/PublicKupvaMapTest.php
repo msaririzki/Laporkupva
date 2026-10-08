@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Kupva;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Collection;
+use PHPUnit\Framework\Attributes\TestWith;
 use Tests\TestCase;
 
 class PublicKupvaMapTest extends TestCase
@@ -129,5 +130,63 @@ class PublicKupvaMapTest extends TestCase
             ->assertOk()
             ->assertDontSee('Perkiraan lokasi dari alamat')
             ->assertViewHas('mapKupvas', fn (Collection $kupvas): bool => $kupvas->first()['approximate'] === false);
+    }
+
+    #[TestWith(['map'])]
+    #[TestWith(['cards'])]
+    public function test_google_maps_links_open_the_verified_coordinates_in_both_views(string $mode): void
+    {
+        Kupva::factory()->create([
+            'name' => 'PT Valas Kota', 'address' => 'Jalan Pejanggik 32',
+            'latitude' => -8.5830695, 'longitude' => 116.11618, 'location_source' => 'manual',
+        ]);
+
+        $this->get(route('kupvas.index', ['view' => $mode]))
+            ->assertSee('href="https://www.google.com/maps/search/?api=1&amp;query=-8.5830695%2C116.11618"', false)
+            ->assertSee('aria-label="Buka lokasi PT Valas Kota di Google Maps (tab baru)"', false)
+            ->assertSee('target="_blank" rel="noopener noreferrer" data-kupva-google-maps', false);
+    }
+
+    #[TestWith(['map', 'nominatim'])]
+    #[TestWith(['map', 'nominatim_area'])]
+    #[TestWith(['cards', 'nominatim'])]
+    #[TestWith(['cards', 'nominatim_area'])]
+    public function test_google_maps_searches_the_business_address_instead_of_an_unverified_point(string $mode, string $source): void
+    {
+        Kupva::factory()->create([
+            'name' => 'PT Valas Kota', 'address' => 'Jalan Pejanggik 32',
+            'latitude' => -8.4, 'longitude' => 116.4, 'location_source' => $source,
+        ]);
+
+        $this->get(route('kupvas.index', ['view' => $mode]))
+            ->assertSee('href="https://www.google.com/maps/search/?api=1&amp;query=PT%20Valas%20Kota%2C%20Jalan%20Pejanggik%2032"', false)
+            ->assertDontSee('query=-8.4%2C116.4', false);
+    }
+
+    #[TestWith(['map'])]
+    #[TestWith(['cards'])]
+    public function test_google_maps_remains_available_without_coordinates_or_a_street_address(string $mode): void
+    {
+        Kupva::factory()->create([
+            'name' => 'PT Valas Kota', 'address' => null, 'district' => 'Cakranegara', 'village' => 'Cilinaya', 'regency' => 'Kota Mataram',
+            'latitude' => null, 'longitude' => null,
+        ]);
+
+        $this->get(route('kupvas.index', ['view' => $mode]))
+            ->assertSee('href="https://www.google.com/maps/search/?api=1&amp;query=PT%20Valas%20Kota%2C%20Cilinaya%2C%20Cakranegara%2C%20Kota%20Mataram"', false);
+    }
+
+    #[TestWith(['map'])]
+    #[TestWith(['cards'])]
+    public function test_google_maps_link_encodes_office_text_without_turning_it_into_url_parameters_or_html(string $mode): void
+    {
+        Kupva::factory()->create([
+            'name' => 'PT "Valas" & Mitra', 'address' => 'Jalan Utama &query=evil',
+            'latitude' => null, 'longitude' => null,
+        ]);
+
+        $this->get(route('kupvas.index', ['view' => $mode]))
+            ->assertSee('href="https://www.google.com/maps/search/?api=1&amp;query=PT%20%22Valas%22%20%26%20Mitra%2C%20Jalan%20Utama%20%26query%3Devil"', false)
+            ->assertSee('aria-label="Buka lokasi PT &quot;Valas&quot; &amp; Mitra di Google Maps (tab baru)"', false);
     }
 }

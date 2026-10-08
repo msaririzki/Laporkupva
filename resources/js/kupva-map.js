@@ -76,6 +76,13 @@ export const initPublicKupvaMap = async () => {
                 const address = document.createElement('p');
                 address.textContent = kupva.address;
                 office.append(name, address);
+                const mapsLink = resultElements.get(kupva.id)?.querySelector('[data-kupva-google-maps]');
+                if (mapsLink) {
+                    const actions = document.createElement('div');
+                    actions.className = 'mt-3 flex justify-end';
+                    actions.append(mapsLink.cloneNode(true));
+                    office.append(actions);
+                }
                 popup.append(office);
             });
             const marker = L.marker([first.latitude, first.longitude], {
