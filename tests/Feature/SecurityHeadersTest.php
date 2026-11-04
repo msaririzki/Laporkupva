@@ -6,6 +6,13 @@ use Tests\TestCase;
 
 class SecurityHeadersTest extends TestCase
 {
+    public function test_admin_login_is_not_indexable(): void
+    {
+        $this->get(route('filament.admin.auth.login'))
+            ->assertOk()
+            ->assertHeader('X-Robots-Tag', 'noindex, nofollow');
+    }
+
     public function test_html_responses_include_security_headers(): void
     {
         $response = $this->get(route('home'));

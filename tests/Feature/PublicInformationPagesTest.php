@@ -10,6 +10,38 @@ class PublicInformationPagesTest extends TestCase
 {
     use LazilyRefreshDatabase;
 
+    public function test_sitemap_lists_only_canonical_public_pages(): void
+    {
+        config(['app.url' => 'https://laporkupva.id']);
+        $publicPaths = ['/', '/lapor', '/kupva-berizin', '/panduan', '/status', '/privasi'];
+
+        $sitemap = simplexml_load_file(public_path('sitemap.xml'));
+
+        $this->assertNotFalse($sitemap);
+        $this->assertSame(['' => 'http://www.sitemaps.org/schemas/sitemap/0.9'], $sitemap->getDocNamespaces());
+        $this->assertSame(
+            array_map(fn (string $path): string => 'https://laporkupva.id'.$path, $publicPaths),
+            array_map(fn (\SimpleXMLElement $url): string => (string) $url->loc, iterator_to_array($sitemap->url, false)),
+        );
+        $this->assertStringContainsString('Sitemap: https://laporkupva.id/sitemap.xml', file_get_contents(public_path('robots.txt')));
+
+        foreach ($publicPaths as $path) {
+            $this->get($path)
+                ->assertOk()
+                ->assertHeaderMissing('X-Robots-Tag')
+                ->assertSee('<link rel="canonical" href="https://laporkupva.id'.$path.'">', false);
+        }
+    }
+
+    public function test_directory_view_and_search_parameters_are_not_in_the_canonical_url(): void
+    {
+        config(['app.url' => 'https://laporkupva.id']);
+
+        $this->get('/kupva-berizin?view=cards&q=Mataram')
+            ->assertSee('<link rel="canonical" href="https://laporkupva.id/kupva-berizin">', false)
+            ->assertSee('<meta property="og:url" content="https://laporkupva.id/kupva-berizin">', false);
+    }
+
     public function test_guide_page_explains_the_anonymous_reporting_flow(): void
     {
         $this->get(route('guide'))

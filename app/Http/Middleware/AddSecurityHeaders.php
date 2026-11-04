@@ -52,6 +52,10 @@ class AddSecurityHeaders
         $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
         $response->headers->set('X-Permitted-Cross-Domain-Policies', 'none');
 
+        if ($request->is('admin', 'admin/*', 'lapor/berhasil', 'status/*') && ! $response->headers->has('X-Robots-Tag')) {
+            $response->headers->set('X-Robots-Tag', 'noindex, nofollow');
+        }
+
         return $response;
     }
 }

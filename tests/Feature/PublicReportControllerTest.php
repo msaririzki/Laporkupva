@@ -478,6 +478,7 @@ class PublicReportControllerTest extends TestCase
 
         $response
             ->assertOk()
+            ->assertHeader('X-Robots-Tag', 'noindex, nofollow')
             ->assertSee('Buka status lewat QR')
             ->assertSee('Unduh gambar akses')
             ->assertSee('Simpan nomor laporan Anda')

@@ -3,7 +3,20 @@
 <head>
     @php
         $pageTitle = isset($title) ? $title.' — TAMBORA' : 'TAMBORA · Bank Indonesia NTB';
-        $pageDescription = 'TAMBORA - Kanal informasi dan pelaporan masyarakat untuk Money Changer (KUPVA BB) di wilayah Nusa Tenggara Barat.';
+        $routeName = request()->route()?->getName();
+        $pageDescription = match ($routeName) {
+            'home' => 'Laporkan dugaan Money Changer tanpa izin di Nusa Tenggara Barat melalui TAMBORA. Cek daftar usaha berizin dan pantau tindak lanjut laporan Anda.',
+            'reports.create' => 'Laporkan dugaan aktivitas Money Changer tanpa izin di NTB. Siapkan lokasi kejadian dan bukti pendukung. Identitas pelapor dirahasiakan.',
+            'kupvas.index' => 'Cari Money Changer berizin di Nusa Tenggara Barat berdasarkan nama usaha atau wilayah. Lihat alamat dan lokasi usaha di peta.',
+            'guide' => 'Panduan TAMBORA untuk membuat laporan Money Changer di NTB, melampirkan bukti, dan memeriksa tindak lanjut laporan.',
+            'reports.track' => 'Cek tindak lanjut laporan TAMBORA menggunakan nomor laporan atau gambar QR yang Anda simpan.',
+            'privacy' => 'Ketahui bagaimana TAMBORA menggunakan dan melindungi identitas pelapor serta bukti yang disampaikan.',
+            default => 'TAMBORA - Kanal informasi dan pelaporan masyarakat untuk Money Changer (KUPVA BB) di wilayah Nusa Tenggara Barat.',
+        };
+        $canonicalUrl = match ($routeName) {
+            'home', 'reports.create', 'kupvas.index', 'guide', 'reports.track', 'privacy' => rtrim((string) config('app.url'), '/').route($routeName, absolute: false),
+            default => null,
+        };
         $shareImage = asset('images/brand/tambora.webp');
     @endphp
 
@@ -15,6 +28,10 @@
     <meta property="og:site_name" content="TAMBORA">
     <meta property="og:title" content="{{ $pageTitle }}">
     <meta property="og:description" content="{{ $pageDescription }}">
+    @if ($canonicalUrl !== null)
+        <link rel="canonical" href="{{ $canonicalUrl }}">
+        <meta property="og:url" content="{{ $canonicalUrl }}">
+    @endif
     <meta property="og:image" content="{{ $shareImage }}">
     <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="720">
