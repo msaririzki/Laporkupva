@@ -41,7 +41,7 @@ class ReportsTable
                     ->searchable()
                     ->copyable()
                     ->weight('bold')
-                    ->description(fn (Report $record): string => $record->created_at->diffForHumans()),
+                    ->description(fn (Report $record): string => 'Masuk '.$record->created_at->translatedFormat('d M Y')),
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
@@ -77,7 +77,7 @@ class ReportsTable
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Dikirim')
-                    ->since()
+                    ->dateTime('d M Y')
                     ->dateTimeTooltip('d M Y, H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

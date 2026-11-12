@@ -46,6 +46,15 @@
 @elseif ($latestRequest?->status === 'approved')
     <section id="persetujuan-progres" class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-800 dark:bg-emerald-950/30 sm:p-6">
         <h2 class="text-base font-bold text-emerald-900 dark:text-emerald-200">Pengajuan progres disetujui</h2>
-        <p class="mt-2 text-sm text-emerald-900 dark:text-emerald-100">Tahap {{ $latestRequest->to_status->label() }} disetujui oleh {{ $latestRequest->reviewer?->name ?? 'Administrator' }} pada {{ $latestRequest->reviewed_at?->translatedFormat('d M Y, H:i') }}. Progres masyarakat telah diperbarui.</p>
+        <p class="mt-2 text-sm text-emerald-900 dark:text-emerald-100">
+            Tahap: <strong>{{ $record->status->label() }}</strong>.
+            @if ($record->completed_at)
+                Penanganan selesai pada <strong>{{ $record->completed_at->translatedFormat('d M Y') }}</strong>.
+            @endif
+        </p>
+        <details class="mt-2 text-xs text-emerald-900 dark:text-emerald-100">
+            <summary>Riwayat pencatatan aplikasi</summary>
+            <p class="mt-2">Dicatat dan disetujui oleh {{ $latestRequest->reviewer?->name ?? 'Administrator' }} pada {{ $latestRequest->reviewed_at?->translatedFormat('d M Y, H:i') }}. Waktu ini menunjukkan pembaruan aplikasi, bukan tanggal kegiatan lapangan.</p>
+        </details>
     </section>
 @endif

@@ -24,7 +24,7 @@
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <h3 @class(['text-xs font-semibold sm:text-sm', 'text-emerald-700' => $isDone, 'text-[#0B2342]' => ! $isDone])>{{ $status->label() }}</h3>
                 @if ($history)
-                    <time class="text-[11px] text-[#64748B]">{{ $history->created_at->translatedFormat('d M Y, H:i') }}</time>
+                    <time class="text-[11px] text-[#64748B]">{{ $history->created_at->translatedFormat($history->created_at->isStartOfDay() ? 'd M Y' : 'd M Y, H:i') }}</time>
                 @endif
             </div>
             <p class="mt-0.5 whitespace-pre-line text-xs leading-relaxed text-[#64748B]">{{ $history?->public_note ?: $status->description() }}</p>

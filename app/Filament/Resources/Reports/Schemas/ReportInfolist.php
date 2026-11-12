@@ -17,6 +17,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 
 class ReportInfolist
 {
@@ -61,7 +62,7 @@ class ReportInfolist
                                         ->weight('bold'),
                                     TextEntry::make('created_at')
                                         ->label('Dikirim pada')
-                                        ->dateTime('d M Y, H:i'),
+                                        ->dateTime(fn (Model $record): string => $record->created_at->isStartOfDay() ? 'd M Y' : 'd M Y, H:i'),
                                     TextEntry::make('incident_type')
                                         ->label('Jenis laporan')
                                         ->formatStateUsing(fn (string $state): string => self::INCIDENT_TYPES[$state] ?? $state),
@@ -83,7 +84,7 @@ class ReportInfolist
                                         ->placeholder('Laporan lama, belum tersedia')
                                         ->copyable(),
                                     TextEntry::make('incident_date')
-                                        ->label('Tanggal kejadian')
+                                        ->label('Perkiraan tanggal kejadian')
                                         ->date('d F Y'),
                                     TextEntry::make('incident_time')
                                         ->label('Perkiraan waktu')
@@ -215,7 +216,7 @@ class ReportInfolist
                                                 ->badge(),
                                             TextEntry::make('created_at')
                                                 ->label('Diunggah')
-                                                ->dateTime('d M Y, H:i'),
+                                                ->dateTime(fn (Model $record): string => $record->created_at->isStartOfDay() ? 'd M Y' : 'd M Y, H:i'),
                                             TextEntry::make('uploadedBy.name')
                                                 ->label('Petugas')
                                                 ->placeholder('petugas TAMBORA'),
@@ -264,7 +265,7 @@ class ReportInfolist
                                                 ->badge(),
                                             TextEntry::make('created_at')
                                                 ->label('Waktu')
-                                                ->dateTime('d M Y, H:i'),
+                                                ->dateTime(fn (Model $record): string => $record->created_at->isStartOfDay() ? 'd M Y' : 'd M Y, H:i'),
                                             TextEntry::make('user.name')
                                                 ->label('Petugas')
                                                 ->placeholder('Sistem'),

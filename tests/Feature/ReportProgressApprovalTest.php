@@ -27,6 +27,42 @@ class ReportProgressApprovalTest extends TestCase
 {
     use LazilyRefreshDatabase;
 
+    public function test_historical_handling_dates_are_distinct_from_application_approval_dates(): void
+    {
+        $this->travelTo(now()->setDate(2026, 11, 12)->setTime(20, 0));
+        $administrator = User::factory()->superAdmin()->create();
+        $report = Report::factory()->completed()->create([
+            'created_at' => '2026-09-20 00:00:00',
+            'completed_at' => '2026-09-23 00:00:00',
+        ]);
+        $report->statusHistories()->make([
+            'to_status' => ReportStatus::Completed,
+            'public_note' => 'Penanganan telah selesai.',
+        ])->forceFill(['created_at' => '2026-09-23 00:00:00'])->saveQuietly();
+        ReportProgressRequest::factory()->create([
+            'report_id' => $report->id,
+            'status' => 'approved',
+            'to_status' => ReportStatus::Completed,
+            'reviewed_by' => $administrator->id,
+            'reviewed_at' => '2026-11-12 19:30:00',
+        ]);
+
+        $this->actingAs($administrator)
+            ->get(ReportResource::getUrl('index'))
+            ->assertOk()
+            ->assertSee('Masuk 20 Sep 2026');
+        $this->get(ReportResource::getUrl('view', ['record' => $report]))
+            ->assertOk()
+            ->assertSeeInOrder(['Penanganan selesai pada', '23 Sep 2026', 'Riwayat pencatatan aplikasi', '12 Nov 2026, 19:30'])
+            ->assertDontSee('20 Sep 2026, 00:00')
+            ->assertDontSee('23 Sep 2026, 00:00');
+        $this->post(route('reports.track.show'), ['tracking_code' => $report->public_code]);
+        $this->get(route('reports.status', ['report' => $report->public_code]))
+            ->assertOk()
+            ->assertSee('23 Sep 2026')
+            ->assertDontSee('23 Sep 2026, 00:00');
+    }
+
     #[TestWith(['received', 'coordination', 'coordinated_at'])]
     #[TestWith(['coordination', 'field_action', 'field_action_at'])]
     #[TestWith(['field_action', 'completed', 'completed_at'])]

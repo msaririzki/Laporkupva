@@ -60,7 +60,7 @@ class RecentReports extends TableWidget
                     ->label('Masuk')
                     ->icon('heroicon-m-clock')
                     ->iconColor('gray')
-                    ->since()
+                    ->dateTime('d M Y')
                     ->visibleFrom('lg')
                     ->dateTimeTooltip('d M Y, H:i'),
             ])
